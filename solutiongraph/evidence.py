@@ -1,10 +1,11 @@
 """Immutable run evidence, experiment design, Pareto ranking, and prior learning."""
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from math import log, sqrt
 from statistics import fmean, pvariance
-from typing import Any, Iterable, Mapping
+from typing import Any
 
 from solutiongraph.model import DIGEST_RE, ID_RE
 from solutiongraph.search import BeliefModel, CandidateWeight, InteractionWeight
@@ -315,4 +316,3 @@ def learn_observational_beliefs(
         candidate_weights=tuple(candidate_weights),
         interaction_weights=tuple(interaction_weights),
     )
-

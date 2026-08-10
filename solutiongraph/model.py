@@ -10,10 +10,11 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from enum import Enum
 from math import isfinite, prod
-from typing import Any, Mapping
+from typing import Any
 
 ID_RE = re.compile(r"^[a-z][a-z0-9_.:/-]*$")
 PORT_RE = re.compile(r"^[a-z][a-z0-9_]*$")

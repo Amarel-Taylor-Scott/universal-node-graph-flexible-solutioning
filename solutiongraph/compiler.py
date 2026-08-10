@@ -1,21 +1,21 @@
 """Strict admission and compilation for domain-neutral graph programs."""
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import replace
-from typing import Mapping
 
 from solutiongraph.errors import Diagnostic, ValidationError
 from solutiongraph.model import (
-    AdmittedSpace,
+    ID_RE,
+    PORT_RE,
     AdmissionDecision,
+    AdmittedSpace,
     Edge,
     ForbiddenCombination,
     FrozenPlan,
     GraphInput,
     GraphOutput,
-    ID_RE,
     NodeSpec,
-    PORT_RE,
     PlanBinding,
     ProgramGraph,
     Registry,

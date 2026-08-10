@@ -18,8 +18,8 @@ from solutiongraph.evidence import (
 )
 from solutiongraph.model import (
     SEMANTIC_MODEL_VERSION,
-    AdmittedSpace,
     AdmissionDecision,
+    AdmittedSpace,
     Candidate,
     Cardinality,
     Determinism,
@@ -104,4 +104,3 @@ __all__ = [
     "pareto_front",
     "sha256_digest",
 ]
-

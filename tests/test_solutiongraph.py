@@ -33,7 +33,6 @@ from solutiongraph import (
 )
 from solutiongraph.schemas import SCHEMA_NAMES, load_all_schemas
 
-
 RAW = ValueType("example.raw_document")
 TEXT = ValueType("example.normalized_text")
 RECORDS = ValueType("example.structured_records")

@@ -5,11 +5,11 @@ make an invalid route valid or alter a frozen plan.
 """
 from __future__ import annotations
 
+from collections.abc import Iterator, Mapping
 from dataclasses import dataclass
 from enum import Enum
 from itertools import product
 from math import isfinite, prod
-from typing import Iterator, Mapping
 
 from solutiongraph.model import AdmittedSpace
 
