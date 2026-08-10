@@ -107,11 +107,11 @@ Declared policy without an enforcing isolation mechanism is evidence about
 intent, not proof of containment.
 
 For LLM-generated or otherwise untrusted candidate code, a plain subprocess is
-also not a sufficient security boundary. Hidden evaluator assets must not be
-candidate-readable, candidate code must never write the evaluator, and the
-candidate and evaluator should execute in separate container, microVM, or
-remote trust domains as required by the threat model. The reference executor
-does not implement that isolation; it only exposes the replacement seam.
+also not a sufficient security boundary, and neither is a plain container.
+Hidden evaluator assets must not be candidate-readable, candidate code must
+never write the evaluator, and the candidate and evaluator should execute in
+separate microVM or remote trust domains. The reference executor does not
+implement that isolation; it only exposes the replacement seam.
 
 ## 5. Artifacts and checkpoints
 

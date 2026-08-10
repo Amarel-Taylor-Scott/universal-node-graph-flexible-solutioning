@@ -99,8 +99,9 @@ objects, not in `NodeSpec`.
 - Preserve multiple candidate lineages during generated-code campaigns; do not
   collapse all evidence into one greedy incumbent.
 - Candidate code must not write its evaluator. Hidden cases require a
-  candidate-unreadable evaluator, and untrusted generated code requires a real
-  container, microVM, or remote trust boundary.
+  candidate-unreadable evaluator, and untrusted generated code requires a
+  microVM or remote trust boundary. A plain container is lifecycle isolation,
+  not an adversarial boundary.
 
 ## LLM rules
 
