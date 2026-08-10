@@ -39,7 +39,6 @@ from solutiongraph.model import (
     ValueType,
 )
 
-
 WEB_SOURCE = ValueType("example.web-source")
 HTML_DOCUMENT = ValueType("example.html-document", media_type="text/html")
 PAGE_RECORD = ValueType("example.page-record")

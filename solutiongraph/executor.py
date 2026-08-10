@@ -40,7 +40,6 @@ from solutiongraph.model import (
     sha256_digest,
 )
 
-
 EXECUTOR_ID = "solutiongraph.reference-python-v1"
 
 
