@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from pathlib import Path
 
 import pytest
-import tomllib
 
 from solutiongraph import (
     CallableVerifier,
@@ -192,8 +192,14 @@ def test_scaffold_is_transactional_complete_and_non_destructive(tmp_path):
 
 def test_distribution_and_import_versions_match_and_release_is_alpha():
     root = Path(__file__).parents[1]
-    metadata = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))
+    metadata = (root / "pyproject.toml").read_text(encoding="utf-8")
+    project = re.search(r"(?ms)^\[project\]\s*(.*?)(?=^\[|\Z)", metadata)
+    version = re.search(
+        r'(?m)^version\s*=\s*"([^"]+)"\s*$',
+        project.group(1) if project else "",
+    )
     from solutiongraph import __version__
 
-    assert metadata["project"]["version"] == __version__ == "0.3.0"
-    assert "Development Status :: 3 - Alpha" in metadata["project"]["classifiers"]
+    assert version is not None
+    assert version.group(1) == __version__ == "0.3.0"
+    assert '"Development Status :: 3 - Alpha"' in (project.group(1) if project else "")

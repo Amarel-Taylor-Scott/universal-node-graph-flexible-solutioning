@@ -4,10 +4,9 @@
 from __future__ import annotations
 
 import os
+import re
 import sys
 from pathlib import Path
-
-import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -15,8 +14,16 @@ if str(ROOT) not in sys.path:
 
 
 def main() -> int:
-    metadata = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
-    distribution_version = metadata["project"]["version"]
+    pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    project = re.search(r"(?ms)^\[project\]\s*(.*?)(?=^\[|\Z)", pyproject)
+    version = re.search(
+        r'(?m)^version\s*=\s*"([^"]+)"\s*$',
+        project.group(1) if project else "",
+    )
+    if version is None:
+        print("release version error: [project].version is missing", file=sys.stderr)
+        return 1
+    distribution_version = version.group(1)
     from solutiongraph import __version__
 
     problems = []
