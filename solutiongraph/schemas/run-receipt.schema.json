@@ -11,14 +11,32 @@
     "belief_revision", "admitted_space_digest", "output_artifacts",
     "verification_details"
   ],
+  "allOf": [
+    {
+      "if": {"properties": {"outcome": {"const": "accepted"}}},
+      "then": {"properties": {"accepted": {"const": true}}}
+    },
+    {
+      "if": {"properties": {"outcome": {"enum": ["rejected", "failed"]}}},
+      "then": {"properties": {"accepted": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"outcome": {"const": "completed_unverified"}}},
+      "then": {"properties": {"accepted": {"type": "null"}}}
+    }
+  ],
   "properties": {
     "id": {"$ref": "common.schema.json#/$defs/id"},
     "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
     "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
-    "task_case_id": {"type": "string", "minLength": 1},
-    "outcome": {"type": "string", "minLength": 1},
+    "task_case_id": {"$ref": "common.schema.json#/$defs/id"},
+    "outcome": {
+      "enum": ["accepted", "rejected", "failed", "completed_unverified"]
+    },
     "accepted": {"type": ["boolean", "null"]},
-    "verifier": {"type": "string"},
+    "verifier": {
+      "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+    },
     "verifier_digest": {
       "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/digest"}]
     },
@@ -41,11 +59,13 @@
         "properties": {
           "slot_id": {"$ref": "common.schema.json#/$defs/id"},
           "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
-          "outcome": {"type": "string", "minLength": 1},
+          "outcome": {"enum": ["succeeded", "failed", "blocked"]},
           "started_at": {"type": "string"},
           "completed_at": {"type": "string"},
           "metrics": {"type": "object", "additionalProperties": {"type": "number"}},
-          "failure_class": {"type": "string"},
+          "failure_class": {
+            "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+          },
           "artifact_digests": {
             "type": "array", "items": {"$ref": "common.schema.json#/$defs/digest"}
           },
@@ -64,7 +84,9 @@
     "seed": {"type": ["integer", "null"]},
     "started_at": {"type": "string"},
     "completed_at": {"type": "string"},
-    "failure_class": {"type": "string"},
+    "failure_class": {
+      "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+    },
     "executor": {"type": "string"},
     "environment_digest": {
       "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/digest"}]

@@ -89,6 +89,26 @@ class ExperimentRunner:
             raise ValueError("missing experiment plans: " + ", ".join(missing_plans))
         if missing_cases:
             raise ValueError("missing experiment cases: " + ", ".join(missing_cases))
+        mismatched_plans = sorted(
+            digest
+            for digest in design.plan_digests
+            if plans[digest].digest != digest
+        )
+        mismatched_cases = sorted(
+            case_id
+            for case_id in design.task_case_ids
+            if cases[case_id].id != case_id
+        )
+        if mismatched_plans:
+            raise ValueError(
+                "experiment plan keys do not match plan digests: "
+                + ", ".join(mismatched_plans)
+            )
+        if mismatched_cases:
+            raise ValueError(
+                "experiment case keys do not match case ids: "
+                + ", ".join(mismatched_cases)
+            )
         artifact_store_factory = artifact_store_factory or MemoryArtifactStore
 
         ledger = EvidenceLedger()

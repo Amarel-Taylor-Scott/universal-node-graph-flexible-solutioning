@@ -3,12 +3,35 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
-from math import log, sqrt
+from math import isfinite, log, sqrt
 from statistics import fmean, pvariance
 from typing import Any
 
 from solutiongraph.model import DIGEST_RE, ID_RE, PORT_RE
 from solutiongraph.search import BeliefModel, CandidateWeight, InteractionWeight
+
+
+RUN_OUTCOMES = ("accepted", "rejected", "failed", "completed_unverified")
+NODE_RUN_OUTCOMES = ("succeeded", "failed", "blocked")
+
+
+def _is_finite_number(value: Any) -> bool:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return False
+    try:
+        return isfinite(value)
+    except OverflowError:
+        return False
+
+
+def _metric_problems(metrics: Mapping[str, float], path: str) -> list[str]:
+    problems: list[str] = []
+    for name, value in metrics.items():
+        if not isinstance(name, str) or not name.strip():
+            problems.append(f"{path} metric names must be nonempty strings")
+        if not _is_finite_number(value):
+            problems.append(f"{path}.{name} must be a finite number")
+    return problems
 
 
 @dataclass(frozen=True)
@@ -21,14 +44,23 @@ class Objective:
 
     def validate(self) -> list[str]:
         problems: list[str] = []
-        if not self.metric.strip():
+        if not isinstance(self.metric, str) or not self.metric.strip():
             problems.append("objective metric must not be empty")
         if self.direction not in ("maximize", "minimize"):
             problems.append("objective direction must be maximize or minimize")
-        if self.weight < 0:
-            problems.append("objective weight must be non-negative")
-        if (self.hard_minimum is not None and self.hard_maximum is not None
-                and self.hard_minimum > self.hard_maximum):
+        if not _is_finite_number(self.weight) or self.weight < 0:
+            problems.append("objective weight must be finite and non-negative")
+        for label, value in (
+            ("hard_minimum", self.hard_minimum),
+            ("hard_maximum", self.hard_maximum),
+        ):
+            if value is not None and not _is_finite_number(value):
+                problems.append(f"objective {label} must be null or finite")
+        if (
+            _is_finite_number(self.hard_minimum)
+            and _is_finite_number(self.hard_maximum)
+            and self.hard_minimum > self.hard_maximum
+        ):
             problems.append("objective hard_minimum exceeds hard_maximum")
         return problems
 
@@ -48,6 +80,32 @@ class NodeRunReceipt:
     implementation_digest: str = ""
     runtime: str = ""
     input_digest: str = ""
+
+    def validate(self, path: str = "node_receipt") -> list[str]:
+        problems: list[str] = []
+        if not ID_RE.fullmatch(self.slot_id) or not ID_RE.fullmatch(self.candidate_id):
+            problems.append(f"{path} slot_id and candidate_id must be identifiers")
+        if self.node_id and not ID_RE.fullmatch(self.node_id):
+            problems.append(f"{path}.node_id must be empty or an identifier")
+        if self.outcome not in NODE_RUN_OUTCOMES:
+            problems.append(f"{path}.outcome must be one of {', '.join(NODE_RUN_OUTCOMES)}")
+        if (
+            isinstance(self.attempt, bool)
+            or not isinstance(self.attempt, int)
+            or self.attempt <= 0
+        ):
+            problems.append(f"{path}.attempt must be positive")
+        if self.failure_class and not ID_RE.fullmatch(self.failure_class):
+            problems.append(f"{path}.failure_class must be empty or an identifier")
+        problems.extend(_metric_problems(self.metrics, f"{path}.metrics"))
+        for digest in (
+            self.implementation_digest,
+            self.input_digest,
+            *self.artifact_digests,
+        ):
+            if digest and not DIGEST_RE.fullmatch(digest):
+                problems.append(f"{path} digests must be sha256 digests")
+        return problems
 
 
 @dataclass(frozen=True)
@@ -93,13 +151,33 @@ class RunReceipt:
                 problems.append(f"{label} must be sha256:<64 lowercase hex chars>")
         if not self.plan_digest or not self.program_digest:
             problems.append("plan_digest and program_digest are required")
-        if not self.task_case_id.strip() or not self.outcome.strip():
-            problems.append("task_case_id and outcome are required")
+        if not ID_RE.fullmatch(self.task_case_id):
+            problems.append("task_case_id must be a lowercase namespaced identifier")
+        if self.outcome not in RUN_OUTCOMES:
+            problems.append(f"outcome must be one of {', '.join(RUN_OUTCOMES)}")
+        expected_acceptance = {
+            "accepted": True,
+            "rejected": False,
+            "failed": False,
+            "completed_unverified": None,
+        }.get(self.outcome)
+        if self.outcome in RUN_OUTCOMES and self.accepted is not expected_acceptance:
+            problems.append("accepted value is inconsistent with outcome")
+        if self.verifier and not ID_RE.fullmatch(self.verifier):
+            problems.append("verifier must be empty or a lowercase namespaced identifier")
         slots = [slot for slot, _ in self.assignments]
         if len(slots) != len(set(slots)):
             problems.append("assignments must contain one candidate per slot")
+        if any(
+            not ID_RE.fullmatch(slot) or not ID_RE.fullmatch(candidate)
+            for slot, candidate in self.assignments
+        ):
+            problems.append("assignment slots and candidates must be identifiers")
         if self.accepted is not None and not isinstance(self.accepted, bool):
             problems.append("accepted must be boolean or null")
+        if self.failure_class and not ID_RE.fullmatch(self.failure_class):
+            problems.append("failure_class must be empty or an identifier")
+        problems.extend(_metric_problems(self.metrics, "metrics"))
         output_names = [name for name, _ in self.output_artifacts]
         if len(output_names) != len(set(output_names)):
             problems.append("output_artifacts must contain unique graph output names")
@@ -108,16 +186,8 @@ class RunReceipt:
                 problems.append("output artifact names must be snake_case")
             if not DIGEST_RE.fullmatch(digest):
                 problems.append("output artifact digests must be sha256 digests")
-        for node_receipt in self.node_receipts:
-            if node_receipt.attempt <= 0:
-                problems.append("node receipt attempts must be positive")
-            for digest in (
-                node_receipt.implementation_digest,
-                node_receipt.input_digest,
-                *node_receipt.artifact_digests,
-            ):
-                if digest and not DIGEST_RE.fullmatch(digest):
-                    problems.append("node receipt digests must be sha256 digests")
+        for index, node_receipt in enumerate(self.node_receipts):
+            problems.extend(node_receipt.validate(f"node_receipts[{index}]"))
         return problems
 
     def to_dict(self) -> dict[str, Any]:
@@ -179,8 +249,12 @@ class ExperimentDesign:
 
     @property
     def scheduled_runs(self) -> int:
-        return (len(self.task_case_ids) * len(self.plan_digests)
-                * len(self.seeds) * self.repetitions)
+        return (
+            len(self.task_case_ids)
+            * len(self.plan_digests)
+            * len(self.seeds)
+            * self.repetitions
+        )
 
     def validate(self) -> list[str]:
         problems: list[str] = []
@@ -188,12 +262,35 @@ class ExperimentDesign:
             problems.append("experiment id must be a lowercase namespaced identifier")
         if not self.task_case_ids or not self.plan_digests or not self.seeds:
             problems.append("task cases, plans, and seeds must not be empty")
-        if self.repetitions <= 0:
+        for label, values in (
+            ("task_case_ids", self.task_case_ids),
+            ("plan_digests", self.plan_digests),
+            ("seeds", self.seeds),
+            ("holdout_case_ids", self.holdout_case_ids),
+        ):
+            if len(values) != len(set(values)):
+                problems.append(f"{label} must be unique")
+        if any(not ID_RE.fullmatch(case_id) for case_id in self.task_case_ids):
+            problems.append("task case ids must be lowercase namespaced identifiers")
+        if any(not DIGEST_RE.fullmatch(digest) for digest in self.plan_digests):
+            problems.append("plan digests must be sha256 digests")
+        if any(isinstance(seed, bool) or not isinstance(seed, int) for seed in self.seeds):
+            problems.append("seeds must be integers")
+        if (
+            isinstance(self.repetitions, bool)
+            or not isinstance(self.repetitions, int)
+            or self.repetitions <= 0
+        ):
             problems.append("repetitions must be positive")
         if self.control_plan_digest and self.control_plan_digest not in self.plan_digests:
             problems.append("control plan must be in plan_digests")
         if set(self.holdout_case_ids) - set(self.task_case_ids):
             problems.append("holdout cases must be a subset of task cases")
+        if not self.objectives:
+            problems.append("objectives must not be empty")
+        objective_metrics = [objective.metric for objective in self.objectives]
+        if len(objective_metrics) != len(set(objective_metrics)):
+            problems.append("objective metrics must be unique")
         for objective in self.objectives:
             problems.extend(objective.validate())
         return problems

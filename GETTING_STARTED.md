@@ -11,10 +11,13 @@ git clone https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-s
 cd universal-node-graph-flexible-solutioning
 python -m pip install -e .
 solutiongraph doctor
+solutiongraph verify --catalog-root catalog
 ```
 
 The doctor command validates all bundled schemas, templates, reference nodes,
-descriptors, and generated catalog projections.
+descriptors, and generated catalog projections. The release verifier then
+compiles and executes all 14 frozen reference routes, checks the three declared
+negative controls, and rejects stale checked-in catalog JSON.
 
 ## 2. Explore reusable templates
 

@@ -126,6 +126,7 @@ unvisited space. Avoid claims not supported by real execution.
 
 ```bash
 solutiongraph doctor
+solutiongraph verify --catalog-root catalog
 solutiongraph catalog export --output catalog
 pytest tests/test_solutiongraph*.py -q
 ruff check solutiongraph tests/test_solutiongraph*.py

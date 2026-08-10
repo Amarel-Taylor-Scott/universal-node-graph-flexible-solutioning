@@ -139,8 +139,13 @@ from solutiongraph.templates import (
     TemplateCatalog,
     TemplateStage,
 )
+from solutiongraph.verification import (
+    ReleaseVerification,
+    RouteVerification,
+    verify_reference_release,
+)
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "SEMANTIC_MODEL_VERSION",
@@ -213,8 +218,10 @@ __all__ = [
     "RegistrySession",
     "RegistrySnapshot",
     "RefinementPolicy",
+    "ReleaseVerification",
     "ResourceClaim",
     "RouteAggregate",
+    "RouteVerification",
     "RouteProposal",
     "RunReceipt",
     "RuntimeAdapter",
@@ -257,4 +264,5 @@ __all__ = [
     "should_stop_early",
     "store_value",
     "write_solution_template",
+    "verify_reference_release",
 ]

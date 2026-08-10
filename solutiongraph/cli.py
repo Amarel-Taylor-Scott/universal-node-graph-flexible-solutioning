@@ -7,6 +7,7 @@ import json
 from collections.abc import Sequence
 from pathlib import Path
 
+from solutiongraph import __version__
 from solutiongraph.executor import ExecutionError
 
 
@@ -36,6 +37,11 @@ def _doctor() -> int:
         problem
         for node in REFERENCE_NODE_SPECS
         for problem in node.validate(f"nodes.{node.id}")
+    )
+    problems.extend(
+        problem
+        for node in EXAMPLE_NODES
+        for problem in node.validate(f"example_nodes.{node.id}")
     )
     node_by_id = {node.id: node for node in REFERENCE_NODE_SPECS}
     for descriptor in REFERENCE_DESCRIPTORS:
@@ -199,15 +205,54 @@ def _examples_run(
     return 0
 
 
+def _verify(catalog_root: Path | None, as_json: bool) -> int:
+    from solutiongraph.verification import verify_reference_release
+
+    result = verify_reference_release(catalog_root=catalog_root)
+    if as_json:
+        print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+    elif result.ok:
+        print(
+            "SolutionGraph release verified: "
+            f"examples={len({item.example_id for item in result.route_results})} "
+            f"routes={len(result.route_results)} "
+            f"accepted={result.accepted_routes} "
+            f"rejected_controls={result.rejected_controls} "
+            f"templates={result.template_count} "
+            f"atomic_slots={result.atomic_slot_count} "
+            f"executable_nodes={result.executable_node_count} "
+            f"schemas={result.schema_count} "
+            f"catalog_documents={result.catalog_document_count} "
+            f"catalog_checked={'yes' if result.catalog_checked else 'no'}"
+        )
+    else:
+        print("SolutionGraph release verification failed:")
+        for problem in result.problems:
+            print(f"- {problem}")
+    return 0 if result.ok else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="solutiongraph",
         description="Author, inspect, validate, and export universal solution graphs.",
     )
-    parser.add_argument("--version", action="version", version="solutiongraph 0.1.0")
+    parser.add_argument(
+        "--version", action="version", version=f"solutiongraph {__version__}"
+    )
     commands = parser.add_subparsers(dest="command", required=True)
 
     commands.add_parser("doctor", help="Validate the installed reference assets")
+    verify = commands.add_parser(
+        "verify",
+        help="Compile and execute every bundled route as a release gate",
+    )
+    verify.add_argument(
+        "--catalog-root",
+        type=Path,
+        help="Also require this generated catalog directory to exactly match",
+    )
+    verify.add_argument("--json", action="store_true", help="Emit full JSON")
 
     templates = commands.add_parser("templates", help="Inspect and author templates")
     template_commands = templates.add_subparsers(dest="template_command", required=True)
@@ -271,6 +316,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if args.command == "doctor":
             return _doctor()
+        if args.command == "verify":
+            return _verify(args.catalog_root, args.json)
         if args.command == "templates":
             if args.template_command == "list":
                 return _templates_list(args.json, tuple(args.domain), tuple(args.tag))

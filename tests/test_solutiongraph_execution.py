@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from dataclasses import replace
 from pathlib import Path
 
@@ -12,7 +13,10 @@ from solutiongraph import (
     Compiler,
     ExecutionError,
     ExecutionPolicy,
+    ExperimentDesign,
+    ExperimentRunner,
     FileArtifactStore,
+    FailureMode,
     GraphInput,
     GraphOutput,
     Idempotency,
@@ -29,6 +33,7 @@ from solutiongraph import (
     callable_implementation_digest,
     digest_value,
     sha256_digest,
+    verify_reference_release,
 )
 from solutiongraph.examples import EXAMPLE_TASKS, run_example
 from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
@@ -54,6 +59,25 @@ def stable_identity(value):
     return value
 
 
+def undeclared_failure(value):
+    raise NodeExecutionFailure("test.not-declared", "not in the node manifest")
+
+
+def retry_contract_mismatch(value):
+    raise NodeExecutionFailure("test.transient", "wrong retry contract")
+
+
+def forged_runtime_failure(value):
+    raise NodeExecutionFailure("runtime.forged", "nodes do not own runtime codes")
+
+
+_FAILURE_MODES = {
+    always_fails: (FailureMode("test.primary-failed", False),),
+    flaky_identity: (FailureMode("test.transient", True),),
+    retry_contract_mismatch: (FailureMode("test.transient", True),),
+}
+
+
 def _one_slot_fixture(*functions):
     nodes = tuple(
         NodeSpec(
@@ -66,6 +90,7 @@ def _one_slot_fixture(*functions):
             entrypoint=f"tests.test_solutiongraph_execution:{function.__name__}",
             capabilities=("test.identity",),
             idempotency=Idempotency.IDEMPOTENT,
+            failure_modes=_FAILURE_MODES.get(function, ()),
         )
         for function in functions
     )
@@ -175,6 +200,38 @@ def test_retry_requires_explicit_retryable_failure_and_idempotency():
     assert result.receipt.metrics["retries"] == 1.0
 
 
+@pytest.mark.parametrize(
+    ("function", "expected_failure"),
+    (
+        (undeclared_failure, "runtime.undeclared-node-failure"),
+        (forged_runtime_failure, "runtime.undeclared-node-failure"),
+        (retry_contract_mismatch, "runtime.failure-contract-mismatch"),
+    ),
+)
+def test_executor_rejects_node_failures_that_violate_the_manifest(
+    function, expected_failure
+):
+    program, registry = _one_slot_fixture(function)
+    compiler = Compiler()
+    space = compiler.admit(program, registry)
+    plan = compiler.compile(
+        program, registry, space, {"identity": registry.candidates[0].id}
+    )
+    result = ReferenceExecutor().execute(
+        plan,
+        program,
+        registry,
+        space,
+        {"value": "contract-safe"},
+        task_case_id="case.failure-contract",
+        verifier=CallableVerifier("verifier.test.equality", _equality_verifier),
+        policy=ExecutionPolicy(max_attempts_per_candidate=2),
+    )
+    assert not result.ok
+    assert result.receipt.failure_class == expected_failure
+    assert result.receipt.metrics["retries"] == 0.0
+
+
 def test_runtime_rechecks_policy_and_implementation_identity():
     program, registry = _one_slot_fixture(stable_identity)
     original = registry.nodes[0]
@@ -229,6 +286,71 @@ def test_every_real_world_example_compiles_full_registry_and_executes_real_route
     assert any(receipt["accepted"] is True for receipt in receipts)
     assert all(receipt["admitted_space_digest"] == space.digest for receipt in receipts)
     assert all(receipt["node_receipts"] for receipt in receipts)
+    receipt_by_digest = {receipt["plan_digest"]: receipt for receipt in receipts}
+    for route in example.routes:
+        receipt = receipt_by_digest[plans[route.id].digest]
+        assert receipt["accepted"] is route.expected_accepted
+        assert receipt["outcome"] == (
+            "accepted" if route.expected_accepted else "rejected"
+        )
+
+
+def test_reference_release_gate_executes_all_routes_and_detects_catalog_drift(
+    tmp_path,
+):
+    result = verify_reference_release(catalog_root="catalog")
+    assert result.ok
+    assert len(result.route_results) == 14
+    assert result.accepted_routes == 11
+    assert result.rejected_controls == 3
+    assert all(route.ok for route in result.route_results)
+
+    stale_catalog = tmp_path / "catalog"
+    shutil.copytree("catalog", stale_catalog)
+    registry_path = stale_catalog / "nodepacks" / "reference-core" / "registry.json"
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    registry["id"] = "registry.stale"
+    registry_path.write_text(json.dumps(registry), encoding="utf-8")
+    stale_result = verify_reference_release(catalog_root=stale_catalog)
+    assert not stale_result.ok
+    assert (
+        "catalog document is stale: nodepacks/reference-core/registry.json"
+        in stale_result.problems
+    )
+
+
+def test_experiment_runner_rejects_plan_and_case_mapping_identity_mismatches():
+    example = EXAMPLE_TASKS[0]
+    space, named_plans = example.compile()
+    first_plan, second_plan = tuple(named_plans.values())
+    design = ExperimentDesign(
+        id="experiment.identity-check",
+        task_case_ids=(example.case.id,),
+        plan_digests=(first_plan.digest,),
+        seeds=(0,),
+        repetitions=1,
+        objectives=example.objectives,
+    )
+    arguments = {
+        "program": example.program,
+        "registry": example.registry,
+        "space": space,
+        "policy": example.policy,
+    }
+    with pytest.raises(ValueError, match="plan keys do not match"):
+        ExperimentRunner().run(
+            design,
+            plans={first_plan.digest: second_plan},
+            cases={example.case.id: example.case},
+            **arguments,
+        )
+    with pytest.raises(ValueError, match="case keys do not match"):
+        ExperimentRunner().run(
+            design,
+            plans={first_plan.digest: first_plan},
+            cases={example.case.id: replace(example.case, id="case.wrong")},
+            **arguments,
+        )
 
 
 def test_new_execution_wire_schemas_are_bundled_and_strict_json_documents():
@@ -240,12 +362,25 @@ def test_new_execution_wire_schemas_are_bundled_and_strict_json_documents():
         "execution-policy.schema.json",
         "verification-result.schema.json",
     }.issubset(schemas)
-    assert all(schema.get("additionalProperties") is False for name, schema in schemas.items() if name in {
+    strict_schemas = {
         "admitted-space.schema.json",
         "artifact-record.schema.json",
         "execution-policy.schema.json",
         "verification-result.schema.json",
-    })
+    }
+    assert all(
+        schema.get("additionalProperties") is False
+        for name, schema in schemas.items()
+        if name in strict_schemas
+    )
+    receipt_schema = schemas["run-receipt.schema.json"]
+    assert receipt_schema["properties"]["outcome"]["enum"] == [
+        "accepted",
+        "rejected",
+        "failed",
+        "completed_unverified",
+    ]
+    assert len(receipt_schema["allOf"]) == 3
 
 
 def test_five_notebooks_are_valid_and_call_the_executable_example_api():

@@ -14,6 +14,7 @@ import platform
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from math import isfinite
 from time import perf_counter
 from typing import Any, Protocol
 
@@ -63,6 +64,37 @@ class NodeExecutionFailure(RuntimeError):
         super().__init__(message)
         self.failure_class = failure_class
         self.retryable = retryable
+
+
+class _RuntimeExecutionFailure(NodeExecutionFailure):
+    """Private marker for executor-generated failures in the trusted runtime."""
+
+
+def _declared_node_failure(
+    node: NodeSpec, failure: NodeExecutionFailure
+) -> NodeExecutionFailure:
+    """Return a contract-safe failure, preserving executor-owned runtime codes."""
+    if isinstance(failure, _RuntimeExecutionFailure):
+        return failure
+    if not isinstance(failure.failure_class, str):
+        return NodeExecutionFailure(
+            "runtime.undeclared-node-failure",
+            f"{node.id} emitted a non-string failure class: {failure}",
+        )
+    declared = {mode.code: mode for mode in node.failure_modes}
+    mode = declared.get(failure.failure_class)
+    if mode is None:
+        return NodeExecutionFailure(
+            "runtime.undeclared-node-failure",
+            f"{node.id} emitted undeclared failure {failure.failure_class}: {failure}",
+        )
+    if mode.retryable is not failure.retryable:
+        return NodeExecutionFailure(
+            "runtime.failure-contract-mismatch",
+            f"{node.id} emitted {failure.failure_class} with retryable="
+            f"{failure.retryable}; manifest declares retryable={mode.retryable}",
+        )
+    return failure
 
 
 @dataclass(frozen=True)
@@ -115,11 +147,21 @@ class VerificationResult:
 
     def validate(self) -> list[str]:
         problems: list[str] = []
-        if not self.outcome.strip():
+        if not isinstance(self.accepted, bool):
+            problems.append("verification accepted must be boolean")
+        if not isinstance(self.outcome, str) or not self.outcome.strip():
             problems.append("verification outcome must not be empty")
         for name, value in self.metrics.items():
-            if not name.strip() or not isinstance(value, (int, float)):
-                problems.append("verification metrics must be named numbers")
+            try:
+                finite = (
+                    not isinstance(value, bool)
+                    and isinstance(value, (int, float))
+                    and isfinite(value)
+                )
+            except OverflowError:
+                finite = False
+            if not isinstance(name, str) or not name.strip() or not finite:
+                problems.append("verification metrics must be named finite numbers")
         return problems
 
 
@@ -315,7 +357,7 @@ def _candidate_map(plan: FrozenPlan) -> dict[str, tuple[PlanFallback, ...]]:
 def _split_outputs(node: NodeSpec, result: Any) -> dict[str, Any]:
     if not node.outputs:
         if result not in (None, {}):
-            raise NodeExecutionFailure(
+            raise _RuntimeExecutionFailure(
                 "runtime.output-shape",
                 f"{node.id} declares no outputs but returned a value",
             )
@@ -323,14 +365,14 @@ def _split_outputs(node: NodeSpec, result: Any) -> dict[str, Any]:
     if len(node.outputs) == 1:
         return {node.outputs[0].name: result}
     if not isinstance(result, Mapping):
-        raise NodeExecutionFailure(
+        raise _RuntimeExecutionFailure(
             "runtime.output-shape",
             f"{node.id} must return a mapping for multiple output ports",
         )
     expected = {port.name for port in node.outputs}
     actual = set(result)
     if expected != actual:
-        raise NodeExecutionFailure(
+        raise _RuntimeExecutionFailure(
             "runtime.output-shape",
             f"{node.id} returned ports {sorted(actual)}; expected {sorted(expected)}",
         )
@@ -341,13 +383,13 @@ def _validate_cardinality(node: NodeSpec, outputs: Mapping[str, Any]) -> None:
     for port in node.outputs:
         value = outputs[port.name]
         if port.cardinality == Cardinality.ONE and value is None:
-            raise NodeExecutionFailure(
+            raise _RuntimeExecutionFailure(
                 "runtime.cardinality", f"required output {node.id}.{port.name} is null"
             )
         if port.cardinality in (Cardinality.MANY, Cardinality.STREAM) and not isinstance(
             value, (list, tuple)
         ):
-            raise NodeExecutionFailure(
+            raise _RuntimeExecutionFailure(
                 "runtime.cardinality",
                 f"output {node.id}.{port.name} must be a list or tuple",
             )
@@ -488,6 +530,7 @@ class ReferenceExecutor:
                         completed = True
                         break
                     except NodeExecutionFailure as exc:
+                        exc = _declared_node_failure(node, exc)
                         elapsed_ms = (perf_counter() - attempt_clock) * 1000
                         node_receipts.append(NodeRunReceipt(
                             slot_id=slot_id,
@@ -764,7 +807,7 @@ class ReferenceExecutor:
         if policy.verify_implementation_digests:
             actual_digest = adapter.implementation_digest(node)
             if actual_digest != binding.implementation_digest:
-                raise NodeExecutionFailure(
+                raise _RuntimeExecutionFailure(
                     "runtime.implementation-digest-mismatch",
                     f"entrypoint digest for {node.id} does not match the frozen plan",
                 )

@@ -134,6 +134,7 @@ Core changes:
 
 ```bash
 solutiongraph doctor
+solutiongraph verify --catalog-root catalog
 pytest tests/test_solutiongraph*.py tests/test_workbench.py -q
 ruff check solutiongraph browsergraph tests/test_solutiongraph*.py
 ```

@@ -6,6 +6,11 @@ All notable changes to this proof of concept are documented here.
 
 ### Added
 
+- A single `solutiongraph verify --catalog-root catalog` release gate that
+  compiles and executes all 14 frozen example routes, asserts 11 accepted
+  routes and three intentional negative controls, and detects catalog drift.
+- Strict runtime enforcement of declared node failure taxonomies, experiment
+  plan/case mapping identities, finite evidence metrics, and receipt outcomes.
 - Admitted-space content identity and compiler-frozen, ordered same-slot fallbacks.
 - Strict trusted-local `ReferenceExecutor` with exact plan reconstruction,
   implementation-digest checks, runtime/effect/permission policy, bounded

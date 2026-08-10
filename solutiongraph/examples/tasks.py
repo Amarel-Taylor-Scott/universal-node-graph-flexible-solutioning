@@ -476,6 +476,7 @@ class ExampleRoute:
     description: str
     selection: Mapping[str, str]
     fallbacks: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
+    expected_accepted: bool = True
 
     def fallback_map(self) -> Mapping[str, tuple[str, ...]]:
         return self.fallbacks or {}
@@ -730,8 +731,21 @@ CLASSIFICATION_PROGRAM = ProgramGraph(
 )
 
 
-def _route(route_id: str, description: str, choices: Mapping[str, str], fallbacks=None) -> ExampleRoute:
-    return ExampleRoute(route_id, description, dict(choices), fallbacks or {})
+def _route(
+    route_id: str,
+    description: str,
+    choices: Mapping[str, str],
+    fallbacks=None,
+    *,
+    expected_accepted: bool = True,
+) -> ExampleRoute:
+    return ExampleRoute(
+        route_id,
+        description,
+        dict(choices),
+        fallbacks or {},
+        expected_accepted,
+    )
 
 
 EXAMPLE_TASKS = (
@@ -784,8 +798,38 @@ EXAMPLE_TASKS = (
         "Compare conservative/aggressive normalization and exact/normalized dedupe.",
         DATA_PROGRAM,
         (
-            _route("baseline", "Conservative normalization and exact dedupe.", {"normalize": _candidate_id("example.data.normalize.conservative"), "deduplicate": _candidate_id("example.data.deduplicate.exact"), "emit": _candidate_id("example.data.sort")}, {"deduplicate": (_candidate_id("example.data.deduplicate.normalized"),)}),
-            _route("robust", "Aggressive normalization and normalized dedupe.", {"normalize": _candidate_id("example.data.normalize.aggressive"), "deduplicate": _candidate_id("example.data.deduplicate.normalized"), "emit": _candidate_id("example.data.sort")}),
+            _route(
+                "baseline",
+                "Conservative normalization and exact dedupe.",
+                {
+                    "normalize": _candidate_id(
+                        "example.data.normalize.conservative"
+                    ),
+                    "deduplicate": _candidate_id(
+                        "example.data.deduplicate.exact"
+                    ),
+                    "emit": _candidate_id("example.data.sort"),
+                },
+                {
+                    "deduplicate": (
+                        _candidate_id("example.data.deduplicate.normalized"),
+                    )
+                },
+                expected_accepted=False,
+            ),
+            _route(
+                "robust",
+                "Aggressive normalization and normalized dedupe.",
+                {
+                    "normalize": _candidate_id(
+                        "example.data.normalize.aggressive"
+                    ),
+                    "deduplicate": _candidate_id(
+                        "example.data.deduplicate.normalized"
+                    ),
+                    "emit": _candidate_id("example.data.sort"),
+                },
+            ),
         ),
         ExperimentCase("case.data-cleanup", {"records": [{"Company": "ACME, Inc.", "Email": "A@EXAMPLE.COM", "Phone": "(555) 0100"}, {"company": "Acme Inc", "email": "a@example.com", "phone": "555-0100"}, {"company": "Beta LLC", "email": "b@example.com", "phone": "555-0200"}]}, CallableVerifier("verifier.example.data", _data_verifier)),
         ExecutionPolicy(),
@@ -797,9 +841,35 @@ EXAMPLE_TASKS = (
         "Compare split strategies and baseline/linear models with a real holdout oracle.",
         ML_PROGRAM,
         (
-            _route("control", "Tail holdout with an intercept-only baseline.", {"split": _candidate_id("example.ml.split.tail"), "train": _candidate_id("example.ml.train.mean"), "evaluate": _candidate_id("example.ml.evaluate")}, {"train": (_candidate_id("example.ml.train.linear"),)}),
-            _route("linear", "Tail holdout with ordinary least squares.", {"split": _candidate_id("example.ml.split.tail"), "train": _candidate_id("example.ml.train.linear"), "evaluate": _candidate_id("example.ml.evaluate")}),
-            _route("alternate-split", "Alternating holdout with ordinary least squares.", {"split": _candidate_id("example.ml.split.alternating"), "train": _candidate_id("example.ml.train.linear"), "evaluate": _candidate_id("example.ml.evaluate")}),
+            _route(
+                "control",
+                "Tail holdout with an intercept-only baseline.",
+                {
+                    "split": _candidate_id("example.ml.split.tail"),
+                    "train": _candidate_id("example.ml.train.mean"),
+                    "evaluate": _candidate_id("example.ml.evaluate"),
+                },
+                {"train": (_candidate_id("example.ml.train.linear"),)},
+                expected_accepted=False,
+            ),
+            _route(
+                "linear",
+                "Tail holdout with ordinary least squares.",
+                {
+                    "split": _candidate_id("example.ml.split.tail"),
+                    "train": _candidate_id("example.ml.train.linear"),
+                    "evaluate": _candidate_id("example.ml.evaluate"),
+                },
+            ),
+            _route(
+                "alternate-split",
+                "Alternating holdout with ordinary least squares.",
+                {
+                    "split": _candidate_id("example.ml.split.alternating"),
+                    "train": _candidate_id("example.ml.train.linear"),
+                    "evaluate": _candidate_id("example.ml.evaluate"),
+                },
+            ),
         ),
         ExperimentCase("case.tabular-regression", {"dataset": {"rows": [{"x": value, "y": 2 * value + 1} for value in range(1, 10)], "predict": [10, 12]}}, CallableVerifier("verifier.example.ml", _ml_verifier)),
         ExecutionPolicy(),
@@ -824,6 +894,7 @@ EXAMPLE_TASKS = (
                         _candidate_id("example.ml.classification.train.threshold"),
                     )
                 },
+                expected_accepted=False,
             ),
             _route(
                 "threshold",

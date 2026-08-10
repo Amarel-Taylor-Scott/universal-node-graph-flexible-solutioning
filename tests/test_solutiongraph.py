@@ -12,6 +12,7 @@ from solutiongraph import (
     Compiler,
     Edge,
     EvidenceLedger,
+    ExperimentDesign,
     ForbiddenCombination,
     GraphInput,
     GraphOutput,
@@ -289,6 +290,41 @@ def test_evidence_is_append_only_pareto_ranked_and_can_fit_observational_priors(
     safe = beliefs.candidate_score("decode", "candidate.example.decode.safe")
     fast = beliefs.candidate_score("decode", "candidate.example.decode.fast")
     assert safe > fast
+
+
+def test_evidence_rejects_nonfinite_metrics_and_inconsistent_outcomes():
+    valid = receipt(
+        "receipt.strict",
+        "strict-plan",
+        {"decode": "candidate.example.decode.safe"},
+        True,
+        0.9,
+        1.0,
+    )
+    with pytest.raises(ValueError, match="finite number"):
+        EvidenceLedger().append(replace(valid, metrics={"quality": float("nan")}))
+    with pytest.raises(ValueError, match="inconsistent with outcome"):
+        EvidenceLedger().append(replace(valid, accepted=False))
+
+
+def test_experiment_design_requires_unique_valid_frozen_identities():
+    digest = sha256_digest("plan")
+    design = ExperimentDesign(
+        id="experiment.strict",
+        task_case_ids=("case.one", "case.one"),
+        plan_digests=(digest, digest),
+        seeds=(0, 0),
+        repetitions=1,
+        objectives=(
+            Objective("quality", "maximize"),
+            Objective("quality", "minimize"),
+        ),
+    )
+    problems = design.validate()
+    assert "task_case_ids must be unique" in problems
+    assert "plan_digests must be unique" in problems
+    assert "seeds must be unique" in problems
+    assert "objective metrics must be unique" in problems
 
 
 def test_stream_cardinality_is_part_of_the_abi():

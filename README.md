@@ -115,6 +115,7 @@ solutiongraph examples run image-check-and-process
 solutiongraph examples run data-cleanup
 solutiongraph examples run tabular-regression
 solutiongraph examples run tabular-classification
+solutiongraph verify --catalog-root catalog
 ```
 
 Each task has multiple frozen routes. The cleanup baseline, mean-regression
@@ -147,6 +148,7 @@ For the shortest path from clone to a custom template, use the
 ```bash
 python -m pip install -e .
 solutiongraph doctor
+solutiongraph verify --catalog-root catalog
 solutiongraph templates list
 solutiongraph templates show template.document-intelligence
 ```
