@@ -4,14 +4,16 @@ This directory is a checked-in projection generated from the canonical Python
 contracts in `solutiongraph.reference_nodes` and `solutiongraph.template_library`.
 
 - `index.json` lists every template and node pack with content digest and counts.
-- `templates/` contains reusable semantic obligations, not fixed routes.
+- `templates/` contains 18 reusable semantic templates and 317 atomic
+  obligations, not fixed routes.
 - `nodepacks/reference-core/` demonstrates node contracts, sparse descriptors,
   external connectors, registry capabilities, and a portable pack manifest.
 
 Regenerate the JSON documents with:
 
 ```bash
-python scripts/export_solutiongraph_catalog.py --output catalog
+solutiongraph catalog export --output catalog
+python scripts/sync_catalog_explorer.py
 ```
 
 The reference pack deliberately has no embeddings. Its capabilities advertise

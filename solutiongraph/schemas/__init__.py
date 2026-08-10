@@ -23,6 +23,7 @@ SCHEMA_NAMES = (
     "registry-snapshot.schema.json",
     "node-pack.schema.json",
     "solution-template.schema.json",
+    "template-blueprint.schema.json",
     "search-report.schema.json",
 )
 

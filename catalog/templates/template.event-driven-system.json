@@ -1,32 +1,50 @@
 {
-  "description": "An event ingestion, reconciliation, policy, delivery, and feedback scaffold.",
+  "description": "An event contract, ingestion, processing, coordination, delivery, and observability scaffold.",
   "domains": [
-    "logistics.shipping",
-    "software.event-driven"
+    "software.event-driven",
+    "software.distributed"
   ],
   "extensions": {
     "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
-  "id": "template.shipping-notifications",
+  "id": "template.event-driven-system",
   "program": {
     "allowed_effects": [],
     "edges": [
       {
         "source_port": "state",
-        "source_slot": "receive_events",
+        "source_slot": "define_event_schema",
         "target_port": "state",
-        "target_slot": "authenticate_source"
+        "target_slot": "define_delivery_semantics"
       },
       {
         "source_port": "state",
-        "source_slot": "authenticate_source",
+        "source_slot": "define_delivery_semantics",
         "target_port": "state",
-        "target_slot": "normalize_event"
+        "target_slot": "define_failure_policy"
       },
       {
         "source_port": "state",
-        "source_slot": "normalize_event",
+        "source_slot": "define_failure_policy",
+        "target_port": "state",
+        "target_slot": "receive_event"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "receive_event",
+        "target_port": "state",
+        "target_slot": "authenticate_event"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authenticate_event",
+        "target_port": "state",
+        "target_slot": "validate_event"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_event",
         "target_port": "state",
         "target_slot": "deduplicate_event"
       },
@@ -34,78 +52,72 @@
         "source_port": "state",
         "source_slot": "deduplicate_event",
         "target_port": "state",
-        "target_slot": "resolve_shipment"
+        "target_slot": "load_state"
       },
       {
         "source_port": "state",
-        "source_slot": "resolve_shipment",
+        "source_slot": "load_state",
         "target_port": "state",
-        "target_slot": "order_events"
+        "target_slot": "apply_transition"
       },
       {
         "source_port": "state",
-        "source_slot": "order_events",
+        "source_slot": "apply_transition",
         "target_port": "state",
-        "target_slot": "derive_status"
+        "target_slot": "persist_transition"
       },
       {
         "source_port": "state",
-        "source_slot": "derive_status",
+        "source_slot": "persist_transition",
         "target_port": "state",
-        "target_slot": "detect_exception"
+        "target_slot": "derive_events"
       },
       {
         "source_port": "state",
-        "source_slot": "detect_exception",
+        "source_slot": "derive_events",
         "target_port": "state",
-        "target_slot": "select_policy"
+        "target_slot": "publish_events"
       },
       {
         "source_port": "state",
-        "source_slot": "select_policy",
+        "source_slot": "publish_events",
         "target_port": "state",
-        "target_slot": "select_recipient"
+        "target_slot": "coordinate_saga"
       },
       {
         "source_port": "state",
-        "source_slot": "select_recipient",
+        "source_slot": "coordinate_saga",
         "target_port": "state",
-        "target_slot": "render_message"
+        "target_slot": "observe_lag"
       },
       {
         "source_port": "state",
-        "source_slot": "render_message",
+        "source_slot": "observe_lag",
         "target_port": "state",
-        "target_slot": "dispatch_notification"
+        "target_slot": "handle_poison_event"
       },
       {
         "source_port": "state",
-        "source_slot": "dispatch_notification",
+        "source_slot": "handle_poison_event",
         "target_port": "state",
-        "target_slot": "verify_delivery"
+        "target_slot": "replay_safely"
       },
       {
         "source_port": "state",
-        "source_slot": "verify_delivery",
+        "source_slot": "replay_safely",
         "target_port": "state",
-        "target_slot": "handle_failure"
-      },
-      {
-        "source_port": "state",
-        "source_slot": "handle_failure",
-        "target_port": "state",
-        "target_slot": "record_feedback"
+        "target_slot": "publish_receipt"
       }
     ],
     "granted_permissions": [],
-    "id": "program.template.shipping-notifications",
+    "id": "program.template.event-driven-system",
     "inputs": [
       {
         "name": "input",
         "target_port": "state",
-        "target_slot": "receive_events",
+        "target_slot": "define_event_schema",
         "type": {
-          "id": "template.shipping-notifications.state-0",
+          "id": "template.event-driven-system.state-0",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -119,9 +131,9 @@
       {
         "name": "result",
         "source_port": "state",
-        "source_slot": "record_feedback",
+        "source_slot": "publish_receipt",
         "type": {
-          "id": "template.shipping-notifications.state-15",
+          "id": "template.event-driven-system.state-17",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -133,16 +145,16 @@
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.contract"
         ],
-        "id": "receive_events",
+        "id": "define_event_schema",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-0",
+              "id": "template.event-driven-system.state-0",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -158,7 +170,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.event-driven-system.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -166,26 +178,112 @@
             }
           }
         ],
-        "purpose": "Receive carrier, warehouse, and order events idempotently.",
+        "purpose": "Define versioned event identity, payload, and semantic meaning.",
         "required_capabilities": [
-          "template.shipping-notifications.receive_events.perform"
+          "template.event-driven-system.define_event_schema.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Receive carrier, warehouse, and order events idempotently and preserve every invariant required by later slots."
+        "success_contract": "Define versioned event identity, payload, and semantic meaning and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_delivery_semantics",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.event-driven-system.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.event-driven-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define ordering, duplication, latency, and durability semantics.",
+        "required_capabilities": [
+          "template.event-driven-system.define_delivery_semantics.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define ordering, duplication, latency, and durability semantics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_failure_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.event-driven-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.event-driven-system.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define retry, dead-letter, compensation, and replay policy.",
+        "required_capabilities": [
+          "template.event-driven-system.define_failure_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define retry, dead-letter, compensation, and replay policy and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.ingest"
         ],
-        "id": "authenticate_source",
+        "id": "receive_event",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.event-driven-system.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -201,7 +299,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.event-driven-system.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -209,26 +307,26 @@
             }
           }
         ],
-        "purpose": "Authenticate event sources and verify integrity.",
+        "purpose": "Receive an event with transport and source evidence.",
         "required_capabilities": [
-          "template.shipping-notifications.authenticate_source.perform"
+          "template.event-driven-system.receive_event.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Authenticate event sources and verify integrity and preserve every invariant required by later slots."
+        "success_contract": "Receive an event with transport and source evidence and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.ingest"
         ],
-        "id": "normalize_event",
+        "id": "authenticate_event",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.event-driven-system.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -244,7 +342,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.event-driven-system.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -252,12 +350,55 @@
             }
           }
         ],
-        "purpose": "Normalize provider payloads into a versioned event schema.",
+        "purpose": "Authenticate producer and verify message integrity.",
         "required_capabilities": [
-          "template.shipping-notifications.normalize_event.perform"
+          "template.event-driven-system.authenticate_event.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Normalize provider payloads into a versioned event schema and preserve every invariant required by later slots."
+        "success_contract": "Authenticate producer and verify message integrity and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "validate_event",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.event-driven-system.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.event-driven-system.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate schema, version, identifiers, and temporal bounds.",
+        "required_capabilities": [
+          "template.event-driven-system.validate_event.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate schema, version, identifiers, and temporal bounds and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
@@ -271,7 +412,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.event-driven-system.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -287,7 +428,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.event-driven-system.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -295,26 +436,26 @@
             }
           }
         ],
-        "purpose": "Detect replayed or semantically duplicate events.",
+        "purpose": "Detect duplicate delivery under the declared identity contract.",
         "required_capabilities": [
-          "template.shipping-notifications.deduplicate_event.perform"
+          "template.event-driven-system.deduplicate_event.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect replayed or semantically duplicate events and preserve every invariant required by later slots."
+        "success_contract": "Detect duplicate delivery under the declared identity contract and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.process"
         ],
-        "id": "resolve_shipment",
+        "id": "load_state",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.event-driven-system.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -330,7 +471,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.event-driven-system.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -338,26 +479,26 @@
             }
           }
         ],
-        "purpose": "Resolve event identifiers to the correct shipment.",
+        "purpose": "Load required state at a declared consistency level.",
         "required_capabilities": [
-          "template.shipping-notifications.resolve_shipment.perform"
+          "template.event-driven-system.load_state.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve event identifiers to the correct shipment and preserve every invariant required by later slots."
+        "success_contract": "Load required state at a declared consistency level and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.process"
         ],
-        "id": "order_events",
+        "id": "apply_transition",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.event-driven-system.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -373,7 +514,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.event-driven-system.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -381,26 +522,26 @@
             }
           }
         ],
-        "purpose": "Order late and out-of-order events under declared semantics.",
+        "purpose": "Apply domain invariants and compute the intended transition.",
         "required_capabilities": [
-          "template.shipping-notifications.order_events.perform"
+          "template.event-driven-system.apply_transition.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Order late and out-of-order events under declared semantics and preserve every invariant required by later slots."
+        "success_contract": "Apply domain invariants and compute the intended transition and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.process"
         ],
-        "id": "derive_status",
+        "id": "persist_transition",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.event-driven-system.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -416,7 +557,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.event-driven-system.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -424,26 +565,26 @@
             }
           }
         ],
-        "purpose": "Derive the current shipment status and confidence.",
+        "purpose": "Persist state and event progress atomically or compensatably.",
         "required_capabilities": [
-          "template.shipping-notifications.derive_status.perform"
+          "template.event-driven-system.persist_transition.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Derive the current shipment status and confidence and preserve every invariant required by later slots."
+        "success_contract": "Persist state and event progress atomically or compensatably and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.coordinate"
         ],
-        "id": "detect_exception",
+        "id": "derive_events",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.event-driven-system.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -459,7 +600,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.event-driven-system.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -467,26 +608,26 @@
             }
           }
         ],
-        "purpose": "Detect delay, damage, address, and delivery exceptions.",
+        "purpose": "Derive typed downstream events from the accepted transition.",
         "required_capabilities": [
-          "template.shipping-notifications.detect_exception.perform"
+          "template.event-driven-system.derive_events.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect delay, damage, address, and delivery exceptions and preserve every invariant required by later slots."
+        "success_contract": "Derive typed downstream events from the accepted transition and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.coordinate"
         ],
-        "id": "select_policy",
+        "id": "publish_events",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.event-driven-system.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -502,7 +643,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.event-driven-system.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -510,26 +651,26 @@
             }
           }
         ],
-        "purpose": "Apply customer, jurisdiction, urgency, and suppression policy.",
+        "purpose": "Publish events under the declared atomicity and retry model.",
         "required_capabilities": [
-          "template.shipping-notifications.select_policy.perform"
+          "template.event-driven-system.publish_events.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Apply customer, jurisdiction, urgency, and suppression policy and preserve every invariant required by later slots."
+        "success_contract": "Publish events under the declared atomicity and retry model and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.coordinate"
         ],
-        "id": "select_recipient",
+        "id": "coordinate_saga",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.event-driven-system.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -545,7 +686,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.event-driven-system.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -553,26 +694,26 @@
             }
           }
         ],
-        "purpose": "Resolve an authorized recipient and channel preference.",
+        "purpose": "Advance or compensate multi-step workflows when required.",
         "required_capabilities": [
-          "template.shipping-notifications.select_recipient.perform"
+          "template.event-driven-system.coordinate_saga.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve an authorized recipient and channel preference and preserve every invariant required by later slots."
+        "success_contract": "Advance or compensate multi-step workflows when required and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.operate"
         ],
-        "id": "render_message",
+        "id": "observe_lag",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.event-driven-system.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -588,7 +729,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.event-driven-system.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -596,26 +737,26 @@
             }
           }
         ],
-        "purpose": "Render localized, privacy-safe notification content.",
+        "purpose": "Measure backlog, latency, failure, and replay state.",
         "required_capabilities": [
-          "template.shipping-notifications.render_message.perform"
+          "template.event-driven-system.observe_lag.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Render localized, privacy-safe notification content and preserve every invariant required by later slots."
+        "success_contract": "Measure backlog, latency, failure, and replay state and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.operate"
         ],
-        "id": "dispatch_notification",
+        "id": "handle_poison_event",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.event-driven-system.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -631,7 +772,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.event-driven-system.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -639,26 +780,26 @@
             }
           }
         ],
-        "purpose": "Dispatch through an admitted delivery provider.",
+        "purpose": "Quarantine or repair poison events without blocking unrelated work.",
         "required_capabilities": [
-          "template.shipping-notifications.dispatch_notification.perform"
+          "template.event-driven-system.handle_poison_event.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Dispatch through an admitted delivery provider and preserve every invariant required by later slots."
+        "success_contract": "Quarantine or repair poison events without blocking unrelated work and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.operate"
         ],
-        "id": "verify_delivery",
+        "id": "replay_safely",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.event-driven-system.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -674,7 +815,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.event-driven-system.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -682,26 +823,26 @@
             }
           }
         ],
-        "purpose": "Observe provider and downstream delivery state.",
+        "purpose": "Replay a bounded event range with idempotency evidence.",
         "required_capabilities": [
-          "template.shipping-notifications.verify_delivery.perform"
+          "template.event-driven-system.replay_safely.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Observe provider and downstream delivery state and preserve every invariant required by later slots."
+        "success_contract": "Replay a bounded event range with idempotency evidence and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.operate"
         ],
-        "id": "handle_failure",
+        "id": "publish_receipt",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.event-driven-system.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -717,7 +858,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.event-driven-system.state-17",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -725,59 +866,16 @@
             }
           }
         ],
-        "purpose": "Retry, fail over, suppress, or escalate by failure class.",
+        "purpose": "Publish state, offsets, effects, and recovery evidence.",
         "required_capabilities": [
-          "template.shipping-notifications.handle_failure.perform"
+          "template.event-driven-system.publish_receipt.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Retry, fail over, suppress, or escalate by failure class and preserve every invariant required by later slots."
-      },
-      {
-        "allowed_effects": [],
-        "group": [
-          "stage.deliver"
-        ],
-        "id": "record_feedback",
-        "inputs": [
-          {
-            "cardinality": "one",
-            "description": "",
-            "name": "state",
-            "type": {
-              "id": "template.shipping-notifications.state-14",
-              "media_type": "application/json",
-              "schema_digest": "",
-              "units": "",
-              "version": "1"
-            }
-          }
-        ],
-        "kind": "atomic",
-        "optional": false,
-        "outputs": [
-          {
-            "cardinality": "one",
-            "description": "",
-            "name": "state",
-            "type": {
-              "id": "template.shipping-notifications.state-15",
-              "media_type": "application/json",
-              "schema_digest": "",
-              "units": "",
-              "version": "1"
-            }
-          }
-        ],
-        "purpose": "Record delivery, engagement, and policy evidence.",
-        "required_capabilities": [
-          "template.shipping-notifications.record_feedback.perform"
-        ],
-        "subgraph_ref": "",
-        "success_contract": "Record delivery, engagement, and policy evidence and preserve every invariant required by later slots."
+        "success_contract": "Publish state, offsets, effects, and recovery evidence and preserve every invariant required by later slots."
       }
     ],
     "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
-    "task": "Instantiate the Shipping logistics notifications obligations for a task-specific contract.",
+    "task": "Instantiate the Event-driven application obligations for a task-specific contract.",
     "version": "1.0.0"
   },
   "refinements": [
@@ -785,7 +883,7 @@
       "budget_ref": "",
       "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
       "extensions": {},
-      "id": "template.shipping-notifications.repair-rejected-route",
+      "id": "template.event-driven-system.repair-rejected-route",
       "max_iterations": 8,
       "proposal_strategy": "search.sprout",
       "refresh_registry_snapshot": false,
@@ -800,7 +898,7 @@
       "budget_ref": "",
       "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
       "extensions": {},
-      "id": "template.shipping-notifications.revisit-registry",
+      "id": "template.event-driven-system.revisit-registry",
       "max_iterations": 1,
       "proposal_strategy": "discovery.refresh",
       "refresh_registry_snapshot": true,
@@ -814,59 +912,69 @@
   ],
   "stages": [
     {
-      "description": "Accept and identify logistics events.",
+      "description": "Define event meaning and delivery guarantees.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_event_schema",
+        "define_delivery_semantics",
+        "define_failure_policy"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Accept and authenticate events.",
       "extensions": {},
       "id": "stage.ingest",
       "slot_ids": [
-        "receive_events",
-        "authenticate_source",
-        "normalize_event",
+        "receive_event",
+        "authenticate_event",
+        "validate_event",
         "deduplicate_event"
       ],
       "title": "Ingest"
     },
     {
-      "description": "Build trustworthy shipment state.",
+      "description": "Derive one deterministic state transition.",
       "extensions": {},
-      "id": "stage.reconcile",
+      "id": "stage.process",
       "slot_ids": [
-        "resolve_shipment",
-        "order_events",
-        "derive_status",
-        "detect_exception"
+        "load_state",
+        "apply_transition",
+        "persist_transition"
       ],
-      "title": "Reconcile"
+      "title": "Process"
     },
     {
-      "description": "Determine whether and how to notify.",
+      "description": "Publish downstream work safely.",
       "extensions": {},
-      "id": "stage.decide",
+      "id": "stage.coordinate",
       "slot_ids": [
-        "select_policy",
-        "select_recipient",
-        "render_message"
+        "derive_events",
+        "publish_events",
+        "coordinate_saga"
       ],
-      "title": "Decide"
+      "title": "Coordinate"
     },
     {
-      "description": "Send and learn from typed outcomes.",
+      "description": "Observe and recover the event flow.",
       "extensions": {},
-      "id": "stage.deliver",
+      "id": "stage.operate",
       "slot_ids": [
-        "dispatch_notification",
-        "verify_delivery",
-        "handle_failure",
-        "record_feedback"
+        "observe_lag",
+        "handle_poison_event",
+        "replay_safely",
+        "publish_receipt"
       ],
-      "title": "Deliver"
+      "title": "Operate"
     }
   ],
   "tags": [
-    "notifications",
-    "integration",
-    "workflow"
+    "events",
+    "messaging",
+    "reliability"
   ],
   "template_model_version": "0.1",
-  "title": "Shipping logistics notifications",
+  "title": "Event-driven application",
   "version": "1.0.0"
 }

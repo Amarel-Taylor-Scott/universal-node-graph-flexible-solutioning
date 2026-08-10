@@ -5,6 +5,7 @@
     "security.identity"
   ],
   "extensions": {
+    "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
   "id": "template.login-system",
@@ -91,7 +92,7 @@
       }
     ],
     "granted_permissions": [],
-    "id": "template.template.login-system",
+    "id": "program.template.login-system",
     "inputs": [
       {
         "name": "input",

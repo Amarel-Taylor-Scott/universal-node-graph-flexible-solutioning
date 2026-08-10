@@ -1,111 +1,128 @@
 {
-  "description": "An event ingestion, reconciliation, policy, delivery, and feedback scaffold.",
+  "description": "A source-contract, ingestion, transformation, quality, publication, and operation scaffold.",
   "domains": [
-    "logistics.shipping",
-    "software.event-driven"
+    "data-engineering.batch"
   ],
   "extensions": {
     "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
-  "id": "template.shipping-notifications",
+  "id": "template.batch-data-pipeline",
   "program": {
     "allowed_effects": [],
     "edges": [
       {
         "source_port": "state",
-        "source_slot": "receive_events",
+        "source_slot": "define_sources",
         "target_port": "state",
-        "target_slot": "authenticate_source"
+        "target_slot": "define_product"
       },
       {
         "source_port": "state",
-        "source_slot": "authenticate_source",
+        "source_slot": "define_product",
         "target_port": "state",
-        "target_slot": "normalize_event"
+        "target_slot": "define_slas"
       },
       {
         "source_port": "state",
-        "source_slot": "normalize_event",
+        "source_slot": "define_slas",
         "target_port": "state",
-        "target_slot": "deduplicate_event"
+        "target_slot": "extract_sources"
       },
       {
         "source_port": "state",
-        "source_slot": "deduplicate_event",
+        "source_slot": "extract_sources",
         "target_port": "state",
-        "target_slot": "resolve_shipment"
+        "target_slot": "validate_arrival"
       },
       {
         "source_port": "state",
-        "source_slot": "resolve_shipment",
+        "source_slot": "validate_arrival",
         "target_port": "state",
-        "target_slot": "order_events"
+        "target_slot": "capture_lineage"
       },
       {
         "source_port": "state",
-        "source_slot": "order_events",
+        "source_slot": "capture_lineage",
         "target_port": "state",
-        "target_slot": "derive_status"
+        "target_slot": "normalize_schema"
       },
       {
         "source_port": "state",
-        "source_slot": "derive_status",
+        "source_slot": "normalize_schema",
         "target_port": "state",
-        "target_slot": "detect_exception"
+        "target_slot": "apply_business_rules"
       },
       {
         "source_port": "state",
-        "source_slot": "detect_exception",
+        "source_slot": "apply_business_rules",
         "target_port": "state",
-        "target_slot": "select_policy"
+        "target_slot": "join_sources"
       },
       {
         "source_port": "state",
-        "source_slot": "select_policy",
+        "source_slot": "join_sources",
         "target_port": "state",
-        "target_slot": "select_recipient"
+        "target_slot": "aggregate_values"
       },
       {
         "source_port": "state",
-        "source_slot": "select_recipient",
+        "source_slot": "aggregate_values",
         "target_port": "state",
-        "target_slot": "render_message"
+        "target_slot": "validate_constraints"
       },
       {
         "source_port": "state",
-        "source_slot": "render_message",
+        "source_slot": "validate_constraints",
         "target_port": "state",
-        "target_slot": "dispatch_notification"
+        "target_slot": "detect_drift"
       },
       {
         "source_port": "state",
-        "source_slot": "dispatch_notification",
+        "source_slot": "detect_drift",
         "target_port": "state",
-        "target_slot": "verify_delivery"
+        "target_slot": "reconcile_totals"
       },
       {
         "source_port": "state",
-        "source_slot": "verify_delivery",
+        "source_slot": "reconcile_totals",
         "target_port": "state",
-        "target_slot": "handle_failure"
+        "target_slot": "write_product"
       },
       {
         "source_port": "state",
-        "source_slot": "handle_failure",
+        "source_slot": "write_product",
         "target_port": "state",
-        "target_slot": "record_feedback"
+        "target_slot": "publish_metadata"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "publish_metadata",
+        "target_port": "state",
+        "target_slot": "notify_consumers"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "notify_consumers",
+        "target_port": "state",
+        "target_slot": "record_run"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "record_run",
+        "target_port": "state",
+        "target_slot": "apply_recovery"
       }
     ],
     "granted_permissions": [],
-    "id": "program.template.shipping-notifications",
+    "id": "program.template.batch-data-pipeline",
     "inputs": [
       {
         "name": "input",
         "target_port": "state",
-        "target_slot": "receive_events",
+        "target_slot": "define_sources",
         "type": {
-          "id": "template.shipping-notifications.state-0",
+          "id": "template.batch-data-pipeline.state-0",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -119,9 +136,9 @@
       {
         "name": "result",
         "source_port": "state",
-        "source_slot": "record_feedback",
+        "source_slot": "apply_recovery",
         "type": {
-          "id": "template.shipping-notifications.state-15",
+          "id": "template.batch-data-pipeline.state-18",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -133,16 +150,16 @@
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.contract"
         ],
-        "id": "receive_events",
+        "id": "define_sources",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-0",
+              "id": "template.batch-data-pipeline.state-0",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -158,7 +175,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.batch-data-pipeline.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -166,26 +183,112 @@
             }
           }
         ],
-        "purpose": "Receive carrier, warehouse, and order events idempotently.",
+        "purpose": "Define source identities, ownership, cadence, and access contracts.",
         "required_capabilities": [
-          "template.shipping-notifications.receive_events.perform"
+          "template.batch-data-pipeline.define_sources.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Receive carrier, warehouse, and order events idempotently and preserve every invariant required by later slots."
+        "success_contract": "Define source identities, ownership, cadence, and access contracts and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_product",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define output schema, semantics, freshness, and consumers.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.define_product.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define output schema, semantics, freshness, and consumers and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_slas",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define quality, latency, recovery, and retention objectives.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.define_slas.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define quality, latency, recovery, and retention objectives and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.ingest"
         ],
-        "id": "authenticate_source",
+        "id": "extract_sources",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.batch-data-pipeline.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -201,7 +304,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.batch-data-pipeline.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -209,26 +312,26 @@
             }
           }
         ],
-        "purpose": "Authenticate event sources and verify integrity.",
+        "purpose": "Extract source data using bounded incremental or full reads.",
         "required_capabilities": [
-          "template.shipping-notifications.authenticate_source.perform"
+          "template.batch-data-pipeline.extract_sources.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Authenticate event sources and verify integrity and preserve every invariant required by later slots."
+        "success_contract": "Extract source data using bounded incremental or full reads and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.ingest"
         ],
-        "id": "normalize_event",
+        "id": "validate_arrival",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.batch-data-pipeline.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -244,7 +347,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.batch-data-pipeline.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -252,26 +355,26 @@
             }
           }
         ],
-        "purpose": "Normalize provider payloads into a versioned event schema.",
+        "purpose": "Validate expected partitions, counts, checksums, and freshness.",
         "required_capabilities": [
-          "template.shipping-notifications.normalize_event.perform"
+          "template.batch-data-pipeline.validate_arrival.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Normalize provider payloads into a versioned event schema and preserve every invariant required by later slots."
+        "success_contract": "Validate expected partitions, counts, checksums, and freshness and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.ingest"
         ],
-        "id": "deduplicate_event",
+        "id": "capture_lineage",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.batch-data-pipeline.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -287,7 +390,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.batch-data-pipeline.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -295,26 +398,26 @@
             }
           }
         ],
-        "purpose": "Detect replayed or semantically duplicate events.",
+        "purpose": "Capture immutable source, schema, and extraction provenance.",
         "required_capabilities": [
-          "template.shipping-notifications.deduplicate_event.perform"
+          "template.batch-data-pipeline.capture_lineage.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect replayed or semantically duplicate events and preserve every invariant required by later slots."
+        "success_contract": "Capture immutable source, schema, and extraction provenance and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.transform"
         ],
-        "id": "resolve_shipment",
+        "id": "normalize_schema",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.batch-data-pipeline.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -330,7 +433,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.batch-data-pipeline.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -338,26 +441,26 @@
             }
           }
         ],
-        "purpose": "Resolve event identifiers to the correct shipment.",
+        "purpose": "Normalize types, names, null semantics, and units.",
         "required_capabilities": [
-          "template.shipping-notifications.resolve_shipment.perform"
+          "template.batch-data-pipeline.normalize_schema.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve event identifiers to the correct shipment and preserve every invariant required by later slots."
+        "success_contract": "Normalize types, names, null semantics, and units and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.transform"
         ],
-        "id": "order_events",
+        "id": "apply_business_rules",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.batch-data-pipeline.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -373,7 +476,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.batch-data-pipeline.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -381,26 +484,26 @@
             }
           }
         ],
-        "purpose": "Order late and out-of-order events under declared semantics.",
+        "purpose": "Apply versioned deterministic business transformations.",
         "required_capabilities": [
-          "template.shipping-notifications.order_events.perform"
+          "template.batch-data-pipeline.apply_business_rules.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Order late and out-of-order events under declared semantics and preserve every invariant required by later slots."
+        "success_contract": "Apply versioned deterministic business transformations and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.transform"
         ],
-        "id": "derive_status",
+        "id": "join_sources",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.batch-data-pipeline.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -416,7 +519,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.batch-data-pipeline.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -424,26 +527,26 @@
             }
           }
         ],
-        "purpose": "Derive the current shipment status and confidence.",
+        "purpose": "Join sources with declared keys, cardinality, and loss accounting.",
         "required_capabilities": [
-          "template.shipping-notifications.derive_status.perform"
+          "template.batch-data-pipeline.join_sources.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Derive the current shipment status and confidence and preserve every invariant required by later slots."
+        "success_contract": "Join sources with declared keys, cardinality, and loss accounting and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.transform"
         ],
-        "id": "detect_exception",
+        "id": "aggregate_values",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.batch-data-pipeline.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -459,7 +562,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.batch-data-pipeline.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -467,26 +570,26 @@
             }
           }
         ],
-        "purpose": "Detect delay, damage, address, and delivery exceptions.",
+        "purpose": "Aggregate at declared grains with reconciliation checks.",
         "required_capabilities": [
-          "template.shipping-notifications.detect_exception.perform"
+          "template.batch-data-pipeline.aggregate_values.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect delay, damage, address, and delivery exceptions and preserve every invariant required by later slots."
+        "success_contract": "Aggregate at declared grains with reconciliation checks and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.assure"
         ],
-        "id": "select_policy",
+        "id": "validate_constraints",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.batch-data-pipeline.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -502,7 +605,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.batch-data-pipeline.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -510,26 +613,26 @@
             }
           }
         ],
-        "purpose": "Apply customer, jurisdiction, urgency, and suppression policy.",
+        "purpose": "Validate schema, uniqueness, referential, and business constraints.",
         "required_capabilities": [
-          "template.shipping-notifications.select_policy.perform"
+          "template.batch-data-pipeline.validate_constraints.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Apply customer, jurisdiction, urgency, and suppression policy and preserve every invariant required by later slots."
+        "success_contract": "Validate schema, uniqueness, referential, and business constraints and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.assure"
         ],
-        "id": "select_recipient",
+        "id": "detect_drift",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.batch-data-pipeline.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -545,7 +648,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.batch-data-pipeline.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -553,26 +656,26 @@
             }
           }
         ],
-        "purpose": "Resolve an authorized recipient and channel preference.",
+        "purpose": "Detect source, schema, distribution, and volume drift.",
         "required_capabilities": [
-          "template.shipping-notifications.select_recipient.perform"
+          "template.batch-data-pipeline.detect_drift.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve an authorized recipient and channel preference and preserve every invariant required by later slots."
+        "success_contract": "Detect source, schema, distribution, and volume drift and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.assure"
         ],
-        "id": "render_message",
+        "id": "reconcile_totals",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.batch-data-pipeline.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -588,7 +691,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.batch-data-pipeline.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -596,26 +699,26 @@
             }
           }
         ],
-        "purpose": "Render localized, privacy-safe notification content.",
+        "purpose": "Reconcile source-to-output counts, balances, and rejects.",
         "required_capabilities": [
-          "template.shipping-notifications.render_message.perform"
+          "template.batch-data-pipeline.reconcile_totals.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Render localized, privacy-safe notification content and preserve every invariant required by later slots."
+        "success_contract": "Reconcile source-to-output counts, balances, and rejects and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.publish"
         ],
-        "id": "dispatch_notification",
+        "id": "write_product",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.batch-data-pipeline.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -631,7 +734,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.batch-data-pipeline.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -639,26 +742,26 @@
             }
           }
         ],
-        "purpose": "Dispatch through an admitted delivery provider.",
+        "purpose": "Write outputs atomically in the declared storage contract.",
         "required_capabilities": [
-          "template.shipping-notifications.dispatch_notification.perform"
+          "template.batch-data-pipeline.write_product.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Dispatch through an admitted delivery provider and preserve every invariant required by later slots."
+        "success_contract": "Write outputs atomically in the declared storage contract and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.publish"
         ],
-        "id": "verify_delivery",
+        "id": "publish_metadata",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.batch-data-pipeline.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -674,7 +777,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.batch-data-pipeline.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -682,26 +785,26 @@
             }
           }
         ],
-        "purpose": "Observe provider and downstream delivery state.",
+        "purpose": "Publish catalog, lineage, quality, and ownership metadata.",
         "required_capabilities": [
-          "template.shipping-notifications.verify_delivery.perform"
+          "template.batch-data-pipeline.publish_metadata.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Observe provider and downstream delivery state and preserve every invariant required by later slots."
+        "success_contract": "Publish catalog, lineage, quality, and ownership metadata and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.publish"
         ],
-        "id": "handle_failure",
+        "id": "notify_consumers",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.batch-data-pipeline.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -717,7 +820,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.batch-data-pipeline.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -725,26 +828,26 @@
             }
           }
         ],
-        "purpose": "Retry, fail over, suppress, or escalate by failure class.",
+        "purpose": "Emit idempotent availability or failure events.",
         "required_capabilities": [
-          "template.shipping-notifications.handle_failure.perform"
+          "template.batch-data-pipeline.notify_consumers.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Retry, fail over, suppress, or escalate by failure class and preserve every invariant required by later slots."
+        "success_contract": "Emit idempotent availability or failure events and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.operate"
         ],
-        "id": "record_feedback",
+        "id": "record_run",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.batch-data-pipeline.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -760,7 +863,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-15",
+              "id": "template.batch-data-pipeline.state-17",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -768,16 +871,59 @@
             }
           }
         ],
-        "purpose": "Record delivery, engagement, and policy evidence.",
+        "purpose": "Record inputs, route, code, environment, metrics, and outcomes.",
         "required_capabilities": [
-          "template.shipping-notifications.record_feedback.perform"
+          "template.batch-data-pipeline.record_run.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Record delivery, engagement, and policy evidence and preserve every invariant required by later slots."
+        "success_contract": "Record inputs, route, code, environment, metrics, and outcomes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.operate"
+        ],
+        "id": "apply_recovery",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retry, backfill, quarantine, or rollback under explicit policy.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.apply_recovery.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retry, backfill, quarantine, or rollback under explicit policy and preserve every invariant required by later slots."
       }
     ],
     "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
-    "task": "Instantiate the Shipping logistics notifications obligations for a task-specific contract.",
+    "task": "Instantiate the Batch data engineering pipeline obligations for a task-specific contract.",
     "version": "1.0.0"
   },
   "refinements": [
@@ -785,7 +931,7 @@
       "budget_ref": "",
       "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
       "extensions": {},
-      "id": "template.shipping-notifications.repair-rejected-route",
+      "id": "template.batch-data-pipeline.repair-rejected-route",
       "max_iterations": 8,
       "proposal_strategy": "search.sprout",
       "refresh_registry_snapshot": false,
@@ -800,7 +946,7 @@
       "budget_ref": "",
       "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
       "extensions": {},
-      "id": "template.shipping-notifications.revisit-registry",
+      "id": "template.batch-data-pipeline.revisit-registry",
       "max_iterations": 1,
       "proposal_strategy": "discovery.refresh",
       "refresh_registry_snapshot": true,
@@ -814,59 +960,78 @@
   ],
   "stages": [
     {
-      "description": "Accept and identify logistics events.",
+      "description": "Define data products and operating constraints.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_sources",
+        "define_product",
+        "define_slas"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Acquire source snapshots safely.",
       "extensions": {},
       "id": "stage.ingest",
       "slot_ids": [
-        "receive_events",
-        "authenticate_source",
-        "normalize_event",
-        "deduplicate_event"
+        "extract_sources",
+        "validate_arrival",
+        "capture_lineage"
       ],
       "title": "Ingest"
     },
     {
-      "description": "Build trustworthy shipment state.",
+      "description": "Produce stable intermediate and business values.",
       "extensions": {},
-      "id": "stage.reconcile",
+      "id": "stage.transform",
       "slot_ids": [
-        "resolve_shipment",
-        "order_events",
-        "derive_status",
-        "detect_exception"
+        "normalize_schema",
+        "apply_business_rules",
+        "join_sources",
+        "aggregate_values"
       ],
-      "title": "Reconcile"
+      "title": "Transform"
     },
     {
-      "description": "Determine whether and how to notify.",
+      "description": "Detect invalid or drifting outputs.",
       "extensions": {},
-      "id": "stage.decide",
+      "id": "stage.assure",
       "slot_ids": [
-        "select_policy",
-        "select_recipient",
-        "render_message"
+        "validate_constraints",
+        "detect_drift",
+        "reconcile_totals"
       ],
-      "title": "Decide"
+      "title": "Assure"
     },
     {
-      "description": "Send and learn from typed outcomes.",
+      "description": "Commit one versioned data product.",
       "extensions": {},
-      "id": "stage.deliver",
+      "id": "stage.publish",
       "slot_ids": [
-        "dispatch_notification",
-        "verify_delivery",
-        "handle_failure",
-        "record_feedback"
+        "write_product",
+        "publish_metadata",
+        "notify_consumers"
       ],
-      "title": "Deliver"
+      "title": "Publish"
+    },
+    {
+      "description": "Preserve evidence and recoverability.",
+      "extensions": {},
+      "id": "stage.operate",
+      "slot_ids": [
+        "record_run",
+        "apply_recovery"
+      ],
+      "title": "Operate"
     }
   ],
   "tags": [
-    "notifications",
-    "integration",
-    "workflow"
+    "etl",
+    "lineage",
+    "data-quality"
   ],
   "template_model_version": "0.1",
-  "title": "Shipping logistics notifications",
+  "title": "Batch data engineering pipeline",
   "version": "1.0.0"
 }

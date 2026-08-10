@@ -94,7 +94,8 @@ it works” loop is invalid.
 
 ## 6. Reference template catalogue
 
-The repository ships six deliberately unrelated templates:
+The repository ships 18 deliberately varied templates containing 317 atomic
+obligations:
 
 | Template | Atomic slots | What it demonstrates |
 |---|---:|---|
@@ -104,13 +105,44 @@ The repository ships six deliberately unrelated templates:
 | `template.login-system` | 14 | threat model, identity operations, sessions, recovery, abuse protection |
 | `template.deployment-release` | 14 | reproducible build, provenance, staged rollout, verification, rollback |
 | `template.shipping-notifications` | 15 | external events, reconciliation, policy, delivery, feedback |
+| `template.document-intelligence` | 18 | format detection, text/vision decoding, normalization, grounded extraction |
+| `template.web-automation` | 19 | authorization, runtime selection, perception, action, verification, recovery |
+| `template.image-processing` | 18 | integrity, quality, vision, transformation, encoding, provenance |
+| `template.batch-data-pipeline` | 18 | source contracts, ETL, lineage, reconciliation, publication, recovery |
+| `template.api-service` | 18 | API contracts, domain state, auth, resilience, observability, assurance |
+| `template.event-driven-system` | 17 | event semantics, idempotency, transitions, sagas, replay |
+| `template.time-series-forecasting` | 20 | temporal leakage, backtests, diverse models, calibration, reconciliation |
+| `template.recommendation-ranking` | 19 | candidates, eligibility, multi-objective ranking, evaluation, exposure |
+| `template.incident-response` | 18 | evidence, triage, containment, recovery, notification, learning |
+| `template.customer-support` | 17 | intake, identity, policy, resolution, communication, follow-up |
+| `template.infrastructure-provisioning` | 17 | desired state, drift, policy plan, approval, apply, lifecycle |
+| `template.scientific-experiment` | 20 | hypotheses, preregistration, measurement, sensitivity, replication |
 
 These are test fixtures for the universal abstraction, not claims that every
 project needs exactly these steps. Their value is that agents can start with a
 known obligation vocabulary, compare it with the concrete task, and make every
 addition/removal explicit.
 
-## 7. Template quality checks
+## 7. Authoring formats
+
+The normative `SolutionTemplate` model supports arbitrary valid DAGs. The
+optional `LinearTemplateBlueprint` is a smaller JSON authoring format for the
+common left-to-right stage/slot matrix. It requires explicit purposes, success
+contracts, and semantic capabilities, then compiles into the normative model.
+
+```bash
+solutiongraph templates list
+solutiongraph templates show template.document-intelligence
+solutiongraph templates validate examples/custom-template-blueprint.json
+solutiongraph templates create examples/custom-template-blueprint.json \
+  --output /tmp/template.json
+```
+
+The convenience blueprint MUST NOT hide a real branch, join, map, barrier,
+composite subgraph, or second typed value inside opaque state. Use the full
+Python model for those topologies.
+
+## 8. Template quality checks
 
 A template is ready for reuse only when:
 
@@ -126,7 +158,7 @@ A template is ready for reuse only when:
 - at least one realistic domain instantiation compiles;
 - tests detect omitted, duplicated, unknown, and backward-grouped slots.
 
-## 8. Anti-patterns
+## 9. Anti-patterns
 
 - **Tool-first template:** stages named “OpenAI,” “Postgres,” or “Chrome.” Those
   are candidates or deployments, not semantic obligations.

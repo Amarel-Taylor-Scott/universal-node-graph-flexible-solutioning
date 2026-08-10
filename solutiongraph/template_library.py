@@ -8,132 +8,11 @@ types into domain schemas when instantiating a production program.
 
 from __future__ import annotations
 
-from solutiongraph.model import (
-    Edge,
-    GraphInput,
-    GraphOutput,
-    Port,
-    ProgramGraph,
-    SemanticSlot,
-    ValueType,
+from solutiongraph.template_authoring import (
+    build_reference_linear_template as _template,
 )
-from solutiongraph.templates import (
-    RefinementPolicy,
-    SolutionTemplate,
-    TemplateCatalog,
-    TemplateStage,
-)
-
-
-def _template(
-    *,
-    template_id: str,
-    title: str,
-    description: str,
-    domains: tuple[str, ...],
-    tags: tuple[str, ...],
-    stages: tuple[tuple[str, str, str, tuple[tuple[str, str], ...]], ...],
-) -> SolutionTemplate:
-    flat_slots = [slot for _, _, _, stage_slots in stages for slot in stage_slots]
-    state_types = tuple(
-        ValueType(f"{template_id}.state-{index}") for index in range(len(flat_slots) + 1)
-    )
-    slots: list[SemanticSlot] = []
-    edges: list[Edge] = []
-    stage_records: list[TemplateStage] = []
-    slot_index = 0
-    for stage_id, stage_title, stage_description, stage_slots in stages:
-        stage_slot_ids: list[str] = []
-        for slot_id, purpose in stage_slots:
-            input_type = state_types[slot_index]
-            output_type = state_types[slot_index + 1]
-            slots.append(
-                SemanticSlot(
-                    id=slot_id,
-                    purpose=purpose,
-                    inputs=(Port("state", input_type),),
-                    outputs=(Port("state", output_type),),
-                    success_contract=(
-                        f"{purpose.rstrip('.')} and preserve every invariant required by later slots."
-                    ),
-                    group=(stage_id,),
-                    required_capabilities=(f"{template_id}.{slot_id}.perform",),
-                )
-            )
-            stage_slot_ids.append(slot_id)
-            if slot_index:
-                edges.append(
-                    Edge(
-                        flat_slots[slot_index - 1][0],
-                        "state",
-                        slot_id,
-                        "state",
-                    )
-                )
-            slot_index += 1
-        stage_records.append(
-            TemplateStage(
-                stage_id,
-                stage_title,
-                stage_description,
-                tuple(stage_slot_ids),
-            )
-        )
-
-    first_slot = flat_slots[0][0]
-    last_slot = flat_slots[-1][0]
-    program = ProgramGraph(
-        id=f"template.{template_id}",
-        version="1.0.0",
-        task=f"Instantiate the {title} obligations for a task-specific contract.",
-        success_contract=(
-            "A task-specific independent acceptance oracle accepts the final result."
-        ),
-        slots=tuple(slots),
-        edges=tuple(edges),
-        inputs=(GraphInput("input", state_types[0], first_slot, "state"),),
-        outputs=(GraphOutput("result", state_types[-1], last_slot, "state"),),
-    )
-    return SolutionTemplate(
-        id=template_id,
-        version="1.0.0",
-        title=title,
-        description=description,
-        program=program,
-        stages=tuple(stage_records),
-        refinements=(
-            RefinementPolicy(
-                id=f"{template_id}.repair-rejected-route",
-                trigger="outcome.rejected",
-                scopes=("program",),
-                proposal_strategy="search.sprout",
-                evaluation_contract=(
-                    "Compile the proposal and re-run the task's independent acceptance oracle."
-                ),
-                stop_contract=(
-                    "Stop at acceptance, explicit experiment exhaustion, or eight proposals."
-                ),
-                max_iterations=8,
-                retain_history=True,
-            ),
-            RefinementPolicy(
-                id=f"{template_id}.revisit-registry",
-                trigger="registry.coverage-gap",
-                scopes=("program",),
-                proposal_strategy="discovery.refresh",
-                evaluation_contract=(
-                    "Negotiate again, preserve a new discovery receipt, then recompile."
-                ),
-                stop_contract="Stop after one new closed-world snapshot is admitted.",
-                max_iterations=1,
-                refresh_registry_snapshot=True,
-            ),
-        ),
-        domains=domains,
-        tags=tags,
-        extensions=(("universal.template-state", "schematic; refine before execution"),),
-    )
-
+from solutiongraph.template_library_extended import EXTENDED_TEMPLATES
+from solutiongraph.templates import TemplateCatalog
 
 KAGGLE_TABULAR = _template(
     template_id="template.kaggle-tabular",
@@ -524,13 +403,19 @@ SHIPPING_NOTIFICATIONS = _template(
 
 
 REFERENCE_TEMPLATES = TemplateCatalog(
-    (
-        DATA_QUALITY,
-        DEPLOYMENT_RELEASE,
-        KAGGLE_TABULAR,
-        LOGIN_SYSTEM,
-        QA_ENGINEERING,
-        SHIPPING_NOTIFICATIONS,
+    tuple(
+        sorted(
+            (
+                DATA_QUALITY,
+                DEPLOYMENT_RELEASE,
+                KAGGLE_TABULAR,
+                LOGIN_SYSTEM,
+                QA_ENGINEERING,
+                SHIPPING_NOTIFICATIONS,
+                *EXTENDED_TEMPLATES,
+            ),
+            key=lambda template: (template.id, template.version),
+        )
     )
 )
 

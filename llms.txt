@@ -5,6 +5,7 @@
 ## Start here
 
 - [README](README.md): Project overview and runnable examples
+- [Getting started](GETTING_STARTED.md): Install, explore, author, validate, and contribute
 - [Normative specification](UNIVERSAL_NODE_GRAPH_SPEC.md): Required ontology and invariants
 - [Research foundations](RESEARCH_FOUNDATIONS.md): Primary-source design rationale
 - [LLM harness integration](LLM_HARNESS.md): Repository instruction and skill map
@@ -18,7 +19,10 @@
 
 - [Universal core](solutiongraph/): Semantic model, discovery, templates, compiler, search, adaptive allocation, evidence
 - [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
-- [Reference catalogue](catalog/): Six semantic templates and one portable node pack
+- [Reference catalogue](catalog/): 18 semantic templates and one portable node pack
 - [Browser adapter](browsergraph/): Concrete runtime proof
 - [Universal conformance tests](tests/test_solutiongraph.py): Executable architecture requirements
-- [Workspace modeling skill](.agents/skills/model-solution-graph/SKILL.md): On-demand agent workflow
+- [Create-template skill](.agents/skills/create-solution-template/SKILL.md): Strict template authoring workflow
+- [Author-node-pack skill](.agents/skills/author-node-pack/SKILL.md): Reusable node publication workflow
+- [Benchmark skill](.agents/skills/benchmark-solution-graph/SKILL.md): Route experiment workflow
+- [Workspace modeling skill](.agents/skills/model-solution-graph/SKILL.md): End-to-end agent workflow

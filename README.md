@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![Core deps: none](https://img.shields.io/badge/core%20deps-stdlib--only-brightgreen)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-493%20passing-brightgreen)](tests/)
+[![Tests](https://img.shields.io/badge/tests-499%20passing-brightgreen)](tests/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
 A proof of concept for a different way to build software: compile each task
@@ -50,11 +50,11 @@ is not mixed into the execution path as another step.
 | Evidence and learning | Typed receipts, feedback channels, fallbacks, independent verification, and inspectable decision traces |
 | Portable specifications | JSON Schema for node manifests and versioned workbench data |
 | Reusable node ecosystem | Strict executable contracts, optional descriptors/documents/embeddings, negotiated search, discovery receipts, snapshots, and node packs |
-| Cross-domain templates | Six checked-in templates containing 98 atomic obligations across ML, data quality, QA, auth, deployment, and logistics |
+| Cross-domain templates | 18 checked-in templates containing 317 atomic obligations across data, ML, documents, web, media, services, operations, security, business, and science |
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
 | Honest route search | Fast prior, bounded beam, seeded sprouts, adaptive promotion, and uncapped streaming exhaustive modes with coverage/accounting reports |
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
-| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and an on-demand workspace Agent Skill |
+| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and four focused workspace Agent Skills |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
 
 ## Compile and search a universal graph
@@ -90,6 +90,16 @@ read the [primary-source research synthesis](RESEARCH_FOUNDATIONS.md). The
 Codex, Claude Code, Gemini CLI, GitHub Copilot, Cursor, and Windsurf aligned
 without duplicating one enormous prompt.
 
+For the shortest path from clone to a custom template, use the
+[getting-started guide](GETTING_STARTED.md):
+
+```bash
+python -m pip install -e .
+solutiongraph doctor
+solutiongraph templates list
+solutiongraph templates show template.document-intelligence
+```
+
 ## Reusable nodes and semantic templates
 
 The [node repository protocol](NODE_REPOSITORY_PROTOCOL.md) standardizes how
@@ -103,10 +113,16 @@ that stated universe.
 The [solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md) standardizes
 macro-stage submatrices, atomic semantic slots, safe pass-through candidates,
 and bounded refinement loops. The generated [catalogue](catalog/) currently
-contains six cross-domain templates and a five-node executable reference pack:
+contains 18 cross-domain templates, 317 atomic obligations, and a five-node
+executable reference pack. Templates can be inspected or authored without
+writing Python:
 
 ```bash
-python scripts/export_solutiongraph_catalog.py --output catalog
+solutiongraph templates list
+solutiongraph templates validate examples/custom-template-blueprint.json
+solutiongraph templates create examples/custom-template-blueprint.json \
+  --output /tmp/example-template.json
+solutiongraph catalog export --output catalog
 python examples/discovery_and_templates.py
 ```
 
@@ -115,9 +131,10 @@ embeddings; its registry advertises exact, lexical, and enumeration modes, and
 the harness negotiates those modes without affecting node validity.
 
 For an agent or new domain adapter, follow the [agent playbook](AGENT_PLAYBOOK.md)
-and the on-demand workspace skill. They require a task contract and independent
-oracle, typed template refinement, receipt-backed discovery, compilation before
-search, and evidence-backed claims.
+and the focused workspace skills: `create-solution-template`,
+`author-node-pack`, `benchmark-solution-graph`, and `model-solution-graph`.
+They require a task contract and independent oracle, typed template refinement,
+receipt-backed discovery, compilation before search, and evidence-backed claims.
 
 ## Open the interactive explorers
 
@@ -126,7 +143,7 @@ modern browser. No server, account, CDN, or build step is required.
 
 | Explorer | Purpose |
 |---|---|
-| [Template and node catalogue](examples/catalog-template-explorer.html) | Six cross-domain templates, atomic slots by submatrix, registry handshake boundary, and reference node pack |
+| [Template and node catalogue](examples/catalog-template-explorer.html) | 18 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and reference node pack |
 | [Full solution studio](examples/universal-graph-workbench.html) | All candidates, route rows, exhaustive adjacent network, comparison, builder, and feedback views |
 | [Compact hierarchical explorer](examples/universal-node-graph-workbench.html) | Select one macro-stage submatrix at a time and see all of its substeps, node families, bindings, and route lines |
 | [Multi-file projection suite](examples/workbench-suite/index.html) | Separate matrix, network, comparison, builder, and feedback entry points |

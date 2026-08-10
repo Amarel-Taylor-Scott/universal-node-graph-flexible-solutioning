@@ -13,8 +13,55 @@
   ],
   "templates": [
     {
+      "atomic_slot_count": 18,
+      "digest": "sha256:07aaea6f78894a4341c90cbbc6235bd336823f5b779b2161fc61b875c912d5c5",
+      "domains": [
+        "software.backend",
+        "software.api"
+      ],
+      "id": "template.api-service",
+      "path": "templates/template.api-service.json",
+      "tags": [
+        "service",
+        "api",
+        "operations"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 18,
+      "digest": "sha256:b917be6ebd64b9216bb88e47b8850d6a54465b042c9771356e0969ca69c76e69",
+      "domains": [
+        "data-engineering.batch"
+      ],
+      "id": "template.batch-data-pipeline",
+      "path": "templates/template.batch-data-pipeline.json",
+      "tags": [
+        "etl",
+        "lineage",
+        "data-quality"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:8ddd0340d47a59e1802bfc59f722fc9d3d49da676c613829f9ea2b83a5568593",
+      "domains": [
+        "business.customer-support",
+        "software.workflow"
+      ],
+      "id": "template.customer-support",
+      "path": "templates/template.customer-support.json",
+      "tags": [
+        "support",
+        "case-management",
+        "automation"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 15,
-      "digest": "sha256:210b834eb448d5645bb7588f3e59d0e2289baea2a7cee232667d5cb1e7d48093",
+      "digest": "sha256:e01519d3899963b2a68ffd94214baea75b2018556b010dee3074117a6726d239",
       "domains": [
         "data-engineering.quality",
         "data-management.entity"
@@ -30,7 +77,7 @@
     },
     {
       "atomic_slot_count": 14,
-      "digest": "sha256:0bad9b466d27ab7aa37982b3efba1b04843b31b7169311f2e9a7296209165356",
+      "digest": "sha256:411f1d15260bc94e659578cad0b968cd14d1647fadef5bb1602983f24a63c277",
       "domains": [
         "software.delivery",
         "operations.deployment"
@@ -45,8 +92,88 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 18,
+      "digest": "sha256:b8722b789b01f15df4cbeabc6b3c89b185003c24b11bab040f6eb08b70367eaf",
+      "domains": [
+        "data-engineering.documents",
+        "ai.document-intelligence"
+      ],
+      "id": "template.document-intelligence",
+      "path": "templates/template.document-intelligence.json",
+      "tags": [
+        "ingestion",
+        "extraction",
+        "unstructured-data"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:40aced457e55c5fe531b19b0ae6d51b92ee4bdc3a26788aa2ee5d0572400ba5c",
+      "domains": [
+        "software.event-driven",
+        "software.distributed"
+      ],
+      "id": "template.event-driven-system",
+      "path": "templates/template.event-driven-system.json",
+      "tags": [
+        "events",
+        "messaging",
+        "reliability"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 18,
+      "digest": "sha256:84df49e59e1d64f90360c36474a14503f9485293d3d79b96fb23c43cf72762d2",
+      "domains": [
+        "media.image-processing",
+        "ai.computer-vision"
+      ],
+      "id": "template.image-processing",
+      "path": "templates/template.image-processing.json",
+      "tags": [
+        "image",
+        "vision",
+        "transformation"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 18,
+      "digest": "sha256:ed93958327a9101018ea09e9acb73c05b66d7e3ac906b7606f150c06aed23a59",
+      "domains": [
+        "security.incident-response",
+        "operations.reliability"
+      ],
+      "id": "template.incident-response",
+      "path": "templates/template.incident-response.json",
+      "tags": [
+        "security",
+        "incident",
+        "recovery"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:0300598486e6e10b66516da7d325f9b1769f21f235fe45129e78b7fc77b6ecb8",
+      "domains": [
+        "operations.infrastructure",
+        "software.delivery"
+      ],
+      "id": "template.infrastructure-provisioning",
+      "path": "templates/template.infrastructure-provisioning.json",
+      "tags": [
+        "infrastructure-as-code",
+        "security",
+        "operations"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 27,
-      "digest": "sha256:12cdaa27ff0498bf69c50af8eea03942582e624c9f9156bfd0e36ecea8f11e37",
+      "digest": "sha256:e205b4dcb731090c21806f5914e9fa55ad9a08eb15f1ebbc5cfd91ac96950ec1",
       "domains": [
         "machine-learning.tabular",
         "competition.kaggle"
@@ -62,7 +189,7 @@
     },
     {
       "atomic_slot_count": 14,
-      "digest": "sha256:06ee8c29658163d0d993220c28d55360aca7624101544c4bf9a6adfbba456960",
+      "digest": "sha256:2f65c44b8e94600f29877badf8887c402a5e9a22c6f12b44496a5311f8346d4b",
       "domains": [
         "software.application",
         "security.identity"
@@ -78,7 +205,7 @@
     },
     {
       "atomic_slot_count": 13,
-      "digest": "sha256:496c01621dcb85b282189360b09990e3cbcc904e5d9e194eb5833bb55190fb18",
+      "digest": "sha256:7aadc30a605cabe400123180583ff81adb165c5acedbcccc70af91d49131e9f8",
       "domains": [
         "software.quality"
       ],
@@ -92,8 +219,40 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 19,
+      "digest": "sha256:020faa46f29d58e62aa0654d3b57c63b322a97a9d85d1e5ae646b5e46399e1bb",
+      "domains": [
+        "machine-learning.recommendation",
+        "software.ranking"
+      ],
+      "id": "template.recommendation-ranking",
+      "path": "templates/template.recommendation-ranking.json",
+      "tags": [
+        "ranking",
+        "personalization",
+        "experimentation"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 20,
+      "digest": "sha256:0f28a71b8d47ef98cb90a3ba8e28c64bca6c1962cfc5fc1f5f6d878984261b50",
+      "domains": [
+        "science.experiment",
+        "research.reproducibility"
+      ],
+      "id": "template.scientific-experiment",
+      "path": "templates/template.scientific-experiment.json",
+      "tags": [
+        "experiment",
+        "statistics",
+        "provenance"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 15,
-      "digest": "sha256:c2d769fb0626274f667bccaca084698402f70dcf01e84d798765dfdfd8a1f4b6",
+      "digest": "sha256:952ec43ee1d66f015e584dc965a2d8a2acbc5754c17d2478ca66b82b7ae567a2",
       "domains": [
         "logistics.shipping",
         "software.event-driven"
@@ -104,6 +263,37 @@
         "notifications",
         "integration",
         "workflow"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 20,
+      "digest": "sha256:e6c156c5821f8661d243cdd5d883a79048ca8bb7aa6665cdb96b1636fd24e76f",
+      "domains": [
+        "machine-learning.time-series"
+      ],
+      "id": "template.time-series-forecasting",
+      "path": "templates/template.time-series-forecasting.json",
+      "tags": [
+        "forecasting",
+        "validation",
+        "ensemble"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 19,
+      "digest": "sha256:23175c9c29f18bf77d4e1c78bba5c811ad107ef7dc03134ba0300fbd8de95aa9",
+      "domains": [
+        "software.web-automation",
+        "ai.computer-use"
+      ],
+      "id": "template.web-automation",
+      "path": "templates/template.web-automation.json",
+      "tags": [
+        "browser",
+        "interaction",
+        "verification"
       ],
       "version": "1.0.0"
     }

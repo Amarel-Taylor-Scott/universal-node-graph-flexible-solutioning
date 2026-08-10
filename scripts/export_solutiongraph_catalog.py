@@ -10,10 +10,9 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
-from solutiongraph.catalog import write_catalog
-
-
 def main() -> int:
+    from solutiongraph.catalog import write_catalog
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--output",

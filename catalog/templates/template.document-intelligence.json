@@ -1,111 +1,129 @@
 {
-  "description": "An event ingestion, reconciliation, policy, delivery, and feedback scaffold.",
+  "description": "An acquisition, decoding, cleanup, interpretation, extraction, and evidence scaffold for unknown or unstructured documents.",
   "domains": [
-    "logistics.shipping",
-    "software.event-driven"
+    "data-engineering.documents",
+    "ai.document-intelligence"
   ],
   "extensions": {
     "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
-  "id": "template.shipping-notifications",
+  "id": "template.document-intelligence",
   "program": {
     "allowed_effects": [],
     "edges": [
       {
         "source_port": "state",
-        "source_slot": "receive_events",
+        "source_slot": "receive_document",
         "target_port": "state",
-        "target_slot": "authenticate_source"
+        "target_slot": "detect_format"
       },
       {
         "source_port": "state",
-        "source_slot": "authenticate_source",
+        "source_slot": "detect_format",
         "target_port": "state",
-        "target_slot": "normalize_event"
+        "target_slot": "malware_policy"
       },
       {
         "source_port": "state",
-        "source_slot": "normalize_event",
+        "source_slot": "malware_policy",
         "target_port": "state",
-        "target_slot": "deduplicate_event"
+        "target_slot": "repair_container"
       },
       {
         "source_port": "state",
-        "source_slot": "deduplicate_event",
+        "source_slot": "repair_container",
         "target_port": "state",
-        "target_slot": "resolve_shipment"
+        "target_slot": "extract_native_text"
       },
       {
         "source_port": "state",
-        "source_slot": "resolve_shipment",
+        "source_slot": "extract_native_text",
         "target_port": "state",
-        "target_slot": "order_events"
+        "target_slot": "render_pages"
       },
       {
         "source_port": "state",
-        "source_slot": "order_events",
+        "source_slot": "render_pages",
         "target_port": "state",
-        "target_slot": "derive_status"
+        "target_slot": "recognize_text"
       },
       {
         "source_port": "state",
-        "source_slot": "derive_status",
+        "source_slot": "recognize_text",
         "target_port": "state",
-        "target_slot": "detect_exception"
+        "target_slot": "remove_boilerplate"
       },
       {
         "source_port": "state",
-        "source_slot": "detect_exception",
+        "source_slot": "remove_boilerplate",
         "target_port": "state",
-        "target_slot": "select_policy"
+        "target_slot": "normalize_symbols"
       },
       {
         "source_port": "state",
-        "source_slot": "select_policy",
+        "source_slot": "normalize_symbols",
         "target_port": "state",
-        "target_slot": "select_recipient"
+        "target_slot": "translate_content"
       },
       {
         "source_port": "state",
-        "source_slot": "select_recipient",
+        "source_slot": "translate_content",
         "target_port": "state",
-        "target_slot": "render_message"
+        "target_slot": "segment_structure"
       },
       {
         "source_port": "state",
-        "source_slot": "render_message",
+        "source_slot": "segment_structure",
         "target_port": "state",
-        "target_slot": "dispatch_notification"
+        "target_slot": "prioritize_regions"
       },
       {
         "source_port": "state",
-        "source_slot": "dispatch_notification",
+        "source_slot": "prioritize_regions",
         "target_port": "state",
-        "target_slot": "verify_delivery"
+        "target_slot": "extract_deterministic"
       },
       {
         "source_port": "state",
-        "source_slot": "verify_delivery",
+        "source_slot": "extract_deterministic",
         "target_port": "state",
-        "target_slot": "handle_failure"
+        "target_slot": "extract_model_assisted"
       },
       {
         "source_port": "state",
-        "source_slot": "handle_failure",
+        "source_slot": "extract_model_assisted",
         "target_port": "state",
-        "target_slot": "record_feedback"
+        "target_slot": "reconcile_candidates"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_candidates",
+        "target_port": "state",
+        "target_slot": "validate_schema"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_schema",
+        "target_port": "state",
+        "target_slot": "ground_output"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ground_output",
+        "target_port": "state",
+        "target_slot": "publish_record"
       }
     ],
     "granted_permissions": [],
-    "id": "program.template.shipping-notifications",
+    "id": "program.template.document-intelligence",
     "inputs": [
       {
         "name": "input",
         "target_port": "state",
-        "target_slot": "receive_events",
+        "target_slot": "receive_document",
         "type": {
-          "id": "template.shipping-notifications.state-0",
+          "id": "template.document-intelligence.state-0",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -119,9 +137,9 @@
       {
         "name": "result",
         "source_port": "state",
-        "source_slot": "record_feedback",
+        "source_slot": "publish_record",
         "type": {
-          "id": "template.shipping-notifications.state-15",
+          "id": "template.document-intelligence.state-18",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -133,16 +151,16 @@
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.acquire"
         ],
-        "id": "receive_events",
+        "id": "receive_document",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-0",
+              "id": "template.document-intelligence.state-0",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -158,7 +176,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.document-intelligence.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -166,26 +184,26 @@
             }
           }
         ],
-        "purpose": "Receive carrier, warehouse, and order events idempotently.",
+        "purpose": "Receive a document with immutable source metadata.",
         "required_capabilities": [
-          "template.shipping-notifications.receive_events.perform"
+          "template.document-intelligence.receive_document.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Receive carrier, warehouse, and order events idempotently and preserve every invariant required by later slots."
+        "success_contract": "Receive a document with immutable source metadata and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.acquire"
         ],
-        "id": "authenticate_source",
+        "id": "detect_format",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.document-intelligence.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -201,7 +219,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.document-intelligence.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -209,26 +227,26 @@
             }
           }
         ],
-        "purpose": "Authenticate event sources and verify integrity.",
+        "purpose": "Detect container, encoding, language hints, and corruption.",
         "required_capabilities": [
-          "template.shipping-notifications.authenticate_source.perform"
+          "template.document-intelligence.detect_format.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Authenticate event sources and verify integrity and preserve every invariant required by later slots."
+        "success_contract": "Detect container, encoding, language hints, and corruption and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.acquire"
         ],
-        "id": "normalize_event",
+        "id": "malware_policy",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.document-intelligence.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -244,7 +262,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.document-intelligence.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -252,26 +270,26 @@
             }
           }
         ],
-        "purpose": "Normalize provider payloads into a versioned event schema.",
+        "purpose": "Apply the declared content safety and quarantine policy.",
         "required_capabilities": [
-          "template.shipping-notifications.normalize_event.perform"
+          "template.document-intelligence.malware_policy.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Normalize provider payloads into a versioned event schema and preserve every invariant required by later slots."
+        "success_contract": "Apply the declared content safety and quarantine policy and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.decode"
         ],
-        "id": "deduplicate_event",
+        "id": "repair_container",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.document-intelligence.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -287,7 +305,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.document-intelligence.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -295,26 +313,26 @@
             }
           }
         ],
-        "purpose": "Detect replayed or semantically duplicate events.",
+        "purpose": "Repair or reject malformed containers without inventing content.",
         "required_capabilities": [
-          "template.shipping-notifications.deduplicate_event.perform"
+          "template.document-intelligence.repair_container.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect replayed or semantically duplicate events and preserve every invariant required by later slots."
+        "success_contract": "Repair or reject malformed containers without inventing content and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.decode"
         ],
-        "id": "resolve_shipment",
+        "id": "extract_native_text",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.document-intelligence.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -330,7 +348,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.document-intelligence.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -338,26 +356,26 @@
             }
           }
         ],
-        "purpose": "Resolve event identifiers to the correct shipment.",
+        "purpose": "Extract embedded text, layout, and metadata when available.",
         "required_capabilities": [
-          "template.shipping-notifications.resolve_shipment.perform"
+          "template.document-intelligence.extract_native_text.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve event identifiers to the correct shipment and preserve every invariant required by later slots."
+        "success_contract": "Extract embedded text, layout, and metadata when available and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.decode"
         ],
-        "id": "order_events",
+        "id": "render_pages",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.document-intelligence.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -373,7 +391,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.document-intelligence.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -381,26 +399,26 @@
             }
           }
         ],
-        "purpose": "Order late and out-of-order events under declared semantics.",
+        "purpose": "Render stable page images for visual processing when required.",
         "required_capabilities": [
-          "template.shipping-notifications.order_events.perform"
+          "template.document-intelligence.render_pages.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Order late and out-of-order events under declared semantics and preserve every invariant required by later slots."
+        "success_contract": "Render stable page images for visual processing when required and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.decode"
         ],
-        "id": "derive_status",
+        "id": "recognize_text",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.document-intelligence.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -416,7 +434,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.document-intelligence.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -424,26 +442,26 @@
             }
           }
         ],
-        "purpose": "Derive the current shipment status and confidence.",
+        "purpose": "Recognize text from visual regions with confidence and provenance.",
         "required_capabilities": [
-          "template.shipping-notifications.derive_status.perform"
+          "template.document-intelligence.recognize_text.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Derive the current shipment status and confidence and preserve every invariant required by later slots."
+        "success_contract": "Recognize text from visual regions with confidence and provenance and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.normalize"
         ],
-        "id": "detect_exception",
+        "id": "remove_boilerplate",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.document-intelligence.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -459,7 +477,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.document-intelligence.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -467,26 +485,26 @@
             }
           }
         ],
-        "purpose": "Detect delay, damage, address, and delivery exceptions.",
+        "purpose": "Separate repeated headers, footers, watermarks, and navigation.",
         "required_capabilities": [
-          "template.shipping-notifications.detect_exception.perform"
+          "template.document-intelligence.remove_boilerplate.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect delay, damage, address, and delivery exceptions and preserve every invariant required by later slots."
+        "success_contract": "Separate repeated headers, footers, watermarks, and navigation and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.normalize"
         ],
-        "id": "select_policy",
+        "id": "normalize_symbols",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.document-intelligence.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -502,7 +520,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.document-intelligence.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -510,26 +528,26 @@
             }
           }
         ],
-        "purpose": "Apply customer, jurisdiction, urgency, and suppression policy.",
+        "purpose": "Normalize encodings, whitespace, and symbols under a reversible policy.",
         "required_capabilities": [
-          "template.shipping-notifications.select_policy.perform"
+          "template.document-intelligence.normalize_symbols.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Apply customer, jurisdiction, urgency, and suppression policy and preserve every invariant required by later slots."
+        "success_contract": "Normalize encodings, whitespace, and symbols under a reversible policy and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.normalize"
         ],
-        "id": "select_recipient",
+        "id": "translate_content",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.document-intelligence.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -545,7 +563,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.document-intelligence.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -553,26 +571,26 @@
             }
           }
         ],
-        "purpose": "Resolve an authorized recipient and channel preference.",
+        "purpose": "Translate content into the target language when the contract requires it.",
         "required_capabilities": [
-          "template.shipping-notifications.select_recipient.perform"
+          "template.document-intelligence.translate_content.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve an authorized recipient and channel preference and preserve every invariant required by later slots."
+        "success_contract": "Translate content into the target language when the contract requires it and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.normalize"
         ],
-        "id": "render_message",
+        "id": "segment_structure",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.document-intelligence.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -588,7 +606,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.document-intelligence.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -596,26 +614,198 @@
             }
           }
         ],
-        "purpose": "Render localized, privacy-safe notification content.",
+        "purpose": "Segment pages, sections, tables, figures, and reading order.",
         "required_capabilities": [
-          "template.shipping-notifications.render_message.perform"
+          "template.document-intelligence.segment_structure.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Render localized, privacy-safe notification content and preserve every invariant required by later slots."
+        "success_contract": "Segment pages, sections, tables, figures, and reading order and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "prioritize_regions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Prioritize source regions relevant to the requested schema.",
+        "required_capabilities": [
+          "template.document-intelligence.prioritize_regions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Prioritize source regions relevant to the requested schema and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "extract_deterministic",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply deterministic parsers, rules, and validators.",
+        "required_capabilities": [
+          "template.document-intelligence.extract_deterministic.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply deterministic parsers, rules, and validators and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "extract_model_assisted",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply admitted model-based extraction with structured output.",
+        "required_capabilities": [
+          "template.document-intelligence.extract_model_assisted.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply admitted model-based extraction with structured output and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "reconcile_candidates",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile conflicting values using source and confidence evidence.",
+        "required_capabilities": [
+          "template.document-intelligence.reconcile_candidates.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile conflicting values using source and confidence evidence and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.deliver"
         ],
-        "id": "dispatch_notification",
+        "id": "validate_schema",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.document-intelligence.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -631,7 +821,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.document-intelligence.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -639,26 +829,26 @@
             }
           }
         ],
-        "purpose": "Dispatch through an admitted delivery provider.",
+        "purpose": "Validate types, required fields, constraints, and cross-field rules.",
         "required_capabilities": [
-          "template.shipping-notifications.dispatch_notification.perform"
+          "template.document-intelligence.validate_schema.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Dispatch through an admitted delivery provider and preserve every invariant required by later slots."
+        "success_contract": "Validate types, required fields, constraints, and cross-field rules and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.deliver"
         ],
-        "id": "verify_delivery",
+        "id": "ground_output",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.document-intelligence.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -674,7 +864,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.document-intelligence.state-17",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -682,26 +872,26 @@
             }
           }
         ],
-        "purpose": "Observe provider and downstream delivery state.",
+        "purpose": "Attach page, region, and source citations to extracted values.",
         "required_capabilities": [
-          "template.shipping-notifications.verify_delivery.perform"
+          "template.document-intelligence.ground_output.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Observe provider and downstream delivery state and preserve every invariant required by later slots."
+        "success_contract": "Attach page, region, and source citations to extracted values and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.deliver"
         ],
-        "id": "handle_failure",
+        "id": "publish_record",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.document-intelligence.state-17",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -717,7 +907,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.document-intelligence.state-18",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -725,59 +915,16 @@
             }
           }
         ],
-        "purpose": "Retry, fail over, suppress, or escalate by failure class.",
+        "purpose": "Publish accepted records, rejects, and a replayable receipt.",
         "required_capabilities": [
-          "template.shipping-notifications.handle_failure.perform"
+          "template.document-intelligence.publish_record.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Retry, fail over, suppress, or escalate by failure class and preserve every invariant required by later slots."
-      },
-      {
-        "allowed_effects": [],
-        "group": [
-          "stage.deliver"
-        ],
-        "id": "record_feedback",
-        "inputs": [
-          {
-            "cardinality": "one",
-            "description": "",
-            "name": "state",
-            "type": {
-              "id": "template.shipping-notifications.state-14",
-              "media_type": "application/json",
-              "schema_digest": "",
-              "units": "",
-              "version": "1"
-            }
-          }
-        ],
-        "kind": "atomic",
-        "optional": false,
-        "outputs": [
-          {
-            "cardinality": "one",
-            "description": "",
-            "name": "state",
-            "type": {
-              "id": "template.shipping-notifications.state-15",
-              "media_type": "application/json",
-              "schema_digest": "",
-              "units": "",
-              "version": "1"
-            }
-          }
-        ],
-        "purpose": "Record delivery, engagement, and policy evidence.",
-        "required_capabilities": [
-          "template.shipping-notifications.record_feedback.perform"
-        ],
-        "subgraph_ref": "",
-        "success_contract": "Record delivery, engagement, and policy evidence and preserve every invariant required by later slots."
+        "success_contract": "Publish accepted records, rejects, and a replayable receipt and preserve every invariant required by later slots."
       }
     ],
     "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
-    "task": "Instantiate the Shipping logistics notifications obligations for a task-specific contract.",
+    "task": "Instantiate the Document ingestion and structured extraction obligations for a task-specific contract.",
     "version": "1.0.0"
   },
   "refinements": [
@@ -785,7 +932,7 @@
       "budget_ref": "",
       "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
       "extensions": {},
-      "id": "template.shipping-notifications.repair-rejected-route",
+      "id": "template.document-intelligence.repair-rejected-route",
       "max_iterations": 8,
       "proposal_strategy": "search.sprout",
       "refresh_registry_snapshot": false,
@@ -800,7 +947,7 @@
       "budget_ref": "",
       "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
       "extensions": {},
-      "id": "template.shipping-notifications.revisit-registry",
+      "id": "template.document-intelligence.revisit-registry",
       "max_iterations": 1,
       "proposal_strategy": "discovery.refresh",
       "refresh_registry_snapshot": true,
@@ -814,59 +961,70 @@
   ],
   "stages": [
     {
-      "description": "Accept and identify logistics events.",
+      "description": "Accept documents and establish source identity.",
       "extensions": {},
-      "id": "stage.ingest",
+      "id": "stage.acquire",
       "slot_ids": [
-        "receive_events",
-        "authenticate_source",
-        "normalize_event",
-        "deduplicate_event"
+        "receive_document",
+        "detect_format",
+        "malware_policy"
       ],
-      "title": "Ingest"
+      "title": "Acquire"
     },
     {
-      "description": "Build trustworthy shipment state.",
+      "description": "Produce source-grounded machine-readable content.",
       "extensions": {},
-      "id": "stage.reconcile",
+      "id": "stage.decode",
       "slot_ids": [
-        "resolve_shipment",
-        "order_events",
-        "derive_status",
-        "detect_exception"
+        "repair_container",
+        "extract_native_text",
+        "render_pages",
+        "recognize_text"
       ],
-      "title": "Reconcile"
+      "title": "Decode"
     },
     {
-      "description": "Determine whether and how to notify.",
+      "description": "Standardize content while preserving traceability.",
       "extensions": {},
-      "id": "stage.decide",
+      "id": "stage.normalize",
       "slot_ids": [
-        "select_policy",
-        "select_recipient",
-        "render_message"
+        "remove_boilerplate",
+        "normalize_symbols",
+        "translate_content",
+        "segment_structure"
       ],
-      "title": "Decide"
+      "title": "Normalize"
     },
     {
-      "description": "Send and learn from typed outcomes.",
+      "description": "Generate schema-bound candidate facts.",
+      "extensions": {},
+      "id": "stage.extract",
+      "slot_ids": [
+        "prioritize_regions",
+        "extract_deterministic",
+        "extract_model_assisted",
+        "reconcile_candidates"
+      ],
+      "title": "Extract"
+    },
+    {
+      "description": "Verify and publish traceable structured output.",
       "extensions": {},
       "id": "stage.deliver",
       "slot_ids": [
-        "dispatch_notification",
-        "verify_delivery",
-        "handle_failure",
-        "record_feedback"
+        "validate_schema",
+        "ground_output",
+        "publish_record"
       ],
       "title": "Deliver"
     }
   ],
   "tags": [
-    "notifications",
-    "integration",
-    "workflow"
+    "ingestion",
+    "extraction",
+    "unstructured-data"
   ],
   "template_model_version": "0.1",
-  "title": "Shipping logistics notifications",
+  "title": "Document ingestion and structured extraction",
   "version": "1.0.0"
 }

@@ -1,111 +1,129 @@
 {
-  "description": "An event ingestion, reconciliation, policy, delivery, and feedback scaffold.",
+  "description": "A bounded detection, triage, containment, eradication, recovery, and learning scaffold.",
   "domains": [
-    "logistics.shipping",
-    "software.event-driven"
+    "security.incident-response",
+    "operations.reliability"
   ],
   "extensions": {
     "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
-  "id": "template.shipping-notifications",
+  "id": "template.incident-response",
   "program": {
     "allowed_effects": [],
     "edges": [
       {
         "source_port": "state",
-        "source_slot": "receive_events",
+        "source_slot": "load_response_policy",
         "target_port": "state",
-        "target_slot": "authenticate_source"
+        "target_slot": "identify_assets"
       },
       {
         "source_port": "state",
-        "source_slot": "authenticate_source",
+        "source_slot": "identify_assets",
         "target_port": "state",
-        "target_slot": "normalize_event"
+        "target_slot": "preserve_initial_evidence"
       },
       {
         "source_port": "state",
-        "source_slot": "normalize_event",
+        "source_slot": "preserve_initial_evidence",
         "target_port": "state",
-        "target_slot": "deduplicate_event"
+        "target_slot": "normalize_alerts"
       },
       {
         "source_port": "state",
-        "source_slot": "deduplicate_event",
+        "source_slot": "normalize_alerts",
         "target_port": "state",
-        "target_slot": "resolve_shipment"
+        "target_slot": "correlate_indicators"
       },
       {
         "source_port": "state",
-        "source_slot": "resolve_shipment",
+        "source_slot": "correlate_indicators",
         "target_port": "state",
-        "target_slot": "order_events"
+        "target_slot": "validate_incident"
       },
       {
         "source_port": "state",
-        "source_slot": "order_events",
+        "source_slot": "validate_incident",
         "target_port": "state",
-        "target_slot": "derive_status"
+        "target_slot": "assess_impact"
       },
       {
         "source_port": "state",
-        "source_slot": "derive_status",
+        "source_slot": "assess_impact",
         "target_port": "state",
-        "target_slot": "detect_exception"
+        "target_slot": "classify_severity"
       },
       {
         "source_port": "state",
-        "source_slot": "detect_exception",
+        "source_slot": "classify_severity",
         "target_port": "state",
-        "target_slot": "select_policy"
+        "target_slot": "select_response_plan"
       },
       {
         "source_port": "state",
-        "source_slot": "select_policy",
+        "source_slot": "select_response_plan",
         "target_port": "state",
-        "target_slot": "select_recipient"
+        "target_slot": "isolate_scope"
       },
       {
         "source_port": "state",
-        "source_slot": "select_recipient",
+        "source_slot": "isolate_scope",
         "target_port": "state",
-        "target_slot": "render_message"
+        "target_slot": "block_indicators"
       },
       {
         "source_port": "state",
-        "source_slot": "render_message",
+        "source_slot": "block_indicators",
         "target_port": "state",
-        "target_slot": "dispatch_notification"
+        "target_slot": "monitor_containment"
       },
       {
         "source_port": "state",
-        "source_slot": "dispatch_notification",
+        "source_slot": "monitor_containment",
         "target_port": "state",
-        "target_slot": "verify_delivery"
+        "target_slot": "eradicate_cause"
       },
       {
         "source_port": "state",
-        "source_slot": "verify_delivery",
+        "source_slot": "eradicate_cause",
         "target_port": "state",
-        "target_slot": "handle_failure"
+        "target_slot": "restore_services"
       },
       {
         "source_port": "state",
-        "source_slot": "handle_failure",
+        "source_slot": "restore_services",
         "target_port": "state",
-        "target_slot": "record_feedback"
+        "target_slot": "verify_recovery"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_recovery",
+        "target_port": "state",
+        "target_slot": "notify_stakeholders"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "notify_stakeholders",
+        "target_port": "state",
+        "target_slot": "publish_incident_record"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "publish_incident_record",
+        "target_port": "state",
+        "target_slot": "improve_controls"
       }
     ],
     "granted_permissions": [],
-    "id": "program.template.shipping-notifications",
+    "id": "program.template.incident-response",
     "inputs": [
       {
         "name": "input",
         "target_port": "state",
-        "target_slot": "receive_events",
+        "target_slot": "load_response_policy",
         "type": {
-          "id": "template.shipping-notifications.state-0",
+          "id": "template.incident-response.state-0",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -119,9 +137,9 @@
       {
         "name": "result",
         "source_port": "state",
-        "source_slot": "record_feedback",
+        "source_slot": "improve_controls",
         "type": {
-          "id": "template.shipping-notifications.state-15",
+          "id": "template.incident-response.state-18",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -133,16 +151,16 @@
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.prepare"
         ],
-        "id": "receive_events",
+        "id": "load_response_policy",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-0",
+              "id": "template.incident-response.state-0",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -158,7 +176,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.incident-response.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -166,26 +184,26 @@
             }
           }
         ],
-        "purpose": "Receive carrier, warehouse, and order events idempotently.",
+        "purpose": "Load response authority, severity, privacy, and notification policy.",
         "required_capabilities": [
-          "template.shipping-notifications.receive_events.perform"
+          "template.incident-response.load_response_policy.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Receive carrier, warehouse, and order events idempotently and preserve every invariant required by later slots."
+        "success_contract": "Load response authority, severity, privacy, and notification policy and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.prepare"
         ],
-        "id": "authenticate_source",
+        "id": "identify_assets",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.incident-response.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -201,7 +219,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.incident-response.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -209,26 +227,26 @@
             }
           }
         ],
-        "purpose": "Authenticate event sources and verify integrity.",
+        "purpose": "Identify affected assets, owners, dependencies, and criticality.",
         "required_capabilities": [
-          "template.shipping-notifications.authenticate_source.perform"
+          "template.incident-response.identify_assets.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Authenticate event sources and verify integrity and preserve every invariant required by later slots."
+        "success_contract": "Identify affected assets, owners, dependencies, and criticality and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.prepare"
         ],
-        "id": "normalize_event",
+        "id": "preserve_initial_evidence",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.incident-response.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -244,7 +262,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.incident-response.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -252,26 +270,26 @@
             }
           }
         ],
-        "purpose": "Normalize provider payloads into a versioned event schema.",
+        "purpose": "Preserve volatile and durable evidence with chain of custody.",
         "required_capabilities": [
-          "template.shipping-notifications.normalize_event.perform"
+          "template.incident-response.preserve_initial_evidence.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Normalize provider payloads into a versioned event schema and preserve every invariant required by later slots."
+        "success_contract": "Preserve volatile and durable evidence with chain of custody and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.detect"
         ],
-        "id": "deduplicate_event",
+        "id": "normalize_alerts",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.incident-response.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -287,7 +305,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.incident-response.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -295,26 +313,26 @@
             }
           }
         ],
-        "purpose": "Detect replayed or semantically duplicate events.",
+        "purpose": "Normalize alerts and observations into a versioned event model.",
         "required_capabilities": [
-          "template.shipping-notifications.deduplicate_event.perform"
+          "template.incident-response.normalize_alerts.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect replayed or semantically duplicate events and preserve every invariant required by later slots."
+        "success_contract": "Normalize alerts and observations into a versioned event model and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.detect"
         ],
-        "id": "resolve_shipment",
+        "id": "correlate_indicators",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.incident-response.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -330,7 +348,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.incident-response.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -338,26 +356,26 @@
             }
           }
         ],
-        "purpose": "Resolve event identifiers to the correct shipment.",
+        "purpose": "Correlate identities, indicators, timelines, and affected resources.",
         "required_capabilities": [
-          "template.shipping-notifications.resolve_shipment.perform"
+          "template.incident-response.correlate_indicators.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve event identifiers to the correct shipment and preserve every invariant required by later slots."
+        "success_contract": "Correlate identities, indicators, timelines, and affected resources and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.detect"
         ],
-        "id": "order_events",
+        "id": "validate_incident",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.incident-response.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -373,7 +391,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.incident-response.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -381,26 +399,26 @@
             }
           }
         ],
-        "purpose": "Order late and out-of-order events under declared semantics.",
+        "purpose": "Distinguish incident, benign behavior, and insufficient evidence.",
         "required_capabilities": [
-          "template.shipping-notifications.order_events.perform"
+          "template.incident-response.validate_incident.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Order late and out-of-order events under declared semantics and preserve every invariant required by later slots."
+        "success_contract": "Distinguish incident, benign behavior, and insufficient evidence and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.triage"
         ],
-        "id": "derive_status",
+        "id": "assess_impact",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.incident-response.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -416,7 +434,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.incident-response.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -424,26 +442,26 @@
             }
           }
         ],
-        "purpose": "Derive the current shipment status and confidence.",
+        "purpose": "Assess confidentiality, integrity, availability, safety, and business impact.",
         "required_capabilities": [
-          "template.shipping-notifications.derive_status.perform"
+          "template.incident-response.assess_impact.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Derive the current shipment status and confidence and preserve every invariant required by later slots."
+        "success_contract": "Assess confidentiality, integrity, availability, safety, and business impact and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.triage"
         ],
-        "id": "detect_exception",
+        "id": "classify_severity",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.incident-response.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -459,7 +477,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.incident-response.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -467,26 +485,26 @@
             }
           }
         ],
-        "purpose": "Detect delay, damage, address, and delivery exceptions.",
+        "purpose": "Classify severity and reporting obligations under policy.",
         "required_capabilities": [
-          "template.shipping-notifications.detect_exception.perform"
+          "template.incident-response.classify_severity.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect delay, damage, address, and delivery exceptions and preserve every invariant required by later slots."
+        "success_contract": "Classify severity and reporting obligations under policy and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.triage"
         ],
-        "id": "select_policy",
+        "id": "select_response_plan",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.incident-response.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -502,7 +520,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.incident-response.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -510,26 +528,26 @@
             }
           }
         ],
-        "purpose": "Apply customer, jurisdiction, urgency, and suppression policy.",
+        "purpose": "Select authorized containment and evidence-preservation actions.",
         "required_capabilities": [
-          "template.shipping-notifications.select_policy.perform"
+          "template.incident-response.select_response_plan.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Apply customer, jurisdiction, urgency, and suppression policy and preserve every invariant required by later slots."
+        "success_contract": "Select authorized containment and evidence-preservation actions and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.contain"
         ],
-        "id": "select_recipient",
+        "id": "isolate_scope",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.incident-response.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -545,7 +563,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.incident-response.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -553,26 +571,26 @@
             }
           }
         ],
-        "purpose": "Resolve an authorized recipient and channel preference.",
+        "purpose": "Isolate affected identities, hosts, workloads, or network segments.",
         "required_capabilities": [
-          "template.shipping-notifications.select_recipient.perform"
+          "template.incident-response.isolate_scope.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve an authorized recipient and channel preference and preserve every invariant required by later slots."
+        "success_contract": "Isolate affected identities, hosts, workloads, or network segments and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.contain"
         ],
-        "id": "render_message",
+        "id": "block_indicators",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.incident-response.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -588,7 +606,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.incident-response.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -596,26 +614,26 @@
             }
           }
         ],
-        "purpose": "Render localized, privacy-safe notification content.",
+        "purpose": "Block verified malicious indicators with expiry and rollback.",
         "required_capabilities": [
-          "template.shipping-notifications.render_message.perform"
+          "template.incident-response.block_indicators.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Render localized, privacy-safe notification content and preserve every invariant required by later slots."
+        "success_contract": "Block verified malicious indicators with expiry and rollback and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.contain"
         ],
-        "id": "dispatch_notification",
+        "id": "monitor_containment",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.incident-response.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -631,7 +649,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.incident-response.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -639,26 +657,26 @@
             }
           }
         ],
-        "purpose": "Dispatch through an admitted delivery provider.",
+        "purpose": "Verify containment and detect displacement or persistence.",
         "required_capabilities": [
-          "template.shipping-notifications.dispatch_notification.perform"
+          "template.incident-response.monitor_containment.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Dispatch through an admitted delivery provider and preserve every invariant required by later slots."
+        "success_contract": "Verify containment and detect displacement or persistence and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.recover"
         ],
-        "id": "verify_delivery",
+        "id": "eradicate_cause",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.incident-response.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -674,7 +692,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.incident-response.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -682,26 +700,26 @@
             }
           }
         ],
-        "purpose": "Observe provider and downstream delivery state.",
+        "purpose": "Remove persistence, vulnerabilities, compromised secrets, and artifacts.",
         "required_capabilities": [
-          "template.shipping-notifications.verify_delivery.perform"
+          "template.incident-response.eradicate_cause.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Observe provider and downstream delivery state and preserve every invariant required by later slots."
+        "success_contract": "Remove persistence, vulnerabilities, compromised secrets, and artifacts and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.recover"
         ],
-        "id": "handle_failure",
+        "id": "restore_services",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.incident-response.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -717,7 +735,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.incident-response.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -725,26 +743,26 @@
             }
           }
         ],
-        "purpose": "Retry, fail over, suppress, or escalate by failure class.",
+        "purpose": "Restore services and data from verified trusted state.",
         "required_capabilities": [
-          "template.shipping-notifications.handle_failure.perform"
+          "template.incident-response.restore_services.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Retry, fail over, suppress, or escalate by failure class and preserve every invariant required by later slots."
+        "success_contract": "Restore services and data from verified trusted state and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.recover"
         ],
-        "id": "record_feedback",
+        "id": "verify_recovery",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.incident-response.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -760,7 +778,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-15",
+              "id": "template.incident-response.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -768,16 +786,145 @@
             }
           }
         ],
-        "purpose": "Record delivery, engagement, and policy evidence.",
+        "purpose": "Verify security, integrity, functionality, and monitoring coverage.",
         "required_capabilities": [
-          "template.shipping-notifications.record_feedback.perform"
+          "template.incident-response.verify_recovery.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Record delivery, engagement, and policy evidence and preserve every invariant required by later slots."
+        "success_contract": "Verify security, integrity, functionality, and monitoring coverage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "notify_stakeholders",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.incident-response.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.incident-response.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Complete authorized legal, customer, partner, and internal notifications.",
+        "required_capabilities": [
+          "template.incident-response.notify_stakeholders.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Complete authorized legal, customer, partner, and internal notifications and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "publish_incident_record",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.incident-response.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.incident-response.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish timeline, evidence, actions, impact, and decisions.",
+        "required_capabilities": [
+          "template.incident-response.publish_incident_record.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish timeline, evidence, actions, impact, and decisions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "improve_controls",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.incident-response.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.incident-response.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Convert verified lessons into owned preventive and detective changes.",
+        "required_capabilities": [
+          "template.incident-response.improve_controls.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Convert verified lessons into owned preventive and detective changes and preserve every invariant required by later slots."
       }
     ],
     "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
-    "task": "Instantiate the Shipping logistics notifications obligations for a task-specific contract.",
+    "task": "Instantiate the Cybersecurity incident response obligations for a task-specific contract.",
     "version": "1.0.0"
   },
   "refinements": [
@@ -785,7 +932,7 @@
       "budget_ref": "",
       "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
       "extensions": {},
-      "id": "template.shipping-notifications.repair-rejected-route",
+      "id": "template.incident-response.repair-rejected-route",
       "max_iterations": 8,
       "proposal_strategy": "search.sprout",
       "refresh_registry_snapshot": false,
@@ -800,7 +947,7 @@
       "budget_ref": "",
       "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
       "extensions": {},
-      "id": "template.shipping-notifications.revisit-registry",
+      "id": "template.incident-response.revisit-registry",
       "max_iterations": 1,
       "proposal_strategy": "discovery.refresh",
       "refresh_registry_snapshot": true,
@@ -814,59 +961,78 @@
   ],
   "stages": [
     {
-      "description": "Accept and identify logistics events.",
+      "description": "Establish authority, evidence, and response boundaries.",
       "extensions": {},
-      "id": "stage.ingest",
+      "id": "stage.prepare",
       "slot_ids": [
-        "receive_events",
-        "authenticate_source",
-        "normalize_event",
-        "deduplicate_event"
+        "load_response_policy",
+        "identify_assets",
+        "preserve_initial_evidence"
       ],
-      "title": "Ingest"
+      "title": "Prepare"
     },
     {
-      "description": "Build trustworthy shipment state.",
+      "description": "Validate and scope the suspected incident.",
       "extensions": {},
-      "id": "stage.reconcile",
+      "id": "stage.detect",
       "slot_ids": [
-        "resolve_shipment",
-        "order_events",
-        "derive_status",
-        "detect_exception"
+        "normalize_alerts",
+        "correlate_indicators",
+        "validate_incident"
       ],
-      "title": "Reconcile"
+      "title": "Detect"
     },
     {
-      "description": "Determine whether and how to notify.",
+      "description": "Prioritize and plan bounded response.",
       "extensions": {},
-      "id": "stage.decide",
+      "id": "stage.triage",
       "slot_ids": [
-        "select_policy",
-        "select_recipient",
-        "render_message"
+        "assess_impact",
+        "classify_severity",
+        "select_response_plan"
       ],
-      "title": "Decide"
+      "title": "Triage"
     },
     {
-      "description": "Send and learn from typed outcomes.",
+      "description": "Limit harm while preserving recoverability.",
       "extensions": {},
-      "id": "stage.deliver",
+      "id": "stage.contain",
       "slot_ids": [
-        "dispatch_notification",
-        "verify_delivery",
-        "handle_failure",
-        "record_feedback"
+        "isolate_scope",
+        "block_indicators",
+        "monitor_containment"
       ],
-      "title": "Deliver"
+      "title": "Contain"
+    },
+    {
+      "description": "Remove cause and restore trusted operation.",
+      "extensions": {},
+      "id": "stage.recover",
+      "slot_ids": [
+        "eradicate_cause",
+        "restore_services",
+        "verify_recovery"
+      ],
+      "title": "Recover"
+    },
+    {
+      "description": "Close obligations and improve defenses.",
+      "extensions": {},
+      "id": "stage.learn",
+      "slot_ids": [
+        "notify_stakeholders",
+        "publish_incident_record",
+        "improve_controls"
+      ],
+      "title": "Learn"
     }
   ],
   "tags": [
-    "notifications",
-    "integration",
-    "workflow"
+    "security",
+    "incident",
+    "recovery"
   ],
   "template_model_version": "0.1",
-  "title": "Shipping logistics notifications",
+  "title": "Cybersecurity incident response",
   "version": "1.0.0"
 }

@@ -1,0 +1,1138 @@
+{
+  "description": "A hypothesis, design, acquisition, analysis, replication, and publication scaffold.",
+  "domains": [
+    "science.experiment",
+    "research.reproducibility"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.scientific-experiment",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_question",
+        "target_port": "state",
+        "target_slot": "state_hypotheses"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "state_hypotheses",
+        "target_port": "state",
+        "target_slot": "define_outcomes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_outcomes",
+        "target_port": "state",
+        "target_slot": "select_design"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_design",
+        "target_port": "state",
+        "target_slot": "define_sampling"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_sampling",
+        "target_port": "state",
+        "target_slot": "plan_power"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "plan_power",
+        "target_port": "state",
+        "target_slot": "preregister_analysis"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "preregister_analysis",
+        "target_port": "state",
+        "target_slot": "calibrate_instruments"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "calibrate_instruments",
+        "target_port": "state",
+        "target_slot": "collect_observations"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "collect_observations",
+        "target_port": "state",
+        "target_slot": "monitor_protocol"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "monitor_protocol",
+        "target_port": "state",
+        "target_slot": "validate_measurements"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_measurements",
+        "target_port": "state",
+        "target_slot": "estimate_effects"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_effects",
+        "target_port": "state",
+        "target_slot": "check_assumptions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "check_assumptions",
+        "target_port": "state",
+        "target_slot": "run_sensitivity"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_sensitivity",
+        "target_port": "state",
+        "target_slot": "reexecute_analysis"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reexecute_analysis",
+        "target_port": "state",
+        "target_slot": "independent_review"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "independent_review",
+        "target_port": "state",
+        "target_slot": "replicate_result"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "replicate_result",
+        "target_port": "state",
+        "target_slot": "assemble_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "assemble_evidence",
+        "target_port": "state",
+        "target_slot": "report_results"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "report_results",
+        "target_port": "state",
+        "target_slot": "publish_artifacts"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.scientific-experiment",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_question",
+        "type": {
+          "id": "template.scientific-experiment.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_artifacts",
+        "type": {
+          "id": "template.scientific-experiment.state-20",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.question"
+        ],
+        "id": "define_question",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define scope, population, constructs, and intended inference.",
+        "required_capabilities": [
+          "template.scientific-experiment.define_question.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define scope, population, constructs, and intended inference and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.question"
+        ],
+        "id": "state_hypotheses",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "State falsifiable hypotheses and alternative explanations.",
+        "required_capabilities": [
+          "template.scientific-experiment.state_hypotheses.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "State falsifiable hypotheses and alternative explanations and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.question"
+        ],
+        "id": "define_outcomes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define primary, secondary, and safety outcomes before observation.",
+        "required_capabilities": [
+          "template.scientific-experiment.define_outcomes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define primary, secondary, and safety outcomes before observation and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "select_design",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select experimental or observational design and assignment mechanism.",
+        "required_capabilities": [
+          "template.scientific-experiment.select_design.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select experimental or observational design and assignment mechanism and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "define_sampling",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define sampling frame, inclusion, exclusion, and recruitment.",
+        "required_capabilities": [
+          "template.scientific-experiment.define_sampling.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define sampling frame, inclusion, exclusion, and recruitment and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "plan_power",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Plan sample size, precision, stopping, and multiplicity.",
+        "required_capabilities": [
+          "template.scientific-experiment.plan_power.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Plan sample size, precision, stopping, and multiplicity and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "preregister_analysis",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Freeze hypotheses, exclusions, transformations, and analysis plan.",
+        "required_capabilities": [
+          "template.scientific-experiment.preregister_analysis.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Freeze hypotheses, exclusions, transformations, and analysis plan and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "calibrate_instruments",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Calibrate instruments, annotators, or measurement systems.",
+        "required_capabilities": [
+          "template.scientific-experiment.calibrate_instruments.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Calibrate instruments, annotators, or measurement systems and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "collect_observations",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Collect observations under the approved protocol.",
+        "required_capabilities": [
+          "template.scientific-experiment.collect_observations.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Collect observations under the approved protocol and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "monitor_protocol",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Monitor deviations, missingness, safety, and data integrity.",
+        "required_capabilities": [
+          "template.scientific-experiment.monitor_protocol.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Monitor deviations, missingness, safety, and data integrity and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "validate_measurements",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate measurements, exclusions, and preprocessing provenance.",
+        "required_capabilities": [
+          "template.scientific-experiment.validate_measurements.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate measurements, exclusions, and preprocessing provenance and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "estimate_effects",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate effects or associations with uncertainty.",
+        "required_capabilities": [
+          "template.scientific-experiment.estimate_effects.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate effects or associations with uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "check_assumptions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Check model, design, measurement, and missing-data assumptions.",
+        "required_capabilities": [
+          "template.scientific-experiment.check_assumptions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Check model, design, measurement, and missing-data assumptions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "run_sensitivity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run declared robustness, subgroup, and alternative-specification analyses.",
+        "required_capabilities": [
+          "template.scientific-experiment.run_sensitivity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run declared robustness, subgroup, and alternative-specification analyses and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.reproduce"
+        ],
+        "id": "reexecute_analysis",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reexecute from immutable data, code, environment, and seeds.",
+        "required_capabilities": [
+          "template.scientific-experiment.reexecute_analysis.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reexecute from immutable data, code, environment, and seeds and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.reproduce"
+        ],
+        "id": "independent_review",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply independent methodological and domain review.",
+        "required_capabilities": [
+          "template.scientific-experiment.independent_review.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply independent methodological and domain review and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.reproduce"
+        ],
+        "id": "replicate_result",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Attempt internal or external replication when feasible.",
+        "required_capabilities": [
+          "template.scientific-experiment.replicate_result.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Attempt internal or external replication when feasible and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "assemble_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Assemble data lineage, analysis, diagnostics, and decision receipts.",
+        "required_capabilities": [
+          "template.scientific-experiment.assemble_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Assemble data lineage, analysis, diagnostics, and decision receipts and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "report_results",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Report estimates, uncertainty, deviations, limitations, and null findings.",
+        "required_capabilities": [
+          "template.scientific-experiment.report_results.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Report estimates, uncertainty, deviations, limitations, and null findings and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "publish_artifacts",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.scientific-experiment.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish permitted data, code, environment, and provenance artifacts.",
+        "required_capabilities": [
+          "template.scientific-experiment.publish_artifacts.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish permitted data, code, environment, and provenance artifacts and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Reproducible scientific experiment obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.scientific-experiment.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.scientific-experiment.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Turn a research question into falsifiable obligations.",
+      "extensions": {},
+      "id": "stage.question",
+      "slot_ids": [
+        "define_question",
+        "state_hypotheses",
+        "define_outcomes"
+      ],
+      "title": "Question"
+    },
+    {
+      "description": "Create an identifiable and adequately powered study.",
+      "extensions": {},
+      "id": "stage.design",
+      "slot_ids": [
+        "select_design",
+        "define_sampling",
+        "plan_power",
+        "preregister_analysis"
+      ],
+      "title": "Design"
+    },
+    {
+      "description": "Collect trustworthy observations.",
+      "extensions": {},
+      "id": "stage.acquire",
+      "slot_ids": [
+        "calibrate_instruments",
+        "collect_observations",
+        "monitor_protocol"
+      ],
+      "title": "Acquire"
+    },
+    {
+      "description": "Apply the frozen analysis and explicit sensitivity routes.",
+      "extensions": {},
+      "id": "stage.analyze",
+      "slot_ids": [
+        "validate_measurements",
+        "estimate_effects",
+        "check_assumptions",
+        "run_sensitivity"
+      ],
+      "title": "Analyze"
+    },
+    {
+      "description": "Verify computational and inferential stability.",
+      "extensions": {},
+      "id": "stage.reproduce",
+      "slot_ids": [
+        "reexecute_analysis",
+        "independent_review",
+        "replicate_result"
+      ],
+      "title": "Reproduce"
+    },
+    {
+      "description": "Report results and limitations without hiding alternatives.",
+      "extensions": {},
+      "id": "stage.publish",
+      "slot_ids": [
+        "assemble_evidence",
+        "report_results",
+        "publish_artifacts"
+      ],
+      "title": "Publish"
+    }
+  ],
+  "tags": [
+    "experiment",
+    "statistics",
+    "provenance"
+  ],
+  "template_model_version": "0.1",
+  "title": "Reproducible scientific experiment",
+  "version": "1.0.0"
+}

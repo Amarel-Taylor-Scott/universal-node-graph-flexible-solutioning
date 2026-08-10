@@ -26,7 +26,9 @@ diagram or candidate count is not, by itself, progress.
 - Negotiated registry discovery with sparse descriptors, exact named embedding
   spaces, graceful query fallback, coverage receipts, and closed-world snapshots.
 - Portable node packs and a deterministic reference catalogue containing five
-  node contracts and six cross-domain templates with 98 atomic obligations.
+  node contracts and 18 cross-domain templates with 317 atomic obligations.
+- Dependency-free template authoring CLI, strict linear-blueprint schema, and
+  focused workspace skills for templates, node packs, and benchmarking.
 - Prior-guided, beam, seeded-sprout, and uncapped exhaustive route search with explicit
   accounting for evaluated, rejected, skipped, and unvisited configurations.
 - Successive-halving promotion and patience-based early stopping primitives.

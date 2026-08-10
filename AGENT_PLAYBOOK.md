@@ -17,7 +17,9 @@ gap explicit. Do not use “the node returned success” as sufficient evidence.
 
 ### 2. Select and critique a semantic template
 
-Search `catalog/templates/` by domain and tags. A template is a hypothesis:
+Search with `solutiongraph templates list`, inspect with
+`solutiongraph templates show <id>`, or search `catalog/templates/` by domain
+and tags. A template is a hypothesis:
 compare every obligation to the task. Explain removed and added slots. Split
 any slot whose alternatives are not genuine substitutes.
 
@@ -112,7 +114,8 @@ unvisited space. Avoid claims not supported by real execution.
 ## Minimum commands
 
 ```bash
-python scripts/export_solutiongraph_catalog.py --output catalog
+solutiongraph doctor
+solutiongraph catalog export --output catalog
 pytest tests/test_solutiongraph*.py -q
 ruff check solutiongraph tests/test_solutiongraph*.py
 ```

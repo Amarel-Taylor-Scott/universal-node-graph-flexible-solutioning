@@ -22,6 +22,27 @@ def test_workspace_skill_has_minimal_frontmatter_and_selective_references():
     assert all(path.read_text(encoding="utf-8").strip() for path in reference_root.glob("*.md"))
 
 
+def test_focused_workspace_skills_are_triggerable_and_progressively_disclosed():
+    skill_root = ROOT / ".agents" / "skills"
+    expected = {
+        "author-node-pack",
+        "benchmark-solution-graph",
+        "create-solution-template",
+        "model-solution-graph",
+    }
+    assert expected == {path.parent.name for path in skill_root.glob("*/SKILL.md")}
+    for name in expected:
+        text = (skill_root / name / "SKILL.md").read_text(encoding="utf-8")
+        assert text.startswith(f"---\nname: {name}\ndescription:")
+        assert text.count("\n---\n") == 1
+        assert len(text.encode("utf-8")) < 8 * 1024
+    create_skill = (skill_root / "create-solution-template" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    assert "references/blueprint-authoring.md" in create_skill
+    assert "solutiongraph templates validate" in create_skill
+
+
 def test_root_instructions_stay_compact_and_vendor_files_point_to_one_source():
     agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
     assert len(agents.encode("utf-8")) < 16 * 1024

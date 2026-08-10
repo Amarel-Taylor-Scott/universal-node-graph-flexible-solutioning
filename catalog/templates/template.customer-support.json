@@ -1,111 +1,123 @@
 {
-  "description": "An event ingestion, reconciliation, policy, delivery, and feedback scaffold.",
+  "description": "An intake, understanding, policy, resolution, communication, and learning scaffold.",
   "domains": [
-    "logistics.shipping",
-    "software.event-driven"
+    "business.customer-support",
+    "software.workflow"
   ],
   "extensions": {
     "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
-  "id": "template.shipping-notifications",
+  "id": "template.customer-support",
   "program": {
     "allowed_effects": [],
     "edges": [
       {
         "source_port": "state",
-        "source_slot": "receive_events",
+        "source_slot": "receive_contact",
         "target_port": "state",
-        "target_slot": "authenticate_source"
+        "target_slot": "authenticate_customer"
       },
       {
         "source_port": "state",
-        "source_slot": "authenticate_source",
+        "source_slot": "authenticate_customer",
         "target_port": "state",
-        "target_slot": "normalize_event"
+        "target_slot": "redact_sensitive_data"
       },
       {
         "source_port": "state",
-        "source_slot": "normalize_event",
+        "source_slot": "redact_sensitive_data",
         "target_port": "state",
-        "target_slot": "deduplicate_event"
+        "target_slot": "classify_intent"
       },
       {
         "source_port": "state",
-        "source_slot": "deduplicate_event",
+        "source_slot": "classify_intent",
         "target_port": "state",
-        "target_slot": "resolve_shipment"
+        "target_slot": "extract_case_facts"
       },
       {
         "source_port": "state",
-        "source_slot": "resolve_shipment",
+        "source_slot": "extract_case_facts",
         "target_port": "state",
-        "target_slot": "order_events"
+        "target_slot": "retrieve_context"
       },
       {
         "source_port": "state",
-        "source_slot": "order_events",
+        "source_slot": "retrieve_context",
         "target_port": "state",
-        "target_slot": "derive_status"
+        "target_slot": "assess_priority"
       },
       {
         "source_port": "state",
-        "source_slot": "derive_status",
+        "source_slot": "assess_priority",
         "target_port": "state",
-        "target_slot": "detect_exception"
+        "target_slot": "retrieve_policy"
       },
       {
         "source_port": "state",
-        "source_slot": "detect_exception",
+        "source_slot": "retrieve_policy",
         "target_port": "state",
-        "target_slot": "select_policy"
+        "target_slot": "generate_options"
       },
       {
         "source_port": "state",
-        "source_slot": "select_policy",
+        "source_slot": "generate_options",
         "target_port": "state",
-        "target_slot": "select_recipient"
+        "target_slot": "select_resolution"
       },
       {
         "source_port": "state",
-        "source_slot": "select_recipient",
+        "source_slot": "select_resolution",
         "target_port": "state",
-        "target_slot": "render_message"
+        "target_slot": "execute_resolution"
       },
       {
         "source_port": "state",
-        "source_slot": "render_message",
+        "source_slot": "execute_resolution",
         "target_port": "state",
-        "target_slot": "dispatch_notification"
+        "target_slot": "compose_response"
       },
       {
         "source_port": "state",
-        "source_slot": "dispatch_notification",
+        "source_slot": "compose_response",
         "target_port": "state",
-        "target_slot": "verify_delivery"
+        "target_slot": "verify_response"
       },
       {
         "source_port": "state",
-        "source_slot": "verify_delivery",
+        "source_slot": "verify_response",
         "target_port": "state",
-        "target_slot": "handle_failure"
+        "target_slot": "deliver_response"
       },
       {
         "source_port": "state",
-        "source_slot": "handle_failure",
+        "source_slot": "deliver_response",
         "target_port": "state",
-        "target_slot": "record_feedback"
+        "target_slot": "verify_resolution"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_resolution",
+        "target_port": "state",
+        "target_slot": "route_followup"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "route_followup",
+        "target_port": "state",
+        "target_slot": "record_outcome"
       }
     ],
     "granted_permissions": [],
-    "id": "program.template.shipping-notifications",
+    "id": "program.template.customer-support",
     "inputs": [
       {
         "name": "input",
         "target_port": "state",
-        "target_slot": "receive_events",
+        "target_slot": "receive_contact",
         "type": {
-          "id": "template.shipping-notifications.state-0",
+          "id": "template.customer-support.state-0",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -119,9 +131,9 @@
       {
         "name": "result",
         "source_port": "state",
-        "source_slot": "record_feedback",
+        "source_slot": "record_outcome",
         "type": {
-          "id": "template.shipping-notifications.state-15",
+          "id": "template.customer-support.state-17",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -133,16 +145,16 @@
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.intake"
         ],
-        "id": "receive_events",
+        "id": "receive_contact",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-0",
+              "id": "template.customer-support.state-0",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -158,7 +170,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.customer-support.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -166,26 +178,26 @@
             }
           }
         ],
-        "purpose": "Receive carrier, warehouse, and order events idempotently.",
+        "purpose": "Receive the customer contact and channel metadata.",
         "required_capabilities": [
-          "template.shipping-notifications.receive_events.perform"
+          "template.customer-support.receive_contact.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Receive carrier, warehouse, and order events idempotently and preserve every invariant required by later slots."
+        "success_contract": "Receive the customer contact and channel metadata and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.intake"
         ],
-        "id": "authenticate_source",
+        "id": "authenticate_customer",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.customer-support.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -201,7 +213,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.customer-support.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -209,26 +221,26 @@
             }
           }
         ],
-        "purpose": "Authenticate event sources and verify integrity.",
+        "purpose": "Authenticate identity only to the level required by the request.",
         "required_capabilities": [
-          "template.shipping-notifications.authenticate_source.perform"
+          "template.customer-support.authenticate_customer.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Authenticate event sources and verify integrity and preserve every invariant required by later slots."
+        "success_contract": "Authenticate identity only to the level required by the request and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.intake"
         ],
-        "id": "normalize_event",
+        "id": "redact_sensitive_data",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.customer-support.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -244,7 +256,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.customer-support.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -252,26 +264,26 @@
             }
           }
         ],
-        "purpose": "Normalize provider payloads into a versioned event schema.",
+        "purpose": "Detect, minimize, and protect unnecessary sensitive content.",
         "required_capabilities": [
-          "template.shipping-notifications.normalize_event.perform"
+          "template.customer-support.redact_sensitive_data.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Normalize provider payloads into a versioned event schema and preserve every invariant required by later slots."
+        "success_contract": "Detect, minimize, and protect unnecessary sensitive content and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.understand"
         ],
-        "id": "deduplicate_event",
+        "id": "classify_intent",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.customer-support.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -287,7 +299,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.customer-support.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -295,26 +307,26 @@
             }
           }
         ],
-        "purpose": "Detect replayed or semantically duplicate events.",
+        "purpose": "Classify the requested outcome and affected product or process.",
         "required_capabilities": [
-          "template.shipping-notifications.deduplicate_event.perform"
+          "template.customer-support.classify_intent.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect replayed or semantically duplicate events and preserve every invariant required by later slots."
+        "success_contract": "Classify the requested outcome and affected product or process and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.understand"
         ],
-        "id": "resolve_shipment",
+        "id": "extract_case_facts",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.customer-support.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -330,7 +342,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.customer-support.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -338,26 +350,26 @@
             }
           }
         ],
-        "purpose": "Resolve event identifiers to the correct shipment.",
+        "purpose": "Extract source-grounded facts, dates, identifiers, and commitments.",
         "required_capabilities": [
-          "template.shipping-notifications.resolve_shipment.perform"
+          "template.customer-support.extract_case_facts.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve event identifiers to the correct shipment and preserve every invariant required by later slots."
+        "success_contract": "Extract source-grounded facts, dates, identifiers, and commitments and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.understand"
         ],
-        "id": "order_events",
+        "id": "retrieve_context",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.customer-support.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -373,7 +385,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.customer-support.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -381,26 +393,26 @@
             }
           }
         ],
-        "purpose": "Order late and out-of-order events under declared semantics.",
+        "purpose": "Retrieve authorized account, order, policy, and interaction context.",
         "required_capabilities": [
-          "template.shipping-notifications.order_events.perform"
+          "template.customer-support.retrieve_context.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Order late and out-of-order events under declared semantics and preserve every invariant required by later slots."
+        "success_contract": "Retrieve authorized account, order, policy, and interaction context and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.understand"
         ],
-        "id": "derive_status",
+        "id": "assess_priority",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.customer-support.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -416,7 +428,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.customer-support.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -424,26 +436,26 @@
             }
           }
         ],
-        "purpose": "Derive the current shipment status and confidence.",
+        "purpose": "Assess urgency, vulnerability, impact, and escalation criteria.",
         "required_capabilities": [
-          "template.shipping-notifications.derive_status.perform"
+          "template.customer-support.assess_priority.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Derive the current shipment status and confidence and preserve every invariant required by later slots."
+        "success_contract": "Assess urgency, vulnerability, impact, and escalation criteria and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.resolve"
         ],
-        "id": "detect_exception",
+        "id": "retrieve_policy",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.customer-support.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -459,7 +471,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.customer-support.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -467,26 +479,26 @@
             }
           }
         ],
-        "purpose": "Detect delay, damage, address, and delivery exceptions.",
+        "purpose": "Retrieve the exact applicable policy, entitlement, and exceptions.",
         "required_capabilities": [
-          "template.shipping-notifications.detect_exception.perform"
+          "template.customer-support.retrieve_policy.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect delay, damage, address, and delivery exceptions and preserve every invariant required by later slots."
+        "success_contract": "Retrieve the exact applicable policy, entitlement, and exceptions and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.resolve"
         ],
-        "id": "select_policy",
+        "id": "generate_options",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.customer-support.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -502,7 +514,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.customer-support.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -510,26 +522,26 @@
             }
           }
         ],
-        "purpose": "Apply customer, jurisdiction, urgency, and suppression policy.",
+        "purpose": "Generate contract-compatible resolution options.",
         "required_capabilities": [
-          "template.shipping-notifications.select_policy.perform"
+          "template.customer-support.generate_options.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Apply customer, jurisdiction, urgency, and suppression policy and preserve every invariant required by later slots."
+        "success_contract": "Generate contract-compatible resolution options and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.resolve"
         ],
-        "id": "select_recipient",
+        "id": "select_resolution",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.customer-support.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -545,7 +557,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.customer-support.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -553,26 +565,26 @@
             }
           }
         ],
-        "purpose": "Resolve an authorized recipient and channel preference.",
+        "purpose": "Select a resolution using authority, evidence, cost, and customer impact.",
         "required_capabilities": [
-          "template.shipping-notifications.select_recipient.perform"
+          "template.customer-support.select_resolution.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve an authorized recipient and channel preference and preserve every invariant required by later slots."
+        "success_contract": "Select a resolution using authority, evidence, cost, and customer impact and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.resolve"
         ],
-        "id": "render_message",
+        "id": "execute_resolution",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.customer-support.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -588,7 +600,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.customer-support.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -596,26 +608,26 @@
             }
           }
         ],
-        "purpose": "Render localized, privacy-safe notification content.",
+        "purpose": "Execute the approved account, refund, replacement, or workflow action.",
         "required_capabilities": [
-          "template.shipping-notifications.render_message.perform"
+          "template.customer-support.execute_resolution.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Render localized, privacy-safe notification content and preserve every invariant required by later slots."
+        "success_contract": "Execute the approved account, refund, replacement, or workflow action and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.communicate"
         ],
-        "id": "dispatch_notification",
+        "id": "compose_response",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.customer-support.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -631,7 +643,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.customer-support.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -639,26 +651,26 @@
             }
           }
         ],
-        "purpose": "Dispatch through an admitted delivery provider.",
+        "purpose": "Compose a clear, accurate, policy-grounded response.",
         "required_capabilities": [
-          "template.shipping-notifications.dispatch_notification.perform"
+          "template.customer-support.compose_response.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Dispatch through an admitted delivery provider and preserve every invariant required by later slots."
+        "success_contract": "Compose a clear, accurate, policy-grounded response and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.communicate"
         ],
-        "id": "verify_delivery",
+        "id": "verify_response",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.customer-support.state-12",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -674,7 +686,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.customer-support.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -682,26 +694,26 @@
             }
           }
         ],
-        "purpose": "Observe provider and downstream delivery state.",
+        "purpose": "Verify facts, promises, tone, privacy, and required disclosures.",
         "required_capabilities": [
-          "template.shipping-notifications.verify_delivery.perform"
+          "template.customer-support.verify_response.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Observe provider and downstream delivery state and preserve every invariant required by later slots."
+        "success_contract": "Verify facts, promises, tone, privacy, and required disclosures and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.communicate"
         ],
-        "id": "handle_failure",
+        "id": "deliver_response",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.customer-support.state-13",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -717,7 +729,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.customer-support.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -725,26 +737,26 @@
             }
           }
         ],
-        "purpose": "Retry, fail over, suppress, or escalate by failure class.",
+        "purpose": "Deliver through the authorized channel and preserve evidence.",
         "required_capabilities": [
-          "template.shipping-notifications.handle_failure.perform"
+          "template.customer-support.deliver_response.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Retry, fail over, suppress, or escalate by failure class and preserve every invariant required by later slots."
+        "success_contract": "Deliver through the authorized channel and preserve evidence and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.deliver"
+          "stage.close"
         ],
-        "id": "record_feedback",
+        "id": "verify_resolution",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.customer-support.state-14",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -760,7 +772,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-15",
+              "id": "template.customer-support.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -768,16 +780,102 @@
             }
           }
         ],
-        "purpose": "Record delivery, engagement, and policy evidence.",
+        "purpose": "Verify that promised actions completed and the case oracle passes.",
         "required_capabilities": [
-          "template.shipping-notifications.record_feedback.perform"
+          "template.customer-support.verify_resolution.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Record delivery, engagement, and policy evidence and preserve every invariant required by later slots."
+        "success_contract": "Verify that promised actions completed and the case oracle passes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.close"
+        ],
+        "id": "route_followup",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.customer-support.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.customer-support.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Schedule, escalate, or reopen unresolved obligations.",
+        "required_capabilities": [
+          "template.customer-support.route_followup.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Schedule, escalate, or reopen unresolved obligations and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.close"
+        ],
+        "id": "record_outcome",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.customer-support.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.customer-support.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record resolution, effort, cost, feedback, and reusable evidence.",
+        "required_capabilities": [
+          "template.customer-support.record_outcome.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record resolution, effort, cost, feedback, and reusable evidence and preserve every invariant required by later slots."
       }
     ],
     "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
-    "task": "Instantiate the Shipping logistics notifications obligations for a task-specific contract.",
+    "task": "Instantiate the Customer support case resolution obligations for a task-specific contract.",
     "version": "1.0.0"
   },
   "refinements": [
@@ -785,7 +883,7 @@
       "budget_ref": "",
       "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
       "extensions": {},
-      "id": "template.shipping-notifications.repair-rejected-route",
+      "id": "template.customer-support.repair-rejected-route",
       "max_iterations": 8,
       "proposal_strategy": "search.sprout",
       "refresh_registry_snapshot": false,
@@ -800,7 +898,7 @@
       "budget_ref": "",
       "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
       "extensions": {},
-      "id": "template.shipping-notifications.revisit-registry",
+      "id": "template.customer-support.revisit-registry",
       "max_iterations": 1,
       "proposal_strategy": "discovery.refresh",
       "refresh_registry_snapshot": true,
@@ -814,59 +912,69 @@
   ],
   "stages": [
     {
-      "description": "Accept and identify logistics events.",
+      "description": "Create a trustworthy support case.",
       "extensions": {},
-      "id": "stage.ingest",
+      "id": "stage.intake",
       "slot_ids": [
-        "receive_events",
-        "authenticate_source",
-        "normalize_event",
-        "deduplicate_event"
+        "receive_contact",
+        "authenticate_customer",
+        "redact_sensitive_data"
       ],
-      "title": "Ingest"
+      "title": "Intake"
     },
     {
-      "description": "Build trustworthy shipment state.",
+      "description": "Determine intent, context, and urgency.",
       "extensions": {},
-      "id": "stage.reconcile",
+      "id": "stage.understand",
       "slot_ids": [
-        "resolve_shipment",
-        "order_events",
-        "derive_status",
-        "detect_exception"
+        "classify_intent",
+        "extract_case_facts",
+        "retrieve_context",
+        "assess_priority"
       ],
-      "title": "Reconcile"
+      "title": "Understand"
     },
     {
-      "description": "Determine whether and how to notify.",
+      "description": "Select and execute an authorized remedy.",
       "extensions": {},
-      "id": "stage.decide",
+      "id": "stage.resolve",
       "slot_ids": [
-        "select_policy",
-        "select_recipient",
-        "render_message"
+        "retrieve_policy",
+        "generate_options",
+        "select_resolution",
+        "execute_resolution"
       ],
-      "title": "Decide"
+      "title": "Resolve"
     },
     {
-      "description": "Send and learn from typed outcomes.",
+      "description": "Explain and confirm the outcome.",
       "extensions": {},
-      "id": "stage.deliver",
+      "id": "stage.communicate",
       "slot_ids": [
-        "dispatch_notification",
-        "verify_delivery",
-        "handle_failure",
-        "record_feedback"
+        "compose_response",
+        "verify_response",
+        "deliver_response"
       ],
-      "title": "Deliver"
+      "title": "Communicate"
+    },
+    {
+      "description": "Verify completion and improve the system.",
+      "extensions": {},
+      "id": "stage.close",
+      "slot_ids": [
+        "verify_resolution",
+        "route_followup",
+        "record_outcome"
+      ],
+      "title": "Close"
     }
   ],
   "tags": [
-    "notifications",
-    "integration",
-    "workflow"
+    "support",
+    "case-management",
+    "automation"
   ],
   "template_model_version": "0.1",
-  "title": "Shipping logistics notifications",
+  "title": "Customer support case resolution",
   "version": "1.0.0"
 }

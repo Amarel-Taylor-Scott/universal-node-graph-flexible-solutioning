@@ -19,8 +19,12 @@ engine.
 4. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
 5. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
 
-For requests to model a new problem using this architecture, use the workspace
-skill in `.agents/skills/model-solution-graph/SKILL.md`.
+Use the narrowest matching workspace skill:
+
+- `.agents/skills/create-solution-template/SKILL.md` for template authoring;
+- `.agents/skills/author-node-pack/SKILL.md` for reusable node packs;
+- `.agents/skills/benchmark-solution-graph/SKILL.md` for route experiments;
+- `.agents/skills/model-solution-graph/SKILL.md` for end-to-end modeling.
 
 ## Non-negotiable ontology
 
@@ -99,6 +103,7 @@ objects, not in `NodeSpec`.
 ## Repository map
 
 - `solutiongraph/` — domain-neutral semantic model, compiler, search, evidence.
+- `solutiongraph/template_authoring.py` — strict linear blueprint compiler.
 - `solutiongraph/schemas/` — strict portable wire schemas.
 - `catalog/` — generated semantic templates and reference node pack.
 - `browsergraph/` — browser runtime adapter and original proof of concept.
@@ -111,6 +116,7 @@ objects, not in `NodeSpec`.
 Core changes:
 
 ```bash
+solutiongraph doctor
 pytest tests/test_solutiongraph*.py tests/test_workbench.py -q
 ruff check solutiongraph browsergraph tests/test_solutiongraph*.py
 ```

@@ -1,0 +1,49 @@
+name: Solution template proposal
+description: Propose a reusable domain decomposition with stages and atomic obligations
+title: "[Template]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem_class
+    attributes:
+      label: Reusable problem class
+      description: Describe the family of tasks independently of any tool, vendor, or implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: inputs_outputs
+    attributes:
+      label: Inputs, outputs, and independent success contract
+      description: What enters, what must be produced, and what oracle can verify it?
+    validations:
+      required: true
+  - type: textarea
+    id: stages
+    attributes:
+      label: Proposed stages and atomic slots
+      description: List ordered stages and the independently replaceable obligations inside each stage.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Example candidate diversity
+      description: Give at least two different implementation approaches for two or more slots, without making those tools the slot names.
+    validations:
+      required: true
+  - type: textarea
+    id: topology
+    attributes:
+      label: Non-linear topology
+      description: Identify any real branches, joins, maps, barriers, loops, or composite subgraphs that should not be flattened.
+  - type: checkboxes
+    id: invariants
+    attributes:
+      label: Architecture checks
+      options:
+        - label: Stages are navigation and are not executable nodes.
+          required: true
+        - label: Every slot will have its own success contract and semantic capability.
+          required: true
+        - label: Tools, optimizers, feedback, and permissions are not disguised as task steps.
+          required: true

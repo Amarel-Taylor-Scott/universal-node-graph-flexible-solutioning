@@ -5,6 +5,7 @@
     "data-management.entity"
   ],
   "extensions": {
+    "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
   "id": "template.data-quality",
@@ -97,7 +98,7 @@
       }
     ],
     "granted_permissions": [],
-    "id": "template.template.data-quality",
+    "id": "program.template.data-quality",
     "inputs": [
       {
         "name": "input",

@@ -9,11 +9,14 @@ All notable changes to this proof of concept are documented here.
 - Sparse node discovery descriptors, unlimited search documents, exact named
   embedding spaces, and harness–registry capability negotiation.
 - Replayable discovery queries, coverage receipts, closed-world registry
-  snapshots, content-addressed node packs, and eleven strict portable schemas.
+  snapshots, content-addressed node packs, and twelve strict portable schemas.
 - Semantic solution templates with visible stages, exact slot partitions, and
   bounded control-plane refinement policies.
-- Six cross-domain templates containing 98 atomic obligations plus a generated
-  reference node pack with explicit identity, validation, file, and HTTP nodes.
+- Eighteen cross-domain templates containing 317 atomic obligations plus a
+  generated reference node pack with explicit identity, validation, file, and HTTP nodes.
+- Strict linear-template blueprints, an eighteenth portable schema, a
+  dependency-free `solutiongraph` authoring CLI, a getting-started guide, and
+  focused workspace skills for template, node-pack, and benchmark work.
 - Seeded random-sprout route proposals around full or partial anchors with
   explicit sampling budgets and accounting.
 - Successive-halving resource promotion and deterministic patience-based early stopping.
@@ -33,7 +36,7 @@ All notable changes to this proof of concept are documented here.
 - Bundled strict JSON Schemas and a domain-neutral document extraction example.
 - Normative universal graph specification and primary-source research notes.
 - Cross-harness repository guidance through `AGENTS.md`, `CLAUDE.md`,
-  `GEMINI.md`, Copilot instructions, `llms.txt`, and a workspace Agent Skill.
+  `GEMINI.md`, Copilot instructions, `llms.txt`, and four workspace Agent Skills.
 
 ### Changed
 

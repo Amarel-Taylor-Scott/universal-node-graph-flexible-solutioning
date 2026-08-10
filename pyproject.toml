@@ -36,6 +36,7 @@ dev = ["pytest>=7.4"]
 
 [project.scripts]
 browsergraph = "browsergraph.cli:main"
+solutiongraph = "solutiongraph.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning"

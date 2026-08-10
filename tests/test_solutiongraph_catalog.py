@@ -39,8 +39,8 @@ def test_reference_nodes_execute_and_all_contracts_and_descriptors_validate():
 
 def test_reference_templates_cover_unrelated_domains_and_atomic_obligations():
     assert REFERENCE_TEMPLATES.validate() == []
-    assert len(REFERENCE_TEMPLATES.templates) == 6
-    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 98
+    assert len(REFERENCE_TEMPLATES.templates) == 18
+    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 317
     assert {
         "template.kaggle-tabular",
         "template.data-quality",
@@ -48,16 +48,16 @@ def test_reference_templates_cover_unrelated_domains_and_atomic_obligations():
         "template.login-system",
         "template.deployment-release",
         "template.shipping-notifications",
-    } == {template.id for template in REFERENCE_TEMPLATES.templates}
+    }.issubset({template.id for template in REFERENCE_TEMPLATES.templates})
 
 
 def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embeddings():
     first = catalog_documents()
     second = catalog_documents()
     assert first == second
-    assert len(first) == 3 + 5 + 5 + 6 + 1
+    assert len(first) == 3 + 5 + 5 + 18 + 1
     index = first["index.json"]
-    assert len(index["templates"]) == 6
+    assert len(index["templates"]) == 18
     assert index["node_packs"][0]["node_count"] == 5
     assert index["node_packs"][0]["embedding_record_count"] == 0
     capabilities = first["nodepacks/reference-core/registry-capabilities.json"]
@@ -85,6 +85,7 @@ def test_catalogue_explorer_is_self_contained_and_exposes_every_reference_templa
     assert "fetch(" not in html
     assert "XMLHttpRequest" not in html
     assert "ung-catalog-explorer" in html
+    assert "ung-domain-select" in html
     assert all(template.id in html for template in REFERENCE_TEMPLATES.templates)
     assert all(node.id in html for node in REFERENCE_NODE_SPECS)
     assert all(node.description in html for node in REFERENCE_NODE_SPECS)

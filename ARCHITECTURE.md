@@ -10,7 +10,9 @@ solutiongraph/
 ├── compiler.py           graph validation, full admission, route compilation
 ├── discovery.py          descriptors, embedding spaces, handshake, snapshots, node packs
 ├── templates.py          semantic stages, reusable templates, refinement policies
-├── template_library.py   six cross-domain reference decompositions
+├── template_authoring.py strict linear blueprint parser/compiler
+├── template_library.py   original reference decompositions
+├── template_library_extended.py  twelve additional application templates
 ├── search.py             prior, beam, sprout, exhaustive search + honest accounting
 ├── adaptive.py           successive promotion and explicit early stopping
 ├── evidence.py           receipts, experiments, Pareto fronts, learned priors
@@ -20,7 +22,7 @@ solutiongraph/
 
 catalog/
 ├── index.json            content-addressed template/node-pack index
-├── templates/            98 atomic obligations across six unrelated domains
+├── templates/            317 atomic obligations across 18 varied domains
 └── nodepacks/            portable reference registry and discovery sidecars
 
 browsergraph/

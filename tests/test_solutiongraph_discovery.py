@@ -330,6 +330,7 @@ def test_discovery_and_template_wire_schemas_are_strict_but_extensions_are_open(
         "registry-snapshot.schema.json",
         "node-pack.schema.json",
         "solution-template.schema.json",
+        "template-blueprint.schema.json",
         "search-report.schema.json",
     }
     assert expected.issubset(schemas)

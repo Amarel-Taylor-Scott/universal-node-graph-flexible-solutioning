@@ -1,111 +1,129 @@
 {
-  "description": "An event ingestion, reconciliation, policy, delivery, and feedback scaffold.",
+  "description": "A provenance-preserving image quality, analysis, transformation, and delivery scaffold.",
   "domains": [
-    "logistics.shipping",
-    "software.event-driven"
+    "media.image-processing",
+    "ai.computer-vision"
   ],
   "extensions": {
     "universal.template-source": "linear-blueprint",
     "universal.template-state": "schematic; refine before execution"
   },
-  "id": "template.shipping-notifications",
+  "id": "template.image-processing",
   "program": {
     "allowed_effects": [],
     "edges": [
       {
         "source_port": "state",
-        "source_slot": "receive_events",
+        "source_slot": "load_image",
         "target_port": "state",
-        "target_slot": "authenticate_source"
+        "target_slot": "decode_image"
       },
       {
         "source_port": "state",
-        "source_slot": "authenticate_source",
+        "source_slot": "decode_image",
         "target_port": "state",
-        "target_slot": "normalize_event"
+        "target_slot": "validate_integrity"
       },
       {
         "source_port": "state",
-        "source_slot": "normalize_event",
+        "source_slot": "validate_integrity",
         "target_port": "state",
-        "target_slot": "deduplicate_event"
+        "target_slot": "quality_profile"
       },
       {
         "source_port": "state",
-        "source_slot": "deduplicate_event",
+        "source_slot": "quality_profile",
         "target_port": "state",
-        "target_slot": "resolve_shipment"
+        "target_slot": "detect_regions"
       },
       {
         "source_port": "state",
-        "source_slot": "resolve_shipment",
+        "source_slot": "detect_regions",
         "target_port": "state",
-        "target_slot": "order_events"
+        "target_slot": "detect_synthetic"
       },
       {
         "source_port": "state",
-        "source_slot": "order_events",
+        "source_slot": "detect_synthetic",
         "target_port": "state",
-        "target_slot": "derive_status"
+        "target_slot": "extract_metadata"
       },
       {
         "source_port": "state",
-        "source_slot": "derive_status",
+        "source_slot": "extract_metadata",
         "target_port": "state",
-        "target_slot": "detect_exception"
+        "target_slot": "normalize_geometry"
       },
       {
         "source_port": "state",
-        "source_slot": "detect_exception",
+        "source_slot": "normalize_geometry",
         "target_port": "state",
-        "target_slot": "select_policy"
+        "target_slot": "normalize_color"
       },
       {
         "source_port": "state",
-        "source_slot": "select_policy",
+        "source_slot": "normalize_color",
         "target_port": "state",
-        "target_slot": "select_recipient"
+        "target_slot": "enhance_signal"
       },
       {
         "source_port": "state",
-        "source_slot": "select_recipient",
+        "source_slot": "enhance_signal",
         "target_port": "state",
-        "target_slot": "render_message"
+        "target_slot": "apply_distortion"
       },
       {
         "source_port": "state",
-        "source_slot": "render_message",
+        "source_slot": "apply_distortion",
         "target_port": "state",
-        "target_slot": "dispatch_notification"
+        "target_slot": "recognize_text"
       },
       {
         "source_port": "state",
-        "source_slot": "dispatch_notification",
+        "source_slot": "recognize_text",
         "target_port": "state",
-        "target_slot": "verify_delivery"
+        "target_slot": "classify_content"
       },
       {
         "source_port": "state",
-        "source_slot": "verify_delivery",
+        "source_slot": "classify_content",
         "target_port": "state",
-        "target_slot": "handle_failure"
+        "target_slot": "measure_geometry"
       },
       {
         "source_port": "state",
-        "source_slot": "handle_failure",
+        "source_slot": "measure_geometry",
         "target_port": "state",
-        "target_slot": "record_feedback"
+        "target_slot": "reconcile_findings"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_findings",
+        "target_port": "state",
+        "target_slot": "encode_output"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "encode_output",
+        "target_port": "state",
+        "target_slot": "verify_output"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_output",
+        "target_port": "state",
+        "target_slot": "publish_artifacts"
       }
     ],
     "granted_permissions": [],
-    "id": "program.template.shipping-notifications",
+    "id": "program.template.image-processing",
     "inputs": [
       {
         "name": "input",
         "target_port": "state",
-        "target_slot": "receive_events",
+        "target_slot": "load_image",
         "type": {
-          "id": "template.shipping-notifications.state-0",
+          "id": "template.image-processing.state-0",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -119,9 +137,9 @@
       {
         "name": "result",
         "source_port": "state",
-        "source_slot": "record_feedback",
+        "source_slot": "publish_artifacts",
         "type": {
-          "id": "template.shipping-notifications.state-15",
+          "id": "template.image-processing.state-18",
           "media_type": "application/json",
           "schema_digest": "",
           "units": "",
@@ -135,14 +153,14 @@
         "group": [
           "stage.ingest"
         ],
-        "id": "receive_events",
+        "id": "load_image",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-0",
+              "id": "template.image-processing.state-0",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -158,7 +176,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.image-processing.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -166,26 +184,26 @@
             }
           }
         ],
-        "purpose": "Receive carrier, warehouse, and order events idempotently.",
+        "purpose": "Load the exact image bytes and source metadata.",
         "required_capabilities": [
-          "template.shipping-notifications.receive_events.perform"
+          "template.image-processing.load_image.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Receive carrier, warehouse, and order events idempotently and preserve every invariant required by later slots."
+        "success_contract": "Load the exact image bytes and source metadata and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.ingest"
         ],
-        "id": "authenticate_source",
+        "id": "decode_image",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-1",
+              "id": "template.image-processing.state-1",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -201,7 +219,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.image-processing.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -209,26 +227,26 @@
             }
           }
         ],
-        "purpose": "Authenticate event sources and verify integrity.",
+        "purpose": "Decode format, color model, orientation, and frame structure.",
         "required_capabilities": [
-          "template.shipping-notifications.authenticate_source.perform"
+          "template.image-processing.decode_image.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Authenticate event sources and verify integrity and preserve every invariant required by later slots."
+        "success_contract": "Decode format, color model, orientation, and frame structure and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.ingest"
         ],
-        "id": "normalize_event",
+        "id": "validate_integrity",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-2",
+              "id": "template.image-processing.state-2",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -244,7 +262,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.image-processing.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -252,26 +270,26 @@
             }
           }
         ],
-        "purpose": "Normalize provider payloads into a versioned event schema.",
+        "purpose": "Detect truncation, malformed regions, and unsupported encodings.",
         "required_capabilities": [
-          "template.shipping-notifications.normalize_event.perform"
+          "template.image-processing.validate_integrity.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Normalize provider payloads into a versioned event schema and preserve every invariant required by later slots."
+        "success_contract": "Detect truncation, malformed regions, and unsupported encodings and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.ingest"
+          "stage.inspect"
         ],
-        "id": "deduplicate_event",
+        "id": "quality_profile",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-3",
+              "id": "template.image-processing.state-3",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -287,7 +305,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.image-processing.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -295,26 +313,26 @@
             }
           }
         ],
-        "purpose": "Detect replayed or semantically duplicate events.",
+        "purpose": "Measure resolution, noise, blur, compression, clipping, and exposure.",
         "required_capabilities": [
-          "template.shipping-notifications.deduplicate_event.perform"
+          "template.image-processing.quality_profile.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect replayed or semantically duplicate events and preserve every invariant required by later slots."
+        "success_contract": "Measure resolution, noise, blur, compression, clipping, and exposure and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.inspect"
         ],
-        "id": "resolve_shipment",
+        "id": "detect_regions",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-4",
+              "id": "template.image-processing.state-4",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -330,7 +348,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.image-processing.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -338,26 +356,26 @@
             }
           }
         ],
-        "purpose": "Resolve event identifiers to the correct shipment.",
+        "purpose": "Detect faces, objects, corners, text regions, and regions of interest.",
         "required_capabilities": [
-          "template.shipping-notifications.resolve_shipment.perform"
+          "template.image-processing.detect_regions.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve event identifiers to the correct shipment and preserve every invariant required by later slots."
+        "success_contract": "Detect faces, objects, corners, text regions, and regions of interest and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.inspect"
         ],
-        "id": "order_events",
+        "id": "detect_synthetic",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-5",
+              "id": "template.image-processing.state-5",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -373,7 +391,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.image-processing.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -381,26 +399,26 @@
             }
           }
         ],
-        "purpose": "Order late and out-of-order events under declared semantics.",
+        "purpose": "Run admitted synthetic-media and manipulation detectors.",
         "required_capabilities": [
-          "template.shipping-notifications.order_events.perform"
+          "template.image-processing.detect_synthetic.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Order late and out-of-order events under declared semantics and preserve every invariant required by later slots."
+        "success_contract": "Run admitted synthetic-media and manipulation detectors and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.inspect"
         ],
-        "id": "derive_status",
+        "id": "extract_metadata",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-6",
+              "id": "template.image-processing.state-6",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -416,7 +434,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.image-processing.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -424,26 +442,26 @@
             }
           }
         ],
-        "purpose": "Derive the current shipment status and confidence.",
+        "purpose": "Extract permitted metadata and provenance claims.",
         "required_capabilities": [
-          "template.shipping-notifications.derive_status.perform"
+          "template.image-processing.extract_metadata.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Derive the current shipment status and confidence and preserve every invariant required by later slots."
+        "success_contract": "Extract permitted metadata and provenance claims and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.reconcile"
+          "stage.transform"
         ],
-        "id": "detect_exception",
+        "id": "normalize_geometry",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-7",
+              "id": "template.image-processing.state-7",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -459,7 +477,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.image-processing.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -467,26 +485,26 @@
             }
           }
         ],
-        "purpose": "Detect delay, damage, address, and delivery exceptions.",
+        "purpose": "Correct orientation, crop, pad, resize, or rectify geometry.",
         "required_capabilities": [
-          "template.shipping-notifications.detect_exception.perform"
+          "template.image-processing.normalize_geometry.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Detect delay, damage, address, and delivery exceptions and preserve every invariant required by later slots."
+        "success_contract": "Correct orientation, crop, pad, resize, or rectify geometry and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.transform"
         ],
-        "id": "select_policy",
+        "id": "normalize_color",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-8",
+              "id": "template.image-processing.state-8",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -502,7 +520,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.image-processing.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -510,26 +528,26 @@
             }
           }
         ],
-        "purpose": "Apply customer, jurisdiction, urgency, and suppression policy.",
+        "purpose": "Convert color space and normalize white balance or tone.",
         "required_capabilities": [
-          "template.shipping-notifications.select_policy.perform"
+          "template.image-processing.normalize_color.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Apply customer, jurisdiction, urgency, and suppression policy and preserve every invariant required by later slots."
+        "success_contract": "Convert color space and normalize white balance or tone and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.transform"
         ],
-        "id": "select_recipient",
+        "id": "enhance_signal",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-9",
+              "id": "template.image-processing.state-9",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -545,7 +563,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.image-processing.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -553,26 +571,26 @@
             }
           }
         ],
-        "purpose": "Resolve an authorized recipient and channel preference.",
+        "purpose": "Adjust contrast, sharpness, denoising, or restoration under policy.",
         "required_capabilities": [
-          "template.shipping-notifications.select_recipient.perform"
+          "template.image-processing.enhance_signal.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Resolve an authorized recipient and channel preference and preserve every invariant required by later slots."
+        "success_contract": "Adjust contrast, sharpness, denoising, or restoration under policy and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
-          "stage.decide"
+          "stage.transform"
         ],
-        "id": "render_message",
+        "id": "apply_distortion",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-10",
+              "id": "template.image-processing.state-10",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -588,7 +606,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.image-processing.state-11",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -596,26 +614,198 @@
             }
           }
         ],
-        "purpose": "Render localized, privacy-safe notification content.",
+        "purpose": "Apply requested augmentation or distortion with recorded parameters.",
         "required_capabilities": [
-          "template.shipping-notifications.render_message.perform"
+          "template.image-processing.apply_distortion.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Render localized, privacy-safe notification content and preserve every invariant required by later slots."
+        "success_contract": "Apply requested augmentation or distortion with recorded parameters and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "recognize_text",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Recognize and ground visible text.",
+        "required_capabilities": [
+          "template.image-processing.recognize_text.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Recognize and ground visible text and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "classify_content",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Classify requested visual attributes with confidence.",
+        "required_capabilities": [
+          "template.image-processing.classify_content.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Classify requested visual attributes with confidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "measure_geometry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure spatial relationships, boundaries, and regions.",
+        "required_capabilities": [
+          "template.image-processing.measure_geometry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure spatial relationships, boundaries, and regions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "reconcile_findings",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.image-processing.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile model and deterministic findings.",
+        "required_capabilities": [
+          "template.image-processing.reconcile_findings.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile model and deterministic findings and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.deliver"
         ],
-        "id": "dispatch_notification",
+        "id": "encode_output",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-11",
+              "id": "template.image-processing.state-15",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -631,7 +821,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.image-processing.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -639,26 +829,26 @@
             }
           }
         ],
-        "purpose": "Dispatch through an admitted delivery provider.",
+        "purpose": "Encode the requested image and metadata format.",
         "required_capabilities": [
-          "template.shipping-notifications.dispatch_notification.perform"
+          "template.image-processing.encode_output.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Dispatch through an admitted delivery provider and preserve every invariant required by later slots."
+        "success_contract": "Encode the requested image and metadata format and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.deliver"
         ],
-        "id": "verify_delivery",
+        "id": "verify_output",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-12",
+              "id": "template.image-processing.state-16",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -674,7 +864,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.image-processing.state-17",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -682,26 +872,26 @@
             }
           }
         ],
-        "purpose": "Observe provider and downstream delivery state.",
+        "purpose": "Verify dimensions, appearance, content constraints, and no unintended loss.",
         "required_capabilities": [
-          "template.shipping-notifications.verify_delivery.perform"
+          "template.image-processing.verify_output.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Observe provider and downstream delivery state and preserve every invariant required by later slots."
+        "success_contract": "Verify dimensions, appearance, content constraints, and no unintended loss and preserve every invariant required by later slots."
       },
       {
         "allowed_effects": [],
         "group": [
           "stage.deliver"
         ],
-        "id": "handle_failure",
+        "id": "publish_artifacts",
         "inputs": [
           {
             "cardinality": "one",
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-13",
+              "id": "template.image-processing.state-17",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -717,7 +907,7 @@
             "description": "",
             "name": "state",
             "type": {
-              "id": "template.shipping-notifications.state-14",
+              "id": "template.image-processing.state-18",
               "media_type": "application/json",
               "schema_digest": "",
               "units": "",
@@ -725,59 +915,16 @@
             }
           }
         ],
-        "purpose": "Retry, fail over, suppress, or escalate by failure class.",
+        "purpose": "Publish outputs, masks, findings, and transformation receipt.",
         "required_capabilities": [
-          "template.shipping-notifications.handle_failure.perform"
+          "template.image-processing.publish_artifacts.perform"
         ],
         "subgraph_ref": "",
-        "success_contract": "Retry, fail over, suppress, or escalate by failure class and preserve every invariant required by later slots."
-      },
-      {
-        "allowed_effects": [],
-        "group": [
-          "stage.deliver"
-        ],
-        "id": "record_feedback",
-        "inputs": [
-          {
-            "cardinality": "one",
-            "description": "",
-            "name": "state",
-            "type": {
-              "id": "template.shipping-notifications.state-14",
-              "media_type": "application/json",
-              "schema_digest": "",
-              "units": "",
-              "version": "1"
-            }
-          }
-        ],
-        "kind": "atomic",
-        "optional": false,
-        "outputs": [
-          {
-            "cardinality": "one",
-            "description": "",
-            "name": "state",
-            "type": {
-              "id": "template.shipping-notifications.state-15",
-              "media_type": "application/json",
-              "schema_digest": "",
-              "units": "",
-              "version": "1"
-            }
-          }
-        ],
-        "purpose": "Record delivery, engagement, and policy evidence.",
-        "required_capabilities": [
-          "template.shipping-notifications.record_feedback.perform"
-        ],
-        "subgraph_ref": "",
-        "success_contract": "Record delivery, engagement, and policy evidence and preserve every invariant required by later slots."
+        "success_contract": "Publish outputs, masks, findings, and transformation receipt and preserve every invariant required by later slots."
       }
     ],
     "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
-    "task": "Instantiate the Shipping logistics notifications obligations for a task-specific contract.",
+    "task": "Instantiate the Image inspection, transformation, and analysis obligations for a task-specific contract.",
     "version": "1.0.0"
   },
   "refinements": [
@@ -785,7 +932,7 @@
       "budget_ref": "",
       "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
       "extensions": {},
-      "id": "template.shipping-notifications.repair-rejected-route",
+      "id": "template.image-processing.repair-rejected-route",
       "max_iterations": 8,
       "proposal_strategy": "search.sprout",
       "refresh_registry_snapshot": false,
@@ -800,7 +947,7 @@
       "budget_ref": "",
       "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
       "extensions": {},
-      "id": "template.shipping-notifications.revisit-registry",
+      "id": "template.image-processing.revisit-registry",
       "max_iterations": 1,
       "proposal_strategy": "discovery.refresh",
       "refresh_registry_snapshot": true,
@@ -814,59 +961,70 @@
   ],
   "stages": [
     {
-      "description": "Accept and identify logistics events.",
+      "description": "Validate and decode the source image.",
       "extensions": {},
       "id": "stage.ingest",
       "slot_ids": [
-        "receive_events",
-        "authenticate_source",
-        "normalize_event",
-        "deduplicate_event"
+        "load_image",
+        "decode_image",
+        "validate_integrity"
       ],
       "title": "Ingest"
     },
     {
-      "description": "Build trustworthy shipment state.",
+      "description": "Measure source quality and content evidence.",
       "extensions": {},
-      "id": "stage.reconcile",
+      "id": "stage.inspect",
       "slot_ids": [
-        "resolve_shipment",
-        "order_events",
-        "derive_status",
-        "detect_exception"
+        "quality_profile",
+        "detect_regions",
+        "detect_synthetic",
+        "extract_metadata"
       ],
-      "title": "Reconcile"
+      "title": "Inspect"
     },
     {
-      "description": "Determine whether and how to notify.",
+      "description": "Apply explicit reversible or declared image operations.",
       "extensions": {},
-      "id": "stage.decide",
+      "id": "stage.transform",
       "slot_ids": [
-        "select_policy",
-        "select_recipient",
-        "render_message"
+        "normalize_geometry",
+        "normalize_color",
+        "enhance_signal",
+        "apply_distortion"
       ],
-      "title": "Decide"
+      "title": "Transform"
     },
     {
-      "description": "Send and learn from typed outcomes.",
+      "description": "Produce typed content findings.",
+      "extensions": {},
+      "id": "stage.analyze",
+      "slot_ids": [
+        "recognize_text",
+        "classify_content",
+        "measure_geometry",
+        "reconcile_findings"
+      ],
+      "title": "Analyze"
+    },
+    {
+      "description": "Encode, verify, and publish outputs.",
       "extensions": {},
       "id": "stage.deliver",
       "slot_ids": [
-        "dispatch_notification",
-        "verify_delivery",
-        "handle_failure",
-        "record_feedback"
+        "encode_output",
+        "verify_output",
+        "publish_artifacts"
       ],
       "title": "Deliver"
     }
   ],
   "tags": [
-    "notifications",
-    "integration",
-    "workflow"
+    "image",
+    "vision",
+    "transformation"
   ],
   "template_model_version": "0.1",
-  "title": "Shipping logistics notifications",
+  "title": "Image inspection, transformation, and analysis",
   "version": "1.0.0"
 }
