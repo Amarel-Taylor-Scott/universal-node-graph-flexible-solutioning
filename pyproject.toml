@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "browsergraph"
-version = "0.1.0"
+version = "0.2.0"
 description = "Universal hierarchical node-graph workbench and composable BrowserGraph runtime for flexible, contract-aware solutioning."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -48,6 +48,7 @@ Source = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-s
 
 [tool.setuptools]
 packages = [
+    "solutiongraph", "solutiongraph.schemas",
     "browsergraph", "browsergraph.nodes", "browsergraph.drivers",
     "browsergraph.dimensions", "browsergraph.extract", "browsergraph.classify",
     "browsergraph.tasks", "browsergraph.assets", "browsergraph.schemas",
@@ -55,6 +56,7 @@ packages = [
 
 [tool.setuptools.package-data]
 browsergraph = ["schemas/*.json", "assets/*.html", "assets/*.json"]
+solutiongraph = ["schemas/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
