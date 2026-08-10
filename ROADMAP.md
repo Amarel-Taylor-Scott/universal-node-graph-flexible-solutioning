@@ -37,6 +37,15 @@ diagram or candidate count is not, by itself, progress.
 - A trusted-local reference executor that reconstructs frozen plans, verifies
   implementation digests, content-addresses outputs, applies bounded retries
   and frozen fallbacks, invokes an independent verifier, and emits receipts.
+- A strict subprocess lifecycle adapter with a portable JSON/bytes ABI,
+  wall-clock termination, reduced environment, optional POSIX CPU/memory
+  limits, and explicit adapter/isolation receipt identity.
+- An fsync-backed local JSONL receipt journal with duplicate protection,
+  monotonic sequence, hash chaining, tamper/truncation verification, and an
+  immediate experiment receipt sink.
+- Transactional `solutiongraph init` starter workspaces that bind a selected
+  semantic template, task intake, and coding-agent instructions without
+  inventing nodes or evidence.
 - Six dependency-free executable programs in five notebooks spanning web,
   documents, images, data cleanup, tabular regression, and classification.
 - Campaign contracts for bounded generated candidates/trials, immutable
@@ -59,20 +68,24 @@ without viewer-specific logic.
 
 ## Phase 2 — isolated execution and receipts
 
-**Reference bootstrap implemented:** the in-process Python adapter, runtime and
-artifact protocols, memory/file content stores, admitted-space-bound plans,
-ordered frozen fallbacks, bounded retry, candidate circuit breaking,
+**Reference bootstrap implemented:** the in-process Python adapter, bounded
+subprocess lifecycle adapter, runtime and artifact protocols, memory/file
+content stores, content-chained local receipt journal, admitted-space-bound
+plans, ordered frozen fallbacks, bounded retry, candidate circuit breaking,
 independent task verification, experiment execution, and receipt-producing
 domain examples are now executable. This proves the seam but is not an
-isolation claim.
+adversarial-isolation or production-durability claim.
 
 **Still required for the phase gate:**
 
-- Execute heterogeneous node runtimes in least-privilege sandboxes.
+- Execute heterogeneous and untrusted node runtimes in enforcing least-
+  privilege sandboxes or separate trust domains.
 - Harden content-addressed artifacts, checkpoints, retries, fallbacks, circuit
-  breakers, explicit plan amendments, durable codecs, and resume across crashes.
+  breakers, explicit plan amendments, streaming codecs, and resume across crashes.
 - Apply independent task, macro-stage, and substep verification oracles.
-- Store immutable attempts and receipts in an append-only evidence ledger.
+- Store immutable attempts and receipts in an authenticated remote append-only
+  evidence service or WORM backend; the local hash-chained journal is the
+  replaceable reference protocol.
 
 **Release gate:** a real task can be executed and replayed from a frozen plan
 and receipt set.

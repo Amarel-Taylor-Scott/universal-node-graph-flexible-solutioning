@@ -4,13 +4,14 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, Protocol
 
 from solutiongraph.artifacts import ArtifactStore, MemoryArtifactStore
 from solutiongraph.evidence import (
     EvidenceLedger,
     ExperimentDesign,
     RouteAggregate,
+    RunReceipt,
     pareto_front,
 )
 from solutiongraph.executor import (
@@ -28,6 +29,12 @@ class ExperimentCase:
     id: str
     inputs: Mapping[str, Any]
     verifier: Verifier
+
+
+class ReceiptSink(Protocol):
+    """Durable destination invoked immediately after every completed run."""
+
+    def append(self, *receipts: RunReceipt) -> Any: ...
 
 
 @dataclass(frozen=True)
@@ -78,6 +85,7 @@ class ExperimentRunner:
         space: AdmittedSpace,
         policy: ExecutionPolicy,
         artifact_store_factory: Callable[[], ArtifactStore] | None = None,
+        receipt_sink: ReceiptSink | None = None,
         belief_revision: str = "",
     ) -> ExperimentResult:
         problems = design.validate()
@@ -138,6 +146,8 @@ class ExperimentRunner:
                             belief_revision=belief_revision,
                             run_id=run_id,
                         )
+                        if receipt_sink is not None:
+                            receipt_sink.append(result.receipt)
                         ledger = ledger.append(result.receipt)
                         if case_id in design.holdout_case_ids:
                             holdout_receipts.append(result.receipt.id)
@@ -153,4 +163,4 @@ class ExperimentRunner:
         )
 
 
-__all__ = ["ExperimentCase", "ExperimentResult", "ExperimentRunner"]
+__all__ = ["ExperimentCase", "ExperimentResult", "ExperimentRunner", "ReceiptSink"]

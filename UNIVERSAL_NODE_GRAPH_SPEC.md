@@ -330,8 +330,11 @@ content-addressed memory/file artifacts, implementation-digest checks, bounded
 retry, frozen fallbacks, independent verification, receipts, and five
 executable domain examples. The bundled Python adapter is in-process and is not
 a least-privilege sandbox, durable crash-replay engine, or production Level 2
-claim. BrowserGraph remains the richer browser runtime proof, not the definition
-of the architecture. See `EXECUTION_PROTOCOL.md` for the exact boundary.
+claim. Version 0.3 also includes a bounded subprocess lifecycle adapter and a
+hash-chained local receipt journal; neither is an adversarial sandbox,
+authenticated remote ledger, or crash-resumable scheduler. BrowserGraph remains
+the richer browser runtime proof, not the definition of the architecture. See
+`EXECUTION_PROTOCOL.md` and `READINESS.md` for the exact boundary.
 
 ## 12. Definition of done for a new domain
 

@@ -1,16 +1,31 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "browsergraph"
-version = "0.2.0"
-description = "Universal hierarchical node-graph workbench and composable BrowserGraph runtime for flexible, contract-aware solutioning."
+version = "0.3.0"
+description = "Domain-neutral typed graph compiler, experiment framework, and BrowserGraph compatibility runtime."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Taylor Amarel" }]
+maintainers = [{ name = "Taylor Amarel" }]
 keywords = ["graph", "nodes", "workflow", "optimization", "solutioning", "browser", "automation", "llm"]
 dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+]
 
 [project.optional-dependencies]
 playwright = ["playwright>=1.40"]
@@ -32,7 +47,7 @@ all = ["playwright>=1.40", "patchright>=1.40", "selenium>=4.15",
        "undetected-chromedriver>=3.5", "seleniumbase>=4.20", "nodriver>=0.30",
        "websockets>=12.0", "PyYAML>=6.0", "curl-cffi>=0.7", "selectolax>=0.3",
        "trafilatura>=2.0"]
-dev = ["pytest>=7.4"]
+dev = ["pytest>=7.4", "ruff>=0.6", "build>=1.2", "twine>=5.1"]
 
 [project.scripts]
 browsergraph = "browsergraph.cli:main"
@@ -43,6 +58,8 @@ Homepage = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible
 Documentation = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/blob/main/UNIVERSAL_GRAPH_SYSTEM.md"
 Issues = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/issues"
 Source = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning"
+Changelog = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/blob/main/CHANGELOG.md"
+Security = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/security/policy"
 
 [project.entry-points."browsergraph.plugins"]
 # third-party packages advertise plugins here; see PLUGINS.md

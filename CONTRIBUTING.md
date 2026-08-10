@@ -11,7 +11,9 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 solutiongraph doctor
 pytest -q
-ruff check browsergraph solutiongraph tests/test_solutiongraph*.py
+ruff check browsergraph solutiongraph tests/test_solutiongraph*.py scripts
+solutiongraph verify --catalog-root catalog --runtime in-process
+solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 The core suite must remain runnable without a browser or network connection.

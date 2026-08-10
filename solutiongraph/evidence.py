@@ -10,7 +10,6 @@ from typing import Any
 from solutiongraph.model import DIGEST_RE, ID_RE, PORT_RE
 from solutiongraph.search import BeliefModel, CandidateWeight, InteractionWeight
 
-
 RUN_OUTCOMES = ("accepted", "rejected", "failed", "completed_unverified")
 NODE_RUN_OUTCOMES = ("succeeded", "failed", "blocked")
 
@@ -79,6 +78,8 @@ class NodeRunReceipt:
     node_id: str = ""
     implementation_digest: str = ""
     runtime: str = ""
+    runtime_adapter: str = ""
+    isolation: str = ""
     input_digest: str = ""
 
     def validate(self, path: str = "node_receipt") -> list[str]:
@@ -87,6 +88,12 @@ class NodeRunReceipt:
             problems.append(f"{path} slot_id and candidate_id must be identifiers")
         if self.node_id and not ID_RE.fullmatch(self.node_id):
             problems.append(f"{path}.node_id must be empty or an identifier")
+        if self.runtime_adapter and not ID_RE.fullmatch(self.runtime_adapter):
+            problems.append(f"{path}.runtime_adapter must be empty or an identifier")
+        if self.isolation and (
+            not isinstance(self.isolation, str) or not self.isolation.strip()
+        ):
+            problems.append(f"{path}.isolation must be empty or a nonempty string")
         if self.outcome not in NODE_RUN_OUTCOMES:
             problems.append(f"{path}.outcome must be one of {', '.join(NODE_RUN_OUTCOMES)}")
         if (
@@ -106,6 +113,39 @@ class NodeRunReceipt:
             if digest and not DIGEST_RE.fullmatch(digest):
                 problems.append(f"{path} digests must be sha256 digests")
         return problems
+
+    @classmethod
+    def from_dict(cls, payload: Mapping[str, Any]) -> NodeRunReceipt:
+        required = {
+            "slot_id", "candidate_id", "outcome", "started_at", "completed_at",
+            "metrics", "failure_class", "artifact_digests", "attempt", "node_id",
+            "implementation_digest", "runtime", "input_digest",
+        }
+        optional = {"runtime_adapter", "isolation"}
+        keys = set(payload)
+        if required - keys or keys - required - optional:
+            raise ValueError("node receipt has missing or unknown fields")
+        receipt = cls(
+            slot_id=payload["slot_id"],
+            candidate_id=payload["candidate_id"],
+            outcome=payload["outcome"],
+            started_at=payload["started_at"],
+            completed_at=payload["completed_at"],
+            metrics=dict(payload["metrics"]),
+            failure_class=payload["failure_class"],
+            artifact_digests=tuple(payload["artifact_digests"]),
+            attempt=payload["attempt"],
+            node_id=payload["node_id"],
+            implementation_digest=payload["implementation_digest"],
+            runtime=payload["runtime"],
+            runtime_adapter=payload.get("runtime_adapter", ""),
+            isolation=payload.get("isolation", ""),
+            input_digest=payload["input_digest"],
+        )
+        problems = receipt.validate()
+        if problems:
+            raise ValueError("invalid node receipt: " + "; ".join(problems))
+        return receipt
 
 
 @dataclass(frozen=True)
@@ -216,6 +256,8 @@ class RunReceipt:
                     "node_id": item.node_id,
                     "implementation_digest": item.implementation_digest,
                     "runtime": item.runtime,
+                    "runtime_adapter": item.runtime_adapter,
+                    "isolation": item.isolation,
                     "input_digest": item.input_digest,
                 }
                 for item in self.node_receipts
@@ -232,6 +274,55 @@ class RunReceipt:
             "output_artifacts": dict(self.output_artifacts),
             "verification_details": dict(self.verification_details),
         }
+
+    @classmethod
+    def from_dict(cls, payload: Mapping[str, Any]) -> RunReceipt:
+        required = {
+            "id", "plan_digest", "program_digest", "task_case_id", "outcome",
+            "accepted", "verifier", "verifier_digest", "assignments", "metrics",
+            "node_receipts", "seed", "started_at", "completed_at", "failure_class",
+            "executor", "environment_digest", "input_digest", "belief_revision",
+            "admitted_space_digest", "output_artifacts", "verification_details",
+        }
+        if set(payload) != required:
+            raise ValueError("run receipt has missing or unknown fields")
+        assignments = payload["assignments"]
+        output_artifacts = payload["output_artifacts"]
+        node_receipts = payload["node_receipts"]
+        if (
+            not isinstance(assignments, Mapping)
+            or not isinstance(output_artifacts, Mapping)
+            or not isinstance(node_receipts, list)
+        ):
+            raise ValueError("run receipt mappings or node receipts are malformed")
+        receipt = cls(
+            id=payload["id"],
+            plan_digest=payload["plan_digest"],
+            program_digest=payload["program_digest"],
+            task_case_id=payload["task_case_id"],
+            outcome=payload["outcome"],
+            accepted=payload["accepted"],
+            verifier=payload["verifier"],
+            assignments=tuple(sorted(assignments.items())),
+            verifier_digest=payload["verifier_digest"],
+            metrics=dict(payload["metrics"]),
+            node_receipts=tuple(NodeRunReceipt.from_dict(item) for item in node_receipts),
+            seed=payload["seed"],
+            started_at=payload["started_at"],
+            completed_at=payload["completed_at"],
+            failure_class=payload["failure_class"],
+            executor=payload["executor"],
+            environment_digest=payload["environment_digest"],
+            input_digest=payload["input_digest"],
+            belief_revision=payload["belief_revision"],
+            admitted_space_digest=payload["admitted_space_digest"],
+            output_artifacts=tuple(sorted(output_artifacts.items())),
+            verification_details=dict(payload["verification_details"]),
+        )
+        problems = receipt.validate()
+        if problems:
+            raise ValueError("invalid run receipt: " + "; ".join(problems))
+        return receipt
 
 
 @dataclass(frozen=True)

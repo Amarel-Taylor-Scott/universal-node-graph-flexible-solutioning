@@ -176,11 +176,21 @@ def _examples_run(
     example_id: str,
     route: str,
     artifact_dir: Path | None,
+    runtime: str,
+    receipt_journal: Path | None,
     as_json: bool,
 ) -> int:
     from solutiongraph.examples import run_example
+    from solutiongraph.ledger import JsonlReceiptJournal
 
-    report = run_example(example_id, route=route, artifact_root=artifact_dir)
+    journal = JsonlReceiptJournal(receipt_journal) if receipt_journal else None
+    report = run_example(
+        example_id,
+        route=route,
+        artifact_root=artifact_dir,
+        runtime=runtime,
+        receipt_journal=journal,
+    )
     if as_json:
         print(json.dumps(report, indent=2, sort_keys=True))
         return 0
@@ -205,15 +215,16 @@ def _examples_run(
     return 0
 
 
-def _verify(catalog_root: Path | None, as_json: bool) -> int:
+def _verify(catalog_root: Path | None, runtime: str, as_json: bool) -> int:
     from solutiongraph.verification import verify_reference_release
 
-    result = verify_reference_release(catalog_root=catalog_root)
+    result = verify_reference_release(catalog_root=catalog_root, runtime=runtime)
     if as_json:
         print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
     elif result.ok:
         print(
             "SolutionGraph release verified: "
+            f"runtime={runtime} "
             f"examples={len({item.example_id for item in result.route_results})} "
             f"routes={len(result.route_results)} "
             f"accepted={result.accepted_routes} "
@@ -230,6 +241,34 @@ def _verify(catalog_root: Path | None, as_json: bool) -> int:
         for problem in result.problems:
             print(f"- {problem}")
     return 0 if result.ok else 1
+
+
+def _init_project(destination: Path, template_id: str, project_id: str | None) -> int:
+    from solutiongraph.scaffold import scaffold_project
+
+    template = _template(template_id)
+    written = scaffold_project(destination, template, project_id=project_id)
+    print(
+        f"created {destination} from {template.id}@{template.version}: "
+        f"files={len(written)}"
+    )
+    print(f"next: open {destination / 'TASK.md'}")
+    return 0
+
+
+def _ledger_verify(path: Path, as_json: bool) -> int:
+    from solutiongraph.ledger import JsonlReceiptJournal
+
+    status = JsonlReceiptJournal(path).status()
+    if as_json:
+        print(json.dumps(status.to_dict(), indent=2, sort_keys=True))
+    else:
+        print(
+            f"valid receipt journal: path={status.path} "
+            f"receipts={status.receipt_count} "
+            f"head={status.head_digest or 'empty'} bytes={status.byte_size}"
+        )
+    return 0
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -252,7 +291,28 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Also require this generated catalog directory to exactly match",
     )
+    verify.add_argument(
+        "--runtime",
+        choices=("in-process", "subprocess"),
+        default="in-process",
+        help="Execution adapter used for every reference route",
+    )
     verify.add_argument("--json", action="store_true", help="Emit full JSON")
+
+    init = commands.add_parser(
+        "init",
+        help="Create a non-destructive starter workspace for a developer or coding agent",
+    )
+    init.add_argument("destination", type=Path)
+    init.add_argument(
+        "--template",
+        default="template.document-intelligence",
+        help="Reference template used as the starting semantic decomposition",
+    )
+    init.add_argument(
+        "--project-id",
+        help="Lowercase namespaced project identifier (derived from destination by default)",
+    )
 
     templates = commands.add_parser("templates", help="Inspect and author templates")
     template_commands = templates.add_subparsers(dest="template_command", required=True)
@@ -306,7 +366,26 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Persist content-addressed outputs instead of using memory",
     )
+    examples_run.add_argument(
+        "--runtime",
+        choices=("in-process", "subprocess"),
+        default="in-process",
+        help="Run nodes locally in-process or in bounded child processes",
+    )
+    examples_run.add_argument(
+        "--receipt-journal",
+        type=Path,
+        help="Append each completed run immediately to a verified JSONL journal",
+    )
     examples_run.add_argument("--json", action="store_true", help="Emit full JSON")
+
+    ledger = commands.add_parser("ledger", help="Verify durable receipt evidence")
+    ledger_commands = ledger.add_subparsers(dest="ledger_command", required=True)
+    ledger_verify = ledger_commands.add_parser(
+        "verify", help="Validate every receipt and the complete hash chain"
+    )
+    ledger_verify.add_argument("path", type=Path)
+    ledger_verify.add_argument("--json", action="store_true", help="Emit JSON")
     return parser
 
 
@@ -317,7 +396,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "doctor":
             return _doctor()
         if args.command == "verify":
-            return _verify(args.catalog_root, args.json)
+            return _verify(args.catalog_root, args.runtime, args.json)
+        if args.command == "init":
+            return _init_project(args.destination, args.template, args.project_id)
         if args.command == "templates":
             if args.template_command == "list":
                 return _templates_list(args.json, tuple(args.domain), tuple(args.tag))
@@ -337,8 +418,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.example_id,
                     args.route,
                     args.artifact_dir,
+                    args.runtime,
+                    args.receipt_journal,
                     args.json,
                 )
+        if args.command == "ledger" and args.ledger_command == "verify":
+            return _ledger_verify(args.path, args.json)
     except (ExecutionError, OSError, ValueError) as exc:
         parser.exit(2, f"solutiongraph: error: {exc}\n")
     parser.error("unsupported command")

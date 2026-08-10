@@ -17,6 +17,8 @@ SCHEMA_NAMES = (
     "execution-policy.schema.json",
     "verification-result.schema.json",
     "run-receipt.schema.json",
+    "receipt-journal-record.schema.json",
+    "solutiongraph-project.schema.json",
     "campaign-budget.schema.json",
     "evaluation-boundary.schema.json",
     "candidate-record.schema.json",

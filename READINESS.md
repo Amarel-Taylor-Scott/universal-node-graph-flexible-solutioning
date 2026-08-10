@@ -1,0 +1,93 @@
+# Readiness and support levels
+
+Current release line: **0.3 Developer Preview / external alpha**.
+
+SolutionGraph is ready for developers and researchers to model typed solution
+spaces, author reusable node contracts, compile frozen routes, execute trusted
+local experiments, preserve evidence, and integrate a coding harness. It is not
+yet a turnkey production scheduler or a hostile-code execution service.
+
+## Capability matrix
+
+| Surface | Status | Supported use |
+|---|---|---|
+| Semantic model and strict schemas | Alpha-supported | Typed task graphs, slots, nodes, candidates, registries, plans, receipts |
+| Compiler and complete snapshot admission | Alpha-supported | Reject invalid types, authority, effects, topology, bindings, and constraints before execution |
+| Prior, beam, sprout, adaptive, exhaustive search | Alpha-supported | Explicitly budgeted proposal ordering over compiler-valid routes |
+| Templates and offline viewers | Alpha-supported | Explore 19 templates and every bundled slot/candidate projection |
+| Trusted in-process Python runtime | Development only | Fast fixtures, tests, and notebooks using trusted code |
+| Bounded subprocess Python runtime | Alpha-supported lifecycle isolation | Trusted code needing process separation, strict JSON/bytes ABI, timeout, and optional POSIX CPU/memory limits |
+| Content-addressed artifacts | Alpha-supported locally | Reproducible fixture outputs and local checkpoints |
+| JSONL receipt journal | Alpha-supported locally | Immediate fsync-backed append, duplicate rejection, complete hash-chain verification |
+| LLM-generated campaign contracts | Experimental | Freeze budgets, ancestry, proposal identity, and evaluator boundary before orchestration |
+| BrowserGraph adapters | Experimental/optional | Browser and HTTP demonstrations when optional runtimes are installed |
+| Hostile generated-code execution | Not provided | Requires an external microVM, Wasm, or remote trust boundary |
+| Multi-tenant secrets/auth/retention | Not provided | Must be supplied by a production platform |
+| Distributed crash replay and scheduling | Not provided | Runtime/scheduler adapter work remains |
+| Universal real-world performance claims | Not claimed | Bundled programs are mechanism fixtures, not domain benchmark superiority evidence |
+
+## Safe uses today
+
+- Clone the repository and follow `GETTING_STARTED.md`.
+- Generate a starter workspace with `solutiongraph init` and give it to an LLM
+  coding harness together with the concrete task.
+- Define exact task contracts, templates, nodes, registries, and independent
+  verifiers.
+- Compare trusted local routes and persist all positive and negative receipts.
+- Build third-party runtime, registry, node-pack, optimizer, and artifact-store
+  adapters against the documented protocols.
+
+## Uses requiring an external enforcement layer
+
+- Running untrusted or compromised node code.
+- Keeping hidden evaluators confidential from candidates.
+- Processing production secrets or regulated multi-tenant data.
+- Enforcing network/filesystem/device policy against adversarial code.
+- Making unattended high-impact deployment, financial, legal, medical, safety,
+  or security decisions.
+
+The subprocess runtime is not a sandbox. It inherits the current operating-system
+user's authority unless an outer system removes it. Declared permissions and
+effects remain admission evidence; they do not enforce operating-system policy.
+
+## Distribution identity
+
+The Python **distribution** remains named `browsergraph` for compatibility with
+the original proof of concept. The primary domain-neutral **import and CLI** are
+`solutiongraph`; `browsergraph` is one bundled adapter. A future distribution
+rename, if any, will be announced before 1.0 with an explicit compatibility
+window rather than performed silently.
+
+No stable-API promise is made before 1.0. Wire-model or behavior changes follow
+semantic release versions, changelog entries, schema versions, and migration
+notes. Exact versions and digests should be frozen in plans and node packs.
+
+## Release gates
+
+Every publishable commit must pass:
+
+```bash
+ruff check browsergraph solutiongraph tests/test_solutiongraph*.py scripts
+pytest -q
+solutiongraph doctor
+solutiongraph verify --catalog-root catalog --runtime in-process
+solutiongraph verify --catalog-root catalog --runtime subprocess
+python -m build
+twine check dist/*
+```
+
+CI additionally installs the built wheel into a clean environment and repeats
+both release-verification modes. Tags must exactly match the package version.
+GitHub release artifacts receive checksums and build provenance. PyPI publishing
+is disabled unless the repository variable `PUBLISH_TO_PYPI=true` is explicitly
+configured.
+
+## Gates before beta or production language
+
+Beta requires at least one enforcing isolated runtime adapter, crash-resumable
+execution, larger real-domain node packs, held-out multi-seed benchmarks, and a
+complete task → graph → execution → evidence → belief-update demonstration.
+
+Production language additionally requires authentication, authorization,
+tenancy, secret brokerage, encryption, retention, operational monitoring,
+incident response, supply-chain policy, and independently audited isolation.

@@ -18,11 +18,14 @@ solutiongraph/
 ├── evidence.py           receipts, experiments, Pareto fronts, learned priors
 ├── artifacts.py          replaceable content-addressed memory/file store boundary
 ├── executor.py           strict frozen-plan recheck + reference Python runtime
+├── subprocess_runtime.py bounded lifecycle adapter with strict JSON/bytes ABI
+├── ledger.py             content-chained, fsync-backed local receipt journal
 ├── experiments.py        receipt-producing plan/case/seed allocation
 ├── campaign.py           population lineage, hard budgets, and evaluator boundaries
 ├── examples/             six executable cross-domain node/program examples
 ├── reference_nodes.py    small executable node-pack demonstration
 ├── catalog.py            deterministic catalogue projection
+├── scaffold.py           transactional coding-harness starter workspaces
 └── schemas/              strict portable JSON Schema 2020-12 wire contracts
 
 catalog/
@@ -88,8 +91,13 @@ weaken contracts, and receipts cannot mutate history. See
 running it and requires exact equality with the supplied program, registry,
 admitted space, primary bindings, and frozen fallbacks. Its default Python
 runtime is explicitly in-process and suitable for trusted fixtures, not hostile
-code. Production harnesses replace `RuntimeAdapter` and `ArtifactStore` while
-preserving the plan and receipt boundary described in `EXECUTION_PROTOCOL.md`.
+code. `SubprocessPythonRuntime` is a bundled replacement that adds a fresh child,
+strict portable-value protocol, wall-clock termination, reduced environment,
+and optional POSIX limits while explicitly remaining a lifecycle—not
+adversarial—boundary. `JsonlReceiptJournal` supplies immediate local durable
+append and tamper evidence. Production harnesses replace `RuntimeAdapter`,
+`ArtifactStore`, and receipt persistence while preserving the plan and receipt
+boundary described in `EXECUTION_PROTOCOL.md`.
 
 An LLM-generated improvement loop sits outside this pipeline. It stores each
 compiled proposal as a `CandidateRecord`, preserves all parents in a

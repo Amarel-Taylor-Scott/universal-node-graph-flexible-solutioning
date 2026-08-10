@@ -4,8 +4,24 @@ All notable changes to this proof of concept are documented here.
 
 ## Unreleased
 
+## 0.3.0 — 2026-08-10
+
 ### Added
 
+- A bounded `SubprocessPythonRuntime` with a collision-safe JSON/bytes protocol,
+  captured child output, wall-clock termination, reduced environment, optional
+  POSIX CPU/address-space limits, and receipt-visible adapter/isolation identity.
+- An fsync-backed `JsonlReceiptJournal` with strict receipt reconstruction,
+  duplicate rejection, monotonic sequence, chained record digests, full
+  tamper/truncation verification, and immediate experiment persistence.
+- Transactional `solutiongraph init` starter workspaces containing a selected
+  template/digest, project metadata, task intake, and coding-agent rules.
+- Subprocess and journal CLI options, `solutiongraph ledger verify`, two new
+  portable schemas, and release-readiness conformance tests.
+- `READINESS.md` with explicit supported, experimental, unsafe, and unavailable
+  surfaces plus beta and production gates.
+- A clean-wheel CI job and gated release workflow with version/tag checks,
+  checksums, build provenance, GitHub artifacts, and opt-in PyPI publication.
 - A single `solutiongraph verify --catalog-root catalog` release gate that
   compiles and executes all 14 frozen example routes, asserts 11 accepted
   routes and three intentional negative controls, and detects catalog drift.
@@ -30,6 +46,14 @@ All notable changes to this proof of concept are documented here.
 - A nineteenth numerical linear-system template with 22 atomic obligations,
   a source-backed AutoResearch/Cholesky review, machine-readable package
   landscape, and `design-autoresearch-campaign` workspace skill.
+
+### Changed
+
+- Declared the package an external-alpha developer preview and aligned package
+  metadata, documentation, security boundaries, and roadmap with that status.
+- Bumped the distribution and `solutiongraph` import version to 0.3.0.
+- Made runtime adapter identity part of environment evidence and normalized
+  receipt deserialization for deterministic journal round trips.
 
 ## 0.2.0 — 2026-08-10
 

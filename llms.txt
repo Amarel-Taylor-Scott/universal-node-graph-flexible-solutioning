@@ -6,6 +6,7 @@
 
 - [README](README.md): Project overview and runnable examples
 - [Getting started](GETTING_STARTED.md): Install, explore, author, validate, and contribute
+- [Readiness](READINESS.md): Supported, experimental, unsafe, and unavailable surfaces
 - [Normative specification](UNIVERSAL_NODE_GRAPH_SPEC.md): Required ontology and invariants
 - [Research foundations](RESEARCH_FOUNDATIONS.md): Primary-source design rationale
 - [AutoResearch and Cholesky review](AUTORESEARCH_REVIEW.md): Package identity, campaign isolation, lineage, promotion, and numerical nodes
@@ -22,6 +23,9 @@
 
 - [Universal core](solutiongraph/): Semantic model, discovery, templates, compiler, search, adaptive allocation, campaign lineage, evidence
 - [Reference executor](solutiongraph/executor.py): Strict plan recheck and replaceable runtime adapter boundary
+- [Subprocess runtime](solutiongraph/subprocess_runtime.py): Bounded trusted-code lifecycle process adapter
+- [Receipt journal](solutiongraph/ledger.py): Fsync-backed, content-chained local evidence persistence
+- [Workspace scaffold](solutiongraph/scaffold.py): Transactional coding-harness task initialization
 - [Campaign contracts](solutiongraph/campaign.py): Hard budgets, population ancestry, evaluator boundaries, and decisions
 - [Artifact stores](solutiongraph/artifacts.py): Content-addressed memory and local-file stores
 - [Executable domain pack](solutiongraph/examples/): Web, document, image, data-cleanup, regression, and classification examples

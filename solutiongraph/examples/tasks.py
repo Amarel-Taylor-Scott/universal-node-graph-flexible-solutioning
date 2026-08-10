@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 import re
 from collections.abc import Callable, Mapping
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -16,12 +16,15 @@ from solutiongraph.examples import nodes as implementations
 from solutiongraph.executor import (
     CallableVerifier,
     ExecutionPolicy,
+    PythonRuntime,
     ReferenceExecutor,
+    RuntimeRegistry,
     VerificationContext,
     VerificationResult,
     callable_implementation_digest,
 )
 from solutiongraph.experiments import ExperimentCase, ExperimentRunner
+from solutiongraph.ledger import JsonlReceiptJournal
 from solutiongraph.model import (
     Candidate,
     Determinism,
@@ -38,6 +41,7 @@ from solutiongraph.model import (
     SemanticSlot,
     ValueType,
 )
+from solutiongraph.subprocess_runtime import SubprocessPythonRuntime
 
 WEB_SOURCE = ValueType("example.web-source")
 HTML_DOCUMENT = ValueType("example.html-document", media_type="text/html")
@@ -951,9 +955,23 @@ def run_example(
     *,
     route: str = "all",
     artifact_root: str | Path | None = None,
+    runtime: str = "in-process",
+    receipt_journal: JsonlReceiptJournal | None = None,
 ) -> dict[str, Any]:
     """Compile and execute one route or a receipt-backed comparison of all routes."""
     example = get_example(example_id)
+    if runtime == "in-process":
+        executor = ReferenceExecutor(
+            runtimes=RuntimeRegistry({"python": PythonRuntime()})
+        )
+        policy = example.policy
+    elif runtime == "subprocess":
+        executor = ReferenceExecutor(
+            runtimes=RuntimeRegistry({"python": SubprocessPythonRuntime()})
+        )
+        policy = replace(example.policy, allow_in_process_python=False)
+    else:
+        raise ValueError("runtime must be 'in-process' or 'subprocess'")
     space, plans_by_name = example.compile()
     store_factory = (
         (lambda: FileArtifactStore(Path(artifact_root)))
@@ -964,7 +982,7 @@ def run_example(
         if route not in plans_by_name:
             known = ", ".join(plans_by_name)
             raise ValueError(f"unknown route {route!r}; known routes: {known}")
-        result = ReferenceExecutor().execute(
+        result = executor.execute(
             plans_by_name[route],
             example.program,
             example.registry,
@@ -972,14 +990,17 @@ def run_example(
             example.case.inputs,
             task_case_id=example.case.id,
             verifier=example.case.verifier,
-            policy=example.policy,
+            policy=policy,
             artifact_store=store_factory(),
             seed=0,
             belief_revision="example.cold-start",
         )
+        if receipt_journal is not None:
+            receipt_journal.append(result.receipt)
         return {
             "example": example.id,
             "route": route,
+            "runtime": runtime,
             "admitted_candidates": {
                 slot_id: list(candidates) for slot_id, candidates in space.choices
             },
@@ -997,19 +1018,21 @@ def run_example(
         objectives=example.objectives,
         control_plan_digest=next(iter(plans)),
     )
-    experiment = ExperimentRunner().run(
+    experiment = ExperimentRunner(executor).run(
         design,
         plans=plans,
         cases={example.case.id: example.case},
         program=example.program,
         registry=example.registry,
         space=space,
-        policy=example.policy,
+        policy=policy,
         artifact_store_factory=store_factory,
+        receipt_sink=receipt_journal,
         belief_revision="example.cold-start",
     )
     return {
         "example": example.id,
+        "runtime": runtime,
         "routes": {name: plan.digest for name, plan in plans_by_name.items()},
         "admitted_candidates": {
             slot_id: list(candidates) for slot_id, candidates in space.choices

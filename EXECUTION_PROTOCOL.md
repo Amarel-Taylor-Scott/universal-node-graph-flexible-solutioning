@@ -5,6 +5,8 @@ Status: research preview 0.1
 Reference implementation: `solutiongraph.executor`
 
 Artifact boundary: `solutiongraph.artifacts`
+Lifecycle subprocess adapter: `solutiongraph.subprocess_runtime`
+Durable local receipt journal: `solutiongraph.ledger`
 Experiment boundary: `solutiongraph.experiments`
 Campaign boundary: `solutiongraph.campaign`
 
@@ -92,6 +94,15 @@ trusted fixtures and local development. A production harness should set
 `allow_in_process_python=False` and register a subprocess, container, Wasm,
 remote-job, browser, model, human, or other isolation adapter.
 
+`SubprocessPythonRuntime` is the bundled lifecycle-isolation adapter. It starts
+one fresh Python child per invocation, uses an explicit collision-safe
+JSON/bytes codec, captures child stdout/stderr away from the protocol stream,
+enforces a parent wall-clock timeout, reduces inherited environment variables,
+and can apply POSIX CPU/address-space limits. Its exact adapter/isolation
+identity participates in the environment digest and node receipt. It does not
+restrict filesystem, network, devices, system calls, or the current operating-
+system user's authority, so it MUST NOT be labeled a hostile-code sandbox.
+
 A production runtime adapter must additionally enforce:
 
 - wall-clock and resource limits outside the node process;
@@ -132,6 +143,14 @@ same four-method protocol.
 Artifacts do not implicitly become node inputs. A later slot consumes a value
 through a declared edge; a resume or distributed runtime may reconstruct that
 value through an explicit codec using the recorded artifact.
+
+`JsonlReceiptJournal` provides a separate durable local evidence boundary. It
+validates every `RunReceipt`, rejects duplicate identities, assigns a monotonic
+sequence, chains each record digest to its predecessor, appends under a file
+lock, flushes, and calls `fsync` before acknowledging success. Every read and
+append revalidates the complete chain. The journal detects mutation and
+truncation; it does not prevent a filesystem-authorized actor from replacing
+or deleting the entire file and is not an authenticated multi-tenant ledger.
 
 ## 6. Failure, retry, fallback, and circuit semantics
 
@@ -215,5 +234,7 @@ The reference executor layer is conforming when:
   without optional packages or network access.
 
 Production readiness additionally requires an enforcing isolated runtime,
-durable append-only ledger, robust codecs/checkpoint resume, secrets and
-tenancy, operational monitoring, and held-out real-domain benchmarks.
+crash-resumable scheduling/checkpoints, authenticated remote evidence storage,
+secrets and tenancy, operational monitoring, and held-out real-domain
+benchmarks. The bundled subprocess adapter and local journal deliberately close
+the lifecycle and evidence-format seams without claiming those stronger gates.

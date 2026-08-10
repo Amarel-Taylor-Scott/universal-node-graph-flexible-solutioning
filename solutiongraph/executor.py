@@ -41,7 +41,7 @@ from solutiongraph.model import (
     sha256_digest,
 )
 
-EXECUTOR_ID = "solutiongraph.reference-python-v1"
+EXECUTOR_ID = "solutiongraph.reference-executor-v2"
 
 
 def _now() -> str:
@@ -206,6 +206,10 @@ class CallableVerifier:
 class RuntimeAdapter(Protocol):
     runtime_id: str
     isolation: str
+    adapter_id: str
+
+    @property
+    def environment_identity(self) -> str: ...
 
     def implementation_digest(self, node: NodeSpec) -> str: ...
 
@@ -228,7 +232,16 @@ class PythonRuntime:
 
     runtime_id: str = "python"
     isolation: str = "in_process"
+    adapter_id: str = "solutiongraph.python-in-process-v1"
     _cache: dict[str, Callable[..., Any]] = field(default_factory=dict)
+
+    @property
+    def environment_identity(self) -> str:
+        return sha256_digest({
+            "adapter": self.adapter_id,
+            "python": platform.python_version(),
+            "platform": platform.platform(),
+        })
 
     def resolve(self, entrypoint: str) -> Callable[..., Any]:
         if entrypoint in self._cache:
@@ -277,6 +290,30 @@ class RuntimeRegistry:
             return self.adapters[runtime_id]
         except KeyError as exc:
             raise ExecutionError(f"no runtime adapter is registered for {runtime_id!r}") from exc
+
+    def identity_records(self) -> tuple[dict[str, str], ...]:
+        """Return stable runtime identities for environment receipts."""
+        records = []
+        for runtime_id, adapter in sorted(self.adapters.items()):
+            records.append({
+                "runtime_id": runtime_id,
+                "adapter_id": getattr(
+                    adapter,
+                    "adapter_id",
+                    f"{type(adapter).__module__}.{type(adapter).__qualname__}",
+                ),
+                "isolation": getattr(adapter, "isolation", "unknown"),
+                "environment_identity": getattr(
+                    adapter,
+                    "environment_identity",
+                    sha256_digest({
+                        "adapter_class": (
+                            f"{type(adapter).__module__}.{type(adapter).__qualname__}"
+                        )
+                    }),
+                ),
+            })
+        return tuple(records)
 
 
 @dataclass
@@ -474,6 +511,7 @@ class ReferenceExecutor:
                 if candidate_index:
                     fallback_activations += 1
                 node = node_map[(binding.node_id, binding.node_version)]
+                adapter = self.runtimes.resolve(node.runtime)
                 if self.circuit_breaker.is_open(binding.candidate_id):
                     timestamp = _now()
                     node_receipts.append(NodeRunReceipt(
@@ -487,6 +525,8 @@ class ReferenceExecutor:
                         node_id=node.id,
                         implementation_digest=node.implementation_digest,
                         runtime=node.runtime,
+                        runtime_adapter=getattr(adapter, "adapter_id", ""),
+                        isolation=getattr(adapter, "isolation", "unknown"),
                         input_digest=input_digest,
                     ))
                     continue
@@ -519,6 +559,8 @@ class ReferenceExecutor:
                             node_id=node.id,
                             implementation_digest=node.implementation_digest,
                             runtime=node.runtime,
+                            runtime_adapter=getattr(adapter, "adapter_id", ""),
+                            isolation=getattr(adapter, "isolation", "unknown"),
                             input_digest=input_digest,
                         ))
                         for name, value in values.items():
@@ -544,6 +586,8 @@ class ReferenceExecutor:
                             node_id=node.id,
                             implementation_digest=node.implementation_digest,
                             runtime=node.runtime,
+                            runtime_adapter=getattr(adapter, "adapter_id", ""),
+                            isolation=getattr(adapter, "isolation", "unknown"),
                             input_digest=input_digest,
                         ))
                         self.circuit_breaker.record_failure(binding.candidate_id)
@@ -574,6 +618,8 @@ class ReferenceExecutor:
                             node_id=node.id,
                             implementation_digest=node.implementation_digest,
                             runtime=node.runtime,
+                            runtime_adapter=getattr(adapter, "adapter_id", ""),
+                            isolation=getattr(adapter, "isolation", "unknown"),
                             input_digest=input_digest,
                         ))
                         self.circuit_breaker.record_failure(binding.candidate_id)
@@ -643,7 +689,7 @@ class ReferenceExecutor:
             "executor": EXECUTOR_ID,
             "python": platform.python_version(),
             "platform": platform.platform(),
-            "runtimes": sorted(self.runtimes.adapters),
+            "runtimes": self.runtimes.identity_records(),
         })
         receipt = RunReceipt(
             id=run_id,

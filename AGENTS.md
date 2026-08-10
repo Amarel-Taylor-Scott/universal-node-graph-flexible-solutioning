@@ -117,8 +117,11 @@ objects, not in `NodeSpec`.
 - `solutiongraph/` — domain-neutral semantic model, compiler, search, evidence.
 - `solutiongraph/template_authoring.py` — strict linear blueprint compiler.
 - `solutiongraph/executor.py` — strict reference frozen-plan executor and runtime seam.
+- `solutiongraph/subprocess_runtime.py` — bounded lifecycle process adapter; never call it a hostile-code sandbox.
 - `solutiongraph/artifacts.py` — content-addressed value/artifact store protocol.
+- `solutiongraph/ledger.py` — fsync-backed content-chained local receipt journal.
 - `solutiongraph/experiments.py` — receipt-producing experiment allocation.
+- `solutiongraph/scaffold.py` — non-destructive starter workspaces for coding harnesses.
 - `solutiongraph/campaign.py` — population ancestry, budgets, decisions, and evaluator boundaries.
 - `solutiongraph/examples/` — six dependency-free executable domain examples.
 - `solutiongraph/schemas/` — strict portable wire schemas.
@@ -135,6 +138,7 @@ Core changes:
 ```bash
 solutiongraph doctor
 solutiongraph verify --catalog-root catalog
+solutiongraph verify --catalog-root catalog --runtime subprocess
 pytest tests/test_solutiongraph*.py tests/test_workbench.py -q
 ruff check solutiongraph browsergraph tests/test_solutiongraph*.py
 ```

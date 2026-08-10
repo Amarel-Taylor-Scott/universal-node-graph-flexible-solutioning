@@ -37,13 +37,25 @@ enforce architecture independently of whether a model followed a prompt.
 
 ## Recommended harness workflow
 
-1. Load the root instruction file.
+Bootstrap a task-specific workspace without copying the entire framework:
+
+```bash
+solutiongraph init <workspace> --template <template-id>
+```
+
+The command fails on an existing destination and records the exact selected
+template digest. It never invents implementations, authority, or evidence.
+
+1. Load the generated and repository root instruction files.
 2. Activate the narrow template, node-pack, executor, benchmark, AutoResearch,
    or end-to-end skill for the requested operation.
 3. Negotiate node discovery and freeze a receipt-backed registry snapshot.
 4. Compile the semantic program and freeze a plan before implementing runtime adapters.
 5. Reconstruct the plan at execution, use explicit runtime authority, and retain
-   artifacts plus an independent verification receipt.
+   artifacts plus an independent verification receipt. Prefer the subprocess
+   adapter for trusted local lifecycle separation, set
+   `allow_in_process_python=False`, and append every result immediately to a
+   receipt journal. Use a stronger external boundary for untrusted code.
 6. Run universal conformance tests before domain-specific integration tests.
 7. Include discovery receipts, compiler diagnostics, search reports, frozen
    plan/admitted-space digests, execution receipts, rejected cases, and

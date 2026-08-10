@@ -2,7 +2,8 @@
 
 Universal Node Graph can be explored without a browser, model provider, vector
 database, or network service. The domain-neutral core uses only the Python
-standard library.
+standard library. Version 0.3 is a developer preview; read `READINESS.md`
+before production integration.
 
 ## 1. Install and verify
 
@@ -11,7 +12,8 @@ git clone https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-s
 cd universal-node-graph-flexible-solutioning
 python -m pip install -e .
 solutiongraph doctor
-solutiongraph verify --catalog-root catalog
+solutiongraph verify --catalog-root catalog --runtime in-process
+solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 The doctor command validates all bundled schemas, templates, reference nodes,
@@ -19,7 +21,33 @@ descriptors, and generated catalog projections. The release verifier then
 compiles and executes all 14 frozen reference routes, checks the three declared
 negative controls, and rejects stale checked-in catalog JSON.
 
-## 2. Explore reusable templates
+For a non-editable installation directly from GitHub:
+
+```bash
+python -m pip install \
+  "browsergraph @ git+https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning.git@main"
+```
+
+`browsergraph` is the compatibility distribution name; `solutiongraph` is the
+primary domain-neutral import and CLI.
+
+## 2. Create a task workspace
+
+Generate a complete, non-destructive starter directory for a developer or LLM
+coding harness:
+
+```bash
+solutiongraph init invoice-solution \
+  --template template.document-intelligence
+cd invoice-solution
+```
+
+The generated workspace contains the exact starting template and digest,
+task-contract intake, agent instructions, project metadata, and safety rules.
+It does not fabricate nodes, permissions, or benchmark evidence. If the target
+directory already exists, initialization fails instead of overwriting it.
+
+## 3. Explore reusable templates
 
 ```bash
 solutiongraph templates list
@@ -35,7 +63,7 @@ ways to accomplish each obligation.
 Open `examples/catalog-template-explorer.html` to browse stages and atomic slots
 visually without running a server.
 
-## 3. Create a template
+## 4. Create a template
 
 Copy the strict authoring example, edit the task, stages, and slots, then
 validate it:
@@ -54,7 +82,7 @@ The linear blueprint is a convenience for left-to-right stage matrices. Use
 the full `SolutionTemplate` and `ProgramGraph` Python models when the task has
 real branches, joins, maps, barriers, composite subgraphs, or multiple values.
 
-## 4. Use the repository skills
+## 5. Use the repository skills
 
 Agents that support workspace skills can be asked to use:
 
@@ -68,7 +96,7 @@ Agents that support workspace skills can be asked to use:
 The skills guide the agent, while schemas, compiler diagnostics, tests, and CI
 remain the enforcement boundary.
 
-## 5. Build or discover nodes
+## 6. Build or discover nodes
 
 Read `NODE_REPOSITORY_PROTOCOL.md`. A reusable node pack separates:
 
@@ -81,7 +109,7 @@ Read `NODE_REPOSITORY_PROTOCOL.md`. A reusable node pack separates:
 Discovery may nominate a node. Only compiler admission against a pinned
 registry snapshot can make it runnable.
 
-## 6. Compile and search
+## 7. Compile and search
 
 Run the minimal executable example:
 
@@ -94,7 +122,7 @@ Choose prior, beam, seeded-sprout, or explicitly exhaustive search according to
 the available budget. Search reports preserve coverage, skips, invalid routes,
 duplicates, unvisited routes, seeds, and belief revision.
 
-## 7. Execute the reference domain skeletons
+## 8. Execute the reference domain skeletons
 
 Execute the six reference programs (grouped into five notebook task families):
 
@@ -108,11 +136,23 @@ solutiongraph examples run tabular-regression
 solutiongraph examples run tabular-classification
 ```
 
+Run the same frozen routes through the bounded subprocess adapter and retain
+durable evidence:
+
+```bash
+solutiongraph examples run document-to-schema \
+  --runtime subprocess \
+  --artifact-dir .artifacts/document \
+  --receipt-journal .artifacts/receipts.jsonl
+solutiongraph ledger verify .artifacts/receipts.jsonl
+```
+
 These runs recompile exact plans, execute trusted standard-library nodes,
 content-address outputs, independently verify outcomes, and retain negative
 results. Read `REAL_WORLD_EXAMPLES.md` before extending them and
 `EXECUTION_PROTOCOL.md` before adding a runtime. The default Python adapter is
-in-process and is not a production sandbox.
+in-process. The subprocess adapter adds lifecycle and resource separation, but
+it is also not an adversarial sandbox.
 
 For an LLM harness that will generate or mutate nodes and routes, read
 `AUTORESEARCH_REVIEW.md` and use `@design-autoresearch-campaign`. Freeze an
@@ -122,12 +162,14 @@ candidate's trust domain. `template.numerical-linear-system` demonstrates the
 same decomposition for Cholesky, QR, SVD, LDL, sparse, iterative, precision,
 and verification alternatives without adding a numerical dependency.
 
-## 8. Validate a contribution
+## 9. Validate a contribution
 
 ```bash
 solutiongraph catalog export --output catalog
 pytest tests/test_solutiongraph*.py -q
 ruff check solutiongraph tests/test_solutiongraph*.py
+solutiongraph verify --catalog-root catalog --runtime in-process
+solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 For changes that touch BrowserGraph or the viewers, run the full deterministic

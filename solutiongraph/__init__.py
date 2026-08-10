@@ -83,6 +83,13 @@ from solutiongraph.experiments import (
     ExperimentCase,
     ExperimentResult,
     ExperimentRunner,
+    ReceiptSink,
+)
+from solutiongraph.ledger import (
+    JOURNAL_SCHEMA_VERSION,
+    JournalStatus,
+    JsonlReceiptJournal,
+    LedgerIntegrityError,
 )
 from solutiongraph.model import (
     SEMANTIC_MODEL_VERSION,
@@ -112,6 +119,11 @@ from solutiongraph.model import (
     canonical_json,
     sha256_digest,
 )
+from solutiongraph.scaffold import (
+    SCAFFOLD_SCHEMA_VERSION,
+    default_project_id,
+    scaffold_project,
+)
 from solutiongraph.search import (
     BeliefModel,
     CandidateWeight,
@@ -122,6 +134,10 @@ from solutiongraph.search import (
     SearchMode,
     SearchReport,
     cartesian_routes,
+)
+from solutiongraph.subprocess_runtime import (
+    SUBPROCESS_PROTOCOL_VERSION,
+    SubprocessPythonRuntime,
 )
 from solutiongraph.template_authoring import (
     BLUEPRINT_MODEL_VERSION,
@@ -145,7 +161,7 @@ from solutiongraph.verification import (
     verify_reference_release,
 )
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 __all__ = [
     "SEMANTIC_MODEL_VERSION",
@@ -153,6 +169,9 @@ __all__ = [
     "TEMPLATE_MODEL_VERSION",
     "BLUEPRINT_MODEL_VERSION",
     "CAMPAIGN_MODEL_VERSION",
+    "JOURNAL_SCHEMA_VERSION",
+    "SUBPROCESS_PROTOCOL_VERSION",
+    "SCAFFOLD_SCHEMA_VERSION",
     "AdmittedSpace",
     "AdmissionDecision",
     "ArtifactStore",
@@ -195,6 +214,9 @@ __all__ = [
     "HarnessCapabilities",
     "Idempotency",
     "InteractionWeight",
+    "JournalStatus",
+    "JsonlReceiptJournal",
+    "LedgerIntegrityError",
     "LinearTemplateBlueprint",
     "MetricObservation",
     "MemoryArtifactStore",
@@ -213,6 +235,7 @@ __all__ = [
     "ProgramGraph",
     "PythonRuntime",
     "ReferenceExecutor",
+    "ReceiptSink",
     "Registry",
     "RegistryCapabilities",
     "RegistrySession",
@@ -245,6 +268,7 @@ __all__ = [
     "TemplateStage",
     "TrialObservation",
     "StoredArtifact",
+    "SubprocessPythonRuntime",
     "VerificationContext",
     "VerificationResult",
     "Verifier",
@@ -253,6 +277,7 @@ __all__ = [
     "build_reference_linear_template",
     "cartesian_routes",
     "descriptors_by_node",
+    "default_project_id",
     "digest_bytes",
     "digest_value",
     "learn_observational_beliefs",
@@ -261,6 +286,7 @@ __all__ = [
     "plan_successive_halving",
     "pareto_front",
     "sha256_digest",
+    "scaffold_project",
     "should_stop_early",
     "store_value",
     "write_solution_template",

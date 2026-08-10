@@ -128,7 +128,9 @@ def _catalog_problems(root: Path, expected: dict[str, dict[str, Any]]) -> list[s
 
 
 def verify_reference_release(
-    *, catalog_root: str | Path | None = None
+    *,
+    catalog_root: str | Path | None = None,
+    runtime: str = "in-process",
 ) -> ReleaseVerification:
     """Compile and execute every bundled route and return all gate failures."""
     problems = list(REFERENCE_TEMPLATES.validate())
@@ -166,7 +168,7 @@ def verify_reference_release(
             if any(not space.choices_for(slot.id) for slot in example.program.slots):
                 problems.append(f"{example.id}: at least one slot has no admitted candidate")
                 continue
-            report = run_example(example.id, route="all")
+            report = run_example(example.id, route="all", runtime=runtime)
         except Exception as exc:  # the release gate must report, not hide, crashes
             problems.append(
                 f"{example.id}: compile or execution crashed: "

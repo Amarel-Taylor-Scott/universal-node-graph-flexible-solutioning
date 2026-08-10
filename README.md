@@ -4,13 +4,19 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![Core deps: none](https://img.shields.io/badge/core%20deps-stdlib--only-brightgreen)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-515%20passing-brightgreen)](tests/)
+[![Status: developer preview](https://img.shields.io/badge/status-developer%20preview-orange)](READINESS.md)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
-A proof of concept for a different way to build software: compile each task
+Version 0.3 is a working developer preview of a different way to build software:
+compile each task
 into an ordered graph search space, expose every compatible implementation for
 every atomic substep, and learn which complete route best satisfies the task's
 quality, speed, cost, reliability, and policy objectives.
+
+It is ready for typed graph modeling, trusted local experiments, coding-harness
+integration, and extension development. It is not a production multi-tenant
+platform or a hostile-code sandbox. The exact supported, experimental, and
+unavailable surfaces are listed in [READINESS.md](READINESS.md).
 
 The framework does not prescribe a fixed six-step pipeline or a fixed node
 catalogue. Macro stages and atomic substeps are task data; node definitions,
@@ -32,11 +38,13 @@ graphs, but generated code still has to enter quarantine, compile, execute in
 an appropriate isolation boundary, and pass an independent fixed oracle.
 
 The repository also includes a strict reference execution seam. It can recheck
-and run trusted local Python plans, content-address outputs, activate only
-compiler-frozen fallbacks, apply an independent verifier, and emit immutable
-receipts. It is a framework skeleton, not a security sandbox: production
-harnesses must replace the in-process adapter with an enforcing isolated
-runtime.
+and run trusted local Python plans in-process or through a bounded subprocess,
+content-address outputs, activate only compiler-frozen fallbacks, apply an
+independent verifier, and immediately append receipts to a tamper-evident JSONL
+journal. The subprocess adapter provides lifecycle isolation, timeout, a strict
+JSON/bytes ABI, and optional POSIX resource limits; it is not a hostile-code
+sandbox. Untrusted generated code still requires an enforcing microVM, Wasm,
+or remote trust boundary.
 
 ```text
 Task
@@ -69,6 +77,9 @@ is not mixed into the execution path as another step.
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
 | Generated-graph campaigns | Population-DAG ancestry, proposal digests, explicit candidate/trial/cost/fidelity budgets, evaluator isolation contracts, and evidence-backed decisions |
 | Reference execution | Frozen-plan reconstruction, runtime/effect/permission policy, implementation-digest checks, bounded retry, frozen fallback, circuit breaker, artifacts, verification, and receipts |
+| Lifecycle process execution | Strict subprocess wire ABI, wall-clock termination, optional POSIX CPU/memory limits, and recorded adapter/isolation identity |
+| Durable local evidence | Fsync-backed, duplicate-rejecting, content-chained JSONL receipt journal with full verification |
+| Harness onboarding | Transactional `solutiongraph init` workspace generation from any bundled semantic template |
 | Executable domain skeleton | Six dependency-free programs in five notebooks for web, documents, images, data cleanup, regression, and classification using one cross-domain registry |
 | Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and six focused workspace Agent Skills |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
@@ -81,7 +92,7 @@ per slot, checks every candidate against every slot, searches all four routes,
 and freezes the winner to an exact plan digest:
 
 ```bash
-pip install -e .
+python -m pip install -e .
 python examples/solutiongraph_quickstart.py
 ```
 
@@ -115,7 +126,8 @@ solutiongraph examples run image-check-and-process
 solutiongraph examples run data-cleanup
 solutiongraph examples run tabular-regression
 solutiongraph examples run tabular-classification
-solutiongraph verify --catalog-root catalog
+solutiongraph verify --catalog-root catalog --runtime in-process
+solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 Each task has multiple frozen routes. The cleanup baseline, mean-regression
@@ -125,16 +137,18 @@ routes pass. Persist artifacts with:
 
 ```bash
 solutiongraph examples run tabular-regression \
-  --artifact-dir .artifacts/tabular-regression --json
+  --runtime subprocess \
+  --artifact-dir .artifacts/tabular-regression \
+  --receipt-journal .artifacts/receipts.jsonl --json
+solutiongraph ledger verify .artifacts/receipts.jsonl
 ```
 
 Open the five notebooks in `notebooks/`, or read
 [the executable-example guide](REAL_WORLD_EXAMPLES.md) and
 [frozen-plan execution protocol](EXECUTION_PROTOCOL.md). `ReferenceExecutor`
-is intentionally in-process; it exposes `RuntimeAdapter` and `ArtifactStore`
-protocols so an LLM coding harness can add subprocess, container, Wasm,
-browser, model, remote-job, human, object-store, or distributed implementations
-without changing program semantics.
+exposes `RuntimeAdapter`, `ArtifactStore`, and receipt-sink protocols so a
+harness can add container, microVM, Wasm, browser, model, remote-job, human,
+object-store, or distributed implementations without changing program semantics.
 
 Start with the [normative specification](UNIVERSAL_NODE_GRAPH_SPEC.md), then
 read the [primary-source research synthesis](RESEARCH_FOUNDATIONS.md). The
@@ -148,7 +162,8 @@ For the shortest path from clone to a custom template, use the
 ```bash
 python -m pip install -e .
 solutiongraph doctor
-solutiongraph verify --catalog-root catalog
+solutiongraph verify --catalog-root catalog --runtime subprocess
+solutiongraph init my-solution --template template.document-intelligence
 solutiongraph templates list
 solutiongraph templates show template.document-intelligence
 ```
@@ -706,6 +721,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 | [UNIVERSAL_GRAPH_SYSTEM.md](UNIVERSAL_GRAPH_SYSTEM.md) | the complete universal solution-graph architecture and implementation blueprint |
 | [WORKBENCH.md](WORKBENCH.md) | hierarchical macro-stage/substep model, schemas, viewer, and extension examples |
 | [ROADMAP.md](ROADMAP.md) | evidence-driven implementation phases and release gates |
+| [READINESS.md](READINESS.md) | exact supported, experimental, unsafe, and future release surfaces |
 | [AUTORESEARCH_REVIEW.md](AUTORESEARCH_REVIEW.md) | verified AutoResearch/package review, evaluator trust boundary, campaign lineage, and Cholesky node decomposition |
 | [CONTRACTS.md](CONTRACTS.md) | what a node promises, and the three moments it is checked |
 | [DIMENSIONS.md](DIMENSIONS.md) | axes worth adding, and why verification matters most |
@@ -716,9 +732,9 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 
 ```bash
 pip install -e ".[dev]"
-pytest -q          # 515 pass here; 140 optional browser tests skip when unavailable
+pytest -q
 mypy browsergraph --ignore-missing-imports
-ruff check browsergraph solutiongraph tests/test_solutiongraph*.py
+ruff check browsergraph solutiongraph tests/test_solutiongraph*.py scripts
 ```
 
 MIT.

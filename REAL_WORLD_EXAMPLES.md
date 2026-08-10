@@ -24,6 +24,21 @@ solutiongraph examples run tabular-regression
 solutiongraph examples run tabular-classification
 ```
 
+Use the bounded child-process adapter and persist each completed receipt before
+the next experiment allocation:
+
+```bash
+solutiongraph examples run data-cleanup \
+  --runtime subprocess \
+  --artifact-dir .artifacts/data-cleanup \
+  --receipt-journal .artifacts/receipts.jsonl
+solutiongraph ledger verify .artifacts/receipts.jsonl
+```
+
+The subprocess adapter is lifecycle isolation, not a hostile-code sandbox.
+The JSONL journal is tamper-evident local persistence, not authenticated WORM
+storage. See `READINESS.md` and `SECURITY.md` before adapting either boundary.
+
 Persist output artifacts locally:
 
 ```bash

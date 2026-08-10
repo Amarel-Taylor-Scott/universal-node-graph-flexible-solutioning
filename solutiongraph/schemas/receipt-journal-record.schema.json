@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "receipt-journal-record.schema.json",
+  "title": "SolutionGraph receipt journal record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "sequence", "previous_digest", "receipt", "record_digest"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "previous_digest": {
+      "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/digest"}]
+    },
+    "receipt": {"$ref": "run-receipt.schema.json"},
+    "record_digest": {"$ref": "common.schema.json#/$defs/digest"}
+  }
+}

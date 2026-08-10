@@ -75,6 +75,10 @@
             "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/digest"}]
           },
           "runtime": {"type": "string"},
+          "runtime_adapter": {
+            "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+          },
+          "isolation": {"type": "string"},
           "input_digest": {
             "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/digest"}]
           }
