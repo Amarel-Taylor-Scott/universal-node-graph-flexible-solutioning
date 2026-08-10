@@ -603,6 +603,11 @@ class AdmittedSpace:
     constraints: tuple[ForbiddenCombination, ...] = ()
 
     @property
+    def digest(self) -> str:
+        """Content identity of the complete closed-world admission result."""
+        return sha256_digest(self.to_dict())
+
+    @property
     def route_count_upper_bound(self) -> int:
         return prod(len(candidates) for _, candidates in self.choices)
 
@@ -643,6 +648,30 @@ class PlanBinding:
 
 
 @dataclass(frozen=True)
+class PlanFallback:
+    """One exact same-slot fallback frozen into an execution plan."""
+
+    slot_id: str
+    priority: int
+    candidate_id: str
+    node_id: str
+    node_version: str
+    implementation_digest: str
+    parameters: tuple[tuple[str, Any], ...]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "slot_id": self.slot_id,
+            "priority": self.priority,
+            "candidate_id": self.candidate_id,
+            "node_id": self.node_id,
+            "node_version": self.node_version,
+            "implementation_digest": self.implementation_digest,
+            "parameters": dict(self.parameters),
+        }
+
+
+@dataclass(frozen=True)
 class FrozenPlan:
     """Content-addressed executable intent with no mutable optimizer state."""
 
@@ -651,9 +680,11 @@ class FrozenPlan:
     program_version: str
     program_digest: str
     registry_digest: str
+    admitted_space_digest: str
     topological_order: tuple[str, ...]
     bindings: tuple[PlanBinding, ...]
     edges: tuple[Edge, ...]
+    fallbacks: tuple[PlanFallback, ...] = ()
 
     def unsigned_dict(self) -> dict[str, Any]:
         return {
@@ -662,9 +693,11 @@ class FrozenPlan:
             "program_version": self.program_version,
             "program_digest": self.program_digest,
             "registry_digest": self.registry_digest,
+            "admitted_space_digest": self.admitted_space_digest,
             "topological_order": list(self.topological_order),
             "bindings": [binding.to_dict() for binding in self.bindings],
             "edges": [edge.to_dict() for edge in self.edges],
+            "fallbacks": [fallback.to_dict() for fallback in self.fallbacks],
         }
 
     def to_dict(self) -> dict[str, Any]:

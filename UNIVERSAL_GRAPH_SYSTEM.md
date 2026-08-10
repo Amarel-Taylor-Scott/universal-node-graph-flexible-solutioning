@@ -772,11 +772,17 @@ Every run should produce a durable `TaskReceipt` containing at least:
 - token and monetary cost;
 - output artifact references and content hashes;
 - verifier identity, evidence, verdict, and independence relationship;
+- verifier implementation digest and immutable evaluator/data/environment identities;
 - failure classification and responsible scope;
 - optimizer/profile/version that proposed the route;
 - baseline route and comparison metrics when relevant;
 - reproducibility and replay information;
 - provenance and freshness metadata.
+
+LLM-generated campaigns additionally retain a population DAG: candidate ID,
+all parent IDs, proposal operator and artifact digest, hypothesis, generation,
+budget/fidelity, and append-only promotion or rejection events. The campaign
+ledger is not part of the executable DAG and cannot make a route valid.
 
 Metrics without task context, evidence count, uncertainty, and version should
 not be treated as universal truths. A candidate may be best for one document
@@ -2095,6 +2101,15 @@ tests, but they must be labeled and must not replace real benchmark evidence.
 - attempt, verification, and task receipts;
 - independent acceptance;
 - immutable evidence ledger.
+
+The repository now contains a trusted-local Phase 3 bootstrap: the reference
+executor reconstructs an admitted-space-bound plan, checks Python source
+identity, applies explicit runtime/effect/permission policy, content-addresses
+outputs, performs bounded retry and compiler-frozen fallback, invokes an
+independent verifier, and emits receipts for six programs across five domain
+notebook families. It remains
+in-process and does not satisfy the least-privilege isolation, durable crash
+replay, tenancy, or production-ledger portions of this phase.
 
 ### Phase 4: optimization and learning
 

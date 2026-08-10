@@ -94,7 +94,7 @@ it works” loop is invalid.
 
 ## 6. Reference template catalogue
 
-The repository ships 18 deliberately varied templates containing 317 atomic
+The repository ships 19 deliberately varied templates containing 339 atomic
 obligations:
 
 | Template | Atomic slots | What it demonstrates |
@@ -117,6 +117,7 @@ obligations:
 | `template.customer-support` | 17 | intake, identity, policy, resolution, communication, follow-up |
 | `template.infrastructure-provisioning` | 17 | desired state, drift, policy plan, approval, apply, lifecycle |
 | `template.scientific-experiment` | 20 | hypotheses, preregistration, measurement, sensitivity, replication |
+| `template.numerical-linear-system` | 22 | structure/SPD qualification, conditioning, solver families, factorization, residual verification, fallbacks |
 
 These are test fixtures for the universal abstraction, not claims that every
 project needs exactly these steps. Their value is that agents can start with a

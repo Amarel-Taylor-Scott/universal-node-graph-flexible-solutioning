@@ -51,14 +51,20 @@ to make the matrix look cleaner.
 ### 7. Freeze a baseline
 
 Select one compiler-valid route, freeze exact bindings and digests, and run a
-small acceptance case. This distinguishes a viable architecture from a large
-unexecutable search space.
+small acceptance case through an explicit runtime policy and independent
+verifier. Content-address outputs and retain the receipt. This distinguishes a
+viable architecture from a large unexecutable search space.
 
 ### 8. Allocate experiments explicitly
 
 Choose among prior, beam, seeded sprout, adaptive/multi-fidelity, or exhaustive
 search. Record every budget and seed. Use holdouts, repeated seeds, independent
 verification, and Pareto metrics. Promote only accepted plans.
+
+For an LLM-generated campaign, freeze an `EvaluationBoundary` and
+`CampaignBudget` before generation. Preserve every candidate's ancestry and
+proposal digest; quarantine and recompile every mutation or crossover. Use the
+`design-autoresearch-campaign` skill for the full workflow.
 
 ### 9. Learn conservatively
 
@@ -92,6 +98,8 @@ unvisited space. Avoid claims not supported by real execution.
   accepted routes deterministically.
 - **Independent failure fallback:** rank portfolios by shared dependencies and
   failure classes as well as mean performance.
+- **Population DAG:** retain diverse seeds, mutations, crossovers, negative
+  outcomes, and ancestry instead of overwriting one incumbent branch.
 
 ## Anti-patterns and required response
 
@@ -110,6 +118,9 @@ unvisited space. Avoid claims not supported by real execution.
 | Search winner reported from training cases | Overstates generalization | Reserve holdout cases and report best-so-far curves |
 | Second-ranked route as fallback | Shared dependency may fail simultaneously | Optimize failure/dependency diversity |
 | Synthetic benchmark presented as production proof | Confuses mechanism with evidence | Label fixture results and run real task cases |
+| In-process adapter called a sandbox | Declared policy is mistaken for enforced containment | Label it trusted-local or install an enforcing runtime adapter |
+| Candidate-readable hidden evaluator | Read-only is confused with confidential | Move evaluator and hidden cases into a separate trust domain |
+| Generated child inherits parent validity | Mutation can change every contract | Quarantine and compile the complete child as a new candidate |
 
 ## Minimum commands
 
@@ -127,5 +138,6 @@ For a new domain, add at least:
 - negative compiler tests for types/effects/permissions;
 - one frozen baseline route;
 - an independent acceptance fixture;
+- one executable runtime policy and content-addressed artifact path;
 - one bounded search report;
 - a receipt and replay/provenance assertion.

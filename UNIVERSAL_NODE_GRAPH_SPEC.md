@@ -263,6 +263,15 @@ candidate priors are explicitly named **observational**: correlated success is
 not a causal estimate of the candidate's effect. Causal claims require controlled
 assignment or another defensible identification strategy.
 
+When an LLM harness generates or mutates nodes, bindings, or graph structure,
+the experiment MUST additionally freeze a campaign budget and evaluator
+boundary before the first proposal. Every compiled proposal MUST preserve its
+parents, proposal operator, hypothesis, proposer identity, and proposal digest
+in an append-only population DAG. Generated code MUST NOT write the evaluator;
+hidden cases MUST be outside the candidate-readable trust domain. Retrieval of
+similar past outcomes and model predictions MAY guide proposal order but MUST
+NOT replace execution evidence, compiler admission, or independent acceptance.
+
 ## 8. Fallbacks
 
 The second-highest score is not automatically the best fallback. A fallback
@@ -312,12 +321,17 @@ independent verifier can be used.
 - **Level 3 — Experimental:** explicit search budgets, baselines, repeated cases,
   Pareto metrics, and coverage reporting.
 - **Level 4 — Adaptive:** learned priors with uncertainty, safe rollout, drift
-  detection, diverse fallbacks, and reversible promotion.
+  detection, diverse fallbacks, reversible promotion, and preserved candidate
+  lineages for generated-graph campaigns.
 
-This repository currently implements Level 1 as a general Python core, portable
-discovery/template contracts, and parts of Levels 2–4 as evidence/search and
-multi-fidelity primitives. BrowserGraph remains the richer runtime proof, not
-the definition of the architecture.
+This repository implements Level 1 as a general Python core and now includes a
+trusted-local Level 2 reference slice: admitted-space-bound frozen plans,
+content-addressed memory/file artifacts, implementation-digest checks, bounded
+retry, frozen fallbacks, independent verification, receipts, and five
+executable domain examples. The bundled Python adapter is in-process and is not
+a least-privilege sandbox, durable crash-replay engine, or production Level 2
+claim. BrowserGraph remains the richer browser runtime proof, not the definition
+of the architecture. See `EXECUTION_PROTOCOL.md` for the exact boundary.
 
 ## 12. Definition of done for a new domain
 

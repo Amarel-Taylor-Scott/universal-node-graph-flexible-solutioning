@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "candidate-record.schema.json",
+  "title": "Universal Node Graph Generated Candidate Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "plan_digest", "parent_ids", "generation", "operator", "hypothesis",
+    "proposer", "proposal_digest", "belief_revision", "created_at"
+  ],
+  "properties": {
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "parent_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "generation": {"type": "integer", "minimum": 0},
+    "operator": {"$ref": "common.schema.json#/$defs/id"},
+    "hypothesis": {"type": "string", "minLength": 1},
+    "proposer": {
+      "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+    },
+    "proposal_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+    "belief_revision": {"type": "string"},
+    "created_at": {"type": "string"}
+  }
+}

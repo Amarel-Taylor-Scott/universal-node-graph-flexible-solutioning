@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "artifact-record.schema.json",
+  "title": "Universal Node Graph Stored Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["digest", "media_type", "size_bytes", "uri"],
+  "properties": {
+    "digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "media_type": {"type": "string", "minLength": 1},
+    "size_bytes": {"type": "integer", "minimum": 0},
+    "uri": {"type": "string"}
+  }
+}

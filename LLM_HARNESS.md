@@ -13,12 +13,16 @@ large prompt into every vendor-specific file.
 | `.agents/skills/model-solution-graph/references/` | Node, discovery, template, and experiment checklists | Loaded selectively for the active operation |
 | `.agents/skills/create-solution-template/SKILL.md` | Template decomposition and strict blueprint workflow | Loaded for reusable template authoring |
 | `.agents/skills/author-node-pack/SKILL.md` | Node ABI, sidecar, manifest, and registry workflow | Loaded for reusable implementation packs |
+| `.agents/skills/execute-solution-graph/SKILL.md` | Runtime, artifact, fallback, verification, and executable-domain workflow | Loaded for frozen-plan execution work |
 | `.agents/skills/benchmark-solution-graph/SKILL.md` | Search-budget, receipt, holdout, and Pareto workflow | Loaded for route experiments |
+| `.agents/skills/design-autoresearch-campaign/SKILL.md` | Population lineage, generated-code quarantine, evaluator isolation, and promotion workflow | Loaded for iterative LLM-generated improvement campaigns |
 | `UNIVERSAL_NODE_GRAPH_SPEC.md` | Normative architecture | Read for design or implementation work |
 | `NODE_REPOSITORY_PROTOCOL.md` | Node packs, sparse metadata, embeddings, handshake, and snapshots | Read for catalogue or discovery work |
 | `SOLUTION_TEMPLATE_PROTOCOL.md` | Cross-domain stages, atomic slots, pass-through, refinement | Read for decomposition/template work |
+| `EXECUTION_PROTOCOL.md` | Frozen-plan execution, runtime adapters, artifacts, recovery, and receipts | Read for runtime or notebook work |
 | `AGENT_PLAYBOOK.md` | Patterns, anti-patterns, and end-to-end delivery workflow | Read before implementing a new domain |
 | `RESEARCH_FOUNDATIONS.md` | Primary-source rationale | Read when evaluating or changing a tradeoff |
+| `AUTORESEARCH_REVIEW.md` | Verified AutoResearch/package lessons and numerical-node decomposition | Read for autonomous campaigns or solver packages |
 | `llms.txt` | Machine-friendly documentation map | Entry point for crawlers and unfamiliar harnesses |
 
 ## Why not duplicate the full prompt?
@@ -34,10 +38,16 @@ enforce architecture independently of whether a model followed a prompt.
 ## Recommended harness workflow
 
 1. Load the root instruction file.
-2. Activate the narrow template, node-pack, benchmark, or end-to-end skill for
-   the requested operation.
+2. Activate the narrow template, node-pack, executor, benchmark, AutoResearch,
+   or end-to-end skill for the requested operation.
 3. Negotiate node discovery and freeze a receipt-backed registry snapshot.
-4. Compile the semantic program before implementing runtime adapters.
-5. Run universal conformance tests before domain-specific integration tests.
-6. Include discovery receipts, compiler diagnostics, search reports, frozen plan digests, and
-   receipts in the review output; do not rely on prose assurance.
+4. Compile the semantic program and freeze a plan before implementing runtime adapters.
+5. Reconstruct the plan at execution, use explicit runtime authority, and retain
+   artifacts plus an independent verification receipt.
+6. Run universal conformance tests before domain-specific integration tests.
+7. Include discovery receipts, compiler diagnostics, search reports, frozen
+   plan/admitted-space digests, execution receipts, rejected cases, and
+   limitations in the review output; do not rely on prose assurance.
+8. For generated-code campaigns, freeze the evaluation boundary before the
+   first proposal, preserve a population DAG and negative evidence, and keep
+   candidate code unable to redefine or inspect hidden evaluation assets.

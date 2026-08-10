@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.1",
+  "researched_at": "2026-08-10",
+  "policy": "reference-not-dependency",
+  "identity_notes": {
+    "chloesky": "No PyPI distribution identified; require an exact URL before treating it as a package.",
+    "karpathy_autoresearch": "GitHub experiment, not the unrelated Auto-Research PyPI project.",
+    "autoresearch_prefix": "A shared name prefix does not establish common provenance or compatibility."
+  },
+  "projects": [
+    {
+      "id": "project.karpathy-autoresearch",
+      "url": "https://github.com/karpathy/autoresearch",
+      "role": "benchmark-pattern",
+      "adoption": "study",
+      "reason": "Fixed evaluator, mutable surface, resource budget, and mechanical metric."
+    },
+    {
+      "id": "project.autoresearch-core",
+      "url": "https://pypi.org/project/autoresearch-core/",
+      "role": "decision-contract-reference",
+      "adoption": "pilot-isolated",
+      "reason": "Deterministic promotion contracts; not required by the dependency-free core."
+    },
+    {
+      "id": "project.autoresearch-lab",
+      "url": "https://pypi.org/project/autoresearch-lab/",
+      "role": "external-runner-reference",
+      "adoption": "pilot-isolated",
+      "reason": "Generic loop and stop conditions; Docker is not an adversarial security boundary."
+    },
+    {
+      "id": "project.autoresearch-rl",
+      "url": "https://pypi.org/project/autoresearch-rl/",
+      "role": "specialized-runner-reference",
+      "adoption": "study",
+      "reason": "Useful progress, cancellation, resource-pool, and hybrid-policy patterns."
+    },
+    {
+      "id": "project.gepa",
+      "url": "https://github.com/gepa-ai/gepa",
+      "role": "optional-candidate-generator",
+      "adoption": "adapter-only",
+      "reason": "Reflective Pareto search can propose text changes but cannot admit or verify routes."
+    },
+    {
+      "id": "project.skypilot",
+      "url": "https://github.com/skypilot-org/skypilot",
+      "role": "optional-runner",
+      "adoption": "adapter-only",
+      "reason": "Portable scheduling and recovery remain separate from semantics and promotion."
+    },
+    {
+      "id": "package.scikit-sparse",
+      "url": "https://pypi.org/project/scikit-sparse/",
+      "role": "sparse-cholesky-candidate",
+      "adoption": "node-pack-only",
+      "reason": "CHOLMOD-backed candidate with explicit SuiteSparse environment requirements."
+    },
+    {
+      "id": "package.cholespy",
+      "url": "https://pypi.org/project/cholespy/",
+      "role": "sparse-cholesky-candidate",
+      "adoption": "node-pack-only",
+      "reason": "CPU/GPU tensor-interoperable sparse solver; binary and device contracts are required."
+    },
+    {
+      "id": "package.cholrot",
+      "url": "https://pypi.org/project/cholrot/",
+      "role": "rank-update-candidate",
+      "adoption": "pilot-isolated",
+      "reason": "Narrow alpha-stage rank update/downdate capability requiring numerical verification."
+    },
+    {
+      "id": "package.pykolesky",
+      "url": "https://pypi.org/project/pyKoLesky/",
+      "role": "spatial-approximation-reference",
+      "adoption": "research-only",
+      "reason": "Specialized approximation semantics and non-commercial licensing."
+    }
+  ]
+}

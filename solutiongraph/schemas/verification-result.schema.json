@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verification-result.schema.json",
+  "title": "Universal Node Graph Verification Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["accepted", "outcome", "metrics", "details"],
+  "properties": {
+    "accepted": {"type": "boolean"},
+    "outcome": {"type": "string", "minLength": 1},
+    "metrics": {"type": "object", "additionalProperties": {"type": "number"}},
+    "details": {"type": "object"}
+  }
+}

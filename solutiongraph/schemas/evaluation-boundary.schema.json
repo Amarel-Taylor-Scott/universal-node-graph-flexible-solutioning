@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evaluation-boundary.schema.json",
+  "title": "Universal Node Graph Evaluation Boundary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "evaluator_digest", "dataset_digest", "environment_digest",
+    "trust_level", "candidate_isolation", "evaluator_isolation",
+    "candidate_can_read_evaluator", "candidate_can_write_evaluator",
+    "candidate_network_access", "hidden_case_ids"
+  ],
+  "properties": {
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "evaluator_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "environment_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "trust_level": {"enum": ["trusted", "untrusted"]},
+    "candidate_isolation": {
+      "enum": ["in_process", "subprocess", "container", "microvm", "remote"]
+    },
+    "evaluator_isolation": {
+      "enum": ["in_process", "subprocess", "container", "microvm", "remote"]
+    },
+    "candidate_can_read_evaluator": {"type": "boolean"},
+    "candidate_can_write_evaluator": {"type": "boolean"},
+    "candidate_network_access": {"type": "boolean"},
+    "hidden_case_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"trust_level": {"const": "untrusted"}}},
+      "then": {
+        "properties": {
+          "candidate_isolation": {"enum": ["microvm", "remote"]}
+        }
+      }
+    },
+    {"properties": {"candidate_can_write_evaluator": {"const": false}}},
+    {
+      "if": {"properties": {"hidden_case_ids": {"minItems": 1}}},
+      "then": {"properties": {"candidate_can_read_evaluator": {"const": false}}}
+    }
+  ]
+}

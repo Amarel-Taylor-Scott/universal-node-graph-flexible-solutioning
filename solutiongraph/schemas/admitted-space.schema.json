@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "admitted-space.schema.json",
+  "title": "Universal Node Graph Admitted Space",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["program_digest", "registry_digest", "choices", "decisions", "constraints"],
+  "properties": {
+    "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slot_id", "candidate_ids"],
+        "properties": {
+          "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+          "candidate_ids": {
+            "type": "array",
+            "items": {"$ref": "common.schema.json#/$defs/id"},
+            "uniqueItems": true,
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slot_id", "candidate_id", "admitted", "reasons"],
+        "properties": {
+          "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+          "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
+          "admitted": {"type": "boolean"},
+          "reasons": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "assignments", "reason"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "assignments": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["slot_id", "candidate_id"],
+              "properties": {
+                "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+                "candidate_id": {"$ref": "common.schema.json#/$defs/id"}
+              }
+            }
+          },
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from solutiongraph.cli import main
+from solutiongraph.schemas import SCHEMA_NAMES
 from solutiongraph.template_authoring import (
     LinearTemplateBlueprint,
     load_linear_blueprint,
@@ -68,9 +69,10 @@ def test_blueprint_rejects_unknown_fields_duplicates_and_missing_capabilities():
 def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert main(["doctor"]) == 0
     doctor = capsys.readouterr().out
-    assert "templates=18" in doctor
-    assert "atomic_slots=317" in doctor
-    assert "schemas=18" in doctor
+    assert "templates=19" in doctor
+    assert "atomic_slots=339" in doctor
+    assert f"schemas={len(SCHEMA_NAMES)}" in doctor
+    assert "executable_examples=6" in doctor
 
     assert main(["templates", "list"]) == 0
     listed = capsys.readouterr().out
@@ -97,16 +99,23 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert output.exists()
     assert json.loads(output.read_text(encoding="utf-8"))["template_model_version"] == "0.1"
 
+    assert main(["examples", "list"]) == 0
+    examples = capsys.readouterr().out
+    assert "browse-and-scrape" in examples
+    assert "tabular-regression" in examples
+    assert "tabular-classification" in examples
 
-def test_reference_catalog_spans_eighteen_templates_and_317_atomic_slots():
+
+def test_reference_catalog_spans_nineteen_templates_and_339_atomic_slots():
     assert REFERENCE_TEMPLATES.validate() == []
-    assert len(REFERENCE_TEMPLATES.templates) == 18
-    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 317
+    assert len(REFERENCE_TEMPLATES.templates) == 19
+    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 339
     assert {
         "template.api-service",
         "template.document-intelligence",
         "template.image-processing",
         "template.incident-response",
+        "template.numerical-linear-system",
         "template.scientific-experiment",
         "template.web-automation",
     }.issubset({template.id for template in REFERENCE_TEMPLATES.templates})

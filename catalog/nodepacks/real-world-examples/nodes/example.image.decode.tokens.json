@@ -1,0 +1,68 @@
+{
+  "capabilities": [
+    "image.decode"
+  ],
+  "description": "Decode an ASCII PGM image with a token scanner.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:decode_pgm_tokens",
+  "failure_modes": [
+    {
+      "code": "image.unsupported-format",
+      "description": "",
+      "retryable": false
+    },
+    {
+      "code": "image.invalid-header",
+      "description": "",
+      "retryable": false
+    },
+    {
+      "code": "image.invalid-pixels",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.image.decode.tokens",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:043d186804a502c5bef78020a53d576b4a53b87253b0e82e54ef3854befa6b27",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "document",
+      "type": {
+        "id": "example.pgm-document",
+        "media_type": "image/x-portable-graymap",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "image",
+      "type": {
+        "id": "example.gray-image",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

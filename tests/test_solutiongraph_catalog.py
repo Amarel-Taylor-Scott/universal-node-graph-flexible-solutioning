@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from solutiongraph.catalog import catalog_documents, write_catalog
+from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
     REFERENCE_NODE_SPECS,
@@ -39,8 +40,8 @@ def test_reference_nodes_execute_and_all_contracts_and_descriptors_validate():
 
 def test_reference_templates_cover_unrelated_domains_and_atomic_obligations():
     assert REFERENCE_TEMPLATES.validate() == []
-    assert len(REFERENCE_TEMPLATES.templates) == 18
-    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 317
+    assert len(REFERENCE_TEMPLATES.templates) == 19
+    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 339
     assert {
         "template.kaggle-tabular",
         "template.data-quality",
@@ -55,10 +56,10 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     first = catalog_documents()
     second = catalog_documents()
     assert first == second
-    assert len(first) == 3 + 5 + 5 + 18 + 1
+    assert len(first) == 3 + 5 + 5 + 3 + len(EXAMPLE_NODES) + 19 + 1
     index = first["index.json"]
-    assert len(index["templates"]) == 18
-    assert index["node_packs"][0]["node_count"] == 5
+    assert len(index["templates"]) == 19
+    assert [item["node_count"] for item in index["node_packs"]] == [5, len(EXAMPLE_NODES)]
     assert index["node_packs"][0]["embedding_record_count"] == 0
     capabilities = first["nodepacks/reference-core/registry-capabilities.json"]
     assert [mode["id"] for mode in capabilities["query_modes"]] == [
@@ -67,6 +68,14 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         "enumeration",
     ]
     assert capabilities["embedding_spaces"] == []
+    example_capabilities = first[
+        "nodepacks/real-world-examples/registry-capabilities.json"
+    ]
+    assert [mode["id"] for mode in example_capabilities["query_modes"]] == [
+        "exact",
+        "enumeration",
+    ]
+    assert example_capabilities["embedding_spaces"] == []
 
 
 def test_catalogue_export_round_trips_every_generated_document(tmp_path):
@@ -88,6 +97,7 @@ def test_catalogue_explorer_is_self_contained_and_exposes_every_reference_templa
     assert "ung-domain-select" in html
     assert all(template.id in html for template in REFERENCE_TEMPLATES.templates)
     assert all(node.id in html for node in REFERENCE_NODE_SPECS)
+    assert all(node.id in html for node in EXAMPLE_NODES)
     assert all(node.description in html for node in REFERENCE_NODE_SPECS)
     assert all(
         slot.id in html and slot.purpose in html

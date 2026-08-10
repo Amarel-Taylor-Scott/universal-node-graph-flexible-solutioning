@@ -8,21 +8,31 @@
 - [Getting started](GETTING_STARTED.md): Install, explore, author, validate, and contribute
 - [Normative specification](UNIVERSAL_NODE_GRAPH_SPEC.md): Required ontology and invariants
 - [Research foundations](RESEARCH_FOUNDATIONS.md): Primary-source design rationale
+- [AutoResearch and Cholesky review](AUTORESEARCH_REVIEW.md): Package identity, campaign isolation, lineage, promotion, and numerical nodes
 - [LLM harness integration](LLM_HARNESS.md): Repository instruction and skill map
 - [Node repository protocol](NODE_REPOSITORY_PROTOCOL.md): Reusable packs, descriptors, embeddings, handshake, snapshots
 - [Solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md): Cross-domain stages, atomic slots, and bounded refinement
+- [Execution protocol](EXECUTION_PROTOCOL.md): Frozen plans, runtimes, artifacts, recovery, verification, and receipts
+- [Executable examples](REAL_WORLD_EXAMPLES.md): Six runnable programs across five domain notebook families and extension gates
 - [Agent playbook](AGENT_PLAYBOOK.md): Patterns, anti-patterns, and implementation workflow
 - [Full architecture blueprint](UNIVERSAL_GRAPH_SYSTEM.md): Extended design and viewer model
 - [Workbench guide](WORKBENCH.md): Interactive hierarchical candidate explorer
 
 ## Code
 
-- [Universal core](solutiongraph/): Semantic model, discovery, templates, compiler, search, adaptive allocation, evidence
+- [Universal core](solutiongraph/): Semantic model, discovery, templates, compiler, search, adaptive allocation, campaign lineage, evidence
+- [Reference executor](solutiongraph/executor.py): Strict plan recheck and replaceable runtime adapter boundary
+- [Campaign contracts](solutiongraph/campaign.py): Hard budgets, population ancestry, evaluator boundaries, and decisions
+- [Artifact stores](solutiongraph/artifacts.py): Content-addressed memory and local-file stores
+- [Executable domain pack](solutiongraph/examples/): Web, document, image, data-cleanup, regression, and classification examples
+- [Example notebooks](notebooks/): Five end-to-end compile, execute, verify, and receipt notebooks
 - [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
-- [Reference catalogue](catalog/): 18 semantic templates and one portable node pack
+- [Reference catalogue](catalog/): 19 semantic templates and two portable node packs
 - [Browser adapter](browsergraph/): Concrete runtime proof
 - [Universal conformance tests](tests/test_solutiongraph.py): Executable architecture requirements
 - [Create-template skill](.agents/skills/create-solution-template/SKILL.md): Strict template authoring workflow
 - [Author-node-pack skill](.agents/skills/author-node-pack/SKILL.md): Reusable node publication workflow
 - [Benchmark skill](.agents/skills/benchmark-solution-graph/SKILL.md): Route experiment workflow
+- [Execution skill](.agents/skills/execute-solution-graph/SKILL.md): Runtime and executable-domain workflow
+- [AutoResearch campaign skill](.agents/skills/design-autoresearch-campaign/SKILL.md): Bounded generated-code improvement workflow
 - [Workspace modeling skill](.agents/skills/model-solution-graph/SKILL.md): End-to-end agent workflow

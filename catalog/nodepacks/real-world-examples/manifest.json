@@ -1,0 +1,328 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:load_web_source_offline"
+      },
+      "digest": "sha256:b686373da96b81001789c23ab179790fd2d990f48beefc201cbb5fe892482534",
+      "media_type": "text/x-python",
+      "name": "artifact.example.web.load.offline",
+      "uri": "python://solutiongraph.examples.nodes:load_web_source_offline"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:load_web_source_urllib"
+      },
+      "digest": "sha256:717b30fb514f8ae3d4269ec9b5e0a59edfd897f5ca28b49dea22f81d56bdfaa7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.web.load.urllib",
+      "uri": "python://solutiongraph.examples.nodes:load_web_source_urllib"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:extract_page_html_parser"
+      },
+      "digest": "sha256:100383a96b627c4c7c79864dc52fabf92c03ebcdf7ce05c7297f639ce6ea33e0",
+      "media_type": "text/x-python",
+      "name": "artifact.example.web.extract.parser",
+      "uri": "python://solutiongraph.examples.nodes:extract_page_html_parser"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:extract_page_regex"
+      },
+      "digest": "sha256:3b62c6347487c27c8e4e3d9e89befab88e87d3ffcd9a6239b2bf9a75c36b0cec",
+      "media_type": "text/x-python",
+      "name": "artifact.example.web.extract.regex",
+      "uri": "python://solutiongraph.examples.nodes:extract_page_regex"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:project_page_schema"
+      },
+      "digest": "sha256:c13b70f5a475014891eba5d6ca0a15b8d2c21c1c26e8e771560b1cdad56f9fd1",
+      "media_type": "text/x-python",
+      "name": "artifact.example.web.project.schema",
+      "uri": "python://solutiongraph.examples.nodes:project_page_schema"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:normalize_document_conservative"
+      },
+      "digest": "sha256:89906e1df2f5cfc918f977050f3d224bfe4a137ea7ee36744b720f234ed4ff31",
+      "media_type": "text/x-python",
+      "name": "artifact.example.document.normalize.conservative",
+      "uri": "python://solutiongraph.examples.nodes:normalize_document_conservative"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:normalize_document_compact"
+      },
+      "digest": "sha256:c5238e09cf3b9a542aff99d587a124ccf39f62afe6bdefcac88bfa8b185c5bf7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.document.normalize.compact",
+      "uri": "python://solutiongraph.examples.nodes:normalize_document_compact"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:extract_document_lines"
+      },
+      "digest": "sha256:6acded8319fa5a269a9a4cb1f2f9a88e2806843e9ba03191862920c42ca52b08",
+      "media_type": "text/x-python",
+      "name": "artifact.example.document.extract.lines",
+      "uri": "python://solutiongraph.examples.nodes:extract_document_lines"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:extract_document_regex"
+      },
+      "digest": "sha256:0c2ef84aaf0f938f594b221c1633c5cf1425c040feec33bb2490513a065c16c5",
+      "media_type": "text/x-python",
+      "name": "artifact.example.document.extract.regex",
+      "uri": "python://solutiongraph.examples.nodes:extract_document_regex"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:project_document_schema"
+      },
+      "digest": "sha256:7c2229fe550f03559285019eae8c1fea8a39c248423030ebb0bbef0bbd87c6fe",
+      "media_type": "text/x-python",
+      "name": "artifact.example.document.project.schema",
+      "uri": "python://solutiongraph.examples.nodes:project_document_schema"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:decode_pgm_tokens"
+      },
+      "digest": "sha256:043d186804a502c5bef78020a53d576b4a53b87253b0e82e54ef3854befa6b27",
+      "media_type": "text/x-python",
+      "name": "artifact.example.image.decode.tokens",
+      "uri": "python://solutiongraph.examples.nodes:decode_pgm_tokens"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:decode_pgm_lines"
+      },
+      "digest": "sha256:abf9f744e086ebb1abd61f79c5124c46e61ef5b9b251bc0ce4980cb22042e921",
+      "media_type": "text/x-python",
+      "name": "artifact.example.image.decode.lines",
+      "uri": "python://solutiongraph.examples.nodes:decode_pgm_lines"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:enhance_image_identity"
+      },
+      "digest": "sha256:6a241c6682df07a69af44180be74c35f48726ba324cc0206f93c34e5c8a0597b",
+      "media_type": "text/x-python",
+      "name": "artifact.example.image.enhance.identity",
+      "uri": "python://solutiongraph.examples.nodes:enhance_image_identity"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:enhance_image_minmax"
+      },
+      "digest": "sha256:652b4b0b87a43c7e0d19b2282f6759b0fb01926f3f4aa8ef8de756d6cc74eae6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.image.enhance.minmax",
+      "uri": "python://solutiongraph.examples.nodes:enhance_image_minmax"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:inspect_image_mean"
+      },
+      "digest": "sha256:7a6c6c49953a06ab510d14fd351da669dd8fcb28b559fa61c1d353ce733d7fe0",
+      "media_type": "text/x-python",
+      "name": "artifact.example.image.inspect.mean",
+      "uri": "python://solutiongraph.examples.nodes:inspect_image_mean"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:inspect_image_histogram"
+      },
+      "digest": "sha256:0ae0d1398626693daed4a4ad764794e5ec3f4330860551325519c3697a613717",
+      "media_type": "text/x-python",
+      "name": "artifact.example.image.inspect.histogram",
+      "uri": "python://solutiongraph.examples.nodes:inspect_image_histogram"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:normalize_records_conservative"
+      },
+      "digest": "sha256:fce6ffae7be4723e0316acdb6e0268f16d41ee1bcd23e29e73fcb542e9651721",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data.normalize.conservative",
+      "uri": "python://solutiongraph.examples.nodes:normalize_records_conservative"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:normalize_records_aggressive"
+      },
+      "digest": "sha256:14fb8e62a816965035be3959b4e92da0780bf936b344552bea21986a33485bcb",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data.normalize.aggressive",
+      "uri": "python://solutiongraph.examples.nodes:normalize_records_aggressive"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:deduplicate_records_exact"
+      },
+      "digest": "sha256:3b2b6eed1db8558acfcdbe3bf9adface51a7d2ed04556146557297eb2a6b034c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data.deduplicate.exact",
+      "uri": "python://solutiongraph.examples.nodes:deduplicate_records_exact"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:deduplicate_records_normalized"
+      },
+      "digest": "sha256:b7221cf1e31df9f2d3ec413f5249be516156aaf4551f49884966b004bc747c6b",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data.deduplicate.normalized",
+      "uri": "python://solutiongraph.examples.nodes:deduplicate_records_normalized"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:sort_records"
+      },
+      "digest": "sha256:21fb5b81f85a197b831534f9aa676278983a57cd4a9337f14d0fedd7eb9507d9",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data.sort",
+      "uri": "python://solutiongraph.examples.nodes:sort_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:split_regression_tail"
+      },
+      "digest": "sha256:fcfba6180aae014ad6949315ffdb492402915374327abd13ba6806d18bdd2914",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.split.tail",
+      "uri": "python://solutiongraph.examples.nodes:split_regression_tail"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:split_regression_alternating"
+      },
+      "digest": "sha256:800af32b49316a084a2572a2e616398b8575ed27e2853a36137cf003a0b52ce4",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.split.alternating",
+      "uri": "python://solutiongraph.examples.nodes:split_regression_alternating"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:train_mean_regressor"
+      },
+      "digest": "sha256:6e5b71e26ccf0682fe3b988cf5a9d7a58bcafd2790a17a66e21e05d48142fff8",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.train.mean",
+      "uri": "python://solutiongraph.examples.nodes:train_mean_regressor"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:train_linear_regressor"
+      },
+      "digest": "sha256:a548a6c1a38edcf29ccbcc5c943a52208d58a54a66ae44b8f2127b8fbf76dcb2",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.train.linear",
+      "uri": "python://solutiongraph.examples.nodes:train_linear_regressor"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:evaluate_regressor"
+      },
+      "digest": "sha256:aaca24659d050a8ef7cddaf3675cdc4fd95129141f612c996c940055cb06b00e",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.evaluate",
+      "uri": "python://solutiongraph.examples.nodes:evaluate_regressor"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:split_classification_tail"
+      },
+      "digest": "sha256:a7a16097f42766a2bb9cf6cd64a48a7c0729d704524e8d2419224b7577f0d5d1",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.classification.split.tail",
+      "uri": "python://solutiongraph.examples.nodes:split_classification_tail"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:split_classification_alternating"
+      },
+      "digest": "sha256:557c15f0747688787c53b56c582a7691c7f36ea42e5e2d1d9f77054c5cfc166e",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.classification.split.alternating",
+      "uri": "python://solutiongraph.examples.nodes:split_classification_alternating"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:train_majority_classifier"
+      },
+      "digest": "sha256:a0595eb109583cdbf65def5fc5e90d6c7dd3ea52ecb7a479c9eb0b50375c326b",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.classification.train.majority",
+      "uri": "python://solutiongraph.examples.nodes:train_majority_classifier"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:train_threshold_classifier"
+      },
+      "digest": "sha256:9940122c765a586e4d4ef26e0c942e36129506cb45a1d6c07e4213805ab8469e",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.classification.train.threshold",
+      "uri": "python://solutiongraph.examples.nodes:train_threshold_classifier"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.nodes:evaluate_classifier"
+      },
+      "digest": "sha256:3c7310aea7ee74a10f5fa3988bf8db1db313d2667be4dcee36fc7e700dfe9931",
+      "media_type": "text/x-python",
+      "name": "artifact.example.ml.classification.evaluate",
+      "uri": "python://solutiongraph.examples.nodes:evaluate_classifier"
+    }
+  ],
+  "dependencies": [],
+  "description": "Dependency-free executable teaching nodes for web, document, image, data-cleaning, tabular-regression, and tabular-classification examples.",
+  "descriptor_digests": [],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "example.maturity": "executable-teaching-fixture"
+  },
+  "id": "example.real-world-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:7e4135950bce4a7396d083713b6df63b26987fa5cdc9f438ee41041144e91304",
+    "sha256:e15e61224cfc0219e1e1deb13814ff146aed587e848c063c0e50fd67464904f4",
+    "sha256:f6ca9863e6665c47510f873e1ec111d2e00dfd889b2b7844263f2bbe9589ab4a",
+    "sha256:8be2b33a0193303a8fea6da63426f670f85f4f246e69d1d0e2c0db99460a605a",
+    "sha256:7f8700161f367499fd1d8af932c5e3527d3bd40b5a27b38bbddb9917372dde75",
+    "sha256:fb317064f2f5507e89b2749fafd168c9dbc03d4bbcab37bccc50acee9f6ce5c5",
+    "sha256:079a91a0458ade48b06af5793f8f055fb36de8c1265ab9d2aa7f6787d12c6543",
+    "sha256:5f7e265a676bc486e35b99c8b5b1df0860a20f8698a86817747076d383ec4ab2",
+    "sha256:93c23906208eaa70bf8ef895186a060f195927fa04c3ca39b2d7edf4c353134a",
+    "sha256:0facaa2bb0325212dabd2d1d8f44453c2a40fd7e163df38eba5416a52c88cfe8",
+    "sha256:28271264029624de7dcb2a3198e61fc3e3fab0e39f9bbc72d8ff3f18a8cf7575",
+    "sha256:c21ddbbb206038d035a83a31e6e74933356c49178fb60b9181e9c1f44a9be229",
+    "sha256:20533a2394c17999289b9563914e8c0813a4a9ffe46e7984a82982951c800f52",
+    "sha256:1607c75d4b75e7afb07d4076b6a3452426d72e5e7b46e91a80afc9106f236999",
+    "sha256:5dd8f71b1d91f0f0ffb0b883ec8b030a8128c309717cf7ab897259cd7f19ba84",
+    "sha256:b670ef8fe076b82b7980ebdfe03811d0d7f480f95569a1835a4512128e529aee",
+    "sha256:629c2d13afde566c31a8c8e6d904ebe4b9560734c4e0c63c075f0a9401d1335b",
+    "sha256:a4739aa2eb49c62e93b54f6b163b897393aa54b204694264196ce21d2880c961",
+    "sha256:04ec6b6a87d8c01866dda4a21af3f7065660db0a4d1438486b52d5c4228cbaeb",
+    "sha256:ccf296345a82bee31039f74b157f0fd5f7f14179f957892b7ca3dbea161abdcd",
+    "sha256:064fe46d6fdb148d49ed3ed4589e5e400310f0173d08515b4c6526a0b736e4fe",
+    "sha256:69da1df4b5ed9c163f9f704a67b03440b700b8253867f0d26b5cefb22f2607d3",
+    "sha256:dadbedc08f2aa0133c3b6848848f1482e5680eac9103769c3cab0adfe98623f6",
+    "sha256:357da0f530a4cd167f36c9d1c42bc3adc29e961a95a9e535e15bcc3652d9aa5e",
+    "sha256:239b268c94e0109771bcb7667a6ab339c410c7a4d384037432231e65d7d27463",
+    "sha256:dd0ef7e57f7668f117015380d94b3660c3d34e2f7f2844bfd76b2ce33f09c40a",
+    "sha256:20410721841a6d9bc366c87828c46a8c3813e83021d3bf9e0656c011232c9016",
+    "sha256:c35301f89d15c8e39126aeba2db5206a01f4fa06634ee2453d951831ffb35a48",
+    "sha256:91f7356b0555465aced637d25b40ecac3e8f5e93c960ecad6c0ecefaf221efe2",
+    "sha256:7b8643c7a372dbd827c35a42040f79dabe2a197bcad8075052942d7fb0da38e1",
+    "sha256:ecf79a133e724ad4adef96f5c0291d6c4e29c33408cae95adf4ba6fec057cd0e"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

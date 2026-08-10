@@ -1,0 +1,67 @@
+{
+  "capabilities": [
+    "web.project-schema"
+  ],
+  "description": "Project extracted page fields into a declared result schema.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:project_page_schema",
+  "failure_modes": [
+    {
+      "code": "schema.missing-field",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.web.project.schema",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:c13b70f5a475014891eba5d6ca0a15b8d2c21c1c26e8e771560b1cdad56f9fd1",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "page",
+      "type": {
+        "id": "example.page-record",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "result",
+      "type": {
+        "id": "example.scrape-result",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": null,
+      "description": "",
+      "name": "fields",
+      "required": true,
+      "value_type": "array[string]"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

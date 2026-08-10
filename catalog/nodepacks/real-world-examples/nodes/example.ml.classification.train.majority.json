@@ -1,0 +1,58 @@
+{
+  "capabilities": [
+    "ml.train-classification"
+  ],
+  "description": "Fit an explicit majority-class control model.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:train_majority_classifier",
+  "failure_modes": [
+    {
+      "code": "ml.empty-training-set",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.ml.classification.train.majority",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:a0595eb109583cdbf65def5fc5e90d6c7dd3ea52ecb7a479c9eb0b50375c326b",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "split",
+      "type": {
+        "id": "example.classification-split",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "model",
+      "type": {
+        "id": "example.classification-model",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

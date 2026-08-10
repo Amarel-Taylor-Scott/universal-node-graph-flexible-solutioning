@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "campaign-budget.schema.json",
+  "title": "Universal Node Graph Campaign Budget",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "max_candidates", "max_trials", "max_parallel_trials", "max_failures",
+    "max_wall_seconds", "max_cost_units", "fidelity_rungs", "random_seed"
+  ],
+  "properties": {
+    "max_candidates": {"type": "integer", "minimum": 1},
+    "max_trials": {"type": "integer", "minimum": 1},
+    "max_parallel_trials": {"type": "integer", "minimum": 1},
+    "max_failures": {"type": "integer", "minimum": 0},
+    "max_wall_seconds": {
+      "oneOf": [{"type": "null"}, {"type": "number", "exclusiveMinimum": 0}]
+    },
+    "max_cost_units": {
+      "oneOf": [{"type": "null"}, {"type": "number", "exclusiveMinimum": 0}]
+    },
+    "fidelity_rungs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "number", "exclusiveMinimum": 0}
+    },
+    "random_seed": {"type": "integer"}
+  }
+}

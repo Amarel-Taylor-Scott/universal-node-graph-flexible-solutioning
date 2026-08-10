@@ -49,7 +49,7 @@ Source = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-s
 
 [tool.setuptools]
 packages = [
-    "solutiongraph", "solutiongraph.schemas",
+    "solutiongraph", "solutiongraph.schemas", "solutiongraph.examples",
     "browsergraph", "browsergraph.nodes", "browsergraph.drivers",
     "browsergraph.dimensions", "browsergraph.extract", "browsergraph.classify",
     "browsergraph.tasks", "browsergraph.assets", "browsergraph.schemas",

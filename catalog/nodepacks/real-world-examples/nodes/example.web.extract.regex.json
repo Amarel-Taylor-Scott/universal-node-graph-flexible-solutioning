@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "web.extract"
+  ],
+  "description": "Extract the same fields with a simple regular-expression strategy.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:extract_page_regex",
+  "failure_modes": [],
+  "id": "example.web.extract.regex",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:3b62c6347487c27c8e4e3d9e89befab88e87d3ffcd9a6239b2bf9a75c36b0cec",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "html",
+      "type": {
+        "id": "example.html-document",
+        "media_type": "text/html",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "page",
+      "type": {
+        "id": "example.page-record",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -60,6 +60,33 @@ Use `@create-solution-template` in a compatible agent harness for the complete
 review checklist. Stages are navigation; tools and vendors remain candidate
 nodes, and optimization remains outside the execution path.
 
+## Add an executable domain or runtime
+
+1. Read `EXECUTION_PROTOCOL.md` and use `@execute-solution-graph` when available.
+2. Compile a closed-world `AdmittedSpace` and freeze exact primary/fallback bindings.
+3. Implement the narrow runtime/artifact protocols without importing domain
+   behavior into the compiler.
+4. Declare real isolation and authority; an in-process adapter is not a sandbox.
+5. Add independent task verification and retain failed/rejected receipts.
+6. Add an executable example or notebook with at least two genuine choices in
+   multiple slots.
+7. Test tampering, permissions, effects, retries, fallbacks, artifacts, and
+   verifier rejection.
+
+Run `pytest tests/test_solutiongraph_execution.py -q` in addition to the core
+suite. Mechanism fixtures are welcome when labeled; production claims require
+held-out real tasks and enforcing runtimes.
+
+## Add an LLM-generated improvement campaign
+
+1. Read `AUTORESEARCH_REVIEW.md` and use `@design-autoresearch-campaign`.
+2. Freeze task, evaluator, split, environment, registry, program, and budget.
+3. Preserve every compiled proposal and its parent IDs in a campaign ledger.
+4. Quarantine generated nodes and re-run admission for every mutation or merge.
+5. Keep hidden evaluators outside the candidate trust domain.
+6. Preserve negative evidence and confirm promotion with repeated clean
+   holdouts on a declared reference environment.
+
 ## Pull requests
 
 - Keep unrelated changes separate.

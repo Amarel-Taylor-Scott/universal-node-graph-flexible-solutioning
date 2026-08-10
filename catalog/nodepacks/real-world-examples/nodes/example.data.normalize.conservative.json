@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "data.normalize-records"
+  ],
+  "description": "Normalize field names, whitespace, and email casing.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:normalize_records_conservative",
+  "failure_modes": [],
+  "id": "example.data.normalize.conservative",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:fce6ffae7be4723e0316acdb6e0268f16d41ee1bcd23e29e73fcb542e9651721",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "example.raw-records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "example.normalized-records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

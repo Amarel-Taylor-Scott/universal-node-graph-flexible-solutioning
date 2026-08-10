@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "document.normalize"
+  ],
+  "description": "Compact repeated whitespace while preserving nonempty record lines.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:normalize_document_compact",
+  "failure_modes": [],
+  "id": "example.document.normalize.compact",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:c5238e09cf3b9a542aff99d587a124ccf39f62afe6bdefcac88bfa8b185c5bf7",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "document",
+      "type": {
+        "id": "example.document-text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "example.normalized-text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

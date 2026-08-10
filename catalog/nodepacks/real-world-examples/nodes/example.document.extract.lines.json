@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "document.extract-fields"
+  ],
+  "description": "Parse colon-delimited fields one line at a time.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:extract_document_lines",
+  "failure_modes": [],
+  "id": "example.document.extract.lines",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:6acded8319fa5a269a9a4cb1f2f9a88e2806843e9ba03191862920c42ca52b08",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "example.normalized-text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "fields",
+      "type": {
+        "id": "example.field-map",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

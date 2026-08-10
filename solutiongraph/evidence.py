@@ -7,7 +7,7 @@ from math import log, sqrt
 from statistics import fmean, pvariance
 from typing import Any
 
-from solutiongraph.model import DIGEST_RE, ID_RE
+from solutiongraph.model import DIGEST_RE, ID_RE, PORT_RE
 from solutiongraph.search import BeliefModel, CandidateWeight, InteractionWeight
 
 
@@ -43,6 +43,11 @@ class NodeRunReceipt:
     metrics: Mapping[str, float] = field(default_factory=dict)
     failure_class: str = ""
     artifact_digests: tuple[str, ...] = ()
+    attempt: int = 1
+    node_id: str = ""
+    implementation_digest: str = ""
+    runtime: str = ""
+    input_digest: str = ""
 
 
 @dataclass(frozen=True)
@@ -57,6 +62,7 @@ class RunReceipt:
     accepted: bool | None
     verifier: str
     assignments: tuple[tuple[str, str], ...]
+    verifier_digest: str = ""
     metrics: Mapping[str, float] = field(default_factory=dict)
     node_receipts: tuple[NodeRunReceipt, ...] = ()
     seed: int | None = None
@@ -67,6 +73,9 @@ class RunReceipt:
     environment_digest: str = ""
     input_digest: str = ""
     belief_revision: str = ""
+    admitted_space_digest: str = ""
+    output_artifacts: tuple[tuple[str, str], ...] = ()
+    verification_details: Mapping[str, Any] = field(default_factory=dict)
 
     def validate(self) -> list[str]:
         problems: list[str] = []
@@ -77,6 +86,8 @@ class RunReceipt:
             ("program_digest", self.program_digest),
             ("environment_digest", self.environment_digest),
             ("input_digest", self.input_digest),
+            ("admitted_space_digest", self.admitted_space_digest),
+            ("verifier_digest", self.verifier_digest),
         ):
             if digest and not DIGEST_RE.fullmatch(digest):
                 problems.append(f"{label} must be sha256:<64 lowercase hex chars>")
@@ -89,6 +100,24 @@ class RunReceipt:
             problems.append("assignments must contain one candidate per slot")
         if self.accepted is not None and not isinstance(self.accepted, bool):
             problems.append("accepted must be boolean or null")
+        output_names = [name for name, _ in self.output_artifacts]
+        if len(output_names) != len(set(output_names)):
+            problems.append("output_artifacts must contain unique graph output names")
+        for name, digest in self.output_artifacts:
+            if not PORT_RE.fullmatch(name):
+                problems.append("output artifact names must be snake_case")
+            if not DIGEST_RE.fullmatch(digest):
+                problems.append("output artifact digests must be sha256 digests")
+        for node_receipt in self.node_receipts:
+            if node_receipt.attempt <= 0:
+                problems.append("node receipt attempts must be positive")
+            for digest in (
+                node_receipt.implementation_digest,
+                node_receipt.input_digest,
+                *node_receipt.artifact_digests,
+            ):
+                if digest and not DIGEST_RE.fullmatch(digest):
+                    problems.append("node receipt digests must be sha256 digests")
         return problems
 
     def to_dict(self) -> dict[str, Any]:
@@ -100,6 +129,7 @@ class RunReceipt:
             "outcome": self.outcome,
             "accepted": self.accepted,
             "verifier": self.verifier,
+            "verifier_digest": self.verifier_digest,
             "assignments": dict(self.assignments),
             "metrics": dict(self.metrics),
             "node_receipts": [
@@ -112,6 +142,11 @@ class RunReceipt:
                     "metrics": dict(item.metrics),
                     "failure_class": item.failure_class,
                     "artifact_digests": list(item.artifact_digests),
+                    "attempt": item.attempt,
+                    "node_id": item.node_id,
+                    "implementation_digest": item.implementation_digest,
+                    "runtime": item.runtime,
+                    "input_digest": item.input_digest,
                 }
                 for item in self.node_receipts
             ],
@@ -123,6 +158,9 @@ class RunReceipt:
             "environment_digest": self.environment_digest,
             "input_digest": self.input_digest,
             "belief_revision": self.belief_revision,
+            "admitted_space_digest": self.admitted_space_digest,
+            "output_artifacts": dict(self.output_artifacts),
+            "verification_details": dict(self.verification_details),
         }
 
 

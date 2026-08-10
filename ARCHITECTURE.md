@@ -12,17 +12,22 @@ solutiongraph/
 ├── templates.py          semantic stages, reusable templates, refinement policies
 ├── template_authoring.py strict linear blueprint parser/compiler
 ├── template_library.py   original reference decompositions
-├── template_library_extended.py  twelve additional application templates
+├── template_library_extended.py  thirteen additional application templates
 ├── search.py             prior, beam, sprout, exhaustive search + honest accounting
 ├── adaptive.py           successive promotion and explicit early stopping
 ├── evidence.py           receipts, experiments, Pareto fronts, learned priors
+├── artifacts.py          replaceable content-addressed memory/file store boundary
+├── executor.py           strict frozen-plan recheck + reference Python runtime
+├── experiments.py        receipt-producing plan/case/seed allocation
+├── campaign.py           population lineage, hard budgets, and evaluator boundaries
+├── examples/             six executable cross-domain node/program examples
 ├── reference_nodes.py    small executable node-pack demonstration
 ├── catalog.py            deterministic catalogue projection
 └── schemas/              strict portable JSON Schema 2020-12 wire contracts
 
 catalog/
 ├── index.json            content-addressed template/node-pack index
-├── templates/            317 atomic obligations across 18 varied domains
+├── templates/            339 atomic obligations across 19 varied domains
 └── nodepacks/            portable reference registry and discovery sidecars
 
 browsergraph/
@@ -67,14 +72,30 @@ task contract
   → AdmittedSpace + rejection reasons
   → BeliefModel-guided prior / beam / seeded sprouts / adaptive allocation
   → content-addressed FrozenPlan
-  → executor adapter
+  → executor policy recheck + runtime adapter
+  → content-addressed node and graph-output artifacts
+  → independent verifier
   → immutable RunReceipt
+  → CampaignDecision + preserved population lineage
   → new BeliefModel revision
 ```
 
 Only the compiler crosses the definition-to-plan boundaries. Beliefs cannot
 weaken contracts, and receipts cannot mutate history. See
 `UNIVERSAL_NODE_GRAPH_SPEC.md` for the normative rules.
+
+`ReferenceExecutor` reconstructs a supplied plan through the compiler before
+running it and requires exact equality with the supplied program, registry,
+admitted space, primary bindings, and frozen fallbacks. Its default Python
+runtime is explicitly in-process and suitable for trusted fixtures, not hostile
+code. Production harnesses replace `RuntimeAdapter` and `ArtifactStore` while
+preserving the plan and receipt boundary described in `EXECUTION_PROTOCOL.md`.
+
+An LLM-generated improvement loop sits outside this pipeline. It stores each
+compiled proposal as a `CandidateRecord`, preserves all parents in a
+`CampaignLedger`, and binds the campaign to a `CampaignBudget` and immutable
+`EvaluationBoundary`. These records are orchestration contracts, not a sandbox,
+optimizer implementation, or second compiler. See `AUTORESEARCH_REVIEW.md`.
 
 Discovery is deliberately asymmetric: registries may evolve continuously, but
 a compiler consumes an immutable receipt-backed snapshot. Optional descriptions

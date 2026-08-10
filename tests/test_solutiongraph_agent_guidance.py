@@ -28,6 +28,8 @@ def test_focused_workspace_skills_are_triggerable_and_progressively_disclosed():
         "author-node-pack",
         "benchmark-solution-graph",
         "create-solution-template",
+        "design-autoresearch-campaign",
+        "execute-solution-graph",
         "model-solution-graph",
     }
     assert expected == {path.parent.name for path in skill_root.glob("*/SKILL.md")}
@@ -48,6 +50,7 @@ def test_root_instructions_stay_compact_and_vendor_files_point_to_one_source():
     assert len(agents.encode("utf-8")) < 16 * 1024
     assert "NODE_REPOSITORY_PROTOCOL.md" in agents
     assert "SOLUTION_TEMPLATE_PROTOCOL.md" in agents
+    assert "EXECUTION_PROTOCOL.md" in agents
     assert "optional discovery sidecars" in agents
     assert "seeded-sprout" in agents
     assert "@AGENTS.md" in (ROOT / "CLAUDE.md").read_text(encoding="utf-8")

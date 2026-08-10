@@ -195,8 +195,11 @@ nodepacks/<pack>/
 └── tests/
 ```
 
-The checked-in `catalog/nodepacks/reference-core/` directory demonstrates this
-layout. Regenerate it with:
+The checked-in `catalog/nodepacks/reference-core/` directory demonstrates a
+small descriptor-rich pack. `catalog/nodepacks/real-world-examples/`
+demonstrates a larger executable pack with deliberately sparse discovery
+metadata; missing descriptors or embeddings do not affect its ABI. Regenerate
+both with:
 
 ```bash
 python scripts/export_solutiongraph_catalog.py --output catalog

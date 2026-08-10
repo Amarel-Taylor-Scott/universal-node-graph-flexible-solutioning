@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "web.extract"
+  ],
+  "description": "Extract title, visible text, and links with HTMLParser.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:extract_page_html_parser",
+  "failure_modes": [],
+  "id": "example.web.extract.parser",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:100383a96b627c4c7c79864dc52fabf92c03ebcdf7ce05c7297f639ce6ea33e0",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "html",
+      "type": {
+        "id": "example.html-document",
+        "media_type": "text/html",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "page",
+      "type": {
+        "id": "example.page-record",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}
