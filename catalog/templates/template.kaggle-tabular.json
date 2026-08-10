@@ -1,0 +1,1487 @@
+{
+  "description": "A 27-obligation experiment scaffold from data acquisition through an audited submission, with EDA, leakage controls, model diversity, and ensembling visible.",
+  "domains": [
+    "machine-learning.tabular",
+    "competition.kaggle"
+  ],
+  "extensions": {
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.kaggle-tabular",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_data",
+        "target_port": "state",
+        "target_slot": "identify_target_metric"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "identify_target_metric",
+        "target_port": "state",
+        "target_slot": "schema_profile"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "schema_profile",
+        "target_port": "state",
+        "target_slot": "split_strategy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "split_strategy",
+        "target_port": "state",
+        "target_slot": "leakage_audit"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "leakage_audit",
+        "target_port": "state",
+        "target_slot": "quality_profile"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "quality_profile",
+        "target_port": "state",
+        "target_slot": "eda_distributions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "eda_distributions",
+        "target_port": "state",
+        "target_slot": "eda_relationships"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "eda_relationships",
+        "target_port": "state",
+        "target_slot": "deduplicate"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "deduplicate",
+        "target_port": "state",
+        "target_slot": "type_repair"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "type_repair",
+        "target_port": "state",
+        "target_slot": "missingness_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "missingness_policy",
+        "target_port": "state",
+        "target_slot": "outlier_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "outlier_policy",
+        "target_port": "state",
+        "target_slot": "encode_categories"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "encode_categories",
+        "target_port": "state",
+        "target_slot": "scale_numeric"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "scale_numeric",
+        "target_port": "state",
+        "target_slot": "generate_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_features",
+        "target_port": "state",
+        "target_slot": "select_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_features",
+        "target_port": "state",
+        "target_slot": "baseline_model"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "baseline_model",
+        "target_port": "state",
+        "target_slot": "candidate_model_pool"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "candidate_model_pool",
+        "target_port": "state",
+        "target_slot": "cross_validate"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "cross_validate",
+        "target_port": "state",
+        "target_slot": "out_of_fold_predictions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "out_of_fold_predictions",
+        "target_port": "state",
+        "target_slot": "calibrate"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "calibrate",
+        "target_port": "state",
+        "target_slot": "ensemble_select"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ensemble_select",
+        "target_port": "state",
+        "target_slot": "ensemble_fit"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ensemble_fit",
+        "target_port": "state",
+        "target_slot": "validate_holdout"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_holdout",
+        "target_port": "state",
+        "target_slot": "postprocess"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "postprocess",
+        "target_port": "state",
+        "target_slot": "package_submission"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "package_submission",
+        "target_port": "state",
+        "target_slot": "audit_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "template.template.kaggle-tabular",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_data",
+        "type": {
+          "id": "template.kaggle-tabular.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "audit_receipt",
+        "type": {
+          "id": "template.kaggle-tabular.state-27",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "load_data",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load train, test, metadata, and sample submission assets.",
+        "required_capabilities": [
+          "template.kaggle-tabular.load_data.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load train, test, metadata, and sample submission assets and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "identify_target_metric",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify target, evaluation metric, and submission schema.",
+        "required_capabilities": [
+          "template.kaggle-tabular.identify_target_metric.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify target, evaluation metric, and submission schema and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "schema_profile",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Profile columns, types, cardinalities, and missingness.",
+        "required_capabilities": [
+          "template.kaggle-tabular.schema_profile.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Profile columns, types, cardinalities, and missingness and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "split_strategy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define a leakage-safe validation and resampling strategy.",
+        "required_capabilities": [
+          "template.kaggle-tabular.split_strategy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define a leakage-safe validation and resampling strategy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "leakage_audit",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Audit temporal, entity, target, and duplicate leakage.",
+        "required_capabilities": [
+          "template.kaggle-tabular.leakage_audit.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Audit temporal, entity, target, and duplicate leakage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "quality_profile",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure duplicates, invalid values, drift, and anomalies.",
+        "required_capabilities": [
+          "template.kaggle-tabular.quality_profile.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure duplicates, invalid values, drift, and anomalies and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "eda_distributions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Analyze univariate target and feature distributions.",
+        "required_capabilities": [
+          "template.kaggle-tabular.eda_distributions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Analyze univariate target and feature distributions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "eda_relationships",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Analyze feature relationships and target associations.",
+        "required_capabilities": [
+          "template.kaggle-tabular.eda_relationships.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Analyze feature relationships and target associations and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "deduplicate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve duplicate rows and conflicting entities.",
+        "required_capabilities": [
+          "template.kaggle-tabular.deduplicate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve duplicate rows and conflicting entities and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "type_repair",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Repair semantic types and parse malformed values.",
+        "required_capabilities": [
+          "template.kaggle-tabular.type_repair.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Repair semantic types and parse malformed values and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "missingness_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Represent or impute missing values without leakage.",
+        "required_capabilities": [
+          "template.kaggle-tabular.missingness_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Represent or impute missing values without leakage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "outlier_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect and handle outliers under an explicit policy.",
+        "required_capabilities": [
+          "template.kaggle-tabular.outlier_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect and handle outliers under an explicit policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "encode_categories",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Encode categorical values with fold-safe fitting.",
+        "required_capabilities": [
+          "template.kaggle-tabular.encode_categories.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Encode categorical values with fold-safe fitting and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "scale_numeric",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Transform numeric values when the downstream model requires it.",
+        "required_capabilities": [
+          "template.kaggle-tabular.scale_numeric.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Transform numeric values when the downstream model requires it and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.features"
+        ],
+        "id": "generate_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate domain, interaction, aggregate, and temporal features.",
+        "required_capabilities": [
+          "template.kaggle-tabular.generate_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate domain, interaction, aggregate, and temporal features and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.features"
+        ],
+        "id": "select_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select a stable feature set using training-only evidence.",
+        "required_capabilities": [
+          "template.kaggle-tabular.select_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select a stable feature set using training-only evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "baseline_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Fit a simple reproducible baseline and establish a floor.",
+        "required_capabilities": [
+          "template.kaggle-tabular.baseline_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Fit a simple reproducible baseline and establish a floor and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "candidate_model_pool",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Fit a diverse pool of admitted model families.",
+        "required_capabilities": [
+          "template.kaggle-tabular.candidate_model_pool.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Fit a diverse pool of admitted model families and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "cross_validate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate each route using the declared validation protocol.",
+        "required_capabilities": [
+          "template.kaggle-tabular.cross_validate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate each route using the declared validation protocol and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "out_of_fold_predictions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Produce complete out-of-fold predictions.",
+        "required_capabilities": [
+          "template.kaggle-tabular.out_of_fold_predictions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Produce complete out-of-fold predictions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "calibrate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-21",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Calibrate predictions when the metric or use case requires it.",
+        "required_capabilities": [
+          "template.kaggle-tabular.calibrate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Calibrate predictions when the metric or use case requires it and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "ensemble_select",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-21",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-22",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select complementary models using holdout-safe evidence.",
+        "required_capabilities": [
+          "template.kaggle-tabular.ensemble_select.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select complementary models using holdout-safe evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "ensemble_fit",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-22",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-23",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Fit ensemble weights or stacker without validation leakage.",
+        "required_capabilities": [
+          "template.kaggle-tabular.ensemble_fit.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Fit ensemble weights or stacker without validation leakage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "validate_holdout",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-23",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-24",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run the independent holdout and robustness checks.",
+        "required_capabilities": [
+          "template.kaggle-tabular.validate_holdout.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run the independent holdout and robustness checks and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "postprocess",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-24",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-25",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply contract-preserving prediction postprocessing.",
+        "required_capabilities": [
+          "template.kaggle-tabular.postprocess.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply contract-preserving prediction postprocessing and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "package_submission",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-25",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-26",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Create and schema-check the submission artifact.",
+        "required_capabilities": [
+          "template.kaggle-tabular.package_submission.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Create and schema-check the submission artifact and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "audit_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-26",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.kaggle-tabular.state-27",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record code, data, seed, environment, route, and metrics.",
+        "required_capabilities": [
+          "template.kaggle-tabular.audit_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record code, data, seed, environment, route, and metrics and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Kaggle tabular supervised learning obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.kaggle-tabular.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.kaggle-tabular.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Load and establish the competition contract.",
+      "extensions": {},
+      "id": "stage.acquire",
+      "slot_ids": [
+        "load_data",
+        "identify_target_metric",
+        "schema_profile"
+      ],
+      "title": "Acquire"
+    },
+    {
+      "description": "Produce evidence before changing data.",
+      "extensions": {},
+      "id": "stage.investigate",
+      "slot_ids": [
+        "split_strategy",
+        "leakage_audit",
+        "quality_profile",
+        "eda_distributions",
+        "eda_relationships"
+      ],
+      "title": "Investigate"
+    },
+    {
+      "description": "Apply isolated, testable data transformations.",
+      "extensions": {},
+      "id": "stage.prepare",
+      "slot_ids": [
+        "deduplicate",
+        "type_repair",
+        "missingness_policy",
+        "outlier_policy",
+        "encode_categories",
+        "scale_numeric"
+      ],
+      "title": "Prepare"
+    },
+    {
+      "description": "Generate and select reproducible predictors.",
+      "extensions": {},
+      "id": "stage.features",
+      "slot_ids": [
+        "generate_features",
+        "select_features"
+      ],
+      "title": "Features"
+    },
+    {
+      "description": "Fit, compare, calibrate, and combine model candidates.",
+      "extensions": {},
+      "id": "stage.model",
+      "slot_ids": [
+        "baseline_model",
+        "candidate_model_pool",
+        "cross_validate",
+        "out_of_fold_predictions",
+        "calibrate",
+        "ensemble_select",
+        "ensemble_fit"
+      ],
+      "title": "Model"
+    },
+    {
+      "description": "Validate and preserve a replayable submission.",
+      "extensions": {},
+      "id": "stage.deliver",
+      "slot_ids": [
+        "validate_holdout",
+        "postprocess",
+        "package_submission",
+        "audit_receipt"
+      ],
+      "title": "Deliver"
+    }
+  ],
+  "tags": [
+    "supervised-learning",
+    "experimentation",
+    "ensemble"
+  ],
+  "template_model_version": "0.1",
+  "title": "Kaggle tabular supervised learning",
+  "version": "1.0.0"
+}

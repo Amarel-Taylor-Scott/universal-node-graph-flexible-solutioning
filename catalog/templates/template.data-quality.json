@@ -1,0 +1,871 @@
+{
+  "description": "A reusable entity cleaning, validation, enrichment, and reconciliation scaffold.",
+  "domains": [
+    "data-engineering.quality",
+    "data-management.entity"
+  ],
+  "extensions": {
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.data-quality",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_sources",
+        "target_port": "state",
+        "target_slot": "infer_schema"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "infer_schema",
+        "target_port": "state",
+        "target_slot": "profile_quality"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "profile_quality",
+        "target_port": "state",
+        "target_slot": "normalize_names"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_names",
+        "target_port": "state",
+        "target_slot": "parse_compound_names"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "parse_compound_names",
+        "target_port": "state",
+        "target_slot": "normalize_address"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_address",
+        "target_port": "state",
+        "target_slot": "parse_street_components"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "parse_street_components",
+        "target_port": "state",
+        "target_slot": "normalize_contact"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_contact",
+        "target_port": "state",
+        "target_slot": "validate_postal"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_postal",
+        "target_port": "state",
+        "target_slot": "validate_geography"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_geography",
+        "target_port": "state",
+        "target_slot": "geocode"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "geocode",
+        "target_port": "state",
+        "target_slot": "match_entities"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "match_entities",
+        "target_port": "state",
+        "target_slot": "merge_entities"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "merge_entities",
+        "target_port": "state",
+        "target_slot": "verify_constraints"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_constraints",
+        "target_port": "state",
+        "target_slot": "publish_dataset"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "template.template.data-quality",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_sources",
+        "type": {
+          "id": "template.data-quality.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_dataset",
+        "type": {
+          "id": "template.data-quality.state-15",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.profile"
+        ],
+        "id": "load_sources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load all source tables with immutable source identities.",
+        "required_capabilities": [
+          "template.data-quality.load_sources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load all source tables with immutable source identities and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.profile"
+        ],
+        "id": "infer_schema",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Infer and then confirm the semantic schema.",
+        "required_capabilities": [
+          "template.data-quality.infer_schema.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Infer and then confirm the semantic schema and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.profile"
+        ],
+        "id": "profile_quality",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure completeness, validity, uniqueness, and drift.",
+        "required_capabilities": [
+          "template.data-quality.profile_quality.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure completeness, validity, uniqueness, and drift and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "normalize_names",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize person and business names.",
+        "required_capabilities": [
+          "template.data-quality.normalize_names.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize person and business names and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "parse_compound_names",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Separate compound and household names when justified.",
+        "required_capabilities": [
+          "template.data-quality.parse_compound_names.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Separate compound and household names when justified and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "normalize_address",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize address text and locality conventions.",
+        "required_capabilities": [
+          "template.data-quality.normalize_address.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize address text and locality conventions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "parse_street_components",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Parse street components into typed fields.",
+        "required_capabilities": [
+          "template.data-quality.parse_street_components.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Parse street components into typed fields and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "normalize_contact",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize phone and electronic contact fields.",
+        "required_capabilities": [
+          "template.data-quality.normalize_contact.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize phone and electronic contact fields and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "validate_postal",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate deliverability against an admitted postal reference.",
+        "required_capabilities": [
+          "template.data-quality.validate_postal.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate deliverability against an admitted postal reference and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "validate_geography",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate geographic components against an admitted census reference.",
+        "required_capabilities": [
+          "template.data-quality.validate_geography.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate geographic components against an admitted census reference and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "geocode",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve coordinates with declared confidence and provenance.",
+        "required_capabilities": [
+          "template.data-quality.geocode.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve coordinates with declared confidence and provenance and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "match_entities",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate and score candidate entity matches.",
+        "required_capabilities": [
+          "template.data-quality.match_entities.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate and score candidate entity matches and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "merge_entities",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Merge accepted matches under a reversible policy.",
+        "required_capabilities": [
+          "template.data-quality.merge_entities.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Merge accepted matches under a reversible policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "verify_constraints",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run schema, referential, and business-rule checks.",
+        "required_capabilities": [
+          "template.data-quality.verify_constraints.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run schema, referential, and business-rule checks and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "publish_dataset",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.data-quality.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish versioned outputs, rejects, and lineage receipts.",
+        "required_capabilities": [
+          "template.data-quality.publish_dataset.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish versioned outputs, rejects, and lineage receipts and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Entity and address data quality obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.data-quality.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.data-quality.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Establish source and quality contracts.",
+      "extensions": {},
+      "id": "stage.profile",
+      "slot_ids": [
+        "load_sources",
+        "infer_schema",
+        "profile_quality"
+      ],
+      "title": "Profile"
+    },
+    {
+      "description": "Apply field-local transformations.",
+      "extensions": {},
+      "id": "stage.normalize",
+      "slot_ids": [
+        "normalize_names",
+        "parse_compound_names",
+        "normalize_address",
+        "parse_street_components",
+        "normalize_contact"
+      ],
+      "title": "Normalize"
+    },
+    {
+      "description": "Validate and reconcile entities.",
+      "extensions": {},
+      "id": "stage.resolve",
+      "slot_ids": [
+        "validate_postal",
+        "validate_geography",
+        "geocode",
+        "match_entities",
+        "merge_entities"
+      ],
+      "title": "Resolve"
+    },
+    {
+      "description": "Verify, report, and publish clean data.",
+      "extensions": {},
+      "id": "stage.publish",
+      "slot_ids": [
+        "verify_constraints",
+        "publish_dataset"
+      ],
+      "title": "Publish"
+    }
+  ],
+  "tags": [
+    "cleaning",
+    "validation",
+    "external-reference"
+  ],
+  "template_model_version": "0.1",
+  "title": "Entity and address data quality",
+  "version": "1.0.0"
+}

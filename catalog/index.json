@@ -1,0 +1,111 @@
+{
+  "catalog_model_version": "0.1",
+  "node_packs": [
+    {
+      "descriptor_count": 5,
+      "digest": "sha256:11215ea37192cbd7088a2850b8d5cf5bdfb301a8cbfc7e740321782e14ca8cec",
+      "embedding_record_count": 0,
+      "id": "reference.core-node-pack",
+      "node_count": 5,
+      "path": "nodepacks/reference-core/manifest.json",
+      "version": "1.0.0"
+    }
+  ],
+  "templates": [
+    {
+      "atomic_slot_count": 15,
+      "digest": "sha256:210b834eb448d5645bb7588f3e59d0e2289baea2a7cee232667d5cb1e7d48093",
+      "domains": [
+        "data-engineering.quality",
+        "data-management.entity"
+      ],
+      "id": "template.data-quality",
+      "path": "templates/template.data-quality.json",
+      "tags": [
+        "cleaning",
+        "validation",
+        "external-reference"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 14,
+      "digest": "sha256:0bad9b466d27ab7aa37982b3efba1b04843b31b7169311f2e9a7296209165356",
+      "domains": [
+        "software.delivery",
+        "operations.deployment"
+      ],
+      "id": "template.deployment-release",
+      "path": "templates/template.deployment-release.json",
+      "tags": [
+        "deployment",
+        "supply-chain",
+        "rollback"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 27,
+      "digest": "sha256:12cdaa27ff0498bf69c50af8eea03942582e624c9f9156bfd0e36ecea8f11e37",
+      "domains": [
+        "machine-learning.tabular",
+        "competition.kaggle"
+      ],
+      "id": "template.kaggle-tabular",
+      "path": "templates/template.kaggle-tabular.json",
+      "tags": [
+        "supervised-learning",
+        "experimentation",
+        "ensemble"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 14,
+      "digest": "sha256:06ee8c29658163d0d993220c28d55360aca7624101544c4bf9a6adfbba456960",
+      "domains": [
+        "software.application",
+        "security.identity"
+      ],
+      "id": "template.login-system",
+      "path": "templates/template.login-system.json",
+      "tags": [
+        "authentication",
+        "authorization",
+        "service"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 13,
+      "digest": "sha256:496c01621dcb85b282189360b09990e3cbcc904e5d9e194eb5833bb55190fb18",
+      "domains": [
+        "software.quality"
+      ],
+      "id": "template.qa-engineering",
+      "path": "templates/template.qa-engineering.json",
+      "tags": [
+        "testing",
+        "verification",
+        "release"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 15,
+      "digest": "sha256:c2d769fb0626274f667bccaca084698402f70dcf01e84d798765dfdfd8a1f4b6",
+      "domains": [
+        "logistics.shipping",
+        "software.event-driven"
+      ],
+      "id": "template.shipping-notifications",
+      "path": "templates/template.shipping-notifications.json",
+      "tags": [
+        "notifications",
+        "integration",
+        "workflow"
+      ],
+      "version": "1.0.0"
+    }
+  ]
+}

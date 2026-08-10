@@ -1,0 +1,821 @@
+{
+  "description": "A build, supply-chain, staged rollout, verification, and rollback scaffold.",
+  "domains": [
+    "software.delivery",
+    "operations.deployment"
+  ],
+  "extensions": {
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.deployment-release",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_release_intent",
+        "target_port": "state",
+        "target_slot": "resolve_dependencies"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "resolve_dependencies",
+        "target_port": "state",
+        "target_slot": "build_artifact"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_artifact",
+        "target_port": "state",
+        "target_slot": "generate_provenance"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_provenance",
+        "target_port": "state",
+        "target_slot": "test_artifact"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "test_artifact",
+        "target_port": "state",
+        "target_slot": "scan_artifact"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "scan_artifact",
+        "target_port": "state",
+        "target_slot": "approve_release"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "approve_release",
+        "target_port": "state",
+        "target_slot": "provision_target"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "provision_target",
+        "target_port": "state",
+        "target_slot": "deploy_canary"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "deploy_canary",
+        "target_port": "state",
+        "target_slot": "verify_canary"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_canary",
+        "target_port": "state",
+        "target_slot": "progressive_rollout"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "progressive_rollout",
+        "target_port": "state",
+        "target_slot": "verify_production"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_production",
+        "target_port": "state",
+        "target_slot": "rollback_or_finalize"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "rollback_or_finalize",
+        "target_port": "state",
+        "target_slot": "publish_release_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "template.template.deployment-release",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_release_intent",
+        "type": {
+          "id": "template.deployment-release.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_release_receipt",
+        "type": {
+          "id": "template.deployment-release.state-14",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "load_release_intent",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load approved change intent, policy, and target environment.",
+        "required_capabilities": [
+          "template.deployment-release.load_release_intent.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load approved change intent, policy, and target environment and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "resolve_dependencies",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve immutable source and dependency identities.",
+        "required_capabilities": [
+          "template.deployment-release.resolve_dependencies.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve immutable source and dependency identities and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "build_artifact",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build an isolated, reproducible release artifact.",
+        "required_capabilities": [
+          "template.deployment-release.build_artifact.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build an isolated, reproducible release artifact and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "generate_provenance",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate signed build and dependency provenance.",
+        "required_capabilities": [
+          "template.deployment-release.generate_provenance.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate signed build and dependency provenance and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "test_artifact",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Test the exact artifact that will be deployed.",
+        "required_capabilities": [
+          "template.deployment-release.test_artifact.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Test the exact artifact that will be deployed and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "scan_artifact",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Scan policy, vulnerabilities, licenses, and secrets.",
+        "required_capabilities": [
+          "template.deployment-release.scan_artifact.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Scan policy, vulnerabilities, licenses, and secrets and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "approve_release",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record an authorized release decision.",
+        "required_capabilities": [
+          "template.deployment-release.approve_release.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record an authorized release decision and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rollout"
+        ],
+        "id": "provision_target",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Prepare target resources through an idempotent plan.",
+        "required_capabilities": [
+          "template.deployment-release.provision_target.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Prepare target resources through an idempotent plan and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rollout"
+        ],
+        "id": "deploy_canary",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Deploy to a bounded canary population.",
+        "required_capabilities": [
+          "template.deployment-release.deploy_canary.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Deploy to a bounded canary population and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rollout"
+        ],
+        "id": "verify_canary",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate canary health against independent SLOs.",
+        "required_capabilities": [
+          "template.deployment-release.verify_canary.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate canary health against independent SLOs and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rollout"
+        ],
+        "id": "progressive_rollout",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Increase exposure under explicit promotion gates.",
+        "required_capabilities": [
+          "template.deployment-release.progressive_rollout.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Increase exposure under explicit promotion gates and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.close"
+        ],
+        "id": "verify_production",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify production behavior and user-visible outcomes.",
+        "required_capabilities": [
+          "template.deployment-release.verify_production.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify production behavior and user-visible outcomes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.close"
+        ],
+        "id": "rollback_or_finalize",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Rollback safely or finalize the release state.",
+        "required_capabilities": [
+          "template.deployment-release.rollback_or_finalize.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Rollback safely or finalize the release state and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.close"
+        ],
+        "id": "publish_release_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.deployment-release.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish artifact, approvals, observations, and decisions.",
+        "required_capabilities": [
+          "template.deployment-release.publish_release_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish artifact, approvals, observations, and decisions and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Deployment and release obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.deployment-release.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.deployment-release.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Freeze intent and prove the build inputs.",
+      "extensions": {},
+      "id": "stage.prepare",
+      "slot_ids": [
+        "load_release_intent",
+        "resolve_dependencies",
+        "build_artifact",
+        "generate_provenance"
+      ],
+      "title": "Prepare"
+    },
+    {
+      "description": "Run pre-release assurance.",
+      "extensions": {},
+      "id": "stage.qualify",
+      "slot_ids": [
+        "test_artifact",
+        "scan_artifact",
+        "approve_release"
+      ],
+      "title": "Qualify"
+    },
+    {
+      "description": "Change environments through bounded stages.",
+      "extensions": {},
+      "id": "stage.rollout",
+      "slot_ids": [
+        "provision_target",
+        "deploy_canary",
+        "verify_canary",
+        "progressive_rollout"
+      ],
+      "title": "Roll out"
+    },
+    {
+      "description": "Verify, recover if needed, and preserve evidence.",
+      "extensions": {},
+      "id": "stage.close",
+      "slot_ids": [
+        "verify_production",
+        "rollback_or_finalize",
+        "publish_release_receipt"
+      ],
+      "title": "Close"
+    }
+  ],
+  "tags": [
+    "deployment",
+    "supply-chain",
+    "rollback"
+  ],
+  "template_model_version": "0.1",
+  "title": "Deployment and release",
+  "version": "1.0.0"
+}

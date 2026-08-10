@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "registry-capabilities.schema.json",
+  "title": "Universal Node Graph registry capabilities",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "discovery_version", "registry_id", "registry_version", "registry_digest",
+    "protocol_versions", "schemas", "query_modes", "embedding_spaces",
+    "descriptor_fields", "supports_enumeration", "supports_snapshots",
+    "supports_continuation", "supports_explanations", "max_page_size", "extensions"
+  ],
+  "properties": {
+    "discovery_version": {"const": "0.1"},
+    "registry_id": {"$ref": "common.schema.json#/$defs/id"},
+    "registry_version": {"type": "string", "minLength": 1},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "protocol_versions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "schemas": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/schema_support"}},
+    "query_modes": {"type": "array", "minItems": 1, "items": {"$ref": "common.schema.json#/$defs/query_mode"}},
+    "embedding_spaces": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/embedding_space"}},
+    "descriptor_fields": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "supports_enumeration": {"type": "boolean"},
+    "supports_snapshots": {"type": "boolean"},
+    "supports_continuation": {"type": "boolean"},
+    "supports_explanations": {"type": "boolean"},
+    "max_page_size": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

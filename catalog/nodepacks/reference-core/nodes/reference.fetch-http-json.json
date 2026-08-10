@@ -1,0 +1,80 @@
+{
+  "capabilities": [
+    "connector.http-json"
+  ],
+  "description": "Execute an explicit read-only HTTP request and parse JSON.",
+  "determinism": "recorded",
+  "effects": [
+    "network.read"
+  ],
+  "entrypoint": "solutiongraph.reference_nodes:fetch_http_json",
+  "failure_modes": [
+    {
+      "code": "policy.disallowed-method",
+      "description": "The request method is not GET or HEAD.",
+      "retryable": false
+    },
+    {
+      "code": "network.timeout",
+      "description": "The request exceeded its timeout.",
+      "retryable": true
+    },
+    {
+      "code": "network.http-error",
+      "description": "The remote service returned an error.",
+      "retryable": true
+    },
+    {
+      "code": "data.invalid-json",
+      "description": "The response is not strict JSON.",
+      "retryable": false
+    }
+  ],
+  "id": "reference.fetch-http-json",
+  "idempotency": "conditional",
+  "implementation_digest": "sha256:4287e374d54883b1afd77b72fea5f7d24fbc8ee30dfd477868a0a8d0d55d8698",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "request",
+      "type": {
+        "id": "reference.http-request",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "value",
+      "type": {
+        "id": "reference.json-value",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [
+    "network.read"
+  ],
+  "postconditions": [],
+  "preconditions": [
+    "The request policy authorizes the URL.",
+    "The request method is GET or HEAD and has no body."
+  ],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/reference_nodes.py",
+  "verifier": "reference.verify.http-receipt",
+  "version": "1.0.0"
+}

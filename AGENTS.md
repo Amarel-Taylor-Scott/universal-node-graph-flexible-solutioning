@@ -14,8 +14,10 @@ engine.
 ## Read before architectural changes
 
 1. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative model and invariants.
-2. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
-3. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
+2. `NODE_REPOSITORY_PROTOCOL.md` — discovery sidecars, embeddings, handshake, snapshots.
+3. `SOLUTION_TEMPLATE_PROTOCOL.md` — stages, atomic slots, and refinement loops.
+4. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
+5. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
 
 For requests to model a new problem using this architecture, use the workspace
 skill in `.agents/skills/model-solution-graph/SKILL.md`.
@@ -50,6 +52,10 @@ steps as if they were more steps.
   optionality contract make it an actual identity operation.
 - Content-address executable code, program definitions, registries, plans,
   environments, inputs, and output artifacts separately.
+- Treat descriptors, documents, and embeddings as optional discovery sidecars;
+  none can grant a capability, change a type, or repair an invalid `NodeSpec`.
+- Negotiate registry/search capabilities, preserve a discovery receipt, and
+  compile a closed-world snapshot. Do not claim global completeness.
 
 ## Node ABI changes
 
@@ -68,8 +74,8 @@ objects, not in `NodeSpec`.
 
 ## Search and experiment rules
 
-- Preserve a fast prior route, an explicit bounded anytime mode, and an explicit
-  exhaustive mode with no hidden cap.
+- Preserve a fast prior route, bounded beam and seeded-sprout modes, adaptive
+  resource promotion, and an explicit exhaustive mode with no hidden cap.
 - Every search report must disclose total Cartesian upper bound, evaluated,
   constraint-eliminated, heuristic-skipped, and unvisited routes, plus the
   belief revision and budget.
@@ -94,6 +100,7 @@ objects, not in `NodeSpec`.
 
 - `solutiongraph/` — domain-neutral semantic model, compiler, search, evidence.
 - `solutiongraph/schemas/` — strict portable wire schemas.
+- `catalog/` — generated semantic templates and reference node pack.
 - `browsergraph/` — browser runtime adapter and original proof of concept.
 - `examples/` — generated viewers, canonical data, and executable examples.
 - `tests/test_solutiongraph.py` — universal conformance tests.
@@ -104,8 +111,8 @@ objects, not in `NodeSpec`.
 Core changes:
 
 ```bash
-pytest tests/test_solutiongraph.py tests/test_workbench.py -q
-ruff check solutiongraph browsergraph tests/test_solutiongraph.py
+pytest tests/test_solutiongraph*.py tests/test_workbench.py -q
+ruff check solutiongraph browsergraph tests/test_solutiongraph*.py
 ```
 
 Full deterministic suite:
@@ -116,4 +123,3 @@ pytest -q
 
 Do not require optional browsers, model providers, or network access for the
 universal core tests. Preserve user changes and avoid unrelated rewrites.
-

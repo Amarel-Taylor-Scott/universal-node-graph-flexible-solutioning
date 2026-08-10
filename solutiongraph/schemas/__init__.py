@@ -1,4 +1,5 @@
 """Bundled JSON Schemas for non-Python registries and executors."""
+
 from __future__ import annotations
 
 import json
@@ -12,6 +13,17 @@ SCHEMA_NAMES = (
     "registry.schema.json",
     "frozen-plan.schema.json",
     "run-receipt.schema.json",
+    "node-descriptor.schema.json",
+    "embedding-record.schema.json",
+    "registry-capabilities.schema.json",
+    "harness-capabilities.schema.json",
+    "registry-session.schema.json",
+    "discovery-query.schema.json",
+    "discovery-receipt.schema.json",
+    "registry-snapshot.schema.json",
+    "node-pack.schema.json",
+    "solution-template.schema.json",
+    "search-report.schema.json",
 )
 
 
@@ -27,4 +39,3 @@ def load_all_schemas() -> dict[str, dict[str, Any]]:
 
 
 __all__ = ["SCHEMA_NAMES", "load_all_schemas", "load_schema"]
-

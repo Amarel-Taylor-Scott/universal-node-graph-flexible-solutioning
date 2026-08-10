@@ -1,0 +1,58 @@
+{
+  "capabilities": [
+    "data.parse-json"
+  ],
+  "description": "Parse JSON text without repairing malformed input.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.reference_nodes:parse_json",
+  "failure_modes": [
+    {
+      "code": "data.invalid-json",
+      "description": "Input is not strict JSON.",
+      "retryable": false
+    }
+  ],
+  "id": "reference.parse-json",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:c20226b034907758620b20f316fdd0ace4e4e5b6f2128b717504f2c18d826bfa",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "reference.json-text",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "value",
+      "type": {
+        "id": "reference.json-value",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/reference_nodes.py",
+  "verifier": "reference.verify.json-roundtrip",
+  "version": "1.0.0"
+}

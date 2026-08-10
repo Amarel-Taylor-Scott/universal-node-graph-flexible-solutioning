@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "node-pack.schema.json",
+  "title": "Universal Node Graph node pack manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "discovery_version", "id", "version", "description", "node_spec_digests",
+    "descriptor_digests", "embedding_record_digests", "artifacts", "dependencies",
+    "source", "license", "extensions"
+  ],
+  "properties": {
+    "discovery_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "node_spec_digests": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "descriptor_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "embedding_record_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "artifacts": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/artifact_reference"}},
+    "dependencies": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/artifact_reference"}},
+    "source": {"type": "string"},
+    "license": {"type": "string"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

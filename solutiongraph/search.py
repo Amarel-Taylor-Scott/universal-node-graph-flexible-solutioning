@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from enum import Enum
 from itertools import product
 from math import isfinite, prod
+from random import Random
 
 from solutiongraph.model import AdmittedSpace
 
@@ -17,6 +18,7 @@ from solutiongraph.model import AdmittedSpace
 class SearchMode(str, Enum):
     PRIOR = "prior"
     BEAM = "beam"
+    SPROUT = "sprout"
     EXHAUSTIVE = "exhaustive"
 
 
@@ -106,6 +108,9 @@ class SearchBudget:
     evaluation_limit: int | None = None
     result_limit: int = 10
     beam_width: int = 32
+    random_seed: int | None = None
+    sampling_attempt_limit: int | None = None
+    mutation_probability: float = 0.35
 
     def validate(self) -> list[str]:
         problems: list[str] = []
@@ -115,6 +120,17 @@ class SearchBudget:
             problems.append("result_limit must be positive")
         if self.beam_width <= 0:
             problems.append("beam_width must be positive")
+        if self.sampling_attempt_limit is not None and self.sampling_attempt_limit <= 0:
+            problems.append("sampling_attempt_limit must be positive or null")
+        if not 0.0 <= self.mutation_probability <= 1.0:
+            problems.append("mutation_probability must be between zero and one")
+        if self.mode == SearchMode.SPROUT:
+            if self.evaluation_limit is None:
+                problems.append("sprout search requires an explicit evaluation_limit")
+            if self.sampling_attempt_limit is None:
+                problems.append("sprout search requires an explicit sampling_attempt_limit")
+            if self.random_seed is None:
+                problems.append("sprout search requires an explicit random_seed")
         return problems
 
 
@@ -154,6 +170,12 @@ class SearchReport:
     result_limit: int
     beam_width: int | None
     proposals: tuple[RouteProposal, ...]
+    random_seed: int | None = None
+    sampling_attempt_limit: int | None = None
+    sampling_attempts: int = 0
+    duplicate_samples: int = 0
+    invalid_samples: int = 0
+    mutation_probability: float | None = None
 
     @property
     def evaluation_coverage(self) -> float:
@@ -177,6 +199,14 @@ class SearchReport:
                 "evaluation_limit": self.evaluation_limit,
                 "result_limit": self.result_limit,
                 "beam_width": self.beam_width,
+                "random_seed": self.random_seed,
+                "sampling_attempt_limit": self.sampling_attempt_limit,
+                "mutation_probability": self.mutation_probability,
+            },
+            "sampling": {
+                "attempts": self.sampling_attempts,
+                "duplicates": self.duplicate_samples,
+                "invalid": self.invalid_samples,
             },
             "proposals": [proposal.to_dict() for proposal in self.proposals],
         }
@@ -231,6 +261,8 @@ class SearchEngine:
         space: AdmittedSpace,
         beliefs: BeliefModel | None = None,
         budget: SearchBudget | None = None,
+        *,
+        anchors: tuple[Mapping[str, str], ...] = (),
     ) -> SearchReport:
         beliefs = beliefs or BeliefModel()
         budget = budget or SearchBudget()
@@ -239,8 +271,124 @@ class SearchEngine:
             raise ValueError("invalid search configuration: " + "; ".join(problems))
         if budget.mode == SearchMode.EXHAUSTIVE:
             return self._search_exhaustive(space, beliefs, budget)
+        if budget.mode == SearchMode.SPROUT:
+            return self._search_sprout(space, beliefs, budget, anchors)
         width = 1 if budget.mode == SearchMode.PRIOR else budget.beam_width
         return self._search_beam(space, beliefs, budget, width)
+
+    def _search_sprout(
+        self,
+        space: AdmittedSpace,
+        beliefs: BeliefModel,
+        budget: SearchBudget,
+        anchors: tuple[Mapping[str, str], ...],
+    ) -> SearchReport:
+        """Sample unique routes, optionally mutating around suggested starting points."""
+        choices = self._ordered_choices(space, beliefs)
+        choice_map = dict(choices)
+        total = space.route_count_upper_bound
+        assert budget.evaluation_limit is not None
+        assert budget.sampling_attempt_limit is not None
+        assert budget.random_seed is not None
+
+        for anchor_index, anchor in enumerate(anchors):
+            unknown_slots = sorted(set(anchor) - set(choice_map))
+            if unknown_slots:
+                raise ValueError(
+                    f"anchor {anchor_index} contains unknown slots: " + ", ".join(unknown_slots)
+                )
+            invalid = sorted(
+                f"{slot}={candidate}"
+                for slot, candidate in anchor.items()
+                if candidate not in choice_map[slot]
+            )
+            if invalid:
+                raise ValueError(
+                    f"anchor {anchor_index} contains non-admitted candidates: " + ", ".join(invalid)
+                )
+
+        random = Random(budget.random_seed)
+        sampled: set[tuple[tuple[str, str], ...]] = set()
+        evaluated: set[tuple[tuple[str, str], ...]] = set()
+        proposals: list[RouteProposal] = []
+        attempts = 0
+        duplicates = 0
+        invalid_samples = 0
+
+        while (
+            len(evaluated) < min(budget.evaluation_limit, total)
+            and attempts < budget.sampling_attempt_limit
+        ):
+            anchor = anchors[attempts % len(anchors)] if anchors else {}
+            attempts += 1
+            selection: dict[str, str] = {}
+            mutated = False
+            mutable_slots: list[str] = []
+            for slot_id, candidates in choices:
+                anchor_choice = anchor.get(slot_id)
+                if anchor_choice is None:
+                    selection[slot_id] = candidates[random.randrange(len(candidates))]
+                    continue
+                alternatives = tuple(
+                    candidate for candidate in candidates if candidate != anchor_choice
+                )
+                if alternatives:
+                    mutable_slots.append(slot_id)
+                if alternatives and random.random() < budget.mutation_probability:
+                    selection[slot_id] = alternatives[random.randrange(len(alternatives))]
+                    mutated = True
+                else:
+                    selection[slot_id] = anchor_choice
+            if anchor and mutable_slots and not mutated:
+                slot_id = mutable_slots[random.randrange(len(mutable_slots))]
+                alternatives = tuple(
+                    candidate for candidate in choice_map[slot_id] if candidate != anchor[slot_id]
+                )
+                selection[slot_id] = alternatives[random.randrange(len(alternatives))]
+
+            assignments = tuple((slot_id, selection[slot_id]) for slot_id, _ in choices)
+            if assignments in sampled:
+                duplicates += 1
+                continue
+            sampled.add(assignments)
+            if self._violates_constraint(space, selection):
+                invalid_samples += 1
+                continue
+
+            score = 0.0
+            contributions: tuple[tuple[str, float], ...] = ()
+            partial: dict[str, str] = {}
+            for slot_id, candidate_id in assignments:
+                partial[slot_id] = candidate_id
+                increment, factors = beliefs.incremental_score(partial, slot_id, candidate_id)
+                score += increment
+                contributions += factors
+            evaluated.add(assignments)
+            proposals.append(RouteProposal(assignments, score, contributions))
+
+        proposals.sort(key=self._proposal_key)
+        complete = not space.constraints and len(evaluated) == total
+        return SearchReport(
+            mode=budget.mode,
+            belief_revision=beliefs.revision,
+            total_cartesian_routes=total,
+            evaluated_routes=len(evaluated),
+            constraint_eliminated_routes=0,
+            heuristic_skipped_routes=0,
+            unvisited_routes=max(0, total - len(evaluated)),
+            complete=complete,
+            optimality_proven=complete,
+            evaluation_limit=budget.evaluation_limit,
+            result_limit=budget.result_limit,
+            beam_width=None,
+            proposals=tuple(proposals[: budget.result_limit]),
+            random_seed=budget.random_seed,
+            sampling_attempt_limit=budget.sampling_attempt_limit,
+            sampling_attempts=attempts,
+            duplicate_samples=duplicates,
+            invalid_samples=invalid_samples,
+            mutation_probability=budget.mutation_probability,
+        )
 
     def _search_exhaustive(
         self, space: AdmittedSpace, beliefs: BeliefModel, budget: SearchBudget

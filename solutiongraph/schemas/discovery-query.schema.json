@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "discovery-query.schema.json",
+  "title": "Universal Node Graph discovery query",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "discovery_version", "id", "session_digest", "text",
+    "required_capabilities", "required_input_types", "required_output_types",
+    "domains", "tags", "requested_modes", "embedding_targets", "page_size",
+    "cursor", "extensions"
+  ],
+  "properties": {
+    "discovery_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "session_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "text": {"type": "string"},
+    "required_capabilities": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "required_input_types": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "required_output_types": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "domains": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "tags": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "requested_modes": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "embedding_targets": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["space_id", "target"],
+        "properties": {
+          "space_id": {"$ref": "common.schema.json#/$defs/id"},
+          "target": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "page_size": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+    "cursor": {"type": "string"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

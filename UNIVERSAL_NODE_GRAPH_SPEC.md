@@ -108,6 +108,24 @@ Empirical quality, latency, or success scores MUST NOT live in the node ABI.
 Those values change with workload and time and belong in a belief/evidence
 overlay.
 
+#### 3.3.1 Discovery sidecars and portable node packs
+
+A node MAY have sparse, independently versioned `NodeDescriptor`,
+`SearchDocument`, and `EmbeddingRecord` sidecars. They can describe purposes,
+solutions, actions, domains, examples, and ABI-port meanings through any number
+of search views. They MUST identify the exact `NodeSpec` digest and MUST NOT add
+capabilities, types, effects, or permissions to it.
+
+Every embedding declares an exact space identity including model/revision,
+representation kind, dimensions, distance, normalization, and scalar type.
+Equal dimensions alone are not compatibility. Missing discovery fields or
+embeddings never make an otherwise valid node invalid.
+
+A `NodePackManifest` is a content-addressed distribution record for node,
+descriptor, embedding, artifact, and dependency digests. Core wire objects are
+strict; forward-compatible metadata is confined to namespaced `extensions`.
+See `NODE_REPOSITORY_PROTOCOL.md` for the normative discovery flow.
+
 ### 3.4 Candidate
 
 A candidate is one concrete binding of one node version and implementation
@@ -133,11 +151,12 @@ A conforming compiler performs these passes in order:
 3. Check port producer counts and nominal type compatibility.
 4. Reject cycles at the current level; require structured control nodes.
 5. Validate every node and candidate in the registry.
-6. Perform a full registry handshake for every slot and candidate.
-7. Emit an admission decision for every examined pair, including rejection reasons.
-8. Apply explicit n-ary configuration constraints.
-9. Require exactly one admitted candidate per slot for a concrete route.
-10. Freeze exact node versions, implementation digests, parameters, registry digest,
+6. Consume an immutable discovery-receipt-backed registry snapshot.
+7. Perform full admission for every slot and candidate in that snapshot.
+8. Emit an admission decision for every examined pair, including rejection reasons.
+9. Apply explicit n-ary configuration constraints.
+10. Require exactly one admitted candidate per slot for a concrete route.
+11. Freeze exact node versions, implementation digests, parameters, registry digest,
     program digest, topology, and edges into a content-addressed plan.
 
 Compiler validity and optimizer profitability are separate functions. A route
@@ -148,10 +167,17 @@ The current `solutiongraph.Compiler` implements these passes for the 0.1 model.
 Diagnostics use stable `UNG-*` codes and are collected before raising so humans
 and coding agents can correct multiple defects in one pass.
 
-## 5. Candidate completeness and exclusions
+## 5. Discovery coverage, candidate completeness, and exclusions
 
-The registry handshake examines every registered candidate for every slot.
-There is no architectural top-k. Each pair produces an `AdmissionDecision`.
+The global set of independently published nodes may be open, federated, and
+unbounded. A harness first negotiates query and schema capabilities, records a
+replayable discovery query and coverage receipt, and freezes the results into a
+closed-world registry snapshot. An incomplete query preserves its continuation
+token or explicit coverage note; it MUST NOT be called globally complete.
+
+Within that immutable snapshot, compiler admission examines every registered
+candidate for every slot. There is no architectural top-k. Each pair produces
+an `AdmissionDecision`.
 
 Search budgets may limit which admitted routes are evaluated, but they MUST NOT
 make candidates disappear from the registry or viewer. Any policy exclusion
@@ -184,16 +210,21 @@ Required search modes are:
 
 - **Prior route:** fastest useful configuration; greedy width-one search.
 - **Bounded anytime search:** beam/best-first search with an explicit budget.
+- **Seeded sprout search:** unique random configurations, optionally mutated
+  around full or partial starting routes, with explicit attempt/evaluation/
+  mutation budgets.
 - **Adaptive experiment search:** allocate partial budgets, stop poor trials,
   and update beliefs from receipts.
 - **Exhaustive search:** enumerate every feasible configuration without a hidden
   cap when the user supplies sufficient compute.
 
-The 0.1 implementation provides prior, beam, and exhaustive modes. Exhaustive
-iteration is streaming through `SearchEngine.iter_exhaustive`. `SearchReport`
+The 0.1 implementation provides prior, beam, seeded sprout, successive-halving,
+patience-based early stopping, and exhaustive primitives. Exhaustive iteration
+is streaming through `SearchEngine.iter_exhaustive`. `SearchReport`
 records the Cartesian upper bound, evaluated routes, constraint-eliminated
 routes, heuristic-skipped routes, unvisited routes, belief revision, budget,
-and whether optimality was actually proven.
+sampling attempts/duplicates/invalid samples where applicable, and whether
+optimality was actually proven.
 
 “Best” SHOULD default to a Pareto set across quality, cost, latency,
 reliability, policy, and resource objectives. A scalar weighted score is a
@@ -283,9 +314,10 @@ independent verifier can be used.
 - **Level 4 — Adaptive:** learned priors with uncertainty, safe rollout, drift
   detection, diverse fallbacks, and reversible promotion.
 
-This repository currently implements Level 1 as a general Python core and parts
-of Levels 2–4 as evidence/search primitives. BrowserGraph remains the richer
-runtime proof, not the definition of the architecture.
+This repository currently implements Level 1 as a general Python core, portable
+discovery/template contracts, and parts of Levels 2–4 as evidence/search and
+multi-fidelity primitives. BrowserGraph remains the richer runtime proof, not
+the definition of the architecture.
 
 ## 12. Definition of done for a new domain
 
@@ -301,4 +333,3 @@ A domain adapter is not complete until it can demonstrate all of the following:
 8. A benchmark can compare routes, select a Pareto front, and identify a diverse fallback.
 9. An agent can implement the adapter by following the repository instructions
    without inventing hidden steps or conflating slots with candidates.
-

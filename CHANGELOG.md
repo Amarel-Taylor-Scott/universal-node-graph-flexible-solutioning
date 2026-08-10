@@ -6,6 +6,19 @@ All notable changes to this proof of concept are documented here.
 
 ### Added
 
+- Sparse node discovery descriptors, unlimited search documents, exact named
+  embedding spaces, and harness–registry capability negotiation.
+- Replayable discovery queries, coverage receipts, closed-world registry
+  snapshots, content-addressed node packs, and eleven strict portable schemas.
+- Semantic solution templates with visible stages, exact slot partitions, and
+  bounded control-plane refinement policies.
+- Six cross-domain templates containing 98 atomic obligations plus a generated
+  reference node pack with explicit identity, validation, file, and HTTP nodes.
+- Seeded random-sprout route proposals around full or partial anchors with
+  explicit sampling budgets and accounting.
+- Successive-halving resource promotion and deterministic patience-based early stopping.
+- Agent patterns, anti-patterns, node/discovery/template/experiment references,
+  and protocols for reusable node repositories and template instantiation.
 - Domain-neutral `solutiongraph` compiler core, independent of BrowserGraph.
 - Strict semantic program, node ABI, candidate registry, admitted space,
   frozen plan, search report, and immutable evidence representations.

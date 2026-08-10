@@ -23,17 +23,22 @@ diagram or candidate count is not, by itself, progress.
   effects, permissions, determinism, resources, failure modes, and provenance.
 - Full registry-to-slot admission handshake with an inspectable decision for
   every candidate/slot pair and n-ary configuration constraints.
-- Prior-guided, beam, and uncapped exhaustive route search with explicit
+- Negotiated registry discovery with sparse descriptors, exact named embedding
+  spaces, graceful query fallback, coverage receipts, and closed-world snapshots.
+- Portable node packs and a deterministic reference catalogue containing five
+  node contracts and six cross-domain templates with 98 atomic obligations.
+- Prior-guided, beam, seeded-sprout, and uncapped exhaustive route search with explicit
   accounting for evaluated, rejected, skipped, and unvisited configurations.
+- Successive-halving promotion and patience-based early stopping primitives.
 - Immutable run receipts, Pareto comparison, observational belief fitting, and
   repository instructions for Codex, Claude, Gemini, Copilot, and other agents.
 
-## Phase 1 — compiler and registry handshake (foundation implemented)
+## Phase 1 — compiler and registry discovery (foundation implemented)
 
 - Stabilize and version the semantic program, node registry, admitted space,
   search report, frozen plan, and run receipt representations.
-- Extend version-, type-, capability-, effect-, permission-, and deployment-
-  aware registry negotiation across language runtimes.
+- Exercise version-, type-, capability-, effect-, permission-, deployment-, and
+  search-capability negotiation across language runtimes and independent registries.
 - Persist admission coverage and all rejection reasons as portable artifacts.
 - Materialize large parameter spaces lazily while preserving exact counts and
   deterministic generation rules.

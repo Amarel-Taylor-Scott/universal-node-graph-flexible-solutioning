@@ -1,0 +1,74 @@
+{
+  "capabilities": [
+    "data.require-keys"
+  ],
+  "description": "Require a finite configured set of object keys.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.reference_nodes:require_keys",
+  "failure_modes": [
+    {
+      "code": "data.invalid-shape",
+      "description": "Input is not a JSON object.",
+      "retryable": false
+    },
+    {
+      "code": "data.missing-key",
+      "description": "A required key is absent.",
+      "retryable": false
+    }
+  ],
+  "id": "reference.require-keys",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:0b72872d87e76608f8e4f1567c669a273ce565407027c97099d569be0f4a500f",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "value",
+      "type": {
+        "id": "reference.json-object",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "value",
+      "type": {
+        "id": "reference.json-object",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": null,
+      "description": "Required object keys.",
+      "name": "keys",
+      "required": true,
+      "value_type": "array[string]"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [
+    "Input is a JSON object."
+  ],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/reference_nodes.py",
+  "verifier": "reference.verify.required-keys",
+  "version": "1.0.0"
+}

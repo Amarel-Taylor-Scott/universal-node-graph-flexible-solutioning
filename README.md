@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![Core deps: none](https://img.shields.io/badge/core%20deps-stdlib--only-brightgreen)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-461%20passing-brightgreen)](tests/)
+[![Tests](https://img.shields.io/badge/tests-493%20passing-brightgreen)](tests/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
 A proof of concept for a different way to build software: compile each task
@@ -17,11 +17,13 @@ catalogue. Macro stages and atomic substeps are task data; node definitions,
 parameter bindings, contracts, routes, objectives, and feedback are separate
 typed objects that can grow without redesigning the viewer or compiler.
 
-The new `solutiongraph` package is the domain-neutral compiler core. It defines
-strict semantic programs, a content-addressed node ABI, complete registry
-admission, frozen execution plans, prior/beam/exhaustive route search, immutable
-evidence, Pareto ranking, and observational prior learning. `browsergraph` is
-now explicitly one concrete runtime adapter and stress test.
+The `solutiongraph` package is the domain-neutral compiler core. It defines
+strict semantic programs, a content-addressed node ABI, negotiated node
+discovery, sparse descriptions and exact embedding spaces, closed-world
+registry snapshots, reusable semantic templates, complete admission, frozen
+plans, prior/beam/sprout/exhaustive search, adaptive resource allocation,
+immutable evidence, Pareto ranking, and observational prior learning.
+`browsergraph` is explicitly one concrete runtime adapter and stress test.
 
 ```text
 Task
@@ -47,8 +49,10 @@ is not mixed into the execution path as another step.
 | Local and global optimization | Recommend one substep, optimize one macro submatrix, or propose a complete route |
 | Evidence and learning | Typed receipts, feedback channels, fallbacks, independent verification, and inspectable decision traces |
 | Portable specifications | JSON Schema for node manifests and versioned workbench data |
-| Domain-neutral compilation | Strict slots, ports, effects, permissions, registry handshake, diagnostics, and content-addressed frozen plans |
-| Honest route search | Fast prior, bounded beam, and uncapped streaming exhaustive modes with coverage/accounting reports |
+| Reusable node ecosystem | Strict executable contracts, optional descriptors/documents/embeddings, negotiated search, discovery receipts, snapshots, and node packs |
+| Cross-domain templates | Six checked-in templates containing 98 atomic obligations across ML, data quality, QA, auth, deployment, and logistics |
+| Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
+| Honest route search | Fast prior, bounded beam, seeded sprouts, adaptive promotion, and uncapped streaming exhaustive modes with coverage/accounting reports |
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
 | Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and an on-demand workspace Agent Skill |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
@@ -68,7 +72,7 @@ python examples/solutiongraph_quickstart.py
 ```python
 from solutiongraph import Compiler, SearchBudget, SearchEngine, SearchMode
 
-space = Compiler().admit(program, registry)  # full registry handshake
+space = Compiler().admit(program, registry)  # full admission over this snapshot
 report = SearchEngine().search(
     space,
     beliefs,
@@ -86,6 +90,35 @@ read the [primary-source research synthesis](RESEARCH_FOUNDATIONS.md). The
 Codex, Claude Code, Gemini CLI, GitHub Copilot, Cursor, and Windsurf aligned
 without duplicating one enormous prompt.
 
+## Reusable nodes and semantic templates
+
+The [node repository protocol](NODE_REPOSITORY_PROTOCOL.md) standardizes how
+independent repositories publish executable contracts, optional human/search
+descriptions, any number of exact named embedding representations, and portable
+node packs. A capability handshake degrades safely from vector/hybrid search to
+lexical, filters, exact lookup, or enumeration. Discovery produces a coverage
+receipt and immutable snapshot; the compiler then examines every candidate in
+that stated universe.
+
+The [solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md) standardizes
+macro-stage submatrices, atomic semantic slots, safe pass-through candidates,
+and bounded refinement loops. The generated [catalogue](catalog/) currently
+contains six cross-domain templates and a five-node executable reference pack:
+
+```bash
+python scripts/export_solutiongraph_catalog.py --output catalog
+python examples/discovery_and_templates.py
+```
+
+Search metadata is deliberately sparse. The reference pack publishes no fake
+embeddings; its registry advertises exact, lexical, and enumeration modes, and
+the harness negotiates those modes without affecting node validity.
+
+For an agent or new domain adapter, follow the [agent playbook](AGENT_PLAYBOOK.md)
+and the on-demand workspace skill. They require a task contract and independent
+oracle, typed template refinement, receipt-backed discovery, compilation before
+search, and evidence-backed claims.
+
 ## Open the interactive explorers
 
 The viewers are self-contained HTML files: download one and open it in any
@@ -93,6 +126,7 @@ modern browser. No server, account, CDN, or build step is required.
 
 | Explorer | Purpose |
 |---|---|
+| [Template and node catalogue](examples/catalog-template-explorer.html) | Six cross-domain templates, atomic slots by submatrix, registry handshake boundary, and reference node pack |
 | [Full solution studio](examples/universal-graph-workbench.html) | All candidates, route rows, exhaustive adjacent network, comparison, builder, and feedback views |
 | [Compact hierarchical explorer](examples/universal-node-graph-workbench.html) | Select one macro-stage submatrix at a time and see all of its substeps, node families, bindings, and route lines |
 | [Multi-file projection suite](examples/workbench-suite/index.html) | Separate matrix, network, comparison, builder, and feedback entry points |
@@ -612,7 +646,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 pip install -e ".[dev]"
 pytest -q          # 461 pass here; optional browser suites skip when unavailable
 mypy browsergraph --ignore-missing-imports
-ruff check browsergraph solutiongraph tests/test_solutiongraph.py
+ruff check browsergraph solutiongraph tests/test_solutiongraph*.py
 ```
 
 MIT.

@@ -8,9 +8,20 @@ longer defines the universal ontology.
 solutiongraph/
 ├── model.py              semantic graph, strict node ABI, registry, frozen plan
 ├── compiler.py           graph validation, full admission, route compilation
-├── search.py             prior, beam, exhaustive search + honest accounting
+├── discovery.py          descriptors, embedding spaces, handshake, snapshots, node packs
+├── templates.py          semantic stages, reusable templates, refinement policies
+├── template_library.py   six cross-domain reference decompositions
+├── search.py             prior, beam, sprout, exhaustive search + honest accounting
+├── adaptive.py           successive promotion and explicit early stopping
 ├── evidence.py           receipts, experiments, Pareto fronts, learned priors
+├── reference_nodes.py    small executable node-pack demonstration
+├── catalog.py            deterministic catalogue projection
 └── schemas/              strict portable JSON Schema 2020-12 wire contracts
+
+catalog/
+├── index.json            content-addressed template/node-pack index
+├── templates/            98 atomic obligations across six unrelated domains
+└── nodepacks/            portable reference registry and discovery sidecars
 
 browsergraph/
 ├── ports.py              BrowserPort protocol + Context — the seam
@@ -48,10 +59,11 @@ browsergraph/
 
 ```text
 task contract
-  → semantic ProgramGraph
-  → Registry handshake
+  → semantic template + task-specific ProgramGraph
+  → registry capability negotiation + DiscoveryQuery
+  → DiscoveryReceipt + closed-world RegistrySnapshot
   → AdmittedSpace + rejection reasons
-  → BeliefModel-guided selection
+  → BeliefModel-guided prior / beam / seeded sprouts / adaptive allocation
   → content-addressed FrozenPlan
   → executor adapter
   → immutable RunReceipt
@@ -61,6 +73,10 @@ task contract
 Only the compiler crosses the definition-to-plan boundaries. Beliefs cannot
 weaken contracts, and receipts cannot mutate history. See
 `UNIVERSAL_NODE_GRAPH_SPEC.md` for the normative rules.
+
+Discovery is deliberately asymmetric: registries may evolve continuously, but
+a compiler consumes an immutable receipt-backed snapshot. Optional descriptions
+and embeddings can improve nomination without ever changing executable truth.
 
 ## Why dimensions is a package and nodes is a package
 

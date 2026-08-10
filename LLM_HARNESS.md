@@ -10,7 +10,11 @@ large prompt into every vendor-specific file.
 | `GEMINI.md` | Gemini CLI adapter | Imports `AGENTS.md` using Gemini's supported `@` syntax |
 | `.github/copilot-instructions.md` | Broad Copilot IDE compatibility | Points at the canonical rules and specification |
 | `.agents/skills/model-solution-graph/SKILL.md` | Detailed on-demand modeling procedure | Loaded only when a matching task activates the workspace skill |
+| `.agents/skills/model-solution-graph/references/` | Node, discovery, template, and experiment checklists | Loaded selectively for the active operation |
 | `UNIVERSAL_NODE_GRAPH_SPEC.md` | Normative architecture | Read for design or implementation work |
+| `NODE_REPOSITORY_PROTOCOL.md` | Node packs, sparse metadata, embeddings, handshake, and snapshots | Read for catalogue or discovery work |
+| `SOLUTION_TEMPLATE_PROTOCOL.md` | Cross-domain stages, atomic slots, pass-through, refinement | Read for decomposition/template work |
+| `AGENT_PLAYBOOK.md` | Patterns, anti-patterns, and end-to-end delivery workflow | Read before implementing a new domain |
 | `RESEARCH_FOUNDATIONS.md` | Primary-source rationale | Read when evaluating or changing a tradeoff |
 | `llms.txt` | Machine-friendly documentation map | Entry point for crawlers and unfamiliar harnesses |
 
@@ -28,8 +32,8 @@ enforce architecture independently of whether a model followed a prompt.
 
 1. Load the root instruction file.
 2. Activate `model-solution-graph` for a new domain or architectural task.
-3. Compile the semantic program before implementing runtime adapters.
-4. Run universal conformance tests before domain-specific integration tests.
-5. Include compiler diagnostics, search reports, frozen plan digests, and
+3. Negotiate node discovery and freeze a receipt-backed registry snapshot.
+4. Compile the semantic program before implementing runtime adapters.
+5. Run universal conformance tests before domain-specific integration tests.
+6. Include discovery receipts, compiler diagnostics, search reports, frozen plan digests, and
    receipts in the review output; do not rely on prose assurance.
-

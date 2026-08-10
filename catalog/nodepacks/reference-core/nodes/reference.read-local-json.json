@@ -1,0 +1,67 @@
+{
+  "capabilities": [
+    "connector.file-json"
+  ],
+  "description": "Read strict JSON from one explicitly provided local path.",
+  "determinism": "recorded",
+  "effects": [
+    "filesystem.read"
+  ],
+  "entrypoint": "solutiongraph.reference_nodes:read_local_json",
+  "failure_modes": [
+    {
+      "code": "filesystem.not-found",
+      "description": "The requested path does not exist.",
+      "retryable": false
+    },
+    {
+      "code": "data.invalid-json",
+      "description": "File content is not strict JSON.",
+      "retryable": false
+    }
+  ],
+  "id": "reference.read-local-json",
+  "idempotency": "conditional",
+  "implementation_digest": "sha256:bce852276acdb05da2845f7277df3460bca25016c1e9be0cd411c4de6245f0c7",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "path",
+      "type": {
+        "id": "reference.file-path",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "value",
+      "type": {
+        "id": "reference.json-value",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [
+    "filesystem.read"
+  ],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/reference_nodes.py",
+  "verifier": "reference.verify.content-digest",
+  "version": "1.0.0"
+}

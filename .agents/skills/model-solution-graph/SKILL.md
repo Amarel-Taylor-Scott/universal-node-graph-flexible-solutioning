@@ -8,6 +8,13 @@ description: Model, implement, validate, or benchmark a software problem using t
 Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md` before changing the ontology. Read
 `../../../RESEARCH_FOUNDATIONS.md` when making a new architectural tradeoff.
 
+Load only the reference needed for the active operation:
+
+- adding or changing nodes: `references/node-authoring.md`;
+- finding/federating nodes or adding search metadata: `references/registry-discovery.md`;
+- adapting a template or decomposing a new domain: `references/template-instantiation.md`;
+- selecting routes, early stopping, learning, or benchmarking: `references/experiments.md`.
+
 ## Build the semantic program
 
 1. State the task independently of any implementation.
@@ -31,12 +38,17 @@ Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md` before changing the ontology. Read
 4. Keep empirical performance in evidence/belief objects, never the node ABI.
 5. Run full compiler admission. Preserve every admit/reject decision and reason.
 
+Keep executable `NodeSpec` truth separate from optional descriptors, documents,
+and embeddings. Freeze discovery results into a receipt-backed registry snapshot
+before compiler admission.
+
 ## Compile and search
 
 1. Compile at least one route before writing an executor.
 2. Treat compiler validity as a hard boundary and belief scores as ordering only.
-3. Provide a fast prior recommendation, a bounded anytime search with an
-   explicit budget, and streaming exhaustive enumeration without a hidden cap.
+3. Provide a fast prior recommendation, bounded beam or seeded-sprout search,
+   adaptive resource promotion, and streaming exhaustive enumeration without a
+   hidden cap. Preserve every budget and seed in the report.
 4. Freeze exact versions, digests, parameters, topology, program, and registry
    into a content-addressed plan.
 5. Report evaluated, eliminated, skipped, and unvisited route counts.
@@ -57,12 +69,11 @@ Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md` before changing the ontology. Read
 Run:
 
 ```bash
-pytest tests/test_solutiongraph.py -q
-ruff check solutiongraph tests/test_solutiongraph.py
+pytest tests/test_solutiongraph*.py -q
+ruff check solutiongraph tests/test_solutiongraph*.py
 ```
 
 Reject the change if optimization became an execution step, candidates became
 hidden parameters, implicit coercion appeared, authority is inferred, a node
 self-verifies consequential output without justification, or a search limit is
 not visible in its report.
-

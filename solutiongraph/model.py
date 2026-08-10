@@ -237,6 +237,11 @@ class NodeSpec:
     verifier: str = ""
     source: str = ""
 
+    @property
+    def digest(self) -> str:
+        """Content identity of the complete executable contract."""
+        return sha256_digest(self.to_dict())
+
     def validate(self, path: str = "node") -> list[str]:
         problems: list[str] = []
         if not ID_RE.fullmatch(self.id):

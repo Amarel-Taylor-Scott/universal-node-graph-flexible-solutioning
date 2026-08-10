@@ -15,6 +15,16 @@ should preserve.
 | [Alloy](https://alloytools.org/about) | Relational constraints can find valid instances and counterexamples | Route constraints and graph invariants should become machine-checkable, with counterexamples rather than vague failures |
 | [Hoare, “An Axiomatic Basis for Computer Programming”](https://doi.org/10.1145/363235.363259) | Preconditions and postconditions support reasoning about program properties | Every slot/node carries behavioral contracts; correctness is checked before optimization |
 | [Parnas, module decomposition criteria](https://doi.org/10.1145/361598.361623) | Good modularity hides likely-to-change decisions behind stable interfaces | Provider, framework, model, and binary details stay behind the node ABI |
+| [Kubeflow reusable components](https://www.kubeflow.org/docs/components/pipelines/user-guides/components/) and [pipeline IR](https://www.kubeflow.org/docs/components/pipelines/concepts/ir-yaml/) | Components have typed inputs/outputs and pipelines compile into a portable intermediate representation | Semantic templates and node implementations are different artifacts; task graphs compile before execution |
+
+## Discovery, federation, and supply chain
+
+| Primary source | Relevant idea | Consequence here |
+|---|---|---|
+| [Model Context Protocol lifecycle](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle) | Client/server versions and optional capabilities are negotiated before operation | Harness and registry advertise query/schema/vector features and use only the exact intersection |
+| [Qdrant vector concepts](https://qdrant.tech/documentation/manage-data/vectors/) and [collections](https://qdrant.tech/documentation/manage-data/collections/) | One record can expose named dense, sparse, and multivector representations with different semantics | Embeddings are optional named spaces; dimensions, model revision, distance, and normalization participate in compatibility |
+| [OCI Distribution Specification](https://github.com/opencontainers/distribution-spec/blob/main/spec.md) and [OCI annotations](https://specs.opencontainers.org/image-spec/annotations/) | Content-addressed manifests/blobs can distribute content-agnostic artifacts with namespaced annotations | Node packs can travel through existing registries while retaining strict core fields and namespaced extensions |
+| [SLSA provenance](https://slsa.dev/spec/v1.2/provenance) | Provenance identifies subjects, build definitions, run details, and dependencies | Node code, packages, model weights, build process, and run receipts need separate verifiable identities |
 
 ## Execution, replay, and evidence
 
@@ -59,8 +69,9 @@ The repository uses one short canonical instruction file plus thin adapters:
 
 The consequence is deliberately boring: `AGENTS.md` is canonical; `CLAUDE.md`,
 `GEMINI.md`, and Copilot files import or point to it; detailed graph-modeling
-procedure lives in an on-demand Agent Skill. Fewer duplicated instructions mean
-less drift and less prompt noise.
+procedure and selectively loaded references live in an on-demand Agent Skill.
+Fewer duplicated instructions mean less drift and less prompt noise. Enforcement
+remains in schemas, compilation, tests, and receipts rather than prompt wording.
 
 ## Critical conclusions
 
@@ -76,3 +87,6 @@ less drift and less prompt noise.
 6. Fallback quality depends on failure diversity, not simply rank two.
 7. The BrowserGraph implementation is valuable precisely because it becomes one
    demanding conformance adapter instead of defining the universal ontology.
+8. A registry may be open-world, but every compilation claim needs a
+   receipt-backed closed-world snapshot. “All candidates” is meaningful only
+   relative to that stated boundary.

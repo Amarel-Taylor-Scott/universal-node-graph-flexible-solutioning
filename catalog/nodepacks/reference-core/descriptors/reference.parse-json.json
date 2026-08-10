@@ -1,0 +1,55 @@
+{
+  "actions": [
+    "data.parse-json"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.reference.parse-json",
+      "language": "und",
+      "source_digest": "",
+      "targets": [
+        "node",
+        "node.inputs",
+        "node.outputs"
+      ],
+      "text": "Parse JSON text without repairing malformed input. Effects: none. Capabilities: data.parse-json."
+    }
+  ],
+  "domains": [
+    "software.general"
+  ],
+  "extensions": {
+    "reference.maturity": "demonstration"
+  },
+  "node_id": "reference.parse-json",
+  "node_spec_digest": "sha256:a639a3884714fcc9a28b9202af21e670196c70ba8c5a9372e55a1c68775bc51d",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "input",
+      "examples": [],
+      "port_name": "text"
+    },
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "output",
+      "examples": [],
+      "port_name": "value"
+    }
+  ],
+  "purposes": [
+    "Perform a small deterministic data or control operation."
+  ],
+  "solutions": [],
+  "summary": "Parse JSON text without repairing malformed input.",
+  "tags": [
+    "reference"
+  ],
+  "title": "Parse Json"
+}
