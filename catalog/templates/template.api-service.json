@@ -1,0 +1,1030 @@
+{
+  "description": "A contract-first API design, implementation, protection, verification, and operation scaffold.",
+  "domains": [
+    "software.backend",
+    "software.api"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.api-service",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "identify_consumers",
+        "target_port": "state",
+        "target_slot": "define_api_schema"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_api_schema",
+        "target_port": "state",
+        "target_slot": "define_slos"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_slos",
+        "target_port": "state",
+        "target_slot": "model_domain"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "model_domain",
+        "target_port": "state",
+        "target_slot": "design_persistence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "design_persistence",
+        "target_port": "state",
+        "target_slot": "design_dependencies"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "design_dependencies",
+        "target_port": "state",
+        "target_slot": "parse_request"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "parse_request",
+        "target_port": "state",
+        "target_slot": "authenticate_request"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authenticate_request",
+        "target_port": "state",
+        "target_slot": "authorize_operation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authorize_operation",
+        "target_port": "state",
+        "target_slot": "execute_domain_logic"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "execute_domain_logic",
+        "target_port": "state",
+        "target_slot": "serialize_response"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "serialize_response",
+        "target_port": "state",
+        "target_slot": "enforce_limits"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "enforce_limits",
+        "target_port": "state",
+        "target_slot": "handle_dependency_failure"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "handle_dependency_failure",
+        "target_port": "state",
+        "target_slot": "emit_observability"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "emit_observability",
+        "target_port": "state",
+        "target_slot": "run_contract_tests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_contract_tests",
+        "target_port": "state",
+        "target_slot": "run_security_tests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_security_tests",
+        "target_port": "state",
+        "target_slot": "verify_capacity"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_capacity",
+        "target_port": "state",
+        "target_slot": "publish_service"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.api-service",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "identify_consumers",
+        "type": {
+          "id": "template.api-service.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_service",
+        "type": {
+          "id": "template.api-service.state-18",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "identify_consumers",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify consumers, trust boundaries, and compatibility commitments.",
+        "required_capabilities": [
+          "template.api-service.identify_consumers.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify consumers, trust boundaries, and compatibility commitments and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_api_schema",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define versioned requests, responses, errors, and semantics.",
+        "required_capabilities": [
+          "template.api-service.define_api_schema.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define versioned requests, responses, errors, and semantics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_slos",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define latency, availability, durability, and correctness objectives.",
+        "required_capabilities": [
+          "template.api-service.define_slos.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define latency, availability, durability, and correctness objectives and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "model_domain",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Model domain values, invariants, and state transitions.",
+        "required_capabilities": [
+          "template.api-service.model_domain.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Model domain values, invariants, and state transitions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "design_persistence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Design persistence, transaction, migration, and consistency contracts.",
+        "required_capabilities": [
+          "template.api-service.design_persistence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Design persistence, transaction, migration, and consistency contracts and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "design_dependencies",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define external dependency contracts and failure behavior.",
+        "required_capabilities": [
+          "template.api-service.design_dependencies.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define external dependency contracts and failure behavior and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "parse_request",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Parse and schema-check the exact incoming request.",
+        "required_capabilities": [
+          "template.api-service.parse_request.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Parse and schema-check the exact incoming request and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "authenticate_request",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Authenticate the caller and credential context.",
+        "required_capabilities": [
+          "template.api-service.authenticate_request.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Authenticate the caller and credential context and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "authorize_operation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Authorize the requested operation and resource scope.",
+        "required_capabilities": [
+          "template.api-service.authorize_operation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Authorize the requested operation and resource scope and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "execute_domain_logic",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute domain rules under transaction and idempotency policy.",
+        "required_capabilities": [
+          "template.api-service.execute_domain_logic.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute domain rules under transaction and idempotency policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "serialize_response",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Serialize typed success or error responses without information leakage.",
+        "required_capabilities": [
+          "template.api-service.serialize_response.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Serialize typed success or error responses without information leakage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.protect"
+        ],
+        "id": "enforce_limits",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Enforce payload, rate, quota, timeout, and concurrency limits.",
+        "required_capabilities": [
+          "template.api-service.enforce_limits.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Enforce payload, rate, quota, timeout, and concurrency limits and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.protect"
+        ],
+        "id": "handle_dependency_failure",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retry, isolate, degrade, or fail dependencies by policy.",
+        "required_capabilities": [
+          "template.api-service.handle_dependency_failure.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retry, isolate, degrade, or fail dependencies by policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.protect"
+        ],
+        "id": "emit_observability",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Emit redacted traces, metrics, logs, and audit events.",
+        "required_capabilities": [
+          "template.api-service.emit_observability.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Emit redacted traces, metrics, logs, and audit events and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "run_contract_tests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run schema, compatibility, property, and integration tests.",
+        "required_capabilities": [
+          "template.api-service.run_contract_tests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run schema, compatibility, property, and integration tests and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "run_security_tests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run authorization, input, abuse, and dependency security tests.",
+        "required_capabilities": [
+          "template.api-service.run_security_tests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run authorization, input, abuse, and dependency security tests and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "verify_capacity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify capacity and SLO behavior under representative load.",
+        "required_capabilities": [
+          "template.api-service.verify_capacity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify capacity and SLO behavior under representative load and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "publish_service",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.api-service.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Deploy, verify, and publish service and operational receipts.",
+        "required_capabilities": [
+          "template.api-service.publish_service.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Deploy, verify, and publish service and operational receipts and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Production API service obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.api-service.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.api-service.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define externally observable service behavior.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "identify_consumers",
+        "define_api_schema",
+        "define_slos"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Choose explicit state and interaction boundaries.",
+      "extensions": {},
+      "id": "stage.design",
+      "slot_ids": [
+        "model_domain",
+        "design_persistence",
+        "design_dependencies"
+      ],
+      "title": "Design"
+    },
+    {
+      "description": "Build atomic request-processing obligations.",
+      "extensions": {},
+      "id": "stage.implement",
+      "slot_ids": [
+        "parse_request",
+        "authenticate_request",
+        "authorize_operation",
+        "execute_domain_logic",
+        "serialize_response"
+      ],
+      "title": "Implement"
+    },
+    {
+      "description": "Apply resilience and abuse controls.",
+      "extensions": {},
+      "id": "stage.protect",
+      "slot_ids": [
+        "enforce_limits",
+        "handle_dependency_failure",
+        "emit_observability"
+      ],
+      "title": "Protect"
+    },
+    {
+      "description": "Prove the service contract and deployability.",
+      "extensions": {},
+      "id": "stage.assure",
+      "slot_ids": [
+        "run_contract_tests",
+        "run_security_tests",
+        "verify_capacity",
+        "publish_service"
+      ],
+      "title": "Assure"
+    }
+  ],
+  "tags": [
+    "service",
+    "api",
+    "operations"
+  ],
+  "template_model_version": "0.1",
+  "title": "Production API service",
+  "version": "1.0.0"
+}

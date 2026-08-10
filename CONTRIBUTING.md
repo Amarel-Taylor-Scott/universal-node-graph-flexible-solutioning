@@ -9,8 +9,9 @@ without imposing arbitrary limits on node diversity or graph scale.
 python -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
+solutiongraph doctor
 pytest -q
-ruff check browsergraph
+ruff check browsergraph solutiongraph tests/test_solutiongraph*.py
 ```
 
 The core suite must remain runnable without a browser or network connection.
@@ -40,6 +41,24 @@ substeps but are never selectable route nodes.
 
 Every route must select one primary candidate per atomic substep. Optional
 substeps use explicit pass-through candidates rather than missing route keys.
+
+## Add a reusable solution template
+
+1. Inspect related decompositions with `solutiongraph templates list` and
+   `solutiongraph templates show <id>`.
+2. Use `examples/custom-template-blueprint.json` for a linear stage/slot matrix,
+   or the full Python model for non-linear topology.
+3. Give every slot an independent success contract and semantic capability.
+4. Validate with `solutiongraph templates validate <blueprint>`.
+5. Compile the portable document with `solutiongraph templates create`.
+6. Add a reference-library entry and tests when contributing it to the bundled
+   catalog.
+7. Regenerate with `solutiongraph catalog export --output catalog` and
+   `python scripts/sync_catalog_explorer.py`.
+
+Use `@create-solution-template` in a compatible agent harness for the complete
+review checklist. Stages are navigation; tools and vendors remain candidate
+nodes, and optimization remains outside the execution path.
 
 ## Pull requests
 

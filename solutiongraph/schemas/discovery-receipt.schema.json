@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "discovery-receipt.schema.json",
+  "title": "Universal Node Graph discovery receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "discovery_version", "id", "query_digest", "session_digest",
+    "source_registry_digest", "snapshot_registry_digest", "modes_used",
+    "pages_fetched", "records_examined", "matches_returned",
+    "result_node_spec_digests", "complete", "continuation_token",
+    "total_matches", "explanations_available", "coverage_notes", "extensions"
+  ],
+  "properties": {
+    "discovery_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "query_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "session_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "source_registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "snapshot_registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "modes_used": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "pages_fetched": {"type": "integer", "minimum": 0},
+    "records_examined": {"type": "integer", "minimum": 0},
+    "matches_returned": {"type": "integer", "minimum": 0},
+    "result_node_spec_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "complete": {"type": "boolean"},
+    "continuation_token": {"type": "string"},
+    "total_matches": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 0}]},
+    "explanations_available": {"type": "boolean"},
+    "coverage_notes": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

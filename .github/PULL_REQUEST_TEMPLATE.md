@@ -9,9 +9,10 @@ Explain the task need and why this representation preserves flexibility.
 
 ## Validation
 
+- [ ] `solutiongraph doctor` passes
 - [ ] Core tests pass
 - [ ] Ruff passes
-- [ ] Affected workbench JSON and HTML artifacts were regenerated
+- [ ] Affected catalog/workbench JSON and HTML artifacts were regenerated
 - [ ] Routes remain complete and contract-compatible
 - [ ] No secrets, private task data, caches, or local artifacts are included
 

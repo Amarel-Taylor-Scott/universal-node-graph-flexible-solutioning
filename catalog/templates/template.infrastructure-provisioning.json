@@ -1,0 +1,980 @@
+{
+  "description": "A desired-state, planning, policy, application, verification, and lifecycle scaffold.",
+  "domains": [
+    "operations.infrastructure",
+    "software.delivery"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.infrastructure-provisioning",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_desired_state",
+        "target_port": "state",
+        "target_slot": "resolve_dependencies"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "resolve_dependencies",
+        "target_port": "state",
+        "target_slot": "define_policies"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_policies",
+        "target_port": "state",
+        "target_slot": "authenticate_provider"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authenticate_provider",
+        "target_port": "state",
+        "target_slot": "read_current_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "read_current_state",
+        "target_port": "state",
+        "target_slot": "import_unmanaged_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "import_unmanaged_state",
+        "target_port": "state",
+        "target_slot": "compute_change_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "compute_change_plan",
+        "target_port": "state",
+        "target_slot": "estimate_cost"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_cost",
+        "target_port": "state",
+        "target_slot": "evaluate_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "evaluate_policy",
+        "target_port": "state",
+        "target_slot": "approve_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "approve_plan",
+        "target_port": "state",
+        "target_slot": "acquire_lock"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "acquire_lock",
+        "target_port": "state",
+        "target_slot": "apply_changes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_changes",
+        "target_port": "state",
+        "target_slot": "handle_partial_failure"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "handle_partial_failure",
+        "target_port": "state",
+        "target_slot": "verify_resources"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_resources",
+        "target_port": "state",
+        "target_slot": "verify_security"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_security",
+        "target_port": "state",
+        "target_slot": "publish_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "publish_state",
+        "target_port": "state",
+        "target_slot": "schedule_lifecycle"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.infrastructure-provisioning",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_desired_state",
+        "type": {
+          "id": "template.infrastructure-provisioning.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "schedule_lifecycle",
+        "type": {
+          "id": "template.infrastructure-provisioning.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.define"
+        ],
+        "id": "load_desired_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load versioned desired state, environment, and ownership.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.load_desired_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load versioned desired state, environment, and ownership and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.define"
+        ],
+        "id": "resolve_dependencies",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve providers, modules, images, and immutable dependencies.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.resolve_dependencies.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve providers, modules, images, and immutable dependencies and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.define"
+        ],
+        "id": "define_policies",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define security, residency, cost, resilience, and naming policies.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.define_policies.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define security, residency, cost, resilience, and naming policies and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.discover"
+        ],
+        "id": "authenticate_provider",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Authenticate to the declared provider and account scope.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.authenticate_provider.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Authenticate to the declared provider and account scope and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.discover"
+        ],
+        "id": "read_current_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Read current resources, state, drift, and locks.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.read_current_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Read current resources, state, drift, and locks and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.discover"
+        ],
+        "id": "import_unmanaged_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect and explicitly reconcile unmanaged resources.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.import_unmanaged_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect and explicitly reconcile unmanaged resources and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.plan"
+        ],
+        "id": "compute_change_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compute create, update, replace, and destroy operations.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.compute_change_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compute create, update, replace, and destroy operations and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.plan"
+        ],
+        "id": "estimate_cost",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate one-time and recurring cost deltas.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.estimate_cost.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate one-time and recurring cost deltas and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.plan"
+        ],
+        "id": "evaluate_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate security, compliance, blast radius, and approval policy.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.evaluate_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate security, compliance, blast radius, and approval policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.plan"
+        ],
+        "id": "approve_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record authorized approval for the exact plan digest.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.approve_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record authorized approval for the exact plan digest and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.apply"
+        ],
+        "id": "acquire_lock",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Acquire an environment-scoped mutation lock.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.acquire_lock.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Acquire an environment-scoped mutation lock and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.apply"
+        ],
+        "id": "apply_changes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply changes idempotently with bounded retries.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.apply_changes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply changes idempotently with bounded retries and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.apply"
+        ],
+        "id": "handle_partial_failure",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Recover, continue, or rollback partial application by policy.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.handle_partial_failure.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Recover, continue, or rollback partial application by policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "verify_resources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify actual resources, configuration, connectivity, and health.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.verify_resources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify actual resources, configuration, connectivity, and health and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "verify_security",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify identity, network, encryption, secrets, and logging controls.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.verify_security.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify identity, network, encryption, secrets, and logging controls and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "publish_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish protected state, outputs, drift baseline, and receipt.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.publish_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish protected state, outputs, drift baseline, and receipt and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "schedule_lifecycle",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.infrastructure-provisioning.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Schedule drift detection, rotation, backup, and decommission obligations.",
+        "required_capabilities": [
+          "template.infrastructure-provisioning.schedule_lifecycle.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Schedule drift detection, rotation, backup, and decommission obligations and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Infrastructure provisioning obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.infrastructure-provisioning.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.infrastructure-provisioning.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Specify desired infrastructure and constraints.",
+      "extensions": {},
+      "id": "stage.define",
+      "slot_ids": [
+        "load_desired_state",
+        "resolve_dependencies",
+        "define_policies"
+      ],
+      "title": "Define"
+    },
+    {
+      "description": "Establish the current trusted state.",
+      "extensions": {},
+      "id": "stage.discover",
+      "slot_ids": [
+        "authenticate_provider",
+        "read_current_state",
+        "import_unmanaged_state"
+      ],
+      "title": "Discover"
+    },
+    {
+      "description": "Compute and qualify the intended changes.",
+      "extensions": {},
+      "id": "stage.plan",
+      "slot_ids": [
+        "compute_change_plan",
+        "estimate_cost",
+        "evaluate_policy",
+        "approve_plan"
+      ],
+      "title": "Plan"
+    },
+    {
+      "description": "Execute the immutable plan safely.",
+      "extensions": {},
+      "id": "stage.apply",
+      "slot_ids": [
+        "acquire_lock",
+        "apply_changes",
+        "handle_partial_failure"
+      ],
+      "title": "Apply"
+    },
+    {
+      "description": "Prove desired state and operational readiness.",
+      "extensions": {},
+      "id": "stage.verify",
+      "slot_ids": [
+        "verify_resources",
+        "verify_security",
+        "publish_state",
+        "schedule_lifecycle"
+      ],
+      "title": "Verify"
+    }
+  ],
+  "tags": [
+    "infrastructure-as-code",
+    "security",
+    "operations"
+  ],
+  "template_model_version": "0.1",
+  "title": "Infrastructure provisioning",
+  "version": "1.0.0"
+}

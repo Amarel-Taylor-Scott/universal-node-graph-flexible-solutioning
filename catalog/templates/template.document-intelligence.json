@@ -1,0 +1,1030 @@
+{
+  "description": "An acquisition, decoding, cleanup, interpretation, extraction, and evidence scaffold for unknown or unstructured documents.",
+  "domains": [
+    "data-engineering.documents",
+    "ai.document-intelligence"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.document-intelligence",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "receive_document",
+        "target_port": "state",
+        "target_slot": "detect_format"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_format",
+        "target_port": "state",
+        "target_slot": "malware_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "malware_policy",
+        "target_port": "state",
+        "target_slot": "repair_container"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "repair_container",
+        "target_port": "state",
+        "target_slot": "extract_native_text"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_native_text",
+        "target_port": "state",
+        "target_slot": "render_pages"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "render_pages",
+        "target_port": "state",
+        "target_slot": "recognize_text"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "recognize_text",
+        "target_port": "state",
+        "target_slot": "remove_boilerplate"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "remove_boilerplate",
+        "target_port": "state",
+        "target_slot": "normalize_symbols"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_symbols",
+        "target_port": "state",
+        "target_slot": "translate_content"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "translate_content",
+        "target_port": "state",
+        "target_slot": "segment_structure"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "segment_structure",
+        "target_port": "state",
+        "target_slot": "prioritize_regions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "prioritize_regions",
+        "target_port": "state",
+        "target_slot": "extract_deterministic"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_deterministic",
+        "target_port": "state",
+        "target_slot": "extract_model_assisted"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_model_assisted",
+        "target_port": "state",
+        "target_slot": "reconcile_candidates"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_candidates",
+        "target_port": "state",
+        "target_slot": "validate_schema"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_schema",
+        "target_port": "state",
+        "target_slot": "ground_output"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ground_output",
+        "target_port": "state",
+        "target_slot": "publish_record"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.document-intelligence",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "receive_document",
+        "type": {
+          "id": "template.document-intelligence.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_record",
+        "type": {
+          "id": "template.document-intelligence.state-18",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "receive_document",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Receive a document with immutable source metadata.",
+        "required_capabilities": [
+          "template.document-intelligence.receive_document.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Receive a document with immutable source metadata and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "detect_format",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect container, encoding, language hints, and corruption.",
+        "required_capabilities": [
+          "template.document-intelligence.detect_format.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect container, encoding, language hints, and corruption and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "malware_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply the declared content safety and quarantine policy.",
+        "required_capabilities": [
+          "template.document-intelligence.malware_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply the declared content safety and quarantine policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.decode"
+        ],
+        "id": "repair_container",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Repair or reject malformed containers without inventing content.",
+        "required_capabilities": [
+          "template.document-intelligence.repair_container.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Repair or reject malformed containers without inventing content and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.decode"
+        ],
+        "id": "extract_native_text",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Extract embedded text, layout, and metadata when available.",
+        "required_capabilities": [
+          "template.document-intelligence.extract_native_text.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Extract embedded text, layout, and metadata when available and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.decode"
+        ],
+        "id": "render_pages",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Render stable page images for visual processing when required.",
+        "required_capabilities": [
+          "template.document-intelligence.render_pages.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Render stable page images for visual processing when required and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.decode"
+        ],
+        "id": "recognize_text",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Recognize text from visual regions with confidence and provenance.",
+        "required_capabilities": [
+          "template.document-intelligence.recognize_text.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Recognize text from visual regions with confidence and provenance and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "remove_boilerplate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Separate repeated headers, footers, watermarks, and navigation.",
+        "required_capabilities": [
+          "template.document-intelligence.remove_boilerplate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Separate repeated headers, footers, watermarks, and navigation and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "normalize_symbols",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize encodings, whitespace, and symbols under a reversible policy.",
+        "required_capabilities": [
+          "template.document-intelligence.normalize_symbols.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize encodings, whitespace, and symbols under a reversible policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "translate_content",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Translate content into the target language when the contract requires it.",
+        "required_capabilities": [
+          "template.document-intelligence.translate_content.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Translate content into the target language when the contract requires it and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "segment_structure",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Segment pages, sections, tables, figures, and reading order.",
+        "required_capabilities": [
+          "template.document-intelligence.segment_structure.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Segment pages, sections, tables, figures, and reading order and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "prioritize_regions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Prioritize source regions relevant to the requested schema.",
+        "required_capabilities": [
+          "template.document-intelligence.prioritize_regions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Prioritize source regions relevant to the requested schema and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "extract_deterministic",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply deterministic parsers, rules, and validators.",
+        "required_capabilities": [
+          "template.document-intelligence.extract_deterministic.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply deterministic parsers, rules, and validators and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "extract_model_assisted",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply admitted model-based extraction with structured output.",
+        "required_capabilities": [
+          "template.document-intelligence.extract_model_assisted.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply admitted model-based extraction with structured output and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.extract"
+        ],
+        "id": "reconcile_candidates",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile conflicting values using source and confidence evidence.",
+        "required_capabilities": [
+          "template.document-intelligence.reconcile_candidates.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile conflicting values using source and confidence evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "validate_schema",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate types, required fields, constraints, and cross-field rules.",
+        "required_capabilities": [
+          "template.document-intelligence.validate_schema.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate types, required fields, constraints, and cross-field rules and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "ground_output",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Attach page, region, and source citations to extracted values.",
+        "required_capabilities": [
+          "template.document-intelligence.ground_output.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Attach page, region, and source citations to extracted values and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "publish_record",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.document-intelligence.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish accepted records, rejects, and a replayable receipt.",
+        "required_capabilities": [
+          "template.document-intelligence.publish_record.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish accepted records, rejects, and a replayable receipt and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Document ingestion and structured extraction obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.document-intelligence.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.document-intelligence.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Accept documents and establish source identity.",
+      "extensions": {},
+      "id": "stage.acquire",
+      "slot_ids": [
+        "receive_document",
+        "detect_format",
+        "malware_policy"
+      ],
+      "title": "Acquire"
+    },
+    {
+      "description": "Produce source-grounded machine-readable content.",
+      "extensions": {},
+      "id": "stage.decode",
+      "slot_ids": [
+        "repair_container",
+        "extract_native_text",
+        "render_pages",
+        "recognize_text"
+      ],
+      "title": "Decode"
+    },
+    {
+      "description": "Standardize content while preserving traceability.",
+      "extensions": {},
+      "id": "stage.normalize",
+      "slot_ids": [
+        "remove_boilerplate",
+        "normalize_symbols",
+        "translate_content",
+        "segment_structure"
+      ],
+      "title": "Normalize"
+    },
+    {
+      "description": "Generate schema-bound candidate facts.",
+      "extensions": {},
+      "id": "stage.extract",
+      "slot_ids": [
+        "prioritize_regions",
+        "extract_deterministic",
+        "extract_model_assisted",
+        "reconcile_candidates"
+      ],
+      "title": "Extract"
+    },
+    {
+      "description": "Verify and publish traceable structured output.",
+      "extensions": {},
+      "id": "stage.deliver",
+      "slot_ids": [
+        "validate_schema",
+        "ground_output",
+        "publish_record"
+      ],
+      "title": "Deliver"
+    }
+  ],
+  "tags": [
+    "ingestion",
+    "extraction",
+    "unstructured-data"
+  ],
+  "template_model_version": "0.1",
+  "title": "Document ingestion and structured extraction",
+  "version": "1.0.0"
+}

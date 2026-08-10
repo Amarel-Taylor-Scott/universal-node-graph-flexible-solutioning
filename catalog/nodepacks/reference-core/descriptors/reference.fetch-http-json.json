@@ -1,0 +1,55 @@
+{
+  "actions": [
+    "connector.http-json"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.reference.fetch-http-json",
+      "language": "und",
+      "source_digest": "",
+      "targets": [
+        "node",
+        "node.inputs",
+        "node.outputs"
+      ],
+      "text": "Execute an explicit read-only HTTP request and parse JSON. Effects: network.read. Capabilities: connector.http-json."
+    }
+  ],
+  "domains": [
+    "integration.external"
+  ],
+  "extensions": {
+    "reference.maturity": "demonstration"
+  },
+  "node_id": "reference.fetch-http-json",
+  "node_spec_digest": "sha256:205339f2c139670540d90b7926a76637c07a878a06200050251f2f0a1bffe195",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "input",
+      "examples": [],
+      "port_name": "request"
+    },
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "output",
+      "examples": [],
+      "port_name": "value"
+    }
+  ],
+  "purposes": [
+    "Connect a graph to an explicitly authorized external resource."
+  ],
+  "solutions": [],
+  "summary": "Execute an explicit read-only HTTP request and parse JSON.",
+  "tags": [
+    "reference"
+  ],
+  "title": "Fetch Http Json"
+}

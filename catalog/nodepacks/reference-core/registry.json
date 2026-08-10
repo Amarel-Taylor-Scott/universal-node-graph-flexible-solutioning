@@ -1,0 +1,386 @@
+{
+  "candidates": [
+    {
+      "deployment": "",
+      "id": "candidate.reference.identity-json.default",
+      "implementation_digest": "sha256:8bca527df015401349387688c4cab3cb2b09c995427de68fcc4b890843d1ff84",
+      "node_id": "reference.identity-json",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.reference.parse-json.default",
+      "implementation_digest": "sha256:c20226b034907758620b20f316fdd0ace4e4e5b6f2128b717504f2c18d826bfa",
+      "node_id": "reference.parse-json",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.reference.read-local-json.default",
+      "implementation_digest": "sha256:bce852276acdb05da2845f7277df3460bca25016c1e9be0cd411c4de6245f0c7",
+      "node_id": "reference.read-local-json",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.reference.fetch-http-json.default",
+      "implementation_digest": "sha256:4287e374d54883b1afd77b72fea5f7d24fbc8ee30dfd477868a0a8d0d55d8698",
+      "node_id": "reference.fetch-http-json",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.reference.require-keys.identifier",
+      "implementation_digest": "sha256:0b72872d87e76608f8e4f1567c669a273ce565407027c97099d569be0f4a500f",
+      "node_id": "reference.require-keys",
+      "node_version": "1.0.0",
+      "parameters": {
+        "keys": [
+          "id"
+        ]
+      }
+    }
+  ],
+  "id": "reference.core-registry",
+  "model_version": "0.1",
+  "nodes": [
+    {
+      "capabilities": [
+        "control.identity"
+      ],
+      "description": "Validate JSON compatibility and return the exact value unchanged.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.reference_nodes:identity_json",
+      "failure_modes": [],
+      "id": "reference.identity-json",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:8bca527df015401349387688c4cab3cb2b09c995427de68fcc4b890843d1ff84",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "reference.json-value",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "reference.json-value",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [
+        "Output is structurally equal to input."
+      ],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/reference_nodes.py",
+      "verifier": "reference.verify.structural-equality",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.parse-json"
+      ],
+      "description": "Parse JSON text without repairing malformed input.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.reference_nodes:parse_json",
+      "failure_modes": [
+        {
+          "code": "data.invalid-json",
+          "description": "Input is not strict JSON.",
+          "retryable": false
+        }
+      ],
+      "id": "reference.parse-json",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c20226b034907758620b20f316fdd0ace4e4e5b6f2128b717504f2c18d826bfa",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "reference.json-text",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "reference.json-value",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/reference_nodes.py",
+      "verifier": "reference.verify.json-roundtrip",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.require-keys"
+      ],
+      "description": "Require a finite configured set of object keys.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.reference_nodes:require_keys",
+      "failure_modes": [
+        {
+          "code": "data.invalid-shape",
+          "description": "Input is not a JSON object.",
+          "retryable": false
+        },
+        {
+          "code": "data.missing-key",
+          "description": "A required key is absent.",
+          "retryable": false
+        }
+      ],
+      "id": "reference.require-keys",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0b72872d87e76608f8e4f1567c669a273ce565407027c97099d569be0f4a500f",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "reference.json-object",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "reference.json-object",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "Required object keys.",
+          "name": "keys",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [
+        "Input is a JSON object."
+      ],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/reference_nodes.py",
+      "verifier": "reference.verify.required-keys",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "connector.file-json"
+      ],
+      "description": "Read strict JSON from one explicitly provided local path.",
+      "determinism": "recorded",
+      "effects": [
+        "filesystem.read"
+      ],
+      "entrypoint": "solutiongraph.reference_nodes:read_local_json",
+      "failure_modes": [
+        {
+          "code": "filesystem.not-found",
+          "description": "The requested path does not exist.",
+          "retryable": false
+        },
+        {
+          "code": "data.invalid-json",
+          "description": "File content is not strict JSON.",
+          "retryable": false
+        }
+      ],
+      "id": "reference.read-local-json",
+      "idempotency": "conditional",
+      "implementation_digest": "sha256:bce852276acdb05da2845f7277df3460bca25016c1e9be0cd411c4de6245f0c7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "path",
+          "type": {
+            "id": "reference.file-path",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "reference.json-value",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [
+        "filesystem.read"
+      ],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/reference_nodes.py",
+      "verifier": "reference.verify.content-digest",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "connector.http-json"
+      ],
+      "description": "Execute an explicit read-only HTTP request and parse JSON.",
+      "determinism": "recorded",
+      "effects": [
+        "network.read"
+      ],
+      "entrypoint": "solutiongraph.reference_nodes:fetch_http_json",
+      "failure_modes": [
+        {
+          "code": "policy.disallowed-method",
+          "description": "The request method is not GET or HEAD.",
+          "retryable": false
+        },
+        {
+          "code": "network.timeout",
+          "description": "The request exceeded its timeout.",
+          "retryable": true
+        },
+        {
+          "code": "network.http-error",
+          "description": "The remote service returned an error.",
+          "retryable": true
+        },
+        {
+          "code": "data.invalid-json",
+          "description": "The response is not strict JSON.",
+          "retryable": false
+        }
+      ],
+      "id": "reference.fetch-http-json",
+      "idempotency": "conditional",
+      "implementation_digest": "sha256:4287e374d54883b1afd77b72fea5f7d24fbc8ee30dfd477868a0a8d0d55d8698",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "request",
+          "type": {
+            "id": "reference.http-request",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "reference.json-value",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [
+        "network.read"
+      ],
+      "postconditions": [],
+      "preconditions": [
+        "The request policy authorizes the URL.",
+        "The request method is GET or HEAD and has no body."
+      ],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/reference_nodes.py",
+      "verifier": "reference.verify.http-receipt",
+      "version": "1.0.0"
+    }
+  ],
+  "version": "1.0.0"
+}

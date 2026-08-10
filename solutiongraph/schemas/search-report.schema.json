@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "search-report.schema.json",
+  "title": "Universal Node Graph route search report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode", "belief_revision", "total_cartesian_routes", "evaluated_routes",
+    "constraint_eliminated_routes", "heuristic_skipped_routes", "unvisited_routes",
+    "complete", "optimality_proven", "evaluation_coverage", "budget", "sampling",
+    "proposals"
+  ],
+  "properties": {
+    "mode": {"enum": ["prior", "beam", "sprout", "exhaustive"]},
+    "belief_revision": {"type": "string", "minLength": 1},
+    "total_cartesian_routes": {"type": "integer", "minimum": 0},
+    "evaluated_routes": {"type": "integer", "minimum": 0},
+    "constraint_eliminated_routes": {"type": "integer", "minimum": 0},
+    "heuristic_skipped_routes": {"type": "integer", "minimum": 0},
+    "unvisited_routes": {"type": "integer", "minimum": 0},
+    "complete": {"type": "boolean"},
+    "optimality_proven": {"type": "boolean"},
+    "evaluation_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation_limit", "result_limit", "beam_width", "random_seed",
+        "sampling_attempt_limit", "mutation_probability"
+      ],
+      "properties": {
+        "evaluation_limit": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+        "result_limit": {"type": "integer", "minimum": 1},
+        "beam_width": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+        "random_seed": {"oneOf": [{"type": "null"}, {"type": "integer"}]},
+        "sampling_attempt_limit": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+        "mutation_probability": {"oneOf": [{"type": "null"}, {"type": "number", "minimum": 0, "maximum": 1}]}
+      }
+    },
+    "sampling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempts", "duplicates", "invalid"],
+      "properties": {
+        "attempts": {"type": "integer", "minimum": 0},
+        "duplicates": {"type": "integer", "minimum": 0},
+        "invalid": {"type": "integer", "minimum": 0}
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["selection", "log_score", "contributions"],
+        "properties": {
+          "selection": {"type": "object", "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}},
+          "log_score": {"type": "number"},
+          "contributions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["factor", "value"],
+              "properties": {
+                "factor": {"type": "string", "minLength": 1},
+                "value": {"type": "number"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

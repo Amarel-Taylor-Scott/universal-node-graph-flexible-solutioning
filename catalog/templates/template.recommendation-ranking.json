@@ -1,0 +1,1088 @@
+{
+  "description": "A candidate generation, ranking, policy, evaluation, serving, and feedback scaffold.",
+  "domains": [
+    "machine-learning.recommendation",
+    "software.ranking"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.recommendation-ranking",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_objectives",
+        "target_port": "state",
+        "target_slot": "define_eligibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_eligibility",
+        "target_port": "state",
+        "target_slot": "define_evaluation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_evaluation",
+        "target_port": "state",
+        "target_slot": "ingest_interactions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ingest_interactions",
+        "target_port": "state",
+        "target_slot": "construct_labels"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "construct_labels",
+        "target_port": "state",
+        "target_slot": "build_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_features",
+        "target_port": "state",
+        "target_slot": "retrieve_candidates"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "retrieve_candidates",
+        "target_port": "state",
+        "target_slot": "merge_candidate_sets"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "merge_candidate_sets",
+        "target_port": "state",
+        "target_slot": "filter_eligibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "filter_eligibility",
+        "target_port": "state",
+        "target_slot": "score_relevance"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "score_relevance",
+        "target_port": "state",
+        "target_slot": "apply_multiobjective_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_multiobjective_policy",
+        "target_port": "state",
+        "target_slot": "diversify_results"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "diversify_results",
+        "target_port": "state",
+        "target_slot": "assemble_slate"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "assemble_slate",
+        "target_port": "state",
+        "target_slot": "offline_evaluation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "offline_evaluation",
+        "target_port": "state",
+        "target_slot": "bias_safety_audit"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "bias_safety_audit",
+        "target_port": "state",
+        "target_slot": "online_experiment"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "online_experiment",
+        "target_port": "state",
+        "target_slot": "serve_slate"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "serve_slate",
+        "target_port": "state",
+        "target_slot": "record_exposure"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "record_exposure",
+        "target_port": "state",
+        "target_slot": "ingest_feedback"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.recommendation-ranking",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_objectives",
+        "type": {
+          "id": "template.recommendation-ranking.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "ingest_feedback",
+        "type": {
+          "id": "template.recommendation-ranking.state-19",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_objectives",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define user, business, ecosystem, and safety objectives.",
+        "required_capabilities": [
+          "template.recommendation-ranking.define_objectives.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define user, business, ecosystem, and safety objectives and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_eligibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define item, user, jurisdiction, and inventory eligibility.",
+        "required_capabilities": [
+          "template.recommendation-ranking.define_eligibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define item, user, jurisdiction, and inventory eligibility and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_evaluation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define offline, counterfactual, online, and guardrail metrics.",
+        "required_capabilities": [
+          "template.recommendation-ranking.define_evaluation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define offline, counterfactual, online, and guardrail metrics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.data"
+        ],
+        "id": "ingest_interactions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Ingest impressions, actions, outcomes, and exposure context.",
+        "required_capabilities": [
+          "template.recommendation-ranking.ingest_interactions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Ingest impressions, actions, outcomes, and exposure context and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.data"
+        ],
+        "id": "construct_labels",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Construct outcome labels with delay and censoring policy.",
+        "required_capabilities": [
+          "template.recommendation-ranking.construct_labels.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Construct outcome labels with delay and censoring policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.data"
+        ],
+        "id": "build_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build point-in-time user, item, context, and interaction features.",
+        "required_capabilities": [
+          "template.recommendation-ranking.build_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build point-in-time user, item, context, and interaction features and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.candidates"
+        ],
+        "id": "retrieve_candidates",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retrieve candidates using one or more admitted strategies.",
+        "required_capabilities": [
+          "template.recommendation-ranking.retrieve_candidates.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retrieve candidates using one or more admitted strategies and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.candidates"
+        ],
+        "id": "merge_candidate_sets",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Merge, deduplicate, and preserve retrieval provenance.",
+        "required_capabilities": [
+          "template.recommendation-ranking.merge_candidate_sets.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Merge, deduplicate, and preserve retrieval provenance and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.candidates"
+        ],
+        "id": "filter_eligibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply hard eligibility, availability, and safety constraints.",
+        "required_capabilities": [
+          "template.recommendation-ranking.filter_eligibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply hard eligibility, availability, and safety constraints and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rank"
+        ],
+        "id": "score_relevance",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Score expected relevance or utility with calibrated evidence.",
+        "required_capabilities": [
+          "template.recommendation-ranking.score_relevance.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Score expected relevance or utility with calibrated evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rank"
+        ],
+        "id": "apply_multiobjective_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Balance declared objectives and hard guardrails.",
+        "required_capabilities": [
+          "template.recommendation-ranking.apply_multiobjective_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Balance declared objectives and hard guardrails and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rank"
+        ],
+        "id": "diversify_results",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply diversity, novelty, coverage, and repetition policy.",
+        "required_capabilities": [
+          "template.recommendation-ranking.diversify_results.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply diversity, novelty, coverage, and repetition policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.rank"
+        ],
+        "id": "assemble_slate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Assemble a position-aware final slate.",
+        "required_capabilities": [
+          "template.recommendation-ranking.assemble_slate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Assemble a position-aware final slate and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.evaluate"
+        ],
+        "id": "offline_evaluation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate ranking, calibration, coverage, and subgroup behavior.",
+        "required_capabilities": [
+          "template.recommendation-ranking.offline_evaluation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate ranking, calibration, coverage, and subgroup behavior and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.evaluate"
+        ],
+        "id": "bias_safety_audit",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Audit feedback loops, exposure bias, fairness, and unsafe content.",
+        "required_capabilities": [
+          "template.recommendation-ranking.bias_safety_audit.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Audit feedback loops, exposure bias, fairness, and unsafe content and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.evaluate"
+        ],
+        "id": "online_experiment",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run bounded randomized or interleaving experiments when authorized.",
+        "required_capabilities": [
+          "template.recommendation-ranking.online_experiment.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run bounded randomized or interleaving experiments when authorized and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.serve"
+        ],
+        "id": "serve_slate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Serve the exact slate within latency and consistency limits.",
+        "required_capabilities": [
+          "template.recommendation-ranking.serve_slate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Serve the exact slate within latency and consistency limits and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.serve"
+        ],
+        "id": "record_exposure",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record exposure, route, position, policy, and experiment identity.",
+        "required_capabilities": [
+          "template.recommendation-ranking.record_exposure.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record exposure, route, position, policy, and experiment identity and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.serve"
+        ],
+        "id": "ingest_feedback",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.recommendation-ranking.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Ingest delayed outcomes and update evidence without rewriting history.",
+        "required_capabilities": [
+          "template.recommendation-ranking.ingest_feedback.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Ingest delayed outcomes and update evidence without rewriting history and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Recommendation and ranking system obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.recommendation-ranking.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.recommendation-ranking.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define recommendation outcomes and constraints.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_objectives",
+        "define_eligibility",
+        "define_evaluation"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Build time-correct recommendation evidence.",
+      "extensions": {},
+      "id": "stage.data",
+      "slot_ids": [
+        "ingest_interactions",
+        "construct_labels",
+        "build_features"
+      ],
+      "title": "Data"
+    },
+    {
+      "description": "Retrieve a broad eligible item set.",
+      "extensions": {},
+      "id": "stage.candidates",
+      "slot_ids": [
+        "retrieve_candidates",
+        "merge_candidate_sets",
+        "filter_eligibility"
+      ],
+      "title": "Candidates"
+    },
+    {
+      "description": "Score and arrange candidates.",
+      "extensions": {},
+      "id": "stage.rank",
+      "slot_ids": [
+        "score_relevance",
+        "apply_multiobjective_policy",
+        "diversify_results",
+        "assemble_slate"
+      ],
+      "title": "Rank"
+    },
+    {
+      "description": "Test ranking behavior independently.",
+      "extensions": {},
+      "id": "stage.evaluate",
+      "slot_ids": [
+        "offline_evaluation",
+        "bias_safety_audit",
+        "online_experiment"
+      ],
+      "title": "Evaluate"
+    },
+    {
+      "description": "Deliver and learn from recommendations.",
+      "extensions": {},
+      "id": "stage.serve",
+      "slot_ids": [
+        "serve_slate",
+        "record_exposure",
+        "ingest_feedback"
+      ],
+      "title": "Serve"
+    }
+  ],
+  "tags": [
+    "ranking",
+    "personalization",
+    "experimentation"
+  ],
+  "template_model_version": "0.1",
+  "title": "Recommendation and ranking system",
+  "version": "1.0.0"
+}

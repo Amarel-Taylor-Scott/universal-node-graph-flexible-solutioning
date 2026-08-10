@@ -1,0 +1,55 @@
+{
+  "actions": [
+    "connector.file-json"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.reference.read-local-json",
+      "language": "und",
+      "source_digest": "",
+      "targets": [
+        "node",
+        "node.inputs",
+        "node.outputs"
+      ],
+      "text": "Read strict JSON from one explicitly provided local path. Effects: filesystem.read. Capabilities: connector.file-json."
+    }
+  ],
+  "domains": [
+    "integration.external"
+  ],
+  "extensions": {
+    "reference.maturity": "demonstration"
+  },
+  "node_id": "reference.read-local-json",
+  "node_spec_digest": "sha256:f93478ea76df6882900f57b7ebc81ed739f66d10227627dd8adc7ee4f18d1197",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "input",
+      "examples": [],
+      "port_name": "path"
+    },
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "output",
+      "examples": [],
+      "port_name": "value"
+    }
+  ],
+  "purposes": [
+    "Connect a graph to an explicitly authorized external resource."
+  ],
+  "solutions": [],
+  "summary": "Read strict JSON from one explicitly provided local path.",
+  "tags": [
+    "reference"
+  ],
+  "title": "Read Local Json"
+}

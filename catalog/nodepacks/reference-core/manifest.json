@@ -1,0 +1,74 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.reference_nodes:identity_json"
+      },
+      "digest": "sha256:8bca527df015401349387688c4cab3cb2b09c995427de68fcc4b890843d1ff84",
+      "media_type": "text/x-python",
+      "name": "artifact.reference.identity-json",
+      "uri": "python://solutiongraph.reference_nodes:identity_json"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.reference_nodes:parse_json"
+      },
+      "digest": "sha256:c20226b034907758620b20f316fdd0ace4e4e5b6f2128b717504f2c18d826bfa",
+      "media_type": "text/x-python",
+      "name": "artifact.reference.parse-json",
+      "uri": "python://solutiongraph.reference_nodes:parse_json"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.reference_nodes:require_keys"
+      },
+      "digest": "sha256:0b72872d87e76608f8e4f1567c669a273ce565407027c97099d569be0f4a500f",
+      "media_type": "text/x-python",
+      "name": "artifact.reference.require-keys",
+      "uri": "python://solutiongraph.reference_nodes:require_keys"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.reference_nodes:read_local_json"
+      },
+      "digest": "sha256:bce852276acdb05da2845f7277df3460bca25016c1e9be0cd411c4de6245f0c7",
+      "media_type": "text/x-python",
+      "name": "artifact.reference.read-local-json",
+      "uri": "python://solutiongraph.reference_nodes:read_local_json"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.reference_nodes:fetch_http_json"
+      },
+      "digest": "sha256:4287e374d54883b1afd77b72fea5f7d24fbc8ee30dfd477868a0a8d0d55d8698",
+      "media_type": "text/x-python",
+      "name": "artifact.reference.fetch-http-json",
+      "uri": "python://solutiongraph.reference_nodes:fetch_http_json"
+    }
+  ],
+  "dependencies": [],
+  "description": "Executable demonstration primitives, identity behavior, and explicit filesystem/network connectors.",
+  "descriptor_digests": [
+    "sha256:5469a0326935099ec11b01f149c2d7dafb74f5c60c252d303246d03f9bd32188",
+    "sha256:53449048b3a78f3605a39705df95213c620e2023304e23630c91eaa7260c03cf",
+    "sha256:76120df3ce8f3a6bfeac3bcffc02f7b18bbbb9867885e6c904ee49dcfb41736d",
+    "sha256:05c4c54eed8861f8f2cbc94807a2c4bdce1ab921cc1463ea8480e3685e1bd2c5",
+    "sha256:48b426a502cefa3d53189cd986e35bae6997179e96760bcfd972919f42aca480"
+  ],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "reference.maturity": "demonstration"
+  },
+  "id": "reference.core-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:6058dd6273429802cbfea9d823a2bd9128dabc32b888a65f0f1d1ac1d0011775",
+    "sha256:a639a3884714fcc9a28b9202af21e670196c70ba8c5a9372e55a1c68775bc51d",
+    "sha256:3bf9b4a0dd68ba2f1aa41a3e0d530b22e744359340df01c474e5687341413710",
+    "sha256:f93478ea76df6882900f57b7ebc81ed739f66d10227627dd8adc7ee4f18d1197",
+    "sha256:205339f2c139670540d90b7926a76637c07a878a06200050251f2f0a1bffe195"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

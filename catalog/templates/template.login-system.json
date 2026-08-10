@@ -1,0 +1,822 @@
+{
+  "description": "A security-conscious service implementation scaffold, not a fixed provider recipe.",
+  "domains": [
+    "software.application",
+    "security.identity"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.login-system",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_identity_contract",
+        "target_port": "state",
+        "target_slot": "threat_model"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "threat_model",
+        "target_port": "state",
+        "target_slot": "select_protocol"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_protocol",
+        "target_port": "state",
+        "target_slot": "account_storage"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "account_storage",
+        "target_port": "state",
+        "target_slot": "registration"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "registration",
+        "target_port": "state",
+        "target_slot": "credential_verification"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "credential_verification",
+        "target_port": "state",
+        "target_slot": "session_issue"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "session_issue",
+        "target_port": "state",
+        "target_slot": "session_verify"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "session_verify",
+        "target_port": "state",
+        "target_slot": "logout_revoke"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "logout_revoke",
+        "target_port": "state",
+        "target_slot": "account_recovery"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "account_recovery",
+        "target_port": "state",
+        "target_slot": "rate_limit"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "rate_limit",
+        "target_port": "state",
+        "target_slot": "security_events"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "security_events",
+        "target_port": "state",
+        "target_slot": "security_tests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "security_tests",
+        "target_port": "state",
+        "target_slot": "deployment_gate"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.login-system",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_identity_contract",
+        "type": {
+          "id": "template.login-system.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "deployment_gate",
+        "type": {
+          "id": "template.login-system.state-14",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_identity_contract",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define actors, credentials, sessions, and assurance levels.",
+        "required_capabilities": [
+          "template.login-system.define_identity_contract.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define actors, credentials, sessions, and assurance levels and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "threat_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Model abuse, disclosure, replay, enumeration, and recovery threats.",
+        "required_capabilities": [
+          "template.login-system.threat_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Model abuse, disclosure, replay, enumeration, and recovery threats and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "select_protocol",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select an admitted authentication protocol and trust boundary.",
+        "required_capabilities": [
+          "template.login-system.select_protocol.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select an admitted authentication protocol and trust boundary and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "account_storage",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Implement protected identity and credential storage.",
+        "required_capabilities": [
+          "template.login-system.account_storage.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Implement protected identity and credential storage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "registration",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Implement registration and proofing under policy.",
+        "required_capabilities": [
+          "template.login-system.registration.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Implement registration and proofing under policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "credential_verification",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify credentials without leaking sensitive state.",
+        "required_capabilities": [
+          "template.login-system.credential_verification.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify credentials without leaking sensitive state and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "session_issue",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Issue bounded, revocable sessions.",
+        "required_capabilities": [
+          "template.login-system.session_issue.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Issue bounded, revocable sessions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "session_verify",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify session integrity, expiry, audience, and revocation.",
+        "required_capabilities": [
+          "template.login-system.session_verify.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify session integrity, expiry, audience, and revocation and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "logout_revoke",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Revoke sessions and propagate logout semantics.",
+        "required_capabilities": [
+          "template.login-system.logout_revoke.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Revoke sessions and propagate logout semantics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.implement"
+        ],
+        "id": "account_recovery",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Implement abuse-resistant account recovery.",
+        "required_capabilities": [
+          "template.login-system.account_recovery.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Implement abuse-resistant account recovery and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.protect"
+        ],
+        "id": "rate_limit",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply privacy-preserving rate and abuse limits.",
+        "required_capabilities": [
+          "template.login-system.rate_limit.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply privacy-preserving rate and abuse limits and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.protect"
+        ],
+        "id": "security_events",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Emit redacted, auditable identity security events.",
+        "required_capabilities": [
+          "template.login-system.security_events.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Emit redacted, auditable identity security events and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "security_tests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run protocol, authorization, session, and abuse tests.",
+        "required_capabilities": [
+          "template.login-system.security_tests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run protocol, authorization, session, and abuse tests and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "deployment_gate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.login-system.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Gate deployment on independent security and reliability checks.",
+        "required_capabilities": [
+          "template.login-system.deployment_gate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Gate deployment on independent security and reliability checks and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Authentication and login system obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.login-system.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.login-system.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define identity boundaries and threats.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_identity_contract",
+        "threat_model",
+        "select_protocol"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Build atomic identity operations.",
+      "extensions": {},
+      "id": "stage.implement",
+      "slot_ids": [
+        "account_storage",
+        "registration",
+        "credential_verification",
+        "session_issue",
+        "session_verify",
+        "logout_revoke",
+        "account_recovery"
+      ],
+      "title": "Implement"
+    },
+    {
+      "description": "Add cross-cutting abuse and observability controls.",
+      "extensions": {},
+      "id": "stage.protect",
+      "slot_ids": [
+        "rate_limit",
+        "security_events"
+      ],
+      "title": "Protect"
+    },
+    {
+      "description": "Verify security and operational behavior.",
+      "extensions": {},
+      "id": "stage.assure",
+      "slot_ids": [
+        "security_tests",
+        "deployment_gate"
+      ],
+      "title": "Assure"
+    }
+  ],
+  "tags": [
+    "authentication",
+    "authorization",
+    "service"
+  ],
+  "template_model_version": "0.1",
+  "title": "Authentication and login system",
+  "version": "1.0.0"
+}

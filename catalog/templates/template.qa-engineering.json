@@ -1,0 +1,771 @@
+{
+  "description": "A test-planning, execution, diagnosis, and release-evidence scaffold.",
+  "domains": [
+    "software.quality"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.qa-engineering",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_change",
+        "target_port": "state",
+        "target_slot": "impact_analysis"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "impact_analysis",
+        "target_port": "state",
+        "target_slot": "derive_oracles"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "derive_oracles",
+        "target_port": "state",
+        "target_slot": "select_test_layers"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_test_layers",
+        "target_port": "state",
+        "target_slot": "generate_cases"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_cases",
+        "target_port": "state",
+        "target_slot": "prepare_fixtures"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "prepare_fixtures",
+        "target_port": "state",
+        "target_slot": "static_checks"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "static_checks",
+        "target_port": "state",
+        "target_slot": "run_tests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_tests",
+        "target_port": "state",
+        "target_slot": "collect_coverage"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "collect_coverage",
+        "target_port": "state",
+        "target_slot": "detect_flakes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_flakes",
+        "target_port": "state",
+        "target_slot": "diagnose_failures"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "diagnose_failures",
+        "target_port": "state",
+        "target_slot": "verify_fixes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_fixes",
+        "target_port": "state",
+        "target_slot": "release_gate"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.qa-engineering",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_change",
+        "type": {
+          "id": "template.qa-engineering.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "release_gate",
+        "type": {
+          "id": "template.qa-engineering.state-13",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.understand"
+        ],
+        "id": "load_change",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load the change, ticket, contracts, and affected artifacts.",
+        "required_capabilities": [
+          "template.qa-engineering.load_change.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load the change, ticket, contracts, and affected artifacts and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.understand"
+        ],
+        "id": "impact_analysis",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify affected components, interfaces, and risks.",
+        "required_capabilities": [
+          "template.qa-engineering.impact_analysis.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify affected components, interfaces, and risks and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.understand"
+        ],
+        "id": "derive_oracles",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Derive independent acceptance and regression oracles.",
+        "required_capabilities": [
+          "template.qa-engineering.derive_oracles.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Derive independent acceptance and regression oracles and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "select_test_layers",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select unit, integration, contract, system, and property layers.",
+        "required_capabilities": [
+          "template.qa-engineering.select_test_layers.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select unit, integration, contract, system, and property layers and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "generate_cases",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate nominal, boundary, adversarial, and metamorphic cases.",
+        "required_capabilities": [
+          "template.qa-engineering.generate_cases.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate nominal, boundary, adversarial, and metamorphic cases and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.design"
+        ],
+        "id": "prepare_fixtures",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Prepare isolated, deterministic fixtures and environments.",
+        "required_capabilities": [
+          "template.qa-engineering.prepare_fixtures.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Prepare isolated, deterministic fixtures and environments and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "static_checks",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run syntax, type, lint, policy, and security checks.",
+        "required_capabilities": [
+          "template.qa-engineering.static_checks.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run syntax, type, lint, policy, and security checks and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "run_tests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute the admitted test suites with recorded configuration.",
+        "required_capabilities": [
+          "template.qa-engineering.run_tests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute the admitted test suites with recorded configuration and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "collect_coverage",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Collect structural and requirements coverage evidence.",
+        "required_capabilities": [
+          "template.qa-engineering.collect_coverage.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Collect structural and requirements coverage evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "detect_flakes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Repeat and classify unstable outcomes.",
+        "required_capabilities": [
+          "template.qa-engineering.detect_flakes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Repeat and classify unstable outcomes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "diagnose_failures",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Cluster failures and identify minimal reproducible causes.",
+        "required_capabilities": [
+          "template.qa-engineering.diagnose_failures.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Cluster failures and identify minimal reproducible causes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "verify_fixes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Re-run focused and regression oracles after repair.",
+        "required_capabilities": [
+          "template.qa-engineering.verify_fixes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Re-run focused and regression oracles after repair and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "release_gate",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.qa-engineering.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply the declared release policy and publish evidence.",
+        "required_capabilities": [
+          "template.qa-engineering.release_gate.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply the declared release policy and publish evidence and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Software quality assurance obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.qa-engineering.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.qa-engineering.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Convert change intent into testable obligations.",
+      "extensions": {},
+      "id": "stage.understand",
+      "slot_ids": [
+        "load_change",
+        "impact_analysis",
+        "derive_oracles"
+      ],
+      "title": "Understand"
+    },
+    {
+      "description": "Create bounded, diverse test assets.",
+      "extensions": {},
+      "id": "stage.design",
+      "slot_ids": [
+        "select_test_layers",
+        "generate_cases",
+        "prepare_fixtures"
+      ],
+      "title": "Design"
+    },
+    {
+      "description": "Run tests and gather typed observations.",
+      "extensions": {},
+      "id": "stage.execute",
+      "slot_ids": [
+        "static_checks",
+        "run_tests",
+        "collect_coverage",
+        "detect_flakes"
+      ],
+      "title": "Execute"
+    },
+    {
+      "description": "Diagnose and gate release independently.",
+      "extensions": {},
+      "id": "stage.decide",
+      "slot_ids": [
+        "diagnose_failures",
+        "verify_fixes",
+        "release_gate"
+      ],
+      "title": "Decide"
+    }
+  ],
+  "tags": [
+    "testing",
+    "verification",
+    "release"
+  ],
+  "template_model_version": "0.1",
+  "title": "Software quality assurance",
+  "version": "1.0.0"
+}

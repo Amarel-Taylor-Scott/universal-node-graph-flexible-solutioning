@@ -1,0 +1,3417 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Catalog Template Explorer</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: transparent !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --main-surface-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --red: light-dark(rgb(186 38 35), rgb(250 66 62));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 10px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-visualize-standalone] {
+  background-color: var(--background) !important;
+}
+
+/* Generic mobile code-block hosts provide light/dark mode but no series palette.
+   AppBlock hosts set all six variables themselves. */
+:root:not([data-app-block-surface]) {
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(#f3883b, #f59a56);
+  --viz-series-3: light-dark(#5dc977, #74d58b);
+  --viz-series-4: light-dark(#eb77b1, #f08fc0);
+  --viz-series-5: light-dark(#9b79ec, #aa91ef);
+  --viz-series-6: light-dark(#3ab9b1, #5acbc2);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface]) > body {
+  padding: 12px;
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The bundled tooltip runtime owns [data-tooltip]. AppBlock's CSS-only
+   pseudo-tooltip can widen dense grids even while hidden. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--interactive-label-primary-default, var(--primary-foreground));
+  background: var(--interactive-bg-primary-default, var(--foreground));
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(
+    in srgb,
+    var(--interactive-label-primary-default, var(--primary-foreground)) 50%,
+    transparent
+  );
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type="file"]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+</style>
+</head>
+<body>
+<div id="ung-catalog-explorer">
+  <style>
+    #ung-catalog-explorer { color: var(--foreground); }
+    #ung-catalog-explorer .ung-stack { display: grid; gap: 1rem; }
+    #ung-catalog-explorer .ung-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .75rem; align-items: start; }
+    #ung-catalog-explorer .ung-flow-step { min-width: 0; text-align: center; }
+    #ung-catalog-explorer .ung-flow-mark { height: .35rem; margin-bottom: .5rem; background: var(--viz-series-1); opacity: .75; }
+    #ung-catalog-explorer .ung-flow-step:nth-child(2) .ung-flow-mark { background: var(--viz-series-2); }
+    #ung-catalog-explorer .ung-flow-step:nth-child(3) .ung-flow-mark { background: var(--viz-series-3); }
+    #ung-catalog-explorer .ung-flow-step:nth-child(4) .ung-flow-mark { background: var(--viz-series-4); }
+    #ung-catalog-explorer .ung-flow-step:nth-child(5) .ung-flow-mark { background: var(--viz-series-5); }
+    #ung-catalog-explorer .ung-slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .75rem; }
+    #ung-catalog-explorer .ung-slot { min-height: 7.5rem; text-align: left; align-content: start; }
+    #ung-catalog-explorer .ung-slot-index { display: block; color: var(--muted-foreground); margin-bottom: .35rem; }
+    #ung-catalog-explorer .ung-slot-id { display: block; overflow-wrap: anywhere; }
+    #ung-catalog-explorer .ung-slot-purpose { display: block; color: var(--muted-foreground); margin-top: .35rem; }
+    #ung-catalog-explorer .ung-node-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: .75rem; }
+    #ung-catalog-explorer .ung-node { min-height: 5rem; text-align: left; align-content: start; }
+    #ung-catalog-explorer .ung-effects { display: block; color: var(--muted-foreground); margin-top: .35rem; }
+    #ung-catalog-explorer .ung-section-label { margin: 0; }
+    #ung-catalog-explorer .ung-stage-controls { display: flex; flex-wrap: wrap; gap: .5rem; }
+    #ung-catalog-explorer .ung-meta { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+    @media (max-width: 600px) {
+      #ung-catalog-explorer .ung-flow { grid-template-columns: 1fr; }
+      #ung-catalog-explorer .ung-flow-step { text-align: left; }
+      #ung-catalog-explorer .ung-flow-mark { width: 2.5rem; }
+    }
+  </style>
+
+  <div class="ung-stack">
+    <div class="viz-controls">
+      <label class="form-label" for="ung-domain-select">Domain
+        <select class="form-select" id="ung-domain-select"></select>
+      </label>
+      <label class="form-label" for="ung-template-select">Template
+        <select class="form-select" id="ung-template-select"></select>
+      </label>
+    </div>
+
+    <div class="ung-meta" aria-live="polite">
+      <span class="viz-badge" id="ung-template-count"></span>
+      <span class="viz-badge" id="ung-stage-count"></span>
+      <span class="viz-badge" id="ung-slot-count"></span>
+      <span class="text-muted" id="ung-domains"></span>
+    </div>
+
+    <div class="ung-flow" role="img" aria-label="Open registry discovery becomes a closed compiler universe before route search">
+      <div class="ung-flow-step"><div class="ung-flow-mark"></div><strong>Open registries</strong><div class="text-small text-muted">node packs + sidecars</div></div>
+      <div class="ung-flow-step"><div class="ung-flow-mark"></div><strong>Negotiate</strong><div class="text-small text-muted">exact · lexical · enumerate</div></div>
+      <div class="ung-flow-step"><div class="ung-flow-mark"></div><strong>Snapshot</strong><div class="text-small text-muted">receipt defines coverage</div></div>
+      <div class="ung-flow-step"><div class="ung-flow-mark"></div><strong>Full admission</strong><div class="text-small text-muted">every slot × candidate</div></div>
+      <div class="ung-flow-step"><div class="ung-flow-mark"></div><strong>Route experiments</strong><div class="text-small text-muted">prior · beam · sprout · exhaustive</div></div>
+    </div>
+
+    <div class="ung-stage-controls" id="ung-stage-controls" aria-label="Template stages"></div>
+    <p class="ung-section-label"><strong id="ung-stage-title"></strong> <span class="text-muted" id="ung-stage-description"></span></p>
+    <div class="ung-slots" id="ung-slots" aria-label="Atomic semantic slots"></div>
+    <div class="card" id="ung-selected-slot" aria-live="polite"></div>
+
+    <p class="ung-section-label"><strong>Reference node pack</strong> <span class="text-muted">5 contracts · 5 descriptors · 0 fabricated embeddings</span></p>
+    <div class="ung-node-grid" id="ung-node-grid" aria-label="Reference node contracts"></div>
+    <div class="card" id="ung-selected-node" aria-live="polite"></div>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById("ung-catalog-explorer");
+      const templates = [
+  {
+    "id": "template.api-service",
+    "title": "Production API service",
+    "domains": [
+      "software.backend",
+      "software.api"
+    ],
+    "stages": [
+      {
+        "id": "stage.contract",
+        "title": "Contract",
+        "description": "Define externally observable service behavior.",
+        "slots": [
+          [
+            "identify_consumers",
+            "Identify consumers, trust boundaries, and compatibility commitments."
+          ],
+          [
+            "define_api_schema",
+            "Define versioned requests, responses, errors, and semantics."
+          ],
+          [
+            "define_slos",
+            "Define latency, availability, durability, and correctness objectives."
+          ]
+        ]
+      },
+      {
+        "id": "stage.design",
+        "title": "Design",
+        "description": "Choose explicit state and interaction boundaries.",
+        "slots": [
+          [
+            "model_domain",
+            "Model domain values, invariants, and state transitions."
+          ],
+          [
+            "design_persistence",
+            "Design persistence, transaction, migration, and consistency contracts."
+          ],
+          [
+            "design_dependencies",
+            "Define external dependency contracts and failure behavior."
+          ]
+        ]
+      },
+      {
+        "id": "stage.implement",
+        "title": "Implement",
+        "description": "Build atomic request-processing obligations.",
+        "slots": [
+          [
+            "parse_request",
+            "Parse and schema-check the exact incoming request."
+          ],
+          [
+            "authenticate_request",
+            "Authenticate the caller and credential context."
+          ],
+          [
+            "authorize_operation",
+            "Authorize the requested operation and resource scope."
+          ],
+          [
+            "execute_domain_logic",
+            "Execute domain rules under transaction and idempotency policy."
+          ],
+          [
+            "serialize_response",
+            "Serialize typed success or error responses without information leakage."
+          ]
+        ]
+      },
+      {
+        "id": "stage.protect",
+        "title": "Protect",
+        "description": "Apply resilience and abuse controls.",
+        "slots": [
+          [
+            "enforce_limits",
+            "Enforce payload, rate, quota, timeout, and concurrency limits."
+          ],
+          [
+            "handle_dependency_failure",
+            "Retry, isolate, degrade, or fail dependencies by policy."
+          ],
+          [
+            "emit_observability",
+            "Emit redacted traces, metrics, logs, and audit events."
+          ]
+        ]
+      },
+      {
+        "id": "stage.assure",
+        "title": "Assure",
+        "description": "Prove the service contract and deployability.",
+        "slots": [
+          [
+            "run_contract_tests",
+            "Run schema, compatibility, property, and integration tests."
+          ],
+          [
+            "run_security_tests",
+            "Run authorization, input, abuse, and dependency security tests."
+          ],
+          [
+            "verify_capacity",
+            "Verify capacity and SLO behavior under representative load."
+          ],
+          [
+            "publish_service",
+            "Deploy, verify, and publish service and operational receipts."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.batch-data-pipeline",
+    "title": "Batch data engineering pipeline",
+    "domains": [
+      "data-engineering.batch"
+    ],
+    "stages": [
+      {
+        "id": "stage.contract",
+        "title": "Contract",
+        "description": "Define data products and operating constraints.",
+        "slots": [
+          [
+            "define_sources",
+            "Define source identities, ownership, cadence, and access contracts."
+          ],
+          [
+            "define_product",
+            "Define output schema, semantics, freshness, and consumers."
+          ],
+          [
+            "define_slas",
+            "Define quality, latency, recovery, and retention objectives."
+          ]
+        ]
+      },
+      {
+        "id": "stage.ingest",
+        "title": "Ingest",
+        "description": "Acquire source snapshots safely.",
+        "slots": [
+          [
+            "extract_sources",
+            "Extract source data using bounded incremental or full reads."
+          ],
+          [
+            "validate_arrival",
+            "Validate expected partitions, counts, checksums, and freshness."
+          ],
+          [
+            "capture_lineage",
+            "Capture immutable source, schema, and extraction provenance."
+          ]
+        ]
+      },
+      {
+        "id": "stage.transform",
+        "title": "Transform",
+        "description": "Produce stable intermediate and business values.",
+        "slots": [
+          [
+            "normalize_schema",
+            "Normalize types, names, null semantics, and units."
+          ],
+          [
+            "apply_business_rules",
+            "Apply versioned deterministic business transformations."
+          ],
+          [
+            "join_sources",
+            "Join sources with declared keys, cardinality, and loss accounting."
+          ],
+          [
+            "aggregate_values",
+            "Aggregate at declared grains with reconciliation checks."
+          ]
+        ]
+      },
+      {
+        "id": "stage.assure",
+        "title": "Assure",
+        "description": "Detect invalid or drifting outputs.",
+        "slots": [
+          [
+            "validate_constraints",
+            "Validate schema, uniqueness, referential, and business constraints."
+          ],
+          [
+            "detect_drift",
+            "Detect source, schema, distribution, and volume drift."
+          ],
+          [
+            "reconcile_totals",
+            "Reconcile source-to-output counts, balances, and rejects."
+          ]
+        ]
+      },
+      {
+        "id": "stage.publish",
+        "title": "Publish",
+        "description": "Commit one versioned data product.",
+        "slots": [
+          [
+            "write_product",
+            "Write outputs atomically in the declared storage contract."
+          ],
+          [
+            "publish_metadata",
+            "Publish catalog, lineage, quality, and ownership metadata."
+          ],
+          [
+            "notify_consumers",
+            "Emit idempotent availability or failure events."
+          ]
+        ]
+      },
+      {
+        "id": "stage.operate",
+        "title": "Operate",
+        "description": "Preserve evidence and recoverability.",
+        "slots": [
+          [
+            "record_run",
+            "Record inputs, route, code, environment, metrics, and outcomes."
+          ],
+          [
+            "apply_recovery",
+            "Retry, backfill, quarantine, or rollback under explicit policy."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.customer-support",
+    "title": "Customer support case resolution",
+    "domains": [
+      "business.customer-support",
+      "software.workflow"
+    ],
+    "stages": [
+      {
+        "id": "stage.intake",
+        "title": "Intake",
+        "description": "Create a trustworthy support case.",
+        "slots": [
+          [
+            "receive_contact",
+            "Receive the customer contact and channel metadata."
+          ],
+          [
+            "authenticate_customer",
+            "Authenticate identity only to the level required by the request."
+          ],
+          [
+            "redact_sensitive_data",
+            "Detect, minimize, and protect unnecessary sensitive content."
+          ]
+        ]
+      },
+      {
+        "id": "stage.understand",
+        "title": "Understand",
+        "description": "Determine intent, context, and urgency.",
+        "slots": [
+          [
+            "classify_intent",
+            "Classify the requested outcome and affected product or process."
+          ],
+          [
+            "extract_case_facts",
+            "Extract source-grounded facts, dates, identifiers, and commitments."
+          ],
+          [
+            "retrieve_context",
+            "Retrieve authorized account, order, policy, and interaction context."
+          ],
+          [
+            "assess_priority",
+            "Assess urgency, vulnerability, impact, and escalation criteria."
+          ]
+        ]
+      },
+      {
+        "id": "stage.resolve",
+        "title": "Resolve",
+        "description": "Select and execute an authorized remedy.",
+        "slots": [
+          [
+            "retrieve_policy",
+            "Retrieve the exact applicable policy, entitlement, and exceptions."
+          ],
+          [
+            "generate_options",
+            "Generate contract-compatible resolution options."
+          ],
+          [
+            "select_resolution",
+            "Select a resolution using authority, evidence, cost, and customer impact."
+          ],
+          [
+            "execute_resolution",
+            "Execute the approved account, refund, replacement, or workflow action."
+          ]
+        ]
+      },
+      {
+        "id": "stage.communicate",
+        "title": "Communicate",
+        "description": "Explain and confirm the outcome.",
+        "slots": [
+          [
+            "compose_response",
+            "Compose a clear, accurate, policy-grounded response."
+          ],
+          [
+            "verify_response",
+            "Verify facts, promises, tone, privacy, and required disclosures."
+          ],
+          [
+            "deliver_response",
+            "Deliver through the authorized channel and preserve evidence."
+          ]
+        ]
+      },
+      {
+        "id": "stage.close",
+        "title": "Close",
+        "description": "Verify completion and improve the system.",
+        "slots": [
+          [
+            "verify_resolution",
+            "Verify that promised actions completed and the case oracle passes."
+          ],
+          [
+            "route_followup",
+            "Schedule, escalate, or reopen unresolved obligations."
+          ],
+          [
+            "record_outcome",
+            "Record resolution, effort, cost, feedback, and reusable evidence."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.data-quality",
+    "title": "Entity and address data quality",
+    "domains": [
+      "data-engineering.quality",
+      "data-management.entity"
+    ],
+    "stages": [
+      {
+        "id": "stage.profile",
+        "title": "Profile",
+        "description": "Establish source and quality contracts.",
+        "slots": [
+          [
+            "load_sources",
+            "Load all source tables with immutable source identities."
+          ],
+          [
+            "infer_schema",
+            "Infer and then confirm the semantic schema."
+          ],
+          [
+            "profile_quality",
+            "Measure completeness, validity, uniqueness, and drift."
+          ]
+        ]
+      },
+      {
+        "id": "stage.normalize",
+        "title": "Normalize",
+        "description": "Apply field-local transformations.",
+        "slots": [
+          [
+            "normalize_names",
+            "Normalize person and business names."
+          ],
+          [
+            "parse_compound_names",
+            "Separate compound and household names when justified."
+          ],
+          [
+            "normalize_address",
+            "Normalize address text and locality conventions."
+          ],
+          [
+            "parse_street_components",
+            "Parse street components into typed fields."
+          ],
+          [
+            "normalize_contact",
+            "Normalize phone and electronic contact fields."
+          ]
+        ]
+      },
+      {
+        "id": "stage.resolve",
+        "title": "Resolve",
+        "description": "Validate and reconcile entities.",
+        "slots": [
+          [
+            "validate_postal",
+            "Validate deliverability against an admitted postal reference."
+          ],
+          [
+            "validate_geography",
+            "Validate geographic components against an admitted census reference."
+          ],
+          [
+            "geocode",
+            "Resolve coordinates with declared confidence and provenance."
+          ],
+          [
+            "match_entities",
+            "Generate and score candidate entity matches."
+          ],
+          [
+            "merge_entities",
+            "Merge accepted matches under a reversible policy."
+          ]
+        ]
+      },
+      {
+        "id": "stage.publish",
+        "title": "Publish",
+        "description": "Verify, report, and publish clean data.",
+        "slots": [
+          [
+            "verify_constraints",
+            "Run schema, referential, and business-rule checks."
+          ],
+          [
+            "publish_dataset",
+            "Publish versioned outputs, rejects, and lineage receipts."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.deployment-release",
+    "title": "Deployment and release",
+    "domains": [
+      "software.delivery",
+      "operations.deployment"
+    ],
+    "stages": [
+      {
+        "id": "stage.prepare",
+        "title": "Prepare",
+        "description": "Freeze intent and prove the build inputs.",
+        "slots": [
+          [
+            "load_release_intent",
+            "Load approved change intent, policy, and target environment."
+          ],
+          [
+            "resolve_dependencies",
+            "Resolve immutable source and dependency identities."
+          ],
+          [
+            "build_artifact",
+            "Build an isolated, reproducible release artifact."
+          ],
+          [
+            "generate_provenance",
+            "Generate signed build and dependency provenance."
+          ]
+        ]
+      },
+      {
+        "id": "stage.qualify",
+        "title": "Qualify",
+        "description": "Run pre-release assurance.",
+        "slots": [
+          [
+            "test_artifact",
+            "Test the exact artifact that will be deployed."
+          ],
+          [
+            "scan_artifact",
+            "Scan policy, vulnerabilities, licenses, and secrets."
+          ],
+          [
+            "approve_release",
+            "Record an authorized release decision."
+          ]
+        ]
+      },
+      {
+        "id": "stage.rollout",
+        "title": "Roll out",
+        "description": "Change environments through bounded stages.",
+        "slots": [
+          [
+            "provision_target",
+            "Prepare target resources through an idempotent plan."
+          ],
+          [
+            "deploy_canary",
+            "Deploy to a bounded canary population."
+          ],
+          [
+            "verify_canary",
+            "Evaluate canary health against independent SLOs."
+          ],
+          [
+            "progressive_rollout",
+            "Increase exposure under explicit promotion gates."
+          ]
+        ]
+      },
+      {
+        "id": "stage.close",
+        "title": "Close",
+        "description": "Verify, recover if needed, and preserve evidence.",
+        "slots": [
+          [
+            "verify_production",
+            "Verify production behavior and user-visible outcomes."
+          ],
+          [
+            "rollback_or_finalize",
+            "Rollback safely or finalize the release state."
+          ],
+          [
+            "publish_release_receipt",
+            "Publish artifact, approvals, observations, and decisions."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.document-intelligence",
+    "title": "Document ingestion and structured extraction",
+    "domains": [
+      "data-engineering.documents",
+      "ai.document-intelligence"
+    ],
+    "stages": [
+      {
+        "id": "stage.acquire",
+        "title": "Acquire",
+        "description": "Accept documents and establish source identity.",
+        "slots": [
+          [
+            "receive_document",
+            "Receive a document with immutable source metadata."
+          ],
+          [
+            "detect_format",
+            "Detect container, encoding, language hints, and corruption."
+          ],
+          [
+            "malware_policy",
+            "Apply the declared content safety and quarantine policy."
+          ]
+        ]
+      },
+      {
+        "id": "stage.decode",
+        "title": "Decode",
+        "description": "Produce source-grounded machine-readable content.",
+        "slots": [
+          [
+            "repair_container",
+            "Repair or reject malformed containers without inventing content."
+          ],
+          [
+            "extract_native_text",
+            "Extract embedded text, layout, and metadata when available."
+          ],
+          [
+            "render_pages",
+            "Render stable page images for visual processing when required."
+          ],
+          [
+            "recognize_text",
+            "Recognize text from visual regions with confidence and provenance."
+          ]
+        ]
+      },
+      {
+        "id": "stage.normalize",
+        "title": "Normalize",
+        "description": "Standardize content while preserving traceability.",
+        "slots": [
+          [
+            "remove_boilerplate",
+            "Separate repeated headers, footers, watermarks, and navigation."
+          ],
+          [
+            "normalize_symbols",
+            "Normalize encodings, whitespace, and symbols under a reversible policy."
+          ],
+          [
+            "translate_content",
+            "Translate content into the target language when the contract requires it."
+          ],
+          [
+            "segment_structure",
+            "Segment pages, sections, tables, figures, and reading order."
+          ]
+        ]
+      },
+      {
+        "id": "stage.extract",
+        "title": "Extract",
+        "description": "Generate schema-bound candidate facts.",
+        "slots": [
+          [
+            "prioritize_regions",
+            "Prioritize source regions relevant to the requested schema."
+          ],
+          [
+            "extract_deterministic",
+            "Apply deterministic parsers, rules, and validators."
+          ],
+          [
+            "extract_model_assisted",
+            "Apply admitted model-based extraction with structured output."
+          ],
+          [
+            "reconcile_candidates",
+            "Reconcile conflicting values using source and confidence evidence."
+          ]
+        ]
+      },
+      {
+        "id": "stage.deliver",
+        "title": "Deliver",
+        "description": "Verify and publish traceable structured output.",
+        "slots": [
+          [
+            "validate_schema",
+            "Validate types, required fields, constraints, and cross-field rules."
+          ],
+          [
+            "ground_output",
+            "Attach page, region, and source citations to extracted values."
+          ],
+          [
+            "publish_record",
+            "Publish accepted records, rejects, and a replayable receipt."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.event-driven-system",
+    "title": "Event-driven application",
+    "domains": [
+      "software.event-driven",
+      "software.distributed"
+    ],
+    "stages": [
+      {
+        "id": "stage.contract",
+        "title": "Contract",
+        "description": "Define event meaning and delivery guarantees.",
+        "slots": [
+          [
+            "define_event_schema",
+            "Define versioned event identity, payload, and semantic meaning."
+          ],
+          [
+            "define_delivery_semantics",
+            "Define ordering, duplication, latency, and durability semantics."
+          ],
+          [
+            "define_failure_policy",
+            "Define retry, dead-letter, compensation, and replay policy."
+          ]
+        ]
+      },
+      {
+        "id": "stage.ingest",
+        "title": "Ingest",
+        "description": "Accept and authenticate events.",
+        "slots": [
+          [
+            "receive_event",
+            "Receive an event with transport and source evidence."
+          ],
+          [
+            "authenticate_event",
+            "Authenticate producer and verify message integrity."
+          ],
+          [
+            "validate_event",
+            "Validate schema, version, identifiers, and temporal bounds."
+          ],
+          [
+            "deduplicate_event",
+            "Detect duplicate delivery under the declared identity contract."
+          ]
+        ]
+      },
+      {
+        "id": "stage.process",
+        "title": "Process",
+        "description": "Derive one deterministic state transition.",
+        "slots": [
+          [
+            "load_state",
+            "Load required state at a declared consistency level."
+          ],
+          [
+            "apply_transition",
+            "Apply domain invariants and compute the intended transition."
+          ],
+          [
+            "persist_transition",
+            "Persist state and event progress atomically or compensatably."
+          ]
+        ]
+      },
+      {
+        "id": "stage.coordinate",
+        "title": "Coordinate",
+        "description": "Publish downstream work safely.",
+        "slots": [
+          [
+            "derive_events",
+            "Derive typed downstream events from the accepted transition."
+          ],
+          [
+            "publish_events",
+            "Publish events under the declared atomicity and retry model."
+          ],
+          [
+            "coordinate_saga",
+            "Advance or compensate multi-step workflows when required."
+          ]
+        ]
+      },
+      {
+        "id": "stage.operate",
+        "title": "Operate",
+        "description": "Observe and recover the event flow.",
+        "slots": [
+          [
+            "observe_lag",
+            "Measure backlog, latency, failure, and replay state."
+          ],
+          [
+            "handle_poison_event",
+            "Quarantine or repair poison events without blocking unrelated work."
+          ],
+          [
+            "replay_safely",
+            "Replay a bounded event range with idempotency evidence."
+          ],
+          [
+            "publish_receipt",
+            "Publish state, offsets, effects, and recovery evidence."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.image-processing",
+    "title": "Image inspection, transformation, and analysis",
+    "domains": [
+      "media.image-processing",
+      "ai.computer-vision"
+    ],
+    "stages": [
+      {
+        "id": "stage.ingest",
+        "title": "Ingest",
+        "description": "Validate and decode the source image.",
+        "slots": [
+          [
+            "load_image",
+            "Load the exact image bytes and source metadata."
+          ],
+          [
+            "decode_image",
+            "Decode format, color model, orientation, and frame structure."
+          ],
+          [
+            "validate_integrity",
+            "Detect truncation, malformed regions, and unsupported encodings."
+          ]
+        ]
+      },
+      {
+        "id": "stage.inspect",
+        "title": "Inspect",
+        "description": "Measure source quality and content evidence.",
+        "slots": [
+          [
+            "quality_profile",
+            "Measure resolution, noise, blur, compression, clipping, and exposure."
+          ],
+          [
+            "detect_regions",
+            "Detect faces, objects, corners, text regions, and regions of interest."
+          ],
+          [
+            "detect_synthetic",
+            "Run admitted synthetic-media and manipulation detectors."
+          ],
+          [
+            "extract_metadata",
+            "Extract permitted metadata and provenance claims."
+          ]
+        ]
+      },
+      {
+        "id": "stage.transform",
+        "title": "Transform",
+        "description": "Apply explicit reversible or declared image operations.",
+        "slots": [
+          [
+            "normalize_geometry",
+            "Correct orientation, crop, pad, resize, or rectify geometry."
+          ],
+          [
+            "normalize_color",
+            "Convert color space and normalize white balance or tone."
+          ],
+          [
+            "enhance_signal",
+            "Adjust contrast, sharpness, denoising, or restoration under policy."
+          ],
+          [
+            "apply_distortion",
+            "Apply requested augmentation or distortion with recorded parameters."
+          ]
+        ]
+      },
+      {
+        "id": "stage.analyze",
+        "title": "Analyze",
+        "description": "Produce typed content findings.",
+        "slots": [
+          [
+            "recognize_text",
+            "Recognize and ground visible text."
+          ],
+          [
+            "classify_content",
+            "Classify requested visual attributes with confidence."
+          ],
+          [
+            "measure_geometry",
+            "Measure spatial relationships, boundaries, and regions."
+          ],
+          [
+            "reconcile_findings",
+            "Reconcile model and deterministic findings."
+          ]
+        ]
+      },
+      {
+        "id": "stage.deliver",
+        "title": "Deliver",
+        "description": "Encode, verify, and publish outputs.",
+        "slots": [
+          [
+            "encode_output",
+            "Encode the requested image and metadata format."
+          ],
+          [
+            "verify_output",
+            "Verify dimensions, appearance, content constraints, and no unintended loss."
+          ],
+          [
+            "publish_artifacts",
+            "Publish outputs, masks, findings, and transformation receipt."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.incident-response",
+    "title": "Cybersecurity incident response",
+    "domains": [
+      "security.incident-response",
+      "operations.reliability"
+    ],
+    "stages": [
+      {
+        "id": "stage.prepare",
+        "title": "Prepare",
+        "description": "Establish authority, evidence, and response boundaries.",
+        "slots": [
+          [
+            "load_response_policy",
+            "Load response authority, severity, privacy, and notification policy."
+          ],
+          [
+            "identify_assets",
+            "Identify affected assets, owners, dependencies, and criticality."
+          ],
+          [
+            "preserve_initial_evidence",
+            "Preserve volatile and durable evidence with chain of custody."
+          ]
+        ]
+      },
+      {
+        "id": "stage.detect",
+        "title": "Detect",
+        "description": "Validate and scope the suspected incident.",
+        "slots": [
+          [
+            "normalize_alerts",
+            "Normalize alerts and observations into a versioned event model."
+          ],
+          [
+            "correlate_indicators",
+            "Correlate identities, indicators, timelines, and affected resources."
+          ],
+          [
+            "validate_incident",
+            "Distinguish incident, benign behavior, and insufficient evidence."
+          ]
+        ]
+      },
+      {
+        "id": "stage.triage",
+        "title": "Triage",
+        "description": "Prioritize and plan bounded response.",
+        "slots": [
+          [
+            "assess_impact",
+            "Assess confidentiality, integrity, availability, safety, and business impact."
+          ],
+          [
+            "classify_severity",
+            "Classify severity and reporting obligations under policy."
+          ],
+          [
+            "select_response_plan",
+            "Select authorized containment and evidence-preservation actions."
+          ]
+        ]
+      },
+      {
+        "id": "stage.contain",
+        "title": "Contain",
+        "description": "Limit harm while preserving recoverability.",
+        "slots": [
+          [
+            "isolate_scope",
+            "Isolate affected identities, hosts, workloads, or network segments."
+          ],
+          [
+            "block_indicators",
+            "Block verified malicious indicators with expiry and rollback."
+          ],
+          [
+            "monitor_containment",
+            "Verify containment and detect displacement or persistence."
+          ]
+        ]
+      },
+      {
+        "id": "stage.recover",
+        "title": "Recover",
+        "description": "Remove cause and restore trusted operation.",
+        "slots": [
+          [
+            "eradicate_cause",
+            "Remove persistence, vulnerabilities, compromised secrets, and artifacts."
+          ],
+          [
+            "restore_services",
+            "Restore services and data from verified trusted state."
+          ],
+          [
+            "verify_recovery",
+            "Verify security, integrity, functionality, and monitoring coverage."
+          ]
+        ]
+      },
+      {
+        "id": "stage.learn",
+        "title": "Learn",
+        "description": "Close obligations and improve defenses.",
+        "slots": [
+          [
+            "notify_stakeholders",
+            "Complete authorized legal, customer, partner, and internal notifications."
+          ],
+          [
+            "publish_incident_record",
+            "Publish timeline, evidence, actions, impact, and decisions."
+          ],
+          [
+            "improve_controls",
+            "Convert verified lessons into owned preventive and detective changes."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.infrastructure-provisioning",
+    "title": "Infrastructure provisioning",
+    "domains": [
+      "operations.infrastructure",
+      "software.delivery"
+    ],
+    "stages": [
+      {
+        "id": "stage.define",
+        "title": "Define",
+        "description": "Specify desired infrastructure and constraints.",
+        "slots": [
+          [
+            "load_desired_state",
+            "Load versioned desired state, environment, and ownership."
+          ],
+          [
+            "resolve_dependencies",
+            "Resolve providers, modules, images, and immutable dependencies."
+          ],
+          [
+            "define_policies",
+            "Define security, residency, cost, resilience, and naming policies."
+          ]
+        ]
+      },
+      {
+        "id": "stage.discover",
+        "title": "Discover",
+        "description": "Establish the current trusted state.",
+        "slots": [
+          [
+            "authenticate_provider",
+            "Authenticate to the declared provider and account scope."
+          ],
+          [
+            "read_current_state",
+            "Read current resources, state, drift, and locks."
+          ],
+          [
+            "import_unmanaged_state",
+            "Detect and explicitly reconcile unmanaged resources."
+          ]
+        ]
+      },
+      {
+        "id": "stage.plan",
+        "title": "Plan",
+        "description": "Compute and qualify the intended changes.",
+        "slots": [
+          [
+            "compute_change_plan",
+            "Compute create, update, replace, and destroy operations."
+          ],
+          [
+            "estimate_cost",
+            "Estimate one-time and recurring cost deltas."
+          ],
+          [
+            "evaluate_policy",
+            "Evaluate security, compliance, blast radius, and approval policy."
+          ],
+          [
+            "approve_plan",
+            "Record authorized approval for the exact plan digest."
+          ]
+        ]
+      },
+      {
+        "id": "stage.apply",
+        "title": "Apply",
+        "description": "Execute the immutable plan safely.",
+        "slots": [
+          [
+            "acquire_lock",
+            "Acquire an environment-scoped mutation lock."
+          ],
+          [
+            "apply_changes",
+            "Apply changes idempotently with bounded retries."
+          ],
+          [
+            "handle_partial_failure",
+            "Recover, continue, or rollback partial application by policy."
+          ]
+        ]
+      },
+      {
+        "id": "stage.verify",
+        "title": "Verify",
+        "description": "Prove desired state and operational readiness.",
+        "slots": [
+          [
+            "verify_resources",
+            "Verify actual resources, configuration, connectivity, and health."
+          ],
+          [
+            "verify_security",
+            "Verify identity, network, encryption, secrets, and logging controls."
+          ],
+          [
+            "publish_state",
+            "Publish protected state, outputs, drift baseline, and receipt."
+          ],
+          [
+            "schedule_lifecycle",
+            "Schedule drift detection, rotation, backup, and decommission obligations."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.kaggle-tabular",
+    "title": "Kaggle tabular supervised learning",
+    "domains": [
+      "machine-learning.tabular",
+      "competition.kaggle"
+    ],
+    "stages": [
+      {
+        "id": "stage.acquire",
+        "title": "Acquire",
+        "description": "Load and establish the competition contract.",
+        "slots": [
+          [
+            "load_data",
+            "Load train, test, metadata, and sample submission assets."
+          ],
+          [
+            "identify_target_metric",
+            "Identify target, evaluation metric, and submission schema."
+          ],
+          [
+            "schema_profile",
+            "Profile columns, types, cardinalities, and missingness."
+          ]
+        ]
+      },
+      {
+        "id": "stage.investigate",
+        "title": "Investigate",
+        "description": "Produce evidence before changing data.",
+        "slots": [
+          [
+            "split_strategy",
+            "Define a leakage-safe validation and resampling strategy."
+          ],
+          [
+            "leakage_audit",
+            "Audit temporal, entity, target, and duplicate leakage."
+          ],
+          [
+            "quality_profile",
+            "Measure duplicates, invalid values, drift, and anomalies."
+          ],
+          [
+            "eda_distributions",
+            "Analyze univariate target and feature distributions."
+          ],
+          [
+            "eda_relationships",
+            "Analyze feature relationships and target associations."
+          ]
+        ]
+      },
+      {
+        "id": "stage.prepare",
+        "title": "Prepare",
+        "description": "Apply isolated, testable data transformations.",
+        "slots": [
+          [
+            "deduplicate",
+            "Resolve duplicate rows and conflicting entities."
+          ],
+          [
+            "type_repair",
+            "Repair semantic types and parse malformed values."
+          ],
+          [
+            "missingness_policy",
+            "Represent or impute missing values without leakage."
+          ],
+          [
+            "outlier_policy",
+            "Detect and handle outliers under an explicit policy."
+          ],
+          [
+            "encode_categories",
+            "Encode categorical values with fold-safe fitting."
+          ],
+          [
+            "scale_numeric",
+            "Transform numeric values when the downstream model requires it."
+          ]
+        ]
+      },
+      {
+        "id": "stage.features",
+        "title": "Features",
+        "description": "Generate and select reproducible predictors.",
+        "slots": [
+          [
+            "generate_features",
+            "Generate domain, interaction, aggregate, and temporal features."
+          ],
+          [
+            "select_features",
+            "Select a stable feature set using training-only evidence."
+          ]
+        ]
+      },
+      {
+        "id": "stage.model",
+        "title": "Model",
+        "description": "Fit, compare, calibrate, and combine model candidates.",
+        "slots": [
+          [
+            "baseline_model",
+            "Fit a simple reproducible baseline and establish a floor."
+          ],
+          [
+            "candidate_model_pool",
+            "Fit a diverse pool of admitted model families."
+          ],
+          [
+            "cross_validate",
+            "Evaluate each route using the declared validation protocol."
+          ],
+          [
+            "out_of_fold_predictions",
+            "Produce complete out-of-fold predictions."
+          ],
+          [
+            "calibrate",
+            "Calibrate predictions when the metric or use case requires it."
+          ],
+          [
+            "ensemble_select",
+            "Select complementary models using holdout-safe evidence."
+          ],
+          [
+            "ensemble_fit",
+            "Fit ensemble weights or stacker without validation leakage."
+          ]
+        ]
+      },
+      {
+        "id": "stage.deliver",
+        "title": "Deliver",
+        "description": "Validate and preserve a replayable submission.",
+        "slots": [
+          [
+            "validate_holdout",
+            "Run the independent holdout and robustness checks."
+          ],
+          [
+            "postprocess",
+            "Apply contract-preserving prediction postprocessing."
+          ],
+          [
+            "package_submission",
+            "Create and schema-check the submission artifact."
+          ],
+          [
+            "audit_receipt",
+            "Record code, data, seed, environment, route, and metrics."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.login-system",
+    "title": "Authentication and login system",
+    "domains": [
+      "software.application",
+      "security.identity"
+    ],
+    "stages": [
+      {
+        "id": "stage.contract",
+        "title": "Contract",
+        "description": "Define identity boundaries and threats.",
+        "slots": [
+          [
+            "define_identity_contract",
+            "Define actors, credentials, sessions, and assurance levels."
+          ],
+          [
+            "threat_model",
+            "Model abuse, disclosure, replay, enumeration, and recovery threats."
+          ],
+          [
+            "select_protocol",
+            "Select an admitted authentication protocol and trust boundary."
+          ]
+        ]
+      },
+      {
+        "id": "stage.implement",
+        "title": "Implement",
+        "description": "Build atomic identity operations.",
+        "slots": [
+          [
+            "account_storage",
+            "Implement protected identity and credential storage."
+          ],
+          [
+            "registration",
+            "Implement registration and proofing under policy."
+          ],
+          [
+            "credential_verification",
+            "Verify credentials without leaking sensitive state."
+          ],
+          [
+            "session_issue",
+            "Issue bounded, revocable sessions."
+          ],
+          [
+            "session_verify",
+            "Verify session integrity, expiry, audience, and revocation."
+          ],
+          [
+            "logout_revoke",
+            "Revoke sessions and propagate logout semantics."
+          ],
+          [
+            "account_recovery",
+            "Implement abuse-resistant account recovery."
+          ]
+        ]
+      },
+      {
+        "id": "stage.protect",
+        "title": "Protect",
+        "description": "Add cross-cutting abuse and observability controls.",
+        "slots": [
+          [
+            "rate_limit",
+            "Apply privacy-preserving rate and abuse limits."
+          ],
+          [
+            "security_events",
+            "Emit redacted, auditable identity security events."
+          ]
+        ]
+      },
+      {
+        "id": "stage.assure",
+        "title": "Assure",
+        "description": "Verify security and operational behavior.",
+        "slots": [
+          [
+            "security_tests",
+            "Run protocol, authorization, session, and abuse tests."
+          ],
+          [
+            "deployment_gate",
+            "Gate deployment on independent security and reliability checks."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.qa-engineering",
+    "title": "Software quality assurance",
+    "domains": [
+      "software.quality"
+    ],
+    "stages": [
+      {
+        "id": "stage.understand",
+        "title": "Understand",
+        "description": "Convert change intent into testable obligations.",
+        "slots": [
+          [
+            "load_change",
+            "Load the change, ticket, contracts, and affected artifacts."
+          ],
+          [
+            "impact_analysis",
+            "Identify affected components, interfaces, and risks."
+          ],
+          [
+            "derive_oracles",
+            "Derive independent acceptance and regression oracles."
+          ]
+        ]
+      },
+      {
+        "id": "stage.design",
+        "title": "Design",
+        "description": "Create bounded, diverse test assets.",
+        "slots": [
+          [
+            "select_test_layers",
+            "Select unit, integration, contract, system, and property layers."
+          ],
+          [
+            "generate_cases",
+            "Generate nominal, boundary, adversarial, and metamorphic cases."
+          ],
+          [
+            "prepare_fixtures",
+            "Prepare isolated, deterministic fixtures and environments."
+          ]
+        ]
+      },
+      {
+        "id": "stage.execute",
+        "title": "Execute",
+        "description": "Run tests and gather typed observations.",
+        "slots": [
+          [
+            "static_checks",
+            "Run syntax, type, lint, policy, and security checks."
+          ],
+          [
+            "run_tests",
+            "Execute the admitted test suites with recorded configuration."
+          ],
+          [
+            "collect_coverage",
+            "Collect structural and requirements coverage evidence."
+          ],
+          [
+            "detect_flakes",
+            "Repeat and classify unstable outcomes."
+          ]
+        ]
+      },
+      {
+        "id": "stage.decide",
+        "title": "Decide",
+        "description": "Diagnose and gate release independently.",
+        "slots": [
+          [
+            "diagnose_failures",
+            "Cluster failures and identify minimal reproducible causes."
+          ],
+          [
+            "verify_fixes",
+            "Re-run focused and regression oracles after repair."
+          ],
+          [
+            "release_gate",
+            "Apply the declared release policy and publish evidence."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.recommendation-ranking",
+    "title": "Recommendation and ranking system",
+    "domains": [
+      "machine-learning.recommendation",
+      "software.ranking"
+    ],
+    "stages": [
+      {
+        "id": "stage.contract",
+        "title": "Contract",
+        "description": "Define recommendation outcomes and constraints.",
+        "slots": [
+          [
+            "define_objectives",
+            "Define user, business, ecosystem, and safety objectives."
+          ],
+          [
+            "define_eligibility",
+            "Define item, user, jurisdiction, and inventory eligibility."
+          ],
+          [
+            "define_evaluation",
+            "Define offline, counterfactual, online, and guardrail metrics."
+          ]
+        ]
+      },
+      {
+        "id": "stage.data",
+        "title": "Data",
+        "description": "Build time-correct recommendation evidence.",
+        "slots": [
+          [
+            "ingest_interactions",
+            "Ingest impressions, actions, outcomes, and exposure context."
+          ],
+          [
+            "construct_labels",
+            "Construct outcome labels with delay and censoring policy."
+          ],
+          [
+            "build_features",
+            "Build point-in-time user, item, context, and interaction features."
+          ]
+        ]
+      },
+      {
+        "id": "stage.candidates",
+        "title": "Candidates",
+        "description": "Retrieve a broad eligible item set.",
+        "slots": [
+          [
+            "retrieve_candidates",
+            "Retrieve candidates using one or more admitted strategies."
+          ],
+          [
+            "merge_candidate_sets",
+            "Merge, deduplicate, and preserve retrieval provenance."
+          ],
+          [
+            "filter_eligibility",
+            "Apply hard eligibility, availability, and safety constraints."
+          ]
+        ]
+      },
+      {
+        "id": "stage.rank",
+        "title": "Rank",
+        "description": "Score and arrange candidates.",
+        "slots": [
+          [
+            "score_relevance",
+            "Score expected relevance or utility with calibrated evidence."
+          ],
+          [
+            "apply_multiobjective_policy",
+            "Balance declared objectives and hard guardrails."
+          ],
+          [
+            "diversify_results",
+            "Apply diversity, novelty, coverage, and repetition policy."
+          ],
+          [
+            "assemble_slate",
+            "Assemble a position-aware final slate."
+          ]
+        ]
+      },
+      {
+        "id": "stage.evaluate",
+        "title": "Evaluate",
+        "description": "Test ranking behavior independently.",
+        "slots": [
+          [
+            "offline_evaluation",
+            "Evaluate ranking, calibration, coverage, and subgroup behavior."
+          ],
+          [
+            "bias_safety_audit",
+            "Audit feedback loops, exposure bias, fairness, and unsafe content."
+          ],
+          [
+            "online_experiment",
+            "Run bounded randomized or interleaving experiments when authorized."
+          ]
+        ]
+      },
+      {
+        "id": "stage.serve",
+        "title": "Serve",
+        "description": "Deliver and learn from recommendations.",
+        "slots": [
+          [
+            "serve_slate",
+            "Serve the exact slate within latency and consistency limits."
+          ],
+          [
+            "record_exposure",
+            "Record exposure, route, position, policy, and experiment identity."
+          ],
+          [
+            "ingest_feedback",
+            "Ingest delayed outcomes and update evidence without rewriting history."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.scientific-experiment",
+    "title": "Reproducible scientific experiment",
+    "domains": [
+      "science.experiment",
+      "research.reproducibility"
+    ],
+    "stages": [
+      {
+        "id": "stage.question",
+        "title": "Question",
+        "description": "Turn a research question into falsifiable obligations.",
+        "slots": [
+          [
+            "define_question",
+            "Define scope, population, constructs, and intended inference."
+          ],
+          [
+            "state_hypotheses",
+            "State falsifiable hypotheses and alternative explanations."
+          ],
+          [
+            "define_outcomes",
+            "Define primary, secondary, and safety outcomes before observation."
+          ]
+        ]
+      },
+      {
+        "id": "stage.design",
+        "title": "Design",
+        "description": "Create an identifiable and adequately powered study.",
+        "slots": [
+          [
+            "select_design",
+            "Select experimental or observational design and assignment mechanism."
+          ],
+          [
+            "define_sampling",
+            "Define sampling frame, inclusion, exclusion, and recruitment."
+          ],
+          [
+            "plan_power",
+            "Plan sample size, precision, stopping, and multiplicity."
+          ],
+          [
+            "preregister_analysis",
+            "Freeze hypotheses, exclusions, transformations, and analysis plan."
+          ]
+        ]
+      },
+      {
+        "id": "stage.acquire",
+        "title": "Acquire",
+        "description": "Collect trustworthy observations.",
+        "slots": [
+          [
+            "calibrate_instruments",
+            "Calibrate instruments, annotators, or measurement systems."
+          ],
+          [
+            "collect_observations",
+            "Collect observations under the approved protocol."
+          ],
+          [
+            "monitor_protocol",
+            "Monitor deviations, missingness, safety, and data integrity."
+          ]
+        ]
+      },
+      {
+        "id": "stage.analyze",
+        "title": "Analyze",
+        "description": "Apply the frozen analysis and explicit sensitivity routes.",
+        "slots": [
+          [
+            "validate_measurements",
+            "Validate measurements, exclusions, and preprocessing provenance."
+          ],
+          [
+            "estimate_effects",
+            "Estimate effects or associations with uncertainty."
+          ],
+          [
+            "check_assumptions",
+            "Check model, design, measurement, and missing-data assumptions."
+          ],
+          [
+            "run_sensitivity",
+            "Run declared robustness, subgroup, and alternative-specification analyses."
+          ]
+        ]
+      },
+      {
+        "id": "stage.reproduce",
+        "title": "Reproduce",
+        "description": "Verify computational and inferential stability.",
+        "slots": [
+          [
+            "reexecute_analysis",
+            "Reexecute from immutable data, code, environment, and seeds."
+          ],
+          [
+            "independent_review",
+            "Apply independent methodological and domain review."
+          ],
+          [
+            "replicate_result",
+            "Attempt internal or external replication when feasible."
+          ]
+        ]
+      },
+      {
+        "id": "stage.publish",
+        "title": "Publish",
+        "description": "Report results and limitations without hiding alternatives.",
+        "slots": [
+          [
+            "assemble_evidence",
+            "Assemble data lineage, analysis, diagnostics, and decision receipts."
+          ],
+          [
+            "report_results",
+            "Report estimates, uncertainty, deviations, limitations, and null findings."
+          ],
+          [
+            "publish_artifacts",
+            "Publish permitted data, code, environment, and provenance artifacts."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.shipping-notifications",
+    "title": "Shipping logistics notifications",
+    "domains": [
+      "logistics.shipping",
+      "software.event-driven"
+    ],
+    "stages": [
+      {
+        "id": "stage.ingest",
+        "title": "Ingest",
+        "description": "Accept and identify logistics events.",
+        "slots": [
+          [
+            "receive_events",
+            "Receive carrier, warehouse, and order events idempotently."
+          ],
+          [
+            "authenticate_source",
+            "Authenticate event sources and verify integrity."
+          ],
+          [
+            "normalize_event",
+            "Normalize provider payloads into a versioned event schema."
+          ],
+          [
+            "deduplicate_event",
+            "Detect replayed or semantically duplicate events."
+          ]
+        ]
+      },
+      {
+        "id": "stage.reconcile",
+        "title": "Reconcile",
+        "description": "Build trustworthy shipment state.",
+        "slots": [
+          [
+            "resolve_shipment",
+            "Resolve event identifiers to the correct shipment."
+          ],
+          [
+            "order_events",
+            "Order late and out-of-order events under declared semantics."
+          ],
+          [
+            "derive_status",
+            "Derive the current shipment status and confidence."
+          ],
+          [
+            "detect_exception",
+            "Detect delay, damage, address, and delivery exceptions."
+          ]
+        ]
+      },
+      {
+        "id": "stage.decide",
+        "title": "Decide",
+        "description": "Determine whether and how to notify.",
+        "slots": [
+          [
+            "select_policy",
+            "Apply customer, jurisdiction, urgency, and suppression policy."
+          ],
+          [
+            "select_recipient",
+            "Resolve an authorized recipient and channel preference."
+          ],
+          [
+            "render_message",
+            "Render localized, privacy-safe notification content."
+          ]
+        ]
+      },
+      {
+        "id": "stage.deliver",
+        "title": "Deliver",
+        "description": "Send and learn from typed outcomes.",
+        "slots": [
+          [
+            "dispatch_notification",
+            "Dispatch through an admitted delivery provider."
+          ],
+          [
+            "verify_delivery",
+            "Observe provider and downstream delivery state."
+          ],
+          [
+            "handle_failure",
+            "Retry, fail over, suppress, or escalate by failure class."
+          ],
+          [
+            "record_feedback",
+            "Record delivery, engagement, and policy evidence."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.time-series-forecasting",
+    "title": "Time-series forecasting",
+    "domains": [
+      "machine-learning.time-series"
+    ],
+    "stages": [
+      {
+        "id": "stage.contract",
+        "title": "Contract",
+        "description": "Define the forecasting decision and evaluation contract.",
+        "slots": [
+          [
+            "define_series",
+            "Define entities, target, timestamps, frequency, and observation semantics."
+          ],
+          [
+            "define_horizon",
+            "Define forecast origin, horizon, update cadence, and latency."
+          ],
+          [
+            "define_metric",
+            "Define point, probabilistic, tail, and business evaluation metrics."
+          ]
+        ]
+      },
+      {
+        "id": "stage.investigate",
+        "title": "Investigate",
+        "description": "Understand temporal structure before modeling.",
+        "slots": [
+          [
+            "validate_timeline",
+            "Validate ordering, frequency, gaps, duplicates, and timezone semantics."
+          ],
+          [
+            "detect_regimes",
+            "Detect trend, seasonality, changepoints, intermittency, and regimes."
+          ],
+          [
+            "audit_leakage",
+            "Audit future, revision, entity, and aggregation leakage."
+          ]
+        ]
+      },
+      {
+        "id": "stage.prepare",
+        "title": "Prepare",
+        "description": "Construct causal training values.",
+        "slots": [
+          [
+            "repair_observations",
+            "Repair or represent missing, duplicated, and anomalous observations."
+          ],
+          [
+            "align_covariates",
+            "Align known-future and observed covariates to forecast origins."
+          ],
+          [
+            "generate_temporal_features",
+            "Generate lag, rolling, calendar, hierarchy, and regime features."
+          ],
+          [
+            "define_backtests",
+            "Define rolling or expanding backtests representative of deployment."
+          ]
+        ]
+      },
+      {
+        "id": "stage.model",
+        "title": "Model",
+        "description": "Fit diverse admitted forecast routes.",
+        "slots": [
+          [
+            "fit_baseline",
+            "Fit naive and seasonal baselines that establish a floor."
+          ],
+          [
+            "fit_statistical",
+            "Fit admitted statistical and state-space candidates."
+          ],
+          [
+            "fit_machine_learning",
+            "Fit admitted feature-based machine-learning candidates."
+          ],
+          [
+            "fit_deep_model",
+            "Fit admitted deep temporal candidates when justified."
+          ]
+        ]
+      },
+      {
+        "id": "stage.combine",
+        "title": "Combine",
+        "description": "Calibrate and combine forecasts without leakage.",
+        "slots": [
+          [
+            "generate_backtest_predictions",
+            "Generate complete origin-safe validation predictions."
+          ],
+          [
+            "calibrate_intervals",
+            "Calibrate uncertainty intervals and coverage."
+          ],
+          [
+            "reconcile_hierarchy",
+            "Reconcile hierarchical or grouped series constraints."
+          ],
+          [
+            "ensemble_forecasts",
+            "Combine complementary forecasts using held-out evidence."
+          ]
+        ]
+      },
+      {
+        "id": "stage.deliver",
+        "title": "Deliver",
+        "description": "Verify and publish forecast artifacts.",
+        "slots": [
+          [
+            "stress_test",
+            "Stress missingness, shifts, sparse history, and extreme events."
+          ],
+          [
+            "publish_forecast",
+            "Publish predictions, intervals, route, assumptions, and receipt."
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "template.web-automation",
+    "title": "Reliable automated web interaction",
+    "domains": [
+      "software.web-automation",
+      "ai.computer-use"
+    ],
+    "stages": [
+      {
+        "id": "stage.contract",
+        "title": "Contract",
+        "description": "Turn user intent into bounded web obligations.",
+        "slots": [
+          [
+            "interpret_intent",
+            "Translate the requested outcome into explicit web actions and limits."
+          ],
+          [
+            "authorize_scope",
+            "Confirm permitted sites, accounts, data, and consequential actions."
+          ],
+          [
+            "define_oracle",
+            "Define independent observable success and stop conditions."
+          ]
+        ]
+      },
+      {
+        "id": "stage.reach",
+        "title": "Reach",
+        "description": "Establish a usable browsing context.",
+        "slots": [
+          [
+            "select_runtime",
+            "Select an admitted browser binary, controller, and transport."
+          ],
+          [
+            "open_target",
+            "Reach the intended origin and preserve navigation evidence."
+          ],
+          [
+            "settle_page",
+            "Wait for the required document, network, and application state."
+          ]
+        ]
+      },
+      {
+        "id": "stage.perceive",
+        "title": "Perceive",
+        "description": "Build a trustworthy view of the current interface.",
+        "slots": [
+          [
+            "capture_state",
+            "Capture DOM, accessibility, visual, and network state as permitted."
+          ],
+          [
+            "locate_target",
+            "Locate the intended element or region using admitted strategies."
+          ],
+          [
+            "disambiguate_target",
+            "Resolve multiple matches using context and policy."
+          ],
+          [
+            "check_preconditions",
+            "Verify visibility, enabled state, identity, and action preconditions."
+          ]
+        ]
+      },
+      {
+        "id": "stage.act",
+        "title": "Act",
+        "description": "Perform one bounded interface mutation.",
+        "slots": [
+          [
+            "choose_action",
+            "Choose a contract-compatible deterministic or model-guided action."
+          ],
+          [
+            "execute_action",
+            "Execute the action with exact target and parameter evidence."
+          ],
+          [
+            "capture_outcome",
+            "Capture the immediate application and network outcome."
+          ]
+        ]
+      },
+      {
+        "id": "stage.verify",
+        "title": "Verify",
+        "description": "Confirm that the intended state transition occurred.",
+        "slots": [
+          [
+            "verify_transition",
+            "Compare observed state with the declared success condition."
+          ],
+          [
+            "detect_side_effects",
+            "Detect unexpected navigation, mutation, download, or account effects."
+          ],
+          [
+            "extract_result",
+            "Extract the requested typed data or resulting artifact."
+          ]
+        ]
+      },
+      {
+        "id": "stage.recover",
+        "title": "Recover",
+        "description": "Handle failure without hiding it.",
+        "slots": [
+          [
+            "classify_failure",
+            "Classify selector, timing, auth, policy, network, and semantic failures."
+          ],
+          [
+            "repair_or_fallback",
+            "Retry, heal, or switch routes within the explicit budget."
+          ],
+          [
+            "publish_receipt",
+            "Publish actions, observations, artifacts, and final acceptance."
+          ]
+        ]
+      }
+    ]
+  }
+];
+
+      const nodes = [
+  {
+    "id": "reference.identity-json",
+    "capability": "control.identity",
+    "effects": [],
+    "summary": "Validate JSON compatibility and return the exact value unchanged."
+  },
+  {
+    "id": "reference.parse-json",
+    "capability": "data.parse-json",
+    "effects": [],
+    "summary": "Parse JSON text without repairing malformed input."
+  },
+  {
+    "id": "reference.require-keys",
+    "capability": "data.require-keys",
+    "effects": [],
+    "summary": "Require a finite configured set of object keys."
+  },
+  {
+    "id": "reference.read-local-json",
+    "capability": "connector.file-json",
+    "effects": [
+      "filesystem.read"
+    ],
+    "summary": "Read strict JSON from one explicitly provided local path."
+  },
+  {
+    "id": "reference.fetch-http-json",
+    "capability": "connector.http-json",
+    "effects": [
+      "network.read"
+    ],
+    "summary": "Execute an explicit read-only HTTP request and parse JSON."
+  }
+];
+
+      const domainSelect = root.querySelector("#ung-domain-select");
+      const templateSelect = root.querySelector("#ung-template-select");
+      const stageControls = root.querySelector("#ung-stage-controls");
+      const slotArea = root.querySelector("#ung-slots");
+      let visibleTemplates = templates;
+      let templateIndex = 0;
+      let stageIndex = 0;
+
+      const domains = [...new Set(templates.flatMap(template => template.domains))].sort();
+      ["all", ...domains].forEach(domain => {
+        const option = document.createElement("option");
+        option.value = domain;
+        option.textContent = domain === "all" ? "All domains" : domain;
+        domainSelect.appendChild(option);
+      });
+
+      function populateTemplateSelect() {
+        const domain = domainSelect.value;
+        visibleTemplates = domain === "all"
+          ? templates
+          : templates.filter(template => template.domains.includes(domain));
+        templateSelect.innerHTML = "";
+        visibleTemplates.forEach((template, index) => {
+          const option = document.createElement("option");
+          option.value = String(index);
+          option.textContent = template.title;
+          templateSelect.appendChild(option);
+        });
+        templateIndex = 0;
+        stageIndex = 0;
+      }
+
+      function slotCount(template) {
+        return template.stages.reduce((total, stage) => total + stage.slots.length, 0);
+      }
+
+      function selectSlot(template, stage, slot, ordinal) {
+        root.querySelector("#ung-selected-slot").innerHTML = "";
+        const summary = root.querySelector("#ung-selected-slot");
+        const strong = document.createElement("strong");
+        strong.textContent = `${ordinal}. ${slot[0]}`;
+        const purpose = document.createElement("div");
+        purpose.textContent = slot[1];
+        const capability = document.createElement("code");
+        capability.textContent = `${template.id}.${slot[0]}.perform`;
+        const note = document.createElement("div");
+        note.className = "text-small text-muted";
+        note.textContent = `Stage: ${stage.title} · registry snapshot must admit every compatible candidate for this capability.`;
+        summary.append(strong, purpose, capability, note);
+      }
+
+      function renderStage() {
+        const template = visibleTemplates[templateIndex];
+        const stage = template.stages[stageIndex];
+        root.querySelector("#ung-stage-title").textContent = stage.title;
+        root.querySelector("#ung-stage-description").textContent = `— ${stage.description}`;
+        slotArea.innerHTML = "";
+        const earlier = template.stages.slice(0, stageIndex).reduce((total, item) => total + item.slots.length, 0);
+        stage.slots.forEach((slot, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "btn viz-tile ung-slot";
+          button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+          const ordinal = earlier + index + 1;
+          const number = document.createElement("span");
+          number.className = "ung-slot-index text-small";
+          number.textContent = `STEP ${ordinal}`;
+          const id = document.createElement("strong");
+          id.className = "ung-slot-id";
+          id.textContent = slot[0];
+          const purpose = document.createElement("span");
+          purpose.className = "ung-slot-purpose text-small";
+          purpose.textContent = slot[1];
+          button.append(number, id, purpose);
+          button.addEventListener("click", () => {
+            slotArea.querySelectorAll("button").forEach(item => item.setAttribute("aria-pressed", "false"));
+            button.setAttribute("aria-pressed", "true");
+            selectSlot(template, stage, slot, ordinal);
+          });
+          slotArea.appendChild(button);
+        });
+        selectSlot(template, stage, stage.slots[0], earlier + 1);
+      }
+
+      function renderTemplate() {
+        const template = visibleTemplates[templateIndex];
+        root.querySelector("#ung-template-count").textContent = visibleTemplates.length === templates.length
+          ? `${templates.length} templates`
+          : `${visibleTemplates.length} of ${templates.length} templates`;
+        root.querySelector("#ung-stage-count").textContent = `${template.stages.length} stages`;
+        root.querySelector("#ung-slot-count").textContent = `${slotCount(template)} atomic slots`;
+        root.querySelector("#ung-domains").textContent = template.domains.join(" · ");
+        stageControls.innerHTML = "";
+        template.stages.forEach((stage, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = index === stageIndex ? "btn btn-primary" : "btn";
+          button.textContent = `${index + 1}. ${stage.title}`;
+          button.setAttribute("aria-pressed", index === stageIndex ? "true" : "false");
+          button.addEventListener("click", () => {
+            stageIndex = index;
+            renderTemplate();
+          });
+          stageControls.appendChild(button);
+        });
+        renderStage();
+      }
+
+      function selectNode(node, button) {
+        root.querySelectorAll(".ung-node").forEach(item => item.setAttribute("aria-pressed", "false"));
+        button.setAttribute("aria-pressed", "true");
+        const summary = root.querySelector("#ung-selected-node");
+        summary.innerHTML = "";
+        const strong = document.createElement("strong");
+        strong.textContent = node.id;
+        const description = document.createElement("div");
+        description.textContent = node.summary;
+        const contract = document.createElement("code");
+        contract.textContent = `${node.capability} · effects: ${node.effects.join(", ") || "none"}`;
+        const note = document.createElement("div");
+        note.className = "text-small text-muted";
+        note.textContent = "Descriptor improves discovery; the strict NodeSpec alone controls admission.";
+        summary.append(strong, description, contract, note);
+      }
+
+      const nodeGrid = root.querySelector("#ung-node-grid");
+      nodes.forEach((node, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn viz-tile ung-node";
+        button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+        const id = document.createElement("strong");
+        id.textContent = node.id;
+        const capability = document.createElement("span");
+        capability.className = "ung-effects text-small";
+        capability.textContent = node.capability;
+        button.append(id, capability);
+        button.addEventListener("click", () => selectNode(node, button));
+        nodeGrid.appendChild(button);
+      });
+
+      templateSelect.addEventListener("change", () => {
+        templateIndex = Number(templateSelect.value);
+        stageIndex = 0;
+        renderTemplate();
+      });
+
+      domainSelect.addEventListener("change", () => {
+        populateTemplateSelect();
+        renderTemplate();
+      });
+
+      populateTemplateSelect();
+      renderTemplate();
+      selectNode(nodes[0], nodeGrid.querySelector("button"));
+    })();
+  </script>
+</div>
+
+<script id="codex-visualization-floating-ui-core" src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script id="codex-visualization-floating-ui-dom" src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script id="codex-visualization-tooltip">/* oxlint-disable typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-return */
+// Runs inside the visualization sandbox, not the host webview.
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide-initialization">(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body>
+</html>

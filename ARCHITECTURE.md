@@ -1,8 +1,30 @@
 # Architecture
 
-Layout, and the conventions that keep it extensible.
+Layout, and the conventions that keep it extensible. The repository now has a
+domain-neutral compiler core and a browser adapter; the browser package no
+longer defines the universal ontology.
 
 ```
+solutiongraph/
+├── model.py              semantic graph, strict node ABI, registry, frozen plan
+├── compiler.py           graph validation, full admission, route compilation
+├── discovery.py          descriptors, embedding spaces, handshake, snapshots, node packs
+├── templates.py          semantic stages, reusable templates, refinement policies
+├── template_authoring.py strict linear blueprint parser/compiler
+├── template_library.py   original reference decompositions
+├── template_library_extended.py  twelve additional application templates
+├── search.py             prior, beam, sprout, exhaustive search + honest accounting
+├── adaptive.py           successive promotion and explicit early stopping
+├── evidence.py           receipts, experiments, Pareto fronts, learned priors
+├── reference_nodes.py    small executable node-pack demonstration
+├── catalog.py            deterministic catalogue projection
+└── schemas/              strict portable JSON Schema 2020-12 wire contracts
+
+catalog/
+├── index.json            content-addressed template/node-pack index
+├── templates/            317 atomic obligations across 18 varied domains
+└── nodepacks/            portable reference registry and discovery sidecars
+
 browsergraph/
 ├── ports.py              BrowserPort protocol + Context — the seam
 ├── graph.py              Graph (DAG), run(), RunResult
@@ -35,6 +57,29 @@ browsergraph/
 └── cli.py                CLI adapter
 ```
 
+## Universal representation pipeline
+
+```text
+task contract
+  → semantic template + task-specific ProgramGraph
+  → registry capability negotiation + DiscoveryQuery
+  → DiscoveryReceipt + closed-world RegistrySnapshot
+  → AdmittedSpace + rejection reasons
+  → BeliefModel-guided prior / beam / seeded sprouts / adaptive allocation
+  → content-addressed FrozenPlan
+  → executor adapter
+  → immutable RunReceipt
+  → new BeliefModel revision
+```
+
+Only the compiler crosses the definition-to-plan boundaries. Beliefs cannot
+weaken contracts, and receipts cannot mutate history. See
+`UNIVERSAL_NODE_GRAPH_SPEC.md` for the normative rules.
+
+Discovery is deliberately asymmetric: registries may evolve continuously, but
+a compiler consumes an immutable receipt-backed snapshot. Optional descriptions
+and embeddings can improve nomination without ever changing executable truth.
+
 ## Why dimensions is a package and nodes is a package
 
 Both started as single files. `dimensions.py` reached 274 lines carrying five
@@ -53,7 +98,7 @@ The same reasoning applies to `nodes/`: grouped by **category** (actions, llm,
 and later control/flow), not one file per node. A node is typically 20 lines;
 a file each would be noise.
 
-## The three layers, and the one-way rule
+## The adapter layers, and the one-way rule
 
 ```
 core        ports.py, graph.py, dimensions/     pure, no I/O
@@ -61,7 +106,9 @@ adapters    drivers/, server.py, cli.py         translate to/from the outside
 extensions  nodes/, heal.py, lint.py            build on core, never on adapters
 ```
 
-`manifest.py` and `workbench.py` are pure description/validation layers. Macro
+`solutiongraph` is the language-neutral compilation layer. `manifest.py` and
+`workbench.py` are the earlier viewer-facing description/validation layers and
+will migrate through explicit adapters rather than a breaking rewrite. Macro
 stages group contiguous typed substeps but never become selectable route nodes.
 They do not import an engine or execute a node. The HTML asset consumes serialized
 workbench data and is therefore another adapter, not part of graph execution.
@@ -151,9 +198,9 @@ they read axes generically rather than naming them.
 ## Testing
 
 `MockBrowser` is the reference `BrowserPort`, so graphs, nodes, linting,
-healing and combination sweeps are all testable with no browser. 68 tests run
-in under a second, which is what makes the pairwise sweeps practical to run on
-every change.
+healing and combination sweeps are all testable with no browser. The default
+suite remains fast enough to run on every change, including compiler admission,
+search accounting, and schema-contract tests for the universal core.
 
 The load-bearing test is
 `test_one_graph_runs_across_every_valid_combination` — one graph, every

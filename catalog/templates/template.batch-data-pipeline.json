@@ -1,0 +1,1037 @@
+{
+  "description": "A source-contract, ingestion, transformation, quality, publication, and operation scaffold.",
+  "domains": [
+    "data-engineering.batch"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.batch-data-pipeline",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_sources",
+        "target_port": "state",
+        "target_slot": "define_product"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_product",
+        "target_port": "state",
+        "target_slot": "define_slas"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_slas",
+        "target_port": "state",
+        "target_slot": "extract_sources"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_sources",
+        "target_port": "state",
+        "target_slot": "validate_arrival"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_arrival",
+        "target_port": "state",
+        "target_slot": "capture_lineage"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "capture_lineage",
+        "target_port": "state",
+        "target_slot": "normalize_schema"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_schema",
+        "target_port": "state",
+        "target_slot": "apply_business_rules"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_business_rules",
+        "target_port": "state",
+        "target_slot": "join_sources"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "join_sources",
+        "target_port": "state",
+        "target_slot": "aggregate_values"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "aggregate_values",
+        "target_port": "state",
+        "target_slot": "validate_constraints"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_constraints",
+        "target_port": "state",
+        "target_slot": "detect_drift"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_drift",
+        "target_port": "state",
+        "target_slot": "reconcile_totals"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_totals",
+        "target_port": "state",
+        "target_slot": "write_product"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "write_product",
+        "target_port": "state",
+        "target_slot": "publish_metadata"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "publish_metadata",
+        "target_port": "state",
+        "target_slot": "notify_consumers"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "notify_consumers",
+        "target_port": "state",
+        "target_slot": "record_run"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "record_run",
+        "target_port": "state",
+        "target_slot": "apply_recovery"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.batch-data-pipeline",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_sources",
+        "type": {
+          "id": "template.batch-data-pipeline.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "apply_recovery",
+        "type": {
+          "id": "template.batch-data-pipeline.state-18",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_sources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define source identities, ownership, cadence, and access contracts.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.define_sources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define source identities, ownership, cadence, and access contracts and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_product",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define output schema, semantics, freshness, and consumers.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.define_product.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define output schema, semantics, freshness, and consumers and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_slas",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define quality, latency, recovery, and retention objectives.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.define_slas.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define quality, latency, recovery, and retention objectives and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "extract_sources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Extract source data using bounded incremental or full reads.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.extract_sources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Extract source data using bounded incremental or full reads and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "validate_arrival",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate expected partitions, counts, checksums, and freshness.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.validate_arrival.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate expected partitions, counts, checksums, and freshness and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "capture_lineage",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Capture immutable source, schema, and extraction provenance.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.capture_lineage.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Capture immutable source, schema, and extraction provenance and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "normalize_schema",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize types, names, null semantics, and units.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.normalize_schema.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize types, names, null semantics, and units and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "apply_business_rules",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply versioned deterministic business transformations.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.apply_business_rules.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply versioned deterministic business transformations and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "join_sources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Join sources with declared keys, cardinality, and loss accounting.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.join_sources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Join sources with declared keys, cardinality, and loss accounting and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "aggregate_values",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Aggregate at declared grains with reconciliation checks.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.aggregate_values.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Aggregate at declared grains with reconciliation checks and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "validate_constraints",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate schema, uniqueness, referential, and business constraints.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.validate_constraints.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate schema, uniqueness, referential, and business constraints and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "detect_drift",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect source, schema, distribution, and volume drift.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.detect_drift.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect source, schema, distribution, and volume drift and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "reconcile_totals",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile source-to-output counts, balances, and rejects.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.reconcile_totals.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile source-to-output counts, balances, and rejects and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "write_product",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Write outputs atomically in the declared storage contract.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.write_product.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Write outputs atomically in the declared storage contract and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "publish_metadata",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish catalog, lineage, quality, and ownership metadata.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.publish_metadata.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish catalog, lineage, quality, and ownership metadata and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "notify_consumers",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Emit idempotent availability or failure events.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.notify_consumers.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Emit idempotent availability or failure events and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.operate"
+        ],
+        "id": "record_run",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record inputs, route, code, environment, metrics, and outcomes.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.record_run.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record inputs, route, code, environment, metrics, and outcomes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.operate"
+        ],
+        "id": "apply_recovery",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.batch-data-pipeline.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retry, backfill, quarantine, or rollback under explicit policy.",
+        "required_capabilities": [
+          "template.batch-data-pipeline.apply_recovery.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retry, backfill, quarantine, or rollback under explicit policy and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Batch data engineering pipeline obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.batch-data-pipeline.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.batch-data-pipeline.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define data products and operating constraints.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_sources",
+        "define_product",
+        "define_slas"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Acquire source snapshots safely.",
+      "extensions": {},
+      "id": "stage.ingest",
+      "slot_ids": [
+        "extract_sources",
+        "validate_arrival",
+        "capture_lineage"
+      ],
+      "title": "Ingest"
+    },
+    {
+      "description": "Produce stable intermediate and business values.",
+      "extensions": {},
+      "id": "stage.transform",
+      "slot_ids": [
+        "normalize_schema",
+        "apply_business_rules",
+        "join_sources",
+        "aggregate_values"
+      ],
+      "title": "Transform"
+    },
+    {
+      "description": "Detect invalid or drifting outputs.",
+      "extensions": {},
+      "id": "stage.assure",
+      "slot_ids": [
+        "validate_constraints",
+        "detect_drift",
+        "reconcile_totals"
+      ],
+      "title": "Assure"
+    },
+    {
+      "description": "Commit one versioned data product.",
+      "extensions": {},
+      "id": "stage.publish",
+      "slot_ids": [
+        "write_product",
+        "publish_metadata",
+        "notify_consumers"
+      ],
+      "title": "Publish"
+    },
+    {
+      "description": "Preserve evidence and recoverability.",
+      "extensions": {},
+      "id": "stage.operate",
+      "slot_ids": [
+        "record_run",
+        "apply_recovery"
+      ],
+      "title": "Operate"
+    }
+  ],
+  "tags": [
+    "etl",
+    "lineage",
+    "data-quality"
+  ],
+  "template_model_version": "0.1",
+  "title": "Batch data engineering pipeline",
+  "version": "1.0.0"
+}

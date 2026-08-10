@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "embedding-record.schema.json",
+  "title": "Universal Node Graph embedding sidecar",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "discovery_version", "id", "node_spec_digest", "descriptor_digest",
+    "space_id", "target", "values", "sparse_values", "multivector",
+    "artifact_digest", "artifact_uri", "source_text_digest", "extensions"
+  ],
+  "properties": {
+    "discovery_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "node_spec_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "descriptor_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "space_id": {"$ref": "common.schema.json#/$defs/id"},
+    "target": {"type": "string", "minLength": 1},
+    "values": {"type": "array", "items": {"type": "number"}},
+    "sparse_values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "value"],
+        "properties": {
+          "index": {"type": "integer", "minimum": 0},
+          "value": {"type": "number"}
+        }
+      }
+    },
+    "multivector": {
+      "type": "array",
+      "items": {"type": "array", "minItems": 1, "items": {"type": "number"}}
+    },
+    "artifact_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+    "artifact_uri": {"type": "string"},
+    "source_text_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "oneOf": [
+    {"properties": {"values": {"minItems": 1}, "sparse_values": {"maxItems": 0}, "multivector": {"maxItems": 0}, "artifact_digest": {"const": ""}}},
+    {"properties": {"values": {"maxItems": 0}, "sparse_values": {"minItems": 1}, "multivector": {"maxItems": 0}, "artifact_digest": {"const": ""}}},
+    {"properties": {"values": {"maxItems": 0}, "sparse_values": {"maxItems": 0}, "multivector": {"minItems": 1}, "artifact_digest": {"const": ""}}},
+    {"properties": {"values": {"maxItems": 0}, "sparse_values": {"maxItems": 0}, "multivector": {"maxItems": 0}, "artifact_digest": {"$ref": "common.schema.json#/$defs/digest"}, "artifact_uri": {"minLength": 1}}}
+  ]
+}

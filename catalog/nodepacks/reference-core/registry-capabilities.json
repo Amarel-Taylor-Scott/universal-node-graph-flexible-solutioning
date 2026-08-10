@@ -1,0 +1,90 @@
+{
+  "descriptor_fields": [
+    "title",
+    "summary",
+    "purposes",
+    "solutions",
+    "actions",
+    "domains",
+    "tags",
+    "ports",
+    "documents"
+  ],
+  "discovery_version": "0.1",
+  "embedding_spaces": [],
+  "extensions": {
+    "reference.maturity": "demonstration"
+  },
+  "max_page_size": 1000,
+  "protocol_versions": [
+    "0.1"
+  ],
+  "query_modes": [
+    {
+      "extensions": {},
+      "fields": [
+        "node_id",
+        "node_spec_digest"
+      ],
+      "id": "exact",
+      "requires_embedding_space": false,
+      "supports_cursor": false,
+      "supports_explanations": false,
+      "supports_filters": false,
+      "supports_scores": false
+    },
+    {
+      "extensions": {},
+      "fields": [
+        "title",
+        "summary",
+        "purposes",
+        "actions",
+        "documents"
+      ],
+      "id": "lexical",
+      "requires_embedding_space": false,
+      "supports_cursor": false,
+      "supports_explanations": true,
+      "supports_filters": true,
+      "supports_scores": true
+    },
+    {
+      "extensions": {},
+      "fields": [],
+      "id": "enumeration",
+      "requires_embedding_space": false,
+      "supports_cursor": true,
+      "supports_explanations": false,
+      "supports_filters": false,
+      "supports_scores": false
+    }
+  ],
+  "registry_digest": "sha256:6dfb81264cb75d073ac0cdd50c17b7613599cd1797b1e69ca87cd41dd0033e29",
+  "registry_id": "reference.core-registry",
+  "registry_version": "1.0.0",
+  "schemas": [
+    {
+      "name": "node-spec",
+      "versions": [
+        "0.1"
+      ]
+    },
+    {
+      "name": "node-descriptor",
+      "versions": [
+        "0.1"
+      ]
+    },
+    {
+      "name": "node-pack",
+      "versions": [
+        "0.1"
+      ]
+    }
+  ],
+  "supports_continuation": true,
+  "supports_enumeration": true,
+  "supports_explanations": true,
+  "supports_snapshots": true
+}

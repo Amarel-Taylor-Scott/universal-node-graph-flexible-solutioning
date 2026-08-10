@@ -1,0 +1,55 @@
+{
+  "actions": [
+    "control.identity"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.reference.identity-json",
+      "language": "und",
+      "source_digest": "",
+      "targets": [
+        "node",
+        "node.inputs",
+        "node.outputs"
+      ],
+      "text": "Validate JSON compatibility and return the exact value unchanged. Effects: none. Capabilities: control.identity."
+    }
+  ],
+  "domains": [
+    "software.general"
+  ],
+  "extensions": {
+    "reference.maturity": "demonstration"
+  },
+  "node_id": "reference.identity-json",
+  "node_spec_digest": "sha256:6058dd6273429802cbfea9d823a2bd9128dabc32b888a65f0f1d1ac1d0011775",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "input",
+      "examples": [],
+      "port_name": "value"
+    },
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "output",
+      "examples": [],
+      "port_name": "value"
+    }
+  ],
+  "purposes": [
+    "Perform a small deterministic data or control operation."
+  ],
+  "solutions": [],
+  "summary": "Validate JSON compatibility and return the exact value unchanged.",
+  "tags": [
+    "reference"
+  ],
+  "title": "Identity Json"
+}

@@ -17,15 +17,34 @@ diagram or candidate count is not, by itself, progress.
 - Durable execution receipts and optimization-decision traces.
 - BrowserGraph runtime demonstrating multiple interchangeable execution
   engines behind a stable port.
+- Domain-neutral `solutiongraph` package with separate semantic-program,
+  registry, admitted-space, belief, frozen-plan, and evidence representations.
+- Strict nominal node ABI and bundled JSON Schemas for types, cardinalities,
+  effects, permissions, determinism, resources, failure modes, and provenance.
+- Full registry-to-slot admission handshake with an inspectable decision for
+  every candidate/slot pair and n-ary configuration constraints.
+- Negotiated registry discovery with sparse descriptors, exact named embedding
+  spaces, graceful query fallback, coverage receipts, and closed-world snapshots.
+- Portable node packs and a deterministic reference catalogue containing five
+  node contracts and 18 cross-domain templates with 317 atomic obligations.
+- Dependency-free template authoring CLI, strict linear-blueprint schema, and
+  focused workspace skills for templates, node packs, and benchmarking.
+- Prior-guided, beam, seeded-sprout, and uncapped exhaustive route search with explicit
+  accounting for evaluated, rejected, skipped, and unvisited configurations.
+- Successive-halving promotion and patience-based early stopping primitives.
+- Immutable run receipts, Pareto comparison, observational belief fitting, and
+  repository instructions for Codex, Claude, Gemini, Copilot, and other agents.
 
-## Phase 1 — compiler and registry handshake
+## Phase 1 — compiler and registry discovery (foundation implemented)
 
-- Add explicit `TaskSpec`, `MacroStageSpec`, `SubstepSpec`, `RoutePlan`, and
-  frozen `ExecutionPlan` intermediate representations.
-- Add version- and capability-aware registry negotiation.
-- Record discovery coverage and unexplored candidate regions.
+- Stabilize and version the semantic program, node registry, admitted space,
+  search report, frozen plan, and run receipt representations.
+- Exercise version-, type-, capability-, effect-, permission-, deployment-, and
+  search-capability negotiation across language runtimes and independent registries.
+- Persist admission coverage and all rejection reasons as portable artifacts.
 - Materialize large parameter spaces lazily while preserving exact counts and
   deterministic generation rules.
+- Add explicit schema migration rules before advancing the model version.
 
 **Release gate:** an intent can compile into a validated, reproducible route
 without viewer-specific logic.
@@ -41,10 +60,11 @@ without viewer-specific logic.
 **Release gate:** a real task can be executed and replayed from a frozen plan
 and receipt set.
 
-## Phase 3 — search and learning
+## Phase 3 — search and learning (baseline implemented)
 
-- Add uncertainty-aware Bayesian, bandit, evolutionary, Pareto, stability, and
-  interaction-aware route search.
+- Extend the current prior, interaction-weighted beam, exhaustive, and Pareto
+  baseline with uncertainty-aware Bayesian, bandit, evolutionary, stability,
+  and multi-fidelity route search.
 - Learn contextual evidence without promoting one candidate to a universal
   winner.
 - Preserve negative evidence, rejected routes, evidence freshness, and drift

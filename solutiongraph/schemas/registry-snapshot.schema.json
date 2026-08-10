@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "registry-snapshot.schema.json",
+  "title": "Universal Node Graph closed-world registry snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["registry", "discovery_receipt"],
+  "properties": {
+    "registry": {"$ref": "registry.schema.json"},
+    "discovery_receipt": {"$ref": "discovery-receipt.schema.json"}
+  }
+}

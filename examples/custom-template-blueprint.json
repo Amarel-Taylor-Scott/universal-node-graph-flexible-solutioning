@@ -1,0 +1,77 @@
+{
+  "blueprint_model_version": "0.1",
+  "id": "template.example-csv-report",
+  "version": "1.0.0",
+  "title": "CSV quality report",
+  "description": "A small authoring example that turns a CSV source into a verified quality report.",
+  "task": "Produce an independently verifiable data-quality report for one CSV source.",
+  "success_contract": "The report schema is valid and every reported measure is reproducible from the identified source bytes.",
+  "domains": [
+    "data-engineering.quality"
+  ],
+  "tags": [
+    "example",
+    "reporting"
+  ],
+  "allowed_effects": [
+    "filesystem.read"
+  ],
+  "granted_permissions": [],
+  "invariants": [
+    "Every derived value retains the source digest and transformation lineage."
+  ],
+  "stages": [
+    {
+      "id": "stage.ingest",
+      "title": "Ingest",
+      "description": "Load and validate the source contract.",
+      "slots": [
+        {
+          "id": "load_csv",
+          "purpose": "Load one explicitly authorized CSV source.",
+          "success_contract": "The exact source bytes, digest, encoding, and parse configuration are recorded.",
+          "required_capabilities": [
+            "example.csv.load"
+          ],
+          "allowed_effects": [
+            "filesystem.read"
+          ]
+        },
+        {
+          "id": "validate_schema",
+          "purpose": "Validate headers, row shape, and declared field types.",
+          "success_contract": "Every row is classified as schema-valid or retained with a stable rejection reason.",
+          "required_capabilities": [
+            "example.csv.validate-schema"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stage.measure",
+      "title": "Measure",
+      "description": "Compute reproducible quality evidence.",
+      "slots": [
+        {
+          "id": "profile_columns",
+          "purpose": "Measure completeness, uniqueness, validity, and distributions by column.",
+          "success_contract": "Each measure declares its denominator, treatment of missing values, and source population.",
+          "required_capabilities": [
+            "example.csv.profile"
+          ]
+        },
+        {
+          "id": "render_report",
+          "purpose": "Render the measurements into the requested report schema.",
+          "success_contract": "The report validates and contains no unsupported claim or untraceable number.",
+          "required_capabilities": [
+            "example.report.render"
+          ]
+        }
+      ]
+    }
+  ],
+  "extensions": {
+    "example.maturity": "tutorial"
+  }
+}

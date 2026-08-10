@@ -1,0 +1,1137 @@
+{
+  "description": "A leakage-safe time-series preparation, modeling, validation, combination, and delivery scaffold.",
+  "domains": [
+    "machine-learning.time-series"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.time-series-forecasting",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_series",
+        "target_port": "state",
+        "target_slot": "define_horizon"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_horizon",
+        "target_port": "state",
+        "target_slot": "define_metric"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_metric",
+        "target_port": "state",
+        "target_slot": "validate_timeline"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_timeline",
+        "target_port": "state",
+        "target_slot": "detect_regimes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_regimes",
+        "target_port": "state",
+        "target_slot": "audit_leakage"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_leakage",
+        "target_port": "state",
+        "target_slot": "repair_observations"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "repair_observations",
+        "target_port": "state",
+        "target_slot": "align_covariates"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "align_covariates",
+        "target_port": "state",
+        "target_slot": "generate_temporal_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_temporal_features",
+        "target_port": "state",
+        "target_slot": "define_backtests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_backtests",
+        "target_port": "state",
+        "target_slot": "fit_baseline"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "fit_baseline",
+        "target_port": "state",
+        "target_slot": "fit_statistical"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "fit_statistical",
+        "target_port": "state",
+        "target_slot": "fit_machine_learning"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "fit_machine_learning",
+        "target_port": "state",
+        "target_slot": "fit_deep_model"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "fit_deep_model",
+        "target_port": "state",
+        "target_slot": "generate_backtest_predictions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_backtest_predictions",
+        "target_port": "state",
+        "target_slot": "calibrate_intervals"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "calibrate_intervals",
+        "target_port": "state",
+        "target_slot": "reconcile_hierarchy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_hierarchy",
+        "target_port": "state",
+        "target_slot": "ensemble_forecasts"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ensemble_forecasts",
+        "target_port": "state",
+        "target_slot": "stress_test"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "stress_test",
+        "target_port": "state",
+        "target_slot": "publish_forecast"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.time-series-forecasting",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_series",
+        "type": {
+          "id": "template.time-series-forecasting.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_forecast",
+        "type": {
+          "id": "template.time-series-forecasting.state-20",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_series",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define entities, target, timestamps, frequency, and observation semantics.",
+        "required_capabilities": [
+          "template.time-series-forecasting.define_series.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define entities, target, timestamps, frequency, and observation semantics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_horizon",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define forecast origin, horizon, update cadence, and latency.",
+        "required_capabilities": [
+          "template.time-series-forecasting.define_horizon.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define forecast origin, horizon, update cadence, and latency and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_metric",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define point, probabilistic, tail, and business evaluation metrics.",
+        "required_capabilities": [
+          "template.time-series-forecasting.define_metric.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define point, probabilistic, tail, and business evaluation metrics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "validate_timeline",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate ordering, frequency, gaps, duplicates, and timezone semantics.",
+        "required_capabilities": [
+          "template.time-series-forecasting.validate_timeline.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate ordering, frequency, gaps, duplicates, and timezone semantics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "detect_regimes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect trend, seasonality, changepoints, intermittency, and regimes.",
+        "required_capabilities": [
+          "template.time-series-forecasting.detect_regimes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect trend, seasonality, changepoints, intermittency, and regimes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.investigate"
+        ],
+        "id": "audit_leakage",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Audit future, revision, entity, and aggregation leakage.",
+        "required_capabilities": [
+          "template.time-series-forecasting.audit_leakage.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Audit future, revision, entity, and aggregation leakage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "repair_observations",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Repair or represent missing, duplicated, and anomalous observations.",
+        "required_capabilities": [
+          "template.time-series-forecasting.repair_observations.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Repair or represent missing, duplicated, and anomalous observations and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "align_covariates",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Align known-future and observed covariates to forecast origins.",
+        "required_capabilities": [
+          "template.time-series-forecasting.align_covariates.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Align known-future and observed covariates to forecast origins and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "generate_temporal_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate lag, rolling, calendar, hierarchy, and regime features.",
+        "required_capabilities": [
+          "template.time-series-forecasting.generate_temporal_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate lag, rolling, calendar, hierarchy, and regime features and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "define_backtests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define rolling or expanding backtests representative of deployment.",
+        "required_capabilities": [
+          "template.time-series-forecasting.define_backtests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define rolling or expanding backtests representative of deployment and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "fit_baseline",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Fit naive and seasonal baselines that establish a floor.",
+        "required_capabilities": [
+          "template.time-series-forecasting.fit_baseline.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Fit naive and seasonal baselines that establish a floor and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "fit_statistical",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Fit admitted statistical and state-space candidates.",
+        "required_capabilities": [
+          "template.time-series-forecasting.fit_statistical.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Fit admitted statistical and state-space candidates and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "fit_machine_learning",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Fit admitted feature-based machine-learning candidates.",
+        "required_capabilities": [
+          "template.time-series-forecasting.fit_machine_learning.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Fit admitted feature-based machine-learning candidates and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.model"
+        ],
+        "id": "fit_deep_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Fit admitted deep temporal candidates when justified.",
+        "required_capabilities": [
+          "template.time-series-forecasting.fit_deep_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Fit admitted deep temporal candidates when justified and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.combine"
+        ],
+        "id": "generate_backtest_predictions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate complete origin-safe validation predictions.",
+        "required_capabilities": [
+          "template.time-series-forecasting.generate_backtest_predictions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate complete origin-safe validation predictions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.combine"
+        ],
+        "id": "calibrate_intervals",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Calibrate uncertainty intervals and coverage.",
+        "required_capabilities": [
+          "template.time-series-forecasting.calibrate_intervals.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Calibrate uncertainty intervals and coverage and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.combine"
+        ],
+        "id": "reconcile_hierarchy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile hierarchical or grouped series constraints.",
+        "required_capabilities": [
+          "template.time-series-forecasting.reconcile_hierarchy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile hierarchical or grouped series constraints and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.combine"
+        ],
+        "id": "ensemble_forecasts",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Combine complementary forecasts using held-out evidence.",
+        "required_capabilities": [
+          "template.time-series-forecasting.ensemble_forecasts.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Combine complementary forecasts using held-out evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "stress_test",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Stress missingness, shifts, sparse history, and extreme events.",
+        "required_capabilities": [
+          "template.time-series-forecasting.stress_test.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Stress missingness, shifts, sparse history, and extreme events and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "publish_forecast",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.time-series-forecasting.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish predictions, intervals, route, assumptions, and receipt.",
+        "required_capabilities": [
+          "template.time-series-forecasting.publish_forecast.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish predictions, intervals, route, assumptions, and receipt and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Time-series forecasting obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.time-series-forecasting.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.time-series-forecasting.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define the forecasting decision and evaluation contract.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_series",
+        "define_horizon",
+        "define_metric"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Understand temporal structure before modeling.",
+      "extensions": {},
+      "id": "stage.investigate",
+      "slot_ids": [
+        "validate_timeline",
+        "detect_regimes",
+        "audit_leakage"
+      ],
+      "title": "Investigate"
+    },
+    {
+      "description": "Construct causal training values.",
+      "extensions": {},
+      "id": "stage.prepare",
+      "slot_ids": [
+        "repair_observations",
+        "align_covariates",
+        "generate_temporal_features",
+        "define_backtests"
+      ],
+      "title": "Prepare"
+    },
+    {
+      "description": "Fit diverse admitted forecast routes.",
+      "extensions": {},
+      "id": "stage.model",
+      "slot_ids": [
+        "fit_baseline",
+        "fit_statistical",
+        "fit_machine_learning",
+        "fit_deep_model"
+      ],
+      "title": "Model"
+    },
+    {
+      "description": "Calibrate and combine forecasts without leakage.",
+      "extensions": {},
+      "id": "stage.combine",
+      "slot_ids": [
+        "generate_backtest_predictions",
+        "calibrate_intervals",
+        "reconcile_hierarchy",
+        "ensemble_forecasts"
+      ],
+      "title": "Combine"
+    },
+    {
+      "description": "Verify and publish forecast artifacts.",
+      "extensions": {},
+      "id": "stage.deliver",
+      "slot_ids": [
+        "stress_test",
+        "publish_forecast"
+      ],
+      "title": "Deliver"
+    }
+  ],
+  "tags": [
+    "forecasting",
+    "validation",
+    "ensemble"
+  ],
+  "template_model_version": "0.1",
+  "title": "Time-series forecasting",
+  "version": "1.0.0"
+}

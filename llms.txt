@@ -1,0 +1,28 @@
+# Universal Node Graph — Flexible Solutioning
+
+> A domain-neutral graph programming, compilation, search, and experimentation architecture.
+
+## Start here
+
+- [README](README.md): Project overview and runnable examples
+- [Getting started](GETTING_STARTED.md): Install, explore, author, validate, and contribute
+- [Normative specification](UNIVERSAL_NODE_GRAPH_SPEC.md): Required ontology and invariants
+- [Research foundations](RESEARCH_FOUNDATIONS.md): Primary-source design rationale
+- [LLM harness integration](LLM_HARNESS.md): Repository instruction and skill map
+- [Node repository protocol](NODE_REPOSITORY_PROTOCOL.md): Reusable packs, descriptors, embeddings, handshake, snapshots
+- [Solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md): Cross-domain stages, atomic slots, and bounded refinement
+- [Agent playbook](AGENT_PLAYBOOK.md): Patterns, anti-patterns, and implementation workflow
+- [Full architecture blueprint](UNIVERSAL_GRAPH_SYSTEM.md): Extended design and viewer model
+- [Workbench guide](WORKBENCH.md): Interactive hierarchical candidate explorer
+
+## Code
+
+- [Universal core](solutiongraph/): Semantic model, discovery, templates, compiler, search, adaptive allocation, evidence
+- [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
+- [Reference catalogue](catalog/): 18 semantic templates and one portable node pack
+- [Browser adapter](browsergraph/): Concrete runtime proof
+- [Universal conformance tests](tests/test_solutiongraph.py): Executable architecture requirements
+- [Create-template skill](.agents/skills/create-solution-template/SKILL.md): Strict template authoring workflow
+- [Author-node-pack skill](.agents/skills/author-node-pack/SKILL.md): Reusable node publication workflow
+- [Benchmark skill](.agents/skills/benchmark-solution-graph/SKILL.md): Route experiment workflow
+- [Workspace modeling skill](.agents/skills/model-solution-graph/SKILL.md): End-to-end agent workflow

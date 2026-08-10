@@ -1,0 +1,55 @@
+{
+  "actions": [
+    "data.require-keys"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.reference.require-keys",
+      "language": "und",
+      "source_digest": "",
+      "targets": [
+        "node",
+        "node.inputs",
+        "node.outputs"
+      ],
+      "text": "Require a finite configured set of object keys. Effects: none. Capabilities: data.require-keys."
+    }
+  ],
+  "domains": [
+    "software.general"
+  ],
+  "extensions": {
+    "reference.maturity": "demonstration"
+  },
+  "node_id": "reference.require-keys",
+  "node_spec_digest": "sha256:3bf9b4a0dd68ba2f1aa41a3e0d530b22e744359340df01c474e5687341413710",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "input",
+      "examples": [],
+      "port_name": "value"
+    },
+    {
+      "concepts": [],
+      "description": "",
+      "direction": "output",
+      "examples": [],
+      "port_name": "value"
+    }
+  ],
+  "purposes": [
+    "Perform a small deterministic data or control operation."
+  ],
+  "solutions": [],
+  "summary": "Require a finite configured set of object keys.",
+  "tags": [
+    "reference"
+  ],
+  "title": "Require Keys"
+}

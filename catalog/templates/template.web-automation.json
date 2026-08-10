@@ -1,0 +1,1088 @@
+{
+  "description": "A browser-agnostic intent, navigation, perception, action, verification, recovery, and evidence scaffold.",
+  "domains": [
+    "software.web-automation",
+    "ai.computer-use"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.web-automation",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "interpret_intent",
+        "target_port": "state",
+        "target_slot": "authorize_scope"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authorize_scope",
+        "target_port": "state",
+        "target_slot": "define_oracle"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_oracle",
+        "target_port": "state",
+        "target_slot": "select_runtime"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_runtime",
+        "target_port": "state",
+        "target_slot": "open_target"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "open_target",
+        "target_port": "state",
+        "target_slot": "settle_page"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "settle_page",
+        "target_port": "state",
+        "target_slot": "capture_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "capture_state",
+        "target_port": "state",
+        "target_slot": "locate_target"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "locate_target",
+        "target_port": "state",
+        "target_slot": "disambiguate_target"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "disambiguate_target",
+        "target_port": "state",
+        "target_slot": "check_preconditions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "check_preconditions",
+        "target_port": "state",
+        "target_slot": "choose_action"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "choose_action",
+        "target_port": "state",
+        "target_slot": "execute_action"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "execute_action",
+        "target_port": "state",
+        "target_slot": "capture_outcome"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "capture_outcome",
+        "target_port": "state",
+        "target_slot": "verify_transition"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_transition",
+        "target_port": "state",
+        "target_slot": "detect_side_effects"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_side_effects",
+        "target_port": "state",
+        "target_slot": "extract_result"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_result",
+        "target_port": "state",
+        "target_slot": "classify_failure"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "classify_failure",
+        "target_port": "state",
+        "target_slot": "repair_or_fallback"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "repair_or_fallback",
+        "target_port": "state",
+        "target_slot": "publish_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.web-automation",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "interpret_intent",
+        "type": {
+          "id": "template.web-automation.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_receipt",
+        "type": {
+          "id": "template.web-automation.state-19",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "interpret_intent",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Translate the requested outcome into explicit web actions and limits.",
+        "required_capabilities": [
+          "template.web-automation.interpret_intent.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Translate the requested outcome into explicit web actions and limits and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "authorize_scope",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Confirm permitted sites, accounts, data, and consequential actions.",
+        "required_capabilities": [
+          "template.web-automation.authorize_scope.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Confirm permitted sites, accounts, data, and consequential actions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_oracle",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define independent observable success and stop conditions.",
+        "required_capabilities": [
+          "template.web-automation.define_oracle.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define independent observable success and stop conditions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.reach"
+        ],
+        "id": "select_runtime",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select an admitted browser binary, controller, and transport.",
+        "required_capabilities": [
+          "template.web-automation.select_runtime.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select an admitted browser binary, controller, and transport and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.reach"
+        ],
+        "id": "open_target",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reach the intended origin and preserve navigation evidence.",
+        "required_capabilities": [
+          "template.web-automation.open_target.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reach the intended origin and preserve navigation evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.reach"
+        ],
+        "id": "settle_page",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Wait for the required document, network, and application state.",
+        "required_capabilities": [
+          "template.web-automation.settle_page.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Wait for the required document, network, and application state and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "capture_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Capture DOM, accessibility, visual, and network state as permitted.",
+        "required_capabilities": [
+          "template.web-automation.capture_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Capture DOM, accessibility, visual, and network state as permitted and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "locate_target",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Locate the intended element or region using admitted strategies.",
+        "required_capabilities": [
+          "template.web-automation.locate_target.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Locate the intended element or region using admitted strategies and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "disambiguate_target",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve multiple matches using context and policy.",
+        "required_capabilities": [
+          "template.web-automation.disambiguate_target.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve multiple matches using context and policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "check_preconditions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify visibility, enabled state, identity, and action preconditions.",
+        "required_capabilities": [
+          "template.web-automation.check_preconditions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify visibility, enabled state, identity, and action preconditions and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.act"
+        ],
+        "id": "choose_action",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Choose a contract-compatible deterministic or model-guided action.",
+        "required_capabilities": [
+          "template.web-automation.choose_action.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Choose a contract-compatible deterministic or model-guided action and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.act"
+        ],
+        "id": "execute_action",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute the action with exact target and parameter evidence.",
+        "required_capabilities": [
+          "template.web-automation.execute_action.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute the action with exact target and parameter evidence and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.act"
+        ],
+        "id": "capture_outcome",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Capture the immediate application and network outcome.",
+        "required_capabilities": [
+          "template.web-automation.capture_outcome.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Capture the immediate application and network outcome and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "verify_transition",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare observed state with the declared success condition.",
+        "required_capabilities": [
+          "template.web-automation.verify_transition.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare observed state with the declared success condition and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "detect_side_effects",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect unexpected navigation, mutation, download, or account effects.",
+        "required_capabilities": [
+          "template.web-automation.detect_side_effects.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect unexpected navigation, mutation, download, or account effects and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "extract_result",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Extract the requested typed data or resulting artifact.",
+        "required_capabilities": [
+          "template.web-automation.extract_result.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Extract the requested typed data or resulting artifact and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.recover"
+        ],
+        "id": "classify_failure",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Classify selector, timing, auth, policy, network, and semantic failures.",
+        "required_capabilities": [
+          "template.web-automation.classify_failure.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Classify selector, timing, auth, policy, network, and semantic failures and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.recover"
+        ],
+        "id": "repair_or_fallback",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retry, heal, or switch routes within the explicit budget.",
+        "required_capabilities": [
+          "template.web-automation.repair_or_fallback.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retry, heal, or switch routes within the explicit budget and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.recover"
+        ],
+        "id": "publish_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.web-automation.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish actions, observations, artifacts, and final acceptance.",
+        "required_capabilities": [
+          "template.web-automation.publish_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish actions, observations, artifacts, and final acceptance and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Reliable automated web interaction obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.web-automation.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.web-automation.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Turn user intent into bounded web obligations.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "interpret_intent",
+        "authorize_scope",
+        "define_oracle"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Establish a usable browsing context.",
+      "extensions": {},
+      "id": "stage.reach",
+      "slot_ids": [
+        "select_runtime",
+        "open_target",
+        "settle_page"
+      ],
+      "title": "Reach"
+    },
+    {
+      "description": "Build a trustworthy view of the current interface.",
+      "extensions": {},
+      "id": "stage.perceive",
+      "slot_ids": [
+        "capture_state",
+        "locate_target",
+        "disambiguate_target",
+        "check_preconditions"
+      ],
+      "title": "Perceive"
+    },
+    {
+      "description": "Perform one bounded interface mutation.",
+      "extensions": {},
+      "id": "stage.act",
+      "slot_ids": [
+        "choose_action",
+        "execute_action",
+        "capture_outcome"
+      ],
+      "title": "Act"
+    },
+    {
+      "description": "Confirm that the intended state transition occurred.",
+      "extensions": {},
+      "id": "stage.verify",
+      "slot_ids": [
+        "verify_transition",
+        "detect_side_effects",
+        "extract_result"
+      ],
+      "title": "Verify"
+    },
+    {
+      "description": "Handle failure without hiding it.",
+      "extensions": {},
+      "id": "stage.recover",
+      "slot_ids": [
+        "classify_failure",
+        "repair_or_fallback",
+        "publish_receipt"
+      ],
+      "title": "Recover"
+    }
+  ],
+  "tags": [
+    "browser",
+    "interaction",
+    "verification"
+  ],
+  "template_model_version": "0.1",
+  "title": "Reliable automated web interaction",
+  "version": "1.0.0"
+}
