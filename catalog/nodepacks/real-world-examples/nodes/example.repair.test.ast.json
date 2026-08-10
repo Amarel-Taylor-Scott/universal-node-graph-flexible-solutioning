@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "repair.test"
+  ],
+  "description": "Run fixed cases through a restricted AST interpreter.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:test_repair_ast",
+  "failure_modes": [],
+  "id": "example.repair.test.ast",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:cee39e3ac3cd06e856d4d217081a826350d1fd5883d0fb19d24d02746f349286",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "proposal",
+      "type": {
+        "id": "example.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "report",
+      "type": {
+        "id": "example.repair-report",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

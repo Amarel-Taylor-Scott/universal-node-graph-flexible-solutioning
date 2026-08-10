@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.catalog import catalog_documents, write_catalog
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.reference_nodes import (
@@ -56,9 +57,24 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     first = catalog_documents()
     second = catalog_documents()
     assert first == second
-    assert len(first) == 3 + 5 + 5 + 3 + len(EXAMPLE_NODES) + 19 + 1
+    assert len(first) == (
+        3
+        + 5
+        + 5
+        + 3
+        + len(EXAMPLE_NODES)
+        + 19
+        + len(UNIVERSAL_DAG_ARENA.tasks)
+        + 1
+        + 1
+    )
     index = first["index.json"]
     assert len(index["templates"]) == 19
+    assert index["arena"] == {
+        "path": "arena/index.json",
+        "task_count": 24,
+        "executable_fixture_count": 10,
+    }
     assert [item["node_count"] for item in index["node_packs"]] == [5, len(EXAMPLE_NODES)]
     assert index["node_packs"][0]["embedding_record_count"] == 0
     capabilities = first["nodepacks/reference-core/registry-capabilities.json"]

@@ -1,0 +1,33 @@
+{
+  "acceptance_signals": [
+    "MAE or pinball loss",
+    "interval coverage",
+    "interval width",
+    "stability"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "calibrated-time-series-forecast"
+  ],
+  "external_requirements": [],
+  "id": "arena.calibrated-forecast",
+  "input_contract": "Timestamped observations, forecast horizon, and backtest boundary.",
+  "output_contract": "Point forecasts and intervals with backtest coverage evidence.",
+  "problem": "Regularize time series, fit candidates, forecast, and calibrate prediction intervals.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "regularize",
+    "detect regime",
+    "features",
+    "fit",
+    "forecast",
+    "calibrate intervals",
+    "backtest"
+  ],
+  "tags": [
+    "forecasting",
+    "time-series"
+  ],
+  "template_id": "template.time-series-forecasting",
+  "title": "Historical transactions to calibrated forecasts"
+}

@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "feed.decode"
+  ],
+  "description": "Decode CSV with the standard library and combine captured JSON rows.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:decode_feeds_csv_module",
+  "failure_modes": [],
+  "id": "example.feed.decode.csv-module",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:4180e4f776bbff21414ef6874b0d3518bdb0ed756ccdb5e0323f504cd45f6a03",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "feeds",
+      "type": {
+        "id": "example.raw-feeds",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "rows",
+      "type": {
+        "id": "example.feed-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

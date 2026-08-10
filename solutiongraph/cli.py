@@ -24,6 +24,7 @@ def _template(template_id: str):
 
 
 def _doctor() -> int:
+    from solutiongraph.arena import UNIVERSAL_DAG_ARENA
     from solutiongraph.catalog import catalog_documents
     from solutiongraph.examples.tasks import EXAMPLE_TASKS
     from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
@@ -32,6 +33,7 @@ def _doctor() -> int:
     from solutiongraph.template_library import REFERENCE_TEMPLATES
 
     problems: list[str] = []
+    problems.extend(UNIVERSAL_DAG_ARENA.validate())
     problems.extend(REFERENCE_TEMPLATES.validate())
     problems.extend(
         problem
@@ -65,6 +67,7 @@ def _doctor() -> int:
         f"nodes={len(REFERENCE_NODE_SPECS)} "
         f"example_nodes={len(EXAMPLE_NODES)} "
         f"executable_examples={len(EXAMPLE_TASKS)} "
+        f"arena_tasks={len(UNIVERSAL_DAG_ARENA.tasks)} "
         f"schemas={len(schemas)} "
         f"catalog_documents={len(documents)}"
     )
@@ -271,6 +274,134 @@ def _ledger_verify(path: Path, as_json: bool) -> int:
     return 0
 
 
+def _solve_example(
+    example_id: str,
+    profile: str,
+    runtime: str,
+    artifact_dir: Path | None,
+    receipt_journal: Path | None,
+    allow_exhaustive: bool,
+    as_json: bool,
+) -> int:
+    from solutiongraph.arena import solve_example
+    from solutiongraph.ledger import JsonlReceiptJournal
+
+    journal = JsonlReceiptJournal(receipt_journal) if receipt_journal else None
+    report = solve_example(
+        example_id,
+        profile=profile,
+        runtime=runtime,
+        artifact_root=artifact_dir,
+        receipt_journal=journal,
+        allow_exhaustive=allow_exhaustive,
+    )
+    result = report["result"]
+    if as_json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+        return 0 if result["status"] == "solved" else 1
+    print(
+        f"{example_id}: {result['status']} profile={profile} runtime={runtime} "
+        f"space={result['route_count_upper_bound']} evaluated={result['evaluated_plan_count']}"
+    )
+    champion = result["champion_plan_digest"]
+    print(f"champion: {champion or 'none'}")
+    for fallback in result["fallbacks"]:
+        print(
+            f"fallback {fallback['priority']}: {fallback['plan_digest']} "
+            f"evidence={fallback['evidence_score']:.3f} "
+            f"diversity={fallback['diversity_score']:.3f}"
+        )
+    for round_ in result["rounds"]:
+        search = round_["search"]
+        print(
+            f"round {round_['index']}: mode={search['mode']} "
+            f"searched={search['evaluated_routes']}/{search['total_cartesian_routes']} "
+            f"new_plans={len(round_['plan_digests'])} complete={search['complete']}"
+        )
+    return 0 if result["status"] == "solved" else 1
+
+
+def _arena_list(readiness: str | None, tags: tuple[str, ...], as_json: bool) -> int:
+    from solutiongraph.arena import UNIVERSAL_DAG_ARENA
+
+    tasks = UNIVERSAL_DAG_ARENA.matching(readiness=readiness, tags=tags)
+    if as_json:
+        print(json.dumps([task.to_dict() for task in tasks], indent=2, sort_keys=True))
+        return 0
+    print("ID\tREADINESS\tEXAMPLES\tTITLE")
+    for task in tasks:
+        print(
+            f"{task.id}\t{task.readiness}\t"
+            f"{','.join(task.executable_example_ids) or '-'}\t{task.title}"
+        )
+    return 0
+
+
+def _arena_show(task_id: str, as_json: bool) -> int:
+    from solutiongraph.arena import UNIVERSAL_DAG_ARENA
+
+    task = UNIVERSAL_DAG_ARENA.get(task_id)
+    if as_json:
+        print(json.dumps(task.to_dict(), indent=2, sort_keys=True))
+        return 0
+    print(f"{task.id} — {task.title}")
+    print(task.problem)
+    print(f"readiness: {task.readiness}")
+    print(f"template: {task.template_id}")
+    print(f"input: {task.input_contract}")
+    print(f"output: {task.output_contract}")
+    print("stages: " + " -> ".join(task.stage_families))
+    print("acceptance: " + ", ".join(task.acceptance_signals))
+    if task.executable_example_ids:
+        print("examples: " + ", ".join(task.executable_example_ids))
+    for requirement in task.external_requirements:
+        print(f"external: {requirement}")
+    return 0
+
+
+def _arena_run(
+    task_ids: tuple[str, ...],
+    profile: str,
+    runtime: str,
+    artifact_dir: Path | None,
+    receipt_journal: Path | None,
+    allow_exhaustive: bool,
+    as_json: bool,
+) -> int:
+    from solutiongraph.arena import run_arena
+    from solutiongraph.ledger import JsonlReceiptJournal
+
+    journal = JsonlReceiptJournal(receipt_journal) if receipt_journal else None
+    report = run_arena(
+        task_ids or None,
+        profile=profile,
+        runtime=runtime,
+        artifact_root=artifact_dir,
+        receipt_journal=journal,
+        allow_exhaustive=allow_exhaustive,
+    )
+    if as_json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+    else:
+        print(
+            f"arena: tasks={len(report['selected_task_ids'])} "
+            f"executed={report['executed_example_count']} "
+            f"skipped={report['skipped_task_count']} profile={profile} runtime={runtime}"
+        )
+        for example in report["examples"]:
+            result = example["result"]
+            print(
+                f"- {example['example_id']}: {result['status']} "
+                f"evaluated={result['evaluated_plan_count']}/"
+                f"{result['route_count_upper_bound']}"
+            )
+        for skipped in report["skipped"]:
+            print(f"- {skipped['task_id']}: skipped ({skipped['readiness']})")
+    return 0 if all(
+        example["result"]["status"] == "solved" for example in report["examples"]
+    ) else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="solutiongraph",
@@ -349,7 +480,7 @@ def build_parser() -> argparse.ArgumentParser:
     export_parser.add_argument("--output", type=Path, default=Path("catalog"))
 
     examples = commands.add_parser(
-        "examples", help="List or execute the six dependency-free domain examples"
+        "examples", help="List or execute the dependency-free domain examples"
     )
     example_commands = examples.add_subparsers(dest="example_command", required=True)
     examples_list = example_commands.add_parser("list", help="List executable examples")
@@ -378,6 +509,64 @@ def build_parser() -> argparse.ArgumentParser:
         help="Append each completed run immediately to a verified JSONL journal",
     )
     examples_run.add_argument("--json", action="store_true", help="Emit full JSON")
+
+    solve = commands.add_parser(
+        "solve",
+        help="Search, benchmark, rank, and select a route for one executable example",
+    )
+    solve.add_argument("example_id")
+    solve.add_argument(
+        "--profile",
+        choices=("quick", "balanced", "broad", "exhaustive"),
+        default="balanced",
+        help="Explicit search and experiment allocation profile",
+    )
+    solve.add_argument(
+        "--runtime",
+        choices=("in-process", "subprocess"),
+        default="in-process",
+    )
+    solve.add_argument("--artifact-dir", type=Path)
+    solve.add_argument("--receipt-journal", type=Path)
+    solve.add_argument(
+        "--allow-exhaustive",
+        action="store_true",
+        help="Acknowledge that exhaustive mode has no implicit route cap",
+    )
+    solve.add_argument("--json", action="store_true", help="Emit full JSON")
+
+    arena = commands.add_parser(
+        "arena", help="Inspect and run the cross-domain Universal DAG Arena"
+    )
+    arena_commands = arena.add_subparsers(dest="arena_command", required=True)
+    arena_list = arena_commands.add_parser("list", help="List arena problem families")
+    arena_list.add_argument(
+        "--readiness",
+        choices=("executable_fixture", "template", "credentialed_connector"),
+    )
+    arena_list.add_argument("--tag", action="append", default=[])
+    arena_list.add_argument("--json", action="store_true", help="Emit JSON")
+    arena_show = arena_commands.add_parser("show", help="Show one arena task contract")
+    arena_show.add_argument("task_id")
+    arena_show.add_argument("--json", action="store_true", help="Emit JSON")
+    arena_run = arena_commands.add_parser(
+        "run", help="Solve selected tasks, or every executable fixture when omitted"
+    )
+    arena_run.add_argument("task_ids", nargs="*")
+    arena_run.add_argument(
+        "--profile",
+        choices=("quick", "balanced", "broad", "exhaustive"),
+        default="quick",
+    )
+    arena_run.add_argument(
+        "--runtime",
+        choices=("in-process", "subprocess"),
+        default="in-process",
+    )
+    arena_run.add_argument("--artifact-dir", type=Path)
+    arena_run.add_argument("--receipt-journal", type=Path)
+    arena_run.add_argument("--allow-exhaustive", action="store_true")
+    arena_run.add_argument("--json", action="store_true", help="Emit full JSON")
 
     ledger = commands.add_parser("ledger", help="Verify durable receipt evidence")
     ledger_commands = ledger.add_subparsers(dest="ledger_command", required=True)
@@ -420,6 +609,31 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.artifact_dir,
                     args.runtime,
                     args.receipt_journal,
+                    args.json,
+                )
+        if args.command == "solve":
+            return _solve_example(
+                args.example_id,
+                args.profile,
+                args.runtime,
+                args.artifact_dir,
+                args.receipt_journal,
+                args.allow_exhaustive,
+                args.json,
+            )
+        if args.command == "arena":
+            if args.arena_command == "list":
+                return _arena_list(args.readiness, tuple(args.tag), args.json)
+            if args.arena_command == "show":
+                return _arena_show(args.task_id, args.json)
+            if args.arena_command == "run":
+                return _arena_run(
+                    tuple(args.task_ids),
+                    args.profile,
+                    args.runtime,
+                    args.artifact_dir,
+                    args.receipt_journal,
+                    args.allow_exhaustive,
                     args.json,
                 )
         if args.command == "ledger" and args.ledger_command == "verify":

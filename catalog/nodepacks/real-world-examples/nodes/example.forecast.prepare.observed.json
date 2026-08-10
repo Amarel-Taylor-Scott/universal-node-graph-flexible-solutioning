@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "forecast.prepare"
+  ],
+  "description": "Use complete observed training values as supplied.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:prepare_series_observed",
+  "failure_modes": [],
+  "id": "example.forecast.prepare.observed",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:63fb2beaa2fe6a85145b57d222018d966f9ef00676451a683a2a32478810b8a5",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "series",
+      "type": {
+        "id": "example.time-series",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "series",
+      "type": {
+        "id": "example.time-series",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

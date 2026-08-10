@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "forecast.fit"
+  ],
+  "description": "Fit an explicit historical-mean control model.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:fit_forecast_mean",
+  "failure_modes": [],
+  "id": "example.forecast.fit.mean",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:14d9fc6db8477444d22e5099ad10a07f285ab138837d4a669fc20f8fc0126992",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "series",
+      "type": {
+        "id": "example.time-series",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "series",
+      "type": {
+        "id": "example.time-series",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

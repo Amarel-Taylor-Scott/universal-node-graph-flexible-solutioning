@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "product.acquire"
+  ],
+  "description": "Preserve authorized captured HTML sources.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:acquire_product_sources_preserve",
+  "failure_modes": [],
+  "id": "example.product.acquire.preserve",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:f1e92d0b07a46e6304ad7ed8e4bc5f397cad4baa1d49241ebd929b4a1d9f692e",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "sources",
+      "type": {
+        "id": "example.product-sources",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "sources",
+      "type": {
+        "id": "example.product-sources",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "feed.normalize"
+  ],
+  "description": "Require already numeric amount fields.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:normalize_feed_rows_strict",
+  "failure_modes": [],
+  "id": "example.feed.normalize.strict",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:45f6d18e37d6271f41ef0c6aab243975cf45c3a0ee38b7112099f6377cd89e30",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "rows",
+      "type": {
+        "id": "example.feed-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "rows",
+      "type": {
+        "id": "example.feed-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -1,0 +1,33 @@
+{
+  "acceptance_signals": [
+    "pair precision",
+    "pair recall",
+    "cluster quality",
+    "review rate"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "organization-entity-linking"
+  ],
+  "external_requirements": [],
+  "id": "arena.organization-entity-graph",
+  "input_contract": "Source-tagged organization records and optional authoritative identifiers.",
+  "output_contract": "Entity components, canonical organizations, pair evidence, and uncertainty.",
+  "problem": "Normalize organizations, generate candidate pairs, score links, and form components.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "normalize",
+    "block",
+    "compare",
+    "link",
+    "cluster",
+    "canonicalize",
+    "audit"
+  ],
+  "tags": [
+    "entity-linking",
+    "knowledge-graph"
+  ],
+  "template_id": "template.data-quality",
+  "title": "Duplicate organizations to a resolved entity graph"
+}

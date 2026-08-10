@@ -1,6 +1,6 @@
 # Readiness and support levels
 
-Current release line: **0.3 Developer Preview / external alpha**.
+Current release line: **0.4 Developer Preview / external alpha**.
 
 SolutionGraph is ready for developers and researchers to model typed solution
 spaces, author reusable node contracts, compile frozen routes, execute trusted
@@ -14,6 +14,8 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Semantic model and strict schemas | Alpha-supported | Typed task graphs, slots, nodes, candidates, registries, plans, receipts |
 | Compiler and complete snapshot admission | Alpha-supported | Reject invalid types, authority, effects, topology, bindings, and constraints before execution |
 | Prior, beam, sprout, adaptive, exhaustive search | Alpha-supported | Explicitly budgeted proposal ordering over compiler-valid routes |
+| UniversalSolver | Alpha-supported locally | Full admission, multi-round search, frozen-plan experiments, learned observational priors, hard gates, ranking, champion, and benchmarked route-level fallbacks |
+| Universal DAG Arena | Alpha-supported as a mechanism suite | 24 typed task contracts and 13 executable fixtures; readiness metadata distinguishes templates and credentialed connectors |
 | Templates and offline viewers | Alpha-supported | Explore 19 templates and every bundled slot/candidate projection |
 | Trusted in-process Python runtime | Development only | Fast fixtures, tests, and notebooks using trusted code |
 | Bounded subprocess Python runtime | Alpha-supported lifecycle isolation | Trusted code needing process separation, strict JSON/bytes ABI, timeout, and optional POSIX CPU/memory limits |
@@ -34,6 +36,8 @@ yet a turnkey production scheduler or a hostile-code execution service.
 - Define exact task contracts, templates, nodes, registries, and independent
   verifiers.
 - Compare trusted local routes and persist all positive and negative receipts.
+- Run `solutiongraph solve` or the executable Arena suite with explicit search
+  coverage, accepted champion, and diverse fallback reporting.
 - Build third-party runtime, registry, node-pack, optimizer, and artifact-store
   adapters against the documented protocols.
 
@@ -85,8 +89,10 @@ configured.
 ## Gates before beta or production language
 
 Beta requires at least one enforcing isolated runtime adapter, crash-resumable
-execution, larger real-domain node packs, held-out multi-seed benchmarks, and a
-complete task → graph → execution → evidence → belief-update demonstration.
+campaign execution, larger mature-library node packs, and held-out multi-seed
+benchmarks on real external tasks. Version 0.4 demonstrates the complete local
+task → graph → admission → search → execution → evidence → belief-update →
+champion/fallback loop, but only on small trusted fixtures.
 
 Production language additionally requires authentication, authorization,
 tenancy, secret brokerage, encryption, retention, operational monitoring,

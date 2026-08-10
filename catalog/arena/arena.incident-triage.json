@@ -1,0 +1,31 @@
+{
+  "acceptance_signals": [
+    "time to useful hypothesis",
+    "evidence coverage",
+    "false action rate",
+    "recovery"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.incident-triage",
+  "input_contract": "Versioned logs, metrics, traces, deploy events, and runbooks.",
+  "output_contract": "Incident timeline, ranked hypotheses, evidence, and bounded response actions.",
+  "problem": "Parse signals, correlate events, retrieve context, propose causes, and test hypotheses.",
+  "readiness": "template",
+  "stage_families": [
+    "parse",
+    "correlate",
+    "retrieve",
+    "hypothesize",
+    "test",
+    "rank",
+    "respond"
+  ],
+  "tags": [
+    "operations",
+    "observability"
+  ],
+  "template_id": "template.incident-response",
+  "title": "Logs and alerts to a verified incident triage packet"
+}

@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "schema conformance",
+    "referential integrity",
+    "reconciliation",
+    "freshness",
+    "lineage"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "multi-feed-analytical-dataset"
+  ],
+  "external_requirements": [],
+  "id": "arena.validated-analytical-dataset",
+  "input_contract": "Versioned files/API captures, contracts, and source priorities.",
+  "output_contract": "Typed analytical tables, quarantine rows, lineage, and quality report.",
+  "problem": "Decode heterogeneous feeds, map schemas, reconcile records, validate, and publish.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "capture",
+    "decode",
+    "map schema",
+    "normalize",
+    "join",
+    "reconcile",
+    "validate",
+    "publish"
+  ],
+  "tags": [
+    "data-engineering",
+    "etl"
+  ],
+  "template_id": "template.batch-data-pipeline",
+  "title": "Raw files and API feeds to a validated analytical dataset"
+}

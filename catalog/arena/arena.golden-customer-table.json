@@ -1,0 +1,31 @@
+{
+  "acceptance_signals": [
+    "entity precision",
+    "entity recall",
+    "verified-field coverage",
+    "provenance completeness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "data-cleanup",
+    "golden-customer-table"
+  ],
+  "external_requirements": [],
+  "id": "arena.golden-customer-table",
+  "input_contract": "Source-tagged customer records plus optional reference directories.",
+  "output_contract": "Deterministic golden records with provenance and verification state.",
+  "problem": "Normalize, validate, resolve, and merge fragmented customer identities.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "normalize",
+    "validate contacts",
+    "resolve identity",
+    "merge golden record"
+  ],
+  "tags": [
+    "data-cleaning",
+    "identity"
+  ],
+  "template_id": "template.data-quality",
+  "title": "Messy customer records to a golden customer table"
+}

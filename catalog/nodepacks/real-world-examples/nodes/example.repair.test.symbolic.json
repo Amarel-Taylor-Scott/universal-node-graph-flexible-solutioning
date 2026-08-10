@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "repair.test"
+  ],
+  "description": "Require both symbolic operator structure and fixed-case success.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:test_repair_symbolic",
+  "failure_modes": [],
+  "id": "example.repair.test.symbolic",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:8c76f3360278e6b8e9573e3dfd5194647dc25367f142a44107d86f0a7d4e7274",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "proposal",
+      "type": {
+        "id": "example.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "report",
+      "type": {
+        "id": "example.repair-report",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "product.normalize"
+  ],
+  "description": "Normalize display prices through floating-point conversion.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:normalize_product_prices_float",
+  "failure_modes": [],
+  "id": "example.product.normalize.float",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:c1cd13a3e8e9d538b178d225181d83f52b521dbbc1bfdfa00baddd4c94fd3ae7",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.product-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.product-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "product.normalize"
+  ],
+  "description": "Normalize monetary values into integer cents with Decimal.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:normalize_product_prices_decimal",
+  "failure_modes": [],
+  "id": "example.product.normalize.decimal",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:c68c1e99c5a0ed052dbd3ebac8e530aa3b4b26f57502609434cb18557c6fdd80",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.product-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.product-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

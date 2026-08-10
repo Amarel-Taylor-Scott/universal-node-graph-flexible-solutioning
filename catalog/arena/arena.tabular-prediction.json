@@ -1,0 +1,38 @@
+{
+  "acceptance_signals": [
+    "holdout metric",
+    "leakage checks",
+    "calibration",
+    "stability",
+    "cost"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "tabular-regression",
+    "tabular-classification"
+  ],
+  "external_requirements": [],
+  "id": "arena.tabular-prediction",
+  "input_contract": "Versioned train/test tables, target definition, metric, and resource budget.",
+  "output_contract": "Reproducible predictions, validation evidence, and a model receipt.",
+  "problem": "Build leakage-safe preprocessing, modeling, ensembling, and submission graphs.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "profile",
+    "split",
+    "clean",
+    "impute",
+    "encode",
+    "select",
+    "fit",
+    "calibrate",
+    "ensemble",
+    "submit"
+  ],
+  "tags": [
+    "machine-learning",
+    "kaggle"
+  ],
+  "template_id": "template.kaggle-tabular",
+  "title": "Tabular data to regression or classification submissions"
+}

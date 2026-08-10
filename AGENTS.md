@@ -28,6 +28,7 @@ Use the narrowest matching workspace skill:
 - `.agents/skills/benchmark-solution-graph/SKILL.md` for route experiments;
 - `.agents/skills/execute-solution-graph/SKILL.md` for runtimes, artifacts, and executable examples;
 - `.agents/skills/design-autoresearch-campaign/SKILL.md` for bounded LLM-generated improvement campaigns;
+- `.agents/skills/solve-universal-dag/SKILL.md` for UniversalSolver and Arena task implementation;
 - `.agents/skills/model-solution-graph/SKILL.md` for end-to-end modeling.
 
 ## Non-negotiable ontology
@@ -114,7 +115,9 @@ objects, not in `NodeSpec`.
 
 ## Repository map
 
-- `solutiongraph/` — domain-neutral semantic model, compiler, search, evidence.
+- `solutiongraph/` — domain-neutral semantic model, compiler, search, solver, evidence.
+- `solutiongraph/solver.py` — guarded multi-round search, experiment, ranking, champion, and route-fallback orchestration.
+- `solutiongraph/arena.py` — cross-domain task contracts, readiness, and executable suite harness.
 - `solutiongraph/template_authoring.py` — strict linear blueprint compiler.
 - `solutiongraph/executor.py` — strict reference frozen-plan executor and runtime seam.
 - `solutiongraph/subprocess_runtime.py` — bounded lifecycle process adapter; never call it a hostile-code sandbox.
@@ -123,7 +126,7 @@ objects, not in `NodeSpec`.
 - `solutiongraph/experiments.py` — receipt-producing experiment allocation.
 - `solutiongraph/scaffold.py` — non-destructive starter workspaces for coding harnesses.
 - `solutiongraph/campaign.py` — population ancestry, budgets, decisions, and evaluator boundaries.
-- `solutiongraph/examples/` — six dependency-free executable domain examples.
+- `solutiongraph/examples/` — 13 dependency-free executable domain examples using one shared registry.
 - `solutiongraph/schemas/` — strict portable wire schemas.
 - `catalog/` — generated semantic templates and reference node pack.
 - `browsergraph/` — browser runtime adapter and original proof of concept.

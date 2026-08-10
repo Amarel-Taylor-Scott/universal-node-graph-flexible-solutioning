@@ -1,4 +1,4 @@
-"""Six executable examples that use one universal registry and executor."""
+"""Executable examples that use one universal registry and executor."""
 
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ from typing import Any
 from solutiongraph.artifacts import FileArtifactStore, MemoryArtifactStore
 from solutiongraph.compiler import Compiler
 from solutiongraph.evidence import ExperimentDesign, Objective
+from solutiongraph.examples import arena_nodes as arena_implementations
 from solutiongraph.examples import nodes as implementations
 from solutiongraph.executor import (
     CallableVerifier,
@@ -72,6 +73,32 @@ CLASSIFICATION_SPLIT = ValueType("example.classification-split")
 CLASSIFICATION_MODEL = ValueType("example.classification-model")
 CLASSIFICATION_RESULT = ValueType("example.classification-result")
 
+CUSTOMER_BUNDLE = ValueType("example.customer-bundle")
+CUSTOMER_GROUPS = ValueType("example.customer-groups")
+GOLDEN_CUSTOMERS = ValueType("example.golden-customers")
+
+ADDRESS_BUNDLE = ValueType("example.address-bundle")
+VERIFIED_ADDRESSES = ValueType("example.verified-addresses")
+
+PRODUCT_SOURCES = ValueType("example.product-sources")
+PRODUCT_ROWS = ValueType("example.product-rows")
+VERIFIED_PRODUCTS = ValueType("example.verified-products")
+
+TIME_SERIES = ValueType("example.time-series")
+FORECAST_RESULT = ValueType("example.forecast-result")
+
+ORGANIZATION_RECORDS = ValueType("example.organization-records")
+ORGANIZATION_BLOCKS = ValueType("example.organization-blocks")
+ENTITY_COMPONENTS = ValueType("example.entity-components")
+
+REPOSITORY_SNAPSHOT = ValueType("example.repository-snapshot")
+REPAIR_PROPOSAL = ValueType("example.repair-proposal")
+REPAIR_REPORT = ValueType("example.repair-report")
+
+RAW_FEEDS = ValueType("example.raw-feeds")
+FEED_ROWS = ValueType("example.feed-rows")
+ANALYTICAL_DATASET = ValueType("example.analytical-dataset")
+
 
 def _node(
     node_id: str,
@@ -94,7 +121,7 @@ def _node(
         inputs=inputs,
         outputs=outputs,
         runtime="python",
-        entrypoint=f"solutiongraph.examples.nodes:{function.__name__}",
+        entrypoint=f"{function.__module__}:{function.__name__}",
         description=description,
         parameters=parameters,
         capabilities=(capability,),
@@ -103,7 +130,7 @@ def _node(
         determinism=determinism,
         idempotency=Idempotency.IDEMPOTENT,
         failure_modes=failure_modes,
-        source="solutiongraph/examples/nodes.py",
+        source=function.__module__.replace(".", "/") + ".py",
     )
 
 
@@ -415,6 +442,563 @@ NODES = (
 )
 
 
+def _arena_node(
+    node_id: str,
+    function: Callable[..., Any],
+    capability: str,
+    input_name: str,
+    input_type: ValueType,
+    output_name: str,
+    output_type: ValueType,
+    description: str,
+) -> NodeSpec:
+    return _node(
+        node_id,
+        function,
+        capability,
+        (Port(input_name, input_type),),
+        (Port(output_name, output_type),),
+        description,
+    )
+
+
+NODES += tuple(
+    _arena_node(*definition)
+    for definition in (
+        (
+            "example.customer.normalize.conservative",
+            arena_implementations.normalize_customers_conservative,
+            "customer.normalize",
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "Normalize customer keys and contact fields conservatively.",
+        ),
+        (
+            "example.customer.normalize.canonical",
+            arena_implementations.normalize_customers_canonical,
+            "customer.normalize",
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "Normalize names, contacts, and common address tokens canonically.",
+        ),
+        (
+            "example.customer.validate.syntax",
+            arena_implementations.validate_customer_contacts_syntax,
+            "customer.validate-contacts",
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "Check contact syntax without claiming external authority.",
+        ),
+        (
+            "example.customer.validate.reference",
+            arena_implementations.validate_customer_contacts_reference,
+            "customer.validate-contacts",
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "Check contacts against an explicitly supplied offline reference fixture.",
+        ),
+        (
+            "example.customer.resolve.email",
+            arena_implementations.resolve_customers_by_email,
+            "customer.resolve",
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "groups",
+            CUSTOMER_GROUPS,
+            "Resolve identities by exact normalized email.",
+        ),
+        (
+            "example.customer.resolve.multikey",
+            arena_implementations.resolve_customers_multikey,
+            "customer.resolve",
+            "bundle",
+            CUSTOMER_BUNDLE,
+            "groups",
+            CUSTOMER_GROUPS,
+            "Resolve identities with email, phone, name, and address evidence.",
+        ),
+        (
+            "example.customer.emit.first",
+            arena_implementations.emit_customer_first,
+            "customer.emit-golden",
+            "groups",
+            CUSTOMER_GROUPS,
+            "records",
+            GOLDEN_CUSTOMERS,
+            "Emit the first record in each entity group with provenance.",
+        ),
+        (
+            "example.customer.emit.complete",
+            arena_implementations.emit_customer_complete,
+            "customer.emit-golden",
+            "groups",
+            CUSTOMER_GROUPS,
+            "records",
+            GOLDEN_CUSTOMERS,
+            "Merge the most complete verified fields with source provenance.",
+        ),
+        (
+            "example.address.parse.commas",
+            arena_implementations.parse_addresses_commas,
+            "address.parse",
+            "bundle",
+            ADDRESS_BUNDLE,
+            "bundle",
+            ADDRESS_BUNDLE,
+            "Parse comma-delimited addresses into typed components.",
+        ),
+        (
+            "example.address.parse.structured",
+            arena_implementations.parse_addresses_structured,
+            "address.parse",
+            "bundle",
+            ADDRESS_BUNDLE,
+            "bundle",
+            ADDRESS_BUNDLE,
+            "Parse United States city, region, and postal-code structure.",
+        ),
+        (
+            "example.address.normalize.basic",
+            arena_implementations.normalize_addresses_basic,
+            "address.normalize",
+            "bundle",
+            ADDRESS_BUNDLE,
+            "bundle",
+            ADDRESS_BUNDLE,
+            "Normalize casing and whitespace only.",
+        ),
+        (
+            "example.address.normalize.postal",
+            arena_implementations.normalize_addresses_postal,
+            "address.normalize",
+            "bundle",
+            ADDRESS_BUNDLE,
+            "bundle",
+            ADDRESS_BUNDLE,
+            "Apply a small Publication-28-inspired abbreviation fixture.",
+        ),
+        (
+            "example.address.verify.exact",
+            arena_implementations.verify_addresses_exact,
+            "address.verify-reference",
+            "bundle",
+            ADDRESS_BUNDLE,
+            "bundle",
+            ADDRESS_BUNDLE,
+            "Require exact equality with a supplied offline reference directory.",
+        ),
+        (
+            "example.address.verify.alias",
+            arena_implementations.verify_addresses_alias_aware,
+            "address.verify-reference",
+            "bundle",
+            ADDRESS_BUNDLE,
+            "bundle",
+            ADDRESS_BUNDLE,
+            "Compare canonical alphanumeric forms to the offline reference directory.",
+        ),
+        (
+            "example.address.emit",
+            arena_implementations.emit_verified_addresses,
+            "address.emit",
+            "bundle",
+            ADDRESS_BUNDLE,
+            "records",
+            VERIFIED_ADDRESSES,
+            "Emit deterministic standardized address records and match codes.",
+        ),
+        (
+            "example.product.acquire.preserve",
+            arena_implementations.acquire_product_sources_preserve,
+            "product.acquire",
+            "sources",
+            PRODUCT_SOURCES,
+            "sources",
+            PRODUCT_SOURCES,
+            "Preserve authorized captured HTML sources.",
+        ),
+        (
+            "example.product.acquire.sorted",
+            arena_implementations.acquire_product_sources_sorted,
+            "product.acquire",
+            "sources",
+            PRODUCT_SOURCES,
+            "sources",
+            PRODUCT_SOURCES,
+            "Canonicalize captured-source order by URL.",
+        ),
+        (
+            "example.product.extract.regex",
+            arena_implementations.extract_products_regex,
+            "product.extract",
+            "sources",
+            PRODUCT_SOURCES,
+            "products",
+            PRODUCT_ROWS,
+            "Extract the fixture product microformat with a bounded expression.",
+        ),
+        (
+            "example.product.extract.parser",
+            arena_implementations.extract_products_parser,
+            "product.extract",
+            "sources",
+            PRODUCT_SOURCES,
+            "products",
+            PRODUCT_ROWS,
+            "Extract the fixture product microformat with HTMLParser.",
+        ),
+        (
+            "example.product.normalize.float",
+            arena_implementations.normalize_product_prices_float,
+            "product.normalize",
+            "products",
+            PRODUCT_ROWS,
+            "products",
+            PRODUCT_ROWS,
+            "Normalize display prices through floating-point conversion.",
+        ),
+        (
+            "example.product.normalize.decimal",
+            arena_implementations.normalize_product_prices_decimal,
+            "product.normalize",
+            "products",
+            PRODUCT_ROWS,
+            "products",
+            PRODUCT_ROWS,
+            "Normalize monetary values into integer cents with Decimal.",
+        ),
+        (
+            "example.product.verify.single",
+            arena_implementations.verify_products_single_source,
+            "product.verify",
+            "products",
+            PRODUCT_ROWS,
+            "products",
+            VERIFIED_PRODUCTS,
+            "Retain single-source evidence without calling it independently verified.",
+        ),
+        (
+            "example.product.verify.cross-source",
+            arena_implementations.verify_products_cross_source,
+            "product.verify",
+            "products",
+            PRODUCT_ROWS,
+            "products",
+            VERIFIED_PRODUCTS,
+            "Require matching SKU and price evidence from independent captured sources.",
+        ),
+        (
+            "example.forecast.prepare.observed",
+            arena_implementations.prepare_series_observed,
+            "forecast.prepare",
+            "series",
+            TIME_SERIES,
+            "series",
+            TIME_SERIES,
+            "Use complete observed training values as supplied.",
+        ),
+        (
+            "example.forecast.prepare.interpolate",
+            arena_implementations.prepare_series_interpolate,
+            "forecast.prepare",
+            "series",
+            TIME_SERIES,
+            "series",
+            TIME_SERIES,
+            "Interpolate missing interior observations deterministically.",
+        ),
+        (
+            "example.forecast.fit.mean",
+            arena_implementations.fit_forecast_mean,
+            "forecast.fit",
+            "series",
+            TIME_SERIES,
+            "series",
+            TIME_SERIES,
+            "Fit an explicit historical-mean control model.",
+        ),
+        (
+            "example.forecast.fit.trend",
+            arena_implementations.fit_forecast_trend,
+            "forecast.fit",
+            "series",
+            TIME_SERIES,
+            "series",
+            TIME_SERIES,
+            "Fit a deterministic linear trend model.",
+        ),
+        (
+            "example.forecast.generate",
+            arena_implementations.generate_forecast,
+            "forecast.generate",
+            "series",
+            TIME_SERIES,
+            "series",
+            TIME_SERIES,
+            "Generate horizon-aligned point predictions from the frozen model.",
+        ),
+        (
+            "example.forecast.interval.fixed",
+            arena_implementations.calibrate_intervals_fixed,
+            "forecast.calibrate-intervals",
+            "series",
+            TIME_SERIES,
+            "result",
+            FORECAST_RESULT,
+            "Attach a narrow fixed-width control interval.",
+        ),
+        (
+            "example.forecast.interval.residual",
+            arena_implementations.calibrate_intervals_residual,
+            "forecast.calibrate-intervals",
+            "series",
+            TIME_SERIES,
+            "result",
+            FORECAST_RESULT,
+            "Calibrate interval width from in-sample absolute residuals.",
+        ),
+        (
+            "example.entity.normalize.basic",
+            arena_implementations.normalize_organizations_basic,
+            "entity.normalize",
+            "records",
+            ORGANIZATION_RECORDS,
+            "records",
+            ORGANIZATION_RECORDS,
+            "Normalize organization names and domains conservatively.",
+        ),
+        (
+            "example.entity.normalize.legal",
+            arena_implementations.normalize_organizations_legal,
+            "entity.normalize",
+            "records",
+            ORGANIZATION_RECORDS,
+            "records",
+            ORGANIZATION_RECORDS,
+            "Normalize common legal suffix variants.",
+        ),
+        (
+            "example.entity.block.domain",
+            arena_implementations.block_organizations_domain,
+            "entity.block",
+            "records",
+            ORGANIZATION_RECORDS,
+            "blocked",
+            ORGANIZATION_BLOCKS,
+            "Generate candidate pairs sharing a normalized web domain.",
+        ),
+        (
+            "example.entity.block.tokens",
+            arena_implementations.block_organizations_tokens,
+            "entity.block",
+            "records",
+            ORGANIZATION_RECORDS,
+            "blocked",
+            ORGANIZATION_BLOCKS,
+            "Generate candidate pairs sharing name tokens or domain evidence.",
+        ),
+        (
+            "example.entity.link.exact",
+            arena_implementations.link_organizations_exact,
+            "entity.link",
+            "blocked",
+            ORGANIZATION_BLOCKS,
+            "linked",
+            ORGANIZATION_BLOCKS,
+            "Link candidate pairs only when normalized names are identical.",
+        ),
+        (
+            "example.entity.link.evidence",
+            arena_implementations.link_organizations_evidence,
+            "entity.link",
+            "blocked",
+            ORGANIZATION_BLOCKS,
+            "linked",
+            ORGANIZATION_BLOCKS,
+            "Link pairs supported by at least two independent fields.",
+        ),
+        (
+            "example.entity.components",
+            arena_implementations.build_entity_components,
+            "entity.components",
+            "linked",
+            ORGANIZATION_BLOCKS,
+            "entities",
+            ENTITY_COMPONENTS,
+            "Build deterministic connected components with source record IDs.",
+        ),
+        (
+            "example.repair.inspect.ast",
+            arena_implementations.inspect_code_ast,
+            "repair.inspect",
+            "repository",
+            REPOSITORY_SNAPSHOT,
+            "proposal",
+            REPAIR_PROPOSAL,
+            "Inspect the bounded fixture source with Python AST.",
+        ),
+        (
+            "example.repair.inspect.tests",
+            arena_implementations.inspect_code_tests,
+            "repair.inspect",
+            "repository",
+            REPOSITORY_SNAPSHOT,
+            "proposal",
+            REPAIR_PROPOSAL,
+            "Inspect the fixed failing test contract.",
+        ),
+        (
+            "example.repair.propose.operator",
+            arena_implementations.propose_operator_repair,
+            "repair.propose",
+            "proposal",
+            REPAIR_PROPOSAL,
+            "proposal",
+            REPAIR_PROPOSAL,
+            "Propose a minimal operator replacement.",
+        ),
+        (
+            "example.repair.propose.contract",
+            arena_implementations.propose_contract_repair,
+            "repair.propose",
+            "proposal",
+            REPAIR_PROPOSAL,
+            "proposal",
+            REPAIR_PROPOSAL,
+            "Derive a bounded repair hypothesis from fixed tests.",
+        ),
+        (
+            "example.repair.apply.exact",
+            arena_implementations.apply_repair_exact,
+            "repair.apply",
+            "proposal",
+            REPAIR_PROPOSAL,
+            "proposal",
+            REPAIR_PROPOSAL,
+            "Apply one exact content replacement.",
+        ),
+        (
+            "example.repair.apply.line",
+            arena_implementations.apply_repair_line,
+            "repair.apply",
+            "proposal",
+            REPAIR_PROPOSAL,
+            "proposal",
+            REPAIR_PROPOSAL,
+            "Apply one line-scoped return-expression replacement.",
+        ),
+        (
+            "example.repair.test.ast",
+            arena_implementations.test_repair_ast,
+            "repair.test",
+            "proposal",
+            REPAIR_PROPOSAL,
+            "report",
+            REPAIR_REPORT,
+            "Run fixed cases through a restricted AST interpreter.",
+        ),
+        (
+            "example.repair.test.symbolic",
+            arena_implementations.test_repair_symbolic,
+            "repair.test",
+            "proposal",
+            REPAIR_PROPOSAL,
+            "report",
+            REPAIR_REPORT,
+            "Require both symbolic operator structure and fixed-case success.",
+        ),
+        (
+            "example.feed.decode.csv-module",
+            arena_implementations.decode_feeds_csv_module,
+            "feed.decode",
+            "feeds",
+            RAW_FEEDS,
+            "rows",
+            FEED_ROWS,
+            "Decode CSV with the standard library and combine captured JSON rows.",
+        ),
+        (
+            "example.feed.decode.lines",
+            arena_implementations.decode_feeds_line_parser,
+            "feed.decode",
+            "feeds",
+            RAW_FEEDS,
+            "rows",
+            FEED_ROWS,
+            "Decode the bounded CSV fixture line by line and combine JSON rows.",
+        ),
+        (
+            "example.feed.normalize.strict",
+            arena_implementations.normalize_feed_rows_strict,
+            "feed.normalize",
+            "rows",
+            FEED_ROWS,
+            "rows",
+            FEED_ROWS,
+            "Require already numeric amount fields.",
+        ),
+        (
+            "example.feed.normalize.coerce",
+            arena_implementations.normalize_feed_rows_coerce,
+            "feed.normalize",
+            "rows",
+            FEED_ROWS,
+            "rows",
+            FEED_ROWS,
+            "Normalize names and explicitly parse currency-formatted amounts.",
+        ),
+        (
+            "example.feed.reconcile.priority",
+            arena_implementations.reconcile_feed_rows_priority,
+            "feed.reconcile",
+            "rows",
+            FEED_ROWS,
+            "rows",
+            FEED_ROWS,
+            "Choose one whole record according to fixed source priority.",
+        ),
+        (
+            "example.feed.reconcile.complete",
+            arena_implementations.reconcile_feed_rows_complete,
+            "feed.reconcile",
+            "rows",
+            FEED_ROWS,
+            "rows",
+            FEED_ROWS,
+            "Merge complementary nonempty fields and retain source lineage.",
+        ),
+        (
+            "example.feed.validate.strict",
+            arena_implementations.validate_feed_rows_strict,
+            "feed.validate",
+            "rows",
+            FEED_ROWS,
+            "dataset",
+            ANALYTICAL_DATASET,
+            "Separate rows that do not meet the analytical schema.",
+        ),
+        (
+            "example.feed.validate.lineage",
+            arena_implementations.validate_feed_rows_quarantine,
+            "feed.validate",
+            "rows",
+            FEED_ROWS,
+            "dataset",
+            ANALYTICAL_DATASET,
+            "Validate schema and report whether every row retains source lineage.",
+        ),
+    )
+)
+
+
 def _parameters_for(node: NodeSpec) -> tuple[str, Mapping[str, Any]]:
     configured: dict[str, tuple[str, Mapping[str, Any]]] = {
         "example.web.project.schema": ("title-links", {"fields": ["title", "links"]}),
@@ -591,6 +1175,132 @@ def _classification_verifier(context: VerificationContext) -> VerificationResult
     )
 
 
+def _customer_verifier(context: VerificationContext) -> VerificationResult:
+    records = context.outputs["records"]
+    alice = next(
+        (record for record in records if record.get("email") == "alice@example.com"),
+        {},
+    )
+    required = ("name", "email", "phone", "address")
+    complete = sum(bool(alice.get(field)) for field in required) / len(required)
+    accepted = (
+        len(records) == 2
+        and complete == 1.0
+        and set(alice.get("verified_fields", ())) == {"email", "phone"}
+        and len(alice.get("provenance", ())) == 3
+    )
+    return VerificationResult(
+        accepted,
+        "golden-table-matches-oracle" if accepted else "golden-table-mismatch",
+        {"quality": complete if len(records) == 2 else complete / 2},
+        {"record_count": len(records), "alice": alice},
+    )
+
+
+def _address_verifier(context: VerificationContext) -> VerificationResult:
+    records = context.outputs["records"]
+    verified = sum(record.get("verified") is True for record in records)
+    accepted = (
+        len(records) == 2
+        and verified == 2
+        and all(record.get("authority") == "offline-reference-fixture" for record in records)
+        and {record.get("postal_code") for record in records} == {"62704", "63101"}
+    )
+    return VerificationResult(
+        accepted,
+        "reference-addresses-match" if accepted else "reference-address-mismatch",
+        {"quality": verified / len(records) if records else 0.0},
+        {
+            "authority_scope": "offline-reference-fixture-not-usps",
+            "verified": verified,
+        },
+    )
+
+
+def _product_verifier(context: VerificationContext) -> VerificationResult:
+    products = context.outputs["products"]
+    accepted = (
+        len(products) == 2
+        and all(product.get("verified") is True for product in products)
+        and {product.get("sku") for product in products} == {"SKU-1", "SKU-2"}
+        and all(len(product.get("evidence_sources", ())) == 2 for product in products)
+    )
+    verified = sum(product.get("verified") is True for product in products)
+    return VerificationResult(
+        accepted,
+        "products-independently-corroborated" if accepted else "product-evidence-insufficient",
+        {"quality": verified / 2},
+        {"product_count": len(products), "verified_count": verified},
+    )
+
+
+def _forecast_verifier(context: VerificationContext) -> VerificationResult:
+    result = context.outputs["result"]
+    actual = [float(value) for value in result["holdout"]]
+    predictions = [float(value) for value in result["predictions"]]
+    mae = sum(abs(left - right) for left, right in zip(actual, predictions, strict=True)) / len(actual)
+    covered = sum(
+        low <= value <= high
+        for value, (low, high) in zip(actual, result["intervals"], strict=True)
+    )
+    coverage = covered / len(actual)
+    accepted = mae <= 0.75 and coverage == 1.0
+    return VerificationResult(
+        accepted,
+        "forecast-and-interval-thresholds-met" if accepted else "forecast-threshold-missed",
+        {"quality": 1.0 / (1.0 + mae), "mae": mae, "coverage": coverage},
+        {"mae_limit": 0.75, "required_coverage": 1.0},
+    )
+
+
+def _entity_verifier(context: VerificationContext) -> VerificationResult:
+    entities = context.outputs["entities"]
+    components = sorted(sorted(entity["record_ids"]) for entity in entities)
+    expected = [["org-1", "org-2"], ["org-3"]]
+    accepted = components == expected
+    correct_pairs = int(["org-1", "org-2"] in components)
+    return VerificationResult(
+        accepted,
+        "entity-components-match-oracle" if accepted else "entity-component-mismatch",
+        {"quality": float(correct_pairs)},
+        {"expected": expected, "actual": components},
+    )
+
+
+def _repair_verifier(context: VerificationContext) -> VerificationResult:
+    report = context.outputs["report"]
+    accepted = (
+        report.get("passed") is True
+        and report.get("passed_cases") == report.get("total_cases") == 3
+        and report.get("changed_files") == ["math_utils.py"]
+        and "return a + b" in report.get("source", "")
+    )
+    return VerificationResult(
+        accepted,
+        "repair-tests-and-scope-pass" if accepted else "repair-verification-failed",
+        {"quality": report.get("passed_cases", 0) / max(1, report.get("total_cases", 0))},
+        {"changed_files": report.get("changed_files", [])},
+    )
+
+
+def _feed_verifier(context: VerificationContext) -> VerificationResult:
+    dataset = context.outputs["dataset"]
+    rows = dataset["rows"]
+    total = sum(float(row["amount"]) for row in rows)
+    accepted = (
+        len(rows) == 3
+        and not dataset["quarantine"]
+        and math.isclose(total, 60.5)
+        and all(bool(row.get("sources") or row.get("source")) for row in rows)
+    )
+    return VerificationResult(
+        accepted,
+        "analytical-dataset-valid" if accepted else "analytical-dataset-invalid",
+        {"quality": len(rows) / 3 if not dataset["quarantine"] else len(rows) / 6},
+        {"row_count": len(rows), "quarantine_count": len(dataset["quarantine"]), "total": total},
+    )
+
+
 BROWSE_PROGRAM = ProgramGraph(
     id="example.browse-and-scrape",
     version="1.0.0",
@@ -732,6 +1442,146 @@ CLASSIFICATION_PROGRAM = ProgramGraph(
     ),
     inputs=(GraphInput("dataset", CLASSIFICATION_DATASET, "split", "dataset"),),
     outputs=(GraphOutput("result", CLASSIFICATION_RESULT, "evaluate", "result"),),
+)
+
+CUSTOMER_PROGRAM = ProgramGraph(
+    id="example.golden-customer-table",
+    version="1.0.0",
+    task="Build a verified golden customer table from fragmented source records.",
+    success_contract="An independent oracle accepts entity count, field completeness, contact verification, and provenance.",
+    slots=(
+        _slot("normalize", "Normalize customer fields without erasing provenance.", (Port("bundle", CUSTOMER_BUNDLE),), (Port("bundle", CUSTOMER_BUNDLE),), "customer.normalize", "Every record has canonical keys and source identity."),
+        _slot("validate", "Validate contact claims at an explicit trust level.", (Port("bundle", CUSTOMER_BUNDLE),), (Port("bundle", CUSTOMER_BUNDLE),), "customer.validate-contacts", "Every verification claim names its method."),
+        _slot("resolve", "Resolve records into candidate customer identities.", (Port("bundle", CUSTOMER_BUNDLE),), (Port("groups", CUSTOMER_GROUPS),), "customer.resolve", "Every source record belongs to exactly one group."),
+        _slot("emit", "Merge each group into one golden record.", (Port("groups", CUSTOMER_GROUPS),), (Port("records", GOLDEN_CUSTOMERS),), "customer.emit-golden", "Golden records retain field values and source provenance."),
+    ),
+    edges=(
+        Edge("normalize", "bundle", "validate", "bundle"),
+        Edge("validate", "bundle", "resolve", "bundle"),
+        Edge("resolve", "groups", "emit", "groups"),
+    ),
+    inputs=(GraphInput("bundle", CUSTOMER_BUNDLE, "normalize", "bundle"),),
+    outputs=(GraphOutput("records", GOLDEN_CUSTOMERS, "emit", "records"),),
+)
+
+ADDRESS_PROGRAM = ProgramGraph(
+    id="example.address-reference-verification",
+    version="1.0.0",
+    task="Standardize addresses and compare them with an explicitly supplied reference directory.",
+    success_contract="The independent oracle accepts canonical components and explicit offline-reference match evidence.",
+    slots=(
+        _slot("parse", "Parse raw address strings into components.", (Port("bundle", ADDRESS_BUNDLE),), (Port("bundle", ADDRESS_BUNDLE),), "address.parse", "Street, city, region, and postal code are explicit."),
+        _slot("normalize", "Normalize components into a postal comparison form.", (Port("bundle", ADDRESS_BUNDLE),), (Port("bundle", ADDRESS_BUNDLE),), "address.normalize", "Normalization is deterministic and preserves source index."),
+        _slot("verify", "Compare addresses with the named offline reference fixture.", (Port("bundle", ADDRESS_BUNDLE),), (Port("bundle", ADDRESS_BUNDLE),), "address.verify-reference", "Each row has authority, match code, and boolean verdict."),
+        _slot("emit", "Emit deterministic standardized records.", (Port("bundle", ADDRESS_BUNDLE),), (Port("records", VERIFIED_ADDRESSES),), "address.emit", "Every source address produces one result row."),
+    ),
+    edges=(
+        Edge("parse", "bundle", "normalize", "bundle"),
+        Edge("normalize", "bundle", "verify", "bundle"),
+        Edge("verify", "bundle", "emit", "bundle"),
+    ),
+    inputs=(GraphInput("bundle", ADDRESS_BUNDLE, "parse", "bundle"),),
+    outputs=(GraphOutput("records", VERIFIED_ADDRESSES, "emit", "records"),),
+)
+
+PRODUCT_PROGRAM = ProgramGraph(
+    id="example.verified-product-dataset",
+    version="1.0.0",
+    task="Extract a product dataset from authorized captured pages and corroborate it across sources.",
+    success_contract="An independent oracle accepts exact SKUs, integer prices, and two-source evidence.",
+    slots=(
+        _slot("acquire", "Prepare authorized captured HTML sources.", (Port("sources", PRODUCT_SOURCES),), (Port("sources", PRODUCT_SOURCES),), "product.acquire", "Captured bytes and source URLs remain paired."),
+        _slot("extract", "Extract product records from each capture.", (Port("sources", PRODUCT_SOURCES),), (Port("products", PRODUCT_ROWS),), "product.extract", "Each row includes SKU, name, price text, and source URL."),
+        _slot("normalize", "Normalize product fields and monetary representation.", (Port("products", PRODUCT_ROWS),), (Port("products", PRODUCT_ROWS),), "product.normalize", "Every amount is an integer number of cents."),
+        _slot("verify", "Corroborate product claims across independent captures.", (Port("products", PRODUCT_ROWS),), (Port("products", VERIFIED_PRODUCTS),), "product.verify", "Verification never exceeds available source evidence."),
+    ),
+    edges=(
+        Edge("acquire", "sources", "extract", "sources"),
+        Edge("extract", "products", "normalize", "products"),
+        Edge("normalize", "products", "verify", "products"),
+    ),
+    inputs=(GraphInput("sources", PRODUCT_SOURCES, "acquire", "sources"),),
+    outputs=(GraphOutput("products", VERIFIED_PRODUCTS, "verify", "products"),),
+)
+
+FORECAST_PROGRAM = ProgramGraph(
+    id="example.calibrated-time-series-forecast",
+    version="1.0.0",
+    task="Fit a point forecast and attach empirically testable prediction intervals.",
+    success_contract="An independent holdout oracle accepts point error and interval coverage thresholds.",
+    slots=(
+        _slot("prepare", "Regularize or certify the observed series.", (Port("series", TIME_SERIES),), (Port("series", TIME_SERIES),), "forecast.prepare", "Training values are finite and ordered."),
+        _slot("fit", "Fit one declared forecasting model.", (Port("series", TIME_SERIES),), (Port("series", TIME_SERIES),), "forecast.fit", "The model is serializable and identifies its family."),
+        _slot("forecast", "Generate horizon-aligned point predictions.", (Port("series", TIME_SERIES),), (Port("series", TIME_SERIES),), "forecast.generate", "Prediction count equals the declared horizon."),
+        _slot("intervals", "Calibrate an interval around every point forecast.", (Port("series", TIME_SERIES),), (Port("result", FORECAST_RESULT),), "forecast.calibrate-intervals", "Every prediction has finite lower and upper bounds."),
+    ),
+    edges=(
+        Edge("prepare", "series", "fit", "series"),
+        Edge("fit", "series", "forecast", "series"),
+        Edge("forecast", "series", "intervals", "series"),
+    ),
+    inputs=(GraphInput("series", TIME_SERIES, "prepare", "series"),),
+    outputs=(GraphOutput("result", FORECAST_RESULT, "intervals", "result"),),
+)
+
+ENTITY_PROGRAM = ProgramGraph(
+    id="example.organization-entity-linking",
+    version="1.0.0",
+    task="Resolve duplicate organization records into an auditable entity graph.",
+    success_contract="An independent entity oracle accepts the exact connected components.",
+    slots=(
+        _slot("normalize", "Normalize organization identity fields.", (Port("records", ORGANIZATION_RECORDS),), (Port("records", ORGANIZATION_RECORDS),), "entity.normalize", "Source record IDs and raw names remain present."),
+        _slot("block", "Generate bounded candidate record pairs.", (Port("records", ORGANIZATION_RECORDS),), (Port("blocked", ORGANIZATION_BLOCKS),), "entity.block", "Every pair references two known records."),
+        _slot("link", "Score and accept supported identity links.", (Port("blocked", ORGANIZATION_BLOCKS),), (Port("linked", ORGANIZATION_BLOCKS),), "entity.link", "Every accepted link was in the candidate pair set."),
+        _slot("components", "Build deterministic entity components.", (Port("linked", ORGANIZATION_BLOCKS),), (Port("entities", ENTITY_COMPONENTS),), "entity.components", "Every record belongs to exactly one component."),
+    ),
+    edges=(
+        Edge("normalize", "records", "block", "records"),
+        Edge("block", "blocked", "link", "blocked"),
+        Edge("link", "linked", "components", "linked"),
+    ),
+    inputs=(GraphInput("records", ORGANIZATION_RECORDS, "normalize", "records"),),
+    outputs=(GraphOutput("entities", ENTITY_COMPONENTS, "components", "entities"),),
+)
+
+REPAIR_PROGRAM = ProgramGraph(
+    id="example.tested-code-repair",
+    version="1.0.0",
+    task="Inspect, patch, and independently test one bounded broken repository fixture.",
+    success_contract="The independent oracle accepts all fixed cases and exact changed-file scope.",
+    slots=(
+        _slot("inspect", "Inspect source or failing test evidence.", (Port("repository", REPOSITORY_SNAPSHOT),), (Port("proposal", REPAIR_PROPOSAL),), "repair.inspect", "Findings retain the immutable source and tests."),
+        _slot("propose", "Form one bounded repair hypothesis.", (Port("proposal", REPAIR_PROPOSAL),), (Port("proposal", REPAIR_PROPOSAL),), "repair.propose", "The patch names old content, new content, and a hypothesis."),
+        _slot("apply", "Apply the patch to an isolated fixture snapshot.", (Port("proposal", REPAIR_PROPOSAL),), (Port("proposal", REPAIR_PROPOSAL),), "repair.apply", "Changed-file scope is explicit."),
+        _slot("test", "Test the patched behavior without executing arbitrary source.", (Port("proposal", REPAIR_PROPOSAL),), (Port("report", REPAIR_REPORT),), "repair.test", "All fixed cases and changed files are reported."),
+    ),
+    edges=(
+        Edge("inspect", "proposal", "propose", "proposal"),
+        Edge("propose", "proposal", "apply", "proposal"),
+        Edge("apply", "proposal", "test", "proposal"),
+    ),
+    inputs=(GraphInput("repository", REPOSITORY_SNAPSHOT, "inspect", "repository"),),
+    outputs=(GraphOutput("report", REPAIR_REPORT, "test", "report"),),
+)
+
+FEED_PROGRAM = ProgramGraph(
+    id="example.multi-feed-analytical-dataset",
+    version="1.0.0",
+    task="Decode heterogeneous captured feeds into one validated analytical dataset.",
+    success_contract="An independent oracle accepts row count, reconciled total, quarantine state, and lineage.",
+    slots=(
+        _slot("decode", "Decode captured CSV and JSON representations.", (Port("feeds", RAW_FEEDS),), (Port("rows", FEED_ROWS),), "feed.decode", "Every decoded row names its source."),
+        _slot("normalize", "Normalize typed analytical fields.", (Port("rows", FEED_ROWS),), (Port("rows", FEED_ROWS),), "feed.normalize", "Conversion failures are explicit, never silently zero-filled."),
+        _slot("reconcile", "Reconcile duplicate source records.", (Port("rows", FEED_ROWS),), (Port("rows", FEED_ROWS),), "feed.reconcile", "Every emitted identity has deterministic field precedence and lineage."),
+        _slot("validate", "Validate and quarantine rows against the analytical contract.", (Port("rows", FEED_ROWS),), (Port("dataset", ANALYTICAL_DATASET),), "feed.validate", "Valid and quarantined rows are disjoint and complete."),
+    ),
+    edges=(
+        Edge("decode", "rows", "normalize", "rows"),
+        Edge("normalize", "rows", "reconcile", "rows"),
+        Edge("reconcile", "rows", "validate", "rows"),
+    ),
+    inputs=(GraphInput("feeds", RAW_FEEDS, "decode", "feeds"),),
+    outputs=(GraphOutput("dataset", ANALYTICAL_DATASET, "validate", "dataset"),),
 )
 
 
@@ -938,6 +1788,347 @@ EXAMPLE_TASKS = (
         ),
         ExecutionPolicy(),
         (Objective("quality", "maximize"), Objective("latency_ms", "minimize")),
+    ),
+)
+
+EXAMPLE_TASKS += (
+    ExecutableExample(
+        "golden-customer-table",
+        "Verified golden customer table",
+        "Compare contact validation, identity resolution, and field-level merge strategies.",
+        CUSTOMER_PROGRAM,
+        (
+            _route(
+                "control",
+                "Syntax checks, exact email grouping, and first-record emission.",
+                {
+                    "normalize": _candidate_id("example.customer.normalize.conservative"),
+                    "validate": _candidate_id("example.customer.validate.syntax"),
+                    "resolve": _candidate_id("example.customer.resolve.email"),
+                    "emit": _candidate_id("example.customer.emit.first"),
+                },
+                expected_accepted=False,
+            ),
+            _route(
+                "reference-multikey",
+                "Reference-backed contacts, multi-key resolution, and completeness merge.",
+                {
+                    "normalize": _candidate_id("example.customer.normalize.canonical"),
+                    "validate": _candidate_id("example.customer.validate.reference"),
+                    "resolve": _candidate_id("example.customer.resolve.multikey"),
+                    "emit": _candidate_id("example.customer.emit.complete"),
+                },
+            ),
+        ),
+        ExperimentCase(
+            "case.golden-customer-table",
+            {
+                "bundle": {
+                    "records": [
+                        {"source_record": "crm-1", "Name": "alice smith", "Email": "ALICE@EXAMPLE.COM", "Phone": "", "Address": "10 Main Street"},
+                        {"source_record": "support-7", "name": "Alice Smith", "email": "", "phone": "(555) 0100", "address": "10 MAIN ST"},
+                        {"source_record": "billing-3", "name": "Alice Smith", "email": "alice@example.com", "phone": "555-0100", "address": ""},
+                        {"source_record": "crm-2", "name": "Bob Jones", "email": "bob@example.com", "phone": "555-0200", "address": "20 Oak Ave"},
+                    ],
+                    "contact_directory": {
+                        "emails": ["alice@example.com", "bob@example.com"],
+                        "phones": ["5550100", "5550200"],
+                    },
+                }
+            },
+            CallableVerifier("verifier.example.customer", _customer_verifier),
+        ),
+        ExecutionPolicy(),
+        (Objective("quality", "maximize", hard_minimum=1.0), Objective("latency_ms", "minimize", weight=0.1)),
+    ),
+    ExecutableExample(
+        "address-reference-verification",
+        "Address standardization and reference verification",
+        "Demonstrate the production USPS connector seam using an honestly labeled offline authority fixture.",
+        ADDRESS_PROGRAM,
+        (
+            _route(
+                "control",
+                "Basic normalization with exact reference comparison.",
+                {
+                    "parse": _candidate_id("example.address.parse.commas"),
+                    "normalize": _candidate_id("example.address.normalize.basic"),
+                    "verify": _candidate_id("example.address.verify.exact"),
+                    "emit": _candidate_id("example.address.emit"),
+                },
+                expected_accepted=False,
+            ),
+            _route(
+                "postal-alias",
+                "Structured parsing, postal abbreviations, and alias-aware comparison.",
+                {
+                    "parse": _candidate_id("example.address.parse.structured"),
+                    "normalize": _candidate_id("example.address.normalize.postal"),
+                    "verify": _candidate_id("example.address.verify.alias"),
+                    "emit": _candidate_id("example.address.emit"),
+                },
+            ),
+        ),
+        ExperimentCase(
+            "case.address-reference-verification",
+            {
+                "bundle": {
+                    "addresses": [
+                        "123 Main Street Apt 4, Springfield, IL 62704",
+                        "500 Market Avenue, St Louis, MO 63101",
+                    ],
+                    "reference_directory": [
+                        {"street": "123 MAIN ST APT 4", "city": "SPRINGFIELD", "region": "IL", "postal_code": "62704"},
+                        {"street": "500 MARKET AVE", "city": "ST LOUIS", "region": "MO", "postal_code": "63101"},
+                    ],
+                }
+            },
+            CallableVerifier("verifier.example.address", _address_verifier),
+        ),
+        ExecutionPolicy(),
+        (Objective("quality", "maximize", hard_minimum=1.0), Objective("latency_ms", "minimize", weight=0.1)),
+    ),
+    ExecutableExample(
+        "verified-product-dataset",
+        "Verified product dataset",
+        "Extract products from captured pages and require independent two-source corroboration.",
+        PRODUCT_PROGRAM,
+        (
+            _route(
+                "control",
+                "Parser extraction with explicitly insufficient single-source verification.",
+                {
+                    "acquire": _candidate_id("example.product.acquire.preserve"),
+                    "extract": _candidate_id("example.product.extract.parser"),
+                    "normalize": _candidate_id("example.product.normalize.float"),
+                    "verify": _candidate_id("example.product.verify.single"),
+                },
+                expected_accepted=False,
+            ),
+            _route(
+                "corroborated",
+                "Canonical source order, parser extraction, Decimal money, and cross-source verification.",
+                {
+                    "acquire": _candidate_id("example.product.acquire.sorted"),
+                    "extract": _candidate_id("example.product.extract.parser"),
+                    "normalize": _candidate_id("example.product.normalize.decimal"),
+                    "verify": _candidate_id("example.product.verify.cross-source"),
+                },
+            ),
+            _route(
+                "corroborated-regex",
+                "Regex extraction with cross-source corroboration as an alternate route.",
+                {
+                    "acquire": _candidate_id("example.product.acquire.preserve"),
+                    "extract": _candidate_id("example.product.extract.regex"),
+                    "normalize": _candidate_id("example.product.normalize.decimal"),
+                    "verify": _candidate_id("example.product.verify.cross-source"),
+                },
+            ),
+        ),
+        ExperimentCase(
+            "case.verified-product-dataset",
+            {
+                "sources": [
+                    {"url": "https://fixture.example/catalog-a", "html": "<article data-sku='SKU-1'><h2>Widget</h2><span class='price'>$19.99</span></article><article data-sku='SKU-2'><h2>Gadget</h2><span class='price'>$8.50</span></article>"},
+                    {"url": "https://fixture.example/catalog-b", "html": "<article data-sku='SKU-1'><h2>Widget</h2><span class='price'>$19.99</span></article><article data-sku='SKU-2'><h2>Gadget</h2><span class='price'>$8.50</span></article>"},
+                ]
+            },
+            CallableVerifier("verifier.example.product", _product_verifier),
+        ),
+        ExecutionPolicy(),
+        (Objective("quality", "maximize", hard_minimum=1.0), Objective("latency_ms", "minimize", weight=0.1)),
+    ),
+    ExecutableExample(
+        "calibrated-time-series-forecast",
+        "Calibrated time-series forecast",
+        "Compare mean/trend models and fixed/empirical interval strategies on a fixed holdout.",
+        FORECAST_PROGRAM,
+        (
+            _route(
+                "control",
+                "Historical mean with a narrow fixed interval.",
+                {
+                    "prepare": _candidate_id("example.forecast.prepare.observed"),
+                    "fit": _candidate_id("example.forecast.fit.mean"),
+                    "forecast": _candidate_id("example.forecast.generate"),
+                    "intervals": _candidate_id("example.forecast.interval.fixed"),
+                },
+                expected_accepted=False,
+            ),
+            _route(
+                "trend-residual",
+                "Linear trend with residual-calibrated intervals.",
+                {
+                    "prepare": _candidate_id("example.forecast.prepare.interpolate"),
+                    "fit": _candidate_id("example.forecast.fit.trend"),
+                    "forecast": _candidate_id("example.forecast.generate"),
+                    "intervals": _candidate_id("example.forecast.interval.residual"),
+                },
+            ),
+        ),
+        ExperimentCase(
+            "case.calibrated-time-series-forecast",
+            {"series": {"train": [1, 2, 3, 4, 5, 6, 7, 8], "holdout": [9, 10], "horizon": 2}},
+            CallableVerifier("verifier.example.forecast", _forecast_verifier),
+        ),
+        ExecutionPolicy(),
+        (
+            Objective("quality", "maximize"),
+            Objective("mae", "minimize", hard_maximum=0.75),
+            Objective("coverage", "maximize", hard_minimum=1.0),
+            Objective("latency_ms", "minimize", weight=0.1),
+        ),
+    ),
+    ExecutableExample(
+        "organization-entity-linking",
+        "Organization entity linking",
+        "Compare normalization, blocking, and link evidence before building entity components.",
+        ENTITY_PROGRAM,
+        (
+            _route(
+                "control",
+                "Basic normalization, domain blocking, and exact-name links.",
+                {
+                    "normalize": _candidate_id("example.entity.normalize.basic"),
+                    "block": _candidate_id("example.entity.block.domain"),
+                    "link": _candidate_id("example.entity.link.exact"),
+                    "components": _candidate_id("example.entity.components"),
+                },
+                expected_accepted=False,
+            ),
+            _route(
+                "multi-evidence",
+                "Legal-suffix normalization, token blocking, and multi-field evidence.",
+                {
+                    "normalize": _candidate_id("example.entity.normalize.legal"),
+                    "block": _candidate_id("example.entity.block.tokens"),
+                    "link": _candidate_id("example.entity.link.evidence"),
+                    "components": _candidate_id("example.entity.components"),
+                },
+            ),
+            _route(
+                "canonical-exact",
+                "Legal normalization makes an exact-name linker sufficient.",
+                {
+                    "normalize": _candidate_id("example.entity.normalize.legal"),
+                    "block": _candidate_id("example.entity.block.domain"),
+                    "link": _candidate_id("example.entity.link.exact"),
+                    "components": _candidate_id("example.entity.components"),
+                },
+            ),
+        ),
+        ExperimentCase(
+            "case.organization-entity-linking",
+            {
+                "records": [
+                    {"id": "org-1", "name": "Acme Inc.", "domain": "acme.example", "address": "10 Main St"},
+                    {"id": "org-2", "name": "ACME Incorporated", "domain": "www.acme.example", "address": "10 Main Street"},
+                    {"id": "org-3", "name": "Beta LLC", "domain": "beta.example", "address": "20 Oak Ave"},
+                ]
+            },
+            CallableVerifier("verifier.example.entity", _entity_verifier),
+        ),
+        ExecutionPolicy(),
+        (Objective("quality", "maximize", hard_minimum=1.0), Objective("latency_ms", "minimize", weight=0.1)),
+    ),
+    ExecutableExample(
+        "tested-code-repair",
+        "Tested code repair",
+        "Inspect and repair a bounded source fixture with two proposal, application, and test strategies.",
+        REPAIR_PROGRAM,
+        (
+            _route(
+                "ast-operator",
+                "AST inspection, explicit operator patch, exact apply, and restricted case execution.",
+                {
+                    "inspect": _candidate_id("example.repair.inspect.ast"),
+                    "propose": _candidate_id("example.repair.propose.operator"),
+                    "apply": _candidate_id("example.repair.apply.exact"),
+                    "test": _candidate_id("example.repair.test.ast"),
+                },
+            ),
+            _route(
+                "contract-symbolic",
+                "Test-contract inspection, derived patch, line apply, and symbolic verification.",
+                {
+                    "inspect": _candidate_id("example.repair.inspect.tests"),
+                    "propose": _candidate_id("example.repair.propose.contract"),
+                    "apply": _candidate_id("example.repair.apply.line"),
+                    "test": _candidate_id("example.repair.test.symbolic"),
+                },
+            ),
+        ),
+        ExperimentCase(
+            "case.tested-code-repair",
+            {
+                "repository": {
+                    "files": {"math_utils.py": "def add(a, b):\n    return a - b\n"},
+                    "tests": [
+                        {"args": [2, 3], "expected": 5},
+                        {"args": [-1, 4], "expected": 3},
+                        {"args": [0, 0], "expected": 0},
+                    ],
+                }
+            },
+            CallableVerifier("verifier.example.repair", _repair_verifier),
+        ),
+        ExecutionPolicy(),
+        (Objective("quality", "maximize", hard_minimum=1.0), Objective("latency_ms", "minimize", weight=0.1)),
+    ),
+    ExecutableExample(
+        "multi-feed-analytical-dataset",
+        "Validated multi-feed analytical dataset",
+        "Decode, normalize, reconcile, and validate captured CSV and JSON feeds.",
+        FEED_PROGRAM,
+        (
+            _route(
+                "control",
+                "Strict numeric parsing and whole-record source priority.",
+                {
+                    "decode": _candidate_id("example.feed.decode.lines"),
+                    "normalize": _candidate_id("example.feed.normalize.strict"),
+                    "reconcile": _candidate_id("example.feed.reconcile.priority"),
+                    "validate": _candidate_id("example.feed.validate.strict"),
+                },
+                expected_accepted=False,
+            ),
+            _route(
+                "coerce-and-merge",
+                "Standard CSV decoding, explicit currency parsing, completeness merge, and lineage validation.",
+                {
+                    "decode": _candidate_id("example.feed.decode.csv-module"),
+                    "normalize": _candidate_id("example.feed.normalize.coerce"),
+                    "reconcile": _candidate_id("example.feed.reconcile.complete"),
+                    "validate": _candidate_id("example.feed.validate.lineage"),
+                },
+            ),
+            _route(
+                "coerce-priority",
+                "Line decoding, explicit currency parsing, source priority, and strict validation.",
+                {
+                    "decode": _candidate_id("example.feed.decode.lines"),
+                    "normalize": _candidate_id("example.feed.normalize.coerce"),
+                    "reconcile": _candidate_id("example.feed.reconcile.priority"),
+                    "validate": _candidate_id("example.feed.validate.strict"),
+                },
+            ),
+        ),
+        ExperimentCase(
+            "case.multi-feed-analytical-dataset",
+            {
+                "feeds": {
+                    "csv": "id,name,amount\n1,alice,10.50\n2,bob,$20.00\n",
+                    "json": [
+                        {"id": "2", "name": "Bob", "amount": 20, "category": "B"},
+                        {"id": "3", "name": "Cara", "amount": 30, "category": "C"},
+                    ],
+                }
+            },
+            CallableVerifier("verifier.example.feed", _feed_verifier),
+        ),
+        ExecutionPolicy(),
+        (Objective("quality", "maximize", hard_minimum=1.0), Objective("latency_ms", "minimize", weight=0.1)),
     ),
 )
 

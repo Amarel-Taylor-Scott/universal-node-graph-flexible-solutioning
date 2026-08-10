@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "deliverability match",
+    "false-positive rate",
+    "unit preservation",
+    "coverage"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "address-reference-verification"
+  ],
+  "external_requirements": [
+    "The bundled example uses an offline reference fixture, not USPS.",
+    "Production USPS validation requires approved credentials, current USPS APIs, rate limits, and response retention rules."
+  ],
+  "id": "arena.usps-address-verification",
+  "input_contract": "Raw addresses plus an explicitly identified authoritative reference connector.",
+  "output_contract": "Standardized address records with match codes, provenance, and unresolved reasons.",
+  "problem": "Parse, standardize, and verify United States postal addresses.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "parse",
+    "normalize to postal form",
+    "authoritative lookup",
+    "classify match",
+    "emit"
+  ],
+  "tags": [
+    "address",
+    "verification",
+    "external-authority"
+  ],
+  "template_id": "template.data-quality",
+  "title": "Multi-source addresses to standardized, verified records"
+}

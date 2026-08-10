@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "product.verify"
+  ],
+  "description": "Require matching SKU and price evidence from independent captured sources.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:verify_products_cross_source",
+  "failure_modes": [],
+  "id": "example.product.verify.cross-source",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:779c9cd1c6f271a43d673dd1f5d0664a669cc5dda41443001de496f547d4ff88",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.product-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.verified-products",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -4,6 +4,45 @@ All notable changes to this proof of concept are documented here.
 
 ## Unreleased
 
+## 0.4.0 — 2026-08-10
+
+### Added
+
+- `UniversalSolver`, a guarded orchestration layer that performs complete
+  admission, explicit multi-round prior/beam/sprout/exhaustive search, freezes
+  every evaluated proposal, runs independent receipt-backed experiments,
+  learns observational priors between rounds, and selects an accepted champion.
+- Transparent objective normalization, hard acceptance/objective gates, Pareto
+  reporting, and separately benchmarked route-level fallbacks selected for
+  evidence plus candidate, implementation, and failure-mode diversity.
+- A clean holdout boundary: search and belief learning use development cases;
+  only the selected champion/fallback shortlist receives holdout confirmation,
+  and holdout failure can demote a provisional winner.
+- Quick, balanced, broad, and genuinely uncapped exhaustive solver profiles;
+  exhaustive execution requires explicit caller acknowledgment.
+- A 24-task Universal DAG Arena spanning customer data, address verification,
+  web products, invoices, images, ML, forecasting, entity linking, code repair,
+  analytical data, reconciliation, privacy, operations, numerical computing,
+  deployment, and business workflows.
+- Seven new executable programs for golden customer records, offline-reference
+  address verification, cross-source product data, calibrated forecasting,
+  organization linking, bounded tested code repair, and multi-feed validation.
+- An expanded 84-node shared example registry, 13 total executable programs,
+  31 release-gated routes, 22 accepted routes, and nine intentional negative
+  controls that run through both reference runtime adapters.
+- `solutiongraph solve` plus `solutiongraph arena list/show/run`, strict Arena
+  and solver-result schemas, generated Arena catalog documents, and the
+  `solve-universal-dag` coding-harness skill.
+- `UNIVERSAL_DAG_ARENA.md` with readiness semantics, solver profiles, extension
+  workflow, Kaggle decomposition guidance, and explicit credentialed-connector
+  boundaries.
+
+### Changed
+
+- Bumped the distribution and `solutiongraph` import version to 0.4.0.
+- Expanded release verification, documentation, catalog metadata, and agent
+  instructions to cover all Arena fixtures and solver outputs.
+
 ## 0.3.0 — 2026-08-10
 
 ### Added

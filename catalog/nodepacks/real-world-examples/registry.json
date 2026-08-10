@@ -267,6 +267,430 @@
       "node_id": "example.ml.classification.evaluate",
       "node_version": "1.0.0",
       "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.normalize.conservative.default",
+      "implementation_digest": "sha256:2b4193b7a3b49caa34cab7dd385ff6283ed363b815c18c52727cebd559f3e627",
+      "node_id": "example.customer.normalize.conservative",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.normalize.canonical.default",
+      "implementation_digest": "sha256:dbf642719c54831a1022f0250858620273c3509de823e4cad4cfa99f7c4c3bc6",
+      "node_id": "example.customer.normalize.canonical",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.validate.syntax.default",
+      "implementation_digest": "sha256:477c7db006fd6363034ab2b13b002787522cee6f9dcfb960e19482933310271b",
+      "node_id": "example.customer.validate.syntax",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.validate.reference.default",
+      "implementation_digest": "sha256:924eb2e6575803345c867acf28fba407c36ba0b0939b2467d22c5baa3ecce6b4",
+      "node_id": "example.customer.validate.reference",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.resolve.email.default",
+      "implementation_digest": "sha256:e6071a2ad8f727c5f6ce72c3f46ccb133875a5644ebd10bbec89871ddfd57e18",
+      "node_id": "example.customer.resolve.email",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.resolve.multikey.default",
+      "implementation_digest": "sha256:8c9baab15ccfd653ff8f533fe60f83900a5eb4ef87d47706f3dfbf132bfa6183",
+      "node_id": "example.customer.resolve.multikey",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.emit.first.default",
+      "implementation_digest": "sha256:487bd6f0d6a52913ba9fb6f7fe6d0ada4915723a2aba8609f2723174e80e12ef",
+      "node_id": "example.customer.emit.first",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.customer.emit.complete.default",
+      "implementation_digest": "sha256:1c082ebce7c5963240b4eaf9840d6586e08651c56d437dd26ff7a2730e905c06",
+      "node_id": "example.customer.emit.complete",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.address.parse.commas.default",
+      "implementation_digest": "sha256:ff0a658876e726c8115daa7f7c7cfceca724c9a784b12f58bb162355f79dc8d7",
+      "node_id": "example.address.parse.commas",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.address.parse.structured.default",
+      "implementation_digest": "sha256:5d278de2b584220c16c8d7dc59707f59762de4e2dbc6f291472c3b733c92519c",
+      "node_id": "example.address.parse.structured",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.address.normalize.basic.default",
+      "implementation_digest": "sha256:7b87b3f923c2295fd9468361d3f068cab767411b12ca3cb4dfb27eb99d031dbb",
+      "node_id": "example.address.normalize.basic",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.address.normalize.postal.default",
+      "implementation_digest": "sha256:074b6d9561ec26f01aff5872ca68ab2e89b8a9653b65cdb7aa3adc97f780aaef",
+      "node_id": "example.address.normalize.postal",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.address.verify.exact.default",
+      "implementation_digest": "sha256:71bbf2fec5accefb37ba01d97e0a258c26a205cc386c6e34d386a11bf39229f7",
+      "node_id": "example.address.verify.exact",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.address.verify.alias.default",
+      "implementation_digest": "sha256:13e54839bf2582aa1b5f50d4ccba912f2ea3dbfe7d547081b91795df1a5a9ec2",
+      "node_id": "example.address.verify.alias",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.address.emit.default",
+      "implementation_digest": "sha256:99a78758c3276b20d3414efc0dacb17a0774ce38a21e449bc74d4bcf3a7c91ff",
+      "node_id": "example.address.emit",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.acquire.preserve.default",
+      "implementation_digest": "sha256:f1e92d0b07a46e6304ad7ed8e4bc5f397cad4baa1d49241ebd929b4a1d9f692e",
+      "node_id": "example.product.acquire.preserve",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.acquire.sorted.default",
+      "implementation_digest": "sha256:d4d0d3ba92ecf57ddb004d083ebe65efbc9058b2e2d8253ac40b50eba324f313",
+      "node_id": "example.product.acquire.sorted",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.extract.regex.default",
+      "implementation_digest": "sha256:9f8cec4bb3ea695c8fc319b03c54b9cecbfb9465047712fd9e61eb6b3a61ac83",
+      "node_id": "example.product.extract.regex",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.extract.parser.default",
+      "implementation_digest": "sha256:b6adf91a653a664be7e3bf775fa63397f30c1bae0cc06a3ac183219e26a2b1a2",
+      "node_id": "example.product.extract.parser",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.normalize.float.default",
+      "implementation_digest": "sha256:c1cd13a3e8e9d538b178d225181d83f52b521dbbc1bfdfa00baddd4c94fd3ae7",
+      "node_id": "example.product.normalize.float",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.normalize.decimal.default",
+      "implementation_digest": "sha256:c68c1e99c5a0ed052dbd3ebac8e530aa3b4b26f57502609434cb18557c6fdd80",
+      "node_id": "example.product.normalize.decimal",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.verify.single.default",
+      "implementation_digest": "sha256:f1ff16aea30c52e5748ef334950b6384466f752f4da017145a37eb18c4fc2fa1",
+      "node_id": "example.product.verify.single",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.product.verify.cross-source.default",
+      "implementation_digest": "sha256:779c9cd1c6f271a43d673dd1f5d0664a669cc5dda41443001de496f547d4ff88",
+      "node_id": "example.product.verify.cross-source",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.forecast.prepare.observed.default",
+      "implementation_digest": "sha256:63fb2beaa2fe6a85145b57d222018d966f9ef00676451a683a2a32478810b8a5",
+      "node_id": "example.forecast.prepare.observed",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.forecast.prepare.interpolate.default",
+      "implementation_digest": "sha256:9055952667db7dd21e105e64b839e517fb601406829a90138c275370957fde88",
+      "node_id": "example.forecast.prepare.interpolate",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.forecast.fit.mean.default",
+      "implementation_digest": "sha256:14d9fc6db8477444d22e5099ad10a07f285ab138837d4a669fc20f8fc0126992",
+      "node_id": "example.forecast.fit.mean",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.forecast.fit.trend.default",
+      "implementation_digest": "sha256:2185ba7e2f79b3ed9e05c80833a181d250d45fff7380831f9d832afb2f613f8d",
+      "node_id": "example.forecast.fit.trend",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.forecast.generate.default",
+      "implementation_digest": "sha256:ea9ce47314bbdf88050cd9285d4e385e316ef47d7fea286eb75d126681174e77",
+      "node_id": "example.forecast.generate",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.forecast.interval.fixed.default",
+      "implementation_digest": "sha256:8642d283978662ff18ba82732183ed5a167434ac7f7f456a1fff490c0823c93c",
+      "node_id": "example.forecast.interval.fixed",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.forecast.interval.residual.default",
+      "implementation_digest": "sha256:6457d5cd0f57be1b06a59dcc332e41214719596efe0c000c894898eac888392c",
+      "node_id": "example.forecast.interval.residual",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.entity.normalize.basic.default",
+      "implementation_digest": "sha256:8a733908edcff70f3f4f16737589e7878a22553ca6b4b378b9ffba400d412d2b",
+      "node_id": "example.entity.normalize.basic",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.entity.normalize.legal.default",
+      "implementation_digest": "sha256:fbf41fd5e41f4de0e811aade3309b7b4474ca26af69446614464d8ac18384278",
+      "node_id": "example.entity.normalize.legal",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.entity.block.domain.default",
+      "implementation_digest": "sha256:73b623d581382b02418dff797b92961f08af2ae500c429e4f0e5b16a4df6c75c",
+      "node_id": "example.entity.block.domain",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.entity.block.tokens.default",
+      "implementation_digest": "sha256:68684e2035380c4cbdb9fb9119fbebb4cd3fc16f3531a43a09ca4fef5bca84ee",
+      "node_id": "example.entity.block.tokens",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.entity.link.exact.default",
+      "implementation_digest": "sha256:b7e8fef1beefc5a7aa618f6f647f4025a8a20e111ad991d576354872990eadc6",
+      "node_id": "example.entity.link.exact",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.entity.link.evidence.default",
+      "implementation_digest": "sha256:a3cf0ccfd3aa510b3705bd13fff4e096a9788c7453e9c3ee65088a1c22b5054a",
+      "node_id": "example.entity.link.evidence",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.entity.components.default",
+      "implementation_digest": "sha256:c20d36d7e58b6c5418ac808748c6a7bd933116d96a465be1fb89dfb33407620f",
+      "node_id": "example.entity.components",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.inspect.ast.default",
+      "implementation_digest": "sha256:ad426c599ceccb146aefae3d6c6e0fc02b8ea646a270525aae0085e12b747890",
+      "node_id": "example.repair.inspect.ast",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.inspect.tests.default",
+      "implementation_digest": "sha256:e0cd88d798bf9d128305bca565ac39ee542ee41d02d2e1a6d949ce2070a7c58b",
+      "node_id": "example.repair.inspect.tests",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.propose.operator.default",
+      "implementation_digest": "sha256:e491b9fa8cca19749d9caabf2eb262fd83d065aa62a8488799c2ea5ff5a4ffad",
+      "node_id": "example.repair.propose.operator",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.propose.contract.default",
+      "implementation_digest": "sha256:29a86ec3503a0a1e9b2bcf16ed076742c74cf729accff3bf7567759f7c14efbc",
+      "node_id": "example.repair.propose.contract",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.apply.exact.default",
+      "implementation_digest": "sha256:ef86e4b2066443d08af73fae305dc8ca004cdbaa5518a4ed217f34c2428c42ac",
+      "node_id": "example.repair.apply.exact",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.apply.line.default",
+      "implementation_digest": "sha256:0cc759e0d27d48e2bf0fc9566d50470126ca024699b8b9449c0fe7b93d2bc200",
+      "node_id": "example.repair.apply.line",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.test.ast.default",
+      "implementation_digest": "sha256:cee39e3ac3cd06e856d4d217081a826350d1fd5883d0fb19d24d02746f349286",
+      "node_id": "example.repair.test.ast",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.repair.test.symbolic.default",
+      "implementation_digest": "sha256:8c76f3360278e6b8e9573e3dfd5194647dc25367f142a44107d86f0a7d4e7274",
+      "node_id": "example.repair.test.symbolic",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.decode.csv-module.default",
+      "implementation_digest": "sha256:4180e4f776bbff21414ef6874b0d3518bdb0ed756ccdb5e0323f504cd45f6a03",
+      "node_id": "example.feed.decode.csv-module",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.decode.lines.default",
+      "implementation_digest": "sha256:6a7be577c1d4434c587fda616fb5c7a5db4134cc7024a0f392aa2800978ffbff",
+      "node_id": "example.feed.decode.lines",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.normalize.strict.default",
+      "implementation_digest": "sha256:45f6d18e37d6271f41ef0c6aab243975cf45c3a0ee38b7112099f6377cd89e30",
+      "node_id": "example.feed.normalize.strict",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.normalize.coerce.default",
+      "implementation_digest": "sha256:d0bcf10095f5f18af681e0f74e5165761b6598d3d619e8351b63e03a33191f0a",
+      "node_id": "example.feed.normalize.coerce",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.reconcile.priority.default",
+      "implementation_digest": "sha256:d419d8a73b0635035f9ec25fbc547a11194e54f0ef0470d713c13c9844542cc0",
+      "node_id": "example.feed.reconcile.priority",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.reconcile.complete.default",
+      "implementation_digest": "sha256:6693ae5657dabe3b631569a21cc17548bb04a2875c27a097a3664555be28f888",
+      "node_id": "example.feed.reconcile.complete",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.validate.strict.default",
+      "implementation_digest": "sha256:139dff3ec1a8096c21f74903130c9358bde22a9c3862b32575e7c487b2684098",
+      "node_id": "example.feed.validate.strict",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.feed.validate.lineage.default",
+      "implementation_digest": "sha256:394bbd7dc1debbe7fe2e6d5bdf1b3640ff7d28b95d357796fd40559a69e8060a",
+      "node_id": "example.feed.validate.lineage",
+      "node_version": "1.0.0",
+      "parameters": {}
     }
   ],
   "id": "example.real-world-registry",
@@ -2106,6 +2530,2762 @@
       "resources": [],
       "runtime": "python",
       "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.normalize"
+      ],
+      "description": "Normalize customer keys and contact fields conservatively.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_customers_conservative",
+      "failure_modes": [],
+      "id": "example.customer.normalize.conservative",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:2b4193b7a3b49caa34cab7dd385ff6283ed363b815c18c52727cebd559f3e627",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.normalize"
+      ],
+      "description": "Normalize names, contacts, and common address tokens canonically.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_customers_canonical",
+      "failure_modes": [],
+      "id": "example.customer.normalize.canonical",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:dbf642719c54831a1022f0250858620273c3509de823e4cad4cfa99f7c4c3bc6",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.validate-contacts"
+      ],
+      "description": "Check contact syntax without claiming external authority.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:validate_customer_contacts_syntax",
+      "failure_modes": [],
+      "id": "example.customer.validate.syntax",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:477c7db006fd6363034ab2b13b002787522cee6f9dcfb960e19482933310271b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.validate-contacts"
+      ],
+      "description": "Check contacts against an explicitly supplied offline reference fixture.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:validate_customer_contacts_reference",
+      "failure_modes": [],
+      "id": "example.customer.validate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:924eb2e6575803345c867acf28fba407c36ba0b0939b2467d22c5baa3ecce6b4",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.resolve"
+      ],
+      "description": "Resolve identities by exact normalized email.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:resolve_customers_by_email",
+      "failure_modes": [],
+      "id": "example.customer.resolve.email",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:e6071a2ad8f727c5f6ce72c3f46ccb133875a5644ebd10bbec89871ddfd57e18",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "groups",
+          "type": {
+            "id": "example.customer-groups",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.resolve"
+      ],
+      "description": "Resolve identities with email, phone, name, and address evidence.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:resolve_customers_multikey",
+      "failure_modes": [],
+      "id": "example.customer.resolve.multikey",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:8c9baab15ccfd653ff8f533fe60f83900a5eb4ef87d47706f3dfbf132bfa6183",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.customer-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "groups",
+          "type": {
+            "id": "example.customer-groups",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.emit-golden"
+      ],
+      "description": "Emit the first record in each entity group with provenance.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:emit_customer_first",
+      "failure_modes": [],
+      "id": "example.customer.emit.first",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:487bd6f0d6a52913ba9fb6f7fe6d0ada4915723a2aba8609f2723174e80e12ef",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "groups",
+          "type": {
+            "id": "example.customer-groups",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.golden-customers",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "customer.emit-golden"
+      ],
+      "description": "Merge the most complete verified fields with source provenance.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:emit_customer_complete",
+      "failure_modes": [],
+      "id": "example.customer.emit.complete",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:1c082ebce7c5963240b4eaf9840d6586e08651c56d437dd26ff7a2730e905c06",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "groups",
+          "type": {
+            "id": "example.customer-groups",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.golden-customers",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "address.parse"
+      ],
+      "description": "Parse comma-delimited addresses into typed components.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:parse_addresses_commas",
+      "failure_modes": [],
+      "id": "example.address.parse.commas",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:ff0a658876e726c8115daa7f7c7cfceca724c9a784b12f58bb162355f79dc8d7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "address.parse"
+      ],
+      "description": "Parse United States city, region, and postal-code structure.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:parse_addresses_structured",
+      "failure_modes": [],
+      "id": "example.address.parse.structured",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:5d278de2b584220c16c8d7dc59707f59762de4e2dbc6f291472c3b733c92519c",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "address.normalize"
+      ],
+      "description": "Normalize casing and whitespace only.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_addresses_basic",
+      "failure_modes": [],
+      "id": "example.address.normalize.basic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:7b87b3f923c2295fd9468361d3f068cab767411b12ca3cb4dfb27eb99d031dbb",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "address.normalize"
+      ],
+      "description": "Apply a small Publication-28-inspired abbreviation fixture.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_addresses_postal",
+      "failure_modes": [],
+      "id": "example.address.normalize.postal",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:074b6d9561ec26f01aff5872ca68ab2e89b8a9653b65cdb7aa3adc97f780aaef",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "address.verify-reference"
+      ],
+      "description": "Require exact equality with a supplied offline reference directory.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:verify_addresses_exact",
+      "failure_modes": [],
+      "id": "example.address.verify.exact",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:71bbf2fec5accefb37ba01d97e0a258c26a205cc386c6e34d386a11bf39229f7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "address.verify-reference"
+      ],
+      "description": "Compare canonical alphanumeric forms to the offline reference directory.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:verify_addresses_alias_aware",
+      "failure_modes": [],
+      "id": "example.address.verify.alias",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:13e54839bf2582aa1b5f50d4ccba912f2ea3dbfe7d547081b91795df1a5a9ec2",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "address.emit"
+      ],
+      "description": "Emit deterministic standardized address records and match codes.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:emit_verified_addresses",
+      "failure_modes": [],
+      "id": "example.address.emit",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:99a78758c3276b20d3414efc0dacb17a0774ce38a21e449bc74d4bcf3a7c91ff",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "bundle",
+          "type": {
+            "id": "example.address-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.verified-addresses",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.acquire"
+      ],
+      "description": "Preserve authorized captured HTML sources.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:acquire_product_sources_preserve",
+      "failure_modes": [],
+      "id": "example.product.acquire.preserve",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:f1e92d0b07a46e6304ad7ed8e4bc5f397cad4baa1d49241ebd929b4a1d9f692e",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "sources",
+          "type": {
+            "id": "example.product-sources",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "sources",
+          "type": {
+            "id": "example.product-sources",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.acquire"
+      ],
+      "description": "Canonicalize captured-source order by URL.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:acquire_product_sources_sorted",
+      "failure_modes": [],
+      "id": "example.product.acquire.sorted",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:d4d0d3ba92ecf57ddb004d083ebe65efbc9058b2e2d8253ac40b50eba324f313",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "sources",
+          "type": {
+            "id": "example.product-sources",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "sources",
+          "type": {
+            "id": "example.product-sources",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.extract"
+      ],
+      "description": "Extract the fixture product microformat with a bounded expression.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:extract_products_regex",
+      "failure_modes": [],
+      "id": "example.product.extract.regex",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:9f8cec4bb3ea695c8fc319b03c54b9cecbfb9465047712fd9e61eb6b3a61ac83",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "sources",
+          "type": {
+            "id": "example.product-sources",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.extract"
+      ],
+      "description": "Extract the fixture product microformat with HTMLParser.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:extract_products_parser",
+      "failure_modes": [],
+      "id": "example.product.extract.parser",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:b6adf91a653a664be7e3bf775fa63397f30c1bae0cc06a3ac183219e26a2b1a2",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "sources",
+          "type": {
+            "id": "example.product-sources",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.normalize"
+      ],
+      "description": "Normalize display prices through floating-point conversion.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_product_prices_float",
+      "failure_modes": [],
+      "id": "example.product.normalize.float",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c1cd13a3e8e9d538b178d225181d83f52b521dbbc1bfdfa00baddd4c94fd3ae7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.normalize"
+      ],
+      "description": "Normalize monetary values into integer cents with Decimal.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_product_prices_decimal",
+      "failure_modes": [],
+      "id": "example.product.normalize.decimal",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c68c1e99c5a0ed052dbd3ebac8e530aa3b4b26f57502609434cb18557c6fdd80",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.verify"
+      ],
+      "description": "Retain single-source evidence without calling it independently verified.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:verify_products_single_source",
+      "failure_modes": [],
+      "id": "example.product.verify.single",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:f1ff16aea30c52e5748ef334950b6384466f752f4da017145a37eb18c4fc2fa1",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.verified-products",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "product.verify"
+      ],
+      "description": "Require matching SKU and price evidence from independent captured sources.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:verify_products_cross_source",
+      "failure_modes": [],
+      "id": "example.product.verify.cross-source",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:779c9cd1c6f271a43d673dd1f5d0664a669cc5dda41443001de496f547d4ff88",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.product-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "products",
+          "type": {
+            "id": "example.verified-products",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "forecast.prepare"
+      ],
+      "description": "Use complete observed training values as supplied.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:prepare_series_observed",
+      "failure_modes": [],
+      "id": "example.forecast.prepare.observed",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:63fb2beaa2fe6a85145b57d222018d966f9ef00676451a683a2a32478810b8a5",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "forecast.prepare"
+      ],
+      "description": "Interpolate missing interior observations deterministically.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:prepare_series_interpolate",
+      "failure_modes": [],
+      "id": "example.forecast.prepare.interpolate",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:9055952667db7dd21e105e64b839e517fb601406829a90138c275370957fde88",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "forecast.fit"
+      ],
+      "description": "Fit an explicit historical-mean control model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:fit_forecast_mean",
+      "failure_modes": [],
+      "id": "example.forecast.fit.mean",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:14d9fc6db8477444d22e5099ad10a07f285ab138837d4a669fc20f8fc0126992",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "forecast.fit"
+      ],
+      "description": "Fit a deterministic linear trend model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:fit_forecast_trend",
+      "failure_modes": [],
+      "id": "example.forecast.fit.trend",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:2185ba7e2f79b3ed9e05c80833a181d250d45fff7380831f9d832afb2f613f8d",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "forecast.generate"
+      ],
+      "description": "Generate horizon-aligned point predictions from the frozen model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:generate_forecast",
+      "failure_modes": [],
+      "id": "example.forecast.generate",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:ea9ce47314bbdf88050cd9285d4e385e316ef47d7fea286eb75d126681174e77",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "forecast.calibrate-intervals"
+      ],
+      "description": "Attach a narrow fixed-width control interval.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:calibrate_intervals_fixed",
+      "failure_modes": [],
+      "id": "example.forecast.interval.fixed",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:8642d283978662ff18ba82732183ed5a167434ac7f7f456a1fff490c0823c93c",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "result",
+          "type": {
+            "id": "example.forecast-result",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "forecast.calibrate-intervals"
+      ],
+      "description": "Calibrate interval width from in-sample absolute residuals.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:calibrate_intervals_residual",
+      "failure_modes": [],
+      "id": "example.forecast.interval.residual",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:6457d5cd0f57be1b06a59dcc332e41214719596efe0c000c894898eac888392c",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "series",
+          "type": {
+            "id": "example.time-series",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "result",
+          "type": {
+            "id": "example.forecast-result",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "entity.normalize"
+      ],
+      "description": "Normalize organization names and domains conservatively.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_organizations_basic",
+      "failure_modes": [],
+      "id": "example.entity.normalize.basic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:8a733908edcff70f3f4f16737589e7878a22553ca6b4b378b9ffba400d412d2b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.organization-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.organization-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "entity.normalize"
+      ],
+      "description": "Normalize common legal suffix variants.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_organizations_legal",
+      "failure_modes": [],
+      "id": "example.entity.normalize.legal",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:fbf41fd5e41f4de0e811aade3309b7b4474ca26af69446614464d8ac18384278",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.organization-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.organization-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "entity.block"
+      ],
+      "description": "Generate candidate pairs sharing a normalized web domain.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:block_organizations_domain",
+      "failure_modes": [],
+      "id": "example.entity.block.domain",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:73b623d581382b02418dff797b92961f08af2ae500c429e4f0e5b16a4df6c75c",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.organization-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "blocked",
+          "type": {
+            "id": "example.organization-blocks",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "entity.block"
+      ],
+      "description": "Generate candidate pairs sharing name tokens or domain evidence.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:block_organizations_tokens",
+      "failure_modes": [],
+      "id": "example.entity.block.tokens",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:68684e2035380c4cbdb9fb9119fbebb4cd3fc16f3531a43a09ca4fef5bca84ee",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.organization-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "blocked",
+          "type": {
+            "id": "example.organization-blocks",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "entity.link"
+      ],
+      "description": "Link candidate pairs only when normalized names are identical.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:link_organizations_exact",
+      "failure_modes": [],
+      "id": "example.entity.link.exact",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:b7e8fef1beefc5a7aa618f6f647f4025a8a20e111ad991d576354872990eadc6",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "blocked",
+          "type": {
+            "id": "example.organization-blocks",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "linked",
+          "type": {
+            "id": "example.organization-blocks",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "entity.link"
+      ],
+      "description": "Link pairs supported by at least two independent fields.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:link_organizations_evidence",
+      "failure_modes": [],
+      "id": "example.entity.link.evidence",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:a3cf0ccfd3aa510b3705bd13fff4e096a9788c7453e9c3ee65088a1c22b5054a",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "blocked",
+          "type": {
+            "id": "example.organization-blocks",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "linked",
+          "type": {
+            "id": "example.organization-blocks",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "entity.components"
+      ],
+      "description": "Build deterministic connected components with source record IDs.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:build_entity_components",
+      "failure_modes": [],
+      "id": "example.entity.components",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c20d36d7e58b6c5418ac808748c6a7bd933116d96a465be1fb89dfb33407620f",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "linked",
+          "type": {
+            "id": "example.organization-blocks",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "entities",
+          "type": {
+            "id": "example.entity-components",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.inspect"
+      ],
+      "description": "Inspect the bounded fixture source with Python AST.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:inspect_code_ast",
+      "failure_modes": [],
+      "id": "example.repair.inspect.ast",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:ad426c599ceccb146aefae3d6c6e0fc02b8ea646a270525aae0085e12b747890",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "repository",
+          "type": {
+            "id": "example.repository-snapshot",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.inspect"
+      ],
+      "description": "Inspect the fixed failing test contract.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:inspect_code_tests",
+      "failure_modes": [],
+      "id": "example.repair.inspect.tests",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:e0cd88d798bf9d128305bca565ac39ee542ee41d02d2e1a6d949ce2070a7c58b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "repository",
+          "type": {
+            "id": "example.repository-snapshot",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.propose"
+      ],
+      "description": "Propose a minimal operator replacement.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:propose_operator_repair",
+      "failure_modes": [],
+      "id": "example.repair.propose.operator",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:e491b9fa8cca19749d9caabf2eb262fd83d065aa62a8488799c2ea5ff5a4ffad",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.propose"
+      ],
+      "description": "Derive a bounded repair hypothesis from fixed tests.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:propose_contract_repair",
+      "failure_modes": [],
+      "id": "example.repair.propose.contract",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:29a86ec3503a0a1e9b2bcf16ed076742c74cf729accff3bf7567759f7c14efbc",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.apply"
+      ],
+      "description": "Apply one exact content replacement.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:apply_repair_exact",
+      "failure_modes": [],
+      "id": "example.repair.apply.exact",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:ef86e4b2066443d08af73fae305dc8ca004cdbaa5518a4ed217f34c2428c42ac",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.apply"
+      ],
+      "description": "Apply one line-scoped return-expression replacement.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:apply_repair_line",
+      "failure_modes": [],
+      "id": "example.repair.apply.line",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0cc759e0d27d48e2bf0fc9566d50470126ca024699b8b9449c0fe7b93d2bc200",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.test"
+      ],
+      "description": "Run fixed cases through a restricted AST interpreter.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:test_repair_ast",
+      "failure_modes": [],
+      "id": "example.repair.test.ast",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:cee39e3ac3cd06e856d4d217081a826350d1fd5883d0fb19d24d02746f349286",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "report",
+          "type": {
+            "id": "example.repair-report",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "repair.test"
+      ],
+      "description": "Require both symbolic operator structure and fixed-case success.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:test_repair_symbolic",
+      "failure_modes": [],
+      "id": "example.repair.test.symbolic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:8c76f3360278e6b8e9573e3dfd5194647dc25367f142a44107d86f0a7d4e7274",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "proposal",
+          "type": {
+            "id": "example.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "report",
+          "type": {
+            "id": "example.repair-report",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.decode"
+      ],
+      "description": "Decode CSV with the standard library and combine captured JSON rows.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:decode_feeds_csv_module",
+      "failure_modes": [],
+      "id": "example.feed.decode.csv-module",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:4180e4f776bbff21414ef6874b0d3518bdb0ed756ccdb5e0323f504cd45f6a03",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "feeds",
+          "type": {
+            "id": "example.raw-feeds",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.decode"
+      ],
+      "description": "Decode the bounded CSV fixture line by line and combine JSON rows.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:decode_feeds_line_parser",
+      "failure_modes": [],
+      "id": "example.feed.decode.lines",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:6a7be577c1d4434c587fda616fb5c7a5db4134cc7024a0f392aa2800978ffbff",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "feeds",
+          "type": {
+            "id": "example.raw-feeds",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.normalize"
+      ],
+      "description": "Require already numeric amount fields.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_feed_rows_strict",
+      "failure_modes": [],
+      "id": "example.feed.normalize.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:45f6d18e37d6271f41ef0c6aab243975cf45c3a0ee38b7112099f6377cd89e30",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.normalize"
+      ],
+      "description": "Normalize names and explicitly parse currency-formatted amounts.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:normalize_feed_rows_coerce",
+      "failure_modes": [],
+      "id": "example.feed.normalize.coerce",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:d0bcf10095f5f18af681e0f74e5165761b6598d3d619e8351b63e03a33191f0a",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.reconcile"
+      ],
+      "description": "Choose one whole record according to fixed source priority.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:reconcile_feed_rows_priority",
+      "failure_modes": [],
+      "id": "example.feed.reconcile.priority",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:d419d8a73b0635035f9ec25fbc547a11194e54f0ef0470d713c13c9844542cc0",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.reconcile"
+      ],
+      "description": "Merge complementary nonempty fields and retain source lineage.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:reconcile_feed_rows_complete",
+      "failure_modes": [],
+      "id": "example.feed.reconcile.complete",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:6693ae5657dabe3b631569a21cc17548bb04a2875c27a097a3664555be28f888",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.validate"
+      ],
+      "description": "Separate rows that do not meet the analytical schema.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:validate_feed_rows_strict",
+      "failure_modes": [],
+      "id": "example.feed.validate.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:139dff3ec1a8096c21f74903130c9358bde22a9c3862b32575e7c487b2684098",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "dataset",
+          "type": {
+            "id": "example.analytical-dataset",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "feed.validate"
+      ],
+      "description": "Validate schema and report whether every row retains source lineage.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.arena_nodes:validate_feed_rows_quarantine",
+      "failure_modes": [],
+      "id": "example.feed.validate.lineage",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:394bbd7dc1debbe7fe2e6d5bdf1b3640ff7d28b95d357796fd40559a69e8060a",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "rows",
+          "type": {
+            "id": "example.feed-rows",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "dataset",
+          "type": {
+            "id": "example.analytical-dataset",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/arena_nodes.py",
       "verifier": "",
       "version": "1.0.0"
     }

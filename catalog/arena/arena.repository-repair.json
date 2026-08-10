@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "target test pass",
+    "regression pass",
+    "scope",
+    "security",
+    "reproducibility"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "tested-code-repair"
+  ],
+  "external_requirements": [],
+  "id": "arena.repository-repair",
+  "input_contract": "Immutable repository snapshot, failing checks, and authority policy.",
+  "output_contract": "Patch, test receipts, changed-file scope, and rollback instructions.",
+  "problem": "Reproduce failures, localize causes, propose bounded patches, and verify regressions.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "reproduce",
+    "localize",
+    "hypothesize",
+    "patch",
+    "test",
+    "security scan",
+    "package"
+  ],
+  "tags": [
+    "code",
+    "repair",
+    "qa"
+  ],
+  "template_id": "template.qa-engineering",
+  "title": "Broken repositories to tested repairs"
+}

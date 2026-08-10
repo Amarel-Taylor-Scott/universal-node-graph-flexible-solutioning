@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "solver-result.schema.json",
+  "title": "Universal SolutionGraph solver result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "solver_model_version", "status", "profile", "program_digest",
+    "registry_digest", "admitted_space_digest", "route_count_upper_bound",
+    "admitted_candidates", "rounds", "evaluated_plan_count",
+    "champion_plan_digest", "fallbacks", "pareto_plan_digests",
+    "development_receipt_ids", "holdout_receipt_ids",
+    "holdout_confirmed_plan_digests", "rankings",
+    "initial_belief_revision", "learned_belief_revision"
+  ],
+  "properties": {
+    "solver_model_version": {"const": "0.1"},
+    "status": {"enum": ["solved", "no-accepted-route", "no-holdout-confirmed-route"]},
+    "profile": {"$ref": "#/$defs/profile"},
+    "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "admitted_space_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "route_count_upper_bound": {"type": "integer", "minimum": 1},
+    "admitted_candidates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array", "minItems": 1, "uniqueItems": true,
+        "items": {"$ref": "common.schema.json#/$defs/id"}
+      }
+    },
+    "rounds": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/round"}
+    },
+    "evaluated_plan_count": {"type": "integer", "minimum": 1},
+    "champion_plan_digest": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "common.schema.json#/$defs/digest"}
+      ]
+    },
+    "fallbacks": {
+      "type": "array", "items": {"$ref": "#/$defs/fallback"}
+    },
+    "pareto_plan_digests": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "development_receipt_ids": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "holdout_receipt_ids": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "holdout_confirmed_plan_digests": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "rankings": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/ranking"}
+    },
+    "initial_belief_revision": {"type": "string", "minLength": 1},
+    "learned_belief_revision": {"type": "string", "minLength": 1},
+    "receipts": {
+      "type": "array", "items": {"$ref": "run-receipt.schema.json"}
+    }
+  },
+  "$defs": {
+    "nullablePositiveInteger": {
+      "oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "search_rounds", "seeds", "repetitions",
+        "minimum_acceptance_rate", "fallback_count"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "search_rounds": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "mode", "evaluation_limit", "result_limit", "beam_width",
+              "random_seed", "sampling_attempt_limit", "mutation_probability"
+            ],
+            "properties": {
+              "mode": {"enum": ["prior", "beam", "sprout", "exhaustive"]},
+              "evaluation_limit": {"$ref": "#/$defs/nullablePositiveInteger"},
+              "result_limit": {"type": "integer", "minimum": 1},
+              "beam_width": {"type": "integer", "minimum": 1},
+              "random_seed": {"oneOf": [{"type": "null"}, {"type": "integer"}]},
+              "sampling_attempt_limit": {"$ref": "#/$defs/nullablePositiveInteger"},
+              "mutation_probability": {"type": "number", "minimum": 0, "maximum": 1}
+            }
+          }
+        },
+        "seeds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer"}},
+        "repetitions": {"type": "integer", "minimum": 1},
+        "minimum_acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "fallback_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "round": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index", "belief_revision_before", "belief_revision_after",
+        "plan_digests", "receipt_ids", "search"
+      ],
+      "properties": {
+        "index": {"type": "integer", "minimum": 1},
+        "belief_revision_before": {"type": "string", "minLength": 1},
+        "belief_revision_after": {"type": "string", "minLength": 1},
+        "plan_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+        "receipt_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+        "search": {"$ref": "search-report.schema.json"}
+      }
+    },
+    "ranking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rank", "plan_digest", "selection", "acceptance_rate", "accepted_runs",
+        "runs", "objective_means", "objective_variances", "weighted_score",
+        "meets_acceptance_gate", "meets_objective_constraints", "pareto"
+      ],
+      "properties": {
+        "rank": {"type": "integer", "minimum": 1},
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "selection": {"type": "object", "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}},
+        "acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "accepted_runs": {"type": "integer", "minimum": 0},
+        "runs": {"type": "integer", "minimum": 1},
+        "objective_means": {"type": "object", "additionalProperties": {"type": "number"}},
+        "objective_variances": {"type": "object", "additionalProperties": {"type": "number", "minimum": 0}},
+        "weighted_score": {"type": "number", "minimum": 0, "maximum": 1},
+        "meets_acceptance_gate": {"type": "boolean"},
+        "meets_objective_constraints": {"type": "boolean"},
+        "pareto": {"type": "boolean"}
+      }
+    },
+    "fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "priority", "plan_digest", "evidence_score", "diversity_score",
+        "selection_score", "candidate_diversity", "implementation_diversity",
+        "failure_mode_diversity"
+      ],
+      "properties": {
+        "priority": {"type": "integer", "minimum": 1},
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "evidence_score": {"type": "number", "minimum": 0, "maximum": 1},
+        "diversity_score": {"type": "number", "minimum": 0, "maximum": 1},
+        "selection_score": {"type": "number", "minimum": 0, "maximum": 1},
+        "candidate_diversity": {"type": "number", "minimum": 0, "maximum": 1},
+        "implementation_diversity": {"type": "number", "minimum": 0, "maximum": 1},
+        "failure_mode_diversity": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    }
+  }
+}

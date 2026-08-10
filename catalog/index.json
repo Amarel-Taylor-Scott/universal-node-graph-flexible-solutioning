@@ -1,4 +1,9 @@
 {
+  "arena": {
+    "executable_fixture_count": 10,
+    "path": "arena/index.json",
+    "task_count": 24
+  },
   "catalog_model_version": "0.1",
   "node_packs": [
     {
@@ -12,10 +17,10 @@
     },
     {
       "descriptor_count": 0,
-      "digest": "sha256:baf9d5d19b18726d46d2c9cafed9a6223c01fb35559ba7e8866582252fc956d3",
+      "digest": "sha256:721e13185ab4f4217b51064a14dcbbda9a4a39adc9da83cc1e0d1fcc88f73f97",
       "embedding_record_count": 0,
       "id": "example.real-world-node-pack",
-      "node_count": 31,
+      "node_count": 84,
       "path": "nodepacks/real-world-examples/manifest.json",
       "version": "1.0.0"
     }

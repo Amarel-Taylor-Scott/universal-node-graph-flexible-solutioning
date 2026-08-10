@@ -7,7 +7,7 @@
 [![Status: developer preview](https://img.shields.io/badge/status-developer%20preview-orange)](READINESS.md)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
-Version 0.3 is a working developer preview of a different way to build software:
+Version 0.4 is a working developer preview of a different way to build software:
 compile each task
 into an ordered graph search space, expose every compatible implementation for
 every atomic substep, and learn which complete route best satisfies the task's
@@ -30,6 +30,14 @@ registry snapshots, reusable semantic templates, complete admission, frozen
 plans, prior/beam/sprout/exhaustive search, adaptive resource allocation,
 immutable evidence, Pareto ranking, and observational prior learning.
 `browsergraph` is explicitly one concrete runtime adapter and stress test.
+
+`UniversalSolver` now joins those primitives into one guarded operation: full
+registry admission, explicit multi-round search, plan freezing, receipt-backed
+experiments, observational belief updates, hard acceptance/objective gates,
+Pareto reporting, champion selection, and separately benchmarked diverse
+fallback routes. The [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md) catalogues
+24 cross-domain problem families. Ten families map to 13 executable local
+fixtures; the rest are honestly labeled templates or credentialed connectors.
 
 For LLM-generated improvement campaigns, the core also provides immutable
 candidate ancestry, hard campaign budgets, append-only promotion decisions,
@@ -75,13 +83,15 @@ is not mixed into the execution path as another step.
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
 | Honest route search | Fast prior, bounded beam, seeded sprouts, adaptive promotion, and uncapped streaming exhaustive modes with coverage/accounting reports |
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
+| Universal route solver | Quick, balanced, broad, and explicit exhaustive profiles; multi-round learning; hard gates; champion and fail-diverse fallback selection |
+| Universal DAG Arena | 24 task families, ten executable fixture families, 13 runnable programs, and explicit template/credentialed-connector readiness |
 | Generated-graph campaigns | Population-DAG ancestry, proposal digests, explicit candidate/trial/cost/fidelity budgets, evaluator isolation contracts, and evidence-backed decisions |
 | Reference execution | Frozen-plan reconstruction, runtime/effect/permission policy, implementation-digest checks, bounded retry, frozen fallback, circuit breaker, artifacts, verification, and receipts |
 | Lifecycle process execution | Strict subprocess wire ABI, wall-clock termination, optional POSIX CPU/memory limits, and recorded adapter/isolation identity |
 | Durable local evidence | Fsync-backed, duplicate-rejecting, content-chained JSONL receipt journal with full verification |
 | Harness onboarding | Transactional `solutiongraph init` workspace generation from any bundled semantic template |
-| Executable domain skeleton | Six dependency-free programs in five notebooks for web, documents, images, data cleanup, regression, and classification using one cross-domain registry |
-| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and six focused workspace Agent Skills |
+| Executable domain skeleton | 13 dependency-free programs for web, products, documents, images, customer data, addresses, feeds, forecasting, entity linking, code repair, regression, and classification using one 84-node registry |
+| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and seven focused workspace Agent Skills |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
 
 ## Compile and search a universal graph
@@ -111,7 +121,7 @@ plan = Compiler().compile(
 print(plan.digest, report.evaluation_coverage)
 ```
 
-## Execute six real framework programs
+## Solve and execute 13 framework programs
 
 The examples use small standard-library implementations so the complete
 compile → execute → verify → receipt path runs from a fresh checkout. They are
@@ -120,20 +130,20 @@ claims for mature web, OCR, vision, data, or ML libraries.
 
 ```bash
 solutiongraph examples list
-solutiongraph examples run browse-and-scrape
-solutiongraph examples run document-to-schema
-solutiongraph examples run image-check-and-process
-solutiongraph examples run data-cleanup
-solutiongraph examples run tabular-regression
-solutiongraph examples run tabular-classification
+solutiongraph arena list
+solutiongraph arena show arena.usps-address-verification
+solutiongraph solve golden-customer-table --profile balanced
+solutiongraph solve address-reference-verification --profile broad
+solutiongraph arena run --profile quick
 solutiongraph verify --catalog-root catalog --runtime in-process
 solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
-Each task has multiple frozen routes. The cleanup baseline, mean-regression
-control, and majority-classification control are intentionally rejected by
-their independent oracles, preserving negative evidence while alternative
-routes pass. Persist artifacts with:
+Every task has multiple frozen routes and every important slot exposes its full
+admitted candidate column. Nine declared controls are intentionally rejected
+by independent oracles, preserving negative evidence while alternative routes
+pass. The address example uses an explicit offline reference fixture and never
+claims that fixture is an official USPS response. Persist artifacts with:
 
 ```bash
 solutiongraph examples run tabular-regression \
@@ -144,7 +154,8 @@ solutiongraph ledger verify .artifacts/receipts.jsonl
 ```
 
 Open the five notebooks in `notebooks/`, or read
-[the executable-example guide](REAL_WORLD_EXAMPLES.md) and
+[the executable-example guide](REAL_WORLD_EXAMPLES.md),
+[the Arena guide](UNIVERSAL_DAG_ARENA.md), and the
 [frozen-plan execution protocol](EXECUTION_PROTOCOL.md). `ReferenceExecutor`
 exposes `RuntimeAdapter`, `ArtifactStore`, and receipt-sink protocols so a
 harness can add container, microVM, Wasm, browser, model, remote-job, human,
@@ -182,8 +193,8 @@ The [solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md) standardizes
 macro-stage submatrices, atomic semantic slots, safe pass-through candidates,
 and bounded refinement loops. The generated [catalogue](catalog/) currently
 contains 19 cross-domain templates, 339 atomic obligations, a five-node core
-reference pack, and a 31-node executable real-world example pack. Templates can be inspected or authored without
-writing Python:
+reference pack, an 84-node executable Arena pack, and 24 Arena task contracts.
+Templates can be inspected or authored without writing Python:
 
 ```bash
 solutiongraph templates list
@@ -201,7 +212,7 @@ the harness negotiates those modes without affecting node validity.
 For an agent or new domain adapter, follow the [agent playbook](AGENT_PLAYBOOK.md)
 and the focused workspace skills: `create-solution-template`,
 `author-node-pack`, `execute-solution-graph`, `benchmark-solution-graph`,
-`design-autoresearch-campaign`, and `model-solution-graph`.
+`design-autoresearch-campaign`, `solve-universal-dag`, and `model-solution-graph`.
 They require a task contract and independent oracle, typed template refinement,
 receipt-backed discovery, compilation before search, and evidence-backed claims.
 

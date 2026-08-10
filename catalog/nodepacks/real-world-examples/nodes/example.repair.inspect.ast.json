@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "repair.inspect"
+  ],
+  "description": "Inspect the bounded fixture source with Python AST.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:inspect_code_ast",
+  "failure_modes": [],
+  "id": "example.repair.inspect.ast",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:ad426c599ceccb146aefae3d6c6e0fc02b8ea646a270525aae0085e12b747890",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "repository",
+      "type": {
+        "id": "example.repository-snapshot",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "proposal",
+      "type": {
+        "id": "example.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

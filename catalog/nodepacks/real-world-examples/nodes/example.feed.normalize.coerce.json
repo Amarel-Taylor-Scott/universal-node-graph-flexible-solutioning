@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "feed.normalize"
+  ],
+  "description": "Normalize names and explicitly parse currency-formatted amounts.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:normalize_feed_rows_coerce",
+  "failure_modes": [],
+  "id": "example.feed.normalize.coerce",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:d0bcf10095f5f18af681e0f74e5165761b6598d3d619e8351b63e03a33191f0a",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "rows",
+      "type": {
+        "id": "example.feed-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "rows",
+      "type": {
+        "id": "example.feed-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

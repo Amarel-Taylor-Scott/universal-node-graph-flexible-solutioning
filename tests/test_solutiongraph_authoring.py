@@ -72,7 +72,8 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert "templates=19" in doctor
     assert "atomic_slots=339" in doctor
     assert f"schemas={len(SCHEMA_NAMES)}" in doctor
-    assert "executable_examples=6" in doctor
+    assert "executable_examples=13" in doctor
+    assert "arena_tasks=24" in doctor
 
     assert main(["templates", "list"]) == 0
     listed = capsys.readouterr().out

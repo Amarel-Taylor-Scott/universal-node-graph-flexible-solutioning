@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "repair.apply"
+  ],
+  "description": "Apply one exact content replacement.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:apply_repair_exact",
+  "failure_modes": [],
+  "id": "example.repair.apply.exact",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:ef86e4b2066443d08af73fae305dc8ca004cdbaa5518a4ed217f34c2428c42ac",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "proposal",
+      "type": {
+        "id": "example.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "proposal",
+      "type": {
+        "id": "example.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -1,0 +1,33 @@
+{
+  "acceptance_signals": [
+    "residual",
+    "backward error",
+    "stability",
+    "time",
+    "memory"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.numerical-linear-system",
+  "input_contract": "Matrix/operator, right-hand side, tolerance, precision, and resource budget.",
+  "output_contract": "Solution, residual, conditioning evidence, selected fallback, and performance receipt.",
+  "problem": "Inspect structure and conditioning, select a solver, solve, and verify residuals.",
+  "readiness": "template",
+  "stage_families": [
+    "validate",
+    "classify structure",
+    "condition",
+    "regularize",
+    "factor or iterate",
+    "solve",
+    "residual",
+    "fallback"
+  ],
+  "tags": [
+    "numerical",
+    "linear-algebra"
+  ],
+  "template_id": "template.numerical-linear-system",
+  "title": "Structured matrices to a verified numerical solution"
+}

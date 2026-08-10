@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "repair.propose"
+  ],
+  "description": "Propose a minimal operator replacement.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:propose_operator_repair",
+  "failure_modes": [],
+  "id": "example.repair.propose.operator",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:e491b9fa8cca19749d9caabf2eb262fd83d065aa62a8488799c2ea5ff5a4ffad",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "proposal",
+      "type": {
+        "id": "example.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "proposal",
+      "type": {
+        "id": "example.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

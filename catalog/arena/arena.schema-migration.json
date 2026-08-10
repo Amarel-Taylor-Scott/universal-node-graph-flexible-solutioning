@@ -1,0 +1,31 @@
+{
+  "acceptance_signals": [
+    "row preservation",
+    "invariant pass",
+    "compatibility",
+    "rollback readiness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.schema-migration",
+  "input_contract": "Old/new schemas, immutable source snapshot, and compatibility requirements.",
+  "output_contract": "Migrated dataset, compatibility report, lineage, and rollback plan.",
+  "problem": "Diff contracts, plan transformations, migrate, backfill, and prove invariants.",
+  "readiness": "template",
+  "stage_families": [
+    "diff",
+    "plan",
+    "transform",
+    "backfill",
+    "validate",
+    "shadow compare",
+    "cut over"
+  ],
+  "tags": [
+    "schema",
+    "migration"
+  ],
+  "template_id": "template.batch-data-pipeline",
+  "title": "Versioned datasets to a verified schema migration"
+}

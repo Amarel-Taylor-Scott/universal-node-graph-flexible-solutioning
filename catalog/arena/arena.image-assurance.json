@@ -1,0 +1,36 @@
+{
+  "acceptance_signals": [
+    "decode success",
+    "OCR accuracy",
+    "calibration",
+    "policy recall",
+    "latency"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "image-check-and-process"
+  ],
+  "external_requirements": [],
+  "id": "arena.image-assurance",
+  "input_contract": "Image bytes plus requested checks and policy versions.",
+  "output_contract": "A typed report with measurements, labels, OCR evidence, and policy verdicts.",
+  "problem": "Decode and transform images, then run independent quality and content checks.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "decode",
+    "orient",
+    "enhance",
+    "OCR",
+    "quality",
+    "safety",
+    "classify",
+    "aggregate"
+  ],
+  "tags": [
+    "image",
+    "quality",
+    "safety"
+  ],
+  "template_id": "template.image-processing",
+  "title": "Images to OCR, quality, safety, and classification reports"
+}

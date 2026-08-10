@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "forecast.generate"
+  ],
+  "description": "Generate horizon-aligned point predictions from the frozen model.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:generate_forecast",
+  "failure_modes": [],
+  "id": "example.forecast.generate",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:ea9ce47314bbdf88050cd9285d4e385e316ef47d7fea286eb75d126681174e77",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "series",
+      "type": {
+        "id": "example.time-series",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "series",
+      "type": {
+        "id": "example.time-series",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -3348,6 +3348,324 @@ svg {
     "capability": "ml.evaluate-classification",
     "effects": [],
     "summary": "Measure holdout accuracy and generate requested class predictions."
+  },
+  {
+    "id": "example.customer.normalize.conservative",
+    "capability": "customer.normalize",
+    "effects": [],
+    "summary": "Normalize customer keys and contact fields conservatively."
+  },
+  {
+    "id": "example.customer.normalize.canonical",
+    "capability": "customer.normalize",
+    "effects": [],
+    "summary": "Normalize names, contacts, and common address tokens canonically."
+  },
+  {
+    "id": "example.customer.validate.syntax",
+    "capability": "customer.validate-contacts",
+    "effects": [],
+    "summary": "Check contact syntax without claiming external authority."
+  },
+  {
+    "id": "example.customer.validate.reference",
+    "capability": "customer.validate-contacts",
+    "effects": [],
+    "summary": "Check contacts against an explicitly supplied offline reference fixture."
+  },
+  {
+    "id": "example.customer.resolve.email",
+    "capability": "customer.resolve",
+    "effects": [],
+    "summary": "Resolve identities by exact normalized email."
+  },
+  {
+    "id": "example.customer.resolve.multikey",
+    "capability": "customer.resolve",
+    "effects": [],
+    "summary": "Resolve identities with email, phone, name, and address evidence."
+  },
+  {
+    "id": "example.customer.emit.first",
+    "capability": "customer.emit-golden",
+    "effects": [],
+    "summary": "Emit the first record in each entity group with provenance."
+  },
+  {
+    "id": "example.customer.emit.complete",
+    "capability": "customer.emit-golden",
+    "effects": [],
+    "summary": "Merge the most complete verified fields with source provenance."
+  },
+  {
+    "id": "example.address.parse.commas",
+    "capability": "address.parse",
+    "effects": [],
+    "summary": "Parse comma-delimited addresses into typed components."
+  },
+  {
+    "id": "example.address.parse.structured",
+    "capability": "address.parse",
+    "effects": [],
+    "summary": "Parse United States city, region, and postal-code structure."
+  },
+  {
+    "id": "example.address.normalize.basic",
+    "capability": "address.normalize",
+    "effects": [],
+    "summary": "Normalize casing and whitespace only."
+  },
+  {
+    "id": "example.address.normalize.postal",
+    "capability": "address.normalize",
+    "effects": [],
+    "summary": "Apply a small Publication-28-inspired abbreviation fixture."
+  },
+  {
+    "id": "example.address.verify.exact",
+    "capability": "address.verify-reference",
+    "effects": [],
+    "summary": "Require exact equality with a supplied offline reference directory."
+  },
+  {
+    "id": "example.address.verify.alias",
+    "capability": "address.verify-reference",
+    "effects": [],
+    "summary": "Compare canonical alphanumeric forms to the offline reference directory."
+  },
+  {
+    "id": "example.address.emit",
+    "capability": "address.emit",
+    "effects": [],
+    "summary": "Emit deterministic standardized address records and match codes."
+  },
+  {
+    "id": "example.product.acquire.preserve",
+    "capability": "product.acquire",
+    "effects": [],
+    "summary": "Preserve authorized captured HTML sources."
+  },
+  {
+    "id": "example.product.acquire.sorted",
+    "capability": "product.acquire",
+    "effects": [],
+    "summary": "Canonicalize captured-source order by URL."
+  },
+  {
+    "id": "example.product.extract.regex",
+    "capability": "product.extract",
+    "effects": [],
+    "summary": "Extract the fixture product microformat with a bounded expression."
+  },
+  {
+    "id": "example.product.extract.parser",
+    "capability": "product.extract",
+    "effects": [],
+    "summary": "Extract the fixture product microformat with HTMLParser."
+  },
+  {
+    "id": "example.product.normalize.float",
+    "capability": "product.normalize",
+    "effects": [],
+    "summary": "Normalize display prices through floating-point conversion."
+  },
+  {
+    "id": "example.product.normalize.decimal",
+    "capability": "product.normalize",
+    "effects": [],
+    "summary": "Normalize monetary values into integer cents with Decimal."
+  },
+  {
+    "id": "example.product.verify.single",
+    "capability": "product.verify",
+    "effects": [],
+    "summary": "Retain single-source evidence without calling it independently verified."
+  },
+  {
+    "id": "example.product.verify.cross-source",
+    "capability": "product.verify",
+    "effects": [],
+    "summary": "Require matching SKU and price evidence from independent captured sources."
+  },
+  {
+    "id": "example.forecast.prepare.observed",
+    "capability": "forecast.prepare",
+    "effects": [],
+    "summary": "Use complete observed training values as supplied."
+  },
+  {
+    "id": "example.forecast.prepare.interpolate",
+    "capability": "forecast.prepare",
+    "effects": [],
+    "summary": "Interpolate missing interior observations deterministically."
+  },
+  {
+    "id": "example.forecast.fit.mean",
+    "capability": "forecast.fit",
+    "effects": [],
+    "summary": "Fit an explicit historical-mean control model."
+  },
+  {
+    "id": "example.forecast.fit.trend",
+    "capability": "forecast.fit",
+    "effects": [],
+    "summary": "Fit a deterministic linear trend model."
+  },
+  {
+    "id": "example.forecast.generate",
+    "capability": "forecast.generate",
+    "effects": [],
+    "summary": "Generate horizon-aligned point predictions from the frozen model."
+  },
+  {
+    "id": "example.forecast.interval.fixed",
+    "capability": "forecast.calibrate-intervals",
+    "effects": [],
+    "summary": "Attach a narrow fixed-width control interval."
+  },
+  {
+    "id": "example.forecast.interval.residual",
+    "capability": "forecast.calibrate-intervals",
+    "effects": [],
+    "summary": "Calibrate interval width from in-sample absolute residuals."
+  },
+  {
+    "id": "example.entity.normalize.basic",
+    "capability": "entity.normalize",
+    "effects": [],
+    "summary": "Normalize organization names and domains conservatively."
+  },
+  {
+    "id": "example.entity.normalize.legal",
+    "capability": "entity.normalize",
+    "effects": [],
+    "summary": "Normalize common legal suffix variants."
+  },
+  {
+    "id": "example.entity.block.domain",
+    "capability": "entity.block",
+    "effects": [],
+    "summary": "Generate candidate pairs sharing a normalized web domain."
+  },
+  {
+    "id": "example.entity.block.tokens",
+    "capability": "entity.block",
+    "effects": [],
+    "summary": "Generate candidate pairs sharing name tokens or domain evidence."
+  },
+  {
+    "id": "example.entity.link.exact",
+    "capability": "entity.link",
+    "effects": [],
+    "summary": "Link candidate pairs only when normalized names are identical."
+  },
+  {
+    "id": "example.entity.link.evidence",
+    "capability": "entity.link",
+    "effects": [],
+    "summary": "Link pairs supported by at least two independent fields."
+  },
+  {
+    "id": "example.entity.components",
+    "capability": "entity.components",
+    "effects": [],
+    "summary": "Build deterministic connected components with source record IDs."
+  },
+  {
+    "id": "example.repair.inspect.ast",
+    "capability": "repair.inspect",
+    "effects": [],
+    "summary": "Inspect the bounded fixture source with Python AST."
+  },
+  {
+    "id": "example.repair.inspect.tests",
+    "capability": "repair.inspect",
+    "effects": [],
+    "summary": "Inspect the fixed failing test contract."
+  },
+  {
+    "id": "example.repair.propose.operator",
+    "capability": "repair.propose",
+    "effects": [],
+    "summary": "Propose a minimal operator replacement."
+  },
+  {
+    "id": "example.repair.propose.contract",
+    "capability": "repair.propose",
+    "effects": [],
+    "summary": "Derive a bounded repair hypothesis from fixed tests."
+  },
+  {
+    "id": "example.repair.apply.exact",
+    "capability": "repair.apply",
+    "effects": [],
+    "summary": "Apply one exact content replacement."
+  },
+  {
+    "id": "example.repair.apply.line",
+    "capability": "repair.apply",
+    "effects": [],
+    "summary": "Apply one line-scoped return-expression replacement."
+  },
+  {
+    "id": "example.repair.test.ast",
+    "capability": "repair.test",
+    "effects": [],
+    "summary": "Run fixed cases through a restricted AST interpreter."
+  },
+  {
+    "id": "example.repair.test.symbolic",
+    "capability": "repair.test",
+    "effects": [],
+    "summary": "Require both symbolic operator structure and fixed-case success."
+  },
+  {
+    "id": "example.feed.decode.csv-module",
+    "capability": "feed.decode",
+    "effects": [],
+    "summary": "Decode CSV with the standard library and combine captured JSON rows."
+  },
+  {
+    "id": "example.feed.decode.lines",
+    "capability": "feed.decode",
+    "effects": [],
+    "summary": "Decode the bounded CSV fixture line by line and combine JSON rows."
+  },
+  {
+    "id": "example.feed.normalize.strict",
+    "capability": "feed.normalize",
+    "effects": [],
+    "summary": "Require already numeric amount fields."
+  },
+  {
+    "id": "example.feed.normalize.coerce",
+    "capability": "feed.normalize",
+    "effects": [],
+    "summary": "Normalize names and explicitly parse currency-formatted amounts."
+  },
+  {
+    "id": "example.feed.reconcile.priority",
+    "capability": "feed.reconcile",
+    "effects": [],
+    "summary": "Choose one whole record according to fixed source priority."
+  },
+  {
+    "id": "example.feed.reconcile.complete",
+    "capability": "feed.reconcile",
+    "effects": [],
+    "summary": "Merge complementary nonempty fields and retain source lineage."
+  },
+  {
+    "id": "example.feed.validate.strict",
+    "capability": "feed.validate",
+    "effects": [],
+    "summary": "Separate rows that do not meet the analytical schema."
+  },
+  {
+    "id": "example.feed.validate.lineage",
+    "capability": "feed.validate",
+    "effects": [],
+    "summary": "Validate schema and report whether every row retains source lineage."
   }
 ];
 

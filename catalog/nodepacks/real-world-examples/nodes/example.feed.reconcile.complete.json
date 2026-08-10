@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "feed.reconcile"
+  ],
+  "description": "Merge complementary nonempty fields and retain source lineage.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:reconcile_feed_rows_complete",
+  "failure_modes": [],
+  "id": "example.feed.reconcile.complete",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:6693ae5657dabe3b631569a21cc17548bb04a2875c27a097a3664555be28f888",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "rows",
+      "type": {
+        "id": "example.feed-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "rows",
+      "type": {
+        "id": "example.feed-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

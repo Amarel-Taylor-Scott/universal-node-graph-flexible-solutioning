@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.discovery import (
     ArtifactReference,
     NodePackManifest,
@@ -131,7 +132,8 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         version="1.0.0",
         description=(
             "Dependency-free executable teaching nodes for web, document, image, "
-            "data-cleaning, tabular-regression, and tabular-classification examples."
+            "data quality, address verification, entity linking, forecasting, "
+            "code repair, feed validation, regression, and classification examples."
         ),
         node_spec_digests=tuple(node.digest for node in EXAMPLE_NODES),
         artifacts=example_artifacts,
@@ -165,6 +167,10 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         )
     for template in REFERENCE_TEMPLATES.templates:
         documents[f"templates/{template.id}.json"] = template.to_dict()
+    for task in UNIVERSAL_DAG_ARENA.tasks:
+        documents[f"arena/{task.id}.json"] = task.to_dict()
+
+    documents["arena/index.json"] = UNIVERSAL_DAG_ARENA.to_dict()
 
     documents["index.json"] = {
         "catalog_model_version": "0.1",
@@ -200,6 +206,13 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "embedding_record_count": 0,
             },
         ],
+        "arena": {
+            "path": "arena/index.json",
+            "task_count": len(UNIVERSAL_DAG_ARENA.tasks),
+            "executable_fixture_count": len(
+                UNIVERSAL_DAG_ARENA.matching(readiness="executable_fixture")
+            ),
+        },
     }
     return dict(sorted(documents.items()))
 

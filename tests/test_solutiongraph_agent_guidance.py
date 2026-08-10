@@ -31,6 +31,7 @@ def test_focused_workspace_skills_are_triggerable_and_progressively_disclosed():
         "design-autoresearch-campaign",
         "execute-solution-graph",
         "model-solution-graph",
+        "solve-universal-dag",
     }
     assert expected == {path.parent.name for path in skill_root.glob("*/SKILL.md")}
     for name in expected:

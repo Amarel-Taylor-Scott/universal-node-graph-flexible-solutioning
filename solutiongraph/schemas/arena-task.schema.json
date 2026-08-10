@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "arena-task.schema.json",
+  "title": "Universal DAG Arena task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "arena_model_version", "id", "title", "problem", "input_contract",
+    "output_contract", "stage_families", "acceptance_signals", "template_id",
+    "readiness", "executable_example_ids", "external_requirements", "tags"
+  ],
+  "properties": {
+    "arena_model_version": {"const": "0.1"},
+    "id": {"type": "string", "pattern": "^arena\\.[a-z][a-z0-9_.:/-]*$"},
+    "title": {"type": "string", "minLength": 1},
+    "problem": {"type": "string", "minLength": 1},
+    "input_contract": {"type": "string", "minLength": 1},
+    "output_contract": {"type": "string", "minLength": 1},
+    "stage_families": {
+      "type": "array", "minItems": 2,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "acceptance_signals": {
+      "type": "array", "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "template_id": {"$ref": "common.schema.json#/$defs/id"},
+    "readiness": {
+      "enum": ["executable_fixture", "template", "credentialed_connector"]
+    },
+    "executable_example_ids": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "external_requirements": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "tags": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"readiness": {"const": "executable_fixture"}}},
+      "then": {"properties": {"executable_example_ids": {"minItems": 1}}},
+      "else": {"properties": {"executable_example_ids": {"maxItems": 0}}}
+    }
+  ]
+}

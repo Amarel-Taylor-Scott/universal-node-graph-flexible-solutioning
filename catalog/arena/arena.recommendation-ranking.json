@@ -1,0 +1,32 @@
+{
+  "acceptance_signals": [
+    "ranking metric",
+    "coverage",
+    "diversity",
+    "policy violations",
+    "latency"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.recommendation-ranking",
+  "input_contract": "User/event context, eligible items, policies, and evaluation split.",
+  "output_contract": "Ranked items with scores, explanations, policy results, and offline evidence.",
+  "problem": "Build candidate sets, features, scores, constraints, diversification, and evaluation.",
+  "readiness": "template",
+  "stage_families": [
+    "eligibility",
+    "candidate generation",
+    "features",
+    "score",
+    "policy",
+    "diversify",
+    "evaluate"
+  ],
+  "tags": [
+    "ranking",
+    "machine-learning"
+  ],
+  "template_id": "template.recommendation-ranking",
+  "title": "Events and catalog data to a verified ranking"
+}

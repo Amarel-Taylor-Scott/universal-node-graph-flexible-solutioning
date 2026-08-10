@@ -1,0 +1,30 @@
+{
+  "acceptance_signals": [
+    "matched value",
+    "false match rate",
+    "unexplained residual",
+    "timeliness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.transaction-reconciliation",
+  "input_contract": "Two or more source ledgers with stable source identities.",
+  "output_contract": "Matched groups, residuals, exceptions, and balancing proof.",
+  "problem": "Normalize, match, balance, explain, and route unmatched financial events.",
+  "readiness": "template",
+  "stage_families": [
+    "normalize",
+    "candidate match",
+    "score",
+    "balance",
+    "explain",
+    "route exception"
+  ],
+  "tags": [
+    "finance",
+    "reconciliation"
+  ],
+  "template_id": "template.batch-data-pipeline",
+  "title": "Independent transaction streams to a reconciled ledger"
+}

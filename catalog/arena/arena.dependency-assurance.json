@@ -1,0 +1,31 @@
+{
+  "acceptance_signals": [
+    "dependency coverage",
+    "advisory freshness",
+    "policy accuracy",
+    "build pass"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.dependency-assurance",
+  "input_contract": "Lockfiles, build manifests, artifact digests, and organization policy.",
+  "output_contract": "SBOM, findings, policy verdicts, remediations, and evidence timestamps.",
+  "problem": "Resolve dependency graphs, identify provenance, scan advisories, and apply policy.",
+  "readiness": "template",
+  "stage_families": [
+    "resolve",
+    "identify",
+    "build SBOM",
+    "scan",
+    "license classify",
+    "policy",
+    "remediate"
+  ],
+  "tags": [
+    "security",
+    "supply-chain"
+  ],
+  "template_id": "template.qa-engineering",
+  "title": "Software dependencies to a license and security decision"
+}

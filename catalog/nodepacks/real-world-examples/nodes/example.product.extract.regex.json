@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "product.extract"
+  ],
+  "description": "Extract the fixture product microformat with a bounded expression.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:extract_products_regex",
+  "failure_modes": [],
+  "id": "example.product.extract.regex",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:9f8cec4bb3ea695c8fc319b03c54b9cecbfb9465047712fd9e61eb6b3a61ac83",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "sources",
+      "type": {
+        "id": "example.product-sources",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.product-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

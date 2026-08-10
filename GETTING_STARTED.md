@@ -2,7 +2,7 @@
 
 Universal Node Graph can be explored without a browser, model provider, vector
 database, or network service. The domain-neutral core uses only the Python
-standard library. Version 0.3 is a developer preview; read `READINESS.md`
+standard library. Version 0.4 is a developer preview; read `READINESS.md`
 before production integration.
 
 ## 1. Install and verify
@@ -18,7 +18,7 @@ solutiongraph verify --catalog-root catalog --runtime subprocess
 
 The doctor command validates all bundled schemas, templates, reference nodes,
 descriptors, and generated catalog projections. The release verifier then
-compiles and executes all 14 frozen reference routes, checks the three declared
+compiles and executes all 31 frozen reference routes, checks nine declared
 negative controls, and rejects stale checked-in catalog JSON.
 
 For a non-editable installation directly from GitHub:
@@ -91,6 +91,7 @@ Agents that support workspace skills can be asked to use:
 - `@execute-solution-graph` to add runtimes, artifacts, verifiers, and executable examples;
 - `@benchmark-solution-graph` to design route experiments;
 - `@design-autoresearch-campaign` to run bounded LLM-generated improvement campaigns;
+- `@solve-universal-dag` to implement or solve an Arena task with evidence-backed route selection;
 - `@model-solution-graph` for the complete end-to-end workflow.
 
 The skills guide the agent, while schemas, compiler diagnostics, tests, and CI
@@ -122,18 +123,16 @@ Choose prior, beam, seeded-sprout, or explicitly exhaustive search according to
 the available budget. Search reports preserve coverage, skips, invalid routes,
 duplicates, unvisited routes, seeds, and belief revision.
 
-## 8. Execute the reference domain skeletons
+## 8. Solve and execute the reference domain skeletons
 
-Execute the six reference programs (grouped into five notebook task families):
+Inspect all 24 Arena contracts and execute or solve the 13 local programs:
 
 ```bash
 solutiongraph examples list
-solutiongraph examples run browse-and-scrape
-solutiongraph examples run document-to-schema
-solutiongraph examples run image-check-and-process
-solutiongraph examples run data-cleanup
-solutiongraph examples run tabular-regression
-solutiongraph examples run tabular-classification
+solutiongraph arena list
+solutiongraph arena show arena.validated-analytical-dataset
+solutiongraph solve multi-feed-analytical-dataset --profile balanced
+solutiongraph arena run --profile quick
 ```
 
 Run the same frozen routes through the bounded subprocess adapter and retain
@@ -161,6 +160,12 @@ parents in a `CampaignLedger`, and keep hidden evaluators outside the
 candidate's trust domain. `template.numerical-linear-system` demonstrates the
 same decomposition for Cholesky, QR, SVD, LDL, sparse, iterative, precision,
 and verification alternatives without adding a numerical dependency.
+
+The address fixture exercises an authority connector contract against an
+offline reference directory. It is not an official USPS lookup. Replace that
+node with a credentialed, policy-aware connector before making USPS validation
+claims. The Arena preserves this limitation in its task metadata and verifier
+details.
 
 ## 9. Validate a contribution
 

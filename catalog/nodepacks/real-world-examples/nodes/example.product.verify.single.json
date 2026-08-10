@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "product.verify"
+  ],
+  "description": "Retain single-source evidence without calling it independently verified.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:verify_products_single_source",
+  "failure_modes": [],
+  "id": "example.product.verify.single",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:f1ff16aea30c52e5748ef334950b6384466f752f4da017145a37eb18c4fc2fa1",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.product-rows",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "products",
+      "type": {
+        "id": "example.verified-products",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

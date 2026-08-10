@@ -1,0 +1,30 @@
+{
+  "acceptance_signals": [
+    "change precision",
+    "change recall",
+    "alert latency",
+    "noise rate"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.web-change-monitoring",
+  "input_contract": "Authorized page targets, prior captures, and significance policy.",
+  "output_contract": "Evidence-backed change events with confidence and alert disposition.",
+  "problem": "Capture pages, remove expected noise, compare semantic content, and corroborate changes.",
+  "readiness": "template",
+  "stage_families": [
+    "capture",
+    "canonicalize",
+    "segment",
+    "diff",
+    "corroborate",
+    "alert"
+  ],
+  "tags": [
+    "web",
+    "monitoring"
+  ],
+  "template_id": "template.web-automation",
+  "title": "Web snapshots to verified change events"
+}

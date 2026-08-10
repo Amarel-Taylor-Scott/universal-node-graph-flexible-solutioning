@@ -14,6 +14,15 @@ from solutiongraph.adaptive import (
     plan_successive_halving,
     should_stop_early,
 )
+from solutiongraph.arena import (
+    ARENA_MODEL_VERSION,
+    ARENA_READINESS,
+    UNIVERSAL_DAG_ARENA,
+    ArenaCatalog,
+    ArenaTask,
+    run_arena,
+    solve_example,
+)
 from solutiongraph.artifacts import (
     ArtifactStore,
     FileArtifactStore,
@@ -135,6 +144,21 @@ from solutiongraph.search import (
     SearchReport,
     cartesian_routes,
 )
+from solutiongraph.solver import (
+    BALANCED_PROFILE,
+    BROAD_PROFILE,
+    EXHAUSTIVE_PROFILE,
+    QUICK_PROFILE,
+    SOLVER_MODEL_VERSION,
+    SOLVER_PROFILES,
+    FallbackRoute,
+    RankedRoute,
+    SolverProfile,
+    SolverResult,
+    SolverRound,
+    UniversalSolver,
+    get_solver_profile,
+)
 from solutiongraph.subprocess_runtime import (
     SUBPROCESS_PROTOCOL_VERSION,
     SubprocessPythonRuntime,
@@ -161,7 +185,7 @@ from solutiongraph.verification import (
     verify_reference_release,
 )
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 __all__ = [
     "SEMANTIC_MODEL_VERSION",
@@ -172,9 +196,14 @@ __all__ = [
     "JOURNAL_SCHEMA_VERSION",
     "SUBPROCESS_PROTOCOL_VERSION",
     "SCAFFOLD_SCHEMA_VERSION",
+    "ARENA_MODEL_VERSION",
+    "SOLVER_MODEL_VERSION",
+    "ARENA_READINESS",
     "AdmittedSpace",
     "AdmissionDecision",
     "ArtifactStore",
+    "ArenaCatalog",
+    "ArenaTask",
     "BeliefModel",
     "ArtifactReference",
     "Candidate",
@@ -207,6 +236,7 @@ __all__ = [
     "ExperimentRunner",
     "FileArtifactStore",
     "FailureMode",
+    "FallbackRoute",
     "ForbiddenCombination",
     "FrozenPlan",
     "GraphInput",
@@ -244,6 +274,7 @@ __all__ = [
     "ReleaseVerification",
     "ResourceClaim",
     "RouteAggregate",
+    "RankedRoute",
     "RouteVerification",
     "RouteProposal",
     "RunReceipt",
@@ -253,6 +284,14 @@ __all__ = [
     "SearchEngine",
     "SearchMode",
     "SearchReport",
+    "SolverProfile",
+    "SolverResult",
+    "SolverRound",
+    "SOLVER_PROFILES",
+    "QUICK_PROFILE",
+    "BALANCED_PROFILE",
+    "BROAD_PROFILE",
+    "EXHAUSTIVE_PROFILE",
     "SearchDocument",
     "SchemaSupport",
     "QueryMode",
@@ -267,6 +306,8 @@ __all__ = [
     "TemplateCatalog",
     "TemplateStage",
     "TrialObservation",
+    "UNIVERSAL_DAG_ARENA",
+    "UniversalSolver",
     "StoredArtifact",
     "SubprocessPythonRuntime",
     "VerificationContext",
@@ -282,11 +323,14 @@ __all__ = [
     "digest_value",
     "learn_observational_beliefs",
     "load_linear_blueprint",
+    "get_solver_profile",
     "negotiate_registry",
     "plan_successive_halving",
     "pareto_front",
     "sha256_digest",
     "scaffold_project",
+    "run_arena",
+    "solve_example",
     "should_stop_early",
     "store_value",
     "write_solution_template",

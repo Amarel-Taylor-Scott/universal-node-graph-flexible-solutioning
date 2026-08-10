@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "address.normalize"
+  ],
+  "description": "Normalize casing and whitespace only.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:normalize_addresses_basic",
+  "failure_modes": [],
+  "id": "example.address.normalize.basic",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:7b87b3f923c2295fd9468361d3f068cab767411b12ca3cb4dfb27eb99d031dbb",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "bundle",
+      "type": {
+        "id": "example.address-bundle",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "bundle",
+      "type": {
+        "id": "example.address-bundle",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

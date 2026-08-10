@@ -1,0 +1,32 @@
+{
+  "acceptance_signals": [
+    "power",
+    "effect uncertainty",
+    "reproducibility",
+    "assumption checks"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.scientific-experiment",
+  "input_contract": "Hypothesis, variables, controls, resource budget, and measurement contract.",
+  "output_contract": "Raw observations, analysis, uncertainty, provenance, and conclusion limits.",
+  "problem": "Design treatments, allocate trials, execute, analyze, and test robustness.",
+  "readiness": "template",
+  "stage_families": [
+    "formalize",
+    "design",
+    "allocate",
+    "execute",
+    "measure",
+    "analyze",
+    "robustness",
+    "report"
+  ],
+  "tags": [
+    "science",
+    "experimentation"
+  ],
+  "template_id": "template.scientific-experiment",
+  "title": "A scientific hypothesis to a reproducible experiment receipt"
+}

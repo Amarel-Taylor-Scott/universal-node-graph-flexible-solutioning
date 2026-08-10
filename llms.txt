@@ -14,7 +14,8 @@
 - [Node repository protocol](NODE_REPOSITORY_PROTOCOL.md): Reusable packs, descriptors, embeddings, handshake, snapshots
 - [Solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md): Cross-domain stages, atomic slots, and bounded refinement
 - [Execution protocol](EXECUTION_PROTOCOL.md): Frozen plans, runtimes, artifacts, recovery, verification, and receipts
-- [Executable examples](REAL_WORLD_EXAMPLES.md): Six runnable programs across five domain notebook families and extension gates
+- [Executable examples](REAL_WORLD_EXAMPLES.md): 13 runnable programs, declared controls, solver commands, and extension gates
+- [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md): 24 task contracts, 13 executable fixtures, solver profiles, and honest external boundaries
 - [Agent playbook](AGENT_PLAYBOOK.md): Patterns, anti-patterns, and implementation workflow
 - [Full architecture blueprint](UNIVERSAL_GRAPH_SYSTEM.md): Extended design and viewer model
 - [Workbench guide](WORKBENCH.md): Interactive hierarchical candidate explorer
@@ -28,7 +29,9 @@
 - [Workspace scaffold](solutiongraph/scaffold.py): Transactional coding-harness task initialization
 - [Campaign contracts](solutiongraph/campaign.py): Hard budgets, population ancestry, evaluator boundaries, and decisions
 - [Artifact stores](solutiongraph/artifacts.py): Content-addressed memory and local-file stores
-- [Executable domain pack](solutiongraph/examples/): Web, document, image, data-cleanup, regression, and classification examples
+- [Universal solver](solutiongraph/solver.py): Multi-round search, receipt-backed ranking, champion, and diverse route fallbacks
+- [DAG Arena](solutiongraph/arena.py): Cross-domain problem catalog and executable suite harness
+- [Executable domain pack](solutiongraph/examples/): 13 trusted local programs across data, web, documents, media, ML, forecasting, entity linking, and code repair
 - [Example notebooks](notebooks/): Five end-to-end compile, execute, verify, and receipt notebooks
 - [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
 - [Reference catalogue](catalog/): 19 semantic templates and two portable node packs
@@ -39,4 +42,5 @@
 - [Benchmark skill](.agents/skills/benchmark-solution-graph/SKILL.md): Route experiment workflow
 - [Execution skill](.agents/skills/execute-solution-graph/SKILL.md): Runtime and executable-domain workflow
 - [AutoResearch campaign skill](.agents/skills/design-autoresearch-campaign/SKILL.md): Bounded generated-code improvement workflow
+- [Universal solver skill](.agents/skills/solve-universal-dag/SKILL.md): Typed task-to-Arena implementation and evidence-backed route selection
 - [Workspace modeling skill](.agents/skills/model-solution-graph/SKILL.md): End-to-end agent workflow

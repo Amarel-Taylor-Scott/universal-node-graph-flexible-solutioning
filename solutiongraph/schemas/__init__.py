@@ -35,6 +35,8 @@ SCHEMA_NAMES = (
     "solution-template.schema.json",
     "template-blueprint.schema.json",
     "search-report.schema.json",
+    "arena-task.schema.json",
+    "solver-result.schema.json",
 )
 
 

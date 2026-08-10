@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "entity.block"
+  ],
+  "description": "Generate candidate pairs sharing a normalized web domain.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:block_organizations_domain",
+  "failure_modes": [],
+  "id": "example.entity.block.domain",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:73b623d581382b02418dff797b92961f08af2ae500c429e4f0e5b16a4df6c75c",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "example.organization-records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "blocked",
+      "type": {
+        "id": "example.organization-blocks",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

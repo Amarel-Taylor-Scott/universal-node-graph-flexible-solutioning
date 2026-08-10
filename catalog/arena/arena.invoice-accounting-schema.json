@@ -1,0 +1,32 @@
+{
+  "acceptance_signals": [
+    "field accuracy",
+    "total reconciliation",
+    "evidence grounding",
+    "schema validity"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "document-to-schema"
+  ],
+  "external_requirements": [],
+  "id": "arena.invoice-accounting-schema",
+  "input_contract": "PDF/image/text invoices and a versioned accounting schema.",
+  "output_contract": "Grounded invoice records with evidence locations and validation findings.",
+  "problem": "Decode documents, recover layout, extract fields, reconcile totals, and validate accounting rules.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "decode",
+    "OCR or text extraction",
+    "layout",
+    "field extraction",
+    "reconcile totals",
+    "validate"
+  ],
+  "tags": [
+    "documents",
+    "accounting"
+  ],
+  "template_id": "template.document-intelligence",
+  "title": "Unstructured invoices to a typed accounting schema"
+}

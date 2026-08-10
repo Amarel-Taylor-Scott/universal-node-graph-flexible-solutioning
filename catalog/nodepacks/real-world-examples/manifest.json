@@ -278,10 +278,487 @@
       "media_type": "text/x-python",
       "name": "artifact.example.ml.classification.evaluate",
       "uri": "python://solutiongraph.examples.nodes:evaluate_classifier"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_customers_conservative"
+      },
+      "digest": "sha256:2b4193b7a3b49caa34cab7dd385ff6283ed363b815c18c52727cebd559f3e627",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.normalize.conservative",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_customers_conservative"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_customers_canonical"
+      },
+      "digest": "sha256:dbf642719c54831a1022f0250858620273c3509de823e4cad4cfa99f7c4c3bc6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.normalize.canonical",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_customers_canonical"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:validate_customer_contacts_syntax"
+      },
+      "digest": "sha256:477c7db006fd6363034ab2b13b002787522cee6f9dcfb960e19482933310271b",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.validate.syntax",
+      "uri": "python://solutiongraph.examples.arena_nodes:validate_customer_contacts_syntax"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:validate_customer_contacts_reference"
+      },
+      "digest": "sha256:924eb2e6575803345c867acf28fba407c36ba0b0939b2467d22c5baa3ecce6b4",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.validate.reference",
+      "uri": "python://solutiongraph.examples.arena_nodes:validate_customer_contacts_reference"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:resolve_customers_by_email"
+      },
+      "digest": "sha256:e6071a2ad8f727c5f6ce72c3f46ccb133875a5644ebd10bbec89871ddfd57e18",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.resolve.email",
+      "uri": "python://solutiongraph.examples.arena_nodes:resolve_customers_by_email"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:resolve_customers_multikey"
+      },
+      "digest": "sha256:8c9baab15ccfd653ff8f533fe60f83900a5eb4ef87d47706f3dfbf132bfa6183",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.resolve.multikey",
+      "uri": "python://solutiongraph.examples.arena_nodes:resolve_customers_multikey"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:emit_customer_first"
+      },
+      "digest": "sha256:487bd6f0d6a52913ba9fb6f7fe6d0ada4915723a2aba8609f2723174e80e12ef",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.emit.first",
+      "uri": "python://solutiongraph.examples.arena_nodes:emit_customer_first"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:emit_customer_complete"
+      },
+      "digest": "sha256:1c082ebce7c5963240b4eaf9840d6586e08651c56d437dd26ff7a2730e905c06",
+      "media_type": "text/x-python",
+      "name": "artifact.example.customer.emit.complete",
+      "uri": "python://solutiongraph.examples.arena_nodes:emit_customer_complete"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:parse_addresses_commas"
+      },
+      "digest": "sha256:ff0a658876e726c8115daa7f7c7cfceca724c9a784b12f58bb162355f79dc8d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.address.parse.commas",
+      "uri": "python://solutiongraph.examples.arena_nodes:parse_addresses_commas"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:parse_addresses_structured"
+      },
+      "digest": "sha256:5d278de2b584220c16c8d7dc59707f59762de4e2dbc6f291472c3b733c92519c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.address.parse.structured",
+      "uri": "python://solutiongraph.examples.arena_nodes:parse_addresses_structured"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_addresses_basic"
+      },
+      "digest": "sha256:7b87b3f923c2295fd9468361d3f068cab767411b12ca3cb4dfb27eb99d031dbb",
+      "media_type": "text/x-python",
+      "name": "artifact.example.address.normalize.basic",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_addresses_basic"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_addresses_postal"
+      },
+      "digest": "sha256:074b6d9561ec26f01aff5872ca68ab2e89b8a9653b65cdb7aa3adc97f780aaef",
+      "media_type": "text/x-python",
+      "name": "artifact.example.address.normalize.postal",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_addresses_postal"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:verify_addresses_exact"
+      },
+      "digest": "sha256:71bbf2fec5accefb37ba01d97e0a258c26a205cc386c6e34d386a11bf39229f7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.address.verify.exact",
+      "uri": "python://solutiongraph.examples.arena_nodes:verify_addresses_exact"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:verify_addresses_alias_aware"
+      },
+      "digest": "sha256:13e54839bf2582aa1b5f50d4ccba912f2ea3dbfe7d547081b91795df1a5a9ec2",
+      "media_type": "text/x-python",
+      "name": "artifact.example.address.verify.alias",
+      "uri": "python://solutiongraph.examples.arena_nodes:verify_addresses_alias_aware"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:emit_verified_addresses"
+      },
+      "digest": "sha256:99a78758c3276b20d3414efc0dacb17a0774ce38a21e449bc74d4bcf3a7c91ff",
+      "media_type": "text/x-python",
+      "name": "artifact.example.address.emit",
+      "uri": "python://solutiongraph.examples.arena_nodes:emit_verified_addresses"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:acquire_product_sources_preserve"
+      },
+      "digest": "sha256:f1e92d0b07a46e6304ad7ed8e4bc5f397cad4baa1d49241ebd929b4a1d9f692e",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.acquire.preserve",
+      "uri": "python://solutiongraph.examples.arena_nodes:acquire_product_sources_preserve"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:acquire_product_sources_sorted"
+      },
+      "digest": "sha256:d4d0d3ba92ecf57ddb004d083ebe65efbc9058b2e2d8253ac40b50eba324f313",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.acquire.sorted",
+      "uri": "python://solutiongraph.examples.arena_nodes:acquire_product_sources_sorted"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:extract_products_regex"
+      },
+      "digest": "sha256:9f8cec4bb3ea695c8fc319b03c54b9cecbfb9465047712fd9e61eb6b3a61ac83",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.extract.regex",
+      "uri": "python://solutiongraph.examples.arena_nodes:extract_products_regex"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:extract_products_parser"
+      },
+      "digest": "sha256:b6adf91a653a664be7e3bf775fa63397f30c1bae0cc06a3ac183219e26a2b1a2",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.extract.parser",
+      "uri": "python://solutiongraph.examples.arena_nodes:extract_products_parser"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_product_prices_float"
+      },
+      "digest": "sha256:c1cd13a3e8e9d538b178d225181d83f52b521dbbc1bfdfa00baddd4c94fd3ae7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.normalize.float",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_product_prices_float"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_product_prices_decimal"
+      },
+      "digest": "sha256:c68c1e99c5a0ed052dbd3ebac8e530aa3b4b26f57502609434cb18557c6fdd80",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.normalize.decimal",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_product_prices_decimal"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:verify_products_single_source"
+      },
+      "digest": "sha256:f1ff16aea30c52e5748ef334950b6384466f752f4da017145a37eb18c4fc2fa1",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.verify.single",
+      "uri": "python://solutiongraph.examples.arena_nodes:verify_products_single_source"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:verify_products_cross_source"
+      },
+      "digest": "sha256:779c9cd1c6f271a43d673dd1f5d0664a669cc5dda41443001de496f547d4ff88",
+      "media_type": "text/x-python",
+      "name": "artifact.example.product.verify.cross-source",
+      "uri": "python://solutiongraph.examples.arena_nodes:verify_products_cross_source"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:prepare_series_observed"
+      },
+      "digest": "sha256:63fb2beaa2fe6a85145b57d222018d966f9ef00676451a683a2a32478810b8a5",
+      "media_type": "text/x-python",
+      "name": "artifact.example.forecast.prepare.observed",
+      "uri": "python://solutiongraph.examples.arena_nodes:prepare_series_observed"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:prepare_series_interpolate"
+      },
+      "digest": "sha256:9055952667db7dd21e105e64b839e517fb601406829a90138c275370957fde88",
+      "media_type": "text/x-python",
+      "name": "artifact.example.forecast.prepare.interpolate",
+      "uri": "python://solutiongraph.examples.arena_nodes:prepare_series_interpolate"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:fit_forecast_mean"
+      },
+      "digest": "sha256:14d9fc6db8477444d22e5099ad10a07f285ab138837d4a669fc20f8fc0126992",
+      "media_type": "text/x-python",
+      "name": "artifact.example.forecast.fit.mean",
+      "uri": "python://solutiongraph.examples.arena_nodes:fit_forecast_mean"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:fit_forecast_trend"
+      },
+      "digest": "sha256:2185ba7e2f79b3ed9e05c80833a181d250d45fff7380831f9d832afb2f613f8d",
+      "media_type": "text/x-python",
+      "name": "artifact.example.forecast.fit.trend",
+      "uri": "python://solutiongraph.examples.arena_nodes:fit_forecast_trend"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:generate_forecast"
+      },
+      "digest": "sha256:ea9ce47314bbdf88050cd9285d4e385e316ef47d7fea286eb75d126681174e77",
+      "media_type": "text/x-python",
+      "name": "artifact.example.forecast.generate",
+      "uri": "python://solutiongraph.examples.arena_nodes:generate_forecast"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:calibrate_intervals_fixed"
+      },
+      "digest": "sha256:8642d283978662ff18ba82732183ed5a167434ac7f7f456a1fff490c0823c93c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.forecast.interval.fixed",
+      "uri": "python://solutiongraph.examples.arena_nodes:calibrate_intervals_fixed"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:calibrate_intervals_residual"
+      },
+      "digest": "sha256:6457d5cd0f57be1b06a59dcc332e41214719596efe0c000c894898eac888392c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.forecast.interval.residual",
+      "uri": "python://solutiongraph.examples.arena_nodes:calibrate_intervals_residual"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_organizations_basic"
+      },
+      "digest": "sha256:8a733908edcff70f3f4f16737589e7878a22553ca6b4b378b9ffba400d412d2b",
+      "media_type": "text/x-python",
+      "name": "artifact.example.entity.normalize.basic",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_organizations_basic"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_organizations_legal"
+      },
+      "digest": "sha256:fbf41fd5e41f4de0e811aade3309b7b4474ca26af69446614464d8ac18384278",
+      "media_type": "text/x-python",
+      "name": "artifact.example.entity.normalize.legal",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_organizations_legal"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:block_organizations_domain"
+      },
+      "digest": "sha256:73b623d581382b02418dff797b92961f08af2ae500c429e4f0e5b16a4df6c75c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.entity.block.domain",
+      "uri": "python://solutiongraph.examples.arena_nodes:block_organizations_domain"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:block_organizations_tokens"
+      },
+      "digest": "sha256:68684e2035380c4cbdb9fb9119fbebb4cd3fc16f3531a43a09ca4fef5bca84ee",
+      "media_type": "text/x-python",
+      "name": "artifact.example.entity.block.tokens",
+      "uri": "python://solutiongraph.examples.arena_nodes:block_organizations_tokens"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:link_organizations_exact"
+      },
+      "digest": "sha256:b7e8fef1beefc5a7aa618f6f647f4025a8a20e111ad991d576354872990eadc6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.entity.link.exact",
+      "uri": "python://solutiongraph.examples.arena_nodes:link_organizations_exact"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:link_organizations_evidence"
+      },
+      "digest": "sha256:a3cf0ccfd3aa510b3705bd13fff4e096a9788c7453e9c3ee65088a1c22b5054a",
+      "media_type": "text/x-python",
+      "name": "artifact.example.entity.link.evidence",
+      "uri": "python://solutiongraph.examples.arena_nodes:link_organizations_evidence"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:build_entity_components"
+      },
+      "digest": "sha256:c20d36d7e58b6c5418ac808748c6a7bd933116d96a465be1fb89dfb33407620f",
+      "media_type": "text/x-python",
+      "name": "artifact.example.entity.components",
+      "uri": "python://solutiongraph.examples.arena_nodes:build_entity_components"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:inspect_code_ast"
+      },
+      "digest": "sha256:ad426c599ceccb146aefae3d6c6e0fc02b8ea646a270525aae0085e12b747890",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.inspect.ast",
+      "uri": "python://solutiongraph.examples.arena_nodes:inspect_code_ast"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:inspect_code_tests"
+      },
+      "digest": "sha256:e0cd88d798bf9d128305bca565ac39ee542ee41d02d2e1a6d949ce2070a7c58b",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.inspect.tests",
+      "uri": "python://solutiongraph.examples.arena_nodes:inspect_code_tests"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:propose_operator_repair"
+      },
+      "digest": "sha256:e491b9fa8cca19749d9caabf2eb262fd83d065aa62a8488799c2ea5ff5a4ffad",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.propose.operator",
+      "uri": "python://solutiongraph.examples.arena_nodes:propose_operator_repair"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:propose_contract_repair"
+      },
+      "digest": "sha256:29a86ec3503a0a1e9b2bcf16ed076742c74cf729accff3bf7567759f7c14efbc",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.propose.contract",
+      "uri": "python://solutiongraph.examples.arena_nodes:propose_contract_repair"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:apply_repair_exact"
+      },
+      "digest": "sha256:ef86e4b2066443d08af73fae305dc8ca004cdbaa5518a4ed217f34c2428c42ac",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.apply.exact",
+      "uri": "python://solutiongraph.examples.arena_nodes:apply_repair_exact"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:apply_repair_line"
+      },
+      "digest": "sha256:0cc759e0d27d48e2bf0fc9566d50470126ca024699b8b9449c0fe7b93d2bc200",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.apply.line",
+      "uri": "python://solutiongraph.examples.arena_nodes:apply_repair_line"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:test_repair_ast"
+      },
+      "digest": "sha256:cee39e3ac3cd06e856d4d217081a826350d1fd5883d0fb19d24d02746f349286",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.test.ast",
+      "uri": "python://solutiongraph.examples.arena_nodes:test_repair_ast"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:test_repair_symbolic"
+      },
+      "digest": "sha256:8c76f3360278e6b8e9573e3dfd5194647dc25367f142a44107d86f0a7d4e7274",
+      "media_type": "text/x-python",
+      "name": "artifact.example.repair.test.symbolic",
+      "uri": "python://solutiongraph.examples.arena_nodes:test_repair_symbolic"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:decode_feeds_csv_module"
+      },
+      "digest": "sha256:4180e4f776bbff21414ef6874b0d3518bdb0ed756ccdb5e0323f504cd45f6a03",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.decode.csv-module",
+      "uri": "python://solutiongraph.examples.arena_nodes:decode_feeds_csv_module"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:decode_feeds_line_parser"
+      },
+      "digest": "sha256:6a7be577c1d4434c587fda616fb5c7a5db4134cc7024a0f392aa2800978ffbff",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.decode.lines",
+      "uri": "python://solutiongraph.examples.arena_nodes:decode_feeds_line_parser"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_feed_rows_strict"
+      },
+      "digest": "sha256:45f6d18e37d6271f41ef0c6aab243975cf45c3a0ee38b7112099f6377cd89e30",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.normalize.strict",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_feed_rows_strict"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:normalize_feed_rows_coerce"
+      },
+      "digest": "sha256:d0bcf10095f5f18af681e0f74e5165761b6598d3d619e8351b63e03a33191f0a",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.normalize.coerce",
+      "uri": "python://solutiongraph.examples.arena_nodes:normalize_feed_rows_coerce"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:reconcile_feed_rows_priority"
+      },
+      "digest": "sha256:d419d8a73b0635035f9ec25fbc547a11194e54f0ef0470d713c13c9844542cc0",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.reconcile.priority",
+      "uri": "python://solutiongraph.examples.arena_nodes:reconcile_feed_rows_priority"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:reconcile_feed_rows_complete"
+      },
+      "digest": "sha256:6693ae5657dabe3b631569a21cc17548bb04a2875c27a097a3664555be28f888",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.reconcile.complete",
+      "uri": "python://solutiongraph.examples.arena_nodes:reconcile_feed_rows_complete"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:validate_feed_rows_strict"
+      },
+      "digest": "sha256:139dff3ec1a8096c21f74903130c9358bde22a9c3862b32575e7c487b2684098",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.validate.strict",
+      "uri": "python://solutiongraph.examples.arena_nodes:validate_feed_rows_strict"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.arena_nodes:validate_feed_rows_quarantine"
+      },
+      "digest": "sha256:394bbd7dc1debbe7fe2e6d5bdf1b3640ff7d28b95d357796fd40559a69e8060a",
+      "media_type": "text/x-python",
+      "name": "artifact.example.feed.validate.lineage",
+      "uri": "python://solutiongraph.examples.arena_nodes:validate_feed_rows_quarantine"
     }
   ],
   "dependencies": [],
-  "description": "Dependency-free executable teaching nodes for web, document, image, data-cleaning, tabular-regression, and tabular-classification examples.",
+  "description": "Dependency-free executable teaching nodes for web, document, image, data quality, address verification, entity linking, forecasting, code repair, feed validation, regression, and classification examples.",
   "descriptor_digests": [],
   "discovery_version": "0.1",
   "embedding_record_digests": [],
@@ -321,7 +798,60 @@
     "sha256:c35301f89d15c8e39126aeba2db5206a01f4fa06634ee2453d951831ffb35a48",
     "sha256:91f7356b0555465aced637d25b40ecac3e8f5e93c960ecad6c0ecefaf221efe2",
     "sha256:7b8643c7a372dbd827c35a42040f79dabe2a197bcad8075052942d7fb0da38e1",
-    "sha256:3b796816e394caf51bcac0266f18b8c8db591f95f838276730fac2cfd262c291"
+    "sha256:3b796816e394caf51bcac0266f18b8c8db591f95f838276730fac2cfd262c291",
+    "sha256:1090a7977ec99179d2e9e86f2873d5e2a18f8b41cce3177000ccfb46bdb87fdf",
+    "sha256:e81706dae6cd75875370bd51dfa8791b1db36c7b08d70826222a417c91da23d3",
+    "sha256:230bc2faccb3685c6cd9c93d59965b09c4aaac1d2a1a27e76de489e1ef76ad81",
+    "sha256:c313a80c86ee2dd339fa71b14c697cd1dc1350cf34677786b476fa861a84b9b3",
+    "sha256:8b6ea003e810abe0edb98de9489816a278e01c6186cb9c6300ce678de05ec75f",
+    "sha256:1902170675ecb6e07142bcd1d3af651246eaa2f2503bb648f899b4754fe95873",
+    "sha256:9dee22d9684024a1d20308f07e5c5391e7d5a2f6fa40c5f54424f3cf16f2a8b0",
+    "sha256:87ee1a3ca81d8c3d858c051ffff51d88fc5a55494dc39106ae36d57d16af782c",
+    "sha256:26412a64b39a65c43b918ab1cf67eb23bc03f73f32d87e65830691aef8844787",
+    "sha256:edc8e2fc78ef177e06fa6423a395bb1ca5c1daeca933e45518ec9bed5a4239b0",
+    "sha256:118b4157ce270b40565330df871f8420e0e3acd665acdec8979b22dc7b23c973",
+    "sha256:7ec32f090480ac6ce4695ecd9784b2a71de11ec6c36c092ee562ae1005a29f41",
+    "sha256:7d35056227090ef16b05e1e6addf17c9590a9dfb7935f34dfbf2eef219430659",
+    "sha256:857da46abf652a93e2c5c986978e3284412680850022151ca432faf9d7405dd3",
+    "sha256:af72a3fbbbb806e11ee82404533d7fb161742f513a38c5d3f68eb92af763b3b2",
+    "sha256:1137ea5b59d6cd883d2d64ab43ba398ecba05b4789ad87c52ac6094cdba3c529",
+    "sha256:bf145ad7bad9cf6e6b976b3f38884e8bb86b661496f0883b84bee798185f478a",
+    "sha256:cd9053d5c29279fef68979f22b3b1ac85f22f2b8e00266df21e7ec2e0152b761",
+    "sha256:d8de42965ade37ce2a64767c40667fbaa8974d5ce4630ce4fdd608e18fc741ce",
+    "sha256:ef71370400aebd30aadc08b88fa299e9e4e013fbdbd892011bb98e7c63efb722",
+    "sha256:02ff46a8b9a18c17782ede38dbd6788ecc87c4216502de54700e77ab6546bf20",
+    "sha256:05a37ff2dd38c2d1fd1273abb96affbc9a8311dc035f3c71a7c36e77f93b28d1",
+    "sha256:c49997f1fb8cf760e3e751613957b49f49574fa640f2ac7ea9d253aab376830c",
+    "sha256:8f3346c4ba40fc79125d9f958ae2db5d84e2ec2df6dcd92f8c34f2321ea97eab",
+    "sha256:71b3f3191cde110c9134166fdc768cc418ec8f001d7b770f7af22af94b4d5aff",
+    "sha256:633452c0bfbc99635507501aa0268b2453090004ee47a8df09124a4055502602",
+    "sha256:e87ba5c918b7505f80296eb5b20fe00182cae842e95b77449f60a14f34192aea",
+    "sha256:1fd01c9c02a8f81c3fe3153e2de5ee29381f5577dd6454463fd028b859825a3b",
+    "sha256:e9690659548aca5b6bd2659eb12f821c942b93dc2acc6d3d2e68a48999625df3",
+    "sha256:076debff5f7abf7ae814f186fe5e9e8ef2a7cd095057381b31f2f4d390e642b8",
+    "sha256:4d8f4592c6b3c0d4c043de4074ecbc05b7937dfce019110a76b72525bff9ac43",
+    "sha256:373338fc7327eb8aa56aba387f9c4a5442dd0b2dcffd3b075840df037cb9551e",
+    "sha256:de43456defa96483f3afa11125e7adf017c2bc32bccd3760b95db1cc923f2537",
+    "sha256:fc24026819548eeb2a1c730011998d6fddb7def183a92f4ea2dc689d8acaefcb",
+    "sha256:338cd950a51ba01f24ea6341597d2fd0ed7caf54c11bde1e698df428ba2b5d31",
+    "sha256:f99a8ebdc3002748f5b0e045c57532e5e6e0d88d07820f73af3b2fd0284cfefd",
+    "sha256:03cf9192b45215a6bd3a54d85dbc465263a03118f48db1521651b9445d2f00b4",
+    "sha256:8a5bef0fc6fcaebe56ab0ea8c184ca848a1e7cecbd90a38c39d5905511868771",
+    "sha256:264657b0770bef293b88fe40c28894508b159da77c090a98ac56264e20229b30",
+    "sha256:94b3a77606b3251c7ee0bbad2ab73664538794e8aceba04867bae5cd000a391a",
+    "sha256:fb7a2b14d543bcc7a25549253c284f906b558270288db47081ce5af274030be1",
+    "sha256:80a5bc7b1059c82f17ea86bbabebe4cccc48a93c0a85facde77d6f59c640ebe3",
+    "sha256:2cc01c3dac51a8dee854bed6120e6cad42bd0f1b8834b850c30c718524f28e56",
+    "sha256:bcdfd7b5b4b9b1513f8bb13c76807ceb439f34efc14a00426cb128344489a860",
+    "sha256:b1e54ee0f42aaf725e947ce8e96a2b87a49b22cff382a853e00985c88e76f264",
+    "sha256:6ab2626a92d446e6859cac23eef4ba597ffed75e75f7bde5246070b6904f427b",
+    "sha256:8d9b71e7fe29d837d855c9e83c2e3d459285b55823d4db06810381069a9fbc73",
+    "sha256:995b4ec176dd53ba32029e3a31636bf5bb26d31165654111b14ebda8bdc7e7b4",
+    "sha256:4d3c651a55d6777746cae4e40868f718fc9cef3422fbb52498758ddbf5f425ee",
+    "sha256:309216beec35b2b4ad06b3fb588beff4d05900d79293c4ee94917d4c8e32ee6f",
+    "sha256:59d6d9ec4168f768cba5eee32959df0fe57ae08a13ba4c1fe5031fd282fef948",
+    "sha256:6d89a8415d64bdb5ef937bedff7985bd457eaa2d2334d26026982fe79bb32bc9",
+    "sha256:7b8fe871d26bf3729ac08ae168f01c405c2ccbdc11e8352560702da277e3e867"
   ],
   "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
   "version": "1.0.0"

@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "address.verify-reference"
+  ],
+  "description": "Compare canonical alphanumeric forms to the offline reference directory.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.arena_nodes:verify_addresses_alias_aware",
+  "failure_modes": [],
+  "id": "example.address.verify.alias",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:13e54839bf2582aa1b5f50d4ccba912f2ea3dbfe7d547081b91795df1a5a9ec2",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "bundle",
+      "type": {
+        "id": "example.address-bundle",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "bundle",
+      "type": {
+        "id": "example.address-bundle",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/arena_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

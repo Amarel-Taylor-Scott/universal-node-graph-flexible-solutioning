@@ -34,7 +34,7 @@
       "supports_scores": false
     }
   ],
-  "registry_digest": "sha256:6683a469b82696c8ef8131a62c29047f42a14e946d206fc0369a653231131484",
+  "registry_digest": "sha256:b88c792d7b4b9419a873f280c118f0a7aeef3add255f8e320697da5aafb6a6be",
   "registry_id": "example.real-world-registry",
   "registry_version": "1.0.0",
   "schemas": [
