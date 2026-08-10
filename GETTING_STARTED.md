@@ -25,7 +25,7 @@ solutiongraph templates show template.document-intelligence
 solutiongraph templates show template.kaggle-tabular --json
 ```
 
-The library contains 18 domain templates and 317 atomic obligations. A template
+The library contains 19 domain templates and 339 atomic obligations. A template
 describes what must happen; node registries independently provide the possible
 ways to accomplish each obligation.
 
@@ -57,7 +57,9 @@ Agents that support workspace skills can be asked to use:
 
 - `@create-solution-template` to author or refine a domain template;
 - `@author-node-pack` to wrap reusable implementations and connectors;
+- `@execute-solution-graph` to add runtimes, artifacts, verifiers, and executable examples;
 - `@benchmark-solution-graph` to design route experiments;
+- `@design-autoresearch-campaign` to run bounded LLM-generated improvement campaigns;
 - `@model-solution-graph` for the complete end-to-end workflow.
 
 The skills guide the agent, while schemas, compiler diagnostics, tests, and CI
@@ -89,7 +91,35 @@ Choose prior, beam, seeded-sprout, or explicitly exhaustive search according to
 the available budget. Search reports preserve coverage, skips, invalid routes,
 duplicates, unvisited routes, seeds, and belief revision.
 
-## 7. Validate a contribution
+## 7. Execute the reference domain skeletons
+
+Execute the six reference programs (grouped into five notebook task families):
+
+```bash
+solutiongraph examples list
+solutiongraph examples run browse-and-scrape
+solutiongraph examples run document-to-schema
+solutiongraph examples run image-check-and-process
+solutiongraph examples run data-cleanup
+solutiongraph examples run tabular-regression
+solutiongraph examples run tabular-classification
+```
+
+These runs recompile exact plans, execute trusted standard-library nodes,
+content-address outputs, independently verify outcomes, and retain negative
+results. Read `REAL_WORLD_EXAMPLES.md` before extending them and
+`EXECUTION_PROTOCOL.md` before adding a runtime. The default Python adapter is
+in-process and is not a production sandbox.
+
+For an LLM harness that will generate or mutate nodes and routes, read
+`AUTORESEARCH_REVIEW.md` and use `@design-autoresearch-campaign`. Freeze an
+`EvaluationBoundary`, declare a `CampaignBudget`, preserve every proposal's
+parents in a `CampaignLedger`, and keep hidden evaluators outside the
+candidate's trust domain. `template.numerical-linear-system` demonstrates the
+same decomposition for Cholesky, QR, SVD, LDL, sparse, iterative, precision,
+and verification alternatives without adding a numerical dependency.
+
+## 8. Validate a contribution
 
 ```bash
 solutiongraph catalog export --output catalog

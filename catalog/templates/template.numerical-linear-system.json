@@ -1,0 +1,1246 @@
+{
+  "description": "A solver-family-neutral scaffold that exposes matrix qualification, formulation, factorization, solving, numerical verification, and fallback decisions as separate atomic obligations. Cholesky, QR, SVD, LDL, sparse, iterative, CPU, GPU, and precision variants compete as typed candidates where they are mathematically valid.",
+  "domains": [
+    "computing.numerical",
+    "machine-learning.linear-algebra"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.numerical-linear-system",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_operator",
+        "target_port": "state",
+        "target_slot": "load_rhs"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "load_rhs",
+        "target_port": "state",
+        "target_slot": "validate_shapes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_shapes",
+        "target_port": "state",
+        "target_slot": "check_finite"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "check_finite",
+        "target_port": "state",
+        "target_slot": "classify_structure"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "classify_structure",
+        "target_port": "state",
+        "target_slot": "check_symmetry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "check_symmetry",
+        "target_port": "state",
+        "target_slot": "check_positive_definite"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "check_positive_definite",
+        "target_port": "state",
+        "target_slot": "estimate_condition"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_condition",
+        "target_port": "state",
+        "target_slot": "select_solver_family"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_solver_family",
+        "target_port": "state",
+        "target_slot": "select_precision"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_precision",
+        "target_port": "state",
+        "target_slot": "scale_system"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "scale_system",
+        "target_port": "state",
+        "target_slot": "regularize_system"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "regularize_system",
+        "target_port": "state",
+        "target_slot": "choose_ordering"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "choose_ordering",
+        "target_port": "state",
+        "target_slot": "symbolic_analysis"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "symbolic_analysis",
+        "target_port": "state",
+        "target_slot": "numeric_factorization"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "numeric_factorization",
+        "target_port": "state",
+        "target_slot": "solve_system"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "solve_system",
+        "target_port": "state",
+        "target_slot": "iterative_refinement"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "iterative_refinement",
+        "target_port": "state",
+        "target_slot": "compute_residual"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "compute_residual",
+        "target_port": "state",
+        "target_slot": "verify_backward_error"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_backward_error",
+        "target_port": "state",
+        "target_slot": "cross_check_solution"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "cross_check_solution",
+        "target_port": "state",
+        "target_slot": "select_fallback"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_fallback",
+        "target_port": "state",
+        "target_slot": "emit_solution"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.numerical-linear-system",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_operator",
+        "type": {
+          "id": "template.numerical-linear-system.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.1",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "emit_solution",
+        "type": {
+          "id": "template.numerical-linear-system.state-22",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "load_operator",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load matrix or linear operator with immutable provenance.",
+        "required_capabilities": [
+          "template.numerical-linear-system.load_operator.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load matrix or linear operator with immutable provenance and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "load_rhs",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load one or more right-hand sides with shape and unit metadata.",
+        "required_capabilities": [
+          "template.numerical-linear-system.load_rhs.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load one or more right-hand sides with shape and unit metadata and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.acquire"
+        ],
+        "id": "validate_shapes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate dimensions, scalar types, devices, and batch axes.",
+        "required_capabilities": [
+          "template.numerical-linear-system.validate_shapes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate dimensions, scalar types, devices, and batch axes and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "check_finite",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reject or explicitly repair NaN and infinite values.",
+        "required_capabilities": [
+          "template.numerical-linear-system.check_finite.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reject or explicitly repair NaN and infinite values and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "classify_structure",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Classify dense, sparse, banded, triangular, or operator form.",
+        "required_capabilities": [
+          "template.numerical-linear-system.classify_structure.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Classify dense, sparse, banded, triangular, or operator form and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "check_symmetry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure real symmetry or complex Hermitian structure.",
+        "required_capabilities": [
+          "template.numerical-linear-system.check_symmetry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure real symmetry or complex Hermitian structure and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "check_positive_definite",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Test or certify positive definiteness when required.",
+        "required_capabilities": [
+          "template.numerical-linear-system.check_positive_definite.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Test or certify positive definiteness when required and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.qualify"
+        ],
+        "id": "estimate_condition",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate conditioning and numerical risk without forming unsafe products.",
+        "required_capabilities": [
+          "template.numerical-linear-system.estimate_condition.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate conditioning and numerical risk without forming unsafe products and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.formulate"
+        ],
+        "id": "select_solver_family",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select an admitted direct or iterative solver family from qualifications.",
+        "required_capabilities": [
+          "template.numerical-linear-system.select_solver_family.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select an admitted direct or iterative solver family from qualifications and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.formulate"
+        ],
+        "id": "select_precision",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select scalar precision and accumulation policy.",
+        "required_capabilities": [
+          "template.numerical-linear-system.select_precision.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select scalar precision and accumulation policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.formulate"
+        ],
+        "id": "scale_system",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply reversible equilibration or scaling when justified.",
+        "required_capabilities": [
+          "template.numerical-linear-system.scale_system.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply reversible equilibration or scaling when justified and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.formulate"
+        ],
+        "id": "regularize_system",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply only authorized regularization with a recorded semantic change.",
+        "required_capabilities": [
+          "template.numerical-linear-system.regularize_system.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply only authorized regularization with a recorded semantic change and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.factor"
+        ],
+        "id": "choose_ordering",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Choose fill-reducing or locality-aware ordering where applicable.",
+        "required_capabilities": [
+          "template.numerical-linear-system.choose_ordering.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Choose fill-reducing or locality-aware ordering where applicable and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.factor"
+        ],
+        "id": "symbolic_analysis",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Perform reusable symbolic sparse analysis or certify pass-through.",
+        "required_capabilities": [
+          "template.numerical-linear-system.symbolic_analysis.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Perform reusable symbolic sparse analysis or certify pass-through and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.factor"
+        ],
+        "id": "numeric_factorization",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compute the selected factorization with failure diagnostics.",
+        "required_capabilities": [
+          "template.numerical-linear-system.numeric_factorization.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compute the selected factorization with failure diagnostics and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.solve"
+        ],
+        "id": "solve_system",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Solve using the selected factor, preconditioner, or iterative method.",
+        "required_capabilities": [
+          "template.numerical-linear-system.solve_system.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Solve using the selected factor, preconditioner, or iterative method and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.solve"
+        ],
+        "id": "iterative_refinement",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Refine the solution under a bounded convergence contract.",
+        "required_capabilities": [
+          "template.numerical-linear-system.iterative_refinement.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Refine the solution under a bounded convergence contract and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "compute_residual",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compute absolute and relative residuals against the original system.",
+        "required_capabilities": [
+          "template.numerical-linear-system.compute_residual.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compute absolute and relative residuals against the original system and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "verify_backward_error",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify backward error, finiteness, convergence, and tolerance contracts.",
+        "required_capabilities": [
+          "template.numerical-linear-system.verify_backward_error.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify backward error, finiteness, convergence, and tolerance contracts and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "cross_check_solution",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Cross-check with an independent method or higher precision when required.",
+        "required_capabilities": [
+          "template.numerical-linear-system.cross_check_solution.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Cross-check with an independent method or higher precision when required and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "select_fallback",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-21",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Activate QR, SVD, LDL, precision escalation, or another frozen fallback by policy.",
+        "required_capabilities": [
+          "template.numerical-linear-system.select_fallback.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Activate QR, SVD, LDL, precision escalation, or another frozen fallback by policy and preserve every invariant required by later slots."
+      },
+      {
+        "allowed_effects": [],
+        "group": [
+          "stage.emit"
+        ],
+        "id": "emit_solution",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-21",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.numerical-linear-system.state-22",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Emit solution, diagnostics, reusable factors, and a provenance receipt.",
+        "required_capabilities": [
+          "template.numerical-linear-system.emit_solution.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Emit solution, diagnostics, reusable factors, and a provenance receipt and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Numerically robust linear system obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.numerical-linear-system.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.numerical-linear-system.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Load the operator, right-hand side, and exact numerical contract.",
+      "extensions": {},
+      "id": "stage.acquire",
+      "slot_ids": [
+        "load_operator",
+        "load_rhs",
+        "validate_shapes"
+      ],
+      "title": "Acquire"
+    },
+    {
+      "description": "Measure the mathematical properties that determine admissible solver families.",
+      "extensions": {},
+      "id": "stage.qualify",
+      "slot_ids": [
+        "check_finite",
+        "classify_structure",
+        "check_symmetry",
+        "check_positive_definite",
+        "estimate_condition"
+      ],
+      "title": "Qualify"
+    },
+    {
+      "description": "Choose a stable formulation under explicit accuracy and cost constraints.",
+      "extensions": {},
+      "id": "stage.formulate",
+      "slot_ids": [
+        "select_solver_family",
+        "select_precision",
+        "scale_system",
+        "regularize_system"
+      ],
+      "title": "Formulate"
+    },
+    {
+      "description": "Prepare reusable structural and numeric work.",
+      "extensions": {},
+      "id": "stage.factor",
+      "slot_ids": [
+        "choose_ordering",
+        "symbolic_analysis",
+        "numeric_factorization"
+      ],
+      "title": "Factor"
+    },
+    {
+      "description": "Produce and improve a candidate solution.",
+      "extensions": {},
+      "id": "stage.solve",
+      "slot_ids": [
+        "solve_system",
+        "iterative_refinement"
+      ],
+      "title": "Solve"
+    },
+    {
+      "description": "Independently establish numerical correctness and fallback need.",
+      "extensions": {},
+      "id": "stage.verify",
+      "slot_ids": [
+        "compute_residual",
+        "verify_backward_error",
+        "cross_check_solution",
+        "select_fallback"
+      ],
+      "title": "Verify"
+    },
+    {
+      "description": "Publish the solution and replayable numerical evidence.",
+      "extensions": {},
+      "id": "stage.emit",
+      "slot_ids": [
+        "emit_solution"
+      ],
+      "title": "Emit"
+    }
+  ],
+  "tags": [
+    "linear-system",
+    "factorization",
+    "numerical-stability"
+  ],
+  "template_model_version": "0.1",
+  "title": "Numerically robust linear system",
+  "version": "1.0.0"
+}

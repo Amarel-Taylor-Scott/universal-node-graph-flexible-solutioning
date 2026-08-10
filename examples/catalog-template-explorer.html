@@ -2272,6 +2272,153 @@ svg {
     ]
   },
   {
+    "id": "template.numerical-linear-system",
+    "title": "Numerically robust linear system",
+    "domains": [
+      "computing.numerical",
+      "machine-learning.linear-algebra"
+    ],
+    "stages": [
+      {
+        "id": "stage.acquire",
+        "title": "Acquire",
+        "description": "Load the operator, right-hand side, and exact numerical contract.",
+        "slots": [
+          [
+            "load_operator",
+            "Load matrix or linear operator with immutable provenance."
+          ],
+          [
+            "load_rhs",
+            "Load one or more right-hand sides with shape and unit metadata."
+          ],
+          [
+            "validate_shapes",
+            "Validate dimensions, scalar types, devices, and batch axes."
+          ]
+        ]
+      },
+      {
+        "id": "stage.qualify",
+        "title": "Qualify",
+        "description": "Measure the mathematical properties that determine admissible solver families.",
+        "slots": [
+          [
+            "check_finite",
+            "Reject or explicitly repair NaN and infinite values."
+          ],
+          [
+            "classify_structure",
+            "Classify dense, sparse, banded, triangular, or operator form."
+          ],
+          [
+            "check_symmetry",
+            "Measure real symmetry or complex Hermitian structure."
+          ],
+          [
+            "check_positive_definite",
+            "Test or certify positive definiteness when required."
+          ],
+          [
+            "estimate_condition",
+            "Estimate conditioning and numerical risk without forming unsafe products."
+          ]
+        ]
+      },
+      {
+        "id": "stage.formulate",
+        "title": "Formulate",
+        "description": "Choose a stable formulation under explicit accuracy and cost constraints.",
+        "slots": [
+          [
+            "select_solver_family",
+            "Select an admitted direct or iterative solver family from qualifications."
+          ],
+          [
+            "select_precision",
+            "Select scalar precision and accumulation policy."
+          ],
+          [
+            "scale_system",
+            "Apply reversible equilibration or scaling when justified."
+          ],
+          [
+            "regularize_system",
+            "Apply only authorized regularization with a recorded semantic change."
+          ]
+        ]
+      },
+      {
+        "id": "stage.factor",
+        "title": "Factor",
+        "description": "Prepare reusable structural and numeric work.",
+        "slots": [
+          [
+            "choose_ordering",
+            "Choose fill-reducing or locality-aware ordering where applicable."
+          ],
+          [
+            "symbolic_analysis",
+            "Perform reusable symbolic sparse analysis or certify pass-through."
+          ],
+          [
+            "numeric_factorization",
+            "Compute the selected factorization with failure diagnostics."
+          ]
+        ]
+      },
+      {
+        "id": "stage.solve",
+        "title": "Solve",
+        "description": "Produce and improve a candidate solution.",
+        "slots": [
+          [
+            "solve_system",
+            "Solve using the selected factor, preconditioner, or iterative method."
+          ],
+          [
+            "iterative_refinement",
+            "Refine the solution under a bounded convergence contract."
+          ]
+        ]
+      },
+      {
+        "id": "stage.verify",
+        "title": "Verify",
+        "description": "Independently establish numerical correctness and fallback need.",
+        "slots": [
+          [
+            "compute_residual",
+            "Compute absolute and relative residuals against the original system."
+          ],
+          [
+            "verify_backward_error",
+            "Verify backward error, finiteness, convergence, and tolerance contracts."
+          ],
+          [
+            "cross_check_solution",
+            "Cross-check with an independent method or higher precision when required."
+          ],
+          [
+            "select_fallback",
+            "Activate QR, SVD, LDL, precision escalation, or another frozen fallback by policy."
+          ]
+        ]
+      },
+      {
+        "id": "stage.emit",
+        "title": "Emit",
+        "description": "Publish the solution and replayable numerical evidence.",
+        "slots": [
+          [
+            "emit_solution",
+            "Emit solution, diagnostics, reusable factors, and a provenance receipt."
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "id": "template.qa-engineering",
     "title": "Software quality assurance",
     "domains": [
@@ -3013,6 +3160,194 @@ svg {
       "network.read"
     ],
     "summary": "Execute an explicit read-only HTTP request and parse JSON."
+  },
+  {
+    "id": "example.web.load.offline",
+    "capability": "web.load",
+    "effects": [],
+    "summary": "Load inline HTML or a text data URL without external network access."
+  },
+  {
+    "id": "example.web.load.urllib",
+    "capability": "web.load",
+    "effects": [
+      "network.read"
+    ],
+    "summary": "Fetch one explicit read-only URL with the Python standard library."
+  },
+  {
+    "id": "example.web.extract.parser",
+    "capability": "web.extract",
+    "effects": [],
+    "summary": "Extract title, visible text, and links with HTMLParser."
+  },
+  {
+    "id": "example.web.extract.regex",
+    "capability": "web.extract",
+    "effects": [],
+    "summary": "Extract the same fields with a simple regular-expression strategy."
+  },
+  {
+    "id": "example.web.project.schema",
+    "capability": "web.project-schema",
+    "effects": [],
+    "summary": "Project extracted page fields into a declared result schema."
+  },
+  {
+    "id": "example.document.normalize.conservative",
+    "capability": "document.normalize",
+    "effects": [],
+    "summary": "Normalize line endings while preserving record boundaries."
+  },
+  {
+    "id": "example.document.normalize.compact",
+    "capability": "document.normalize",
+    "effects": [],
+    "summary": "Compact repeated whitespace while preserving nonempty record lines."
+  },
+  {
+    "id": "example.document.extract.lines",
+    "capability": "document.extract-fields",
+    "effects": [],
+    "summary": "Parse colon-delimited fields one line at a time."
+  },
+  {
+    "id": "example.document.extract.regex",
+    "capability": "document.extract-fields",
+    "effects": [],
+    "summary": "Parse colon-delimited fields with a multiline expression."
+  },
+  {
+    "id": "example.document.project.schema",
+    "capability": "document.project-schema",
+    "effects": [],
+    "summary": "Require and project an exact requested document schema."
+  },
+  {
+    "id": "example.image.decode.tokens",
+    "capability": "image.decode",
+    "effects": [],
+    "summary": "Decode an ASCII PGM image with a token scanner."
+  },
+  {
+    "id": "example.image.decode.lines",
+    "capability": "image.decode",
+    "effects": [],
+    "summary": "Decode the same ASCII PGM contract with a line parser."
+  },
+  {
+    "id": "example.image.enhance.identity",
+    "capability": "image.enhance",
+    "effects": [],
+    "summary": "Explicitly certify that no contrast transformation is required."
+  },
+  {
+    "id": "example.image.enhance.minmax",
+    "capability": "image.enhance",
+    "effects": [],
+    "summary": "Stretch observed pixels across the declared grayscale range."
+  },
+  {
+    "id": "example.image.inspect.mean",
+    "capability": "image.inspect",
+    "effects": [],
+    "summary": "Measure dimensions and contrast directly from pixels."
+  },
+  {
+    "id": "example.image.inspect.histogram",
+    "capability": "image.inspect",
+    "effects": [],
+    "summary": "Measure the same contract through a grayscale histogram."
+  },
+  {
+    "id": "example.data.normalize.conservative",
+    "capability": "data.normalize-records",
+    "effects": [],
+    "summary": "Normalize field names, whitespace, and email casing."
+  },
+  {
+    "id": "example.data.normalize.aggressive",
+    "capability": "data.normalize-records",
+    "effects": [],
+    "summary": "Add person, company, and phone canonicalization."
+  },
+  {
+    "id": "example.data.deduplicate.exact",
+    "capability": "data.deduplicate",
+    "effects": [],
+    "summary": "Deduplicate configured fields by exact equality."
+  },
+  {
+    "id": "example.data.deduplicate.normalized",
+    "capability": "data.deduplicate",
+    "effects": [],
+    "summary": "Deduplicate configured fields by normalized alphanumeric equality."
+  },
+  {
+    "id": "example.data.sort",
+    "capability": "data.emit-clean",
+    "effects": [],
+    "summary": "Emit cleaned records in a deterministic order."
+  },
+  {
+    "id": "example.ml.split.tail",
+    "capability": "ml.split-regression",
+    "effects": [],
+    "summary": "Reserve the last observations as a deterministic holdout."
+  },
+  {
+    "id": "example.ml.split.alternating",
+    "capability": "ml.split-regression",
+    "effects": [],
+    "summary": "Use deterministic alternating rows for train and holdout partitions."
+  },
+  {
+    "id": "example.ml.train.mean",
+    "capability": "ml.train-regression",
+    "effects": [],
+    "summary": "Fit an intercept-only regression baseline."
+  },
+  {
+    "id": "example.ml.train.linear",
+    "capability": "ml.train-regression",
+    "effects": [],
+    "summary": "Fit a one-feature ordinary least-squares model."
+  },
+  {
+    "id": "example.ml.evaluate",
+    "capability": "ml.evaluate-regression",
+    "effects": [],
+    "summary": "Measure holdout RMSE and generate requested predictions."
+  },
+  {
+    "id": "example.ml.classification.split.tail",
+    "capability": "ml.split-classification",
+    "effects": [],
+    "summary": "Reserve the last labeled observations as a deterministic holdout."
+  },
+  {
+    "id": "example.ml.classification.split.alternating",
+    "capability": "ml.split-classification",
+    "effects": [],
+    "summary": "Use deterministic alternating rows for classification partitions."
+  },
+  {
+    "id": "example.ml.classification.train.majority",
+    "capability": "ml.train-classification",
+    "effects": [],
+    "summary": "Fit an explicit majority-class control model."
+  },
+  {
+    "id": "example.ml.classification.train.threshold",
+    "capability": "ml.train-classification",
+    "effects": [],
+    "summary": "Fit a one-feature binary threshold model."
+  },
+  {
+    "id": "example.ml.classification.evaluate",
+    "capability": "ml.evaluate-classification",
+    "effects": [],
+    "summary": "Measure holdout accuracy and generate requested class predictions."
   }
 ];
 

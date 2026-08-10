@@ -825,6 +825,93 @@ SCIENTIFIC_EXPERIMENT = _template(
 )
 
 
+NUMERICAL_LINEAR_SYSTEM = _template(
+    template_id="template.numerical-linear-system",
+    title="Numerically robust linear system",
+    description=(
+        "A solver-family-neutral scaffold that exposes matrix qualification, formulation, "
+        "factorization, solving, numerical verification, and fallback decisions as separate "
+        "atomic obligations. Cholesky, QR, SVD, LDL, sparse, iterative, CPU, GPU, and "
+        "precision variants compete as typed candidates where they are mathematically valid."
+    ),
+    domains=("computing.numerical", "machine-learning.linear-algebra"),
+    tags=("linear-system", "factorization", "numerical-stability"),
+    stages=(
+        (
+            "stage.acquire",
+            "Acquire",
+            "Load the operator, right-hand side, and exact numerical contract.",
+            (
+                ("load_operator", "Load matrix or linear operator with immutable provenance."),
+                ("load_rhs", "Load one or more right-hand sides with shape and unit metadata."),
+                ("validate_shapes", "Validate dimensions, scalar types, devices, and batch axes."),
+            ),
+        ),
+        (
+            "stage.qualify",
+            "Qualify",
+            "Measure the mathematical properties that determine admissible solver families.",
+            (
+                ("check_finite", "Reject or explicitly repair NaN and infinite values."),
+                ("classify_structure", "Classify dense, sparse, banded, triangular, or operator form."),
+                ("check_symmetry", "Measure real symmetry or complex Hermitian structure."),
+                ("check_positive_definite", "Test or certify positive definiteness when required."),
+                ("estimate_condition", "Estimate conditioning and numerical risk without forming unsafe products."),
+            ),
+        ),
+        (
+            "stage.formulate",
+            "Formulate",
+            "Choose a stable formulation under explicit accuracy and cost constraints.",
+            (
+                ("select_solver_family", "Select an admitted direct or iterative solver family from qualifications."),
+                ("select_precision", "Select scalar precision and accumulation policy."),
+                ("scale_system", "Apply reversible equilibration or scaling when justified."),
+                ("regularize_system", "Apply only authorized regularization with a recorded semantic change."),
+            ),
+        ),
+        (
+            "stage.factor",
+            "Factor",
+            "Prepare reusable structural and numeric work.",
+            (
+                ("choose_ordering", "Choose fill-reducing or locality-aware ordering where applicable."),
+                ("symbolic_analysis", "Perform reusable symbolic sparse analysis or certify pass-through."),
+                ("numeric_factorization", "Compute the selected factorization with failure diagnostics."),
+            ),
+        ),
+        (
+            "stage.solve",
+            "Solve",
+            "Produce and improve a candidate solution.",
+            (
+                ("solve_system", "Solve using the selected factor, preconditioner, or iterative method."),
+                ("iterative_refinement", "Refine the solution under a bounded convergence contract."),
+            ),
+        ),
+        (
+            "stage.verify",
+            "Verify",
+            "Independently establish numerical correctness and fallback need.",
+            (
+                ("compute_residual", "Compute absolute and relative residuals against the original system."),
+                ("verify_backward_error", "Verify backward error, finiteness, convergence, and tolerance contracts."),
+                ("cross_check_solution", "Cross-check with an independent method or higher precision when required."),
+                ("select_fallback", "Activate QR, SVD, LDL, precision escalation, or another frozen fallback by policy."),
+            ),
+        ),
+        (
+            "stage.emit",
+            "Emit",
+            "Publish the solution and replayable numerical evidence.",
+            (
+                ("emit_solution", "Emit solution, diagnostics, reusable factors, and a provenance receipt."),
+            ),
+        ),
+    ),
+)
+
+
 EXTENDED_TEMPLATES = (
     API_SERVICE,
     BATCH_DATA_PIPELINE,
@@ -834,6 +921,7 @@ EXTENDED_TEMPLATES = (
     IMAGE_PROCESSING,
     INCIDENT_RESPONSE,
     INFRASTRUCTURE_PROVISIONING,
+    NUMERICAL_LINEAR_SYSTEM,
     RECOMMENDATION_RANKING,
     SCIENTIFIC_EXPERIMENT,
     TIME_SERIES_FORECASTING,
@@ -851,6 +939,7 @@ __all__ = [
     "IMAGE_PROCESSING",
     "INCIDENT_RESPONSE",
     "INFRASTRUCTURE_PROVISIONING",
+    "NUMERICAL_LINEAR_SYSTEM",
     "RECOMMENDATION_RANKING",
     "SCIENTIFIC_EXPERIMENT",
     "TIME_SERIES_FORECASTING",

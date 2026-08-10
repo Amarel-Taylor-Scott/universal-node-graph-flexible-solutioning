@@ -1,0 +1,70 @@
+{
+  "capabilities": [
+    "ml.evaluate-regression"
+  ],
+  "description": "Measure holdout RMSE and generate requested predictions.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:evaluate_regressor",
+  "failure_modes": [
+    {
+      "code": "ml.unknown-model",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.ml.evaluate",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:74b02f64dafc7d7d683cce89f89cc25fadb1a03867309fc1d69638417d05325a",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "split",
+      "type": {
+        "id": "example.regression-split",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "model",
+      "type": {
+        "id": "example.regression-model",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "result",
+      "type": {
+        "id": "example.regression-result",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

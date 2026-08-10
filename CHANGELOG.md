@@ -2,6 +2,30 @@
 
 All notable changes to this proof of concept are documented here.
 
+## Unreleased
+
+### Added
+
+- Admitted-space content identity and compiler-frozen, ordered same-slot fallbacks.
+- Strict trusted-local `ReferenceExecutor` with exact plan reconstruction,
+  implementation-digest checks, runtime/effect/permission policy, bounded
+  retries, candidate circuit breaking, independent task verification, and
+  enriched node/run receipts.
+- Replaceable `RuntimeAdapter` and `ArtifactStore` protocols plus deterministic
+  memory and local-file content-addressed stores.
+- Receipt-producing `ExperimentRunner` over declared plan/case/seed/repetition matrices.
+- A sparse 31-node executable example pack and five real mechanism notebooks
+  covering browse/scrape, document/schema extraction, image processing, data
+  cleanup, tabular regression, and tabular classification.
+- Four additional strict wire schemas, the frozen-plan execution protocol,
+  executable-example guide, and `execute-solution-graph` workspace skill.
+- Immutable population-DAG campaign records, explicit campaign budgets,
+  evaluator trust-boundary contracts, verifier implementation digests, and
+  four portable campaign schemas.
+- A nineteenth numerical linear-system template with 22 atomic obligations,
+  a source-backed AutoResearch/Cholesky review, machine-readable package
+  landscape, and `design-autoresearch-campaign` workspace skill.
+
 ## 0.2.0 — 2026-08-10
 
 ### Added

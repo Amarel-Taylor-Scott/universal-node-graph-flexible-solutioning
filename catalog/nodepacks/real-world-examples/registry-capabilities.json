@@ -1,0 +1,58 @@
+{
+  "descriptor_fields": [],
+  "discovery_version": "0.1",
+  "embedding_spaces": [],
+  "extensions": {
+    "example.maturity": "executable-teaching-fixture"
+  },
+  "max_page_size": 1000,
+  "protocol_versions": [
+    "0.1"
+  ],
+  "query_modes": [
+    {
+      "extensions": {},
+      "fields": [
+        "node_id",
+        "node_spec_digest"
+      ],
+      "id": "exact",
+      "requires_embedding_space": false,
+      "supports_cursor": false,
+      "supports_explanations": false,
+      "supports_filters": false,
+      "supports_scores": false
+    },
+    {
+      "extensions": {},
+      "fields": [],
+      "id": "enumeration",
+      "requires_embedding_space": false,
+      "supports_cursor": true,
+      "supports_explanations": false,
+      "supports_filters": false,
+      "supports_scores": false
+    }
+  ],
+  "registry_digest": "sha256:6683a469b82696c8ef8131a62c29047f42a14e946d206fc0369a653231131484",
+  "registry_id": "example.real-world-registry",
+  "registry_version": "1.0.0",
+  "schemas": [
+    {
+      "name": "node-spec",
+      "versions": [
+        "0.1"
+      ]
+    },
+    {
+      "name": "node-pack",
+      "versions": [
+        "0.1"
+      ]
+    }
+  ],
+  "supports_continuation": true,
+  "supports_enumeration": true,
+  "supports_explanations": true,
+  "supports_snapshots": true
+}

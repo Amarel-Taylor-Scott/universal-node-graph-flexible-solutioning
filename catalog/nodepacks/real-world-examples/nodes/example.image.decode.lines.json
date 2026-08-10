@@ -1,0 +1,68 @@
+{
+  "capabilities": [
+    "image.decode"
+  ],
+  "description": "Decode the same ASCII PGM contract with a line parser.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:decode_pgm_lines",
+  "failure_modes": [
+    {
+      "code": "image.unsupported-format",
+      "description": "",
+      "retryable": false
+    },
+    {
+      "code": "image.invalid-header",
+      "description": "",
+      "retryable": false
+    },
+    {
+      "code": "image.invalid-pixels",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.image.decode.lines",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:abf9f744e086ebb1abd61f79c5124c46e61ef5b9b251bc0ce4980cb22042e921",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "document",
+      "type": {
+        "id": "example.pgm-document",
+        "media_type": "image/x-portable-graymap",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "image",
+      "type": {
+        "id": "example.gray-image",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

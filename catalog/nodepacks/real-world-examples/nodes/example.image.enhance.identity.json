@@ -1,0 +1,52 @@
+{
+  "capabilities": [
+    "image.enhance"
+  ],
+  "description": "Explicitly certify that no contrast transformation is required.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:enhance_image_identity",
+  "failure_modes": [],
+  "id": "example.image.enhance.identity",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:6a241c6682df07a69af44180be74c35f48726ba324cc0206f93c34e5c8a0597b",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "image",
+      "type": {
+        "id": "example.gray-image",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "image",
+      "type": {
+        "id": "example.gray-image",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -1,0 +1,58 @@
+{
+  "capabilities": [
+    "ml.train-classification"
+  ],
+  "description": "Fit a one-feature binary threshold model.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:train_threshold_classifier",
+  "failure_modes": [
+    {
+      "code": "ml.nonbinary-target",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.ml.classification.train.threshold",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:9940122c765a586e4d4ef26e0c942e36129506cb45a1d6c07e4213805ab8469e",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "split",
+      "type": {
+        "id": "example.classification-split",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "model",
+      "type": {
+        "id": "example.classification-model",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

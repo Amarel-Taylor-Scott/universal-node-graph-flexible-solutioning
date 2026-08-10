@@ -26,7 +26,7 @@ diagram or candidate count is not, by itself, progress.
 - Negotiated registry discovery with sparse descriptors, exact named embedding
   spaces, graceful query fallback, coverage receipts, and closed-world snapshots.
 - Portable node packs and a deterministic reference catalogue containing five
-  node contracts and 18 cross-domain templates with 317 atomic obligations.
+  node contracts and 19 cross-domain templates with 339 atomic obligations.
 - Dependency-free template authoring CLI, strict linear-blueprint schema, and
   focused workspace skills for templates, node packs, and benchmarking.
 - Prior-guided, beam, seeded-sprout, and uncapped exhaustive route search with explicit
@@ -34,6 +34,14 @@ diagram or candidate count is not, by itself, progress.
 - Successive-halving promotion and patience-based early stopping primitives.
 - Immutable run receipts, Pareto comparison, observational belief fitting, and
   repository instructions for Codex, Claude, Gemini, Copilot, and other agents.
+- A trusted-local reference executor that reconstructs frozen plans, verifies
+  implementation digests, content-addresses outputs, applies bounded retries
+  and frozen fallbacks, invokes an independent verifier, and emits receipts.
+- Six dependency-free executable programs in five notebooks spanning web,
+  documents, images, data cleanup, tabular regression, and classification.
+- Campaign contracts for bounded generated candidates/trials, immutable
+  proposal ancestry, append-only evidence decisions, and explicit evaluator
+  trust boundaries, plus a harness skill for population-based campaigns.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 
@@ -51,9 +59,18 @@ without viewer-specific logic.
 
 ## Phase 2 — isolated execution and receipts
 
+**Reference bootstrap implemented:** the in-process Python adapter, runtime and
+artifact protocols, memory/file content stores, admitted-space-bound plans,
+ordered frozen fallbacks, bounded retry, candidate circuit breaking,
+independent task verification, experiment execution, and receipt-producing
+domain examples are now executable. This proves the seam but is not an
+isolation claim.
+
+**Still required for the phase gate:**
+
 - Execute heterogeneous node runtimes in least-privilege sandboxes.
-- Add content-addressed artifacts, checkpoints, bounded retries, fallbacks,
-  circuit breakers, and explicit plan amendments.
+- Harden content-addressed artifacts, checkpoints, retries, fallbacks, circuit
+  breakers, explicit plan amendments, durable codecs, and resume across crashes.
 - Apply independent task, macro-stage, and substep verification oracles.
 - Store immutable attempts and receipts in an append-only evidence ledger.
 
@@ -69,6 +86,9 @@ and receipt set.
   winner.
 - Preserve negative evidence, rejected routes, evidence freshness, and drift
   invalidation.
+- Extend the campaign-ledger skeleton with diverse frontier selection,
+  paired/interleaved statistical promotion, focused outcome retrieval, and
+  hardware-aware confirmation runs.
 - Support generated-node proposals only through quarantine, fixtures,
   sandboxing, and independent admission.
 

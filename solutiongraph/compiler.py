@@ -17,6 +17,7 @@ from solutiongraph.model import (
     GraphOutput,
     NodeSpec,
     PlanBinding,
+    PlanFallback,
     ProgramGraph,
     Registry,
     SemanticSlot,
@@ -382,9 +383,12 @@ class Compiler:
         registry: Registry,
         space: AdmittedSpace,
         selection: Mapping[str, str],
+        *,
+        fallbacks: Mapping[str, tuple[str, ...]] | None = None,
     ) -> FrozenPlan:
-        """Bind one candidate per slot and freeze exact implementation identities."""
+        """Freeze primary and ordered same-slot fallback implementation identities."""
         diagnostics: list[Diagnostic] = []
+        fallbacks = fallbacks or {}
         if space.program_digest != program.digest:
             diagnostics.append(Diagnostic(
                 "UNG-COMPILE-001", "candidate space was produced for another program", "space"))
@@ -413,6 +417,39 @@ class Compiler:
                     f"selection violates {constraint.id}: {constraint.reason}",
                     "selection",
                 ))
+        for slot_id, candidate_ids in fallbacks.items():
+            path = f"fallbacks.{slot_id}"
+            if slot_id not in expected:
+                diagnostics.append(Diagnostic(
+                    "UNG-COMPILE-007", "fallback references an unknown slot", path))
+                continue
+            if len(candidate_ids) != len(set(candidate_ids)):
+                diagnostics.append(Diagnostic(
+                    "UNG-COMPILE-008", "fallback candidates must be unique", path))
+            for candidate_id in candidate_ids:
+                if candidate_id == selection.get(slot_id):
+                    diagnostics.append(Diagnostic(
+                        "UNG-COMPILE-009",
+                        "primary candidate cannot also be its own fallback",
+                        path,
+                    ))
+                elif candidate_id not in space.choices_for(slot_id):
+                    diagnostics.append(Diagnostic(
+                        "UNG-COMPILE-010",
+                        f"fallback candidate {candidate_id} is not admitted for slot {slot_id}",
+                        path,
+                    ))
+                else:
+                    fallback_selection = dict(selection)
+                    fallback_selection[slot_id] = candidate_id
+                    for constraint in space.constraints:
+                        if constraint.matches(fallback_selection):
+                            diagnostics.append(Diagnostic(
+                                "UNG-COMPILE-011",
+                                f"fallback {candidate_id} violates {constraint.id}: "
+                                f"{constraint.reason}",
+                                path,
+                            ))
         if diagnostics:
             raise ValidationError("cannot compile route", diagnostics)
 
@@ -420,6 +457,7 @@ class Compiler:
         candidate_map = registry.candidate_map()
         node_map = registry.node_map()
         bindings: list[PlanBinding] = []
+        frozen_fallbacks: list[PlanFallback] = []
         for slot_id in order:
             candidate = candidate_map[selection[slot_id]]
             node = node_map[(candidate.node_id, candidate.node_version)]
@@ -431,15 +469,31 @@ class Compiler:
                 implementation_digest=node.implementation_digest,
                 parameters=tuple(sorted(candidate.resolved_parameters(node).items())),
             ))
+            for priority, fallback_id in enumerate(fallbacks.get(slot_id, ()), start=1):
+                fallback = candidate_map[fallback_id]
+                fallback_node = node_map[(fallback.node_id, fallback.node_version)]
+                frozen_fallbacks.append(PlanFallback(
+                    slot_id=slot_id,
+                    priority=priority,
+                    candidate_id=fallback.id,
+                    node_id=fallback_node.id,
+                    node_version=fallback_node.version,
+                    implementation_digest=fallback_node.implementation_digest,
+                    parameters=tuple(sorted(
+                        fallback.resolved_parameters(fallback_node).items()
+                    )),
+                ))
         plan = FrozenPlan(
             digest="",
             program_id=program.id,
             program_version=program.version,
             program_digest=program.digest,
             registry_digest=registry.digest,
+            admitted_space_digest=space.digest,
             topological_order=order,
             bindings=tuple(bindings),
             edges=program.edges,
+            fallbacks=tuple(frozen_fallbacks),
         )
         return replace(plan, digest=sha256_digest(plan.unsigned_dict()))
 

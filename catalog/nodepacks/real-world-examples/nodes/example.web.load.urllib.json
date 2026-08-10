@@ -1,0 +1,81 @@
+{
+  "capabilities": [
+    "web.load"
+  ],
+  "description": "Fetch one explicit read-only URL with the Python standard library.",
+  "determinism": "recorded",
+  "effects": [
+    "network.read"
+  ],
+  "entrypoint": "solutiongraph.examples.nodes:load_web_source_urllib",
+  "failure_modes": [
+    {
+      "code": "web.missing-url",
+      "description": "No URL was supplied.",
+      "retryable": false
+    },
+    {
+      "code": "web.invalid-url",
+      "description": "The supplied URL is malformed.",
+      "retryable": false
+    },
+    {
+      "code": "network.http-error",
+      "description": "The read-only fetch failed.",
+      "retryable": true
+    }
+  ],
+  "id": "example.web.load.urllib",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:717b30fb514f8ae3d4269ec9b5e0a59edfd897f5ca28b49dea22f81d56bdfaa7",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "source",
+      "type": {
+        "id": "example.web-source",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "html",
+      "type": {
+        "id": "example.html-document",
+        "media_type": "text/html",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": 10.0,
+      "description": "",
+      "name": "timeout_seconds",
+      "required": false,
+      "value_type": "number"
+    }
+  ],
+  "permissions": [
+    "network.read"
+  ],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

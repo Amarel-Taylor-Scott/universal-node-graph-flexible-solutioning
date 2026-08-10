@@ -1,0 +1,67 @@
+{
+  "capabilities": [
+    "ml.split-regression"
+  ],
+  "description": "Reserve the last observations as a deterministic holdout.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:split_regression_tail",
+  "failure_modes": [
+    {
+      "code": "ml.invalid-split",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.ml.split.tail",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:fcfba6180aae014ad6949315ffdb492402915374327abd13ba6806d18bdd2914",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "dataset",
+      "type": {
+        "id": "example.regression-dataset",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "split",
+      "type": {
+        "id": "example.regression-split",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": 2,
+      "description": "",
+      "name": "holdout_size",
+      "required": false,
+      "value_type": "integer"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

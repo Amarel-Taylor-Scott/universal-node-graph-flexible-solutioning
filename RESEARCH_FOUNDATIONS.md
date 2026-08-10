@@ -50,6 +50,31 @@ should preserve.
 | [DreamCoder](https://www.pldi21.org/poster_pldi.355.html) | Jointly learn reusable abstractions and a search policy | Repeated successful subgraphs can become versioned composite nodes without erasing their provenance |
 | [Shannon, “A Mathematical Theory of Communication”](https://doi.org/10.1002/j.1538-7305.1948.tb01338.x) | Entropy quantifies unresolved uncertainty | Search should report how much of the route space remains unresolved; priors reduce search order, not candidate visibility |
 
+## Generated-code research campaigns
+
+| Primary source | Relevant idea | Consequence here |
+|---|---|---|
+| [Karpathy AutoResearch](https://github.com/karpathy/autoresearch) | A deliberately small mutable surface, fixed evaluator, mechanical metric, and fixed wall-clock budget make autonomous iterations reviewable | A campaign freezes its evaluation boundary and budget before generated changes; the repository is a pattern, not a core dependency |
+| [GEPA](https://arxiv.org/abs/2507.19457) | Diagnostic execution traces can guide reflective mutations while Pareto selection preserves candidates that excel on different cases | Text reflection is an optional proposal policy; it cannot compile, admit, or verify a route |
+| [GEAR](https://arxiv.org/abs/2605.13874) | Population-based search preserves alternate research states, novelty, ancestry, mutation, and crossover | `CampaignLedger` records a population DAG rather than only the latest incumbent |
+| [Rehearse](https://arxiv.org/abs/2607.27687) | Similar prior attempts and outcomes can improve late-stage pre-execution selection | Focused outcome retrieval informs proposals but never substitutes for an actual run or independent oracle |
+| [AutoMegaKernel](https://arxiv.org/abs/2606.09682) | Static correctness gates can reject unsafe generated schedules before expensive execution | Generated nodes and plans are quarantined and validated before benchmark allocation |
+| [SkyPilot parallel AutoResearch](https://blog.skypilot.co/scaling-autoresearch/) | Parallel experiment waves expose interaction effects, while heterogeneous hardware changes outcome comparability | Schedulers may fan out trials, but receipts and promotion rules preserve hardware/environment identity and reference-hardware confirmation |
+
+`AUTORESEARCH_REVIEW.md` records the package-level review and the resulting
+trust-boundary, lineage, promotion, and numerical-node guidance. The 2026 works
+above are recent preprints or project reports; their claims are design inputs,
+not proof that this framework has reproduced their results.
+
+## Numerical factorization
+
+| Primary source | Relevant idea | Consequence here |
+|---|---|---|
+| [NumPy Cholesky](https://numpy.org/doc/stable/reference/generated/numpy.linalg.cholesky.html) | Cholesky requires a Hermitian/symmetric positive-definite input | SPD qualification is an explicit atomic obligation before Cholesky candidates become admissible |
+| [PyTorch `cholesky_ex`](https://docs.pytorch.org/docs/stable/generated/torch.linalg.cholesky_ex.html) | Batched factorization exposes per-input failure information without immediately constructing exceptions | Failure codes, batch axes, device, and precision belong in typed outputs and receipts |
+| [SciPy factor/solve](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.cho_solve.html) | Factorization and solve are separable and factors can be reused | Symbolic/numeric preparation, factor storage, solve, and residual verification are separate replaceable nodes |
+| [scikit-sparse](https://pypi.org/project/scikit-sparse/) and [cholespy](https://pypi.org/project/cholespy/) | Sparse solvers add SuiteSparse, binary, layout, device, and precision constraints | Package/runtime details stay in candidate and environment contracts, not in the semantic `solve` slot |
+
 ## Coding-agent adoption
 
 The repository uses one short canonical instruction file plus thin adapters:

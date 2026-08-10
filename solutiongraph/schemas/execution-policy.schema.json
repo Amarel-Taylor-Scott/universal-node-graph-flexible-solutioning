@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "execution-policy.schema.json",
+  "title": "Universal Node Graph Execution Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "allowed_runtimes", "granted_permissions", "allowed_effects",
+    "max_attempts_per_candidate", "verify_implementation_digests",
+    "require_task_verifier", "allow_in_process_python"
+  ],
+  "properties": {
+    "allowed_runtimes": {
+      "type": "array", "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true, "minItems": 1
+    },
+    "granted_permissions": {
+      "type": "array", "items": {"$ref": "common.schema.json#/$defs/id"},
+      "uniqueItems": true
+    },
+    "allowed_effects": {
+      "type": "array", "items": {"$ref": "common.schema.json#/$defs/id"},
+      "uniqueItems": true
+    },
+    "max_attempts_per_candidate": {"type": "integer", "minimum": 1},
+    "verify_implementation_digests": {"type": "boolean"},
+    "require_task_verifier": {"type": "boolean"},
+    "allow_in_process_python": {"type": "boolean"}
+  }
+}

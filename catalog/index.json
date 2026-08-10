@@ -9,6 +9,15 @@
       "node_count": 5,
       "path": "nodepacks/reference-core/manifest.json",
       "version": "1.0.0"
+    },
+    {
+      "descriptor_count": 0,
+      "digest": "sha256:baf9d5d19b18726d46d2c9cafed9a6223c01fb35559ba7e8866582252fc956d3",
+      "embedding_record_count": 0,
+      "id": "example.real-world-node-pack",
+      "node_count": 31,
+      "path": "nodepacks/real-world-examples/manifest.json",
+      "version": "1.0.0"
     }
   ],
   "templates": [
@@ -200,6 +209,22 @@
         "authentication",
         "authorization",
         "service"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 22,
+      "digest": "sha256:f195acb4e2af17252b204b005890c9eeb3465140ae5d4468b1cfe093484ac601",
+      "domains": [
+        "computing.numerical",
+        "machine-learning.linear-algebra"
+      ],
+      "id": "template.numerical-linear-system",
+      "path": "templates/template.numerical-linear-system.json",
+      "tags": [
+        "linear-system",
+        "factorization",
+        "numerical-stability"
       ],
       "version": "1.0.0"
     },

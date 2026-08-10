@@ -6,7 +6,8 @@
   "additionalProperties": false,
   "required": [
     "digest", "model_version", "program_id", "program_version", "program_digest",
-    "registry_digest", "topological_order", "bindings", "edges"
+    "registry_digest", "admitted_space_digest", "topological_order", "bindings",
+    "edges", "fallbacks"
   ],
   "properties": {
     "digest": {"$ref": "common.schema.json#/$defs/digest"},
@@ -15,6 +16,7 @@
     "program_version": {"type": "string", "minLength": 1},
     "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
     "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "admitted_space_digest": {"$ref": "common.schema.json#/$defs/digest"},
     "topological_order": {
       "type": "array", "items": {"$ref": "common.schema.json#/$defs/id"}, "uniqueItems": true
     },
@@ -37,7 +39,26 @@
         }
       }
     },
-    "edges": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/edge"}}
+    "edges": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/edge"}},
+    "fallbacks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "slot_id", "priority", "candidate_id", "node_id", "node_version",
+          "implementation_digest", "parameters"
+        ],
+        "properties": {
+          "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+          "priority": {"type": "integer", "minimum": 1},
+          "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
+          "node_id": {"$ref": "common.schema.json#/$defs/id"},
+          "node_version": {"type": "string", "minLength": 1},
+          "implementation_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "parameters": {"type": "object"}
+        }
+      }
+    }
   }
 }
-

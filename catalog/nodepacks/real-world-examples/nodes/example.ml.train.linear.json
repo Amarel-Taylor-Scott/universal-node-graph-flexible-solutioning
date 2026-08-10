@@ -1,0 +1,58 @@
+{
+  "capabilities": [
+    "ml.train-regression"
+  ],
+  "description": "Fit a one-feature ordinary least-squares model.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.nodes:train_linear_regressor",
+  "failure_modes": [
+    {
+      "code": "ml.constant-feature",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "example.ml.train.linear",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:a548a6c1a38edcf29ccbcc5c943a52208d58a54a66ae44b8f2127b8fbf76dcb2",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "split",
+      "type": {
+        "id": "example.regression-split",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.1",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "model",
+      "type": {
+        "id": "example.regression-model",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

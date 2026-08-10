@@ -7,6 +7,8 @@ import json
 from collections.abc import Sequence
 from pathlib import Path
 
+from solutiongraph.executor import ExecutionError
+
 
 def _template(template_id: str):
     from solutiongraph.template_library import REFERENCE_TEMPLATES
@@ -22,6 +24,8 @@ def _template(template_id: str):
 
 def _doctor() -> int:
     from solutiongraph.catalog import catalog_documents
+    from solutiongraph.examples.tasks import EXAMPLE_TASKS
+    from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
     from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
     from solutiongraph.schemas import load_all_schemas
     from solutiongraph.template_library import REFERENCE_TEMPLATES
@@ -53,6 +57,8 @@ def _doctor() -> int:
         f"templates={len(REFERENCE_TEMPLATES.templates)} "
         f"atomic_slots={sum(len(item.program.slots) for item in REFERENCE_TEMPLATES.templates)} "
         f"nodes={len(REFERENCE_NODE_SPECS)} "
+        f"example_nodes={len(EXAMPLE_NODES)} "
+        f"executable_examples={len(EXAMPLE_TASKS)} "
         f"schemas={len(schemas)} "
         f"catalog_documents={len(documents)}"
     )
@@ -138,6 +144,61 @@ def _catalog_export(output: Path) -> int:
     return 0
 
 
+def _examples_list(as_json: bool) -> int:
+    from solutiongraph.examples import EXAMPLE_TASKS
+
+    rows = [
+        {
+            "id": example.id,
+            "title": example.title,
+            "description": example.description,
+            "slots": len(example.program.slots),
+            "routes": [route.id for route in example.routes],
+        }
+        for example in EXAMPLE_TASKS
+    ]
+    if as_json:
+        print(json.dumps(rows, indent=2, sort_keys=True))
+        return 0
+    print("ID\tSLOTS\tROUTES\tTITLE")
+    for row in rows:
+        print(f"{row['id']}\t{row['slots']}\t{len(row['routes'])}\t{row['title']}")
+    return 0
+
+
+def _examples_run(
+    example_id: str,
+    route: str,
+    artifact_dir: Path | None,
+    as_json: bool,
+) -> int:
+    from solutiongraph.examples import run_example
+
+    report = run_example(example_id, route=route, artifact_root=artifact_dir)
+    if as_json:
+        print(json.dumps(report, indent=2, sort_keys=True))
+        return 0
+    if route == "all":
+        experiment = report["experiment"]
+        print(
+            f"{example_id}: {experiment['completed_runs']} routes executed; "
+            f"Pareto routes={len(experiment['pareto_plan_digests'])}"
+        )
+        for receipt in experiment["receipts"]:
+            print(
+                f"- {receipt['plan_digest'][:23]} {receipt['outcome']} "
+                f"quality={receipt['metrics'].get('quality', 'n/a')} "
+                f"latency_ms={receipt['metrics']['latency_ms']:.3f}"
+            )
+    else:
+        receipt = report["execution"]["receipt"]
+        print(
+            f"{example_id}/{route}: {receipt['outcome']} "
+            f"plan={report['plan']['digest']} artifacts={len(report['execution']['artifacts'])}"
+        )
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="solutiongraph",
@@ -181,6 +242,26 @@ def build_parser() -> argparse.ArgumentParser:
     catalog_commands = catalog.add_subparsers(dest="catalog_command", required=True)
     export_parser = catalog_commands.add_parser("export", help="Export the reference catalog")
     export_parser.add_argument("--output", type=Path, default=Path("catalog"))
+
+    examples = commands.add_parser(
+        "examples", help="List or execute the six dependency-free domain examples"
+    )
+    example_commands = examples.add_subparsers(dest="example_command", required=True)
+    examples_list = example_commands.add_parser("list", help="List executable examples")
+    examples_list.add_argument("--json", action="store_true", help="Emit JSON")
+    examples_run = example_commands.add_parser("run", help="Compile and execute an example")
+    examples_run.add_argument("example_id")
+    examples_run.add_argument(
+        "--route",
+        default="all",
+        help="Route name, or 'all' to run a receipt-backed comparison",
+    )
+    examples_run.add_argument(
+        "--artifact-dir",
+        type=Path,
+        help="Persist content-addressed outputs instead of using memory",
+    )
+    examples_run.add_argument("--json", action="store_true", help="Emit full JSON")
     return parser
 
 
@@ -201,7 +282,17 @@ def main(argv: Sequence[str] | None = None) -> int:
                 return _templates_create(args.blueprint, args.output)
         if args.command == "catalog" and args.catalog_command == "export":
             return _catalog_export(args.output)
-    except (OSError, ValueError) as exc:
+        if args.command == "examples":
+            if args.example_command == "list":
+                return _examples_list(args.json)
+            if args.example_command == "run":
+                return _examples_run(
+                    args.example_id,
+                    args.route,
+                    args.artifact_dir,
+                    args.json,
+                )
+    except (ExecutionError, OSError, ValueError) as exc:
         parser.exit(2, f"solutiongraph: error: {exc}\n")
     parser.error("unsupported command")
     return 2

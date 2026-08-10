@@ -13,6 +13,8 @@ from solutiongraph.discovery import (
     RegistryCapabilities,
     SchemaSupport,
 )
+from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
+from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
     REFERENCE_NODE_SPECS,
@@ -64,6 +66,29 @@ def reference_registry_capabilities() -> RegistryCapabilities:
     )
 
 
+def example_registry_capabilities() -> RegistryCapabilities:
+    """Advertise only exact lookup and enumeration for the sparse example pack."""
+    return RegistryCapabilities(
+        registry_id=EXAMPLE_REGISTRY.id,
+        registry_version=EXAMPLE_REGISTRY.version,
+        registry_digest=EXAMPLE_REGISTRY.digest,
+        protocol_versions=("0.1",),
+        schemas=(
+            SchemaSupport("node-spec", ("0.1",)),
+            SchemaSupport("node-pack", ("0.1",)),
+        ),
+        query_modes=(
+            QueryMode("exact", fields=("node_id", "node_spec_digest")),
+            QueryMode("enumeration", supports_cursor=True),
+        ),
+        supports_enumeration=True,
+        supports_snapshots=True,
+        supports_continuation=True,
+        max_page_size=1000,
+        extensions=(("example.maturity", "executable-teaching-fixture"),),
+    )
+
+
 def catalog_documents() -> dict[str, dict[str, Any]]:
     """Return every generated catalogue document keyed by portable relative path."""
     artifacts = tuple(
@@ -91,16 +116,52 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         extensions=(("reference.maturity", "demonstration"),),
     )
     capabilities = reference_registry_capabilities()
+    example_artifacts = tuple(
+        ArtifactReference(
+            name=f"artifact.{node.id}",
+            media_type="text/x-python",
+            digest=node.implementation_digest,
+            uri=f"python://{node.entrypoint}",
+            annotations=(("org.opencontainers.image.title", node.entrypoint),),
+        )
+        for node in EXAMPLE_NODES
+    )
+    example_pack = NodePackManifest(
+        id="example.real-world-node-pack",
+        version="1.0.0",
+        description=(
+            "Dependency-free executable teaching nodes for web, document, image, "
+            "data-cleaning, tabular-regression, and tabular-classification examples."
+        ),
+        node_spec_digests=tuple(node.digest for node in EXAMPLE_NODES),
+        artifacts=example_artifacts,
+        source=(
+            "https://github.com/Amarel-Taylor-Scott/"
+            "universal-node-graph-flexible-solutioning"
+        ),
+        license="MIT",
+        extensions=(("example.maturity", "executable-teaching-fixture"),),
+    )
+    example_capabilities = example_registry_capabilities()
     documents: dict[str, dict[str, Any]] = {
         "nodepacks/reference-core/manifest.json": node_pack.to_dict(),
         "nodepacks/reference-core/registry.json": REFERENCE_REGISTRY.to_dict(),
         "nodepacks/reference-core/registry-capabilities.json": capabilities.to_dict(),
+        "nodepacks/real-world-examples/manifest.json": example_pack.to_dict(),
+        "nodepacks/real-world-examples/registry.json": EXAMPLE_REGISTRY.to_dict(),
+        "nodepacks/real-world-examples/registry-capabilities.json": (
+            example_capabilities.to_dict()
+        ),
     }
     for node in REFERENCE_NODE_SPECS:
         documents[f"nodepacks/reference-core/nodes/{node.id}.json"] = node.to_dict()
     for descriptor in REFERENCE_DESCRIPTORS:
         documents[f"nodepacks/reference-core/descriptors/{descriptor.node_id}.json"] = (
             descriptor.to_dict()
+        )
+    for node in EXAMPLE_NODES:
+        documents[f"nodepacks/real-world-examples/nodes/{node.id}.json"] = (
+            node.to_dict()
         )
     for template in REFERENCE_TEMPLATES.templates:
         documents[f"templates/{template.id}.json"] = template.to_dict()
@@ -128,7 +189,16 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "node_count": len(REFERENCE_NODE_SPECS),
                 "descriptor_count": len(REFERENCE_DESCRIPTORS),
                 "embedding_record_count": 0,
-            }
+            },
+            {
+                "id": example_pack.id,
+                "version": example_pack.version,
+                "digest": example_pack.digest,
+                "path": "nodepacks/real-world-examples/manifest.json",
+                "node_count": len(EXAMPLE_NODES),
+                "descriptor_count": 0,
+                "embedding_record_count": 0,
+            },
         ],
     }
     return dict(sorted(documents.items()))
@@ -151,6 +221,7 @@ def write_catalog(root: str | Path) -> tuple[Path, ...]:
 
 __all__ = [
     "catalog_documents",
+    "example_registry_capabilities",
     "reference_registry_capabilities",
     "write_catalog",
 ]

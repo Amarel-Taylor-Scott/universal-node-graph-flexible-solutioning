@@ -1,0 +1,2114 @@
+{
+  "candidates": [
+    {
+      "deployment": "",
+      "id": "candidate.example.web.load.offline.default",
+      "implementation_digest": "sha256:b686373da96b81001789c23ab179790fd2d990f48beefc201cbb5fe892482534",
+      "node_id": "example.web.load.offline",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.web.load.urllib.default",
+      "implementation_digest": "sha256:717b30fb514f8ae3d4269ec9b5e0a59edfd897f5ca28b49dea22f81d56bdfaa7",
+      "node_id": "example.web.load.urllib",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.web.extract.parser.default",
+      "implementation_digest": "sha256:100383a96b627c4c7c79864dc52fabf92c03ebcdf7ce05c7297f639ce6ea33e0",
+      "node_id": "example.web.extract.parser",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.web.extract.regex.default",
+      "implementation_digest": "sha256:3b62c6347487c27c8e4e3d9e89befab88e87d3ffcd9a6239b2bf9a75c36b0cec",
+      "node_id": "example.web.extract.regex",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.web.project.schema.title-links",
+      "implementation_digest": "sha256:c13b70f5a475014891eba5d6ca0a15b8d2c21c1c26e8e771560b1cdad56f9fd1",
+      "node_id": "example.web.project.schema",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "title",
+          "links"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.document.normalize.conservative.default",
+      "implementation_digest": "sha256:89906e1df2f5cfc918f977050f3d224bfe4a137ea7ee36744b720f234ed4ff31",
+      "node_id": "example.document.normalize.conservative",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.document.normalize.compact.default",
+      "implementation_digest": "sha256:c5238e09cf3b9a542aff99d587a124ccf39f62afe6bdefcac88bfa8b185c5bf7",
+      "node_id": "example.document.normalize.compact",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.document.extract.lines.default",
+      "implementation_digest": "sha256:6acded8319fa5a269a9a4cb1f2f9a88e2806843e9ba03191862920c42ca52b08",
+      "node_id": "example.document.extract.lines",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.document.extract.regex.default",
+      "implementation_digest": "sha256:0c2ef84aaf0f938f594b221c1633c5cf1425c040feec33bb2490513a065c16c5",
+      "node_id": "example.document.extract.regex",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.document.project.schema.invoice",
+      "implementation_digest": "sha256:7c2229fe550f03559285019eae8c1fea8a39c248423030ebb0bbef0bbd87c6fe",
+      "node_id": "example.document.project.schema",
+      "node_version": "1.0.0",
+      "parameters": {
+        "required_fields": [
+          "name",
+          "invoice_total"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.image.decode.tokens.default",
+      "implementation_digest": "sha256:043d186804a502c5bef78020a53d576b4a53b87253b0e82e54ef3854befa6b27",
+      "node_id": "example.image.decode.tokens",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.image.decode.lines.default",
+      "implementation_digest": "sha256:abf9f744e086ebb1abd61f79c5124c46e61ef5b9b251bc0ce4980cb22042e921",
+      "node_id": "example.image.decode.lines",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.image.enhance.identity.default",
+      "implementation_digest": "sha256:6a241c6682df07a69af44180be74c35f48726ba324cc0206f93c34e5c8a0597b",
+      "node_id": "example.image.enhance.identity",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.image.enhance.minmax.default",
+      "implementation_digest": "sha256:652b4b0b87a43c7e0d19b2282f6759b0fb01926f3f4aa8ef8de756d6cc74eae6",
+      "node_id": "example.image.enhance.minmax",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.image.inspect.mean.default",
+      "implementation_digest": "sha256:7a6c6c49953a06ab510d14fd351da669dd8fcb28b559fa61c1d353ce733d7fe0",
+      "node_id": "example.image.inspect.mean",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.image.inspect.histogram.default",
+      "implementation_digest": "sha256:0ae0d1398626693daed4a4ad764794e5ec3f4330860551325519c3697a613717",
+      "node_id": "example.image.inspect.histogram",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.data.normalize.conservative.default",
+      "implementation_digest": "sha256:fce6ffae7be4723e0316acdb6e0268f16d41ee1bcd23e29e73fcb542e9651721",
+      "node_id": "example.data.normalize.conservative",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.data.normalize.aggressive.default",
+      "implementation_digest": "sha256:14fb8e62a816965035be3959b4e92da0780bf936b344552bea21986a33485bcb",
+      "node_id": "example.data.normalize.aggressive",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.data.deduplicate.exact.company",
+      "implementation_digest": "sha256:3b2b6eed1db8558acfcdbe3bf9adface51a7d2ed04556146557297eb2a6b034c",
+      "node_id": "example.data.deduplicate.exact",
+      "node_version": "1.0.0",
+      "parameters": {
+        "key_fields": [
+          "company"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.data.deduplicate.normalized.company",
+      "implementation_digest": "sha256:b7221cf1e31df9f2d3ec413f5249be516156aaf4551f49884966b004bc747c6b",
+      "node_id": "example.data.deduplicate.normalized",
+      "node_version": "1.0.0",
+      "parameters": {
+        "key_fields": [
+          "company"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.data.sort.company",
+      "implementation_digest": "sha256:21fb5b81f85a197b831534f9aa676278983a57cd4a9337f14d0fedd7eb9507d9",
+      "node_id": "example.data.sort",
+      "node_version": "1.0.0",
+      "parameters": {
+        "sort_key": "company"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.split.tail.default",
+      "implementation_digest": "sha256:fcfba6180aae014ad6949315ffdb492402915374327abd13ba6806d18bdd2914",
+      "node_id": "example.ml.split.tail",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.split.alternating.default",
+      "implementation_digest": "sha256:800af32b49316a084a2572a2e616398b8575ed27e2853a36137cf003a0b52ce4",
+      "node_id": "example.ml.split.alternating",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.train.mean.default",
+      "implementation_digest": "sha256:6e5b71e26ccf0682fe3b988cf5a9d7a58bcafd2790a17a66e21e05d48142fff8",
+      "node_id": "example.ml.train.mean",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.train.linear.default",
+      "implementation_digest": "sha256:a548a6c1a38edcf29ccbcc5c943a52208d58a54a66ae44b8f2127b8fbf76dcb2",
+      "node_id": "example.ml.train.linear",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.evaluate.default",
+      "implementation_digest": "sha256:74b02f64dafc7d7d683cce89f89cc25fadb1a03867309fc1d69638417d05325a",
+      "node_id": "example.ml.evaluate",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.classification.split.tail.default",
+      "implementation_digest": "sha256:a7a16097f42766a2bb9cf6cd64a48a7c0729d704524e8d2419224b7577f0d5d1",
+      "node_id": "example.ml.classification.split.tail",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.classification.split.alternating.default",
+      "implementation_digest": "sha256:557c15f0747688787c53b56c582a7691c7f36ea42e5e2d1d9f77054c5cfc166e",
+      "node_id": "example.ml.classification.split.alternating",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.classification.train.majority.default",
+      "implementation_digest": "sha256:a0595eb109583cdbf65def5fc5e90d6c7dd3ea52ecb7a479c9eb0b50375c326b",
+      "node_id": "example.ml.classification.train.majority",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.classification.train.threshold.default",
+      "implementation_digest": "sha256:9940122c765a586e4d4ef26e0c942e36129506cb45a1d6c07e4213805ab8469e",
+      "node_id": "example.ml.classification.train.threshold",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.ml.classification.evaluate.default",
+      "implementation_digest": "sha256:858861bb59ab34780851b42a717e5fdcc0c672e16e610a5b410c76a1cd6a7347",
+      "node_id": "example.ml.classification.evaluate",
+      "node_version": "1.0.0",
+      "parameters": {}
+    }
+  ],
+  "id": "example.real-world-registry",
+  "model_version": "0.1",
+  "nodes": [
+    {
+      "capabilities": [
+        "web.load"
+      ],
+      "description": "Load inline HTML or a text data URL without external network access.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:load_web_source_offline",
+      "failure_modes": [
+        {
+          "code": "web.offline-source-unavailable",
+          "description": "No offline payload exists.",
+          "retryable": false
+        },
+        {
+          "code": "web.invalid-data-url",
+          "description": "The data URL is malformed.",
+          "retryable": false
+        }
+      ],
+      "id": "example.web.load.offline",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:b686373da96b81001789c23ab179790fd2d990f48beefc201cbb5fe892482534",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "source",
+          "type": {
+            "id": "example.web-source",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "html",
+          "type": {
+            "id": "example.html-document",
+            "media_type": "text/html",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "web.load"
+      ],
+      "description": "Fetch one explicit read-only URL with the Python standard library.",
+      "determinism": "recorded",
+      "effects": [
+        "network.read"
+      ],
+      "entrypoint": "solutiongraph.examples.nodes:load_web_source_urllib",
+      "failure_modes": [
+        {
+          "code": "web.missing-url",
+          "description": "No URL was supplied.",
+          "retryable": false
+        },
+        {
+          "code": "web.invalid-url",
+          "description": "The supplied URL is malformed.",
+          "retryable": false
+        },
+        {
+          "code": "network.http-error",
+          "description": "The read-only fetch failed.",
+          "retryable": true
+        }
+      ],
+      "id": "example.web.load.urllib",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:717b30fb514f8ae3d4269ec9b5e0a59edfd897f5ca28b49dea22f81d56bdfaa7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "source",
+          "type": {
+            "id": "example.web-source",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "html",
+          "type": {
+            "id": "example.html-document",
+            "media_type": "text/html",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": 10.0,
+          "description": "",
+          "name": "timeout_seconds",
+          "required": false,
+          "value_type": "number"
+        }
+      ],
+      "permissions": [
+        "network.read"
+      ],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "web.extract"
+      ],
+      "description": "Extract title, visible text, and links with HTMLParser.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:extract_page_html_parser",
+      "failure_modes": [],
+      "id": "example.web.extract.parser",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:100383a96b627c4c7c79864dc52fabf92c03ebcdf7ce05c7297f639ce6ea33e0",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "html",
+          "type": {
+            "id": "example.html-document",
+            "media_type": "text/html",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "page",
+          "type": {
+            "id": "example.page-record",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "web.extract"
+      ],
+      "description": "Extract the same fields with a simple regular-expression strategy.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:extract_page_regex",
+      "failure_modes": [],
+      "id": "example.web.extract.regex",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3b62c6347487c27c8e4e3d9e89befab88e87d3ffcd9a6239b2bf9a75c36b0cec",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "html",
+          "type": {
+            "id": "example.html-document",
+            "media_type": "text/html",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "page",
+          "type": {
+            "id": "example.page-record",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "web.project-schema"
+      ],
+      "description": "Project extracted page fields into a declared result schema.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:project_page_schema",
+      "failure_modes": [
+        {
+          "code": "schema.missing-field",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.web.project.schema",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c13b70f5a475014891eba5d6ca0a15b8d2c21c1c26e8e771560b1cdad56f9fd1",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "page",
+          "type": {
+            "id": "example.page-record",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "result",
+          "type": {
+            "id": "example.scrape-result",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "document.normalize"
+      ],
+      "description": "Normalize line endings while preserving record boundaries.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:normalize_document_conservative",
+      "failure_modes": [],
+      "id": "example.document.normalize.conservative",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:89906e1df2f5cfc918f977050f3d224bfe4a137ea7ee36744b720f234ed4ff31",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "document",
+          "type": {
+            "id": "example.document-text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "example.normalized-text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "document.normalize"
+      ],
+      "description": "Compact repeated whitespace while preserving nonempty record lines.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:normalize_document_compact",
+      "failure_modes": [],
+      "id": "example.document.normalize.compact",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c5238e09cf3b9a542aff99d587a124ccf39f62afe6bdefcac88bfa8b185c5bf7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "document",
+          "type": {
+            "id": "example.document-text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "example.normalized-text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "document.extract-fields"
+      ],
+      "description": "Parse colon-delimited fields one line at a time.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:extract_document_lines",
+      "failure_modes": [],
+      "id": "example.document.extract.lines",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:6acded8319fa5a269a9a4cb1f2f9a88e2806843e9ba03191862920c42ca52b08",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "example.normalized-text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "fields",
+          "type": {
+            "id": "example.field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "document.extract-fields"
+      ],
+      "description": "Parse colon-delimited fields with a multiline expression.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:extract_document_regex",
+      "failure_modes": [],
+      "id": "example.document.extract.regex",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0c2ef84aaf0f938f594b221c1633c5cf1425c040feec33bb2490513a065c16c5",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "example.normalized-text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "fields",
+          "type": {
+            "id": "example.field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "document.project-schema"
+      ],
+      "description": "Require and project an exact requested document schema.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:project_document_schema",
+      "failure_modes": [
+        {
+          "code": "schema.missing-field",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.document.project.schema",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:7c2229fe550f03559285019eae8c1fea8a39c248423030ebb0bbef0bbd87c6fe",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "fields",
+          "type": {
+            "id": "example.field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "result",
+          "type": {
+            "id": "example.document-record",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "required_fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "image.decode"
+      ],
+      "description": "Decode an ASCII PGM image with a token scanner.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:decode_pgm_tokens",
+      "failure_modes": [
+        {
+          "code": "image.unsupported-format",
+          "description": "",
+          "retryable": false
+        },
+        {
+          "code": "image.invalid-header",
+          "description": "",
+          "retryable": false
+        },
+        {
+          "code": "image.invalid-pixels",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.image.decode.tokens",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:043d186804a502c5bef78020a53d576b4a53b87253b0e82e54ef3854befa6b27",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "document",
+          "type": {
+            "id": "example.pgm-document",
+            "media_type": "image/x-portable-graymap",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "image.decode"
+      ],
+      "description": "Decode the same ASCII PGM contract with a line parser.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:decode_pgm_lines",
+      "failure_modes": [
+        {
+          "code": "image.unsupported-format",
+          "description": "",
+          "retryable": false
+        },
+        {
+          "code": "image.invalid-header",
+          "description": "",
+          "retryable": false
+        },
+        {
+          "code": "image.invalid-pixels",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.image.decode.lines",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:abf9f744e086ebb1abd61f79c5124c46e61ef5b9b251bc0ce4980cb22042e921",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "document",
+          "type": {
+            "id": "example.pgm-document",
+            "media_type": "image/x-portable-graymap",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "image.enhance"
+      ],
+      "description": "Explicitly certify that no contrast transformation is required.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:enhance_image_identity",
+      "failure_modes": [],
+      "id": "example.image.enhance.identity",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:6a241c6682df07a69af44180be74c35f48726ba324cc0206f93c34e5c8a0597b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "image.enhance"
+      ],
+      "description": "Stretch observed pixels across the declared grayscale range.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:enhance_image_minmax",
+      "failure_modes": [],
+      "id": "example.image.enhance.minmax",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:652b4b0b87a43c7e0d19b2282f6759b0fb01926f3f4aa8ef8de756d6cc74eae6",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "image.inspect"
+      ],
+      "description": "Measure dimensions and contrast directly from pixels.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:inspect_image_mean",
+      "failure_modes": [],
+      "id": "example.image.inspect.mean",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:7a6c6c49953a06ab510d14fd351da669dd8fcb28b559fa61c1d353ce733d7fe0",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "report",
+          "type": {
+            "id": "example.image-report",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "image.inspect"
+      ],
+      "description": "Measure the same contract through a grayscale histogram.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:inspect_image_histogram",
+      "failure_modes": [],
+      "id": "example.image.inspect.histogram",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0ae0d1398626693daed4a4ad764794e5ec3f4330860551325519c3697a613717",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "image",
+          "type": {
+            "id": "example.gray-image",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "report",
+          "type": {
+            "id": "example.image-report",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.normalize-records"
+      ],
+      "description": "Normalize field names, whitespace, and email casing.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:normalize_records_conservative",
+      "failure_modes": [],
+      "id": "example.data.normalize.conservative",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:fce6ffae7be4723e0316acdb6e0268f16d41ee1bcd23e29e73fcb542e9651721",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.raw-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.normalized-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.normalize-records"
+      ],
+      "description": "Add person, company, and phone canonicalization.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:normalize_records_aggressive",
+      "failure_modes": [],
+      "id": "example.data.normalize.aggressive",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:14fb8e62a816965035be3959b4e92da0780bf936b344552bea21986a33485bcb",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.raw-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.normalized-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.deduplicate"
+      ],
+      "description": "Deduplicate configured fields by exact equality.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:deduplicate_records_exact",
+      "failure_modes": [],
+      "id": "example.data.deduplicate.exact",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3b2b6eed1db8558acfcdbe3bf9adface51a7d2ed04556146557297eb2a6b034c",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.normalized-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.deduplicated-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "key_fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.deduplicate"
+      ],
+      "description": "Deduplicate configured fields by normalized alphanumeric equality.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:deduplicate_records_normalized",
+      "failure_modes": [],
+      "id": "example.data.deduplicate.normalized",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:b7221cf1e31df9f2d3ec413f5249be516156aaf4551f49884966b004bc747c6b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.normalized-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.deduplicated-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "key_fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.emit-clean"
+      ],
+      "description": "Emit cleaned records in a deterministic order.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:sort_records",
+      "failure_modes": [],
+      "id": "example.data.sort",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:21fb5b81f85a197b831534f9aa676278983a57cd4a9337f14d0fedd7eb9507d9",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.deduplicated-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "example.clean-records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "sort_key",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.split-regression"
+      ],
+      "description": "Reserve the last observations as a deterministic holdout.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:split_regression_tail",
+      "failure_modes": [
+        {
+          "code": "ml.invalid-split",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.split.tail",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:fcfba6180aae014ad6949315ffdb492402915374327abd13ba6806d18bdd2914",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "dataset",
+          "type": {
+            "id": "example.regression-dataset",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.regression-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": 2,
+          "description": "",
+          "name": "holdout_size",
+          "required": false,
+          "value_type": "integer"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.split-regression"
+      ],
+      "description": "Use deterministic alternating rows for train and holdout partitions.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:split_regression_alternating",
+      "failure_modes": [
+        {
+          "code": "ml.invalid-split",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.split.alternating",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:800af32b49316a084a2572a2e616398b8575ed27e2853a36137cf003a0b52ce4",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "dataset",
+          "type": {
+            "id": "example.regression-dataset",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.regression-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.train-regression"
+      ],
+      "description": "Fit an intercept-only regression baseline.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:train_mean_regressor",
+      "failure_modes": [],
+      "id": "example.ml.train.mean",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:6e5b71e26ccf0682fe3b988cf5a9d7a58bcafd2790a17a66e21e05d48142fff8",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.regression-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "model",
+          "type": {
+            "id": "example.regression-model",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.train-regression"
+      ],
+      "description": "Fit a one-feature ordinary least-squares model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:train_linear_regressor",
+      "failure_modes": [
+        {
+          "code": "ml.constant-feature",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.train.linear",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:a548a6c1a38edcf29ccbcc5c943a52208d58a54a66ae44b8f2127b8fbf76dcb2",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.regression-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "model",
+          "type": {
+            "id": "example.regression-model",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.evaluate-regression"
+      ],
+      "description": "Measure holdout RMSE and generate requested predictions.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:evaluate_regressor",
+      "failure_modes": [
+        {
+          "code": "ml.unknown-model",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.evaluate",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:74b02f64dafc7d7d683cce89f89cc25fadb1a03867309fc1d69638417d05325a",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.regression-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "model",
+          "type": {
+            "id": "example.regression-model",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "result",
+          "type": {
+            "id": "example.regression-result",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.split-classification"
+      ],
+      "description": "Reserve the last labeled observations as a deterministic holdout.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:split_classification_tail",
+      "failure_modes": [
+        {
+          "code": "ml.invalid-split",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.classification.split.tail",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:a7a16097f42766a2bb9cf6cd64a48a7c0729d704524e8d2419224b7577f0d5d1",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "dataset",
+          "type": {
+            "id": "example.classification-dataset",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.classification-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": 2,
+          "description": "",
+          "name": "holdout_size",
+          "required": false,
+          "value_type": "integer"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.split-classification"
+      ],
+      "description": "Use deterministic alternating rows for classification partitions.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:split_classification_alternating",
+      "failure_modes": [
+        {
+          "code": "ml.invalid-split",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.classification.split.alternating",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:557c15f0747688787c53b56c582a7691c7f36ea42e5e2d1d9f77054c5cfc166e",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "dataset",
+          "type": {
+            "id": "example.classification-dataset",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.classification-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.train-classification"
+      ],
+      "description": "Fit an explicit majority-class control model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:train_majority_classifier",
+      "failure_modes": [
+        {
+          "code": "ml.empty-training-set",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.classification.train.majority",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:a0595eb109583cdbf65def5fc5e90d6c7dd3ea52ecb7a479c9eb0b50375c326b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.classification-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "model",
+          "type": {
+            "id": "example.classification-model",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.train-classification"
+      ],
+      "description": "Fit a one-feature binary threshold model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:train_threshold_classifier",
+      "failure_modes": [
+        {
+          "code": "ml.nonbinary-target",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.classification.train.threshold",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:9940122c765a586e4d4ef26e0c942e36129506cb45a1d6c07e4213805ab8469e",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.classification-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "model",
+          "type": {
+            "id": "example.classification-model",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "ml.evaluate-classification"
+      ],
+      "description": "Measure holdout accuracy and generate requested class predictions.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.nodes:evaluate_classifier",
+      "failure_modes": [
+        {
+          "code": "ml.unknown-model",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "example.ml.classification.evaluate",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:858861bb59ab34780851b42a717e5fdcc0c672e16e610a5b410c76a1cd6a7347",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "split",
+          "type": {
+            "id": "example.classification-split",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "model",
+          "type": {
+            "id": "example.classification-model",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.1",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "result",
+          "type": {
+            "id": "example.classification-result",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    }
+  ],
+  "version": "1.0.0"
+}

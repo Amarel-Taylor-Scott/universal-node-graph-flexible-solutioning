@@ -16,14 +16,18 @@ engine.
 1. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative model and invariants.
 2. `NODE_REPOSITORY_PROTOCOL.md` — discovery sidecars, embeddings, handshake, snapshots.
 3. `SOLUTION_TEMPLATE_PROTOCOL.md` — stages, atomic slots, and refinement loops.
-4. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
-5. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
+4. `EXECUTION_PROTOCOL.md` — frozen plans, runtime adapters, artifacts, fallbacks, and receipts.
+5. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
+6. `AUTORESEARCH_REVIEW.md` — generated-code campaigns, evaluator isolation, and numerical nodes.
+7. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
 
 Use the narrowest matching workspace skill:
 
 - `.agents/skills/create-solution-template/SKILL.md` for template authoring;
 - `.agents/skills/author-node-pack/SKILL.md` for reusable node packs;
 - `.agents/skills/benchmark-solution-graph/SKILL.md` for route experiments;
+- `.agents/skills/execute-solution-graph/SKILL.md` for runtimes, artifacts, and executable examples;
+- `.agents/skills/design-autoresearch-campaign/SKILL.md` for bounded LLM-generated improvement campaigns;
 - `.agents/skills/model-solution-graph/SKILL.md` for end-to-end modeling.
 
 ## Non-negotiable ontology
@@ -36,6 +40,8 @@ Use the narrowest matching workspace skill:
 - A belief model contains mutable learned priors. It is not program semantics.
 - A frozen plan contains one exact candidate per slot and no mutable score.
 - A receipt records observation. It never rewrites a definition or prior result.
+- A campaign record preserves candidate ancestry and proposal identity. It does
+  not grant admission or replace execution evidence.
 
 Do not mix optimization, contracts, feedback, or evidence into the ordered task
 steps as if they were more steps.
@@ -90,6 +96,11 @@ objects, not in `NodeSpec`.
 - Call receipt-derived node effects observational unless assignment supports a
   causal claim.
 - Select fallbacks for failure diversity as well as rank.
+- Preserve multiple candidate lineages during generated-code campaigns; do not
+  collapse all evidence into one greedy incumbent.
+- Candidate code must not write its evaluator. Hidden cases require a
+  candidate-unreadable evaluator, and untrusted generated code requires a real
+  container, microVM, or remote trust boundary.
 
 ## LLM rules
 
@@ -104,6 +115,11 @@ objects, not in `NodeSpec`.
 
 - `solutiongraph/` — domain-neutral semantic model, compiler, search, evidence.
 - `solutiongraph/template_authoring.py` — strict linear blueprint compiler.
+- `solutiongraph/executor.py` — strict reference frozen-plan executor and runtime seam.
+- `solutiongraph/artifacts.py` — content-addressed value/artifact store protocol.
+- `solutiongraph/experiments.py` — receipt-producing experiment allocation.
+- `solutiongraph/campaign.py` — population ancestry, budgets, decisions, and evaluator boundaries.
+- `solutiongraph/examples/` — six dependency-free executable domain examples.
 - `solutiongraph/schemas/` — strict portable wire schemas.
 - `catalog/` — generated semantic templates and reference node pack.
 - `browsergraph/` — browser runtime adapter and original proof of concept.

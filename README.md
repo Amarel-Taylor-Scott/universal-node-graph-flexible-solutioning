@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![Core deps: none](https://img.shields.io/badge/core%20deps-stdlib--only-brightgreen)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-499%20passing-brightgreen)](tests/)
+[![Tests](https://img.shields.io/badge/tests-515%20passing-brightgreen)](tests/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
 A proof of concept for a different way to build software: compile each task
@@ -24,6 +24,19 @@ registry snapshots, reusable semantic templates, complete admission, frozen
 plans, prior/beam/sprout/exhaustive search, adaptive resource allocation,
 immutable evidence, Pareto ranking, and observational prior learning.
 `browsergraph` is explicitly one concrete runtime adapter and stress test.
+
+For LLM-generated improvement campaigns, the core also provides immutable
+candidate ancestry, hard campaign budgets, append-only promotion decisions,
+and explicit evaluator trust boundaries. The harness may generate new nodes or
+graphs, but generated code still has to enter quarantine, compile, execute in
+an appropriate isolation boundary, and pass an independent fixed oracle.
+
+The repository also includes a strict reference execution seam. It can recheck
+and run trusted local Python plans, content-address outputs, activate only
+compiler-frozen fallbacks, apply an independent verifier, and emit immutable
+receipts. It is a framework skeleton, not a security sandbox: production
+harnesses must replace the in-process adapter with an enforcing isolated
+runtime.
 
 ```text
 Task
@@ -50,11 +63,14 @@ is not mixed into the execution path as another step.
 | Evidence and learning | Typed receipts, feedback channels, fallbacks, independent verification, and inspectable decision traces |
 | Portable specifications | JSON Schema for node manifests and versioned workbench data |
 | Reusable node ecosystem | Strict executable contracts, optional descriptors/documents/embeddings, negotiated search, discovery receipts, snapshots, and node packs |
-| Cross-domain templates | 18 checked-in templates containing 317 atomic obligations across data, ML, documents, web, media, services, operations, security, business, and science |
+| Cross-domain templates | 19 checked-in templates containing 339 atomic obligations across data, ML, documents, web, media, services, operations, security, business, science, and numerical computing |
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
 | Honest route search | Fast prior, bounded beam, seeded sprouts, adaptive promotion, and uncapped streaming exhaustive modes with coverage/accounting reports |
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
-| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and four focused workspace Agent Skills |
+| Generated-graph campaigns | Population-DAG ancestry, proposal digests, explicit candidate/trial/cost/fidelity budgets, evaluator isolation contracts, and evidence-backed decisions |
+| Reference execution | Frozen-plan reconstruction, runtime/effect/permission policy, implementation-digest checks, bounded retry, frozen fallback, circuit breaker, artifacts, verification, and receipts |
+| Executable domain skeleton | Six dependency-free programs in five notebooks for web, documents, images, data cleanup, regression, and classification using one cross-domain registry |
+| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and six focused workspace Agent Skills |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
 
 ## Compile and search a universal graph
@@ -83,6 +99,41 @@ plan = Compiler().compile(
 )
 print(plan.digest, report.evaluation_coverage)
 ```
+
+## Execute six real framework programs
+
+The examples use small standard-library implementations so the complete
+compile → execute → verify → receipt path runs from a fresh checkout. They are
+real mechanism executions over real fixture payloads, not production benchmark
+claims for mature web, OCR, vision, data, or ML libraries.
+
+```bash
+solutiongraph examples list
+solutiongraph examples run browse-and-scrape
+solutiongraph examples run document-to-schema
+solutiongraph examples run image-check-and-process
+solutiongraph examples run data-cleanup
+solutiongraph examples run tabular-regression
+solutiongraph examples run tabular-classification
+```
+
+Each task has multiple frozen routes. The cleanup baseline, mean-regression
+control, and majority-classification control are intentionally rejected by
+their independent oracles, preserving negative evidence while alternative
+routes pass. Persist artifacts with:
+
+```bash
+solutiongraph examples run tabular-regression \
+  --artifact-dir .artifacts/tabular-regression --json
+```
+
+Open the five notebooks in `notebooks/`, or read
+[the executable-example guide](REAL_WORLD_EXAMPLES.md) and
+[frozen-plan execution protocol](EXECUTION_PROTOCOL.md). `ReferenceExecutor`
+is intentionally in-process; it exposes `RuntimeAdapter` and `ArtifactStore`
+protocols so an LLM coding harness can add subprocess, container, Wasm,
+browser, model, remote-job, human, object-store, or distributed implementations
+without changing program semantics.
 
 Start with the [normative specification](UNIVERSAL_NODE_GRAPH_SPEC.md), then
 read the [primary-source research synthesis](RESEARCH_FOUNDATIONS.md). The
@@ -113,8 +164,8 @@ that stated universe.
 The [solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md) standardizes
 macro-stage submatrices, atomic semantic slots, safe pass-through candidates,
 and bounded refinement loops. The generated [catalogue](catalog/) currently
-contains 18 cross-domain templates, 317 atomic obligations, and a five-node
-executable reference pack. Templates can be inspected or authored without
+contains 19 cross-domain templates, 339 atomic obligations, a five-node core
+reference pack, and a 31-node executable real-world example pack. Templates can be inspected or authored without
 writing Python:
 
 ```bash
@@ -132,7 +183,8 @@ the harness negotiates those modes without affecting node validity.
 
 For an agent or new domain adapter, follow the [agent playbook](AGENT_PLAYBOOK.md)
 and the focused workspace skills: `create-solution-template`,
-`author-node-pack`, `benchmark-solution-graph`, and `model-solution-graph`.
+`author-node-pack`, `execute-solution-graph`, `benchmark-solution-graph`,
+`design-autoresearch-campaign`, and `model-solution-graph`.
 They require a task contract and independent oracle, typed template refinement,
 receipt-backed discovery, compilation before search, and evidence-backed claims.
 
@@ -143,7 +195,7 @@ modern browser. No server, account, CDN, or build step is required.
 
 | Explorer | Purpose |
 |---|---|
-| [Template and node catalogue](examples/catalog-template-explorer.html) | 18 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and reference node pack |
+| [Template and node catalogue](examples/catalog-template-explorer.html) | 19 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and reference node packs |
 | [Full solution studio](examples/universal-graph-workbench.html) | All candidates, route rows, exhaustive adjacent network, comparison, builder, and feedback views |
 | [Compact hierarchical explorer](examples/universal-node-graph-workbench.html) | Select one macro-stage submatrix at a time and see all of its substeps, node families, bindings, and route lines |
 | [Multi-file projection suite](examples/workbench-suite/index.html) | Separate matrix, network, comparison, builder, and feedback entry points |
@@ -652,6 +704,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 | [UNIVERSAL_GRAPH_SYSTEM.md](UNIVERSAL_GRAPH_SYSTEM.md) | the complete universal solution-graph architecture and implementation blueprint |
 | [WORKBENCH.md](WORKBENCH.md) | hierarchical macro-stage/substep model, schemas, viewer, and extension examples |
 | [ROADMAP.md](ROADMAP.md) | evidence-driven implementation phases and release gates |
+| [AUTORESEARCH_REVIEW.md](AUTORESEARCH_REVIEW.md) | verified AutoResearch/package review, evaluator trust boundary, campaign lineage, and Cholesky node decomposition |
 | [CONTRACTS.md](CONTRACTS.md) | what a node promises, and the three moments it is checked |
 | [DIMENSIONS.md](DIMENSIONS.md) | axes worth adding, and why verification matters most |
 | [ISOLATION.md](ISOLATION.md) | conflicting engines in separate virtualenvs |
@@ -661,7 +714,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 
 ```bash
 pip install -e ".[dev]"
-pytest -q          # 461 pass here; optional browser suites skip when unavailable
+pytest -q          # 515 pass here; 140 optional browser tests skip when unavailable
 mypy browsergraph --ignore-missing-imports
 ruff check browsergraph solutiongraph tests/test_solutiongraph*.py
 ```
