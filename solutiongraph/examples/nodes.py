@@ -391,7 +391,13 @@ def evaluate_regressor(split: dict[str, Any], model: dict[str, Any]) -> dict[str
 
     actual = [float(row["y"]) for row in split["test"]]
     holdout_predictions = [predict(float(row["x"])) for row in split["test"]]
-    rmse = math.sqrt(sum((left - right) ** 2 for left, right in zip(actual, holdout_predictions)) / len(actual))
+    rmse = math.sqrt(
+        sum(
+            (left - right) ** 2
+            for left, right in zip(actual, holdout_predictions, strict=True)
+        )
+        / len(actual)
+    )
     requested = [predict(float(value)) for value in split["predict"]]
     return {
         "model": model,
@@ -486,7 +492,8 @@ def evaluate_classifier(split: dict[str, Any], model: dict[str, Any]) -> dict[st
     actual = [row["label"] for row in split["test"]]
     holdout_predictions = [predict(float(row["x"])) for row in split["test"]]
     accuracy = sum(
-        left == right for left, right in zip(actual, holdout_predictions)
+        left == right
+        for left, right in zip(actual, holdout_predictions, strict=True)
     ) / len(actual)
     return {
         "model": model,

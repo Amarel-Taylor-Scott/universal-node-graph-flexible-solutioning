@@ -10,7 +10,6 @@ from solutiongraph import (
     CallableVerifier,
     Candidate,
     Compiler,
-    Edge,
     ExecutionError,
     ExecutionPolicy,
     FileArtifactStore,
@@ -34,7 +33,6 @@ from solutiongraph import (
 from solutiongraph.examples import EXAMPLE_TASKS, run_example
 from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
 from solutiongraph.schemas import SCHEMA_NAMES, load_all_schemas
-
 
 TEST_VALUE = ValueType("test.execution-value")
 _FLAKY_CALLS = 0

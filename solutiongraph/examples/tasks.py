@@ -12,6 +12,7 @@ from typing import Any
 from solutiongraph.artifacts import FileArtifactStore, MemoryArtifactStore
 from solutiongraph.compiler import Compiler
 from solutiongraph.evidence import ExperimentDesign, Objective
+from solutiongraph.examples import nodes as implementations
 from solutiongraph.executor import (
     CallableVerifier,
     ExecutionPolicy,
@@ -37,7 +38,6 @@ from solutiongraph.model import (
     SemanticSlot,
     ValueType,
 )
-from solutiongraph.examples import nodes as implementations
 
 
 WEB_SOURCE = ValueType("example.web-source")

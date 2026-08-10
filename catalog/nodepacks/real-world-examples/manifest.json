@@ -229,7 +229,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.nodes:evaluate_regressor"
       },
-      "digest": "sha256:aaca24659d050a8ef7cddaf3675cdc4fd95129141f612c996c940055cb06b00e",
+      "digest": "sha256:74b02f64dafc7d7d683cce89f89cc25fadb1a03867309fc1d69638417d05325a",
       "media_type": "text/x-python",
       "name": "artifact.example.ml.evaluate",
       "uri": "python://solutiongraph.examples.nodes:evaluate_regressor"
@@ -274,7 +274,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.nodes:evaluate_classifier"
       },
-      "digest": "sha256:3c7310aea7ee74a10f5fa3988bf8db1db313d2667be4dcee36fc7e700dfe9931",
+      "digest": "sha256:858861bb59ab34780851b42a717e5fdcc0c672e16e610a5b410c76a1cd6a7347",
       "media_type": "text/x-python",
       "name": "artifact.example.ml.classification.evaluate",
       "uri": "python://solutiongraph.examples.nodes:evaluate_classifier"
@@ -316,12 +316,12 @@
     "sha256:dadbedc08f2aa0133c3b6848848f1482e5680eac9103769c3cab0adfe98623f6",
     "sha256:357da0f530a4cd167f36c9d1c42bc3adc29e961a95a9e535e15bcc3652d9aa5e",
     "sha256:239b268c94e0109771bcb7667a6ab339c410c7a4d384037432231e65d7d27463",
-    "sha256:dd0ef7e57f7668f117015380d94b3660c3d34e2f7f2844bfd76b2ce33f09c40a",
+    "sha256:5f415a3f6cde62bf5fe81543ebcae0e8cda1ac29e39743071a8b30a343bd3d4e",
     "sha256:20410721841a6d9bc366c87828c46a8c3813e83021d3bf9e0656c011232c9016",
     "sha256:c35301f89d15c8e39126aeba2db5206a01f4fa06634ee2453d951831ffb35a48",
     "sha256:91f7356b0555465aced637d25b40ecac3e8f5e93c960ecad6c0ecefaf221efe2",
     "sha256:7b8643c7a372dbd827c35a42040f79dabe2a197bcad8075052942d7fb0da38e1",
-    "sha256:ecf79a133e724ad4adef96f5c0291d6c4e29c33408cae95adf4ba6fec057cd0e"
+    "sha256:3b796816e394caf51bcac0266f18b8c8db591f95f838276730fac2cfd262c291"
   ],
   "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
   "version": "1.0.0"

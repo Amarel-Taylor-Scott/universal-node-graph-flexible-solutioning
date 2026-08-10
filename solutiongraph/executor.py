@@ -27,6 +27,7 @@ from solutiongraph.artifacts import (
 from solutiongraph.compiler import Compiler
 from solutiongraph.evidence import NodeRunReceipt, RunReceipt
 from solutiongraph.model import (
+    ID_RE,
     AdmittedSpace,
     Cardinality,
     FrozenPlan,
@@ -36,7 +37,6 @@ from solutiongraph.model import (
     PlanFallback,
     ProgramGraph,
     Registry,
-    ID_RE,
     sha256_digest,
 )
 

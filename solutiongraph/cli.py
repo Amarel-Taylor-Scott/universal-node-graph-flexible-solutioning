@@ -24,10 +24,11 @@ def _template(template_id: str):
 
 def _doctor() -> int:
     from solutiongraph.catalog import catalog_documents
+    from solutiongraph.examples.tasks import EXAMPLE_TASKS
+    from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
     from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
     from solutiongraph.schemas import load_all_schemas
     from solutiongraph.template_library import REFERENCE_TEMPLATES
-    from solutiongraph.examples.tasks import EXAMPLE_TASKS, NODES as EXAMPLE_NODES
 
     problems: list[str] = []
     problems.extend(REFERENCE_TEMPLATES.validate())

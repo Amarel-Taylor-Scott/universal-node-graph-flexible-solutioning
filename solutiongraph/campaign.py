@@ -14,7 +14,6 @@ from typing import Any
 
 from solutiongraph.model import DIGEST_RE, ID_RE
 
-
 CAMPAIGN_MODEL_VERSION = "0.1"
 ISOLATION_LEVELS = ("in_process", "subprocess", "container", "microvm", "remote")
 DECISIONS = ("retain", "promote", "reject", "quarantine", "invalidate")
@@ -53,7 +52,9 @@ class CampaignBudget:
             problems.append(f"{path}.fidelity_rungs must contain finite positive values")
         elif any(
             current <= previous
-            for previous, current in zip(self.fidelity_rungs, self.fidelity_rungs[1:])
+            for previous, current in zip(
+                self.fidelity_rungs, self.fidelity_rungs[1:], strict=False
+            )
         ):
             problems.append(f"{path}.fidelity_rungs must be strictly increasing")
         return problems

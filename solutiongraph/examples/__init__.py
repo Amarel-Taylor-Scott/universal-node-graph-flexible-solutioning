@@ -2,8 +2,8 @@
 
 from solutiongraph.examples.tasks import (
     EXAMPLE_TASKS,
-    ExecutableExample,
     ExampleRoute,
+    ExecutableExample,
     get_example,
     run_example,
 )

@@ -15,7 +15,7 @@
   ],
   "id": "example.ml.classification.evaluate",
   "idempotency": "idempotent",
-  "implementation_digest": "sha256:3c7310aea7ee74a10f5fa3988bf8db1db313d2667be4dcee36fc7e700dfe9931",
+  "implementation_digest": "sha256:858861bb59ab34780851b42a717e5fdcc0c672e16e610a5b410c76a1cd6a7347",
   "inputs": [
     {
       "cardinality": "one",

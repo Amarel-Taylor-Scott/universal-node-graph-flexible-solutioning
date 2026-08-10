@@ -13,12 +13,13 @@ from solutiongraph.discovery import (
     RegistryCapabilities,
     SchemaSupport,
 )
+from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
+from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
     REFERENCE_NODE_SPECS,
     REFERENCE_REGISTRY,
 )
-from solutiongraph.examples.tasks import EXAMPLE_REGISTRY, NODES as EXAMPLE_NODES
 from solutiongraph.template_library import REFERENCE_TEMPLATES
 
 
