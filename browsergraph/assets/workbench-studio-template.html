@@ -1,0 +1,1971 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BrowserGraph Hierarchical Solution Studio</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f4f6fa;
+    --panel: #ffffff;
+    --panel-2: #f8f9fc;
+    --text: #172033;
+    --muted: #5e6878;
+    --border: #d8dee8;
+    --soft: #eaf0ff;
+    --accent: #315ee8;
+    --accent-foreground: #ffffff;
+    --accent-2: #6b3fd4;
+    --good: #08795d;
+    --warn: #a45400;
+    --bad: #b52c3b;
+    --shadow: 0 2px 10px rgba(25, 38, 65, .08);
+    --route-1: #315ee8;
+    --route-2: #b65b00;
+    --route-3: #078568;
+    --route-4: #8447c7;
+    --route-5: #c43f70;
+    --route-6: #5f6877;
+    --route-custom: #d33e00;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1118;
+      --panel: #171c25;
+      --panel-2: #11161e;
+      --text: #edf2f9;
+      --muted: #aab4c4;
+      --border: #323b49;
+      --soft: #253151;
+      --accent: #8ca8ff;
+      --accent-foreground: #0d1118;
+      --accent-2: #c29aff;
+      --good: #58d3ac;
+      --warn: #f0a85d;
+      --bad: #ff8792;
+      --shadow: none;
+      --route-1: #8ca8ff;
+      --route-2: #f2a45a;
+      --route-3: #58d3ac;
+      --route-4: #c29aff;
+      --route-5: #ff82ad;
+      --route-6: #b4becd;
+      --route-custom: #ff8656;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.42 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  button, input, select { font: inherit; }
+  button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  h1, h2, h3, p { margin-top: 0; }
+  h1 { margin-bottom: 4px; font-size: clamp(24px, 3vw, 36px); }
+  h2 { margin: 0; font-size: 20px; }
+  h3 { margin: 0; font-size: 15px; }
+  code { padding: 1px 4px; border-radius: 4px; background: var(--panel-2); color: var(--text); }
+  .app { width: min(1900px, 100%); margin: 0 auto; padding: 18px; }
+  .topline { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
+  .top-actions { display: flex; justify-content: flex-end; gap: 8px; align-items: end; flex-wrap: wrap; max-width: 760px; }
+  .muted { color: var(--muted); }
+  .small { font-size: 12px; }
+  .eyebrow { color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+  .summary { margin-top: 14px; padding: 13px 15px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .term-strip { display: flex; flex-wrap: wrap; gap: 7px 18px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .term-strip strong { font-weight: 700; }
+  .load-status, .status-line { min-height: 20px; color: var(--muted); }
+  .field { display: grid; gap: 4px; min-width: 150px; }
+  .field.grow { flex: 1 1 280px; }
+  .field label, .field > span { color: var(--muted); font-size: 12px; }
+  input[type="search"], input[type="file"], select {
+    width: 100%;
+    min-height: 38px;
+    padding: 7px 9px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+  }
+  .button {
+    min-height: 38px;
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .button:hover { background: var(--panel-2); }
+  .button.primary { border-color: var(--accent); background: var(--accent); color: var(--accent-foreground); }
+  .tabs {
+    display: flex;
+    gap: 7px;
+    margin: 18px 0 0;
+    padding-bottom: 9px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    white-space: nowrap;
+    min-height: 38px;
+    padding: 7px 12px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .tab[aria-selected="true"] { border-color: var(--border); background: var(--panel); color: var(--text); box-shadow: var(--shadow); }
+  .view { margin-top: 18px; }
+  .view[hidden] { display: none; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 9px; align-items: end; padding: 11px; }
+  .route-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .route-control {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    gap: 6px;
+    align-items: start;
+    min-width: 215px;
+    padding: 8px 9px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--panel);
+  }
+  .route-control input { margin-top: 3px; }
+  .swatch { width: 12px; height: 12px; margin-top: 3px; border-radius: 50%; background: var(--swatch); }
+  .route-name { display: block; font-weight: 700; }
+  .linear-map { display: grid; gap: 8px; }
+  .linear-route-row {
+    display: grid;
+    grid-template-columns: 176px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .linear-route-row:last-child { border-bottom: 0; }
+  .linear-route-label { min-width: 0; }
+  .linear-route-name { font-weight: 700; overflow-wrap: anywhere; }
+  .linear-route-scroll { overflow-x: auto; padding: 2px; }
+  .linear-route-steps { display: flex; align-items: stretch; min-width: max-content; }
+  .route-node {
+    width: 190px;
+    min-height: 68px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--route-color);
+    border-radius: 8px;
+    background: var(--panel-2);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+  }
+  .route-node:hover { background: var(--soft); }
+  .route-step-name { display: block; margin-bottom: 3px; color: var(--muted); font-size: 11px; }
+  .route-choice { display: block; font-weight: 700; }
+  .route-binding { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+  .route-fallback { display: block; margin-top: 3px; color: var(--accent-2); font-size: 11px; }
+  .route-arrow { position: relative; width: 34px; flex: 0 0 34px; }
+  .route-arrow::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 5px;
+    top: 50%;
+    height: 2px;
+    background: var(--route-color);
+  }
+  .route-arrow::after {
+    content: "";
+    position: absolute;
+    right: 3px;
+    top: calc(50% - 4px);
+    width: 7px;
+    height: 7px;
+    border-top: 2px solid var(--route-color);
+    border-right: 2px solid var(--route-color);
+    transform: rotate(45deg);
+  }
+  .matrix-shell { overflow-x: auto; padding: 12px; }
+  .stage-grid { display: flex; gap: 22px; align-items: flex-start; min-width: max-content; }
+  .macro-stage-group { display: grid; gap: 8px; padding: 8px; border-top: 4px solid var(--accent-2); background: var(--panel-2); }
+  .macro-stage-header { min-height: 86px; padding: 4px 4px 8px; border-bottom: 1px solid var(--border); }
+  .macro-stage-number { color: var(--accent-2); font-weight: 700; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+  .substep-grid { display: grid; grid-auto-flow: column; grid-auto-columns: 255px; gap: 12px; align-items: start; }
+  .stage-column { min-width: 0; }
+  .stage-header {
+    min-height: 150px;
+    padding: 10px;
+    border-top: 4px solid var(--accent);
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+  .stage-number { color: var(--accent); font-weight: 700; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+  .stage-contract { margin: 6px 0; overflow-wrap: anywhere; }
+  .stage-count { margin-top: 6px; color: var(--muted); font-size: 12px; }
+  .candidate-stack { display: grid; gap: 10px; max-height: 680px; overflow-y: auto; padding: 9px 5px 8px 0; }
+  .candidate-stack.expanded { max-height: none; overflow: visible; }
+  .definition-group { display: grid; gap: 5px; padding-left: 7px; border-left: 2px solid var(--border); }
+  .definition-head { position: sticky; top: 0; z-index: 2; padding: 4px 2px; background: var(--panel); color: var(--muted); font-size: 11px; }
+  .candidate-node {
+    width: 100%;
+    min-height: 46px;
+    padding: 7px 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel-2);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+  }
+  .candidate-node:hover { background: var(--soft); }
+  .candidate-node.is-selected { border-color: var(--accent); background: var(--soft); }
+  .candidate-node:disabled { cursor: not-allowed; opacity: .58; }
+  .candidate-title { display: block; font-weight: 700; }
+  .candidate-binding { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+  .node-marks { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+  .route-dot, .mini-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 17px;
+    min-height: 17px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: var(--dot, var(--panel));
+    color: var(--dot-text, #fff);
+    font-size: 10px;
+  }
+  .mini-badge { border: 1px solid var(--border); color: var(--muted); --dot-text: var(--muted); }
+  .inspector { margin-top: 12px; padding: 14px; }
+  .inspector-top { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; flex-wrap: wrap; }
+  .badges { display: flex; flex-wrap: wrap; gap: 5px; }
+  .badge { display: inline-flex; padding: 3px 7px; border-radius: 999px; background: var(--panel-2); font-size: 12px; }
+  .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 9px 14px; margin-top: 12px; }
+  .detail-item { min-width: 0; overflow-wrap: anywhere; }
+  .detail-value { margin-top: 2px; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 9px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { color: var(--muted); font-weight: 700; }
+  .comparison-table { min-width: 1300px; }
+  .comparison-table th:first-child, .comparison-table td:first-child { position: sticky; left: 0; z-index: 2; background: var(--panel); }
+  .compare-cell { min-width: 180px; cursor: pointer; }
+  .compare-cell.changed { background: var(--soft); }
+  .compare-cell button { all: unset; display: block; width: 100%; cursor: pointer; }
+  .compare-node { font-weight: 700; }
+  .compare-binding, .compare-fallback { margin-top: 3px; color: var(--muted); font-size: 11px; }
+  .compare-evidence { display: grid; gap: 3px; min-width: 170px; }
+  .status-badge { display: inline-flex; width: fit-content; padding: 2px 6px; border-radius: 999px; background: var(--soft); color: var(--text); font-size: 11px; }
+  .builder-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 14px; align-items: start; }
+  .builder-main { min-width: 0; }
+  .builder-side { position: sticky; top: 12px; display: grid; gap: 10px; }
+  .builder-panel { padding: 12px; }
+  .stage-rail { display: flex; min-width: max-content; align-items: center; }
+  .stage-rail-button {
+    width: 170px;
+    min-height: 66px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+  }
+  .stage-rail-button[aria-current="step"] { border-color: var(--accent); background: var(--soft); }
+  .stage-rail-arrow { width: 28px; text-align: center; color: var(--muted); }
+  .builder-candidates { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; margin-top: 10px; }
+  .builder-candidate { min-height: 104px; }
+  .candidate-metrics { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; }
+  .candidate-reason { display: block; margin-top: 5px; color: var(--bad); font-size: 11px; }
+  .recommendation-table { min-width: 720px; }
+  .recommendation-table td:first-child { width: 42px; }
+  .recommendation-score { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .network-scroll { overflow: auto; padding: 8px; background: var(--panel); }
+  .network-svg { display: block; max-width: none; }
+  .network-svg .column-guide { stroke: var(--border); stroke-width: 1; }
+  .network-svg .macro-guide { stroke: var(--accent-2); stroke-width: 2; stroke-opacity: .6; }
+  .network-svg .macro-title { fill: var(--text); font-size: 13px; font-weight: 700; }
+  .network-svg .column-title { fill: var(--text); font-size: 14px; font-weight: 700; }
+  .network-svg .column-subtitle { fill: var(--muted); font-size: 10px; }
+  .network-svg .network-edge { fill: none; stroke: var(--muted); stroke-width: 1; stroke-opacity: .045; }
+  .network-svg .network-sample { fill: none; stroke: var(--muted); stroke-width: 1; stroke-opacity: .065; }
+  .network-svg .network-before { fill: none; stroke: var(--warn); stroke-width: 3; stroke-opacity: .95; stroke-dasharray: 8 5; }
+  .network-svg .network-after { fill: none; stroke: var(--good); stroke-width: 4; stroke-opacity: .95; }
+  .network-svg .network-node rect { fill: var(--panel-2); stroke: var(--border); stroke-width: 1.2; }
+  .network-svg .network-node text { fill: var(--text); font-size: 10px; pointer-events: none; }
+  .network-svg .network-node .network-node-prior { fill: var(--muted); font-size: 9px; }
+  .network-svg .network-node.model rect { fill: color-mix(in srgb, var(--warn) 10%, var(--panel)); stroke: var(--warn); }
+  .network-svg .network-node.pass rect { stroke-dasharray: 4 3; }
+  .network-svg .network-node.before rect { stroke: var(--warn); stroke-width: 2; }
+  .network-svg .network-node.after rect { stroke: var(--good); stroke-width: 2.5; }
+  .network-svg .network-node { cursor: pointer; }
+  .network-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 8px 0; color: var(--muted); }
+  .legend-line { display: inline-block; width: 28px; height: 0; margin-right: 6px; vertical-align: middle; border-top: 3px solid var(--legend-color); }
+  .legend-line.before { border-top-style: dashed; }
+  .policy-list { display: grid; gap: 7px; margin-top: 8px; }
+  .check { display: flex; gap: 7px; align-items: flex-start; }
+  .check input { margin-top: 3px; }
+  .validation-list { display: grid; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
+  .validation-list li { padding-left: 17px; position: relative; }
+  .validation-list li::before { position: absolute; left: 0; content: "✓"; color: var(--good); }
+  .validation-list li.problem::before { content: "!"; color: var(--bad); }
+  .metric-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+  .metric { padding: 8px; border-top: 2px solid var(--border); background: var(--panel-2); }
+  .metric-value { margin-top: 2px; font-weight: 700; }
+  .feedback-plane-label { display: inline-flex; margin-bottom: 8px; padding: 3px 7px; border-radius: 999px; background: var(--soft); color: var(--text); }
+  .feedback-flow { display: flex; min-width: max-content; align-items: stretch; }
+  .feedback-box { width: 190px; min-height: 96px; padding: 10px; border: 1px solid var(--border); border-radius: 9px; background: var(--panel); }
+  .feedback-arrow { display: grid; place-items: center; width: 36px; color: var(--muted); font-size: 22px; }
+  .signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; margin-top: 10px; }
+  .signal { padding: 10px; border-left: 3px solid var(--accent-2); background: var(--panel-2); }
+  .signal-name { font-weight: 700; }
+  .signal-action { margin-top: 3px; color: var(--muted); }
+  .receipt-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 8px; margin: 10px 0; }
+  .receipt-item { padding: 9px; border-top: 2px solid var(--border); background: var(--panel-2); }
+  .control-plane { margin-top: 14px; padding: 12px; border: 1px dashed var(--accent-2); border-radius: 12px; }
+  .empty { padding: 12px; color: var(--muted); }
+  @media (max-width: 980px) {
+    .builder-layout { grid-template-columns: 1fr; }
+    .builder-side { position: static; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  }
+  @media (max-width: 720px) {
+    .app { padding: 11px; }
+    .linear-route-row { grid-template-columns: 1fr; }
+    .metric-grid { grid-template-columns: 1fr; }
+    .route-control { min-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<main class="app" id="solution-studio">
+  <div class="topline">
+    <div>
+      <div class="eyebrow">Hierarchical linear solution architecture</div>
+      <h1 id="title">BrowserGraph Hierarchical Solution Studio</h1>
+      <p class="muted" id="task"></p>
+    </div>
+    <div class="top-actions">
+      <button class="button" type="button" id="copy-workbench">Copy complete JSON</button>
+      <button class="button" type="button" id="download-workbench">Download JSON</button>
+      <button class="button" type="button" id="copy-route">Copy current route</button>
+      <div class="field">
+        <label for="load-json">Load standardized workbench JSON</label>
+        <input id="load-json" type="file" accept="application/json,.json">
+      </div>
+    </div>
+  </div>
+  <div class="load-status" id="load-status" aria-live="polite"></div>
+
+  <div class="summary panel">
+    <div class="summary-grid">
+      <div><div class="eyebrow">Success oracle</div><div id="success"></div></div>
+      <div><div class="eyebrow">Complete registry</div><div id="registry-size"></div></div>
+      <div><div class="eyebrow">Concrete route space</div><div id="route-space"></div></div>
+      <div><div class="eyebrow">Evidence source</div><div id="metric-source"></div></div>
+    </div>
+    <div class="term-strip" aria-label="Canonical terminology">
+      <span><strong>Macro stage</strong> = one conceptual phase and submatrix</span>
+      <span><strong>Substep</strong> = one atomic ordered selection column</span>
+      <span><strong>Candidate</strong> = one atomic implementation binding</span>
+      <span><strong>Route</strong> = one candidate per substep</span>
+      <span><strong>Feedback</strong> = learns from receipts outside the execution line</span>
+    </div>
+  </div>
+
+  <nav class="tabs" id="view-tabs" aria-label="Studio views">
+    <button class="tab" type="button" data-view="matrix">1 · Hierarchical submatrices</button>
+    <button class="tab" type="button" data-view="network">2 · Path network</button>
+    <button class="tab" type="button" data-view="compare">3 · Compare routes</button>
+    <button class="tab" type="button" data-view="builder">4 · Build step by step</button>
+    <button class="tab" type="button" data-view="feedback">5 · Feedback and optimization</button>
+  </nav>
+
+  <section class="view" data-view-panel="matrix" aria-labelledby="matrix-heading">
+    <div class="section-head">
+      <div>
+        <h2 id="matrix-heading">Every macro stage, substep, and registered atomic candidate</h2>
+        <div class="muted">Macro stages run left to right. Each expands into an ordered submatrix of atomic substeps; candidates stack vertically inside each substep.</div>
+      </div>
+    </div>
+    <div class="toolbar panel" aria-label="Candidate filters">
+      <div class="field grow"><label for="candidate-search">Find candidate, implementation, parameter, role, or capability</label><input id="candidate-search" type="search" placeholder="Firefox, DeepSeek, deterministic, verifier…"></div>
+      <div class="field"><label for="role-filter">Role</label><select id="role-filter"><option value="">All roles</option></select></div>
+      <div class="field"><label for="permission-filter">Permission</label><select id="permission-filter"><option value="">All permissions</option></select></div>
+      <button class="button" type="button" id="clear-filters">Clear filters</button>
+      <button class="button" type="button" id="toggle-stacks">Expand all stacks</button>
+    </div>
+    <div class="route-controls" id="route-controls" aria-label="Visible solution routes"></div>
+    <div class="linear-map panel" id="matrix-route-map" aria-label="Selected routes"></div>
+    <div class="status-line" id="matrix-status" aria-live="polite"></div>
+    <div class="matrix-shell panel"><div class="stage-grid" id="stage-grid"></div></div>
+    <aside class="inspector panel" id="inspector" aria-live="polite"></aside>
+  </section>
+
+  <section class="view" data-view-panel="network" aria-labelledby="network-heading" hidden>
+    <div class="section-head">
+      <div>
+        <h2 id="network-heading">Every candidate in its substep and macro-stage band</h2>
+        <div class="muted">Macro-stage bands contain ordered substep columns. Candidate paths remain strictly left to right.</div>
+      </div>
+    </div>
+    <div class="toolbar panel" aria-label="Path network controls">
+      <div class="field"><label for="network-before">Initial or baseline route</label><select id="network-before"></select></div>
+      <div class="field"><label for="network-after">Current or learned route</label><select id="network-after"></select></div>
+      <div class="field"><label for="network-mode">Background structure</label><select id="network-mode"><option value="adjacent">Every adjacent possibility</option><option value="sample">Sample complete routes</option><option value="selected">Selected routes only</option></select></div>
+      <div class="field"><label for="network-sample">Complete route sample</label><select id="network-sample"><option value="50">50 routes</option><option value="200" selected>200 routes</option><option value="1000">1,000 routes</option></select></div>
+    </div>
+    <div class="network-legend">
+      <span><span class="legend-line before" style="--legend-color:var(--warn)"></span>initial / baseline route</span>
+      <span><span class="legend-line" style="--legend-color:var(--good)"></span>current / learned route</span>
+      <span><span class="legend-line" style="--legend-color:var(--muted);opacity:.35"></span>other valid structure</span>
+    </div>
+    <div class="status-line" id="network-status" aria-live="polite"></div>
+    <div class="network-scroll panel"><svg class="network-svg" id="network-svg" role="img" aria-labelledby="network-svg-title network-svg-desc"><title id="network-svg-title">Hierarchical linear candidate path network</title><desc id="network-svg-desc">Every macro stage contains ordered substep columns of atomic candidates. Paths move only from one substep to the next, left to right.</desc></svg></div>
+    <aside class="inspector panel" id="network-inspector" aria-live="polite"></aside>
+  </section>
+
+  <section class="view" data-view-panel="compare" aria-labelledby="compare-heading" hidden>
+    <div class="section-head">
+      <div>
+        <h2 id="compare-heading">Routes as parallel left-to-right rows</h2>
+        <div class="muted">One row is one complete solution. Highlighted cells differ from the selected baseline.</div>
+      </div>
+      <div class="field"><label for="compare-baseline">Comparison baseline</label><select id="compare-baseline"></select></div>
+    </div>
+    <div class="status-line" id="comparison-status" aria-live="polite"></div>
+    <div class="table-wrap panel"><table class="comparison-table" id="comparison-table"></table></div>
+  </section>
+
+  <section class="view" data-view-panel="builder" aria-labelledby="builder-heading" hidden>
+    <div class="section-head">
+      <div>
+        <h2 id="builder-heading">Build one route, one atomic substep at a time</h2>
+        <div class="muted">Every candidate remains visible. Policy-ineligible choices stay visible and explain why they are blocked.</div>
+      </div>
+    </div>
+    <div class="linear-route-scroll panel"><div class="stage-rail" id="stage-rail"></div></div>
+    <div class="builder-layout" style="margin-top:12px">
+      <div class="builder-main">
+        <div class="toolbar panel">
+          <div class="field grow"><label for="builder-search">Filter this substep</label><input id="builder-search" type="search" placeholder="Search all choices in the current substep"></div>
+          <div class="field"><label for="objective">Recommendation objective</label><select id="objective"><option value="balanced">Balanced</option><option value="quality">Quality prior</option><option value="speed">Lowest latency</option><option value="cost">Lowest cost</option></select></div>
+          <button class="button primary" type="button" id="recommend">Recommend eligible candidate</button>
+          <button class="button" type="button" id="optimize-macro">Optimize current macro stage</button>
+          <button class="button" type="button" id="optimize-route">Optimize every substep</button>
+          <button class="button" type="button" id="builder-prev">Previous substep</button>
+          <button class="button" type="button" id="builder-next">Next substep</button>
+        </div>
+        <div class="panel builder-panel" style="margin-top:10px">
+          <div class="eyebrow" id="builder-step-label"></div>
+          <h3 id="builder-stage-title"></h3>
+          <div class="muted" id="builder-stage-contract"></div>
+          <div class="status-line" id="builder-feedback" aria-live="polite"></div>
+          <div class="builder-candidates" id="builder-candidates"></div>
+        </div>
+      </div>
+      <aside class="builder-side">
+        <div class="panel builder-panel">
+          <div class="eyebrow">Hard eligibility policy</div>
+          <div class="policy-list">
+            <label class="check"><input type="checkbox" id="policy-network"> Disallow network permission</label>
+            <label class="check"><input type="checkbox" id="policy-browser"> Disallow browser permission</label>
+            <label class="check"><input type="checkbox" id="policy-llm"> Disallow LLM permission</label>
+            <label class="check"><input type="checkbox" id="policy-effects"> Disallow external effects</label>
+            <label class="check"><input type="checkbox" id="policy-deterministic"> Require deterministic runtime</label>
+          </div>
+        </div>
+        <div class="panel builder-panel" id="route-validation"></div>
+        <div class="panel builder-panel" id="recommendation-explain"></div>
+      </aside>
+    </div>
+    <div class="linear-map panel" id="builder-route-map" style="margin-top:12px"></div>
+  </section>
+
+  <section class="view" data-view-panel="feedback" aria-labelledby="feedback-heading" hidden>
+    <div class="section-head">
+      <div>
+        <h2 id="feedback-heading">Feedback and optimization remain outside macro stages and substeps</h2>
+        <div class="muted">The route stays linear. Receipts update evidence and propose the next route without becoming extra columns.</div>
+      </div>
+      <div class="field"><label for="feedback-route">Inspect route receipts</label><select id="feedback-route"></select></div>
+    </div>
+    <div class="feedback-plane-label">Execution plane · strictly left to right</div>
+    <div class="linear-map panel" id="feedback-route-map"></div>
+    <div class="receipt-summary" id="receipt-summary" aria-label="Selected route evidence summary"></div>
+    <div class="signal-grid" id="signal-grid" aria-label="Feedback channels"></div>
+    <div class="control-plane">
+      <div class="feedback-plane-label">Learning and control plane · not execution substeps</div>
+      <div class="linear-route-scroll">
+        <div class="feedback-flow" aria-label="Feedback processing sequence">
+          <div class="feedback-box"><div class="eyebrow">1 · Observe</div><h3>Collect receipts</h3><div class="small muted">Node status, verifier result, latency, cost, yield, resources, policy and provenance.</div></div>
+          <div class="feedback-arrow">→</div>
+          <div class="feedback-box"><div class="eyebrow">2 · Attribute</div><h3>Assign evidence</h3><div class="small muted">Attach each signal to candidate, edge, substep, macro stage, route, task context and version.</div></div>
+          <div class="feedback-arrow">→</div>
+          <div class="feedback-box"><div class="eyebrow">3 · Diagnose</div><h3>Explain failure</h3><div class="small muted">Separate contract errors, policy blocks, transient failures, quality misses and drift.</div></div>
+          <div class="feedback-arrow">→</div>
+          <div class="feedback-box"><div class="eyebrow">4 · Propose</div><h3>Mutate the route</h3><div class="small muted">Replace one candidate, activate a fallback, or change a concrete binding.</div></div>
+          <div class="feedback-arrow">→</div>
+          <div class="feedback-box"><div class="eyebrow">5 · Gate</div><h3>Revalidate</h3><div class="small muted">Contracts, permissions, effects, budgets and independent acceptance must still pass.</div></div>
+          <div class="feedback-arrow">→</div>
+          <div class="feedback-box"><div class="eyebrow">6 · Learn</div><h3>Rank next routes</h3><div class="small muted">Update uncertainty-aware priors and retain replayable evidence for the next run.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var INITIAL_DATA = __WORKBENCH_DATA__;
+  var INITIAL_VIEW = __WORKBENCH_INITIAL_VIEW__;
+  var data = normalizeData(INITIAL_DATA);
+  var enabledSolutions = new Set();
+  var selectedCandidateId = "";
+  var customRoute = {};
+  var customEnabled = false;
+  var currentView = INITIAL_VIEW;
+  var builderStageIndex = 0;
+  var stacksExpanded = false;
+  var builderMessage = "Select any atomic candidate or ask for a recommendation.";
+  var recommendationRows = [];
+  var recommendationProfileId = "";
+  var recommendationStageId = "";
+  var decisionSequence = 0;
+
+  var byId = function (id) { return document.getElementById(id); };
+  var elements = {
+    title: byId("title"), task: byId("task"), success: byId("success"),
+    registry: byId("registry-size"), routeSpace: byId("route-space"),
+    metricSource: byId("metric-source"), file: byId("load-json"),
+    copyWorkbench: byId("copy-workbench"), downloadWorkbench: byId("download-workbench"),
+    copyRoute: byId("copy-route"),
+    loadStatus: byId("load-status"), tabs: byId("view-tabs"),
+    search: byId("candidate-search"), role: byId("role-filter"),
+    permission: byId("permission-filter"), clear: byId("clear-filters"),
+    toggleStacks: byId("toggle-stacks"), routeControls: byId("route-controls"),
+    matrixRouteMap: byId("matrix-route-map"), matrixStatus: byId("matrix-status"),
+    stages: byId("stage-grid"), inspector: byId("inspector"),
+    networkBefore: byId("network-before"), networkAfter: byId("network-after"),
+    networkMode: byId("network-mode"), networkSample: byId("network-sample"),
+    networkStatus: byId("network-status"), networkSvg: byId("network-svg"),
+    networkInspector: byId("network-inspector"),
+    baseline: byId("compare-baseline"), comparison: byId("comparison-table"),
+    comparisonStatus: byId("comparison-status"),
+    stageRail: byId("stage-rail"), builderSearch: byId("builder-search"),
+    objective: byId("objective"), recommend: byId("recommend"),
+    optimizeMacro: byId("optimize-macro"), optimizeRoute: byId("optimize-route"), recommendation: byId("recommendation-explain"),
+    previous: byId("builder-prev"), next: byId("builder-next"),
+    builderStep: byId("builder-step-label"), builderTitle: byId("builder-stage-title"),
+    builderContract: byId("builder-stage-contract"), builderFeedback: byId("builder-feedback"),
+    builderCandidates: byId("builder-candidates"), validation: byId("route-validation"),
+    builderRouteMap: byId("builder-route-map"), feedbackRoute: byId("feedback-route"),
+    feedbackRouteMap: byId("feedback-route-map"), signalGrid: byId("signal-grid"),
+    receiptSummary: byId("receipt-summary"),
+    policyNetwork: byId("policy-network"), policyBrowser: byId("policy-browser"),
+    policyLlm: byId("policy-llm"), policyEffects: byId("policy-effects"),
+    policyDeterministic: byId("policy-deterministic")
+  };
+
+  function append(parent, tag, className, text) {
+    var element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined && text !== null) element.textContent = String(text);
+    parent.appendChild(element);
+    return element;
+  }
+
+  function normalizeData(candidate) {
+    var normalized = candidate || {};
+    if (!Array.isArray(normalized.stages) && Array.isArray(normalized.planes)) normalized.stages = normalized.planes;
+    if (!Array.isArray(normalized.candidates)) {
+      normalized.candidates = (normalized.nodes || []).map(function (node) {
+        return {id: node.id, node_id: node.id, name: node.name, parameters: {}, metrics: {}, tags: []};
+      });
+    }
+    ["nodes", "candidates", "macro_stages", "stages", "solutions", "feedback_channels", "optimization_profiles", "receipts", "optimization_decisions"].forEach(function (key) {
+      if (!Array.isArray(normalized[key])) normalized[key] = [];
+    });
+    if (!normalized.metadata || typeof normalized.metadata !== "object") normalized.metadata = {};
+    return normalized;
+  }
+
+  function maps() {
+    var nodes = {}, candidates = {}, stages = {}, macroStages = {};
+    (data.nodes || []).forEach(function (node) { nodes[node.id] = node; });
+    (data.candidates || []).forEach(function (candidate) { candidates[candidate.id] = candidate; });
+    (data.stages || []).forEach(function (stage) { stages[stage.id] = stage; });
+    (data.macro_stages || []).forEach(function (stage) { macroStages[stage.id] = stage; });
+    return {nodes: nodes, candidates: candidates, stages: stages, macroStages: macroStages};
+  }
+
+  function macroGroups() {
+    var index = maps();
+    if ((data.macro_stages || []).length) {
+      return data.macro_stages.map(function (macroStage) {
+        return {
+          macroStage: macroStage,
+          stages: (macroStage.substeps || []).map(function (id) { return index.stages[id]; }).filter(Boolean)
+        };
+      });
+    }
+    return [{
+      macroStage: {id: "task", name: "Task stages", description: "Flat legacy workbench", substeps: (data.stages || []).map(function (stage) { return stage.id; })},
+      stages: data.stages || []
+    }];
+  }
+
+  function macroForStage(stage) {
+    if (!stage) return null;
+    var index = maps();
+    return index.macroStages[stage.macro_stage_id] || null;
+  }
+
+  function substepPosition(stage) {
+    var macroStage = macroForStage(stage);
+    var macroIndex = Math.max(0, (data.macro_stages || []).findIndex(function (item) { return macroStage && item.id === macroStage.id; }));
+    var within = macroStage ? Math.max(0, (macroStage.substeps || []).indexOf(stage.id)) : (data.stages || []).indexOf(stage);
+    return {macroStage: macroStage, macroIndex: macroIndex, within: within};
+  }
+
+  function substepLabel(stage) {
+    var position = substepPosition(stage);
+    if (!position.macroStage) return "Step " + ((data.stages || []).indexOf(stage) + 1);
+    return "Macro " + (position.macroIndex + 1) + " · Substep " + (position.macroIndex + 1) + "." + (position.within + 1);
+  }
+
+  function shortSubstepLabel(stage) {
+    var position = substepPosition(stage);
+    return position.macroStage ? (position.macroIndex + 1) + "." + (position.within + 1) : String((data.stages || []).indexOf(stage) + 1);
+  }
+
+  function formatInteger(value) { return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  function routeCount() {
+    return (data.stages || []).reduce(function (total, stage) {
+      return total * BigInt((stage.candidates || []).length);
+    }, 1n);
+  }
+  function routeColor(index) {
+    return getComputedStyle(document.documentElement).getPropertyValue("--route-" + ((index % 6) + 1)).trim();
+  }
+  function customColor() { return getComputedStyle(document.documentElement).getPropertyValue("--route-custom").trim(); }
+  function parameterText(candidate) {
+    return Object.entries(candidate.parameters || {}).map(function (entry) { return entry[0] + "=" + entry[1]; }).join(" · ");
+  }
+  function candidateName(candidate, node) { return (candidate && candidate.name) || (node && node.name) || "Unknown candidate"; }
+  function metric(candidate, node, name, fallback) {
+    var candidateMetrics = (candidate && candidate.metrics) || {};
+    var nodeMetrics = (node && node.metrics) || {};
+    return candidateMetrics[name] !== undefined ? Number(candidateMetrics[name]) :
+      (nodeMetrics[name] !== undefined ? Number(nodeMetrics[name]) : fallback);
+  }
+  function metricSummary(solution) {
+    var metrics = solution.metrics || {}, parts = [];
+    if (metrics.quality !== undefined) parts.push("Q " + metrics.quality);
+    if (metrics.reliability !== undefined) parts.push("R " + metrics.reliability);
+    if (metrics.latency_ms !== undefined) parts.push(formatInteger(metrics.latency_ms) + " ms");
+    if (metrics.cost_usd !== undefined) parts.push("$" + Number(metrics.cost_usd).toFixed(3));
+    if (metrics.memory_mb !== undefined) parts.push(formatInteger(metrics.memory_mb) + " MB");
+    if (metrics.evidence_count !== undefined) parts.push("n=" + formatInteger(metrics.evidence_count));
+    return parts.join(" · ");
+  }
+
+  function fallbackCount(routeItem) {
+    return Object.values((routeItem && routeItem.fallbacks) || {}).reduce(function (total, values) {
+      return total + (Array.isArray(values) ? values.length : 0);
+    }, 0);
+  }
+
+  function copyText(value, successMessage) {
+    var text = String(value);
+    var fallback = function () {
+      var area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "absolute";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      var copied = document.execCommand("copy");
+      area.remove();
+      if (!copied) throw new Error("clipboard unavailable");
+    };
+    var operation = navigator.clipboard && navigator.clipboard.writeText ?
+      navigator.clipboard.writeText(text).catch(function () { fallback(); }) :
+      Promise.resolve().then(function () { fallback(); });
+    operation.then(function () {
+      elements.loadStatus.textContent = successMessage;
+    }).catch(function (error) {
+      elements.loadStatus.textContent = "Could not copy: " + error.message;
+    });
+  }
+
+  function downloadJson() {
+    var blob = new Blob([JSON.stringify(data, null, 2) + "\n"], {type: "application/json"});
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement("a");
+    link.href = url;
+    link.download = "browsergraph-workbench.json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    elements.loadStatus.textContent = "Downloaded the complete standardized workbench JSON.";
+  }
+
+  function currentRoutePayload() {
+    return {
+      schema_version: data.schema_version || "2.0",
+      title: "Custom route from " + (data.title || "workbench"),
+      route: Object.assign({}, customRoute),
+      validation: validateRoute(customRoute),
+      metrics: routeMetrics(customRoute),
+      optimization_profile: elements.objective.value || "",
+      optimization_decision: (data.optimization_decisions || []).slice(-1)[0] || null,
+      evidence_source: (data.metadata && data.metadata.metric_source) || "not declared"
+    };
+  }
+
+  function paretoRouteIds(routes) {
+    var eligible = routes.filter(routeHasParetoMetrics);
+    return new Set(eligible.filter(function (candidate) {
+      return !eligible.some(function (other) {
+        if (other.id === candidate.id) return false;
+        var left = other.metrics, right = candidate.metrics;
+        var noWorse = Number(left.quality) >= Number(right.quality) &&
+          Number(left.latency_ms) <= Number(right.latency_ms) &&
+          Number(left.cost_usd) <= Number(right.cost_usd);
+        var strictlyBetter = Number(left.quality) > Number(right.quality) ||
+          Number(left.latency_ms) < Number(right.latency_ms) ||
+          Number(left.cost_usd) < Number(right.cost_usd);
+        return noWorse && strictlyBetter;
+      });
+    }).map(function (route) { return route.id; }));
+  }
+
+  function routeHasParetoMetrics(route) {
+    var metrics = (route && route.metrics) || {};
+    return [metrics.quality, metrics.latency_ms, metrics.cost_usd].every(function (value) {
+      return value !== undefined && Number.isFinite(Number(value));
+    });
+  }
+
+  function renderHeader() {
+    elements.title.textContent = data.title || "Hierarchical Solution Studio";
+    elements.task.textContent = data.task || "";
+    elements.success.textContent = data.success || "Not declared";
+    elements.registry.textContent = (data.nodes || []).length + " definitions · " +
+      (data.candidates || []).length + " atomic candidates · " +
+      (data.macro_stages || []).length + " macro stages · " + (data.stages || []).length + " ordered substeps";
+    elements.routeSpace.textContent = formatInteger(routeCount()) + " complete primary routes";
+    elements.metricSource.textContent = ((data.metadata && data.metadata.metric_source) || "Not declared") +
+      " · " + (data.receipts || []).length + " execution receipt" + ((data.receipts || []).length === 1 ? "" : "s") +
+      " · " + (data.optimization_decisions || []).length + " decision trace" + ((data.optimization_decisions || []).length === 1 ? "" : "s");
+  }
+
+  function setView(view) {
+    var known = ["matrix", "network", "compare", "builder", "feedback"];
+    currentView = known.includes(view) ? view : "matrix";
+    document.querySelectorAll("[data-view-panel]").forEach(function (panel) {
+      panel.hidden = panel.dataset.viewPanel !== currentView;
+    });
+    elements.tabs.querySelectorAll("[data-view]").forEach(function (button) {
+      button.setAttribute("aria-selected", button.dataset.view === currentView ? "true" : "false");
+    });
+    if (currentView === "matrix") renderMatrix();
+    if (currentView === "network") renderNetwork();
+    if (currentView === "compare") renderComparison();
+    if (currentView === "builder") renderBuilder();
+    if (currentView === "feedback") renderFeedback();
+  }
+
+  function selectedUses(candidateId) {
+    var uses = [];
+    (data.solutions || []).forEach(function (solution, index) {
+      if (enabledSolutions.has(solution.id) && Object.values(solution.route || {}).includes(candidateId)) {
+        uses.push({name: solution.name, index: index});
+      }
+    });
+    if (customEnabled && Object.values(customRoute).includes(candidateId)) uses.push({name: "Custom route", index: -1});
+    return uses;
+  }
+
+  function activeRoutes(includeCustom) {
+    var routes = [];
+    (data.solutions || []).forEach(function (solution, index) {
+      if (enabledSolutions.has(solution.id)) routes.push({
+        id: solution.id, name: solution.name, description: solution.description || "",
+        status: solution.status || "candidate", tags: solution.tags || [],
+        route: solution.route || {}, fallbacks: solution.fallbacks || {},
+        metrics: solution.metrics || {}, index: index
+      });
+    });
+    if (includeCustom && customEnabled) routes.push({id: "custom", name: "Custom route", description: "Interactive route", status: "custom", tags: [], route: customRoute, fallbacks: {}, metrics: routeMetrics(customRoute), index: -1});
+    return routes;
+  }
+
+  function renderRouteControls() {
+    elements.routeControls.replaceChildren();
+    (data.solutions || []).forEach(function (solution, index) {
+      var label = append(elements.routeControls, "label", "route-control");
+      var input = document.createElement("input");
+      input.type = "checkbox";
+      input.checked = enabledSolutions.has(solution.id);
+      input.addEventListener("change", function () {
+        if (input.checked) enabledSolutions.add(solution.id); else enabledSolutions.delete(solution.id);
+        renderMatrix();
+      });
+      label.appendChild(input);
+      var swatch = append(label, "span", "swatch");
+      swatch.style.setProperty("--swatch", routeColor(index));
+      var body = append(label, "span", "");
+      append(body, "span", "route-name", solution.name);
+      append(body, "span", "small muted", (solution.status || "candidate") + (metricSummary(solution) ? " · " + metricSummary(solution) : ""));
+    });
+    var customLabel = append(elements.routeControls, "label", "route-control");
+    var customInput = document.createElement("input");
+    customInput.type = "checkbox";
+    customInput.checked = customEnabled;
+    customInput.addEventListener("change", function () { customEnabled = customInput.checked; renderAllViews(); });
+    customLabel.appendChild(customInput);
+    var customSwatch = append(customLabel, "span", "swatch");
+    customSwatch.style.setProperty("--swatch", customColor());
+    var customBody = append(customLabel, "span", "");
+    append(customBody, "span", "route-name", "Custom route");
+    append(customBody, "span", "small muted", "Click any candidate to replace only its atomic substep");
+  }
+
+  function renderLinearRoutes(container, routes, compact) {
+    container.replaceChildren();
+    var index = maps();
+    if (!routes.length) {
+      append(container, "div", "empty", "Enable at least one route.");
+      return;
+    }
+    routes.forEach(function (routeItem) {
+      var color = routeItem.index < 0 ? customColor() : routeColor(routeItem.index);
+      var row = append(container, "div", "linear-route-row");
+      var label = append(row, "div", "linear-route-label");
+      var name = append(label, "div", "linear-route-name", routeItem.name);
+      name.style.color = "var(--text)";
+      append(label, "div", "small muted", metricSummary({metrics: routeItem.metrics || {}}) || "One candidate per atomic substep");
+      var scroll = append(row, "div", "linear-route-scroll");
+      var steps = append(scroll, "div", "linear-route-steps");
+      (data.stages || []).forEach(function (stage, stageIndex) {
+        var candidate = index.candidates[routeItem.route[stage.id]];
+        var node = candidate && index.nodes[candidate.node_id];
+        var button = append(steps, "button", "route-node");
+        button.type = "button";
+        button.style.setProperty("--route-color", color);
+        button.setAttribute("aria-label", stage.name + ": " + candidateName(candidate, node));
+        var position = substepPosition(stage);
+        append(button, "span", "route-step-name", substepLabel(stage) +
+          (position.macroStage ? " · " + position.macroStage.name : ""));
+        append(button, "span", "route-binding", stage.name);
+        append(button, "span", "route-choice", candidateName(candidate, node));
+        var binding = candidate ? parameterText(candidate) : "";
+        if (binding && !compact) append(button, "span", "route-binding", binding);
+        var fallbackTotal = (((routeItem.fallbacks || {})[stage.id]) || []).length;
+        if (fallbackTotal) append(button, "span", "route-fallback", "+" + fallbackTotal + " ordered fallback" + (fallbackTotal === 1 ? "" : "s"));
+        button.addEventListener("click", function () {
+          if (!candidate) return;
+          selectedCandidateId = candidate.id;
+          builderStageIndex = stageIndex;
+          renderInspector();
+          if (currentView === "builder") renderBuilder();
+        });
+        if (stageIndex < (data.stages || []).length - 1) {
+          var arrow = append(steps, "span", "route-arrow");
+          arrow.style.setProperty("--route-color", color);
+          arrow.setAttribute("aria-hidden", "true");
+        }
+      });
+    });
+  }
+
+  function rebuildFilterOptions() {
+    var currentRole = elements.role.value, currentPermission = elements.permission.value;
+    var roles = new Set(), permissions = new Set();
+    (data.nodes || []).forEach(function (node) {
+      (node.roles || []).forEach(function (value) { roles.add(value); });
+      (node.permissions || []).forEach(function (value) { permissions.add(value); });
+    });
+    elements.role.replaceChildren();
+    var allRoles = append(elements.role, "option", "", "All roles"); allRoles.value = "";
+    [...roles].sort().forEach(function (value) { var option = append(elements.role, "option", "", value); option.value = value; });
+    elements.permission.replaceChildren();
+    var allPermissions = append(elements.permission, "option", "", "All permissions"); allPermissions.value = "";
+    var none = append(elements.permission, "option", "", "No special permission"); none.value = "none";
+    [...permissions].sort().forEach(function (value) { var option = append(elements.permission, "option", "", value); option.value = value; });
+    elements.role.value = currentRole;
+    elements.permission.value = currentPermission;
+  }
+
+  function filterMatches(candidate, node) {
+    var query = elements.search.value.trim().toLowerCase();
+    var text = [candidate.id, candidate.name, JSON.stringify(candidate.parameters || {}), node.id, node.name,
+      node.description, JSON.stringify(node.roles || []), JSON.stringify(node.capabilities || []),
+      JSON.stringify(node.permissions || []), JSON.stringify(node.dependencies || [])].join(" ").toLowerCase();
+    if (query && !text.includes(query)) return false;
+    if (elements.role.value && !(node.roles || []).includes(elements.role.value)) return false;
+    if (elements.permission.value === "none" && (node.permissions || []).length) return false;
+    if (elements.permission.value && elements.permission.value !== "none" && !(node.permissions || []).includes(elements.permission.value)) return false;
+    return true;
+  }
+
+  function candidateButton(candidate, node, stage, builderMode) {
+    var uses = selectedUses(candidate.id);
+    var button = append(document.createDocumentFragment(), "button", "candidate-node" + (builderMode ? " builder-candidate" : ""));
+    button.type = "button";
+    button.dataset.candidateId = candidate.id;
+    if (customEnabled && customRoute[stage.id] === candidate.id) button.classList.add("is-selected");
+    append(button, "span", "candidate-title", candidateName(candidate, node));
+    var binding = parameterText(candidate);
+    if (binding) append(button, "span", "candidate-binding", binding);
+    if (builderMode) {
+      append(button, "span", "candidate-metrics", "Q " + metric(candidate, node, "quality_prior", 0).toFixed(3) +
+        " · " + formatInteger(metric(candidate, node, "latency_ms_prior", 0)) + " ms · $" +
+        metric(candidate, node, "cost_usd_prior", 0).toFixed(4));
+      if (recommendationStageId === stage.id && recommendationProfileId === elements.objective.value) {
+        var rankedIndex = recommendationRows.findIndex(function (row) { return row.candidate.id === candidate.id; });
+        if (rankedIndex >= 0) append(button, "span", "candidate-metrics", "Rank " + (rankedIndex + 1) + " · normalized score " + recommendationRows[rankedIndex].score.toFixed(3));
+      }
+      var policy = policyProblems(node);
+      if (policy.length) {
+        button.disabled = true;
+        append(button, "span", "candidate-reason", policy.join(" · "));
+      }
+    }
+    if (uses.length) {
+      var marks = append(button, "span", "node-marks");
+      uses.forEach(function (use) {
+        var dot = append(marks, "span", "route-dot", use.index < 0 ? "C" : String(use.index + 1));
+        dot.style.setProperty("--dot", use.index < 0 ? customColor() : routeColor(use.index));
+        dot.setAttribute("aria-label", "Selected in " + use.name);
+      });
+    }
+    button.addEventListener("click", function () {
+      selectedCandidateId = candidate.id;
+      customRoute[stage.id] = candidate.id;
+      customEnabled = true;
+      builderMessage = "Selected " + candidateName(candidate, node) + " for " + stage.name + ".";
+      renderAllViews();
+    });
+    return button;
+  }
+
+  function renderMatrix() {
+    renderRouteControls();
+    renderLinearRoutes(elements.matrixRouteMap, activeRoutes(true), true);
+    var index = maps(), totalMatches = 0, totalShown = 0;
+    elements.stages.replaceChildren();
+    macroGroups().forEach(function (macroGroup, macroIndex) {
+      var macroStage = macroGroup.macroStage;
+      var group = append(elements.stages, "section", "macro-stage-group");
+      group.dataset.macroStageId = macroStage.id;
+      var macroHeader = append(group, "div", "macro-stage-header");
+      append(macroHeader, "div", "macro-stage-number", "Macro stage " + (macroIndex + 1) + " · " + macroGroup.stages.length + " atomic substeps");
+      append(macroHeader, "h3", "", macroStage.name);
+      if (macroStage.input_type || macroStage.output_type) {
+        append(macroHeader, "div", "stage-contract small", (macroStage.input_type || "any") + " → " + (macroStage.output_type || "any"));
+      }
+      append(macroHeader, "div", "small muted", macroStage.description || "");
+      var submatrix = append(group, "div", "substep-grid");
+      macroGroup.stages.forEach(function (stage) {
+        var column = append(submatrix, "article", "stage-column");
+        column.dataset.substepId = stage.id;
+        var header = append(column, "div", "stage-header");
+        append(header, "div", "stage-number", substepLabel(stage));
+        append(header, "h3", "", stage.name);
+        append(header, "div", "stage-contract small", stage.input_type + " → " + stage.output_type);
+        append(header, "div", "small muted", stage.description || "");
+        var stack = append(column, "div", "candidate-stack" + (stacksExpanded ? " expanded" : ""));
+        var definitions = new Map(), matching = 0;
+        (stage.candidates || []).forEach(function (candidateId) {
+          var candidate = index.candidates[candidateId], node = candidate && index.nodes[candidate.node_id];
+          if (!candidate || !node || !filterMatches(candidate, node)) return;
+          matching += 1;
+          if (!definitions.has(node.id)) definitions.set(node.id, {node: node, candidates: []});
+          definitions.get(node.id).candidates.push(candidate);
+        });
+        definitions.forEach(function (definition) {
+          var wrapper = append(stack, "div", "definition-group");
+          append(wrapper, "div", "definition-head", definition.node.name + " · " + definition.candidates.length + " atomic " + (definition.candidates.length === 1 ? "candidate" : "candidates"));
+          definition.candidates.forEach(function (candidate) { wrapper.appendChild(candidateButton(candidate, definition.node, stage, false)); });
+        });
+        if (!matching) append(stack, "div", "empty", "No candidates match these filters.");
+        totalMatches += matching; totalShown += matching;
+        append(header, "div", "stage-count", matching + " / " + (stage.candidates || []).length + " candidates shown");
+      });
+    });
+    elements.matrixStatus.textContent = totalShown + " atomic boxes shown across " + (data.macro_stages || []).length +
+      " macro-stage submatrices and " + (data.stages || []).length +
+      " ordered substep columns. Route rows above connect one selected candidate per substep.";
+    elements.toggleStacks.textContent = stacksExpanded ? "Contain column stacks" : "Expand all stacks";
+    renderInspector();
+  }
+
+  function valueText(value) {
+    if (Array.isArray(value)) return value.length ? value.join(", ") : "—";
+    if (value && typeof value === "object") return Object.keys(value).length ? JSON.stringify(value) : "—";
+    return value === undefined || value === null || value === "" ? "—" : String(value);
+  }
+  function detailItem(parent, label, value) {
+    var item = append(parent, "div", "detail-item");
+    append(item, "div", "eyebrow", label);
+    append(item, "div", "detail-value", valueText(value));
+  }
+  function renderInspector(target) {
+    target = target || elements.inspector;
+    target.replaceChildren();
+    var index = maps();
+    var candidate = index.candidates[selectedCandidateId] || index.candidates[(data.metadata || {}).default_candidate] || (data.candidates || [])[0];
+    if (!candidate) { append(target, "div", "empty", "No candidate selected."); return; }
+    selectedCandidateId = candidate.id;
+    var node = index.nodes[candidate.node_id];
+    var stage = (data.stages || []).find(function (item) { return (item.candidates || []).includes(candidate.id); });
+    var top = append(target, "div", "inspector-top");
+    var identity = append(top, "div", "");
+    append(identity, "div", "eyebrow", "Selected atomic candidate");
+    append(identity, "h3", "", candidateName(candidate, node));
+    append(identity, "div", "muted", candidate.description || node.description || "");
+    var badges = append(top, "div", "badges");
+    (node.roles || []).forEach(function (role) { append(badges, "span", "badge", role); });
+    var details = append(target, "div", "detail-grid");
+    var macroStage = macroForStage(stage);
+    detailItem(details, "Macro stage", macroStage ? macroStage.name : "—");
+    detailItem(details, "Atomic substep", stage ? substepLabel(stage) + " · " + stage.name : "—");
+    detailItem(details, "Candidate ID", candidate.id);
+    detailItem(details, "Reusable definition", candidate.node_id);
+    detailItem(details, "Concrete bindings", candidate.parameters);
+    detailItem(details, "Technical ports", (node.inputs || []).map(function (port) { return port.data_type; }).join(", ") + " → " + (node.outputs || []).map(function (port) { return port.data_type; }).join(", "));
+    detailItem(details, "Capabilities", node.capabilities);
+    detailItem(details, "Permissions", node.permissions);
+    detailItem(details, "Effects", node.effects);
+    detailItem(details, "Dependencies", node.dependencies);
+    detailItem(details, "Runtime", node.runtime);
+    detailItem(details, "Context policy", node.context);
+    detailItem(details, "Local intelligence", node.intelligence);
+    detailItem(details, "Metrics", candidate.metrics || node.metrics);
+    detailItem(details, "Source / docs", [node.source, node.docs].filter(Boolean).join(" · "));
+  }
+
+  function svgElement(tag) {
+    return document.createElementNS("http://www.w3.org/2000/svg", tag);
+  }
+
+  function populateNetworkRoutes() {
+    var before = elements.networkBefore.value, after = elements.networkAfter.value;
+    var options = (data.solutions || []).map(function (solution, index) {
+      return {id: solution.id, name: solution.name, route: solution.route || {}, index: index};
+    });
+    if (customEnabled) options.push({id: "custom", name: "Custom route", route: customRoute, index: -1});
+    [elements.networkBefore, elements.networkAfter].forEach(function (select) {
+      select.replaceChildren();
+      options.forEach(function (item) { var option = append(select, "option", "", item.name); option.value = item.id; });
+    });
+    var ids = options.map(function (item) { return item.id; });
+    elements.networkBefore.value = ids.includes(before) ? before : (ids[0] || "");
+    elements.networkAfter.value = ids.includes(after) ? after : (ids[1] || ids[0] || "");
+    return options;
+  }
+
+  function networkPath(group, ids, points, className) {
+    var usable = ids.map(function (id) { return points.get(id); });
+    if (usable.some(function (point) { return !point; })) return false;
+    var path = svgElement("path"), description = "";
+    usable.forEach(function (point, index) {
+      if (!index) { description = "M " + (point.x + point.width) + " " + point.y; return; }
+      var previous = usable[index - 1], left = previous.x + previous.width, right = point.x;
+      var middle = left + (right - left) / 2;
+      description += " C " + middle + " " + previous.y + ", " + middle + " " + point.y + ", " + right + " " + point.y;
+    });
+    path.setAttribute("d", description);
+    path.setAttribute("class", className);
+    group.appendChild(path);
+    return true;
+  }
+
+  function seededRandom(seed) {
+    var state = seed >>> 0;
+    return function () {
+      state = (1664525 * state + 1013904223) >>> 0;
+      return state / 4294967296;
+    };
+  }
+
+  function candidateIdsConnect(ids, index) {
+    for (var position = 0; position < ids.length - 1; position += 1) {
+      var leftCandidate = index.candidates[ids[position]];
+      var rightCandidate = index.candidates[ids[position + 1]];
+      var leftNode = leftCandidate && index.nodes[leftCandidate.node_id];
+      var rightNode = rightCandidate && index.nodes[rightCandidate.node_id];
+      if (!portsConnect(leftNode, rightNode)) return false;
+    }
+    return true;
+  }
+
+  function renderNetwork() {
+    var routeOptions = populateNetworkRoutes();
+    var index = maps(), stages = data.stages || [];
+    var before = routeOptions.find(function (item) { return item.id === elements.networkBefore.value; }) || routeOptions[0];
+    var after = routeOptions.find(function (item) { return item.id === elements.networkAfter.value; }) || routeOptions[1] || routeOptions[0];
+    var nodeWidth = 174, nodeHeight = 30, columnGap = 72, step = nodeWidth + columnGap;
+    var top = 108, rowGap = 36, leftMargin = 28;
+    var maxCandidates = Math.max.apply(null, stages.map(function (stage) { return (stage.candidates || []).length; }).concat([1]));
+    var width = leftMargin * 2 + stages.length * nodeWidth + Math.max(0, stages.length - 1) * columnGap;
+    var height = top + maxCandidates * rowGap + 34;
+    var svg = elements.networkSvg;
+    svg.replaceChildren();
+    var title = svgElement("title"); title.id = "network-svg-title"; title.textContent = "Linear candidate path network"; svg.appendChild(title);
+    var desc = svgElement("desc"); desc.id = "network-svg-desc"; desc.textContent = "Every macro stage contains ordered substep columns of atomic candidates. Paths move only from one substep to the next, left to right."; svg.appendChild(desc);
+    svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+    svg.setAttribute("width", String(width));
+    svg.setAttribute("height", String(height));
+
+    var macroBands = svgElement("g"); svg.appendChild(macroBands);
+    macroGroups().forEach(function (macroGroup, macroIndex) {
+      if (!macroGroup.stages.length) return;
+      var firstIndex = stages.indexOf(macroGroup.stages[0]);
+      var lastIndex = stages.indexOf(macroGroup.stages[macroGroup.stages.length - 1]);
+      if (firstIndex < 0 || lastIndex < 0) return;
+      var x1 = leftMargin + firstIndex * step;
+      var x2 = leftMargin + lastIndex * step + nodeWidth;
+      var line = svgElement("line");
+      line.setAttribute("x1", String(x1)); line.setAttribute("x2", String(x2));
+      line.setAttribute("y1", "32"); line.setAttribute("y2", "32");
+      line.setAttribute("class", "macro-guide"); macroBands.appendChild(line);
+      var label = svgElement("text");
+      label.setAttribute("x", String((x1 + x2) / 2)); label.setAttribute("y", "20");
+      label.setAttribute("text-anchor", "middle"); label.setAttribute("class", "macro-title");
+      label.textContent = "Macro " + (macroIndex + 1) + " · " + macroGroup.macroStage.name + " · " + macroGroup.stages.length + " substeps";
+      macroBands.appendChild(label);
+    });
+
+    var points = new Map();
+    stages.forEach(function (stage, stageIndex) {
+      var x = leftMargin + stageIndex * step;
+      (stage.candidates || []).forEach(function (id, candidateIndex) {
+        points.set(id, {x: x, y: top + candidateIndex * rowGap + nodeHeight / 2, width: nodeWidth});
+      });
+    });
+
+    var background = svgElement("g"); svg.appendChild(background);
+    var backgroundCount = 0, incompatibleCount = 0;
+    if (elements.networkMode.value === "adjacent") {
+      for (var stageIndex = 0; stageIndex < stages.length - 1; stageIndex += 1) {
+        (stages[stageIndex].candidates || []).forEach(function (leftId) {
+          (stages[stageIndex + 1].candidates || []).forEach(function (rightId) {
+            var left = points.get(leftId), right = points.get(rightId);
+            if (!left || !right) return;
+            if (!candidateIdsConnect([leftId, rightId], index)) {
+              incompatibleCount += 1;
+              return;
+            }
+            var middle = left.x + left.width + (right.x - left.x - left.width) / 2;
+            var path = svgElement("path");
+            path.setAttribute("d", "M " + (left.x + left.width) + " " + left.y + " C " + middle + " " + left.y + ", " + middle + " " + right.y + ", " + right.x + " " + right.y);
+            path.setAttribute("class", "network-edge");
+            background.appendChild(path); backgroundCount += 1;
+          });
+        });
+      }
+    } else if (elements.networkMode.value === "sample") {
+      var sampleCount = Number(elements.networkSample.value), random = seededRandom(20260809);
+      var attempts = 0, maximumAttempts = Math.max(sampleCount * 20, sampleCount);
+      while (backgroundCount < sampleCount && attempts < maximumAttempts) {
+        attempts += 1;
+        var ids = stages.map(function (stage) {
+          var choices = stage.candidates || [];
+          return choices[Math.floor(random() * choices.length)];
+        });
+        if (!candidateIdsConnect(ids, index)) {
+          incompatibleCount += 1;
+          continue;
+        }
+        if (networkPath(background, ids, points, "network-sample")) backgroundCount += 1;
+      }
+    }
+
+    var highlight = svgElement("g"); svg.appendChild(highlight);
+    if (before) networkPath(highlight, stages.map(function (stage) { return before.route[stage.id]; }), points, "network-before");
+    if (after) networkPath(highlight, stages.map(function (stage) { return after.route[stage.id]; }), points, "network-after");
+    var beforeIds = new Set(before ? Object.values(before.route) : []), afterIds = new Set(after ? Object.values(after.route) : []);
+
+    var columns = svgElement("g"); svg.appendChild(columns);
+    stages.forEach(function (stage, stageIndex) {
+      var x = leftMargin + stageIndex * step;
+      var guide = svgElement("line");
+      guide.setAttribute("x1", String(x + nodeWidth / 2)); guide.setAttribute("x2", String(x + nodeWidth / 2));
+      guide.setAttribute("y1", "82"); guide.setAttribute("y2", String(height - 12)); guide.setAttribute("class", "column-guide"); columns.appendChild(guide);
+      var heading = svgElement("text"); heading.setAttribute("x", String(x + nodeWidth / 2)); heading.setAttribute("y", "54"); heading.setAttribute("text-anchor", "middle"); heading.setAttribute("class", "column-title"); heading.textContent = shortSubstepLabel(stage) + " · " + stage.name; columns.appendChild(heading);
+      var subtitle = svgElement("text"); subtitle.setAttribute("x", String(x + nodeWidth / 2)); subtitle.setAttribute("y", "72"); subtitle.setAttribute("text-anchor", "middle"); subtitle.setAttribute("class", "column-subtitle"); subtitle.textContent = stage.input_type + " → " + stage.output_type + " · " + (stage.candidates || []).length + " candidates"; columns.appendChild(subtitle);
+      (stage.candidates || []).forEach(function (candidateId, candidateIndex) {
+        var candidate = index.candidates[candidateId], node = candidate && index.nodes[candidate.node_id];
+        if (!candidate || !node) return;
+        var point = points.get(candidateId), group = svgElement("g");
+        var classes = ["network-node"];
+        if ((node.roles || []).includes("model")) classes.push("model");
+        if ((node.roles || []).includes("pass_through")) classes.push("pass");
+        if (beforeIds.has(candidateId)) classes.push("before");
+        if (afterIds.has(candidateId)) classes.push("after");
+        group.setAttribute("class", classes.join(" "));
+        group.dataset.candidateId = candidateId;
+        var rect = svgElement("rect"); rect.setAttribute("x", String(point.x)); rect.setAttribute("y", String(point.y - nodeHeight / 2)); rect.setAttribute("width", String(nodeWidth)); rect.setAttribute("height", String(nodeHeight)); rect.setAttribute("rx", "5"); group.appendChild(rect);
+        var label = candidateName(candidate, node), shown = label.length > 27 ? label.slice(0, 26) + "…" : label;
+        var text = svgElement("text"); text.setAttribute("x", String(point.x + nodeWidth / 2)); text.setAttribute("y", String(point.y - 1)); text.setAttribute("text-anchor", "middle"); text.textContent = shown; group.appendChild(text);
+        var prior = svgElement("text"); prior.setAttribute("x", String(point.x + nodeWidth / 2)); prior.setAttribute("y", String(point.y + 10)); prior.setAttribute("text-anchor", "middle"); prior.setAttribute("class", "network-node-prior"); prior.textContent = "q prior " + metric(candidate, node, "quality_prior", 0).toFixed(3); group.appendChild(prior);
+        var nodeTitle = svgElement("title"); nodeTitle.textContent = label + (parameterText(candidate) ? " · " + parameterText(candidate) : ""); group.appendChild(nodeTitle);
+        group.addEventListener("click", function () {
+          selectedCandidateId = candidateId;
+          customRoute[stage.id] = candidateId;
+          customEnabled = true;
+          builderStageIndex = stageIndex;
+          builderMessage = "Selected " + candidateName(candidate, node) + " for " + stage.name + ".";
+          renderAllViews();
+        });
+        columns.appendChild(group);
+      });
+    });
+    elements.networkStatus.textContent = (data.macro_stages || []).length + " macro-stage submatrices · " + stages.length + " ordered substeps · " + (data.candidates || []).length + " atomic candidates · " +
+      (elements.networkMode.value === "adjacent" ? formatInteger(backgroundCount) + " runnable adjacent possibility lines" : elements.networkMode.value === "sample" ? formatInteger(backgroundCount) + " runnable sampled complete routes" : "selected routes only") +
+      (incompatibleCount ? " · " + formatInteger(incompatibleCount) + " incompatible path" + (incompatibleCount === 1 ? "" : "s") + " excluded" : "") +
+      " · all paths move left to right";
+    renderInspector(elements.networkInspector);
+  }
+
+  function populateBaseline() {
+    var current = elements.baseline.value;
+    elements.baseline.replaceChildren();
+    (data.solutions || []).forEach(function (solution) {
+      var option = append(elements.baseline, "option", "", solution.name); option.value = solution.id;
+    });
+    elements.baseline.value = (data.solutions || []).some(function (solution) { return solution.id === current; }) ? current : ((data.solutions || [])[0] || {}).id || "";
+  }
+
+  function renderComparison() {
+    populateBaseline();
+    var index = maps();
+    var routes = (data.solutions || []).map(function (solution, routeIndex) {
+      return {id: solution.id, name: solution.name, description: solution.description || "",
+        status: solution.status || "candidate", tags: solution.tags || [],
+        route: solution.route || {}, metrics: solution.metrics || {},
+        fallbacks: solution.fallbacks || {}, index: routeIndex};
+    });
+    if (customEnabled) routes.push({id: "custom", name: "Custom route", description: "Interactive route assembled in this viewer", status: "custom", tags: [], route: customRoute, metrics: routeMetrics(customRoute), fallbacks: {}, index: -1});
+    var baseline = routes.find(function (route) { return route.id === elements.baseline.value; }) || routes[0];
+    var pareto = paretoRouteIds(routes);
+    elements.comparisonStatus.textContent = routes.length + " complete hierarchical routes compared across " + (data.stages || []).length + " substeps · " + pareto.size +
+      " non-dominated across quality, latency, and cost · highlighted cells differ from " +
+      (baseline ? baseline.name : "the baseline");
+    elements.comparison.replaceChildren();
+    var head = append(elements.comparison, "thead", ""), headRow = append(head, "tr", "");
+    append(headRow, "th", "", "Solution route");
+    (data.stages || []).forEach(function (stage) {
+      var macroStage = macroForStage(stage);
+      append(headRow, "th", "", shortSubstepLabel(stage) + " · " + (macroStage ? macroStage.name + " / " : "") + stage.name);
+    });
+    append(headRow, "th", "", "Route metrics");
+    var body = append(elements.comparison, "tbody", "");
+    routes.forEach(function (routeItem) {
+      var row = append(body, "tr", "");
+      var label = append(row, "td", "");
+      append(label, "div", "compare-node", routeItem.name);
+      append(label, "div", "small muted", routeItem.id === (baseline && baseline.id) ? "baseline" : routeItem.description || "parallel solution");
+      (data.stages || []).forEach(function (stage, stageIndex) {
+        var candidate = index.candidates[routeItem.route[stage.id]], node = candidate && index.nodes[candidate.node_id];
+        var changed = baseline && routeItem.route[stage.id] !== baseline.route[stage.id];
+        var cell = append(row, "td", "compare-cell" + (changed ? " changed" : ""));
+        var button = append(cell, "button", ""); button.type = "button";
+        append(button, "div", "compare-node", candidateName(candidate, node));
+        var binding = candidate ? parameterText(candidate) : "";
+        if (binding) append(button, "div", "compare-binding", binding);
+        var fallbackCount = ((routeItem.fallbacks || {})[stage.id] || []).length;
+        if (fallbackCount) append(button, "div", "compare-fallback", fallbackCount + " fallback " + (fallbackCount === 1 ? "candidate" : "candidates"));
+        button.addEventListener("click", function () { if (candidate) { selectedCandidateId = candidate.id; builderStageIndex = stageIndex; setView("matrix"); } });
+      });
+      var metrics = append(row, "td", "compare-evidence");
+      append(metrics, "span", "status-badge", !routeHasParetoMetrics(routeItem) ? "Insufficient comparable metrics" : pareto.has(routeItem.id) ? "Pareto / non-dominated" : "Dominated under shown metrics");
+      append(metrics, "div", "compare-node", metricSummary({metrics: routeItem.metrics}) || "No measured route receipt");
+      append(metrics, "div", "small muted", (routeItem.status || "candidate") +
+        (routeItem.tags && routeItem.tags.length ? " · " + routeItem.tags.join(", ") : ""));
+      var totalFallbacks = fallbackCount(routeItem);
+      append(metrics, "div", "small muted", totalFallbacks + " ordered fallback" + (totalFallbacks === 1 ? "" : "s"));
+    });
+  }
+
+  function policyProblems(node) {
+    var problems = [], permissions = node.permissions || [], effects = node.effects || [], runtime = node.runtime || {};
+    if (elements.policyNetwork.checked && permissions.includes("network")) problems.push("network disallowed");
+    if (elements.policyBrowser.checked && permissions.includes("browser")) problems.push("browser disallowed");
+    if (elements.policyLlm.checked && (permissions.includes("llm") || (node.roles || []).includes("model"))) problems.push("LLM disallowed");
+    if (elements.policyEffects.checked && effects.length) problems.push("external effects disallowed");
+    if (elements.policyDeterministic.checked && runtime.deterministic !== true) problems.push("not deterministic");
+    return problems;
+  }
+
+  function portsConnect(left, right) {
+    if (!right || !(right.inputs || []).length) return true;
+    if (!left || !(left.outputs || []).length) return false;
+    return left.outputs.some(function (output) {
+      return right.inputs.some(function (input) {
+        return output.data_type === "any" || input.data_type === "any" || output.data_type === input.data_type;
+      });
+    });
+  }
+
+  function validateRoute(route) {
+    var index = maps(), problems = [], previousNode = null;
+    (data.stages || []).forEach(function (stage) {
+      var candidate = index.candidates[route[stage.id]], node = candidate && index.nodes[candidate.node_id];
+      if (!candidate || !(stage.candidates || []).includes(candidate.id)) {
+        problems.push(stage.name + ": missing or invalid candidate");
+        previousNode = null;
+        return;
+      }
+      policyProblems(node).forEach(function (problem) { problems.push(stage.name + ": " + problem); });
+      if (previousNode && !portsConnect(previousNode, node)) problems.push(stage.name + ": input does not connect to prior output");
+      previousNode = node;
+    });
+    return problems;
+  }
+
+  function routeMetrics(route) {
+    var index = maps(), quality = [], latency = 0, cost = 0;
+    (data.stages || []).forEach(function (stage) {
+      var candidate = index.candidates[route[stage.id]], node = candidate && index.nodes[candidate.node_id];
+      if (!candidate || !node) return;
+      quality.push(metric(candidate, node, "quality_prior", 0));
+      latency += metric(candidate, node, "latency_ms_prior", 0);
+      cost += metric(candidate, node, "cost_usd_prior", 0);
+    });
+    return {quality: quality.length ? quality.reduce(function (a, b) { return a + b; }, 0) / quality.length : 0,
+      latency_ms: latency, cost_usd: cost};
+  }
+
+  function renderStageRail() {
+    elements.stageRail.replaceChildren();
+    var index = maps();
+    (data.stages || []).forEach(function (stage, stageIndex) {
+      var candidate = index.candidates[customRoute[stage.id]], node = candidate && index.nodes[candidate.node_id];
+      var button = append(elements.stageRail, "button", "stage-rail-button");
+      button.type = "button";
+      if (stageIndex === builderStageIndex) button.setAttribute("aria-current", "step");
+      var macroStage = macroForStage(stage);
+      append(button, "span", "route-step-name", substepLabel(stage) + (macroStage ? " · " + macroStage.name : ""));
+      append(button, "span", "route-choice", stage.name);
+      append(button, "span", "route-binding", candidateName(candidate, node));
+      button.addEventListener("click", function () { builderStageIndex = stageIndex; renderBuilder(); });
+      if (stageIndex < (data.stages || []).length - 1) append(elements.stageRail, "span", "stage-rail-arrow", "→");
+    });
+  }
+
+  function renderValidation() {
+    elements.validation.replaceChildren();
+    append(elements.validation, "div", "eyebrow", "Live route validation");
+    var problems = validateRoute(customRoute), metrics = routeMetrics(customRoute);
+    append(elements.validation, "h3", "", problems.length ? problems.length + " issue" + (problems.length === 1 ? "" : "s") : "Route is technically valid");
+    var grid = append(elements.validation, "div", "metric-grid");
+    [["Mean quality prior", metrics.quality.toFixed(3)], ["Summed latency prior", formatInteger(metrics.latency_ms) + " ms"], ["Summed cost prior", "$" + metrics.cost_usd.toFixed(4)]].forEach(function (entry) {
+      var box = append(grid, "div", "metric"); append(box, "div", "eyebrow", entry[0]); append(box, "div", "metric-value", entry[1]);
+    });
+    var list = append(elements.validation, "ul", "validation-list");
+    if (!problems.length) {
+      append(list, "li", "", "One candidate is selected for every atomic substep");
+      append(list, "li", "", "Every adjacent technical port connects");
+      append(list, "li", "", "Every selected candidate satisfies the active policy");
+    } else {
+      problems.forEach(function (problem) { append(list, "li", "problem", problem); });
+    }
+    append(elements.validation, "div", "small muted", "Priors are illustrative until replaced by measured run receipts.");
+  }
+
+  function renderBuilder() {
+    renderStageRail();
+    var index = maps(), stage = (data.stages || [])[builderStageIndex];
+    if (!stage) return;
+    var macroStage = macroForStage(stage);
+    elements.builderStep.textContent = substepLabel(stage) + " · " + (builderStageIndex + 1) + " of " + data.stages.length + " total substeps";
+    elements.builderTitle.textContent = (macroStage ? macroStage.name + " / " : "") + stage.name;
+    elements.builderContract.textContent = stage.input_type + " → " + stage.output_type + " · Success: " + stage.success;
+    elements.builderFeedback.textContent = builderMessage;
+    elements.previous.disabled = builderStageIndex <= 0;
+    elements.next.disabled = builderStageIndex >= data.stages.length - 1;
+    var query = elements.builderSearch.value.trim().toLowerCase();
+    elements.builderCandidates.replaceChildren();
+    var shown = 0;
+    (stage.candidates || []).forEach(function (candidateId) {
+      var candidate = index.candidates[candidateId], node = candidate && index.nodes[candidate.node_id];
+      if (!candidate || !node) return;
+      var text = [candidate.name, node.name, node.description, JSON.stringify(candidate.parameters || {}), JSON.stringify(node.roles || [])].join(" ").toLowerCase();
+      if (query && !text.includes(query)) return;
+      elements.builderCandidates.appendChild(candidateButton(candidate, node, stage, true));
+      shown += 1;
+    });
+    if (!shown) append(elements.builderCandidates, "div", "empty", "No candidates match this stage filter.");
+    renderValidation();
+    renderRecommendationExplain(stage);
+    renderLinearRoutes(elements.builderRouteMap, [{id: "custom", name: "Custom route", route: customRoute, metrics: routeMetrics(customRoute), index: -1}], false);
+  }
+
+  function objectiveProfiles() {
+    if ((data.optimization_profiles || []).length) return data.optimization_profiles;
+    return [
+      {id: "balanced", name: "Balanced", objectives: [{metric: "quality_prior", direction: "maximize", weight: .5}, {metric: "latency_ms_prior", direction: "minimize", weight: .25}, {metric: "cost_usd_prior", direction: "minimize", weight: .25}]},
+      {id: "quality", name: "Quality prior", objectives: [{metric: "quality_prior", direction: "maximize", weight: 1}]},
+      {id: "speed", name: "Lowest latency", objectives: [{metric: "latency_ms_prior", direction: "minimize", weight: 1}]},
+      {id: "cost", name: "Lowest cost", objectives: [{metric: "cost_usd_prior", direction: "minimize", weight: 1}]}
+    ];
+  }
+
+  function populateObjectiveProfiles() {
+    var current = elements.objective.value;
+    elements.objective.replaceChildren();
+    objectiveProfiles().forEach(function (profile) {
+      var option = append(elements.objective, "option", "", profile.name); option.value = profile.id;
+    });
+    if ([...elements.objective.options].some(function (option) { return option.value === current; })) elements.objective.value = current;
+  }
+
+  function rankStageCandidates(stage) {
+    var index = maps();
+    var eligible = (stage.candidates || []).map(function (id) { return index.candidates[id]; }).filter(function (candidate) {
+      var node = candidate && index.nodes[candidate.node_id];
+      return candidate && node && !policyProblems(node).length;
+    });
+    if (!eligible.length) return {profile: null, rows: []};
+    var rows = eligible.map(function (candidate) {
+      var node = index.nodes[candidate.node_id];
+      return {candidate: candidate, node: node, quality: metric(candidate, node, "quality_prior", 0),
+        latency: metric(candidate, node, "latency_ms_prior", 0), cost: metric(candidate, node, "cost_usd_prior", 0), components: []};
+    });
+    function normalized(value, values, inverse) {
+      var min = Math.min.apply(null, values), max = Math.max.apply(null, values);
+      var score = max === min ? 1 : (value - min) / (max - min);
+      return inverse ? 1 - score : score;
+    }
+    var profile = objectiveProfiles().find(function (item) { return item.id === elements.objective.value; }) || objectiveProfiles()[0];
+    var totalWeight = (profile.objectives || []).reduce(function (total, objective) { return total + Number(objective.weight || 0); }, 0) || 1;
+    rows.forEach(function (row) {
+      row.score = (profile.objectives || []).reduce(function (score, objective) {
+        var values = rows.map(function (item) { return metric(item.candidate, item.node, objective.metric, 0); });
+        var value = metric(row.candidate, row.node, objective.metric, 0);
+        var normalizedValue = normalized(value, values, objective.direction === "minimize");
+        var contribution = normalizedValue * Number(objective.weight || 0) / totalWeight;
+        row.components.push({metric: objective.metric, direction: objective.direction,
+          weight: Number(objective.weight || 0), value: value,
+          normalized: normalizedValue, contribution: contribution});
+        return score + contribution;
+      }, 0);
+    });
+    rows.sort(function (left, right) { return right.score - left.score || left.candidate.id.localeCompare(right.candidate.id); });
+    return {profile: profile, rows: rows};
+  }
+
+  function recordStageDecision(stage, ranked) {
+    var winner = ranked.rows[0];
+    decisionSequence += 1;
+    var objectiveValues = {}, contributions = {};
+    winner.components.forEach(function (component) {
+      objectiveValues[component.metric] = component.value;
+      contributions[component.metric] = component.contribution;
+    });
+    data.optimization_decisions.push({
+      id: "viewer.decision.d" + Date.now() + "." + decisionSequence,
+      scope: "substep",
+      profile_id: ranked.profile.id,
+      selected: {[stage.id]: winner.candidate.id},
+      eligible_count: ranked.rows.length,
+      rejected_count: Math.max(0, (stage.candidates || []).length - ranked.rows.length),
+      score: winner.score,
+      objective_values: objectiveValues,
+      contributions: contributions,
+      alternatives: ranked.rows.slice(1, 6).map(function (row) { return row.candidate.id; }),
+      evidence_snapshot: (data.metadata && data.metadata.metric_source) || "not declared",
+      reason: "highest normalized score after hard-policy admission",
+      created_at: new Date().toISOString()
+    });
+    renderHeader();
+  }
+
+  function recordRouteDecision(rankings) {
+    decisionSequence += 1;
+    var profile = null, scores = [], eligible = 0, rejected = 0;
+    var contributions = {}, objectiveValues = {}, alternatives = [];
+    (data.stages || []).forEach(function (stage) {
+      var ranked = rankings[stage.id], winner = ranked && ranked.rows[0];
+      if (!ranked || !winner) return;
+      profile = profile || ranked.profile;
+      scores.push(winner.score);
+      eligible += ranked.rows.length;
+      rejected += Math.max(0, (stage.candidates || []).length - ranked.rows.length);
+      alternatives.push.apply(alternatives, ranked.rows.slice(1, 2).map(function (row) { return row.candidate.id; }));
+      winner.components.forEach(function (component) {
+        objectiveValues[component.metric] = (objectiveValues[component.metric] || 0) + component.value;
+        contributions[component.metric] = (contributions[component.metric] || 0) + component.contribution;
+      });
+    });
+    var divisor = Math.max(1, scores.length);
+    Object.keys(objectiveValues).forEach(function (metricName) {
+      objectiveValues[metricName] /= divisor;
+      contributions[metricName] /= divisor;
+    });
+    data.optimization_decisions.push({
+      id: "viewer.decision.d" + Date.now() + "." + decisionSequence,
+      scope: "route",
+      profile_id: profile ? profile.id : "",
+      selected: Object.assign({}, customRoute),
+      eligible_count: eligible,
+      rejected_count: rejected,
+      score: scores.length ? scores.reduce(function (total, value) { return total + value; }, 0) / scores.length : null,
+      objective_values: objectiveValues,
+      contributions: contributions,
+      alternatives: [...new Set(alternatives)],
+      evidence_snapshot: (data.metadata && data.metadata.metric_source) || "not declared",
+      reason: "coordinate-wise highest eligible substep scores followed by full hierarchical route revalidation",
+      created_at: new Date().toISOString()
+    });
+    renderHeader();
+  }
+
+  function recordMacroDecision(macroStage, targetStages, rankings) {
+    decisionSequence += 1;
+    var profile = null, scores = [], eligible = 0, rejected = 0;
+    var contributions = {}, objectiveValues = {}, alternatives = [], selected = {};
+    targetStages.forEach(function (stage) {
+      var ranked = rankings[stage.id], winner = ranked && ranked.rows[0];
+      if (!ranked || !winner) return;
+      profile = profile || ranked.profile;
+      scores.push(winner.score);
+      eligible += ranked.rows.length;
+      rejected += Math.max(0, (stage.candidates || []).length - ranked.rows.length);
+      selected[stage.id] = winner.candidate.id;
+      alternatives.push.apply(alternatives, ranked.rows.slice(1, 2).map(function (row) { return row.candidate.id; }));
+      winner.components.forEach(function (component) {
+        objectiveValues[component.metric] = (objectiveValues[component.metric] || 0) + component.value;
+        contributions[component.metric] = (contributions[component.metric] || 0) + component.contribution;
+      });
+    });
+    var divisor = Math.max(1, scores.length);
+    Object.keys(objectiveValues).forEach(function (metricName) {
+      objectiveValues[metricName] /= divisor;
+      contributions[metricName] /= divisor;
+    });
+    data.optimization_decisions.push({
+      id: "viewer.decision.d" + Date.now() + "." + decisionSequence,
+      scope: "macro_stage",
+      profile_id: profile ? profile.id : "",
+      selected: selected,
+      eligible_count: eligible,
+      rejected_count: rejected,
+      score: scores.length ? scores.reduce(function (total, value) { return total + value; }, 0) / scores.length : null,
+      objective_values: objectiveValues,
+      contributions: contributions,
+      alternatives: [...new Set(alternatives)],
+      evidence_snapshot: (data.metadata && data.metadata.metric_source) || "not declared",
+      reason: "highest eligible substep scores inside macro stage " + (macroStage ? macroStage.id : "legacy") + " followed by full route revalidation",
+      created_at: new Date().toISOString()
+    });
+    renderHeader();
+  }
+
+  function renderRecommendationExplain(stage) {
+    elements.recommendation.replaceChildren();
+    append(elements.recommendation, "div", "eyebrow", "Decision rationale");
+    var profile = objectiveProfiles().find(function (item) { return item.id === elements.objective.value; }) || objectiveProfiles()[0];
+    append(elements.recommendation, "h3", "", profile ? profile.name : "No optimization profile");
+    if (profile) {
+      append(elements.recommendation, "div", "small muted", (profile.objectives || []).map(function (objective) {
+        return objective.metric + " " + objective.direction + " × " + Number(objective.weight || 0).toFixed(2);
+      }).join(" · ") + (profile.description ? " · " + profile.description : ""));
+    }
+    if (!recommendationRows.length || recommendationStageId !== stage.id || recommendationProfileId !== (profile && profile.id)) {
+      append(elements.recommendation, "div", "empty", "Run a recommendation to see the eligible ranking and objective contributions for this substep.");
+      return;
+    }
+    var wrapper = append(elements.recommendation, "div", "table-wrap");
+    var table = append(wrapper, "table", "recommendation-table");
+    var head = append(table, "thead", ""), row = append(head, "tr", "");
+    ["Rank", "Atomic candidate", "Score", "Objective contributions"].forEach(function (label) { append(row, "th", "", label); });
+    var body = append(table, "tbody", "");
+    recommendationRows.slice(0, 5).forEach(function (item, rank) {
+      var resultRow = append(body, "tr", "");
+      append(resultRow, "td", "", String(rank + 1));
+      var identity = append(resultRow, "td", "");
+      append(identity, "div", "compare-node", candidateName(item.candidate, item.node));
+      if (parameterText(item.candidate)) append(identity, "div", "small muted", parameterText(item.candidate));
+      append(resultRow, "td", "recommendation-score", item.score.toFixed(3));
+      append(resultRow, "td", "small", item.components.map(function (component) {
+        return component.metric + "=" + component.value + " → " + component.contribution.toFixed(3);
+      }).join(" · "));
+    });
+    append(elements.recommendation, "div", "small muted", recommendationRows.length + " eligible candidates ranked; only the top five are shown here. Hard-policy failures were excluded before scoring.");
+  }
+
+  function recommendCandidate() {
+    var stage = (data.stages || [])[builderStageIndex];
+    if (!stage) return;
+    var ranked = rankStageCandidates(stage);
+    if (!ranked.rows.length) {
+      recommendationRows = [];
+      recommendationStageId = stage.id;
+      recommendationProfileId = ranked.profile ? ranked.profile.id : "";
+      builderMessage = "No candidate satisfies all active hard policies. Relax a policy or add a compatible node.";
+      renderBuilder();
+      return;
+    }
+    recommendationRows = ranked.rows;
+    recommendationStageId = stage.id;
+    recommendationProfileId = ranked.profile.id;
+    var winner = ranked.rows[0];
+    customRoute[stage.id] = winner.candidate.id;
+    customEnabled = true;
+    selectedCandidateId = winner.candidate.id;
+    recordStageDecision(stage, ranked);
+    builderMessage = "Recommended " + candidateName(winner.candidate, winner.node) + " under the " + ranked.profile.name + " profile (normalized score " + winner.score.toFixed(3) + "). The ranking below shows why.";
+    renderAllViews();
+  }
+
+  function optimizeCurrentMacroStage() {
+    var currentStage = (data.stages || [])[builderStageIndex];
+    if (!currentStage) return;
+    var macroStage = macroForStage(currentStage);
+    var index = maps();
+    var targetStages = macroStage ? (macroStage.substeps || []).map(function (id) { return index.stages[id]; }).filter(Boolean) : [currentStage];
+    var rankings = {}, blockedStage = null;
+    targetStages.forEach(function (stage) {
+      if (blockedStage) return;
+      var ranked = rankStageCandidates(stage);
+      if (!ranked.rows.length) {
+        blockedStage = stage;
+        return;
+      }
+      rankings[stage.id] = ranked;
+    });
+    if (blockedStage) {
+      builderMessage = "Could not optimize " + (macroStage ? macroStage.name : "the current macro stage") + " because " + blockedStage.name + " has no eligible candidate.";
+      renderBuilder();
+      return;
+    }
+    targetStages.forEach(function (stage) {
+      customRoute[stage.id] = rankings[stage.id].rows[0].candidate.id;
+    });
+    customEnabled = true;
+    var currentRanking = rankings[currentStage.id];
+    recommendationRows = currentRanking.rows;
+    recommendationStageId = currentStage.id;
+    recommendationProfileId = currentRanking.profile.id;
+    selectedCandidateId = customRoute[currentStage.id];
+    var problems = validateRoute(customRoute);
+    recordMacroDecision(macroStage, targetStages, rankings);
+    builderMessage = "Proposed one candidate for each of " + targetStages.length + " substeps inside " +
+      (macroStage ? macroStage.name : "the current macro stage") + ". Full-route revalidation found " +
+      problems.length + " issue" + (problems.length === 1 ? "" : "s") + ".";
+    renderAllViews();
+  }
+
+  function optimizeEveryStage() {
+    var proposals = {}, rankings = {}, blockedStage = null;
+    (data.stages || []).forEach(function (stage) {
+      if (blockedStage) return;
+      var ranked = rankStageCandidates(stage);
+      if (!ranked.rows.length) {
+        blockedStage = stage;
+        return;
+      }
+      proposals[stage.id] = ranked.rows[0].candidate.id;
+      rankings[stage.id] = ranked;
+    });
+    if (blockedStage) {
+      builderMessage = "Could not optimize the full route because " + blockedStage.name + " has no candidate satisfying every active hard policy.";
+      renderBuilder();
+      return;
+    }
+    customRoute = proposals;
+    customEnabled = true;
+    var currentStage = (data.stages || [])[builderStageIndex];
+    var currentRanking = currentStage && rankings[currentStage.id];
+    recommendationRows = currentRanking ? currentRanking.rows : [];
+    recommendationStageId = currentStage ? currentStage.id : "";
+    recommendationProfileId = currentRanking && currentRanking.profile ? currentRanking.profile.id : "";
+    selectedCandidateId = currentStage ? customRoute[currentStage.id] : selectedCandidateId;
+    var problems = validateRoute(customRoute);
+    recordRouteDecision(rankings);
+    builderMessage = "Proposed one highest-ranked eligible candidate for every atomic substep under " +
+      ((currentRanking && currentRanking.profile && currentRanking.profile.name) || "the selected profile") +
+      ". Full route revalidation found " + problems.length + " issue" + (problems.length === 1 ? "" : "s") + ".";
+    renderAllViews();
+  }
+
+  function populateFeedbackRoutes() {
+    var current = elements.feedbackRoute.value;
+    elements.feedbackRoute.replaceChildren();
+    (data.solutions || []).forEach(function (solution) { var option = append(elements.feedbackRoute, "option", "", solution.name); option.value = solution.id; });
+    if (customEnabled) { var custom = append(elements.feedbackRoute, "option", "", "Custom route"); custom.value = "custom"; }
+    var ids = [...elements.feedbackRoute.options].map(function (option) { return option.value; });
+    elements.feedbackRoute.value = ids.includes(current) ? current : (ids[0] || "");
+  }
+
+  function routeAuthority(route) {
+    var index = maps(), permissions = new Set(), effects = new Set(), dependencies = new Set();
+    (data.stages || []).forEach(function (stage) {
+      var candidate = index.candidates[route[stage.id]], node = candidate && index.nodes[candidate.node_id];
+      if (!node) return;
+      (node.permissions || []).forEach(function (value) { permissions.add(value); });
+      (node.effects || []).forEach(function (value) { effects.add(value); });
+      (node.dependencies || []).forEach(function (value) { dependencies.add(value); });
+    });
+    return {permissions: [...permissions].sort(), effects: [...effects].sort(), dependencies: [...dependencies].sort()};
+  }
+
+  function renderFeedback() {
+    populateFeedbackRoutes();
+    var solution = (data.solutions || []).find(function (item) { return item.id === elements.feedbackRoute.value; });
+    var routeItem = solution ? {id: solution.id, name: solution.name, description: solution.description || "", status: solution.status || "candidate", tags: solution.tags || [], route: solution.route, fallbacks: solution.fallbacks || {}, metrics: solution.metrics || {}, index: (data.solutions || []).indexOf(solution)} :
+      {id: "custom", name: "Custom route", description: "Interactive route", status: "custom", tags: [], route: customRoute, fallbacks: {}, metrics: routeMetrics(customRoute), index: -1};
+    var matchingReceipts = (data.receipts || []).filter(function (receipt) { return receipt.solution_id === routeItem.id; });
+    var latestReceipt = matchingReceipts.length ? matchingReceipts[matchingReceipts.length - 1] : null;
+    if (latestReceipt && latestReceipt.metrics) routeItem.metrics = latestReceipt.metrics;
+    renderLinearRoutes(elements.feedbackRouteMap, [routeItem], false);
+    var metrics = routeItem.metrics || {}, index = maps();
+    var routeProblems = validateRoute(routeItem.route), authority = routeAuthority(routeItem.route);
+    elements.receiptSummary.replaceChildren();
+    [
+      ["Admission and contract gate", routeProblems.length ? routeProblems.length + " issue" + (routeProblems.length === 1 ? "" : "s") : "Pass"],
+      ["Route hierarchy", (data.macro_stages || []).length + " macro stages · " + (data.stages || []).length + " atomic substeps"],
+      ["Latest execution receipt", latestReceipt ? latestReceipt.outcome + (latestReceipt.accepted === null || latestReceipt.accepted === undefined ? "" : latestReceipt.accepted ? " · accepted" : " · rejected") : "No measured execution receipt loaded"],
+      ["Route evidence", metricSummary({metrics: metrics}) || "Await measured receipt"],
+      ["Evidence source", (latestReceipt && latestReceipt.evidence_source) || (data.metadata && data.metadata.metric_source) || "Not declared"],
+      ["Fallback resilience", fallbackCount(routeItem) + " ordered fallback" + (fallbackCount(routeItem) === 1 ? "" : "s")],
+      ["Required permissions", authority.permissions.length ? authority.permissions.join(", ") : "None declared"],
+      ["Possible effects", authority.effects.length ? authority.effects.join(", ") : "None declared"],
+      ["Dependencies", authority.dependencies.length ? authority.dependencies.join(", ") : "None declared"],
+      ["Route status", routeItem.status + (routeItem.tags.length ? " · " + routeItem.tags.join(", ") : "")],
+      ["Optimizer decisions", String((data.optimization_decisions || []).length)]
+    ].forEach(function (entry) {
+      var box = append(elements.receiptSummary, "div", "receipt-item");
+      append(box, "div", "eyebrow", entry[0]);
+      append(box, "div", "", entry[1]);
+    });
+    var verifyStage = (data.stages || []).find(function (stage) { return stage.id === "verify.outcome" || stage.id === "verify"; }) || (data.stages || [])[Math.max(0, data.stages.length - 2)];
+    var emitStage = (data.stages || []).find(function (stage) { return stage.id === "emit.register" || stage.id === "emit"; }) || (data.stages || [])[data.stages.length - 1];
+    var verifyCandidate = verifyStage && index.candidates[routeItem.route[verifyStage.id]];
+    var emitCandidate = emitStage && index.candidates[routeItem.route[emitStage.id]];
+    function signalValue(channel) {
+      if (channel.signal === "contract_status") return validateRoute(routeItem.route).length ? "Route requires review" : "All adjacent ports connect";
+      if (channel.signal === "attempt_outcome") return "Recorded per candidate and attempt";
+      if (channel.signal === "acceptance_verdict") return verifyCandidate ? candidateName(verifyCandidate, index.nodes[verifyCandidate.node_id]) : "Verifier not resolved";
+      if (channel.signal === "quality_yield_receipt") return metrics.quality !== undefined ? "Route receipt Q " + metrics.quality : "Await measured receipt";
+      if (channel.signal === "resource_receipt") return metrics.latency_ms !== undefined ? formatInteger(metrics.latency_ms) + " ms route receipt" : "Await measured receipt";
+      if (channel.signal === "cost_receipt") return metrics.cost_usd !== undefined ? "$" + Number(metrics.cost_usd).toFixed(4) + " route receipt" : "Await measured receipt";
+      if (channel.signal === "policy_decision") return "Permissions and effects remain explicit";
+      if (channel.signal === "freshness_receipt") return emitCandidate ? candidateName(emitCandidate, index.nodes[emitCandidate.node_id]) : "Receipt sink not resolved";
+      return "Typed " + channel.scope + " signal";
+    }
+    var channels = (data.feedback_channels || []).length ? data.feedback_channels : [
+      {name: "Contract compatibility", signal: "contract_status", scope: "edge", producer: "compiler", consumer: "admission_gate", action: "reject incompatible transition"},
+      {name: "Execution status and diagnosis", signal: "attempt_outcome", scope: "candidate", producer: "supervisor", consumer: "route_controller", action: "retry, fallback, circuit break or stop"},
+      {name: "Independent verification", signal: "acceptance_verdict", scope: "route", producer: "verifier", consumer: "acceptance_gate", action: "accept or reject"},
+      {name: "Quality and yield", signal: "quality_yield_receipt", scope: "route", producer: "receipt", consumer: "learner", action: "update quality prior"},
+      {name: "Latency and resources", signal: "resource_receipt", scope: "candidate", producer: "runtime", consumer: "optimizer", action: "update resource model"},
+      {name: "Cost and token spend", signal: "cost_receipt", scope: "route", producer: "budget", consumer: "optimizer", action: "constrain and rank"},
+      {name: "Policy, authority and effects", signal: "policy_decision", scope: "route", producer: "policy_gate", consumer: "executor", action: "allow or stop"},
+      {name: "Provenance, drift and freshness", signal: "freshness_receipt", scope: "candidate", producer: "registry", consumer: "learner", action: "invalidate stale evidence"}
+    ];
+    var signals = channels.map(function (channel) {
+      return [channel.name, signalValue(channel), channel.producer + " → " + channel.consumer + " · " + String(channel.action || "").replaceAll("_", " ")];
+    });
+    elements.signalGrid.replaceChildren();
+    signals.forEach(function (signal) {
+      var box = append(elements.signalGrid, "div", "signal");
+      append(box, "div", "signal-name", signal[0]);
+      append(box, "div", "small", signal[1]);
+      append(box, "div", "signal-action small", signal[2]);
+    });
+  }
+
+  function stageTypesConnect(outputType, inputType) {
+    if (["", "any"].includes(outputType) || ["", "any"].includes(inputType)) return true;
+    if (["none", "void"].includes(outputType) || ["none", "void"].includes(inputType)) {
+      return ["none", "void"].includes(outputType) && ["none", "void"].includes(inputType);
+    }
+    return outputType === inputType;
+  }
+
+  function basicValidate(candidate) {
+    if (!candidate || typeof candidate !== "object") return "JSON root must be an object";
+    candidate = normalizeData(candidate);
+    for (var key of ["nodes", "candidates", "macro_stages", "stages", "solutions"]) if (!Array.isArray(candidate[key])) return key + " must be an array";
+    function duplicates(values) { return new Set(values).size !== values.length; }
+    var nodeIds = candidate.nodes.map(function (node) { return node.id; });
+    var candidateIds = candidate.candidates.map(function (item) { return item.id; });
+    var macroStageIds = candidate.macro_stages.map(function (stage) { return stage.id; });
+    var stageIds = candidate.stages.map(function (stage) { return stage.id; });
+    var solutionIds = candidate.solutions.map(function (solution) { return solution.id; });
+    if (duplicates(nodeIds) || duplicates(candidateIds) || duplicates(macroStageIds) || duplicates(stageIds) || duplicates(solutionIds)) return "node, candidate, macro-stage, substep, and solution IDs must be unique";
+    if (macroStageIds.some(function (id) { return stageIds.includes(id); })) return "macro-stage IDs must not reuse substep IDs";
+    if (!candidate.stages.length) return "at least one ordered substep is required";
+    var nodes = new Set(nodeIds), candidates = new Set(candidateIds);
+    for (var atomic of candidate.candidates) if (!nodes.has(atomic.node_id)) return "candidate " + atomic.id + " references an unknown definition";
+    for (var stage of candidate.stages) {
+      if (!stage.id || !stage.name || !stage.input_type || !stage.output_type || !stage.success) return "every substep requires id, name, input_type, output_type and success";
+      if (!stage.candidates || !stage.candidates.length) return "substep " + stage.id + " has no candidates";
+      for (var candidateId of stage.candidates) if (!candidates.has(candidateId)) return "substep " + stage.id + " references an unknown candidate";
+    }
+    if (candidate.macro_stages.length) {
+      var declaredSubsteps = [];
+      for (var macroStage of candidate.macro_stages) {
+        if (!macroStage.id || !macroStage.name || !macroStage.input_type || !macroStage.output_type || !macroStage.success) return "every macro stage requires id, name, input_type, output_type and success";
+        if (!Array.isArray(macroStage.substeps) || !macroStage.substeps.length) return "macro stage " + macroStage.id + " has no substeps";
+        for (var substepId of macroStage.substeps) {
+          var substep = candidate.stages.find(function (stage) { return stage.id === substepId; });
+          if (!substep) return "macro stage " + macroStage.id + " references an unknown substep";
+          if (substep.macro_stage_id !== macroStage.id) return "substep " + substep.id + " declares the wrong macro stage";
+          declaredSubsteps.push(substepId);
+        }
+      }
+      if (declaredSubsteps.length !== stageIds.length || declaredSubsteps.some(function (id, index) { return id !== stageIds[index]; })) return "macro-stage submatrices must cover every substep in contiguous global order";
+    }
+    for (var boundary = 0; boundary < candidate.stages.length - 1; boundary += 1) {
+      var leftStage = candidate.stages[boundary], rightStage = candidate.stages[boundary + 1];
+      if (!stageTypesConnect(leftStage.output_type, rightStage.input_type)) return "substep boundary " + leftStage.id + " → " + rightStage.id + " is incompatible";
+    }
+    for (var solution of candidate.solutions) {
+      var keys = Object.keys(solution.route || {});
+      if (keys.length !== stageIds.length || stageIds.some(function (id) { return !keys.includes(id); })) return "solution " + solution.id + " must select one candidate in every substep";
+      for (var selectedStage of candidate.stages) if (!selectedStage.candidates.includes(solution.route[selectedStage.id])) return "solution " + solution.id + " selects an invalid candidate for " + selectedStage.id;
+      for (var fallbackStage of Object.keys(solution.fallbacks || {})) {
+        if (!stageIds.includes(fallbackStage)) return "solution " + solution.id + " has fallbacks for unknown stage " + fallbackStage;
+        var admitted = candidate.stages.find(function (stage) { return stage.id === fallbackStage; }).candidates;
+        for (var fallbackId of solution.fallbacks[fallbackStage] || []) if (!admitted.includes(fallbackId)) return "solution " + solution.id + " has an invalid fallback for " + fallbackStage;
+      }
+    }
+    var profiles = new Set(candidate.optimization_profiles.map(function (profile) { return profile.id; }));
+    var solutions = new Set(solutionIds);
+    for (var receipt of candidate.receipts) {
+      if (!solutions.has(receipt.solution_id)) return "receipt " + receipt.id + " references an unknown solution";
+      for (var receiptStage of Object.keys(receipt.stage_outcomes || {})) if (!stageIds.includes(receiptStage)) return "receipt " + receipt.id + " references an unknown stage";
+      for (var receiptMacroStage of Object.keys(receipt.macro_stage_outcomes || {})) if (!macroStageIds.includes(receiptMacroStage)) return "receipt " + receipt.id + " references an unknown macro stage";
+    }
+    for (var decision of candidate.optimization_decisions) {
+      if (decision.profile_id && !profiles.has(decision.profile_id)) return "optimization decision " + decision.id + " references an unknown profile";
+      for (var decisionStage of Object.keys(decision.selected || {})) {
+        var decisionStageDefinition = candidate.stages.find(function (stage) { return stage.id === decisionStage; });
+        if (!decisionStageDefinition) return "optimization decision " + decision.id + " selects an unknown stage";
+        if (!decisionStageDefinition.candidates.includes(decision.selected[decisionStage])) return "optimization decision " + decision.id + " selects an invalid candidate";
+      }
+      for (var alternative of decision.alternatives || []) if (!candidates.has(alternative)) return "optimization decision " + decision.id + " references an unknown alternative";
+    }
+    return "";
+  }
+
+  function initialize() {
+    enabledSolutions = new Set((data.solutions || []).map(function (solution) { return solution.id; }));
+    var seed = (data.solutions || [])[0];
+    customRoute = seed ? Object.assign({}, seed.route) : {};
+    (data.stages || []).forEach(function (stage) { if (!customRoute[stage.id]) customRoute[stage.id] = (stage.candidates || [])[0] || ""; });
+    customEnabled = false;
+    selectedCandidateId = (data.metadata && data.metadata.default_candidate) || Object.values(customRoute)[0] || "";
+    builderStageIndex = 0;
+    builderMessage = "Select any atomic candidate for this substep or ask for a recommendation.";
+    recommendationRows = [];
+    recommendationProfileId = "";
+    recommendationStageId = "";
+    renderHeader();
+    rebuildFilterOptions();
+    populateObjectiveProfiles();
+    populateBaseline();
+    populateFeedbackRoutes();
+    setView(currentView);
+  }
+
+  function renderAllViews() {
+    setView(currentView);
+  }
+
+  elements.tabs.addEventListener("click", function (event) {
+    var button = event.target.closest("[data-view]");
+    if (button) setView(button.dataset.view);
+  });
+  elements.search.addEventListener("input", renderMatrix);
+  elements.role.addEventListener("change", renderMatrix);
+  elements.permission.addEventListener("change", renderMatrix);
+  elements.clear.addEventListener("click", function () { elements.search.value = ""; elements.role.value = ""; elements.permission.value = ""; renderMatrix(); });
+  elements.toggleStacks.addEventListener("click", function () { stacksExpanded = !stacksExpanded; renderMatrix(); });
+  [elements.networkBefore, elements.networkAfter, elements.networkMode, elements.networkSample].forEach(function (select) {
+    select.addEventListener("change", renderNetwork);
+  });
+  elements.baseline.addEventListener("change", renderComparison);
+  elements.builderSearch.addEventListener("input", renderBuilder);
+  elements.recommend.addEventListener("click", recommendCandidate);
+  elements.optimizeMacro.addEventListener("click", optimizeCurrentMacroStage);
+  elements.optimizeRoute.addEventListener("click", optimizeEveryStage);
+  elements.objective.addEventListener("change", function () {
+    recommendationRows = [];
+    recommendationProfileId = "";
+    recommendationStageId = "";
+    builderMessage = "Optimization profile changed. Run a recommendation to create a new evidence trace.";
+    renderBuilder();
+  });
+  elements.previous.addEventListener("click", function () { builderStageIndex = Math.max(0, builderStageIndex - 1); renderBuilder(); });
+  elements.next.addEventListener("click", function () { builderStageIndex = Math.min((data.stages || []).length - 1, builderStageIndex + 1); renderBuilder(); });
+  [elements.policyNetwork, elements.policyBrowser, elements.policyLlm, elements.policyEffects, elements.policyDeterministic].forEach(function (input) {
+    input.addEventListener("change", function () {
+      recommendationRows = [];
+      recommendationProfileId = "";
+      recommendationStageId = "";
+      builderMessage = "Hard policy changed. Existing selections remain visible; re-run recommendation to rank the new eligible set.";
+      renderBuilder();
+    });
+  });
+  elements.copyWorkbench.addEventListener("click", function () {
+    copyText(JSON.stringify(data, null, 2), "Copied the complete standardized workbench JSON.");
+  });
+  elements.downloadWorkbench.addEventListener("click", downloadJson);
+  elements.copyRoute.addEventListener("click", function () {
+    copyText(JSON.stringify(currentRoutePayload(), null, 2), "Copied the current route, validation result, metrics, and profile.");
+  });
+  elements.feedbackRoute.addEventListener("change", renderFeedback);
+  elements.file.addEventListener("change", function () {
+    var file = elements.file.files && elements.file.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
+      try {
+        var candidate = normalizeData(JSON.parse(String(reader.result || "")));
+        var problem = basicValidate(candidate);
+        if (problem) throw new Error(problem);
+        data = candidate;
+        elements.loadStatus.textContent = "Loaded " + file.name;
+        initialize();
+      } catch (error) {
+        elements.loadStatus.textContent = "Could not load " + file.name + ": " + error.message;
+      }
+    });
+    reader.readAsText(file);
+  });
+
+  initialize();
+})();
+</script>
+</body>
+</html>

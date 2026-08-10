@@ -1,0 +1,46 @@
+name: Capability proposal
+description: Propose a node, substep, domain, optimizer, registry, or viewer capability
+title: "[Capability]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task or limitation
+      description: What real task cannot be represented or executed well today?
+    validations:
+      required: true
+  - type: dropdown
+    id: concept
+    attributes:
+      label: Primary concept
+      options:
+        - Node definition
+        - Candidate binding
+        - Macro stage or atomic substep
+        - Contract, adapter, or pass-through
+        - Route search or optimization
+        - Feedback, verification, or receipt
+        - Registry, runtime, or execution
+        - Viewer or developer experience
+    validations:
+      required: true
+  - type: textarea
+    id: contracts
+    attributes:
+      label: Inputs, outputs, and success condition
+      description: Describe known typed boundaries and independent verification.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or examples
+      description: Link real tasks, packages, implementations, or benchmarks when available.
+  - type: checkboxes
+    id: invariants
+    attributes:
+      label: Architectural checks
+      options:
+        - label: This does not require an arbitrary top-k or graph-size limit.
+          required: true
+        - label: This keeps task substeps separate from configuration, policy, feedback, and optimization.
+          required: true

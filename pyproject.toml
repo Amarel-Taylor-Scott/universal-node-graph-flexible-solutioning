@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "browsergraph"
+version = "0.1.0"
+description = "Universal hierarchical node-graph workbench and composable BrowserGraph runtime for flexible, contract-aware solutioning."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["graph", "nodes", "workflow", "optimization", "solutioning", "browser", "automation", "llm"]
+dependencies = []
+
+[project.optional-dependencies]
+playwright = ["playwright>=1.40"]
+playwright_stealth = ["playwright>=1.40", "playwright-stealth>=1.0"]
+patchright = ["patchright>=1.40"]
+camoufox = ["camoufox[geoip]>=0.3"]
+selenium = ["selenium>=4.15", "undetected-chromedriver>=3.5"]
+seleniumbase = ["seleniumbase>=4.20"]
+nodriver = ["nodriver>=0.30"]
+cdp = ["websockets>=12.0"]
+http = ["curl-cffi>=0.7", "selectolax>=0.3"]          # browser-less, TLS-impersonated
+zendriver = ["zendriver>=0.5"]
+pydoll = ["pydoll-python>=2.0"]
+botasaurus = ["botasaurus>=4.0"]
+rebrowser = ["rebrowser-playwright>=1.4"]
+extract = ["trafilatura>=2.0", "selectolax>=0.3"]     # better boilerplate removal
+yaml = ["PyYAML>=6.0"]
+all = ["playwright>=1.40", "patchright>=1.40", "selenium>=4.15",
+       "undetected-chromedriver>=3.5", "seleniumbase>=4.20", "nodriver>=0.30",
+       "websockets>=12.0", "PyYAML>=6.0", "curl-cffi>=0.7", "selectolax>=0.3",
+       "trafilatura>=2.0"]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+browsergraph = "browsergraph.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning"
+Documentation = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/blob/main/UNIVERSAL_GRAPH_SYSTEM.md"
+Issues = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/issues"
+Source = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning"
+
+[project.entry-points."browsergraph.plugins"]
+# third-party packages advertise plugins here; see PLUGINS.md
+
+[tool.setuptools]
+packages = [
+    "browsergraph", "browsergraph.nodes", "browsergraph.drivers",
+    "browsergraph.dimensions", "browsergraph.extract", "browsergraph.classify",
+    "browsergraph.tasks", "browsergraph.assets", "browsergraph.schemas",
+]
+
+[tool.setuptools.package-data]
+browsergraph = ["schemas/*.json", "assets/*.html", "assets/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Heavy engines (camoufox is a hardened Firefox in a subprocess) take minutes
+# and are environment-sensitive. They are opt-in so the default suite stays a
+# fast, deterministic signal: `pytest -m slow` or `-m "slow or not slow"`.
+addopts = "-q -m 'not slow'"
+markers = [
+    "slow: heavy browser engines; run explicitly with -m slow",
+]

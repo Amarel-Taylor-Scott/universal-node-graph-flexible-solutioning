@@ -1,0 +1,50 @@
+name: Bug report
+description: Report a reproducible contract, runtime, viewer, or data-model problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for helping make the graph model more reliable.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include a small non-sensitive manifest, route, or command.
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - Hierarchy or candidate discovery
+        - Contracts or route validation
+        - Workbench viewer
+        - Optimization or feedback
+        - Execution runtime or driver
+        - CLI, server, packaging, or documentation
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and version
+      description: Commit, Python version, operating system, and optional engine.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials and private task data from this report.
+          required: true

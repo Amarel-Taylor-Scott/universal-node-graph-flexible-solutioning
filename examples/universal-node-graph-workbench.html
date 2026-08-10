@@ -1,0 +1,1488 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Hierarchical Submatrix Network</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: transparent !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --main-surface-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --red: light-dark(rgb(186 38 35), rgb(250 66 62));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 10px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-visualize-standalone] {
+  background-color: var(--background) !important;
+}
+
+/* Generic mobile code-block hosts provide light/dark mode but no series palette.
+   AppBlock hosts set all six variables themselves. */
+:root:not([data-app-block-surface]) {
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(#f3883b, #f59a56);
+  --viz-series-3: light-dark(#5dc977, #74d58b);
+  --viz-series-4: light-dark(#eb77b1, #f08fc0);
+  --viz-series-5: light-dark(#9b79ec, #aa91ef);
+  --viz-series-6: light-dark(#3ab9b1, #5acbc2);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface]) > body {
+  padding: 12px;
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The bundled tooltip runtime owns [data-tooltip]. AppBlock's CSS-only
+   pseudo-tooltip can widen dense grids even while hidden. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--interactive-label-primary-default, var(--primary-foreground));
+  background: var(--interactive-bg-primary-default, var(--foreground));
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(
+    in srgb,
+    var(--interactive-label-primary-default, var(--primary-foreground)) 50%,
+    transparent
+  );
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type="file"]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+</style>
+</head>
+<body>
+<div id="hierarchical-submatrix-network">
+  <div class="viz-controls" aria-label="Submatrix controls">
+    <label class="form-label" for="hsm-profile">Route objective
+      <select class="form-select" id="hsm-profile">
+        <option value="balanced">Balanced</option>
+        <option value="quality">Quality</option>
+        <option value="speed">Speed</option>
+        <option value="cost">Cost</option>
+      </select>
+    </label>
+    <button class="btn btn-primary" type="button" id="hsm-propose">Propose this macro route</button>
+  </div>
+  <div class="hsm-macro-grid" id="hsm-macro-grid" aria-label="Macro stages"></div>
+  <div class="card hsm-summary" id="hsm-summary" aria-live="polite"></div>
+  <div class="hsm-focus-head">
+    <div>
+      <div class="text-small text-muted" id="hsm-focus-order"></div>
+      <h3 id="hsm-focus-name"></h3>
+      <div class="text-small text-muted" id="hsm-focus-contract"></div>
+    </div>
+    <span class="viz-badge" id="hsm-focus-space"></span>
+  </div>
+  <div class="hsm-canvas" id="hsm-canvas">
+    <svg class="hsm-edges" id="hsm-edges" role="img" aria-label="All family-level transitions and the selected route"></svg>
+    <div class="hsm-submatrix" id="hsm-submatrix"></div>
+  </div>
+  <div class="text-small text-muted" id="hsm-status" aria-live="polite"></div>
+</div>
+
+<style>
+  #hierarchical-submatrix-network { display: grid; gap: 12px; width: 100%; }
+  #hierarchical-submatrix-network .hsm-macro-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 8px;
+  }
+  #hierarchical-submatrix-network .hsm-macro-grid .btn { white-space: normal; }
+  #hierarchical-submatrix-network .hsm-summary { padding: 10px 12px; }
+  #hierarchical-submatrix-network .hsm-focus-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--viz-series-2);
+    padding-bottom: 8px;
+  }
+  #hierarchical-submatrix-network .hsm-focus-head h3 { margin: 0; }
+  #hierarchical-submatrix-network .hsm-canvas { position: relative; min-width: 0; }
+  #hierarchical-submatrix-network .hsm-submatrix {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(var(--hsm-columns), minmax(0, 1fr));
+    gap: 18px;
+    align-items: start;
+  }
+  #hierarchical-submatrix-network .hsm-substep {
+    min-width: 0;
+    border-top: 2px solid var(--border);
+    padding-top: 8px;
+  }
+  #hierarchical-submatrix-network .hsm-substep-head { min-height: 92px; }
+  #hierarchical-submatrix-network .hsm-family-list { display: grid; gap: 6px; }
+  #hierarchical-submatrix-network .hsm-family-list .btn {
+    position: relative;
+    z-index: 2;
+    white-space: normal;
+    text-align: left;
+  }
+  #hierarchical-submatrix-network .hsm-edges {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  #hierarchical-submatrix-network .hsm-edge {
+    fill: none;
+    stroke: var(--muted-foreground);
+    stroke-width: 1;
+    stroke-opacity: .08;
+  }
+  #hierarchical-submatrix-network .hsm-route {
+    fill: none;
+    stroke: var(--viz-series-1);
+    stroke-width: 4;
+  }
+  @media (max-width: 700px) {
+    #hierarchical-submatrix-network .hsm-macro-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (max-width: 600px) {
+    #hierarchical-submatrix-network .hsm-submatrix { grid-template-columns: 1fr; gap: 14px; }
+    #hierarchical-submatrix-network .hsm-substep-head { min-height: 0; }
+  }
+  @media (max-width: 390px) {
+    #hierarchical-submatrix-network .hsm-macro-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.getElementById("hierarchical-submatrix-network");
+  if (!root) return;
+
+  function families(rows) {
+    return rows.map(function (row, index) {
+      return {name: row[0], bindings: row[1], role: row[2] || "deterministic", index: index};
+    });
+  }
+
+  var macros = [
+    {id: "acquire", name: "Acquire inputs", input: "TaskReference", output: "InputHandle", substeps: [
+      {id: "acquire.resolve", name: "Resolve source", input: "TaskReference", output: "ResolvedReference", nodes: families([
+        ["File/source reference", 3], ["API reference", 4], ["Browser target", 60], ["Database reference", 5],
+        ["Event or sensor reference", 3], ["Model endpoint reference", 4, "model"], ["Generated adapter", 1], ["Existing context reference", 1]
+      ])},
+      {id: "acquire.authorize", name: "Authorize access", input: "ResolvedReference", output: "AuthorizedReference", nodes: families([
+        ["Credential resolver", 4], ["OAuth flow", 3], ["API-key broker", 4], ["Browser session policy", 4],
+        ["Workload identity", 4], ["Signed URL verifier", 1], ["Local permission check", 1], ["Authorized pass-through", 1, "pass"]
+      ])},
+      {id: "acquire.retrieve", name: "Retrieve payload", input: "AuthorizedReference", output: "RetrievedPayload", nodes: families([
+        ["File reader", 3], ["HTTP fetcher", 3], ["Browser capture", 4], ["Database query", 3],
+        ["Stream consumer", 3], ["Model response reader", 3, "model"], ["Cache lookup", 3], ["Retrieved pass-through", 1, "pass"]
+      ])},
+      {id: "acquire.identify", name: "Identify and fingerprint", input: "RetrievedPayload", output: "InputHandle", nodes: families([
+        ["Content fingerprint", 4], ["MIME detector", 3], ["Payload safety checker", 3],
+        ["Source version pin", 3], ["Integrity composite", 1, "composite"], ["Identified pass-through", 1, "pass"]
+      ])}
+    ]},
+    {id: "canonicalize", name: "Canonicalize representation", input: "InputHandle", output: "CanonicalState", substeps: [
+      {id: "canonicalize.detect", name: "Detect representation", input: "InputHandle", output: "FormatEnvelope", nodes: families([
+        ["Extension detector", 1], ["Magic-byte detector", 1], ["Header detector", 1], ["MIME detector", 1],
+        ["Learned format detector", 3, "model"], ["LLM format detector", 6, "model"], ["Detector ensemble", 1, "composite"], ["Known-format pass-through", 1, "pass"]
+      ])},
+      {id: "canonicalize.decode", name: "Decode content", input: "FormatEnvelope", output: "DecodedContent", nodes: families([
+        ["PDF decoder", 5], ["Office document decoder", 4], ["Image OCR", 5, "model"], ["HTML decoder", 4],
+        ["Audio transcription", 5, "model"], ["Table decoder", 4], ["Structured-data decoder", 4], ["LLM decoder", 6, "model"], ["Decoded pass-through", 1, "pass"]
+      ])},
+      {id: "canonicalize.normalize", name: "Normalize values", input: "DecodedContent", output: "NormalizedContent", nodes: families([
+        ["Encoding normalizer", 3], ["Unicode normalizer", 3], ["Unit normalizer", 4], ["Locale normalizer", 4],
+        ["Whitespace and layout cleaner", 4], ["Junk-data remover", 4], ["Missing-value normalizer", 3], ["Learned normalizer", 3, "model"], ["Normalized pass-through", 1, "pass"]
+      ])},
+      {id: "canonicalize.schema", name: "Map canonical schema", input: "NormalizedContent", output: "CanonicalState", nodes: families([
+        ["Deterministic field mapper", 4], ["Schema adapter", 3], ["Entity resolver", 3], ["Learned parser", 3, "model"],
+        ["LLM schema parser", 18, "model"], ["Schema-mapping subgraph", 3, "composite"], ["Schema-valid pass-through", 1, "pass"]
+      ])}
+    ]},
+    {id: "enrich", name: "Enrich context", input: "CanonicalState", output: "EnrichedState", substeps: [
+      {id: "enrich.clean", name: "Clean and protect", input: "CanonicalState", output: "CleanState", nodes: families([
+        ["Cleaning rules", 4], ["Noise filter", 4], ["Deduplicator", 4], ["Sensitive-data protector", 4],
+        ["Outlier cleaner", 4, "model"], ["Quality gate", 4], ["Clean pass-through", 1, "pass"]
+      ])},
+      {id: "enrich.language", name: "Resolve language", input: "CleanState", output: "LinguisticState", nodes: families([
+        ["Language detector", 4, "model"], ["Translator", 24, "model"], ["Transliterator", 4], ["Terminology resolver", 3], ["Language pass-through", 1, "pass"]
+      ])},
+      {id: "enrich.context", name: "Retrieve context", input: "LinguisticState", output: "ContextState", nodes: families([
+        ["Document retriever", 4], ["Reference lookup", 3], ["External evidence service", 5], ["Knowledge-graph lookup", 4],
+        ["Web research", 4], ["Vector-store retrieval", 5], ["Context cache", 3], ["Context pass-through", 1, "pass"]
+      ])},
+      {id: "enrich.analyze", name: "Derive features and evidence", input: "ContextState", output: "EnrichedState", nodes: families([
+        ["Derived-field rules", 4], ["Statistical analyzer", 4, "model"], ["Feature generator", 5], ["Classifier", 6, "model"],
+        ["LLM evidence analyst", 6, "model"], ["Evidence ensemble", 4, "composite"], ["Confidence calibrator", 3], ["Analysis pass-through", 1, "pass"]
+      ])}
+    ]},
+    {id: "transform", name: "Transform or act", input: "EnrichedState", output: "CandidateResult", substeps: [
+      {id: "transform.plan", name: "Plan operation", input: "EnrichedState", output: "ActionPlan", nodes: families([
+        ["Plan template", 4], ["Constraint solver", 4], ["Search planner", 5], ["LLM planner", 6, "model"], ["Workflow compiler", 4, "composite"], ["Existing-plan pass-through", 1, "pass"]
+      ])},
+      {id: "transform.execute", name: "Execute operation", input: "ActionPlan", output: "RawResult", nodes: families([
+        ["Function runtime", 5], ["Package runtime", 4], ["External API action", 4], ["Browser action", 25], ["ML inference runtime", 4, "model"],
+        ["LLM agent", 18, "model"], ["Workflow engine", 4, "composite"], ["Composite child graph", 3, "composite"], ["Execution pass-through", 1, "pass"]
+      ])},
+      {id: "transform.reconcile", name: "Reconcile result", input: "RawResult", output: "CandidateResult", nodes: families([
+        ["Schema assembler", 4], ["Postprocessor", 4], ["Result ensemble", 5, "composite"], ["Conflict resolver", 4],
+        ["Result calibrator", 4], ["Rollback coordinator", 3], ["Reconciled pass-through", 1, "pass"]
+      ])}
+    ]},
+    {id: "verify", name: "Verify success", input: "CandidateResult", output: "VerifiedOutcome", substeps: [
+      {id: "verify.contract", name: "Validate contract", input: "CandidateResult", output: "ContractCheckedResult", nodes: families([
+        ["Schema validator", 4], ["Type checker", 3], ["Invariant checker", 4], ["Security scanner", 4], ["Authority and effect gate", 3], ["Contract-certified pass-through", 1, "pass"]
+      ])},
+      {id: "verify.outcome", name: "Verify outcome independently", input: "ContractCheckedResult", output: "EvidenceVerdict", nodes: families([
+        ["Deterministic oracle", 4], ["Independent external verifier", 3], ["Replay verifier", 3], ["Independent model verifier", 6, "model"],
+        ["Visual verifier", 4, "model"], ["Human review", 3], ["Simulation verifier", 3], ["Verified-evidence pass-through", 1, "pass"]
+      ])},
+      {id: "verify.adjudicate", name: "Adjudicate confidence and risk", input: "EvidenceVerdict", output: "VerifiedOutcome", nodes: families([
+        ["Threshold policy", 4], ["Verifier consensus", 5, "composite"], ["Risk gate", 4], ["Escalation controller", 4], ["Counterfactual check", 3], ["Adjudicated pass-through", 1, "pass"]
+      ])}
+    ]},
+    {id: "emit", name: "Emit result and receipt", input: "VerifiedOutcome", output: "TaskReceipt", substeps: [
+      {id: "emit.package", name: "Package result and evidence", input: "VerifiedOutcome", output: "ReceiptBundle", nodes: families([
+        ["Result serializer", 4], ["Evidence packager", 4], ["Provenance packager", 4], ["Artifact packager", 4], ["Compression layer", 3], ["Encryption layer", 3], ["Packaged pass-through", 1, "pass"]
+      ])},
+      {id: "emit.deliver", name: "Deliver or persist", input: "ReceiptBundle", output: "DurableResult", nodes: families([
+        ["In-memory result", 1], ["File sink", 4], ["Database sink", 5], ["Object-store sink", 4],
+        ["Event sink", 4], ["Callback sink", 4], ["Human delivery", 3], ["Durable-result pass-through", 1, "pass"]
+      ])},
+      {id: "emit.register", name: "Register receipt and checkpoint", input: "DurableResult", output: "TaskReceipt", nodes: families([
+        ["Graph checkpoint", 4], ["Receipt ledger", 4], ["Result catalog", 4], ["Audit receipt", 4], ["Monitoring signal", 3], ["Registered-receipt pass-through", 1, "pass"]
+      ])}
+    ]}
+  ];
+
+  var selectedMacroId = "canonicalize";
+  var selectedFamilies = {};
+  var selectedNode = {substepId: "canonicalize.schema", familyIndex: 4};
+  macros.forEach(function (macro) {
+    macro.substeps.forEach(function (substep) { selectedFamilies[substep.id] = 0; });
+  });
+  selectedFamilies["canonicalize.schema"] = 4;
+
+  var macroGrid = root.querySelector("#hsm-macro-grid");
+  var summary = root.querySelector("#hsm-summary");
+  var focusOrder = root.querySelector("#hsm-focus-order");
+  var focusName = root.querySelector("#hsm-focus-name");
+  var focusContract = root.querySelector("#hsm-focus-contract");
+  var focusSpace = root.querySelector("#hsm-focus-space");
+  var canvas = root.querySelector("#hsm-canvas");
+  var submatrix = root.querySelector("#hsm-submatrix");
+  var edges = root.querySelector("#hsm-edges");
+  var status = root.querySelector("#hsm-status");
+  var profile = root.querySelector("#hsm-profile");
+  var propose = root.querySelector("#hsm-propose");
+
+  function append(parent, tag, className, text) {
+    var element = document.createElement(tag);
+    if (className) element.className = className;
+    if (text !== undefined) element.textContent = text;
+    parent.appendChild(element);
+    return element;
+  }
+
+  function formatInteger(value) {
+    return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function atomicCount(substep) {
+    return substep.nodes.reduce(function (total, node) { return total + node.bindings; }, 0);
+  }
+
+  function macroRouteCount(macro) {
+    return macro.substeps.reduce(function (total, substep) {
+      return total * BigInt(atomicCount(substep));
+    }, 1n);
+  }
+
+  function macroCandidateCount(macro) {
+    return macro.substeps.reduce(function (total, substep) { return total + atomicCount(substep); }, 0);
+  }
+
+  function fullRouteCount() {
+    return macros.reduce(function (total, macro) { return total * macroRouteCount(macro); }, 1n);
+  }
+
+  function activeMacro() {
+    return macros.find(function (macro) { return macro.id === selectedMacroId; }) || macros[0];
+  }
+
+  function renderMacroGrid() {
+    macroGrid.replaceChildren();
+    macros.forEach(function (macro, index) {
+      var button = append(macroGrid, "button", "btn", (index + 1) + " · " + macro.name);
+      button.type = "button";
+      button.setAttribute("aria-pressed", macro.id === selectedMacroId ? "true" : "false");
+      button.setAttribute("aria-label", macro.name + ", " + macro.substeps.length + " substeps, " + macroCandidateCount(macro) + " atomic candidates");
+      button.addEventListener("click", function () {
+        selectedMacroId = macro.id;
+        selectedNode = {substepId: macro.substeps[0].id, familyIndex: selectedFamilies[macro.substeps[0].id] || 0};
+        render();
+      });
+    });
+  }
+
+  function familyScore(node, index, total) {
+    var quality = 0.62 + (total <= 1 ? 0 : index / (total - 1)) * 0.25;
+    if (node.role === "model") quality += 0.08;
+    if (node.role === "composite") quality += 0.1;
+    var latency = 1 + index + (node.role === "model" ? 6 : node.role === "composite" ? 4 : 0);
+    var cost = node.role === "model" ? 8 : node.role === "composite" ? 5 : index * 0.4;
+    if (profile.value === "quality") return quality;
+    if (profile.value === "speed") return 1 / latency;
+    if (profile.value === "cost") return 1 / (1 + cost);
+    return quality * 0.55 + (1 / latency) * 0.25 + (1 / (1 + cost)) * 0.20;
+  }
+
+  function renderSummary() {
+    var macro = activeMacro();
+    var substep = macro.substeps.find(function (item) { return item.id === selectedNode.substepId; }) || macro.substeps[0];
+    var node = substep.nodes[selectedNode.familyIndex] || substep.nodes[0];
+    summary.textContent = "Selected family: " + macro.name + " / " + substep.name + " / " + node.name +
+      " · " + node.bindings + " atomic binding" + (node.bindings === 1 ? "" : "s") +
+      " · clicking another family changes only this substep";
+  }
+
+  function renderSubmatrix() {
+    var macro = activeMacro();
+    var macroIndex = macros.indexOf(macro);
+    focusOrder.textContent = "Macro stage " + (macroIndex + 1) + " of " + macros.length + " · " + macro.substeps.length + " ordered atomic substeps";
+    focusName.textContent = macro.name;
+    focusContract.textContent = macro.input + " → " + macro.output;
+    focusSpace.textContent = formatInteger(macroRouteCount(macro)) + " routes inside this submatrix";
+    submatrix.style.setProperty("--hsm-columns", String(macro.substeps.length));
+    submatrix.replaceChildren();
+    macro.substeps.forEach(function (substep, substepIndex) {
+      var section = append(submatrix, "section", "hsm-substep");
+      section.dataset.substepId = substep.id;
+      var head = append(section, "div", "hsm-substep-head");
+      append(head, "div", "text-small text-muted", "Substep " + (macroIndex + 1) + "." + (substepIndex + 1));
+      append(head, "div", "", substep.name);
+      append(head, "div", "text-small text-muted", substep.input + " → " + substep.output);
+      append(head, "div", "text-small text-muted", substep.nodes.length + " node families · " + atomicCount(substep) + " atomic bindings");
+      var list = append(section, "div", "hsm-family-list");
+      substep.nodes.forEach(function (node, familyIndex) {
+        var button = append(list, "button", "btn btn-block", node.name + " · " + node.bindings);
+        button.type = "button";
+        button.dataset.substepId = substep.id;
+        button.dataset.familyIndex = String(familyIndex);
+        button.setAttribute("aria-pressed", selectedFamilies[substep.id] === familyIndex ? "true" : "false");
+        button.setAttribute("aria-label", node.name + ", " + node.bindings + " atomic bindings, role " + node.role);
+        button.addEventListener("click", function () {
+          selectedFamilies[substep.id] = familyIndex;
+          selectedNode = {substepId: substep.id, familyIndex: familyIndex};
+          renderSubmatrix();
+          renderSummary();
+        });
+      });
+    });
+    var familyTransitions = macro.substeps.slice(0, -1).reduce(function (total, substep, index) {
+      return total + substep.nodes.length * macro.substeps[index + 1].nodes.length;
+    }, 0);
+    status.textContent = macro.substeps.length + " substeps · " + macro.substeps.reduce(function (total, substep) { return total + substep.nodes.length; }, 0) +
+      " visible node families · " + macroCandidateCount(macro) + " atomic bindings · " + familyTransitions +
+      " visible family-to-family transitions · " + formatInteger(fullRouteCount()) + " complete routes across all macro stages";
+    requestAnimationFrame(drawEdges);
+  }
+
+  function svgPath(points, vertical) {
+    if (!points.length) return "";
+    var description = "M " + points[0].x + " " + points[0].y;
+    for (var index = 1; index < points.length; index += 1) {
+      var previous = points[index - 1];
+      var current = points[index];
+      if (vertical) {
+        var middleY = previous.y + (current.y - previous.y) / 2;
+        description += " C " + previous.x + " " + middleY + ", " + current.x + " " + middleY + ", " + current.x + " " + current.y;
+      } else {
+        var middleX = previous.x + (current.x - previous.x) / 2;
+        description += " C " + middleX + " " + previous.y + ", " + middleX + " " + current.y + ", " + current.x + " " + current.y;
+      }
+    }
+    return description;
+  }
+
+  function pointFor(button, base, vertical, entering) {
+    var box = button.getBoundingClientRect();
+    if (vertical) {
+      return {x: box.left - base.left + box.width / 2, y: box.top - base.top + (entering ? 0 : box.height)};
+    }
+    return {x: box.left - base.left + (entering ? 0 : box.width), y: box.top - base.top + box.height / 2};
+  }
+
+  function makePath(className, description) {
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("class", className);
+    path.setAttribute("d", description);
+    edges.appendChild(path);
+  }
+
+  function drawEdges() {
+    var macro = activeMacro();
+    var base = canvas.getBoundingClientRect();
+    var vertical = root.getBoundingClientRect().width <= 600;
+    edges.replaceChildren();
+    edges.setAttribute("viewBox", "0 0 " + Math.max(1, base.width) + " " + Math.max(1, base.height));
+    edges.setAttribute("width", String(Math.max(1, base.width)));
+    edges.setAttribute("height", String(Math.max(1, base.height)));
+    for (var stageIndex = 0; stageIndex < macro.substeps.length - 1; stageIndex += 1) {
+      var leftButtons = root.querySelectorAll('[data-substep-id="' + macro.substeps[stageIndex].id + '"][data-family-index]');
+      var rightButtons = root.querySelectorAll('[data-substep-id="' + macro.substeps[stageIndex + 1].id + '"][data-family-index]');
+      leftButtons.forEach(function (left) {
+        rightButtons.forEach(function (right) {
+          var leftPoint = pointFor(left, base, vertical, false);
+          var rightPoint = pointFor(right, base, vertical, true);
+          makePath("hsm-edge", svgPath([leftPoint, rightPoint], vertical));
+        });
+      });
+    }
+    var selectedPoints = macro.substeps.map(function (substep) {
+      var button = root.querySelector('[data-substep-id="' + substep.id + '"][data-family-index="' + selectedFamilies[substep.id] + '"]');
+      return button ? pointFor(button, base, vertical, false) : null;
+    }).filter(Boolean);
+    if (selectedPoints.length > 1) makePath("hsm-route", svgPath(selectedPoints, vertical));
+  }
+
+  function render() {
+    renderMacroGrid();
+    renderSubmatrix();
+    renderSummary();
+  }
+
+  propose.addEventListener("click", function () {
+    var macro = activeMacro();
+    macro.substeps.forEach(function (substep) {
+      var ranked = substep.nodes.map(function (node, index) {
+        return {index: index, score: familyScore(node, index, substep.nodes.length)};
+      }).sort(function (left, right) { return right.score - left.score || left.index - right.index; });
+      selectedFamilies[substep.id] = ranked[0].index;
+    });
+    selectedNode = {substepId: macro.substeps[0].id, familyIndex: selectedFamilies[macro.substeps[0].id]};
+    renderSubmatrix();
+    renderSummary();
+  });
+  profile.addEventListener("change", function () {
+    status.textContent = "Objective changed; propose this macro route to re-rank every substep.";
+  });
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(function () { requestAnimationFrame(drawEdges); }).observe(canvas);
+  }
+  render();
+})();
+</script>
+
+<script id="codex-visualization-floating-ui-core" src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script id="codex-visualization-floating-ui-dom" src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script id="codex-visualization-tooltip">/* oxlint-disable typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-return */
+// Runs inside the visualization sandbox, not the host webview.
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide-initialization">(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body>
+</html>
