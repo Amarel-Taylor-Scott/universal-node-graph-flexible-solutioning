@@ -51,28 +51,29 @@ response provenance, retention policy, and stable failure taxonomy.
 | Organization entity graph | `organization-entity-linking` | normalization × blocking × linking × components |
 | Repository repair | `tested-code-repair` | inspection × proposal × application × independent tests |
 | Analytical dataset | `multi-feed-analytical-dataset` | decode × normalize × reconcile × validate/quarantine |
+| Contact verification | `contact-verification` | endpoint normalization × syntax/reference checks × consent-safe classification |
+| Web change monitoring | `web-change-monitoring` | canonicalize snapshots × semantic diff × corroborate |
+| Transaction reconciliation | `transaction-reconciliation` | normalize × match × balance/residual proof |
+| PII redaction | `pii-redaction` | detect spans × redact × independent leakage check |
+| Schema migration | `schema-migration` | transform × invariant validation × shadow comparison |
+| Incident triage | `incident-triage` | normalize signals × correlate × evidence-ranked disposition |
+| Dependency assurance | `dependency-assurance` | inventory/SBOM × advisory/license policy × verdict |
+| Recommendation ranking | `recommendation-ranking` | score × eligibility/policy × diversification |
+| Scientific experiment | `scientific-experiment` | allocate observations × compare × robustness check |
+| Numerical linear system | `numerical-linear-system` | validate structure × solve × residual verification |
 
-Together these map to 13 programs and 31 declared reference routes. The shared
-registry contains 84 executable nodes. The declared routes are release-gate
-fixtures; `UniversalSolver` searches additional combinations from the complete
-compiler-admitted matrix.
+Together these map to 23 programs and 51 declared reference routes. The two
+Arena registries contain 146 executable nodes. Thirty-two routes are accepted
+by independent fixture oracles and 19 are deliberate negative controls. The
+declared routes are release-gate fixtures; `UniversalSolver` searches
+additional combinations from the complete compiler-admitted matrix.
 
 ## Other included DAG families
 
-The catalog also contains reusable contracts for:
+The four remaining catalog families require production connectors for:
 
-- contact and communication-endpoint verification;
-- web change monitoring;
-- transaction reconciliation;
-- PII redaction and independent leakage checks;
-- schema migration and shadow comparison;
 - shipping-event normalization and notifications;
-- incident/log/trace triage;
-- dependency, license, advisory, and SBOM assurance;
-- recommendation and policy-aware ranking;
 - geospatial and authority enrichment;
-- reproducible scientific experiments;
-- structured numerical linear systems;
 - deployment/canary/rollback workflows; and
 - multi-system API business transactions with compensation.
 

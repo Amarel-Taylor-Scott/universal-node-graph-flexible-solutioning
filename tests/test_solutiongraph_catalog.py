@@ -7,6 +7,7 @@ import pytest
 
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.catalog import catalog_documents, write_catalog
+from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
@@ -63,6 +64,8 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + 5
         + 3
         + len(EXAMPLE_NODES)
+        + 3
+        + len(EXTENDED_NODES)
         + 19
         + len(UNIVERSAL_DAG_ARENA.tasks)
         + 1
@@ -73,9 +76,13 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     assert index["arena"] == {
         "path": "arena/index.json",
         "task_count": 24,
-        "executable_fixture_count": 10,
+        "executable_fixture_count": 20,
     }
-    assert [item["node_count"] for item in index["node_packs"]] == [5, len(EXAMPLE_NODES)]
+    assert [item["node_count"] for item in index["node_packs"]] == [
+        5,
+        len(EXAMPLE_NODES),
+        len(EXTENDED_NODES),
+    ]
     assert index["node_packs"][0]["embedding_record_count"] == 0
     capabilities = first["nodepacks/reference-core/registry-capabilities.json"]
     assert [mode["id"] for mode in capabilities["query_modes"]] == [
@@ -119,4 +126,22 @@ def test_catalogue_explorer_is_self_contained_and_exposes_every_reference_templa
         slot.id in html and slot.purpose in html
         for template in REFERENCE_TEMPLATES.templates
         for slot in template.program.slots
+    )
+
+
+def test_universal_dag_explorer_is_linear_complete_and_self_contained():
+    html = (
+        Path(__file__).parents[1] / "examples" / "universal-dag-explorer.html"
+    ).read_text(encoding="utf-8")
+    assert "fetch(" not in html
+    assert "XMLHttpRequest" not in html
+    assert "<script id=\"codex-visualization-floating-ui-core\"" not in html
+    assert html.count('class="udx-stage"') == 3
+    assert html.count('class="udx-step"') == 9
+    assert html.count('class="udx-node"') == 27
+    assert "Every step. Every compatible node. Every tested route." in html
+    assert "Execution is monotonic left to right" in html
+    assert all(
+        f"data-route=\"{route}\"" in html
+        for route in ("champion", "fallback", "control")
     )

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stream-emission.schema.json",
+  "title": "SolutionGraph Stream Emission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "key", "window_start", "window_end", "revision", "reason", "value",
+    "event_ids", "watermark", "retracts"
+  ],
+  "properties": {
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "key": {"type": "string", "minLength": 1},
+    "window_start": {"type": "number"},
+    "window_end": {"type": "number"},
+    "revision": {"type": "integer", "minimum": 1},
+    "reason": {"enum": ["early", "on-time", "late", "final"]},
+    "value": true,
+    "event_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "watermark": {"type": "number"},
+    "retracts": {
+      "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+    }
+  }
+}

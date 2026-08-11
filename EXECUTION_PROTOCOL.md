@@ -1,12 +1,17 @@
 # Frozen-plan execution protocol
 
-Status: research preview 0.1
+Status: research preview 0.2
 
 Reference implementation: `solutiongraph.executor`
 
 Artifact boundary: `solutiongraph.artifacts`
 Lifecycle subprocess adapter: `solutiongraph.subprocess_runtime`
 Durable local receipt journal: `solutiongraph.ledger`
+Durable local checkpoint protocol: `solutiongraph.durable`
+Structured lowering: `solutiongraph.structured`
+Finite stream conformance adapter: `solutiongraph.streaming`
+Compensation runner: `solutiongraph.saga`
+Provenance projections: `solutiongraph.provenance`
 Experiment boundary: `solutiongraph.experiments`
 Campaign boundary: `solutiongraph.campaign`
 
@@ -24,7 +29,9 @@ ProgramGraph + RegistrySnapshot
 → Compiler.compile(primary choices + ordered fallbacks)
 → FrozenPlan digest
 → executor policy recheck
+→ data-dependent activation check for each slot
 → runtime invocation through named typed ports
+→ exact completed-prefix checkpoint after each successful/skipped slot
 → content-addressed output artifacts
 → independent verification
 → immutable RunReceipt
@@ -144,6 +151,21 @@ Artifacts do not implicitly become node inputs. A later slot consumes a value
 through a declared edge; a resume or distributed runtime may reconstruct that
 value through an explicit codec using the recorded artifact.
 
+`ExecutionCheckpoint` turns that reconstruction seam into an exact local
+resume protocol. The reference executor persists every successful or skipped
+topological prefix with its node receipt and artifact-backed outputs. Resume is
+allowed only when plan, program, registry, admitted-space, input, environment,
+task-case, and seed identities all match. Completed slots must be an exact
+prefix of the current topological order. Any mismatch or missing artifact fails
+closed; completed work is never guessed.
+
+`FileArtifactStore` verifies content digests on read and durably publishes new
+blobs with atomic replace plus file/directory `fsync`. `FileCheckpointStore`
+uses the same write discipline. A failed run retains
+its checkpoint; a successful or verifier-rejected completion clears it by
+default. This is local durability, not a distributed lease, fencing protocol,
+or exactly-once sink guarantee.
+
 `JsonlReceiptJournal` provides a separate durable local evidence boundary. It
 validates every `RunReceipt`, rejects duplicate identities, assigns a monotonic
 sequence, chains each record digest to its predecessor, appends under a file
@@ -173,6 +195,23 @@ Nodes may raise `NodeExecutionFailure(code, message, retryable=...)`.
 Generic exceptions are recorded as `runtime.exception` and are not retried by
 the reference adapter.
 
+Data-dependent slots are checked before invocation. Inactive slots emit
+`outcome="skipped"`; they do not invoke a runtime or synthesize output. The
+compiler requires conditional outputs to meet at optional merge ports before a
+required consumer or graph output, preventing an inactive producer from
+silently creating a missing required value.
+
+For multi-step external effects, `SagaRunner` provides a reference
+compensation protocol. Every action and compensation is an ordinary `NodeSpec`
+whose digest, runtime, effects, permissions, and state ports are rechecked.
+Completed actions are compensated in reverse order with explicit idempotency
+keys and append-only attempt receipts. Effectful steps must use unique keys. If
+an action declares an `idempotency_key` parameter, the runner supplies the
+saga-owned key and rejects a caller override; compensation receives the same
+key with a `:compensation` suffix. This lets an external adapter forward the
+receipt identity to a provider's deduplication boundary. Compensation is not atomic rollback;
+uncompensated steps remain visible in the result.
+
 ## 7. Verification and receipts
 
 The task verifier receives exact inputs, outputs, output artifacts, plan,
@@ -188,6 +227,12 @@ environment, implementation, artifact, verifier, route-assignment, attempt,
 timing, fallback, retry, failure, and belief-revision evidence. Failed and
 rejected runs remain append-only observations.
 
+`solutiongraph provenance export` projects one `RunReceipt` into W3C PROV JSON,
+an OpenLineage run event with custom facets, or an in-toto Statement carrying
+SLSA provenance v1. These are interoperable projections of the receipt; they
+do not replace the source receipt or claim that an external lineage backend
+accepted the event.
+
 ## 8. Experiment execution
 
 `ExperimentRunner` executes the Cartesian allocation declared by
@@ -197,7 +242,9 @@ immutable `EvidenceLedger`, per-plan aggregates, Pareto plan identities, and
 explicit holdout receipt IDs.
 
 Use the existing successive-halving and early-stopping primitives only through
-an explicit multi-fidelity supervisor. Never compare incomplete resource rungs
+an explicit multi-fidelity supervisor. `run_successive_halving` invokes the
+supplied evaluator at each resource rung and records every observation,
+promotion, finalist, and consumed resource unit. Never compare incomplete resource rungs
 as equal or let a holdout result update the proposing belief model.
 
 ## 9. Harness extension sequence
@@ -215,9 +262,10 @@ An LLM coding harness adding a domain should:
 9. compare baseline and alternatives under declared objectives;
 10. add holdouts before making optimization claims.
 
-The five notebooks in `notebooks/` demonstrate this sequence with standard-
-library nodes. They are executable teaching fixtures, not production benchmark
-claims for web scraping, OCR, imaging, entity resolution, or machine learning.
+The 23 bundled programs and five notebooks demonstrate this sequence with
+standard-library nodes. They are executable teaching fixtures, not production
+benchmark claims for web scraping, OCR, imaging, entity resolution, or machine
+learning.
 
 ## 10. Reference-release gate
 
@@ -230,11 +278,16 @@ The reference executor layer is conforming when:
 - retries and fallbacks are bounded and visible;
 - verification is independent and may reject a technically completed route;
 - every attempt produces a valid receipt;
-- all six examples compile against the same cross-domain registry and execute
+- all 23 examples compile against their declared cross-domain registries and execute
   without optional packages or network access.
 
+The `solutiongraph conformance` gate additionally executes conditional control,
+structured lowering, alternative-topology search, event-time streaming, exact
+local resume, saga compensation, successive-halving evaluation, and provenance
+export from an installed wheel.
+
 Production readiness additionally requires an enforcing isolated runtime,
-crash-resumable scheduling/checkpoints, authenticated remote evidence storage,
+distributed crash-resumable scheduling with leases/fencing, authenticated remote evidence storage,
 secrets and tenancy, operational monitoring, and held-out real-domain
 benchmarks. The bundled subprocess adapter and local journal deliberately close
 the lifecycle and evidence-format seams without claiming those stronger gates.

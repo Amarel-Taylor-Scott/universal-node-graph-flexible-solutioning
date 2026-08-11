@@ -25,7 +25,7 @@
     "reference.maturity": "demonstration"
   },
   "node_id": "reference.require-keys",
-  "node_spec_digest": "sha256:3bf9b4a0dd68ba2f1aa41a3e0d530b22e744359340df01c474e5687341413710",
+  "node_spec_digest": "sha256:4ccb01d48c0efb3db781391f0883b6dd14cbeb58d2cbf2f6c085d437597f11c8",
   "node_version": "1.0.0",
   "ports": [
     {

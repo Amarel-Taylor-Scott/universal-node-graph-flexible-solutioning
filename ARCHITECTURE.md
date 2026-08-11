@@ -14,15 +14,23 @@ solutiongraph/
 ├── template_library.py   original reference decompositions
 ├── template_library_extended.py  thirteen additional application templates
 ├── search.py             prior, beam, sprout, exhaustive search + honest accounting
-├── adaptive.py           successive promotion and explicit early stopping
+├── topology.py           explicit alternative DAG families + route search accounting
+├── structured.py         composite and bounded-loop lowering to atomic DAGs
+├── adaptive.py           planned/executed successive promotion + explicit early stopping
 ├── evidence.py           receipts, experiments, Pareto fronts, learned priors
 ├── artifacts.py          replaceable content-addressed memory/file store boundary
+├── durable.py            exact-identity completed-prefix checkpoints and resume
 ├── executor.py           strict frozen-plan recheck + reference Python runtime
+├── streaming.py          finite event-time conformance adapter
+├── saga.py               effectful action/compensation reference runner
+├── compatibility.py      optional exact node/port operational sidecars
+├── provenance.py         W3C PROV, OpenLineage, and SLSA projections
+├── conformance.py        installed-wheel advanced mechanism gate
 ├── subprocess_runtime.py bounded lifecycle adapter with strict JSON/bytes ABI
 ├── ledger.py             content-chained, fsync-backed local receipt journal
 ├── experiments.py        receipt-producing plan/case/seed allocation
 ├── campaign.py           population lineage, hard budgets, and evaluator boundaries
-├── examples/             six executable cross-domain node/program examples
+├── examples/             23 executable cross-domain node/program examples
 ├── reference_nodes.py    small executable node-pack demonstration
 ├── catalog.py            deterministic catalogue projection
 ├── scaffold.py           transactional coding-harness starter workspaces
@@ -31,7 +39,7 @@ solutiongraph/
 catalog/
 ├── index.json            content-addressed template/node-pack index
 ├── templates/            339 atomic obligations across 19 varied domains
-└── nodepacks/            portable reference registry and discovery sidecars
+└── nodepacks/            three portable registries and discovery sidecars
 
 browsergraph/
 ├── ports.py              BrowserPort protocol + Context — the seam
@@ -69,16 +77,19 @@ browsergraph/
 
 ```text
 task contract
-  → semantic template + task-specific ProgramGraph
+  → semantic template + task-specific ProgramGraph or TopologyFamily
+  → deterministic structured-control lowering when required
   → registry capability negotiation + DiscoveryQuery
   → DiscoveryReceipt + closed-world RegistrySnapshot
   → AdmittedSpace + rejection reasons
-  → BeliefModel-guided prior / beam / seeded sprouts / adaptive allocation
+  → BeliefModel-guided topology + prior / beam / seeded sprouts / adaptive allocation
   → content-addressed FrozenPlan
   → executor policy recheck + runtime adapter
+  → exact checkpoint after each successful/skipped prefix
   → content-addressed node and graph-output artifacts
   → independent verifier
   → immutable RunReceipt
+  → W3C PROV / OpenLineage / SLSA projection when requested
   → CampaignDecision + preserved population lineage
   → new BeliefModel revision
 ```
@@ -95,8 +106,9 @@ code. `SubprocessPythonRuntime` is a bundled replacement that adds a fresh child
 strict portable-value protocol, wall-clock termination, reduced environment,
 and optional POSIX limits while explicitly remaining a lifecycle—not
 adversarial—boundary. `JsonlReceiptJournal` supplies immediate local durable
-append and tamper evidence. Production harnesses replace `RuntimeAdapter`,
-`ArtifactStore`, and receipt persistence while preserving the plan and receipt
+append and tamper evidence, while `FileCheckpointStore` supplies exact local
+prefix resume. Production harnesses replace `RuntimeAdapter`,
+`ArtifactStore`, checkpoint coordination, and receipt persistence while preserving the plan and receipt
 boundary described in `EXECUTION_PROTOCOL.md`.
 
 An LLM-generated improvement loop sits outside this pipeline. It stores each

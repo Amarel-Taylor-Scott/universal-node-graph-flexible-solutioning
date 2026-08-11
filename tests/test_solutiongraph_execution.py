@@ -36,7 +36,6 @@ from solutiongraph import (
     verify_reference_release,
 )
 from solutiongraph.examples import EXAMPLE_TASKS, run_example
-from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
 from solutiongraph.schemas import SCHEMA_NAMES, load_all_schemas
 
 TEST_VALUE = ValueType("test.execution-value")
@@ -141,6 +140,9 @@ def test_memory_and_file_artifact_stores_are_content_addressed_and_deduplicated(
     assert files.get_bytes(stored.digest) == b"real bytes"
     assert stored.uri.startswith("file:")
     assert digest_value({"payload": b"real bytes"}).startswith("sha256:")
+    Path(stored.uri.removeprefix("file://")).write_bytes(b"corrupt bytes")
+    with pytest.raises(ValueError, match="corrupt content"):
+        files.get_bytes(stored.digest)
 
 
 def test_compiler_freezes_ordered_fallbacks_and_executor_activates_them():
@@ -276,7 +278,9 @@ def test_runtime_rechecks_policy_and_implementation_identity():
 @pytest.mark.parametrize("example", EXAMPLE_TASKS, ids=lambda item: item.id)
 def test_every_real_world_example_compiles_full_registry_and_executes_real_routes(example):
     space, plans = example.compile()
-    assert len(space.decisions) == len(example.program.slots) * len(EXAMPLE_REGISTRY.candidates)
+    assert len(space.decisions) == (
+        len(example.program.slots) * len(example.registry.candidates)
+    )
     assert all(space.choices_for(slot.id) for slot in example.program.slots)
     assert len({plan.digest for plan in plans.values()}) == len(plans)
 
@@ -300,9 +304,11 @@ def test_reference_release_gate_executes_all_routes_and_detects_catalog_drift(
 ):
     result = verify_reference_release(catalog_root="catalog")
     assert result.ok
-    assert len(result.route_results) == 31
-    assert result.accepted_routes == 22
-    assert result.rejected_controls == 9
+    assert len(result.route_results) == 51
+    assert result.accepted_routes == 32
+    assert result.rejected_controls == 19
+    assert result.conformance.ok
+    assert len(result.conformance.checks) == 8
     assert all(route.ok for route in result.route_results)
 
     stale_catalog = tmp_path / "catalog"
@@ -359,7 +365,17 @@ def test_new_execution_wire_schemas_are_bundled_and_strict_json_documents():
     assert {
         "admitted-space.schema.json",
         "artifact-record.schema.json",
+        "conformance-result.schema.json",
+        "execution-checkpoint.schema.json",
         "execution-policy.schema.json",
+        "node-compatibility-profile.schema.json",
+        "provenance-bundle.schema.json",
+        "saga-result.schema.json",
+        "stream-run-receipt.schema.json",
+        "stream-window-policy.schema.json",
+        "structured-lowering-receipt.schema.json",
+        "subgraph-catalog.schema.json",
+        "topology-family.schema.json",
         "verification-result.schema.json",
     }.issubset(schemas)
     strict_schemas = {

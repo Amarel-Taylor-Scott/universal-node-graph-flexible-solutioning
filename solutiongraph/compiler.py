@@ -72,6 +72,27 @@ class Compiler:
                 Diagnostic("UNG-SLOT-001", problem, f"program.slots[{index}]")
                 for problem in slot.validate(f"program.slots[{index}]")
             )
+            if slot.activation_slot:
+                source = slot_map.get(slot.activation_slot)
+                path = f"program.slots[{index}].activation"
+                if source is None:
+                    diagnostics.append(Diagnostic(
+                        "UNG-ACTIVATION-001",
+                        "activation references an unknown source slot",
+                        path,
+                    ))
+                elif source.id == slot.id:
+                    diagnostics.append(Diagnostic(
+                        "UNG-ACTIVATION-002",
+                        "a slot cannot activate itself",
+                        path,
+                    ))
+                elif source.port("output", slot.activation_port) is None:
+                    diagnostics.append(Diagnostic(
+                        "UNG-ACTIVATION-003",
+                        "activation references an unknown source output port",
+                        path,
+                    ))
 
         producers: dict[tuple[str, str], list[str]] = {}
         for index, edge in enumerate(program.edges):
@@ -95,6 +116,19 @@ class Compiler:
                     f"assignable to {target_port.value_type.id}@{target_port.value_type.version}",
                     path,
                     "Insert an explicit adapter slot; the compiler never coerces values.",
+                ))
+            if (
+                source.activation_slot
+                and target_port.required
+                and not self._activation_implies(target, source)
+            ):
+                diagnostics.append(Diagnostic(
+                    "UNG-ACTIVATION-004",
+                    f"conditional output {source.id}.{source_port.name} cannot feed "
+                    f"unconditionally required input {target.id}.{target_port.name}",
+                    path,
+                    "Guard the target with a compatible activation rule or connect "
+                    "branch arms to optional ports on an explicit merge node.",
                 ))
             producers.setdefault((edge.target_slot, edge.target_port), []).append(path)
 
@@ -201,6 +235,28 @@ class Compiler:
         if not source_port.value_type.is_assignable_to(graph_output.value_type):
             diagnostics.append(Diagnostic(
                 "UNG-TYPE-003", "source port type is not assignable to graph output", path))
+        if source.activation_slot:
+            diagnostics.append(Diagnostic(
+                "UNG-ACTIVATION-005",
+                "a conditional slot cannot directly provide a required graph output",
+                path,
+                "Route all branch arms through an explicit merge node first.",
+            ))
+
+    @staticmethod
+    def _activation_implies(target: SemanticSlot, source: SemanticSlot) -> bool:
+        """Return whether every target activation also activates ``source``.
+
+        A required input is safe only when the consumer can never run without its
+        conditional producer. A target guarded by the same decision and a subset
+        of the producer's admitted values satisfies that invariant.
+        """
+        return (
+            target.activation_slot == source.activation_slot
+            and target.activation_port == source.activation_port
+            and bool(target.activation_values)
+            and set(target.activation_values).issubset(source.activation_values)
+        )
 
     def validate_registry(self, registry: Registry) -> tuple[Diagnostic, ...]:
         diagnostics: list[Diagnostic] = []
@@ -510,6 +566,14 @@ class Compiler:
             if edge.target_slot not in children[edge.source_slot]:
                 children[edge.source_slot].add(edge.target_slot)
                 indegree[edge.target_slot] += 1
+        for slot in slots:
+            if (
+                slot.activation_slot in slot_ids
+                and slot.id in slot_ids
+                and slot.id not in children[slot.activation_slot]
+            ):
+                children[slot.activation_slot].add(slot.id)
+                indegree[slot.id] += 1
         ready = sorted(slot_id for slot_id, degree in indegree.items() if degree == 0)
         order: list[str] = []
         while ready:

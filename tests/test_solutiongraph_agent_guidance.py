@@ -26,9 +26,11 @@ def test_focused_workspace_skills_are_triggerable_and_progressively_disclosed():
     skill_root = ROOT / ".agents" / "skills"
     expected = {
         "author-node-pack",
+        "author-structured-workflow",
         "benchmark-solution-graph",
         "create-solution-template",
         "design-autoresearch-campaign",
+        "design-topology-family",
         "execute-solution-graph",
         "model-solution-graph",
         "solve-universal-dag",

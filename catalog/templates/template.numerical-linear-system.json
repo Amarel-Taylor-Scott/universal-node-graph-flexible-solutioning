@@ -156,7 +156,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -173,6 +173,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -216,6 +219,9 @@
         "success_contract": "Load matrix or linear operator with immutable provenance and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -259,6 +265,9 @@
         "success_contract": "Load one or more right-hand sides with shape and unit metadata and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -302,6 +311,9 @@
         "success_contract": "Validate dimensions, scalar types, devices, and batch axes and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -345,6 +357,9 @@
         "success_contract": "Reject or explicitly repair NaN and infinite values and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -388,6 +403,9 @@
         "success_contract": "Classify dense, sparse, banded, triangular, or operator form and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -431,6 +449,9 @@
         "success_contract": "Measure real symmetry or complex Hermitian structure and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -474,6 +495,9 @@
         "success_contract": "Test or certify positive definiteness when required and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -517,6 +541,9 @@
         "success_contract": "Estimate conditioning and numerical risk without forming unsafe products and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.formulate"
@@ -560,6 +587,9 @@
         "success_contract": "Select an admitted direct or iterative solver family from qualifications and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.formulate"
@@ -603,6 +633,9 @@
         "success_contract": "Select scalar precision and accumulation policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.formulate"
@@ -646,6 +679,9 @@
         "success_contract": "Apply reversible equilibration or scaling when justified and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.formulate"
@@ -689,6 +725,9 @@
         "success_contract": "Apply only authorized regularization with a recorded semantic change and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.factor"
@@ -732,6 +771,9 @@
         "success_contract": "Choose fill-reducing or locality-aware ordering where applicable and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.factor"
@@ -775,6 +817,9 @@
         "success_contract": "Perform reusable symbolic sparse analysis or certify pass-through and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.factor"
@@ -818,6 +863,9 @@
         "success_contract": "Compute the selected factorization with failure diagnostics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.solve"
@@ -861,6 +909,9 @@
         "success_contract": "Solve using the selected factor, preconditioner, or iterative method and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.solve"
@@ -904,6 +955,9 @@
         "success_contract": "Refine the solution under a bounded convergence contract and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"
@@ -947,6 +1001,9 @@
         "success_contract": "Compute absolute and relative residuals against the original system and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"
@@ -990,6 +1047,9 @@
         "success_contract": "Verify backward error, finiteness, convergence, and tolerance contracts and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"
@@ -1033,6 +1093,9 @@
         "success_contract": "Cross-check with an independent method or higher precision when required and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"
@@ -1076,6 +1139,9 @@
         "success_contract": "Activate QR, SVD, LDL, precision escalation, or another frozen fallback by policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.emit"

@@ -132,7 +132,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -149,6 +149,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -192,6 +195,9 @@
         "success_contract": "Identify consumers, trust boundaries, and compatibility commitments and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -235,6 +241,9 @@
         "success_contract": "Define versioned requests, responses, errors, and semantics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -278,6 +287,9 @@
         "success_contract": "Define latency, availability, durability, and correctness objectives and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -321,6 +333,9 @@
         "success_contract": "Model domain values, invariants, and state transitions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -364,6 +379,9 @@
         "success_contract": "Design persistence, transaction, migration, and consistency contracts and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -407,6 +425,9 @@
         "success_contract": "Define external dependency contracts and failure behavior and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -450,6 +471,9 @@
         "success_contract": "Parse and schema-check the exact incoming request and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -493,6 +517,9 @@
         "success_contract": "Authenticate the caller and credential context and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -536,6 +563,9 @@
         "success_contract": "Authorize the requested operation and resource scope and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -579,6 +609,9 @@
         "success_contract": "Execute domain rules under transaction and idempotency policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -622,6 +655,9 @@
         "success_contract": "Serialize typed success or error responses without information leakage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.protect"
@@ -665,6 +701,9 @@
         "success_contract": "Enforce payload, rate, quota, timeout, and concurrency limits and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.protect"
@@ -708,6 +747,9 @@
         "success_contract": "Retry, isolate, degrade, or fail dependencies by policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.protect"
@@ -751,6 +793,9 @@
         "success_contract": "Emit redacted traces, metrics, logs, and audit events and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"
@@ -794,6 +839,9 @@
         "success_contract": "Run schema, compatibility, property, and integration tests and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"
@@ -837,6 +885,9 @@
         "success_contract": "Run authorization, input, abuse, and dependency security tests and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"
@@ -880,6 +931,9 @@
         "success_contract": "Verify capacity and SLO behavior under representative load and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"

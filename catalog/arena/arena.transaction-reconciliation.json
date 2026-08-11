@@ -6,13 +6,15 @@
     "timeliness"
   ],
   "arena_model_version": "0.1",
-  "executable_example_ids": [],
+  "executable_example_ids": [
+    "transaction-reconciliation"
+  ],
   "external_requirements": [],
   "id": "arena.transaction-reconciliation",
   "input_contract": "Two or more source ledgers with stable source identities.",
   "output_contract": "Matched groups, residuals, exceptions, and balancing proof.",
   "problem": "Normalize, match, balance, explain, and route unmatched financial events.",
-  "readiness": "template",
+  "readiness": "executable_fixture",
   "stage_families": [
     "normalize",
     "candidate match",

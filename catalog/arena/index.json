@@ -437,7 +437,9 @@
         "freshness"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "contact-verification"
+      ],
       "external_requirements": [
         "L",
         "i",
@@ -532,7 +534,7 @@
       "input_contract": "Contact records, consent ledger, and approved verification connectors.",
       "output_contract": "Endpoint-specific validity, consent, provenance, and next-action state.",
       "problem": "Parse and verify email, phone, consent, and reachability without conflating those claims.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "parse",
         "normalize",
@@ -556,13 +558,15 @@
         "noise rate"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "web-change-monitoring"
+      ],
       "external_requirements": [],
       "id": "arena.web-change-monitoring",
       "input_contract": "Authorized page targets, prior captures, and significance policy.",
       "output_contract": "Evidence-backed change events with confidence and alert disposition.",
       "problem": "Capture pages, remove expected noise, compare semantic content, and corroborate changes.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "capture",
         "canonicalize",
@@ -586,13 +590,15 @@
         "timeliness"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "transaction-reconciliation"
+      ],
       "external_requirements": [],
       "id": "arena.transaction-reconciliation",
       "input_contract": "Two or more source ledgers with stable source identities.",
       "output_contract": "Matched groups, residuals, exceptions, and balancing proof.",
       "problem": "Normalize, match, balance, explain, and route unmatched financial events.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "normalize",
         "candidate match",
@@ -616,13 +622,15 @@
         "leakage"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "pii-redaction"
+      ],
       "external_requirements": [],
       "id": "arena.pii-redaction",
       "input_contract": "Documents, jurisdiction, entity policy, and output-format contract.",
       "output_contract": "Redacted document, span ledger, and leakage-test receipt.",
       "problem": "Detect sensitive spans, apply policy-aware redactions, and independently check leakage.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "decode",
         "detect",
@@ -646,13 +654,15 @@
         "rollback readiness"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "schema-migration"
+      ],
       "external_requirements": [],
       "id": "arena.schema-migration",
       "input_contract": "Old/new schemas, immutable source snapshot, and compatibility requirements.",
       "output_contract": "Migrated dataset, compatibility report, lineage, and rollback plan.",
       "problem": "Diff contracts, plan transformations, migrate, backfill, and prove invariants.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "diff",
         "plan",
@@ -777,13 +787,15 @@
         "recovery"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "incident-triage"
+      ],
       "external_requirements": [],
       "id": "arena.incident-triage",
       "input_contract": "Versioned logs, metrics, traces, deploy events, and runbooks.",
       "output_contract": "Incident timeline, ranked hypotheses, evidence, and bounded response actions.",
       "problem": "Parse signals, correlate events, retrieve context, propose causes, and test hypotheses.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "parse",
         "correlate",
@@ -808,13 +820,15 @@
         "build pass"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "dependency-assurance"
+      ],
       "external_requirements": [],
       "id": "arena.dependency-assurance",
       "input_contract": "Lockfiles, build manifests, artifact digests, and organization policy.",
       "output_contract": "SBOM, findings, policy verdicts, remediations, and evidence timestamps.",
       "problem": "Resolve dependency graphs, identify provenance, scan advisories, and apply policy.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "resolve",
         "identify",
@@ -840,13 +854,15 @@
         "latency"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "recommendation-ranking"
+      ],
       "external_requirements": [],
       "id": "arena.recommendation-ranking",
       "input_contract": "User/event context, eligible items, policies, and evaluation split.",
       "output_contract": "Ranked items with scores, explanations, policy results, and offline evidence.",
       "problem": "Build candidate sets, features, scores, constraints, diversification, and evaluation.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "eligibility",
         "candidate generation",
@@ -1000,13 +1016,15 @@
         "assumption checks"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "scientific-experiment"
+      ],
       "external_requirements": [],
       "id": "arena.scientific-experiment",
       "input_contract": "Hypothesis, variables, controls, resource budget, and measurement contract.",
       "output_contract": "Raw observations, analysis, uncertainty, provenance, and conclusion limits.",
       "problem": "Design treatments, allocate trials, execute, analyze, and test robustness.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "formalize",
         "design",
@@ -1033,13 +1051,15 @@
         "memory"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "numerical-linear-system"
+      ],
       "external_requirements": [],
       "id": "arena.numerical-linear-system",
       "input_contract": "Matrix/operator, right-hand side, tolerance, precision, and resource budget.",
       "output_contract": "Solution, residual, conditioning evidence, selected fallback, and performance receipt.",
       "problem": "Inspect structure and conditioning, select a solver, solve, and verify residuals.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "validate",
         "classify structure",

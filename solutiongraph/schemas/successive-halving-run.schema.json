@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "successive-halving-run.schema.json",
+  "title": "SolutionGraph Successive Halving Run",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policy_id", "rungs", "finalist_plan_digests", "consumed_resource"],
+  "properties": {
+    "policy_id": {"$ref": "common.schema.json#/$defs/id"},
+    "rungs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/rung"}
+    },
+    "finalist_plan_digests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "consumed_resource": {"type": "number", "minimum": 0}
+  },
+  "$defs": {
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_digest", "resource", "metric", "accepted", "complete", "failure_class"
+      ],
+      "properties": {
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "resource": {"type": "number", "exclusiveMinimum": 0},
+        "metric": {"type": "number"},
+        "accepted": {"type": "boolean"},
+        "complete": {"type": "boolean"},
+        "failure_class": {
+          "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_digest", "metric", "from_resource", "to_resource", "promoted",
+        "rank", "reason"
+      ],
+      "properties": {
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "metric": {"type": "number"},
+        "from_resource": {"type": "number", "exclusiveMinimum": 0},
+        "to_resource": {"type": "number", "exclusiveMinimum": 0},
+        "promoted": {"type": "boolean"},
+        "rank": {
+          "oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]
+        },
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "rung": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resource", "observations", "decisions"],
+      "properties": {
+        "resource": {"type": "number", "exclusiveMinimum": 0},
+        "observations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/observation"}
+        },
+        "decisions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/decision"}
+        }
+      }
+    }
+  }
+}

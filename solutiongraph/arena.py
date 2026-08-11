@@ -303,6 +303,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("parse", "normalize", "syntax check", "authority check", "consent check", "classify"),
             ("precision", "coverage", "consent safety", "freshness"),
             "template.data-quality",
+            examples=("contact-verification",),
             external=("Live email and phone reachability require approved providers and consent-aware policies."),
             tags=("contact", "verification"),
         ),
@@ -315,6 +316,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("capture", "canonicalize", "segment", "diff", "corroborate", "alert"),
             ("change precision", "change recall", "alert latency", "noise rate"),
             "template.web-automation",
+            examples=("web-change-monitoring",),
             tags=("web", "monitoring"),
         ),
         _task(
@@ -326,6 +328,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("normalize", "candidate match", "score", "balance", "explain", "route exception"),
             ("matched value", "false match rate", "unexplained residual", "timeliness"),
             "template.batch-data-pipeline",
+            examples=("transaction-reconciliation",),
             tags=("finance", "reconciliation"),
         ),
         _task(
@@ -337,6 +340,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("decode", "detect", "resolve overlaps", "redact", "render", "leakage verify"),
             ("sensitive recall", "over-redaction", "render integrity", "leakage"),
             "template.document-intelligence",
+            examples=("pii-redaction",),
             tags=("privacy", "documents"),
         ),
         _task(
@@ -348,6 +352,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("diff", "plan", "transform", "backfill", "validate", "shadow compare", "cut over"),
             ("row preservation", "invariant pass", "compatibility", "rollback readiness"),
             "template.batch-data-pipeline",
+            examples=("schema-migration",),
             tags=("schema", "migration"),
         ),
         _task(
@@ -372,6 +377,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("parse", "correlate", "retrieve", "hypothesize", "test", "rank", "respond"),
             ("time to useful hypothesis", "evidence coverage", "false action rate", "recovery"),
             "template.incident-response",
+            examples=("incident-triage",),
             tags=("operations", "observability"),
         ),
         _task(
@@ -383,6 +389,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("resolve", "identify", "build SBOM", "scan", "license classify", "policy", "remediate"),
             ("dependency coverage", "advisory freshness", "policy accuracy", "build pass"),
             "template.qa-engineering",
+            examples=("dependency-assurance",),
             tags=("security", "supply-chain"),
         ),
         _task(
@@ -394,6 +401,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("eligibility", "candidate generation", "features", "score", "policy", "diversify", "evaluate"),
             ("ranking metric", "coverage", "diversity", "policy violations", "latency"),
             "template.recommendation-ranking",
+            examples=("recommendation-ranking",),
             tags=("ranking", "machine-learning"),
         ),
         _task(
@@ -418,6 +426,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("formalize", "design", "allocate", "execute", "measure", "analyze", "robustness", "report"),
             ("power", "effect uncertainty", "reproducibility", "assumption checks"),
             "template.scientific-experiment",
+            examples=("scientific-experiment",),
             tags=("science", "experimentation"),
         ),
         _task(
@@ -429,6 +438,7 @@ UNIVERSAL_DAG_ARENA = ArenaCatalog(
             ("validate", "classify structure", "condition", "regularize", "factor or iterate", "solve", "residual", "fallback"),
             ("residual", "backward error", "stability", "time", "memory"),
             "template.numerical-linear-system",
+            examples=("numerical-linear-system",),
             tags=("numerical", "linear-algebra"),
         ),
         _task(

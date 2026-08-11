@@ -108,7 +108,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -125,6 +125,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -168,6 +171,9 @@
         "success_contract": "Load approved change intent, policy, and target environment and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -211,6 +217,9 @@
         "success_contract": "Resolve immutable source and dependency identities and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -254,6 +263,9 @@
         "success_contract": "Build an isolated, reproducible release artifact and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -297,6 +309,9 @@
         "success_contract": "Generate signed build and dependency provenance and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -340,6 +355,9 @@
         "success_contract": "Test the exact artifact that will be deployed and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -383,6 +401,9 @@
         "success_contract": "Scan policy, vulnerabilities, licenses, and secrets and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.qualify"
@@ -426,6 +447,9 @@
         "success_contract": "Record an authorized release decision and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.rollout"
@@ -469,6 +493,9 @@
         "success_contract": "Prepare target resources through an idempotent plan and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.rollout"
@@ -512,6 +539,9 @@
         "success_contract": "Deploy to a bounded canary population and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.rollout"
@@ -555,6 +585,9 @@
         "success_contract": "Evaluate canary health against independent SLOs and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.rollout"
@@ -598,6 +631,9 @@
         "success_contract": "Increase exposure under explicit promotion gates and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.close"
@@ -641,6 +677,9 @@
         "success_contract": "Verify production behavior and user-visible outcomes and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.close"
@@ -684,6 +723,9 @@
         "success_contract": "Rollback safely or finalize the release state and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.close"

@@ -101,7 +101,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -118,6 +118,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.understand"
@@ -161,6 +164,9 @@
         "success_contract": "Load the change, ticket, contracts, and affected artifacts and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.understand"
@@ -204,6 +210,9 @@
         "success_contract": "Identify affected components, interfaces, and risks and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.understand"
@@ -247,6 +256,9 @@
         "success_contract": "Derive independent acceptance and regression oracles and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -290,6 +302,9 @@
         "success_contract": "Select unit, integration, contract, system, and property layers and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -333,6 +348,9 @@
         "success_contract": "Generate nominal, boundary, adversarial, and metamorphic cases and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -376,6 +394,9 @@
         "success_contract": "Prepare isolated, deterministic fixtures and environments and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.execute"
@@ -419,6 +440,9 @@
         "success_contract": "Run syntax, type, lint, policy, and security checks and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.execute"
@@ -462,6 +486,9 @@
         "success_contract": "Execute the admitted test suites with recorded configuration and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.execute"
@@ -505,6 +532,9 @@
         "success_contract": "Collect structural and requirements coverage evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.execute"
@@ -548,6 +578,9 @@
         "success_contract": "Repeat and classify unstable outcomes and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decide"
@@ -591,6 +624,9 @@
         "success_contract": "Cluster failures and identify minimal reproducible causes and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decide"
@@ -634,6 +670,9 @@
         "success_contract": "Re-run focused and regression oracles after repair and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decide"

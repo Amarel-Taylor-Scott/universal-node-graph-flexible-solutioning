@@ -694,7 +694,7 @@
     }
   ],
   "id": "example.real-world-registry",
-  "model_version": "0.1",
+  "model_version": "0.2",
   "nodes": [
     {
       "capabilities": [
@@ -734,7 +734,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -804,7 +804,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -867,7 +867,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -919,7 +919,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -977,7 +977,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1038,7 +1038,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1090,7 +1090,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1142,7 +1142,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1194,7 +1194,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1252,7 +1252,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1329,7 +1329,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1397,7 +1397,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1449,7 +1449,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1501,7 +1501,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1553,7 +1553,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1605,7 +1605,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1657,7 +1657,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1709,7 +1709,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1761,7 +1761,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1822,7 +1822,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1883,7 +1883,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -1950,7 +1950,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2017,7 +2017,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2069,7 +2069,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2127,7 +2127,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2197,7 +2197,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2255,7 +2255,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2322,7 +2322,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2380,7 +2380,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2438,7 +2438,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2508,7 +2508,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2560,7 +2560,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2612,7 +2612,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2664,7 +2664,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2716,7 +2716,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2768,7 +2768,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2820,7 +2820,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2872,7 +2872,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2924,7 +2924,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -2976,7 +2976,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3028,7 +3028,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3080,7 +3080,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3132,7 +3132,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3184,7 +3184,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3236,7 +3236,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3288,7 +3288,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3340,7 +3340,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3392,7 +3392,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3444,7 +3444,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3496,7 +3496,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3548,7 +3548,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3600,7 +3600,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3652,7 +3652,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3704,7 +3704,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3756,7 +3756,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3808,7 +3808,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3860,7 +3860,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3912,7 +3912,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -3964,7 +3964,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4016,7 +4016,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4068,7 +4068,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4120,7 +4120,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4172,7 +4172,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4224,7 +4224,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4276,7 +4276,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4328,7 +4328,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4380,7 +4380,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4432,7 +4432,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4484,7 +4484,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4536,7 +4536,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4588,7 +4588,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4640,7 +4640,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4692,7 +4692,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4744,7 +4744,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4796,7 +4796,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4848,7 +4848,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4900,7 +4900,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -4952,7 +4952,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -5004,7 +5004,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -5056,7 +5056,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -5108,7 +5108,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -5160,7 +5160,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -5212,7 +5212,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",
@@ -5264,7 +5264,7 @@
         }
       ],
       "invariants": [],
-      "model_version": "0.1",
+      "model_version": "0.2",
       "outputs": [
         {
           "cardinality": "one",

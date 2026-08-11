@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/main/solutiongraph/schemas/openlineage-artifact-facet.schema.json",
+  "title": "SolutionGraph OpenLineage Artifact Dataset Facet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["_producer", "_schemaURL", "digest"],
+  "properties": {
+    "_producer": {"type": "string", "format": "uri"},
+    "_schemaURL": {"const": "https://raw.githubusercontent.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/main/solutiongraph/schemas/openlineage-artifact-facet.schema.json"},
+    "digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

@@ -6,13 +6,15 @@
     "leakage"
   ],
   "arena_model_version": "0.1",
-  "executable_example_ids": [],
+  "executable_example_ids": [
+    "pii-redaction"
+  ],
   "external_requirements": [],
   "id": "arena.pii-redaction",
   "input_contract": "Documents, jurisdiction, entity policy, and output-format contract.",
   "output_contract": "Redacted document, span ledger, and leakage-test receipt.",
   "problem": "Detect sensitive spans, apply policy-aware redactions, and independently check leakage.",
-  "readiness": "template",
+  "readiness": "executable_fixture",
   "stage_families": [
     "decode",
     "detect",

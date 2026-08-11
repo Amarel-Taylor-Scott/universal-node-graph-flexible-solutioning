@@ -2132,6 +2132,13 @@ EXAMPLE_TASKS += (
     ),
 )
 
+# Import after the shared dataclasses and core examples exist.  The extended
+# module owns a separate registry so adding cross-domain fixtures does not turn
+# the original teaching registry into one misleading universal deployment.
+from solutiongraph.examples.extended_tasks import EXTENDED_EXAMPLE_TASKS  # noqa: E402
+
+EXAMPLE_TASKS = (*EXAMPLE_TASKS, *EXTENDED_EXAMPLE_TASKS)
+
 
 def get_example(example_id: str) -> ExecutableExample:
     try:

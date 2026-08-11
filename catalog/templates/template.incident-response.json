@@ -132,7 +132,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -149,6 +149,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -192,6 +195,9 @@
         "success_contract": "Load response authority, severity, privacy, and notification policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -235,6 +241,9 @@
         "success_contract": "Identify affected assets, owners, dependencies, and criticality and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -278,6 +287,9 @@
         "success_contract": "Preserve volatile and durable evidence with chain of custody and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.detect"
@@ -321,6 +333,9 @@
         "success_contract": "Normalize alerts and observations into a versioned event model and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.detect"
@@ -364,6 +379,9 @@
         "success_contract": "Correlate identities, indicators, timelines, and affected resources and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.detect"
@@ -407,6 +425,9 @@
         "success_contract": "Distinguish incident, benign behavior, and insufficient evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.triage"
@@ -450,6 +471,9 @@
         "success_contract": "Assess confidentiality, integrity, availability, safety, and business impact and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.triage"
@@ -493,6 +517,9 @@
         "success_contract": "Classify severity and reporting obligations under policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.triage"
@@ -536,6 +563,9 @@
         "success_contract": "Select authorized containment and evidence-preservation actions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contain"
@@ -579,6 +609,9 @@
         "success_contract": "Isolate affected identities, hosts, workloads, or network segments and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contain"
@@ -622,6 +655,9 @@
         "success_contract": "Block verified malicious indicators with expiry and rollback and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contain"
@@ -665,6 +701,9 @@
         "success_contract": "Verify containment and detect displacement or persistence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.recover"
@@ -708,6 +747,9 @@
         "success_contract": "Remove persistence, vulnerabilities, compromised secrets, and artifacts and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.recover"
@@ -751,6 +793,9 @@
         "success_contract": "Restore services and data from verified trusted state and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.recover"
@@ -794,6 +839,9 @@
         "success_contract": "Verify security, integrity, functionality, and monitoring coverage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.learn"
@@ -837,6 +885,9 @@
         "success_contract": "Complete authorized legal, customer, partner, and internal notifications and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.learn"
@@ -880,6 +931,9 @@
         "success_contract": "Publish timeline, evidence, actions, impact, and decisions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.learn"

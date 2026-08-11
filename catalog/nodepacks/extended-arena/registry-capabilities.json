@@ -1,0 +1,58 @@
+{
+  "descriptor_fields": [],
+  "discovery_version": "0.1",
+  "embedding_spaces": [],
+  "extensions": {
+    "example.maturity": "cross-domain-conformance-fixture"
+  },
+  "max_page_size": 1000,
+  "protocol_versions": [
+    "0.1"
+  ],
+  "query_modes": [
+    {
+      "extensions": {},
+      "fields": [
+        "node_id",
+        "node_spec_digest"
+      ],
+      "id": "exact",
+      "requires_embedding_space": false,
+      "supports_cursor": false,
+      "supports_explanations": false,
+      "supports_filters": false,
+      "supports_scores": false
+    },
+    {
+      "extensions": {},
+      "fields": [],
+      "id": "enumeration",
+      "requires_embedding_space": false,
+      "supports_cursor": true,
+      "supports_explanations": false,
+      "supports_filters": false,
+      "supports_scores": false
+    }
+  ],
+  "registry_digest": "sha256:660d572268f745845e10e6c9519f7e1d2696898755fa29459ddd563a4c9ebcc0",
+  "registry_id": "example.extended-arena-registry",
+  "registry_version": "1.0.0",
+  "schemas": [
+    {
+      "name": "node-spec",
+      "versions": [
+        "0.2"
+      ]
+    },
+    {
+      "name": "node-pack",
+      "versions": [
+        "0.1"
+      ]
+    }
+  ],
+  "supports_continuation": true,
+  "supports_enumeration": true,
+  "supports_explanations": true,
+  "supports_snapshots": true
+}

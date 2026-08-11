@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    "extended.contact.verify"
+  ],
+  "description": "Strict reference implementation for contact/verify.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+  "failure_modes": [],
+  "id": "example.extended.contact.verify.strict",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.extended-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.extended-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "contact"
+      ],
+      "default": null,
+      "description": "",
+      "name": "domain",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "verify"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/extended_tasks.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -114,7 +114,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -131,6 +131,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.profile"
@@ -174,6 +177,9 @@
         "success_contract": "Load all source tables with immutable source identities and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.profile"
@@ -217,6 +223,9 @@
         "success_contract": "Infer and then confirm the semantic schema and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.profile"
@@ -260,6 +269,9 @@
         "success_contract": "Measure completeness, validity, uniqueness, and drift and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -303,6 +315,9 @@
         "success_contract": "Normalize person and business names and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -346,6 +361,9 @@
         "success_contract": "Separate compound and household names when justified and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -389,6 +407,9 @@
         "success_contract": "Normalize address text and locality conventions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -432,6 +453,9 @@
         "success_contract": "Parse street components into typed fields and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -475,6 +499,9 @@
         "success_contract": "Normalize phone and electronic contact fields and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -518,6 +545,9 @@
         "success_contract": "Validate deliverability against an admitted postal reference and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -561,6 +591,9 @@
         "success_contract": "Validate geographic components against an admitted census reference and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -604,6 +637,9 @@
         "success_contract": "Resolve coordinates with declared confidence and provenance and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -647,6 +683,9 @@
         "success_contract": "Generate and score candidate entity matches and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -690,6 +729,9 @@
         "success_contract": "Merge accepted matches under a reversible policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"
@@ -733,6 +775,9 @@
         "success_contract": "Run schema, referential, and business-rule checks and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"

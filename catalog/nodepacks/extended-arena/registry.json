@@ -1,0 +1,5217 @@
+{
+  "candidates": [
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.parse.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.contact.parse.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "parse"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.parse.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.contact.parse.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "parse"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.normalize.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.contact.normalize.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "normalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.normalize.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.contact.normalize.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "normalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.verify.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.contact.verify.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "verify"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.verify.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.contact.verify.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "verify"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.consent.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.contact.consent.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "consent"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.contact.consent.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.contact.consent.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "contact",
+        "operation": "consent"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.web-change.canonicalize.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.web-change.canonicalize.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "web-change",
+        "operation": "canonicalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.web-change.canonicalize.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.web-change.canonicalize.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "web-change",
+        "operation": "canonicalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.web-change.diff.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.web-change.diff.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "web-change",
+        "operation": "diff"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.web-change.diff.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.web-change.diff.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "web-change",
+        "operation": "diff"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.web-change.corroborate.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.web-change.corroborate.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "web-change",
+        "operation": "corroborate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.web-change.corroborate.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.web-change.corroborate.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "web-change",
+        "operation": "corroborate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.reconciliation.normalize.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.reconciliation.normalize.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "reconciliation",
+        "operation": "normalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.reconciliation.normalize.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.reconciliation.normalize.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "reconciliation",
+        "operation": "normalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.reconciliation.match.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.reconciliation.match.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "reconciliation",
+        "operation": "match"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.reconciliation.match.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.reconciliation.match.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "reconciliation",
+        "operation": "match"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.reconciliation.balance.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.reconciliation.balance.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "reconciliation",
+        "operation": "balance"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.reconciliation.balance.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.reconciliation.balance.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "reconciliation",
+        "operation": "balance"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.pii.detect.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.pii.detect.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "pii",
+        "operation": "detect"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.pii.detect.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.pii.detect.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "pii",
+        "operation": "detect"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.pii.redact.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.pii.redact.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "pii",
+        "operation": "redact"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.pii.redact.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.pii.redact.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "pii",
+        "operation": "redact"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.pii.leakage-check.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.pii.leakage-check.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "pii",
+        "operation": "leakage-check"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.pii.leakage-check.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.pii.leakage-check.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "pii",
+        "operation": "leakage-check"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.schema-migration.transform.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.schema-migration.transform.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "schema-migration",
+        "operation": "transform"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.schema-migration.transform.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.schema-migration.transform.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "schema-migration",
+        "operation": "transform"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.schema-migration.validate.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.schema-migration.validate.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "schema-migration",
+        "operation": "validate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.schema-migration.validate.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.schema-migration.validate.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "schema-migration",
+        "operation": "validate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.schema-migration.shadow-compare.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.schema-migration.shadow-compare.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "schema-migration",
+        "operation": "shadow-compare"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.schema-migration.shadow-compare.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.schema-migration.shadow-compare.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "schema-migration",
+        "operation": "shadow-compare"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.incident.parse.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.incident.parse.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "incident",
+        "operation": "parse"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.incident.parse.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.incident.parse.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "incident",
+        "operation": "parse"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.incident.correlate.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.incident.correlate.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "incident",
+        "operation": "correlate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.incident.correlate.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.incident.correlate.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "incident",
+        "operation": "correlate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.incident.rank.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.incident.rank.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "incident",
+        "operation": "rank"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.incident.rank.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.incident.rank.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "incident",
+        "operation": "rank"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.dependency.resolve.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.dependency.resolve.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "dependency",
+        "operation": "resolve"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.dependency.resolve.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.dependency.resolve.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "dependency",
+        "operation": "resolve"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.dependency.scan.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.dependency.scan.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "dependency",
+        "operation": "scan"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.dependency.scan.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.dependency.scan.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "dependency",
+        "operation": "scan"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.dependency.policy.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.dependency.policy.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "dependency",
+        "operation": "policy"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.dependency.policy.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.dependency.policy.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "dependency",
+        "operation": "policy"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.recommendation.eligibility.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.recommendation.eligibility.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "recommendation",
+        "operation": "eligibility"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.recommendation.eligibility.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.recommendation.eligibility.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "recommendation",
+        "operation": "eligibility"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.recommendation.score.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.recommendation.score.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "recommendation",
+        "operation": "score"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.recommendation.score.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.recommendation.score.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "recommendation",
+        "operation": "score"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.recommendation.diversify.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.recommendation.diversify.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "recommendation",
+        "operation": "diversify"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.recommendation.diversify.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.recommendation.diversify.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "recommendation",
+        "operation": "diversify"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.scientific.design.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.scientific.design.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "scientific",
+        "operation": "design"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.scientific.design.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.scientific.design.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "scientific",
+        "operation": "design"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.scientific.analyze.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.scientific.analyze.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "scientific",
+        "operation": "analyze"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.scientific.analyze.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.scientific.analyze.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "scientific",
+        "operation": "analyze"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.scientific.robustness.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.scientific.robustness.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "scientific",
+        "operation": "robustness"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.scientific.robustness.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.scientific.robustness.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "scientific",
+        "operation": "robustness"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.numerical.validate.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.numerical.validate.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "numerical",
+        "operation": "validate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.numerical.validate.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.numerical.validate.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "numerical",
+        "operation": "validate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.numerical.solve.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.numerical.solve.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "numerical",
+        "operation": "solve"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.numerical.solve.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.numerical.solve.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "numerical",
+        "operation": "solve"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.numerical.residual.strict",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "node_id": "example.extended.numerical.residual.strict",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "numerical",
+        "operation": "residual"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.extended.numerical.residual.heuristic",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "node_id": "example.extended.numerical.residual.heuristic",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "numerical",
+        "operation": "residual"
+      }
+    }
+  ],
+  "id": "example.extended-arena-registry",
+  "model_version": "0.2",
+  "nodes": [
+    {
+      "capabilities": [
+        "extended.contact.parse"
+      ],
+      "description": "Strict reference implementation for contact/parse.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.parse.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "parse"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.contact.parse"
+      ],
+      "description": "Heuristic reference implementation for contact/parse.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.parse.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "parse"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.contact.normalize"
+      ],
+      "description": "Strict reference implementation for contact/normalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.normalize.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "normalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.contact.normalize"
+      ],
+      "description": "Heuristic reference implementation for contact/normalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.normalize.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "normalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.contact.verify"
+      ],
+      "description": "Strict reference implementation for contact/verify.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.verify.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "verify"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.contact.verify"
+      ],
+      "description": "Heuristic reference implementation for contact/verify.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.verify.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "verify"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.contact.consent"
+      ],
+      "description": "Strict reference implementation for contact/consent.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.consent.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "consent"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.contact.consent"
+      ],
+      "description": "Heuristic reference implementation for contact/consent.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.contact.consent.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "contact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "consent"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.web-change.canonicalize"
+      ],
+      "description": "Strict reference implementation for web-change/canonicalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.web-change.canonicalize.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "web-change"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "canonicalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.web-change.canonicalize"
+      ],
+      "description": "Heuristic reference implementation for web-change/canonicalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.web-change.canonicalize.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "web-change"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "canonicalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.web-change.diff"
+      ],
+      "description": "Strict reference implementation for web-change/diff.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.web-change.diff.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "web-change"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "diff"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.web-change.diff"
+      ],
+      "description": "Heuristic reference implementation for web-change/diff.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.web-change.diff.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "web-change"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "diff"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.web-change.corroborate"
+      ],
+      "description": "Strict reference implementation for web-change/corroborate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.web-change.corroborate.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "web-change"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "corroborate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.web-change.corroborate"
+      ],
+      "description": "Heuristic reference implementation for web-change/corroborate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.web-change.corroborate.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "web-change"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "corroborate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.reconciliation.normalize"
+      ],
+      "description": "Strict reference implementation for reconciliation/normalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.reconciliation.normalize.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "reconciliation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "normalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.reconciliation.normalize"
+      ],
+      "description": "Heuristic reference implementation for reconciliation/normalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.reconciliation.normalize.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "reconciliation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "normalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.reconciliation.match"
+      ],
+      "description": "Strict reference implementation for reconciliation/match.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.reconciliation.match.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "reconciliation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "match"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.reconciliation.match"
+      ],
+      "description": "Heuristic reference implementation for reconciliation/match.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.reconciliation.match.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "reconciliation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "match"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.reconciliation.balance"
+      ],
+      "description": "Strict reference implementation for reconciliation/balance.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.reconciliation.balance.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "reconciliation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "balance"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.reconciliation.balance"
+      ],
+      "description": "Heuristic reference implementation for reconciliation/balance.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.reconciliation.balance.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "reconciliation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "balance"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.pii.detect"
+      ],
+      "description": "Strict reference implementation for pii/detect.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.pii.detect.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "pii"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "detect"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.pii.detect"
+      ],
+      "description": "Heuristic reference implementation for pii/detect.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.pii.detect.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "pii"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "detect"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.pii.redact"
+      ],
+      "description": "Strict reference implementation for pii/redact.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.pii.redact.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "pii"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "redact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.pii.redact"
+      ],
+      "description": "Heuristic reference implementation for pii/redact.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.pii.redact.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "pii"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "redact"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.pii.leakage-check"
+      ],
+      "description": "Strict reference implementation for pii/leakage-check.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.pii.leakage-check.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "pii"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "leakage-check"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.pii.leakage-check"
+      ],
+      "description": "Heuristic reference implementation for pii/leakage-check.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.pii.leakage-check.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "pii"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "leakage-check"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.schema-migration.transform"
+      ],
+      "description": "Strict reference implementation for schema-migration/transform.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.schema-migration.transform.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "schema-migration"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "transform"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.schema-migration.transform"
+      ],
+      "description": "Heuristic reference implementation for schema-migration/transform.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.schema-migration.transform.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "schema-migration"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "transform"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.schema-migration.validate"
+      ],
+      "description": "Strict reference implementation for schema-migration/validate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.schema-migration.validate.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "schema-migration"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "validate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.schema-migration.validate"
+      ],
+      "description": "Heuristic reference implementation for schema-migration/validate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.schema-migration.validate.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "schema-migration"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "validate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.schema-migration.shadow-compare"
+      ],
+      "description": "Strict reference implementation for schema-migration/shadow-compare.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.schema-migration.shadow-compare.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "schema-migration"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "shadow-compare"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.schema-migration.shadow-compare"
+      ],
+      "description": "Heuristic reference implementation for schema-migration/shadow-compare.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.schema-migration.shadow-compare.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "schema-migration"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "shadow-compare"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.incident.parse"
+      ],
+      "description": "Strict reference implementation for incident/parse.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.incident.parse.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "incident"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "parse"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.incident.parse"
+      ],
+      "description": "Heuristic reference implementation for incident/parse.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.incident.parse.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "incident"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "parse"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.incident.correlate"
+      ],
+      "description": "Strict reference implementation for incident/correlate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.incident.correlate.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "incident"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "correlate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.incident.correlate"
+      ],
+      "description": "Heuristic reference implementation for incident/correlate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.incident.correlate.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "incident"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "correlate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.incident.rank"
+      ],
+      "description": "Strict reference implementation for incident/rank.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.incident.rank.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "incident"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "rank"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.incident.rank"
+      ],
+      "description": "Heuristic reference implementation for incident/rank.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.incident.rank.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "incident"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "rank"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.dependency.resolve"
+      ],
+      "description": "Strict reference implementation for dependency/resolve.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.dependency.resolve.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "dependency"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "resolve"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.dependency.resolve"
+      ],
+      "description": "Heuristic reference implementation for dependency/resolve.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.dependency.resolve.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "dependency"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "resolve"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.dependency.scan"
+      ],
+      "description": "Strict reference implementation for dependency/scan.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.dependency.scan.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "dependency"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "scan"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.dependency.scan"
+      ],
+      "description": "Heuristic reference implementation for dependency/scan.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.dependency.scan.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "dependency"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "scan"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.dependency.policy"
+      ],
+      "description": "Strict reference implementation for dependency/policy.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.dependency.policy.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "dependency"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "policy"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.dependency.policy"
+      ],
+      "description": "Heuristic reference implementation for dependency/policy.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.dependency.policy.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "dependency"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "policy"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.recommendation.eligibility"
+      ],
+      "description": "Strict reference implementation for recommendation/eligibility.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.recommendation.eligibility.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "recommendation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "eligibility"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.recommendation.eligibility"
+      ],
+      "description": "Heuristic reference implementation for recommendation/eligibility.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.recommendation.eligibility.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "recommendation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "eligibility"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.recommendation.score"
+      ],
+      "description": "Strict reference implementation for recommendation/score.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.recommendation.score.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "recommendation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "score"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.recommendation.score"
+      ],
+      "description": "Heuristic reference implementation for recommendation/score.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.recommendation.score.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "recommendation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "score"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.recommendation.diversify"
+      ],
+      "description": "Strict reference implementation for recommendation/diversify.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.recommendation.diversify.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "recommendation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "diversify"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.recommendation.diversify"
+      ],
+      "description": "Heuristic reference implementation for recommendation/diversify.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.recommendation.diversify.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "recommendation"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "diversify"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.scientific.design"
+      ],
+      "description": "Strict reference implementation for scientific/design.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.scientific.design.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "scientific"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "design"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.scientific.design"
+      ],
+      "description": "Heuristic reference implementation for scientific/design.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.scientific.design.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "scientific"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "design"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.scientific.analyze"
+      ],
+      "description": "Strict reference implementation for scientific/analyze.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.scientific.analyze.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "scientific"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "analyze"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.scientific.analyze"
+      ],
+      "description": "Heuristic reference implementation for scientific/analyze.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.scientific.analyze.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "scientific"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "analyze"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.scientific.robustness"
+      ],
+      "description": "Strict reference implementation for scientific/robustness.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.scientific.robustness.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "scientific"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "robustness"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.scientific.robustness"
+      ],
+      "description": "Heuristic reference implementation for scientific/robustness.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.scientific.robustness.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "scientific"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "robustness"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.numerical.validate"
+      ],
+      "description": "Strict reference implementation for numerical/validate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.numerical.validate.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "numerical"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "validate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.numerical.validate"
+      ],
+      "description": "Heuristic reference implementation for numerical/validate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.numerical.validate.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "numerical"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "validate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.numerical.solve"
+      ],
+      "description": "Strict reference implementation for numerical/solve.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.numerical.solve.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "numerical"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "solve"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.numerical.solve"
+      ],
+      "description": "Heuristic reference implementation for numerical/solve.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.numerical.solve.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "numerical"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "solve"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.numerical.residual"
+      ],
+      "description": "Strict reference implementation for numerical/residual.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_strict_step",
+      "failure_modes": [],
+      "id": "example.extended.numerical.residual.strict",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "numerical"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "residual"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "extended.numerical.residual"
+      ],
+      "description": "Heuristic reference implementation for numerical/residual.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+      "failure_modes": [],
+      "id": "example.extended.numerical.residual.heuristic",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.extended-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "numerical"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "residual"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/extended_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    }
+  ],
+  "version": "1.0.0"
+}

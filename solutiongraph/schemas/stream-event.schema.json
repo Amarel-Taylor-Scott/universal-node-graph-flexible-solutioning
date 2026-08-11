@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stream-event.schema.json",
+  "title": "SolutionGraph Stream Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "key", "event_time", "value", "source", "headers"],
+  "properties": {
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "key": {"type": "string", "minLength": 1},
+    "event_time": {"type": "number"},
+    "value": true,
+    "source": {"type": "string"},
+    "headers": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    }
+  }
+}

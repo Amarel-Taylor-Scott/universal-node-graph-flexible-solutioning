@@ -1,6 +1,6 @@
 {
   "arena": {
-    "executable_fixture_count": 10,
+    "executable_fixture_count": 20,
     "path": "arena/index.json",
     "task_count": 24
   },
@@ -8,7 +8,7 @@
   "node_packs": [
     {
       "descriptor_count": 5,
-      "digest": "sha256:11215ea37192cbd7088a2850b8d5cf5bdfb301a8cbfc7e740321782e14ca8cec",
+      "digest": "sha256:3d0c1275ae4dcaa119f8b81572327195b292d8fec135694b2df3f8a90ef12c85",
       "embedding_record_count": 0,
       "id": "reference.core-node-pack",
       "node_count": 5,
@@ -17,18 +17,27 @@
     },
     {
       "descriptor_count": 0,
-      "digest": "sha256:721e13185ab4f4217b51064a14dcbbda9a4a39adc9da83cc1e0d1fcc88f73f97",
+      "digest": "sha256:c44ff58b53954478a057c15bcb0aad4c15a491f4ca87263e400cf9210f702278",
       "embedding_record_count": 0,
       "id": "example.real-world-node-pack",
       "node_count": 84,
       "path": "nodepacks/real-world-examples/manifest.json",
+      "version": "1.0.0"
+    },
+    {
+      "descriptor_count": 0,
+      "digest": "sha256:b9a5277bdad59c0053599055dceb4036a539cc808c726a15ce436a7b1d56d7bd",
+      "embedding_record_count": 0,
+      "id": "example.extended-arena-node-pack",
+      "node_count": 62,
+      "path": "nodepacks/extended-arena/manifest.json",
       "version": "1.0.0"
     }
   ],
   "templates": [
     {
       "atomic_slot_count": 18,
-      "digest": "sha256:07aaea6f78894a4341c90cbbc6235bd336823f5b779b2161fc61b875c912d5c5",
+      "digest": "sha256:dbab137c9db1b8e17a13373c078c330e186cf94f9248b39fe5b827dab9d5d462",
       "domains": [
         "software.backend",
         "software.api"
@@ -44,7 +53,7 @@
     },
     {
       "atomic_slot_count": 18,
-      "digest": "sha256:b917be6ebd64b9216bb88e47b8850d6a54465b042c9771356e0969ca69c76e69",
+      "digest": "sha256:892fa5c7ba06de4c527a29200f2c5e4388a272e9437e6ef7b05917adb62d1376",
       "domains": [
         "data-engineering.batch"
       ],
@@ -59,7 +68,7 @@
     },
     {
       "atomic_slot_count": 17,
-      "digest": "sha256:8ddd0340d47a59e1802bfc59f722fc9d3d49da676c613829f9ea2b83a5568593",
+      "digest": "sha256:be54a85020462a93190215158575de38a0b1eaa9de44e68a23564dee5043b477",
       "domains": [
         "business.customer-support",
         "software.workflow"
@@ -75,7 +84,7 @@
     },
     {
       "atomic_slot_count": 15,
-      "digest": "sha256:e01519d3899963b2a68ffd94214baea75b2018556b010dee3074117a6726d239",
+      "digest": "sha256:b255b753590d3d345d577497fbe0eb266e83e12743f144378007f026e0fd7947",
       "domains": [
         "data-engineering.quality",
         "data-management.entity"
@@ -91,7 +100,7 @@
     },
     {
       "atomic_slot_count": 14,
-      "digest": "sha256:411f1d15260bc94e659578cad0b968cd14d1647fadef5bb1602983f24a63c277",
+      "digest": "sha256:21aa45b052a79e3bbcde561205939223c38e0395a08c5c99e24b4937f319dc4d",
       "domains": [
         "software.delivery",
         "operations.deployment"
@@ -107,7 +116,7 @@
     },
     {
       "atomic_slot_count": 18,
-      "digest": "sha256:b8722b789b01f15df4cbeabc6b3c89b185003c24b11bab040f6eb08b70367eaf",
+      "digest": "sha256:daa514b8a9a78fad07149f624d465d942ce327375a9e0e5ea3575da5540a7eea",
       "domains": [
         "data-engineering.documents",
         "ai.document-intelligence"
@@ -123,7 +132,7 @@
     },
     {
       "atomic_slot_count": 17,
-      "digest": "sha256:40aced457e55c5fe531b19b0ae6d51b92ee4bdc3a26788aa2ee5d0572400ba5c",
+      "digest": "sha256:01a53166495c015b35e5143131c6afe6f68dba2e8bf1d9802771303cfc24702a",
       "domains": [
         "software.event-driven",
         "software.distributed"
@@ -139,7 +148,7 @@
     },
     {
       "atomic_slot_count": 18,
-      "digest": "sha256:84df49e59e1d64f90360c36474a14503f9485293d3d79b96fb23c43cf72762d2",
+      "digest": "sha256:ed1ac1a26c37b96f2a162949de9e3d5219d5d3fdba7f5802e34e8b8c85ee0296",
       "domains": [
         "media.image-processing",
         "ai.computer-vision"
@@ -155,7 +164,7 @@
     },
     {
       "atomic_slot_count": 18,
-      "digest": "sha256:ed93958327a9101018ea09e9acb73c05b66d7e3ac906b7606f150c06aed23a59",
+      "digest": "sha256:1ce5bd9ac87a85028426339cbd0fd9c3ab2abfa9171ef4b12873b55a11e00273",
       "domains": [
         "security.incident-response",
         "operations.reliability"
@@ -171,7 +180,7 @@
     },
     {
       "atomic_slot_count": 17,
-      "digest": "sha256:0300598486e6e10b66516da7d325f9b1769f21f235fe45129e78b7fc77b6ecb8",
+      "digest": "sha256:b083a7d899fda8d9e933779f26838873bf5ea576fa96c0066c855b85a54724ed",
       "domains": [
         "operations.infrastructure",
         "software.delivery"
@@ -187,7 +196,7 @@
     },
     {
       "atomic_slot_count": 27,
-      "digest": "sha256:e205b4dcb731090c21806f5914e9fa55ad9a08eb15f1ebbc5cfd91ac96950ec1",
+      "digest": "sha256:88aa4f982ccf27ff814d33ff49e595caf977a4e3eb0b9fa5558a1e9558636c99",
       "domains": [
         "machine-learning.tabular",
         "competition.kaggle"
@@ -203,7 +212,7 @@
     },
     {
       "atomic_slot_count": 14,
-      "digest": "sha256:2f65c44b8e94600f29877badf8887c402a5e9a22c6f12b44496a5311f8346d4b",
+      "digest": "sha256:1b6244544a18887f507cb5b140770a5e00f9701d409c80d82c14ea2439e602e5",
       "domains": [
         "software.application",
         "security.identity"
@@ -219,7 +228,7 @@
     },
     {
       "atomic_slot_count": 22,
-      "digest": "sha256:f195acb4e2af17252b204b005890c9eeb3465140ae5d4468b1cfe093484ac601",
+      "digest": "sha256:f3cf011b2226679448df2aa8bd2642d2415a131261cc4c42bc0e6119553e0f55",
       "domains": [
         "computing.numerical",
         "machine-learning.linear-algebra"
@@ -235,7 +244,7 @@
     },
     {
       "atomic_slot_count": 13,
-      "digest": "sha256:7aadc30a605cabe400123180583ff81adb165c5acedbcccc70af91d49131e9f8",
+      "digest": "sha256:ef68e6ea76f3ee80f3fe7da7f1638a87ef89cd0e64cb56233d53aa3e3c35f971",
       "domains": [
         "software.quality"
       ],
@@ -250,7 +259,7 @@
     },
     {
       "atomic_slot_count": 19,
-      "digest": "sha256:020faa46f29d58e62aa0654d3b57c63b322a97a9d85d1e5ae646b5e46399e1bb",
+      "digest": "sha256:e3bc5e2295195eadc04b9dc73f893b4714471c691dde6b510c4dbfd0ace8c270",
       "domains": [
         "machine-learning.recommendation",
         "software.ranking"
@@ -266,7 +275,7 @@
     },
     {
       "atomic_slot_count": 20,
-      "digest": "sha256:0f28a71b8d47ef98cb90a3ba8e28c64bca6c1962cfc5fc1f5f6d878984261b50",
+      "digest": "sha256:192285ef9e8ddacda45e6f0e0a586201f1bdcfe7c57fb0c7d17dbab9badaf5f2",
       "domains": [
         "science.experiment",
         "research.reproducibility"
@@ -282,7 +291,7 @@
     },
     {
       "atomic_slot_count": 15,
-      "digest": "sha256:952ec43ee1d66f015e584dc965a2d8a2acbc5754c17d2478ca66b82b7ae567a2",
+      "digest": "sha256:14851b16a979f9589224481b94efdab776ddfcf55fa5682f240aabcbf01319fa",
       "domains": [
         "logistics.shipping",
         "software.event-driven"
@@ -298,7 +307,7 @@
     },
     {
       "atomic_slot_count": 20,
-      "digest": "sha256:e6c156c5821f8661d243cdd5d883a79048ca8bb7aa6665cdb96b1636fd24e76f",
+      "digest": "sha256:53c3d03dccda037eb13cc6992e0493c40b78cdcfd5517a1a45d32f69ef2e0da3",
       "domains": [
         "machine-learning.time-series"
       ],
@@ -313,7 +322,7 @@
     },
     {
       "atomic_slot_count": 19,
-      "digest": "sha256:23175c9c29f18bf77d4e1c78bba5c811ad107ef7dc03134ba0300fbd8de95aa9",
+      "digest": "sha256:e5847549aeb5a97f750e09b615d038011d97d7d229673d6c136b46e4d474b30f",
       "domains": [
         "software.web-automation",
         "ai.computer-use"

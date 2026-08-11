@@ -29,6 +29,12 @@ Name each value, version, schema digest, media type, units, and cardinality.
 Trace every required input to exactly one producer unless it is explicitly
 many/stream. Add visible adapter, merge, branch, or structured loop slots.
 
+Decide whether topology is fixed or experimental. If multiple graph shapes are
+meaningful, author a closed `TopologyFamily`; do not encode “maybe insert this
+step” as a hidden node parameter. For conditional execution, connect arm
+outputs to optional ports on an explicit merge. For iteration, use a child
+graph, finite `LoopPolicy`, and explicit state feedback.
+
 ### 4. Discover, do not invent, implementations
 
 Negotiate registry capabilities. Query exact/typed metadata first, then
@@ -47,6 +53,10 @@ identity. Keep optional descriptions and embeddings in sidecars.
 Run program and registry validation, then full slot×candidate admission. Fix
 semantic and authority defects before search. Never delete a rejection merely
 to make the matrix look cleaner.
+
+When strict operational metadata matters, bind `NodeCompatibilityProfile`
+sidecars and reject ordering, event-time, classification, state, secret,
+hardware, residency, or compensation incompatibilities before execution.
 
 ### 7. Freeze a baseline
 
@@ -100,6 +110,12 @@ unvisited space. Avoid claims not supported by real execution.
   failure classes as well as mean performance.
 - **Population DAG:** retain diverse seeds, mutations, crossovers, negative
   outcomes, and ancestry instead of overwriting one incumbent branch.
+- **Topology family:** make graph-shape alternatives explicit, content-distinct,
+  compiler-valid programs and account for routes skipped with their topology.
+- **Structured lowering:** compile composites and bounded loops into inspectable
+  namespaced DAGs before admission; retain the lowering receipt.
+- **Exact resume:** rehydrate only an identity-matching topological prefix; do
+  not infer that an old checkpoint is close enough.
 
 ## Anti-patterns and required response
 
@@ -121,11 +137,16 @@ unvisited space. Avoid claims not supported by real execution.
 | In-process adapter called a sandbox | Declared policy is mistaken for enforced containment | Label it trusted-local or install an enforcing runtime adapter |
 | Candidate-readable hidden evaluator | Read-only is confused with confidential | Move evaluator and hidden cases into a separate trust domain |
 | Generated child inherits parent validity | Mutation can change every contract | Quarantine and compile the complete child as a new candidate |
+| Conditional arm feeds a required sink | Inactive arm creates a missing runtime value | Use a compatible guard or optional-port merge |
+| Loop encoded as a backward edge | Bound, state, effects, and replay are ambiguous | Lower an explicit bounded child graph |
+| Graph rewrite hidden in optimizer | Search silently changes program meaning | Publish a topology variant with parent/operator lineage |
+| Local checkpoint called exactly-once | Filesystem durability lacks distributed fencing and sink semantics | State the local boundary and add a real scheduler adapter |
 
 ## Minimum commands
 
 ```bash
 solutiongraph doctor
+solutiongraph conformance
 solutiongraph verify --catalog-root catalog
 solutiongraph catalog export --output catalog
 pytest tests/test_solutiongraph*.py -q

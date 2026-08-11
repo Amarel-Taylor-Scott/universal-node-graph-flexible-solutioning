@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stream-window-policy.schema.json",
+  "title": "SolutionGraph Stream Window Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stream_model_version", "id", "size", "slide", "watermark_delay", "allowed_lateness", "early_trigger_count", "accumulation"],
+  "properties": {
+    "stream_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "size": {"type": "number", "exclusiveMinimum": 0},
+    "slide": {"type": "number", "exclusiveMinimum": 0},
+    "watermark_delay": {"type": "number", "minimum": 0},
+    "allowed_lateness": {"type": "number", "minimum": 0},
+    "early_trigger_count": {"type": ["integer", "null"], "minimum": 1},
+    "accumulation": {"enum": ["accumulating", "discarding"]}
+  }
+}

@@ -7,6 +7,7 @@ unaccepted outcome into a successful one.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from math import ceil, isfinite
 
@@ -169,6 +170,121 @@ def plan_successive_halving(
             )
         )
     return tuple(decisions)
+
+
+@dataclass(frozen=True)
+class FidelityRung:
+    resource: float
+    observations: tuple[TrialObservation, ...]
+    decisions: tuple[PromotionDecision, ...]
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "resource": self.resource,
+            "observations": [
+                {
+                    "plan_digest": item.plan_digest,
+                    "resource": item.resource,
+                    "metric": item.metric,
+                    "accepted": item.accepted,
+                    "complete": item.complete,
+                    "failure_class": item.failure_class,
+                }
+                for item in self.observations
+            ],
+            "decisions": [item.to_dict() for item in self.decisions],
+        }
+
+
+@dataclass(frozen=True)
+class SuccessiveHalvingRun:
+    policy: SuccessiveHalvingPolicy
+    rungs: tuple[FidelityRung, ...]
+    finalist_plan_digests: tuple[str, ...]
+    consumed_resource: float
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "policy_id": self.policy.id,
+            "rungs": [item.to_dict() for item in self.rungs],
+            "finalist_plan_digests": list(self.finalist_plan_digests),
+            "consumed_resource": self.consumed_resource,
+        }
+
+
+def run_successive_halving(
+    plan_digests: tuple[str, ...],
+    policy: SuccessiveHalvingPolicy,
+    evaluator: Callable[[str, float], TrialObservation],
+) -> SuccessiveHalvingRun:
+    """Execute every promotion rung through a caller-supplied trial evaluator."""
+    problems = policy.validate()
+    if not plan_digests:
+        problems.append("plan_digests must not be empty")
+    if len(plan_digests) != len(set(plan_digests)):
+        problems.append("plan_digests must be unique")
+    if any(not DIGEST_RE.fullmatch(digest) for digest in plan_digests):
+        problems.append("plan_digests must contain sha256 digests")
+    if problems:
+        raise ValueError("invalid successive-halving run: " + "; ".join(problems))
+
+    active = tuple(sorted(plan_digests))
+    resource = policy.min_resource
+    rungs: list[FidelityRung] = []
+    consumed = 0.0
+    finalists: tuple[str, ...] = ()
+    while active:
+        observations: list[TrialObservation] = []
+        for digest in active:
+            observation = evaluator(digest, resource)
+            observation_problems = observation.validate(
+                f"observation.{digest.removeprefix('sha256:')[:12]}"
+            )
+            if observation_problems:
+                raise ValueError(
+                    "trial evaluator returned an invalid observation: "
+                    + "; ".join(observation_problems)
+                )
+            if observation.plan_digest != digest or observation.resource != resource:
+                raise ValueError(
+                    "trial evaluator changed the requested plan digest or resource"
+                )
+            observations.append(observation)
+            consumed += resource
+        decisions = plan_successive_halving(tuple(observations), policy)
+        rungs.append(FidelityRung(resource, tuple(observations), decisions))
+        eligible = tuple(
+            observation.plan_digest
+            for observation in sorted(
+                observations,
+                key=lambda item: (
+                    -item.metric if policy.direction == "maximize" else item.metric,
+                    item.plan_digest,
+                ),
+            )
+            if observation.complete
+            and (observation.accepted or not policy.require_accepted)
+        )
+        if resource >= policy.max_resource:
+            finalists = eligible
+            break
+        active = tuple(
+            decision.plan_digest for decision in decisions if decision.promoted
+        )
+        if not active:
+            finalists = ()
+            break
+        next_resource = decisions[0].to_resource
+        if next_resource <= resource:
+            finalists = eligible
+            break
+        resource = next_resource
+    return SuccessiveHalvingRun(
+        policy=policy,
+        rungs=tuple(rungs),
+        finalist_plan_digests=finalists,
+        consumed_resource=consumed,
+    )
 
 
 @dataclass(frozen=True)

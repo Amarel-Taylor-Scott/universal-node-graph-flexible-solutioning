@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "compatibility-catalog.schema.json",
+  "title": "SolutionGraph Compatibility Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["compatibility_model_version", "id", "version", "profiles"],
+  "properties": {
+    "compatibility_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "profiles": {
+      "type": "array",
+      "items": {"$ref": "node-compatibility-profile.schema.json"}
+    }
+  }
+}

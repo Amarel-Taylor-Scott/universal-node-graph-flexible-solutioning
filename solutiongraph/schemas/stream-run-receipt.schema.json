@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stream-run-receipt.schema.json",
+  "title": "SolutionGraph Stream Run Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["stream_model_version", "id", "policy_digest", "processor_digest", "input_event_count", "accepted_event_count", "late_accepted_count", "too_late_count", "emission_count", "final_watermark", "dropped_event_ids"],
+  "properties": {
+    "stream_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "policy_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "processor_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "input_event_count": {"type": "integer", "minimum": 0},
+    "accepted_event_count": {"type": "integer", "minimum": 0},
+    "late_accepted_count": {"type": "integer", "minimum": 0},
+    "too_late_count": {"type": "integer", "minimum": 0},
+    "emission_count": {"type": "integer", "minimum": 0},
+    "final_watermark": {"type": ["number", "string"]},
+    "dropped_event_ids": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/id"}}
+  }
+}

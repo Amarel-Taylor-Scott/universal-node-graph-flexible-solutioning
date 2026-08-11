@@ -131,7 +131,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -148,6 +148,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -191,6 +194,9 @@
         "success_contract": "Define source identities, ownership, cadence, and access contracts and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -234,6 +240,9 @@
         "success_contract": "Define output schema, semantics, freshness, and consumers and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -277,6 +286,9 @@
         "success_contract": "Define quality, latency, recovery, and retention objectives and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -320,6 +332,9 @@
         "success_contract": "Extract source data using bounded incremental or full reads and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -363,6 +378,9 @@
         "success_contract": "Validate expected partitions, counts, checksums, and freshness and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -406,6 +424,9 @@
         "success_contract": "Capture immutable source, schema, and extraction provenance and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -449,6 +470,9 @@
         "success_contract": "Normalize types, names, null semantics, and units and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -492,6 +516,9 @@
         "success_contract": "Apply versioned deterministic business transformations and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -535,6 +562,9 @@
         "success_contract": "Join sources with declared keys, cardinality, and loss accounting and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -578,6 +608,9 @@
         "success_contract": "Aggregate at declared grains with reconciliation checks and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"
@@ -621,6 +654,9 @@
         "success_contract": "Validate schema, uniqueness, referential, and business constraints and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"
@@ -664,6 +700,9 @@
         "success_contract": "Detect source, schema, distribution, and volume drift and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"
@@ -707,6 +746,9 @@
         "success_contract": "Reconcile source-to-output counts, balances, and rejects and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"
@@ -750,6 +792,9 @@
         "success_contract": "Write outputs atomically in the declared storage contract and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"
@@ -793,6 +838,9 @@
         "success_contract": "Publish catalog, lineage, quality, and ownership metadata and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"
@@ -836,6 +884,9 @@
         "success_contract": "Emit idempotent availability or failure events and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.operate"
@@ -879,6 +930,9 @@
         "success_contract": "Record inputs, route, code, environment, metrics, and outcomes and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.operate"

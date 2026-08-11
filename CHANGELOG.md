@@ -4,6 +4,54 @@ All notable changes to this proof of concept are documented here.
 
 ## Unreleased
 
+## 0.5.0 — 2026-08-10
+
+### Added
+
+- Semantic model 0.2 data-dependent activation, exactly receipted skipped
+  slots, implicit activation dependencies, and compiler diagnostics that reject
+  unsafe conditional edges or required graph outputs without explicit merges.
+- Deterministic composite and bounded-loop lowering with strict typed/effect
+  boundaries, explicit finite feedback policies, namespaced atomic slots, and
+  content-addressed lowering receipts.
+- Versioned topology families plus search over alternative compiler-valid graph
+  shapes and node routes, with separate topology/route limits and complete
+  evaluated, constrained, skipped, and unvisited accounting.
+- Exact local completed-prefix checkpoints and resume, atomic/fsync file storage,
+  content-addressed output rehydration, and strict plan/program/registry/
+  admission/input/environment/case/seed identity matching.
+- A finite event-time stream conformance adapter with tumbling/sliding windows,
+  watermarks, allowed lateness, early/on-time/late/final emissions, retraction
+  links, and explicit too-late drops.
+- A reference saga runner with ordinary effectful action/compensation nodes,
+  reverse-order recovery, idempotency keys, and uncompensated-failure evidence.
+- Executed successive-halving allocation with caller evaluation, exact rung and
+  promotion records, finalists, and resource accounting.
+- Exact node compatibility sidecars for ordering, time, nullability, data
+  classification, state, cache, secrets, hardware, residency, and compensation.
+- W3C PROV, OpenLineage, and in-toto/SLSA provenance projections plus CLI export,
+  checkpoint inspection, and an eight-mechanism installed-wheel conformance CLI.
+- Ten additional executable Arena programs covering contact verification, web
+  change monitoring, transaction reconciliation, PII redaction, schema
+  migration, incident triage, dependency assurance, recommendation ranking,
+  scientific comparison, and numerical solving.
+- A 62-node extended Arena pack. The full fixture suite now has 23 programs,
+  146 executable nodes, and 51 declared routes: 32 accepted and 19 intentional
+  negative controls across 20 of 24 Arena task families.
+- A strictly left-to-right interactive DAG explorer with nested submatrices,
+  every visible candidate per atomic step, structured-control labels, route
+  overlays, filters, contract inspection, provenance, and feedback.
+- Five focused protocol guides and two coding-harness skills for structured
+  workflows and topology families.
+
+### Changed
+
+- Bumped the distribution and `solutiongraph` import version to 0.5.0 and the
+  semantic model to 0.2.
+- Expanded the deterministic catalog to three node packs and 210 documents,
+  registered 48 strict JSON Schemas, and integrated advanced conformance into
+  release verification and clean-wheel CI.
+
 ## 0.4.0 — 2026-08-10
 
 ### Added

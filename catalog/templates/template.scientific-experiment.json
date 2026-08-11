@@ -144,7 +144,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -161,6 +161,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.question"
@@ -204,6 +207,9 @@
         "success_contract": "Define scope, population, constructs, and intended inference and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.question"
@@ -247,6 +253,9 @@
         "success_contract": "State falsifiable hypotheses and alternative explanations and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.question"
@@ -290,6 +299,9 @@
         "success_contract": "Define primary, secondary, and safety outcomes before observation and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -333,6 +345,9 @@
         "success_contract": "Select experimental or observational design and assignment mechanism and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -376,6 +391,9 @@
         "success_contract": "Define sampling frame, inclusion, exclusion, and recruitment and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -419,6 +437,9 @@
         "success_contract": "Plan sample size, precision, stopping, and multiplicity and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.design"
@@ -462,6 +483,9 @@
         "success_contract": "Freeze hypotheses, exclusions, transformations, and analysis plan and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -505,6 +529,9 @@
         "success_contract": "Calibrate instruments, annotators, or measurement systems and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -548,6 +575,9 @@
         "success_contract": "Collect observations under the approved protocol and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -591,6 +621,9 @@
         "success_contract": "Monitor deviations, missingness, safety, and data integrity and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -634,6 +667,9 @@
         "success_contract": "Validate measurements, exclusions, and preprocessing provenance and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -677,6 +713,9 @@
         "success_contract": "Estimate effects or associations with uncertainty and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -720,6 +759,9 @@
         "success_contract": "Check model, design, measurement, and missing-data assumptions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -763,6 +805,9 @@
         "success_contract": "Run declared robustness, subgroup, and alternative-specification analyses and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.reproduce"
@@ -806,6 +851,9 @@
         "success_contract": "Reexecute from immutable data, code, environment, and seeds and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.reproduce"
@@ -849,6 +897,9 @@
         "success_contract": "Apply independent methodological and domain review and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.reproduce"
@@ -892,6 +943,9 @@
         "success_contract": "Attempt internal or external replication when feasible and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"
@@ -935,6 +989,9 @@
         "success_contract": "Assemble data lineage, analysis, diagnostics, and decision receipts and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"
@@ -978,6 +1035,9 @@
         "success_contract": "Report estimates, uncertainty, deviations, limitations, and null findings and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.publish"

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "topology-search-report.schema.json",
+  "title": "SolutionGraph Topology Search Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "topology_model_version", "family_digest", "registry_digest",
+    "total_topologies", "searched_topologies", "total_cartesian_routes",
+    "evaluated_routes", "constraint_eliminated_routes",
+    "heuristic_skipped_routes", "topology_skipped_routes", "unvisited_routes",
+    "complete", "optimality_proven", "evaluation_coverage", "per_variant",
+    "proposals"
+  ],
+  "properties": {
+    "topology_model_version": {"const": "0.1"},
+    "family_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "total_topologies": {"type": "integer", "minimum": 0},
+    "searched_topologies": {"type": "integer", "minimum": 0},
+    "total_cartesian_routes": {"type": "integer", "minimum": 0},
+    "evaluated_routes": {"type": "integer", "minimum": 0},
+    "constraint_eliminated_routes": {"type": "integer", "minimum": 0},
+    "heuristic_skipped_routes": {"type": "integer", "minimum": 0},
+    "topology_skipped_routes": {"type": "integer", "minimum": 0},
+    "unvisited_routes": {"type": "integer", "minimum": 0},
+    "complete": {"type": "boolean"},
+    "optimality_proven": {"type": "boolean"},
+    "evaluation_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+    "per_variant": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["variant_id", "search"],
+        "properties": {
+          "variant_id": {"$ref": "common.schema.json#/$defs/id"},
+          "search": {"$ref": "search-report.schema.json"}
+        }
+      }
+    },
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "variant_id", "program_digest", "selection", "route_log_score",
+          "topology_log_weight", "log_score", "contributions"
+        ],
+        "properties": {
+          "variant_id": {"$ref": "common.schema.json#/$defs/id"},
+          "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "selection": {
+            "type": "object",
+            "propertyNames": {"$ref": "common.schema.json#/$defs/id"},
+            "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}
+          },
+          "route_log_score": {"type": "number"},
+          "topology_log_weight": {"type": "number"},
+          "log_score": {"type": "number"},
+          "contributions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["factor", "value"],
+              "properties": {
+                "factor": {"type": "string", "minLength": 1},
+                "value": {"type": "number"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

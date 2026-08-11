@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "conformance-result.schema.json",
+  "title": "SolutionGraph Advanced Conformance Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["conformance_model_version", "ok", "check_count", "checks"],
+  "properties": {
+    "conformance_model_version": {"const": "0.1"},
+    "ok": {"type": "boolean"},
+    "check_count": {"type": "integer", "minimum": 0},
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "passed", "details"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "passed": {"type": "boolean"},
+          "details": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

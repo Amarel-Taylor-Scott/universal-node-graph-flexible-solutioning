@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "saga-result.schema.json",
+  "title": "SolutionGraph Saga Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["saga_model_version", "id", "outcome", "state", "attempts", "committed_steps", "compensated_steps", "uncompensated_steps"],
+  "properties": {
+    "saga_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "outcome": {"enum": ["committed", "compensated", "compensation_failed"]},
+    "state": true,
+    "attempts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step_id", "phase", "node_id", "implementation_digest", "outcome", "input_digest", "idempotency_key", "output_digest", "failure_class", "message"],
+        "properties": {
+          "step_id": {"$ref": "common.schema.json#/$defs/id"},
+          "phase": {"enum": ["action", "compensation"]},
+          "node_id": {"$ref": "common.schema.json#/$defs/id"},
+          "implementation_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "outcome": {"enum": ["succeeded", "failed"]},
+          "input_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "idempotency_key": {"type": "string", "minLength": 1},
+          "output_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+          "failure_class": {"oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]},
+          "message": {"type": "string"}
+        }
+      }
+    },
+    "committed_steps": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "compensated_steps": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "uncompensated_steps": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/id"}}
+  }
+}

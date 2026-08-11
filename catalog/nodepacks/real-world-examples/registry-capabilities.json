@@ -34,14 +34,14 @@
       "supports_scores": false
     }
   ],
-  "registry_digest": "sha256:b88c792d7b4b9419a873f280c118f0a7aeef3add255f8e320697da5aafb6a6be",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
   "registry_id": "example.real-world-registry",
   "registry_version": "1.0.0",
   "schemas": [
     {
       "name": "node-spec",
       "versions": [
-        "0.1"
+        "0.2"
       ]
     },
     {

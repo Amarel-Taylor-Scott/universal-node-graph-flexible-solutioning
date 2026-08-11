@@ -25,7 +25,7 @@
     "reference.maturity": "demonstration"
   },
   "node_id": "reference.read-local-json",
-  "node_spec_digest": "sha256:f93478ea76df6882900f57b7ebc81ed739f66d10227627dd8adc7ee4f18d1197",
+  "node_spec_digest": "sha256:69d5bca34bb3316764c7cb4d5b98d52c7bfb4d35ad174579b47cae89b77ac635",
   "node_version": "1.0.0",
   "ports": [
     {

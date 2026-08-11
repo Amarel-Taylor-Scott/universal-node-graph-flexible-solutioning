@@ -143,7 +143,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -160,6 +160,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -203,6 +206,9 @@
         "success_contract": "Define entities, target, timestamps, frequency, and observation semantics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -246,6 +252,9 @@
         "success_contract": "Define forecast origin, horizon, update cadence, and latency and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -289,6 +298,9 @@
         "success_contract": "Define point, probabilistic, tail, and business evaluation metrics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -332,6 +344,9 @@
         "success_contract": "Validate ordering, frequency, gaps, duplicates, and timezone semantics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -375,6 +390,9 @@
         "success_contract": "Detect trend, seasonality, changepoints, intermittency, and regimes and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -418,6 +436,9 @@
         "success_contract": "Audit future, revision, entity, and aggregation leakage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -461,6 +482,9 @@
         "success_contract": "Repair or represent missing, duplicated, and anomalous observations and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -504,6 +528,9 @@
         "success_contract": "Align known-future and observed covariates to forecast origins and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -547,6 +574,9 @@
         "success_contract": "Generate lag, rolling, calendar, hierarchy, and regime features and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -590,6 +620,9 @@
         "success_contract": "Define rolling or expanding backtests representative of deployment and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -633,6 +666,9 @@
         "success_contract": "Fit naive and seasonal baselines that establish a floor and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -676,6 +712,9 @@
         "success_contract": "Fit admitted statistical and state-space candidates and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -719,6 +758,9 @@
         "success_contract": "Fit admitted feature-based machine-learning candidates and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -762,6 +804,9 @@
         "success_contract": "Fit admitted deep temporal candidates when justified and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.combine"
@@ -805,6 +850,9 @@
         "success_contract": "Generate complete origin-safe validation predictions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.combine"
@@ -848,6 +896,9 @@
         "success_contract": "Calibrate uncertainty intervals and coverage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.combine"
@@ -891,6 +942,9 @@
         "success_contract": "Reconcile hierarchical or grouped series constraints and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.combine"
@@ -934,6 +988,9 @@
         "success_contract": "Combine complementary forecasts using held-out evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -977,6 +1034,9 @@
         "success_contract": "Stress missingness, shifts, sparse history, and extreme events and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"

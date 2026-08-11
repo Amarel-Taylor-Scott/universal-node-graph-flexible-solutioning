@@ -60,14 +60,14 @@
       "supports_scores": false
     }
   ],
-  "registry_digest": "sha256:6dfb81264cb75d073ac0cdd50c17b7613599cd1797b1e69ca87cd41dd0033e29",
+  "registry_digest": "sha256:49975640d245aa9c5d4c0d2c5cbc5947e86077481bb9d0b359205c2923f16539",
   "registry_id": "reference.core-registry",
   "registry_version": "1.0.0",
   "schemas": [
     {
       "name": "node-spec",
       "versions": [
-        "0.1"
+        "0.2"
       ]
     },
     {

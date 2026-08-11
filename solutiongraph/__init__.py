@@ -7,11 +7,14 @@ that are intended to apply to any typed graph-programming problem.
 from solutiongraph.adaptive import (
     EarlyStopDecision,
     EarlyStoppingPolicy,
+    FidelityRung,
     MetricObservation,
     PromotionDecision,
     SuccessiveHalvingPolicy,
+    SuccessiveHalvingRun,
     TrialObservation,
     plan_successive_halving,
+    run_successive_halving,
     should_stop_early,
 )
 from solutiongraph.arena import (
@@ -40,7 +43,19 @@ from solutiongraph.campaign import (
     CandidateRecord,
     EvaluationBoundary,
 )
+from solutiongraph.compatibility import (
+    COMPATIBILITY_MODEL_VERSION,
+    CompatibilityCatalog,
+    NodeCompatibilityProfile,
+    PortSemantics,
+)
 from solutiongraph.compiler import Compiler
+from solutiongraph.conformance import (
+    CONFORMANCE_MODEL_VERSION,
+    ConformanceCheck,
+    ConformanceResult,
+    run_conformance_suite,
+)
 from solutiongraph.discovery import (
     DISCOVERY_PROTOCOL_VERSION,
     ArtifactReference,
@@ -60,6 +75,15 @@ from solutiongraph.discovery import (
     SearchDocument,
     descriptors_by_node,
     negotiate_registry,
+)
+from solutiongraph.durable import (
+    CHECKPOINT_MODEL_VERSION,
+    CheckpointOutput,
+    CheckpointStore,
+    ExecutionCheckpoint,
+    FileCheckpointStore,
+    MemoryCheckpointStore,
+    SlotCheckpoint,
 )
 from solutiongraph.errors import Diagnostic, ValidationError
 from solutiongraph.evidence import (
@@ -128,6 +152,21 @@ from solutiongraph.model import (
     canonical_json,
     sha256_digest,
 )
+from solutiongraph.provenance import (
+    PROVENANCE_MODEL_VERSION,
+    ProvenanceBundle,
+    export_provenance,
+    to_openlineage,
+    to_slsa_provenance,
+    to_w3c_prov,
+)
+from solutiongraph.saga import (
+    SAGA_MODEL_VERSION,
+    SagaAttemptReceipt,
+    SagaResult,
+    SagaRunner,
+    SagaStep,
+)
 from solutiongraph.scaffold import (
     SCAFFOLD_SCHEMA_VERSION,
     default_project_id,
@@ -159,6 +198,24 @@ from solutiongraph.solver import (
     UniversalSolver,
     get_solver_profile,
 )
+from solutiongraph.streaming import (
+    STREAM_MODEL_VERSION,
+    ReferenceStreamEngine,
+    StreamEmission,
+    StreamEvent,
+    StreamResult,
+    StreamRunReceipt,
+    WindowPolicy,
+)
+from solutiongraph.structured import (
+    STRUCTURED_MODEL_VERSION,
+    ExpansionRecord,
+    LoopPolicy,
+    LoweredProgram,
+    LoweringReceipt,
+    StructuredCompiler,
+    SubgraphCatalog,
+)
 from solutiongraph.subprocess_runtime import (
     SUBPROCESS_PROTOCOL_VERSION,
     SubprocessPythonRuntime,
@@ -179,13 +236,22 @@ from solutiongraph.templates import (
     TemplateCatalog,
     TemplateStage,
 )
+from solutiongraph.topology import (
+    TOPOLOGY_MODEL_VERSION,
+    TopologyFamily,
+    TopologyProposal,
+    TopologySearchBudget,
+    TopologySearchEngine,
+    TopologySearchReport,
+    TopologyVariant,
+)
 from solutiongraph.verification import (
     ReleaseVerification,
     RouteVerification,
     verify_reference_release,
 )
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 __all__ = [
     "SEMANTIC_MODEL_VERSION",
@@ -198,6 +264,14 @@ __all__ = [
     "SCAFFOLD_SCHEMA_VERSION",
     "ARENA_MODEL_VERSION",
     "SOLVER_MODEL_VERSION",
+    "CHECKPOINT_MODEL_VERSION",
+    "COMPATIBILITY_MODEL_VERSION",
+    "CONFORMANCE_MODEL_VERSION",
+    "PROVENANCE_MODEL_VERSION",
+    "SAGA_MODEL_VERSION",
+    "STREAM_MODEL_VERSION",
+    "STRUCTURED_MODEL_VERSION",
+    "TOPOLOGY_MODEL_VERSION",
     "ARENA_READINESS",
     "AdmittedSpace",
     "AdmissionDecision",
@@ -216,12 +290,18 @@ __all__ = [
     "Cardinality",
     "Compiler",
     "CircuitBreaker",
+    "CheckpointOutput",
+    "CheckpointStore",
+    "CompatibilityCatalog",
+    "ConformanceCheck",
+    "ConformanceResult",
     "Determinism",
     "Diagnostic",
     "DiscoveryQuery",
     "DiscoveryReceipt",
     "EarlyStopDecision",
     "EarlyStoppingPolicy",
+    "ExecutionCheckpoint",
     "Edge",
     "EvidenceLedger",
     "EvaluationBoundary",
@@ -235,6 +315,8 @@ __all__ = [
     "ExperimentResult",
     "ExperimentRunner",
     "FileArtifactStore",
+    "FileCheckpointStore",
+    "FidelityRung",
     "FailureMode",
     "FallbackRoute",
     "ForbiddenCombination",
@@ -250,6 +332,8 @@ __all__ = [
     "LinearTemplateBlueprint",
     "MetricObservation",
     "MemoryArtifactStore",
+    "MemoryCheckpointStore",
+    "NodeCompatibilityProfile",
     "NodeExecutionFailure",
     "NodeRunReceipt",
     "NodeDescriptor",
@@ -261,9 +345,12 @@ __all__ = [
     "PlanFallback",
     "Port",
     "PortMeaning",
+    "PortSemantics",
     "PromotionDecision",
     "ProgramGraph",
     "PythonRuntime",
+    "ProvenanceBundle",
+    "ReferenceStreamEngine",
     "ReferenceExecutor",
     "ReceiptSink",
     "Registry",
@@ -277,6 +364,10 @@ __all__ = [
     "RankedRoute",
     "RouteVerification",
     "RouteProposal",
+    "SagaAttemptReceipt",
+    "SagaResult",
+    "SagaRunner",
+    "SagaStep",
     "RunReceipt",
     "RuntimeAdapter",
     "RuntimeRegistry",
@@ -299,6 +390,13 @@ __all__ = [
     "SolutionTemplate",
     "SlotBlueprint",
     "StageBlueprint",
+    "StreamEmission",
+    "StreamEvent",
+    "StreamResult",
+    "StreamRunReceipt",
+    "StructuredCompiler",
+    "SubgraphCatalog",
+    "SuccessiveHalvingRun",
     "SuccessiveHalvingPolicy",
     "SlotKind",
     "ValidationError",
@@ -309,10 +407,22 @@ __all__ = [
     "UNIVERSAL_DAG_ARENA",
     "UniversalSolver",
     "StoredArtifact",
+    "SlotCheckpoint",
+    "ExpansionRecord",
+    "LoopPolicy",
+    "LoweredProgram",
+    "LoweringReceipt",
     "SubprocessPythonRuntime",
     "VerificationContext",
     "VerificationResult",
     "Verifier",
+    "WindowPolicy",
+    "TopologyFamily",
+    "TopologyProposal",
+    "TopologySearchBudget",
+    "TopologySearchEngine",
+    "TopologySearchReport",
+    "TopologyVariant",
     "callable_implementation_digest",
     "canonical_json",
     "build_reference_linear_template",
@@ -321,18 +431,24 @@ __all__ = [
     "default_project_id",
     "digest_bytes",
     "digest_value",
+    "export_provenance",
     "learn_observational_beliefs",
     "load_linear_blueprint",
     "get_solver_profile",
     "negotiate_registry",
     "plan_successive_halving",
+    "run_successive_halving",
     "pareto_front",
     "sha256_digest",
     "scaffold_project",
     "run_arena",
+    "run_conformance_suite",
     "solve_example",
     "should_stop_early",
     "store_value",
+    "to_openlineage",
+    "to_slsa_provenance",
+    "to_w3c_prov",
     "write_solution_template",
     "verify_reference_release",
 ]

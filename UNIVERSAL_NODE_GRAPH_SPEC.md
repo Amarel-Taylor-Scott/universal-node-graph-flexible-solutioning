@@ -1,7 +1,7 @@
 # Universal Node Graph Specification
 
-Status: research preview 0.1  
-Normative core package: `solutiongraph`  
+Status: research preview 0.2
+Normative core package: `solutiongraph`
 Concrete adapter and stress test: `browsergraph`
 
 This document defines a domain-neutral programming model in which a problem is
@@ -75,8 +75,24 @@ A semantic slot is one obligation in the program. It defines purpose, typed
 ports, success contract, required capabilities, allowed effects, and its place
 in a group/submatrix. A slot is not an implementation.
 
-Slot kinds in version 0.1 are `atomic`, `composite`, `branch`, `loop`, `map`,
+Slot kinds in version 0.2 are `atomic`, `composite`, `branch`, `loop`, `map`,
 `reduce`, and `barrier`. A composite slot references another semantic graph.
+
+A data-dependent slot MAY declare an activation source output and a nonempty
+set of string values. All three fields—source slot, source port, and values—are
+atomic: a partial activation rule is invalid. An inactive slot emits a
+`skipped` node receipt and no outputs. A conditional output MUST feed either a
+consumer whose guard implies the producer's guard or an optional input on an
+explicit merge. It MUST NOT directly provide a required graph output.
+
+`composite` and `loop` slots MUST reference a child graph. Before ordinary
+compilation, `StructuredCompiler` deterministically expands the child into
+namespaced atomic slots. A loop additionally requires an explicit finite
+iteration bound and feedback mapping for every child input. Loop-invariant
+values are carried explicitly in the state envelope; hidden captures are not
+allowed. `map`, `reduce`, and `barrier` remain semantic obligations whose
+runtime behavior is supplied by admitted nodes unless a future version defines
+a separate lowering protocol for them.
 
 Slots SHOULD be atomic enough that two candidates in the same slot are genuine
 substitutes. If candidates perform materially different sequences, permissions,
@@ -142,6 +158,16 @@ node with its own contract, cost, effects, tests, and receipts.
 Cardinality (`one`, `optional`, `many`, `stream`) is part of the ABI. Fan-in to a
 single-value port is invalid unless an explicit merge node exists.
 
+### 3.6 Topology family
+
+A topology family is a versioned collection of complete `ProgramGraph`
+alternatives that satisfy one task and success contract. Each variant declares
+its rationale, prior weight, optional parent, and explicit topology operators.
+Topology search MUST validate and admit every variant independently. Node-route
+counts, topology exclusions, heuristic skips, and unvisited space MUST be
+reported separately; an optimizer cannot smuggle an unvalidated graph rewrite
+inside a node-selection proposal.
+
 ## 4. Compilation
 
 A conforming compiler performs these passes in order:
@@ -149,21 +175,25 @@ A conforming compiler performs these passes in order:
 1. Validate the task and semantic graph schemas.
 2. Resolve all slots and ports and reject dangling references.
 3. Check port producer counts and nominal type compatibility.
-4. Reject cycles at the current level; require structured control nodes.
-5. Validate every node and candidate in the registry.
-6. Consume an immutable discovery-receipt-backed registry snapshot.
-7. Perform full admission for every slot and candidate in that snapshot.
-8. Emit an admission decision for every examined pair, including rejection reasons.
-9. Apply explicit n-ary configuration constraints.
-10. Require exactly one admitted candidate per slot for a concrete route.
-11. Freeze exact node versions, implementation digests, parameters, registry digest,
+4. Check activation sources and reject conditional outputs that can be absent
+   where a required value is promised.
+5. Reject cycles at the current level; require structured control nodes.
+6. Lower referenced composites and explicitly bounded loops when present.
+7. Validate every node and candidate in the registry.
+8. Consume an immutable discovery-receipt-backed registry snapshot.
+9. Perform full admission for every slot and candidate in that snapshot.
+10. Emit an admission decision for every examined pair, including rejection reasons.
+11. Apply explicit n-ary configuration constraints.
+12. Require exactly one admitted candidate per slot for a concrete route.
+13. Freeze exact node versions, implementation digests, parameters, registry digest,
     program digest, topology, and edges into a content-addressed plan.
 
 Compiler validity and optimizer profitability are separate functions. A route
 that compiles with a low score is valid. A route with a high score that fails a
 contract is invalid.
 
-The current `solutiongraph.Compiler` implements these passes for the 0.1 model.
+The current `solutiongraph.Compiler` and `StructuredCompiler` implement these
+passes for the 0.2 semantic model.
 Diagnostics use stable `UNG-*` codes and are collected before raising so humans
 and coding agents can correct multiple defects in one pass.
 
@@ -218,8 +248,9 @@ Required search modes are:
 - **Exhaustive search:** enumerate every feasible configuration without a hidden
   cap when the user supplies sufficient compute.
 
-The 0.1 implementation provides prior, beam, seeded sprout, successive-halving,
-patience-based early stopping, and exhaustive primitives. Exhaustive iteration
+The 0.2 implementation provides prior, beam, seeded sprout, executed
+successive-halving, patience-based early stopping, alternative-topology search,
+and exhaustive primitives. Exhaustive iteration
 is streaming through `SearchEngine.iter_exhaustive`. `SearchReport`
 records the Cartesian upper bound, evaluated routes, constraint-eliminated
 routes, heuristic-skipped routes, unvisited routes, belief revision, budget,

@@ -26,6 +26,12 @@ from solutiongraph.artifacts import (
     store_value,
 )
 from solutiongraph.compiler import Compiler
+from solutiongraph.durable import (
+    CheckpointOutput,
+    CheckpointStore,
+    ExecutionCheckpoint,
+    SlotCheckpoint,
+)
 from solutiongraph.evidence import NodeRunReceipt, RunReceipt
 from solutiongraph.model import (
     ID_RE,
@@ -459,6 +465,10 @@ class ReferenceExecutor:
         seed: int | None = None,
         belief_revision: str = "",
         run_id: str = "",
+        checkpoint_store: CheckpointStore | None = None,
+        resume: bool = False,
+        checkpoint_id: str = "",
+        clear_checkpoint_on_success: bool = True,
     ) -> ExecutionResult:
         """Execute one frozen plan after reconstructing and comparing it exactly."""
         policy_problems = policy.validate()
@@ -474,14 +484,33 @@ class ReferenceExecutor:
         self._validate_plan(plan, program, registry, space)
         self._validate_inputs(program, inputs)
         self._validate_authority(plan, registry, policy)
+        if resume and checkpoint_store is None:
+            raise ExecutionError("resume requires a checkpoint store")
 
         store = artifact_store or MemoryArtifactStore()
         started_at = _now()
         started_clock = perf_counter()
+        graph_input_digest = digest_value(inputs)
+        environment_digest = sha256_digest({
+            "executor": EXECUTOR_ID,
+            "python": platform.python_version(),
+            "platform": platform.platform(),
+            "runtimes": self.runtimes.identity_records(),
+        })
+        if not checkpoint_id:
+            key = sha256_digest({
+                "plan": plan.digest,
+                "case": task_case_id,
+                "seed": seed,
+                "input": graph_input_digest,
+            }).removeprefix("sha256:")[:16]
+            checkpoint_id = f"checkpoint.{program.id}.{key}"
         node_receipts: list[NodeRunReceipt] = []
         artifacts: dict[str, StoredArtifact] = {}
         slot_outputs: dict[tuple[str, str], Any] = {}
         actual_assignments: dict[str, str] = {}
+        completed_checkpoints: list[SlotCheckpoint] = []
+        restored_slots: set[str] = set()
         candidates_by_slot = _candidate_map(plan)
         node_map = registry.node_map()
         graph_inputs = {
@@ -496,8 +525,133 @@ class ReferenceExecutor:
         error_message = ""
         fallback_activations = 0
         retry_count = 0
+        skipped_count = 0
+        resumed_count = 0
+
+        def save_checkpoint(status: str, failure: str = "") -> None:
+            if checkpoint_store is None:
+                return
+            checkpoint_store.save(ExecutionCheckpoint(
+                id=checkpoint_id,
+                plan_digest=plan.digest,
+                program_digest=program.digest,
+                registry_digest=registry.digest,
+                admitted_space_digest=space.digest,
+                input_digest=graph_input_digest,
+                environment_digest=environment_digest,
+                task_case_id=task_case_id,
+                seed=seed,
+                status=status,
+                completed_slots=tuple(completed_checkpoints),
+                failure_class=failure,
+            ))
+
+        if checkpoint_store is not None:
+            existing = checkpoint_store.load(checkpoint_id)
+            if existing is not None and not resume:
+                raise ExecutionError(
+                    f"checkpoint {checkpoint_id} already exists; resume it or choose another id"
+                )
+            if resume:
+                if existing is None:
+                    raise ExecutionError(f"checkpoint {checkpoint_id} does not exist")
+                try:
+                    existing.assert_matches(
+                        plan_digest=plan.digest,
+                        program_digest=program.digest,
+                        registry_digest=registry.digest,
+                        admitted_space_digest=space.digest,
+                        input_digest=graph_input_digest,
+                        environment_digest=environment_digest,
+                        task_case_id=task_case_id,
+                        seed=seed,
+                    )
+                except ValueError as exc:
+                    raise ExecutionError(str(exc)) from exc
+                checkpoint_slots = tuple(
+                    item.slot_id for item in existing.completed_slots
+                )
+                if checkpoint_slots != plan.topological_order[: len(checkpoint_slots)]:
+                    raise ExecutionError(
+                        "checkpoint completed slots are not an exact topological prefix"
+                    )
+                primary_by_slot = {
+                    binding.slot_id: binding.candidate_id for binding in plan.bindings
+                }
+                fallback_by_slot = {
+                    fallback.slot_id: {
+                        item.candidate_id
+                        for item in plan.fallbacks
+                        if item.slot_id == fallback.slot_id
+                    }
+                    for fallback in plan.fallbacks
+                }
+                for item in existing.completed_slots:
+                    legal_candidates = {
+                        primary_by_slot[item.slot_id],
+                        *fallback_by_slot.get(item.slot_id, set()),
+                    }
+                    if item.candidate_id not in legal_candidates:
+                        raise ExecutionError(
+                            f"checkpoint candidate is not frozen for slot {item.slot_id}"
+                        )
+                    for output in item.outputs:
+                        try:
+                            value = output.load(store)
+                        except (OSError, ValueError) as exc:
+                            raise ExecutionError(
+                                f"checkpoint artifact is unavailable for "
+                                f"{item.slot_id}.{output.name}: {exc}"
+                            ) from exc
+                        slot_outputs[(item.slot_id, output.name)] = value
+                        artifacts.setdefault(output.artifact.digest, output.artifact)
+                    node_receipts.append(item.receipt)
+                    actual_assignments[item.slot_id] = item.candidate_id
+                    completed_checkpoints.append(item)
+                    restored_slots.add(item.slot_id)
+                    resumed_count += 1
 
         for slot_id in plan.topological_order:
+            if slot_id in restored_slots:
+                continue
+            slot = next(item for item in program.slots if item.id == slot_id)
+            if slot.activation_slot:
+                activation = slot_outputs.get(
+                    (slot.activation_slot, slot.activation_port)
+                )
+                if activation not in slot.activation_values:
+                    binding = candidates_by_slot[slot_id][0]
+                    node = node_map[(binding.node_id, binding.node_version)]
+                    adapter = self.runtimes.resolve(node.runtime)
+                    timestamp = _now()
+                    node_receipts.append(NodeRunReceipt(
+                        slot_id=slot_id,
+                        candidate_id=binding.candidate_id,
+                        outcome="skipped",
+                        started_at=timestamp,
+                        completed_at=timestamp,
+                        metrics={"activated": 0.0},
+                        attempt=1,
+                        node_id=node.id,
+                        implementation_digest=node.implementation_digest,
+                        runtime=node.runtime,
+                        runtime_adapter=getattr(adapter, "adapter_id", ""),
+                        isolation=getattr(adapter, "isolation", "unknown"),
+                        input_digest=digest_value({
+                            "activation": activation,
+                            "allowed": list(slot.activation_values),
+                        }),
+                    ))
+                    actual_assignments[slot_id] = binding.candidate_id
+                    skipped_count += 1
+                    completed_checkpoints.append(SlotCheckpoint(
+                        slot_id=slot_id,
+                        candidate_id=binding.candidate_id,
+                        outputs=(),
+                        receipt=node_receipts[-1],
+                    ))
+                    save_checkpoint("running")
+                    continue
             candidate_inputs = self._slot_inputs(
                 slot_id,
                 program,
@@ -567,6 +721,28 @@ class ReferenceExecutor:
                             slot_outputs[(slot_id, name)] = value
                         actual_assignments[slot_id] = binding.candidate_id
                         self.circuit_breaker.record_success(binding.candidate_id)
+                        completed_checkpoints.append(SlotCheckpoint(
+                            slot_id=slot_id,
+                            candidate_id=binding.candidate_id,
+                            outputs=tuple(
+                                CheckpointOutput(
+                                    name=name,
+                                    artifact=produced[name],
+                                    value_kind=(
+                                        "bytes"
+                                        if isinstance(values[name], bytes)
+                                        else (
+                                            "text"
+                                            if isinstance(values[name], str)
+                                            else "json"
+                                        )
+                                    ),
+                                )
+                                for name in sorted(produced)
+                            ),
+                            receipt=node_receipts[-1],
+                        ))
+                        save_checkpoint("running")
                         failure_class = ""
                         error_message = ""
                         completed = True
@@ -638,6 +814,9 @@ class ReferenceExecutor:
         outcome = "failed" if failure_class else "completed_unverified"
         verification_metrics: Mapping[str, float] = {}
 
+        if failure_class:
+            save_checkpoint("failed", failure_class)
+
         if not failure_class:
             for item in program.outputs:
                 value = slot_outputs[(item.source_slot, item.source_port)]
@@ -675,6 +854,8 @@ class ReferenceExecutor:
             "node_attempts": float(len(node_receipts)),
             "fallback_activations": float(fallback_activations),
             "retries": float(retry_count),
+            "skipped_slots": float(skipped_count),
+            "resumed_slots": float(resumed_count),
             **{name: float(value) for name, value in verification_metrics.items()},
         }
         if not run_id:
@@ -685,12 +866,6 @@ class ReferenceExecutor:
                 "started_at": started_at,
             }
             run_id = f"run.{program.id}.{sha256_digest(receipt_key)[7:23]}"
-        environment_digest = sha256_digest({
-            "executor": EXECUTOR_ID,
-            "python": platform.python_version(),
-            "platform": platform.platform(),
-            "runtimes": self.runtimes.identity_records(),
-        })
         receipt = RunReceipt(
             id=run_id,
             plan_digest=plan.digest,
@@ -712,7 +887,7 @@ class ReferenceExecutor:
             failure_class=failure_class,
             executor=EXECUTOR_ID,
             environment_digest=environment_digest,
-            input_digest=digest_value(inputs),
+            input_digest=graph_input_digest,
             belief_revision=belief_revision,
             admitted_space_digest=space.digest,
             output_artifacts=tuple(
@@ -723,6 +898,12 @@ class ReferenceExecutor:
         problems = receipt.validate()
         if problems:
             raise ExecutionError("executor produced an invalid receipt: " + "; ".join(problems))
+        if outcome == "failed":
+            save_checkpoint("failed", failure_class)
+        else:
+            save_checkpoint("completed")
+            if checkpoint_store is not None and clear_checkpoint_on_success:
+                checkpoint_store.clear(checkpoint_id)
         return ExecutionResult(
             outputs=outputs,
             output_artifacts=output_artifacts,
@@ -829,9 +1010,11 @@ class ReferenceExecutor:
             if key in graph_inputs:
                 values.setdefault(port.name, []).append(graph_inputs[key])
         for edge in edges_by_target.get(slot_id, []):
-            values.setdefault(edge.target_port, []).append(
-                slot_outputs[(edge.source_slot, edge.source_port)]
-            )
+            source_key = (edge.source_slot, edge.source_port)
+            if source_key in slot_outputs:
+                values.setdefault(edge.target_port, []).append(
+                    slot_outputs[source_key]
+                )
         resolved: dict[str, Any] = {}
         for port in slot.inputs:
             produced = values.get(port.name, [])

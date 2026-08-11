@@ -6,13 +6,15 @@
     "build pass"
   ],
   "arena_model_version": "0.1",
-  "executable_example_ids": [],
+  "executable_example_ids": [
+    "dependency-assurance"
+  ],
   "external_requirements": [],
   "id": "arena.dependency-assurance",
   "input_contract": "Lockfiles, build manifests, artifact digests, and organization policy.",
   "output_contract": "SBOM, findings, policy verdicts, remediations, and evidence timestamps.",
   "problem": "Resolve dependency graphs, identify provenance, scan advisories, and apply policy.",
-  "readiness": "template",
+  "readiness": "executable_fixture",
   "stage_families": [
     "resolve",
     "identify",

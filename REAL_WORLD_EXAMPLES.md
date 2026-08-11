@@ -1,7 +1,7 @@
 # Executable real-world example skeleton
 
-The repository now includes 13 dependency-free programs, including five
-notebook task families and seven additional Arena fixtures, that pass through
+The repository now includes 23 dependency-free programs, including five
+notebook task families and 17 additional Arena fixtures, that pass through
 the same universal lifecycle: full registry admission, route compilation,
 frozen fallbacks, execution, content-addressed artifacts, independent
 verification, and immutable receipts.
@@ -29,6 +29,16 @@ solutiongraph examples run calibrated-time-series-forecast
 solutiongraph examples run organization-entity-linking
 solutiongraph examples run tested-code-repair
 solutiongraph examples run multi-feed-analytical-dataset
+solutiongraph examples run contact-verification
+solutiongraph examples run web-change-monitoring
+solutiongraph examples run transaction-reconciliation
+solutiongraph examples run pii-redaction
+solutiongraph examples run schema-migration
+solutiongraph examples run incident-triage
+solutiongraph examples run dependency-assurance
+solutiongraph examples run recommendation-ranking
+solutiongraph examples run scientific-experiment
+solutiongraph examples run numerical-linear-system
 ```
 
 Use the bounded child-process adapter and persist each completed receipt before
@@ -70,13 +80,23 @@ solutiongraph examples run tabular-regression \
 | Organization entity linking | normalize → block → link → components | basic/legal cleanup; domain/token blocking; exact/multi-evidence links | exact entity components |
 | Tested code repair | inspect → propose → apply → test | AST/test inspection; operator/contract proposal; exact/line apply; AST/symbolic tests | all fixed tests and changed-file scope |
 | Multi-feed analytical data | decode → normalize → reconcile → validate | CSV module/line parsing; strict/coerce; priority/completeness; schema/lineage checks | row count, total, quarantine, lineage |
+| Contact verification | normalize → check syntax/reference → classify | strict/heuristic endpoint handling at every operation | verified endpoint and consent-safe disposition |
+| Web change monitoring | canonicalize → compare → corroborate | strict/heuristic snapshot, diff, and evidence paths | exact significant-change event |
+| Transaction reconciliation | normalize → match → balance | strict/heuristic matching and residual handling | balanced groups and explicit exceptions |
+| PII redaction | detect → redact → leakage check | strict/heuristic span handling and verification | expected redaction with zero prohibited leakage |
+| Schema migration | transform → validate → shadow compare | strict/heuristic migration and invariant paths | row-preserving compatible result |
+| Incident triage | normalize → correlate → disposition | strict/heuristic signal and evidence handling | evidence-backed priority and hypothesis |
+| Dependency assurance | inventory → policy evaluate → verdict | strict/heuristic SBOM, advisory, and license handling | expected allow/block result with findings |
+| Recommendation ranking | score → policy → diversify | strict/heuristic relevance and constraint handling | eligible, deterministic diverse ranking |
+| Scientific experiment | allocate → compare → robustness | strict/heuristic analysis paths | expected effect and robustness verdict |
+| Numerical solve | validate → solve → residual | strict/heuristic 2×2 solver and verification paths | exact solution within residual tolerance |
 
 Both ML examples are real DAGs rather than only lists: each split artifact fans
 out to training and evaluation, while the trained model joins evaluation.
 
-Nine controls are expected to be rejected by their independent oracles.
+Nineteen controls are expected to be rejected by their independent oracles.
 Preserving those valid-but-poor routes is part of the evidence model. The
-release gate compiles and executes all 31 declared routes through both runtime
+release gate compiles and executes all 51 declared routes through both runtime
 adapters.
 
 ## Let the universal solver choose routes

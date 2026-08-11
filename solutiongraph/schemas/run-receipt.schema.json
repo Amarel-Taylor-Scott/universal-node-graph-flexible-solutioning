@@ -59,7 +59,7 @@
         "properties": {
           "slot_id": {"$ref": "common.schema.json#/$defs/id"},
           "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
-          "outcome": {"enum": ["succeeded", "failed", "blocked"]},
+          "outcome": {"enum": ["succeeded", "failed", "blocked", "skipped"]},
           "started_at": {"type": "string"},
           "completed_at": {"type": "string"},
           "metrics": {"type": "object", "additionalProperties": {"type": "number"}},

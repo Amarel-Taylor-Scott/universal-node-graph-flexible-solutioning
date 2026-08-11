@@ -126,7 +126,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -143,6 +143,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -186,6 +189,9 @@
         "success_contract": "Define versioned event identity, payload, and semantic meaning and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -229,6 +235,9 @@
         "success_contract": "Define ordering, duplication, latency, and durability semantics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -272,6 +281,9 @@
         "success_contract": "Define retry, dead-letter, compensation, and replay policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -315,6 +327,9 @@
         "success_contract": "Receive an event with transport and source evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -358,6 +373,9 @@
         "success_contract": "Authenticate producer and verify message integrity and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -401,6 +419,9 @@
         "success_contract": "Validate schema, version, identifiers, and temporal bounds and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -444,6 +465,9 @@
         "success_contract": "Detect duplicate delivery under the declared identity contract and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.process"
@@ -487,6 +511,9 @@
         "success_contract": "Load required state at a declared consistency level and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.process"
@@ -530,6 +557,9 @@
         "success_contract": "Apply domain invariants and compute the intended transition and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.process"
@@ -573,6 +603,9 @@
         "success_contract": "Persist state and event progress atomically or compensatably and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.coordinate"
@@ -616,6 +649,9 @@
         "success_contract": "Derive typed downstream events from the accepted transition and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.coordinate"
@@ -659,6 +695,9 @@
         "success_contract": "Publish events under the declared atomicity and retry model and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.coordinate"
@@ -702,6 +741,9 @@
         "success_contract": "Advance or compensate multi-step workflows when required and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.operate"
@@ -745,6 +787,9 @@
         "success_contract": "Measure backlog, latency, failure, and replay state and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.operate"
@@ -788,6 +833,9 @@
         "success_contract": "Quarantine or repair poison events without blocking unrelated work and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.operate"
@@ -831,6 +879,9 @@
         "success_contract": "Replay a bounded event range with idempotency evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.operate"

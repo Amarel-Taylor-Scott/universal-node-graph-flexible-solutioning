@@ -132,7 +132,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -149,6 +149,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -192,6 +195,9 @@
         "success_contract": "Receive a document with immutable source metadata and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -235,6 +241,9 @@
         "success_contract": "Detect container, encoding, language hints, and corruption and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -278,6 +287,9 @@
         "success_contract": "Apply the declared content safety and quarantine policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decode"
@@ -321,6 +333,9 @@
         "success_contract": "Repair or reject malformed containers without inventing content and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decode"
@@ -364,6 +379,9 @@
         "success_contract": "Extract embedded text, layout, and metadata when available and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decode"
@@ -407,6 +425,9 @@
         "success_contract": "Render stable page images for visual processing when required and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decode"
@@ -450,6 +471,9 @@
         "success_contract": "Recognize text from visual regions with confidence and provenance and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -493,6 +517,9 @@
         "success_contract": "Separate repeated headers, footers, watermarks, and navigation and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -536,6 +563,9 @@
         "success_contract": "Normalize encodings, whitespace, and symbols under a reversible policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -579,6 +609,9 @@
         "success_contract": "Translate content into the target language when the contract requires it and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.normalize"
@@ -622,6 +655,9 @@
         "success_contract": "Segment pages, sections, tables, figures, and reading order and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.extract"
@@ -665,6 +701,9 @@
         "success_contract": "Prioritize source regions relevant to the requested schema and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.extract"
@@ -708,6 +747,9 @@
         "success_contract": "Apply deterministic parsers, rules, and validators and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.extract"
@@ -751,6 +793,9 @@
         "success_contract": "Apply admitted model-based extraction with structured output and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.extract"
@@ -794,6 +839,9 @@
         "success_contract": "Reconcile conflicting values using source and confidence evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -837,6 +885,9 @@
         "success_contract": "Validate types, required fields, constraints, and cross-field rules and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -880,6 +931,9 @@
         "success_contract": "Attach page, region, and source citations to extracted values and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"

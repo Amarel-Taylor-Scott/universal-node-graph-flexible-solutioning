@@ -21,6 +21,12 @@ diagram or candidate count is not, by itself, progress.
   registry, admitted-space, belief, frozen-plan, and evidence representations.
 - Strict nominal node ABI and bundled JSON Schemas for types, cardinalities,
   effects, permissions, determinism, resources, failure modes, and provenance.
+- Compiler-checked conditional activation with explicit skipped receipts and
+  invalid conditional-edge/graph-output diagnostics.
+- Deterministic composite and bounded-loop lowering into namespaced atomic DAGs
+  with content-addressed expansion receipts.
+- Explicit topology families and search over alternative compiler-valid graph
+  shapes in addition to node bindings, with independent budget accounting.
 - Full registry-to-slot admission handshake with an inspectable decision for
   every candidate/slot pair and n-ary configuration constraints.
 - Negotiated registry discovery with sparse descriptors, exact named embedding
@@ -32,6 +38,8 @@ diagram or candidate count is not, by itself, progress.
 - Prior-guided, beam, seeded-sprout, and uncapped exhaustive route search with explicit
   accounting for evaluated, rejected, skipped, and unvisited configurations.
 - Successive-halving promotion and patience-based early stopping primitives.
+- Executed successive-halving rungs with caller evaluators, exact promotion
+  decisions, and total resource accounting.
 - Immutable run receipts, Pareto comparison, observational belief fitting, and
   repository instructions for Codex, Claude, Gemini, Copilot, and other agents.
 - A trusted-local reference executor that reconstructs frozen plans, verifies
@@ -43,11 +51,23 @@ diagram or candidate count is not, by itself, progress.
 - An fsync-backed local JSONL receipt journal with duplicate protection,
   monotonic sequence, hash chaining, tamper/truncation verification, and an
   immediate experiment receipt sink.
+- Exact local completed-prefix checkpoints with content-addressed output
+  rehydration and identity-bound resume after interruption.
+- A finite event-time reference adapter with windows, watermarks, allowed
+  lateness, retractions, and explicit too-late drops.
+- Reverse-order saga compensation over ordinary effectful nodes, with visible
+  idempotency keys, attempts, and uncompensated failures.
+- Compatibility sidecars for optional ordering, time, nullability, data
+  classification, state, cache, secret, hardware, residency, and compensation
+  constraints while preserving a stable executable ABI.
+- W3C PROV, OpenLineage, and in-toto/SLSA projections from run receipts plus an
+  installed-wheel advanced conformance suite.
 - Transactional `solutiongraph init` starter workspaces that bind a selected
   semantic template, task intake, and coding-agent instructions without
   inventing nodes or evidence.
-- Six dependency-free executable programs in five notebooks spanning web,
-  documents, images, data cleanup, tabular regression, and classification.
+- Twenty-three dependency-free executable programs spanning 20 Arena task
+  families, including data, identity, privacy, operations, security, science,
+  recommendation, and numerical workflows in addition to the five notebooks.
 - Campaign contracts for bounded generated candidates/trials, immutable
   proposal ancestry, append-only evidence decisions, and explicit evaluator
   trust boundaries, plus a harness skill for population-based campaigns.
@@ -80,8 +100,9 @@ adversarial-isolation or production-durability claim.
 
 - Execute heterogeneous and untrusted node runtimes in enforcing least-
   privilege sandboxes or separate trust domains.
-- Harden content-addressed artifacts, checkpoints, retries, fallbacks, circuit
-  breakers, explicit plan amendments, streaming codecs, and resume across crashes.
+- Harden the implemented local checkpoints and finite stream adapter into
+  distributed leases, fencing, exactly-once/idempotent sinks, backpressure,
+  state snapshots, plan amendments, and resume across worker/host failures.
 - Apply independent task, macro-stage, and substep verification oracles.
 - Store immutable attempts and receipts in an authenticated remote append-only
   evidence service or WORM backend; the local hash-chained journal is the
@@ -111,7 +132,9 @@ without weakening contracts or authority.
 ## Phase 4 — federated universal scale
 
 - Federate registries across languages, runtimes, tenants, and environments.
-- Expand composite nodes into validated child graphs on demand.
+- Extend the implemented local composite/loop lowering with remote child-graph
+  resolution, signed subgraph packs, and topology mutations generated under
+  explicit operator contracts.
 - Add distributed scheduling, resource locality, effect-conflict controls,
   tenancy, authorization, usage accounting, and operational budgets.
 - Benchmark across document extraction, web automation, image processing, data

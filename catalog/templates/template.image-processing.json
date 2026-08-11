@@ -132,7 +132,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -149,6 +149,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -192,6 +195,9 @@
         "success_contract": "Load the exact image bytes and source metadata and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -235,6 +241,9 @@
         "success_contract": "Decode format, color model, orientation, and frame structure and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -278,6 +287,9 @@
         "success_contract": "Detect truncation, malformed regions, and unsupported encodings and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.inspect"
@@ -321,6 +333,9 @@
         "success_contract": "Measure resolution, noise, blur, compression, clipping, and exposure and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.inspect"
@@ -364,6 +379,9 @@
         "success_contract": "Detect faces, objects, corners, text regions, and regions of interest and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.inspect"
@@ -407,6 +425,9 @@
         "success_contract": "Run admitted synthetic-media and manipulation detectors and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.inspect"
@@ -450,6 +471,9 @@
         "success_contract": "Extract permitted metadata and provenance claims and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -493,6 +517,9 @@
         "success_contract": "Correct orientation, crop, pad, resize, or rectify geometry and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -536,6 +563,9 @@
         "success_contract": "Convert color space and normalize white balance or tone and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -579,6 +609,9 @@
         "success_contract": "Adjust contrast, sharpness, denoising, or restoration under policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.transform"
@@ -622,6 +655,9 @@
         "success_contract": "Apply requested augmentation or distortion with recorded parameters and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -665,6 +701,9 @@
         "success_contract": "Recognize and ground visible text and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -708,6 +747,9 @@
         "success_contract": "Classify requested visual attributes with confidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -751,6 +793,9 @@
         "success_contract": "Measure spatial relationships, boundaries, and regions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.analyze"
@@ -794,6 +839,9 @@
         "success_contract": "Reconcile model and deterministic findings and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -837,6 +885,9 @@
         "success_contract": "Encode the requested image and metadata format and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -880,6 +931,9 @@
         "success_contract": "Verify dimensions, appearance, content constraints, and no unintended loss and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"

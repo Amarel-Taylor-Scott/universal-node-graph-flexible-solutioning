@@ -6,7 +6,9 @@
     "freshness"
   ],
   "arena_model_version": "0.1",
-  "executable_example_ids": [],
+  "executable_example_ids": [
+    "contact-verification"
+  ],
   "external_requirements": [
     "L",
     "i",
@@ -101,7 +103,7 @@
   "input_contract": "Contact records, consent ledger, and approved verification connectors.",
   "output_contract": "Endpoint-specific validity, consent, provenance, and next-action state.",
   "problem": "Parse and verify email, phone, consent, and reachability without conflating those claims.",
-  "readiness": "template",
+  "readiness": "executable_fixture",
   "stage_families": [
     "parse",
     "normalize",

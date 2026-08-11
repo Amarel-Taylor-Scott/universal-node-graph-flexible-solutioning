@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stream-result.schema.json",
+  "title": "SolutionGraph Stream Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["emissions", "receipt"],
+  "properties": {
+    "emissions": {
+      "type": "array",
+      "items": {"$ref": "stream-emission.schema.json"}
+    },
+    "receipt": {"$ref": "stream-run-receipt.schema.json"}
+  }
+}

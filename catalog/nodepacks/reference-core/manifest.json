@@ -49,11 +49,11 @@
   "dependencies": [],
   "description": "Executable demonstration primitives, identity behavior, and explicit filesystem/network connectors.",
   "descriptor_digests": [
-    "sha256:5469a0326935099ec11b01f149c2d7dafb74f5c60c252d303246d03f9bd32188",
-    "sha256:53449048b3a78f3605a39705df95213c620e2023304e23630c91eaa7260c03cf",
-    "sha256:76120df3ce8f3a6bfeac3bcffc02f7b18bbbb9867885e6c904ee49dcfb41736d",
-    "sha256:05c4c54eed8861f8f2cbc94807a2c4bdce1ab921cc1463ea8480e3685e1bd2c5",
-    "sha256:48b426a502cefa3d53189cd986e35bae6997179e96760bcfd972919f42aca480"
+    "sha256:19ad2b60be2f44e3a1264201721a3f5d7e37e0f95df3f253eff874ab107a9126",
+    "sha256:e02378cea5aa43df2a78064a9a5751e0709c37730ee667514fd0a310db70d115",
+    "sha256:b765b453221c447fc3c0965e8aca564fe4599605e4819a4b7b8859cd4d5cdd5e",
+    "sha256:7214489fe956fdb4887b0bee8484f1f524c4784c1eff87a894fb7cb8458c7d3e",
+    "sha256:554e18ed9f9abf021a697a35618aa3624d52a4233c8c369ab4e2a187c033cff5"
   ],
   "discovery_version": "0.1",
   "embedding_record_digests": [],
@@ -63,11 +63,11 @@
   "id": "reference.core-node-pack",
   "license": "MIT",
   "node_spec_digests": [
-    "sha256:6058dd6273429802cbfea9d823a2bd9128dabc32b888a65f0f1d1ac1d0011775",
-    "sha256:a639a3884714fcc9a28b9202af21e670196c70ba8c5a9372e55a1c68775bc51d",
-    "sha256:3bf9b4a0dd68ba2f1aa41a3e0d530b22e744359340df01c474e5687341413710",
-    "sha256:f93478ea76df6882900f57b7ebc81ed739f66d10227627dd8adc7ee4f18d1197",
-    "sha256:205339f2c139670540d90b7926a76637c07a878a06200050251f2f0a1bffe195"
+    "sha256:384a5f0d313d3458767ae266800be6664fd186820c71e170572abad0c9c3b719",
+    "sha256:176c19b3050291f9e498da952f6409d80211cc6b45f254d6136f72e65b2b382c",
+    "sha256:4ccb01d48c0efb3db781391f0883b6dd14cbeb58d2cbf2f6c085d437597f11c8",
+    "sha256:69d5bca34bb3316764c7cb4d5b98d52c7bfb4d35ad174579b47cae89b77ac635",
+    "sha256:e000fe55312fab1fbea916588a08ca575c44cda1c77a1e8d8408fc677e3f563e"
   ],
   "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
   "version": "1.0.0"

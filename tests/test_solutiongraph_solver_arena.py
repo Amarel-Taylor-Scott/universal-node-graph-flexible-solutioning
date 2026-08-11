@@ -50,7 +50,7 @@ def test_arena_is_valid_cross_domain_and_honest_about_external_authorities():
 def test_every_arena_executable_points_to_a_real_typed_example():
     examples = {example.id: example for example in EXAMPLE_TASKS}
     executable_tasks = UNIVERSAL_DAG_ARENA.matching(readiness="executable_fixture")
-    assert len(executable_tasks) == 10
+    assert len(executable_tasks) == 20
     for task in executable_tasks:
         for example_id in task.executable_example_ids:
             example = examples[example_id]
@@ -162,9 +162,9 @@ def test_solver_profiles_and_arena_runner_disclose_budgets_and_skips():
         ("arena.organization-entity-graph", "arena.transaction-reconciliation"),
         profile="quick",
     )
-    assert report["executed_example_count"] == 1
-    assert report["skipped_task_count"] == 1
-    assert report["skipped"][0]["readiness"] == "template"
+    assert report["executed_example_count"] == 2
+    assert report["skipped_task_count"] == 0
+    assert report["skipped"] == []
 
 
 def test_arena_and_solver_wire_schemas_are_bundled_and_strict():

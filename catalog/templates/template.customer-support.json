@@ -126,7 +126,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -143,6 +143,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.intake"
@@ -186,6 +189,9 @@
         "success_contract": "Receive the customer contact and channel metadata and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.intake"
@@ -229,6 +235,9 @@
         "success_contract": "Authenticate identity only to the level required by the request and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.intake"
@@ -272,6 +281,9 @@
         "success_contract": "Detect, minimize, and protect unnecessary sensitive content and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.understand"
@@ -315,6 +327,9 @@
         "success_contract": "Classify the requested outcome and affected product or process and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.understand"
@@ -358,6 +373,9 @@
         "success_contract": "Extract source-grounded facts, dates, identifiers, and commitments and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.understand"
@@ -401,6 +419,9 @@
         "success_contract": "Retrieve authorized account, order, policy, and interaction context and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.understand"
@@ -444,6 +465,9 @@
         "success_contract": "Assess urgency, vulnerability, impact, and escalation criteria and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -487,6 +511,9 @@
         "success_contract": "Retrieve the exact applicable policy, entitlement, and exceptions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -530,6 +557,9 @@
         "success_contract": "Generate contract-compatible resolution options and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -573,6 +603,9 @@
         "success_contract": "Select a resolution using authority, evidence, cost, and customer impact and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.resolve"
@@ -616,6 +649,9 @@
         "success_contract": "Execute the approved account, refund, replacement, or workflow action and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.communicate"
@@ -659,6 +695,9 @@
         "success_contract": "Compose a clear, accurate, policy-grounded response and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.communicate"
@@ -702,6 +741,9 @@
         "success_contract": "Verify facts, promises, tone, privacy, and required disclosures and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.communicate"
@@ -745,6 +787,9 @@
         "success_contract": "Deliver through the authorized channel and preserve evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.close"
@@ -788,6 +833,9 @@
         "success_contract": "Verify that promised actions completed and the case oracle passes and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.close"
@@ -831,6 +879,9 @@
         "success_contract": "Schedule, escalate, or reopen unresolved obligations and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.close"

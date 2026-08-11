@@ -6,7 +6,9 @@ description: Model and solve a real task with the UniversalSolver or extend the 
 # Solve a universal DAG
 
 Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md`, `../../../EXECUTION_PROTOCOL.md`,
-and `../../../REAL_WORLD_EXAMPLES.md`. For generated-node campaigns, also use
+`../../../STRUCTURED_CONTROL_PROTOCOL.md`,
+`../../../TOPOLOGY_SEARCH_PROTOCOL.md`, and
+`../../../REAL_WORLD_EXAMPLES.md`. For generated-node campaigns, also use
 `../design-autoresearch-campaign/SKILL.md`.
 
 ## Establish the task boundary
@@ -30,12 +32,19 @@ and `../../../REAL_WORLD_EXAMPLES.md`. For generated-node campaigns, also use
    testable purpose and one explicit success contract.
 2. Declare nominal, versioned input/output types. Insert adapter nodes for
    conversions; never depend on implicit coercion.
-3. Keep task, slots, nodes, admission, search beliefs, frozen plans, runtime
+3. Decide explicitly whether the task has one fixed topology or a closed
+   `TopologyFamily`. Graph-shape alternatives are programs, not candidates.
+4. Use activation rules plus optional-port merge nodes for conditionals. Use a
+   child graph and finite `LoopPolicy` for iteration. Retain the lowering
+   receipt before ordinary admission.
+5. Keep task, slots, nodes, admission, search beliefs, frozen plans, runtime
    policy, verification, and evidence as separate layers.
-4. Author at least two genuine implementation candidates for important slots
+6. Author at least two genuine implementation candidates for important slots
    when alternatives exist. Identity/pass-through candidates are legal only
    when skipping the obligation preserves its contract.
-5. Admit against a closed registry snapshot and resolve every compiler error.
+7. Add compatibility sidecars when ordering, event time, nullability, data
+   classification, state, secrets, hardware, residency, or compensation matter.
+8. Admit against a closed registry snapshot and resolve every compiler error.
    Search scores cannot admit a node or legalize an invalid route.
 
 ## Solve and learn
@@ -59,6 +68,11 @@ acceptance and objective constraints before selecting a champion. Keep each
 fallback as a separately benchmarked frozen route; do not splice untested
 per-slot choices into a new fallback route.
 
+For long local runs, use an exact checkpoint store and shared artifact store;
+resume only the identity-matching prefix. For event-time tasks, test late and
+too-late events plus retractions. For external effects, declare compensation
+nodes and idempotency keys. Export standard provenance from the final receipt.
+
 ## Extend the Arena
 
 When adding a local fixture:
@@ -78,6 +92,7 @@ When adding a local fixture:
 
 ```bash
 solutiongraph doctor
+solutiongraph conformance
 solutiongraph verify --catalog-root catalog
 solutiongraph verify --runtime subprocess
 solutiongraph arena run --profile quick
@@ -87,5 +102,5 @@ pytest -q
 Regenerate `catalog/` after changing templates, registries, nodes, or Arena
 entries. Report evaluated and total routes, unvisited space, search budgets,
 accepted/rejected/failed receipts, Pareto routes, champion, fallback diversity,
-and remaining external or production gates. Synthetic fixture success proves
+lowering/topology/checkpoint identities, and remaining external or production gates. Synthetic fixture success proves
 the framework mechanism only; it is not domain-level production validation.

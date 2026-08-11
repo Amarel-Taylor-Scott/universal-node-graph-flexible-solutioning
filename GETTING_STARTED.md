@@ -2,7 +2,7 @@
 
 Universal Node Graph can be explored without a browser, model provider, vector
 database, or network service. The domain-neutral core uses only the Python
-standard library. Version 0.4 is a developer preview; read `READINESS.md`
+standard library. Version 0.5 is a developer preview; read `READINESS.md`
 before production integration.
 
 ## 1. Install and verify
@@ -12,13 +12,14 @@ git clone https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-s
 cd universal-node-graph-flexible-solutioning
 python -m pip install -e .
 solutiongraph doctor
+solutiongraph conformance
 solutiongraph verify --catalog-root catalog --runtime in-process
 solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 The doctor command validates all bundled schemas, templates, reference nodes,
 descriptors, and generated catalog projections. The release verifier then
-compiles and executes all 31 frozen reference routes, checks nine declared
+compiles and executes all 51 frozen reference routes, checks 19 declared
 negative controls, and rejects stale checked-in catalog JSON.
 
 For a non-editable installation directly from GitHub:
@@ -60,8 +61,10 @@ The library contains 19 domain templates and 339 atomic obligations. A template
 describes what must happen; node registries independently provide the possible
 ways to accomplish each obligation.
 
-Open `examples/catalog-template-explorer.html` to browse stages and atomic slots
-visually without running a server.
+Open `examples/universal-dag-explorer.html` for a strictly left-to-right view of
+nested submatrices, every visible candidate, structured-control semantics, and
+parallel routes. Open `examples/catalog-template-explorer.html` to browse every
+template and node pack without running a server.
 
 ## 4. Create a template
 
@@ -91,6 +94,8 @@ Agents that support workspace skills can be asked to use:
 - `@execute-solution-graph` to add runtimes, artifacts, verifiers, and executable examples;
 - `@benchmark-solution-graph` to design route experiments;
 - `@design-autoresearch-campaign` to run bounded LLM-generated improvement campaigns;
+- `@design-topology-family` to author and benchmark alternative graph shapes;
+- `@author-structured-workflow` to implement branches, composites, and bounded loops safely;
 - `@solve-universal-dag` to implement or solve an Arena task with evidence-backed route selection;
 - `@model-solution-graph` for the complete end-to-end workflow.
 
@@ -125,7 +130,7 @@ duplicates, unvisited routes, seeds, and belief revision.
 
 ## 8. Solve and execute the reference domain skeletons
 
-Inspect all 24 Arena contracts and execute or solve the 13 local programs:
+Inspect all 24 Arena contracts and execute or solve the 23 local programs:
 
 ```bash
 solutiongraph examples list
@@ -173,6 +178,7 @@ details.
 solutiongraph catalog export --output catalog
 pytest tests/test_solutiongraph*.py -q
 ruff check solutiongraph tests/test_solutiongraph*.py
+solutiongraph conformance
 solutiongraph verify --catalog-root catalog --runtime in-process
 solutiongraph verify --catalog-root catalog --runtime subprocess
 ```

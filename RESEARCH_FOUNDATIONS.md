@@ -38,6 +38,16 @@ should preserve.
 | [OpenTelemetry traces](https://opentelemetry.io/docs/concepts/signals/traces/) | Spans, context propagation, links, status, and attributes reconstruct an end-to-end path | Node receipts need stable parentage, timing, status, links, and semantic attributes |
 | [Lamport, *Specifying Systems*](https://www.microsoft.com/en-us/research/publication/specifying-systems-the-tla-language-and-tools-for-hardware-and-software-engineers/) | Safety and liveness properties require explicit temporal specifications | Long-running/composite nodes need lifecycle and progress contracts, not just input/output schemas |
 
+## Structured control, streaming, and effects
+
+| Primary source | Relevant idea | Consequence here |
+|---|---|---|
+| [Apache Beam programming guide](https://beam.apache.org/documentation/programming-guide/) | Event time differs from processing time; windows, watermarks, triggers, allowed lateness, accumulation, and late panes are separate semantics | `ReferenceStreamEngine` makes those choices explicit and receipted while remaining a finite conformance adapter rather than claiming distributed execution |
+| [Temporal documentation](https://docs.temporal.io/) | Durable workflow systems resume after process, network, and infrastructure failures through a persisted execution model | Exact local prefix checkpoints prove the adapter contract, while leases, fencing, remote history, and distributed recovery remain production-runtime requirements |
+| [OpenLineage facets specification](https://openlineage.io/docs/spec/facets/) | Run, job, input, and output metadata extend core events through named versioned facets | A `RunReceipt` projects to an OpenLineage event without mutating its original evidence model |
+| [W3C PROV-O](https://www.w3.org/TR/prov-o/) | Activities use and generate entities under attributable agents | Plans and artifacts remain entities; executions and node attempts remain activities |
+| [SLSA provenance 1.2](https://slsa.dev/spec/v1.2/provenance) | Provenance tracks where, when, and how artifacts were produced | The in-toto/SLSA projection binds output subjects to program, plan, environment, builder, and receipt identity |
+
 ## Search and synthesis
 
 | Primary source | Relevant idea | Consequence here |

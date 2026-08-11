@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "execution-checkpoint.schema.json",
+  "title": "SolutionGraph Execution Checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["checkpoint_model_version", "id", "plan_digest", "program_digest", "registry_digest", "admitted_space_digest", "input_digest", "environment_digest", "task_case_id", "seed", "status", "completed_slots", "failure_class"],
+  "properties": {
+    "checkpoint_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "admitted_space_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "input_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "environment_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "task_case_id": {"$ref": "common.schema.json#/$defs/id"},
+    "seed": {"type": ["integer", "null"]},
+    "status": {"enum": ["running", "failed", "completed"]},
+    "completed_slots": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/slotCheckpoint"}
+    },
+    "failure_class": {
+      "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "failed"}}},
+      "then": {"properties": {"failure_class": {"$ref": "common.schema.json#/$defs/id"}}},
+      "else": {"properties": {"failure_class": {"const": ""}}}
+    }
+  ],
+  "$defs": {
+    "checkpointOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "artifact", "value_kind"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "artifact": {"$ref": "artifact-record.schema.json"},
+        "value_kind": {"enum": ["json", "text", "bytes"]}
+      }
+    },
+    "nodeReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id", "candidate_id", "outcome", "started_at", "completed_at",
+        "metrics", "failure_class", "artifact_digests", "attempt", "node_id",
+        "implementation_digest", "runtime", "runtime_adapter", "isolation",
+        "input_digest"
+      ],
+      "properties": {
+        "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+        "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
+        "outcome": {"enum": ["succeeded", "skipped"]},
+        "started_at": {"type": "string"},
+        "completed_at": {"type": "string"},
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {"type": "number"}
+        },
+        "failure_class": {
+          "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+        },
+        "artifact_digests": {
+          "type": "array",
+          "items": {"$ref": "common.schema.json#/$defs/digest"}
+        },
+        "attempt": {"type": "integer", "minimum": 1},
+        "node_id": {
+          "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+        },
+        "implementation_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+        "runtime": {"type": "string"},
+        "runtime_adapter": {
+          "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+        },
+        "isolation": {"type": "string"},
+        "input_digest": {"$ref": "common.schema.json#/$defs/optional_digest"}
+      }
+    },
+    "slotCheckpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slot_id", "candidate_id", "outputs", "receipt"],
+      "properties": {
+        "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+        "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
+        "outputs": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/checkpointOutput"}
+        },
+        "receipt": {"$ref": "#/$defs/nodeReceipt"}
+      }
+    }
+  }
+}

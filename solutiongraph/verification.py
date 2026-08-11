@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from solutiongraph.catalog import catalog_documents
+from solutiongraph.conformance import ConformanceResult, run_conformance_suite
 from solutiongraph.examples import EXAMPLE_TASKS, run_example
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
@@ -72,10 +73,15 @@ class ReleaseVerification:
     schema_count: int
     catalog_document_count: int
     catalog_checked: bool
+    conformance: ConformanceResult
 
     @property
     def ok(self) -> bool:
-        return not self.problems and all(item.ok for item in self.route_results)
+        return (
+            not self.problems
+            and self.conformance.ok
+            and all(item.ok for item in self.route_results)
+        )
 
     @property
     def accepted_routes(self) -> int:
@@ -95,6 +101,7 @@ class ReleaseVerification:
             "schema_count": self.schema_count,
             "catalog_document_count": self.catalog_document_count,
             "catalog_checked": self.catalog_checked,
+            "conformance": self.conformance.to_dict(),
             "example_count": len(EXAMPLE_TASKS),
             "route_count": len(self.route_results),
             "accepted_routes": self.accepted_routes,
@@ -134,6 +141,12 @@ def verify_reference_release(
 ) -> ReleaseVerification:
     """Compile and execute every bundled route and return all gate failures."""
     problems = list(REFERENCE_TEMPLATES.validate())
+    conformance = run_conformance_suite()
+    problems.extend(
+        f"advanced conformance failed: {check.id}: {check.details}"
+        for check in conformance.checks
+        if not check.passed
+    )
     node_by_id = {node.id: node for node in REFERENCE_NODE_SPECS}
     for node in REFERENCE_NODE_SPECS:
         problems.extend(node.validate(f"nodes.{node.id}"))
@@ -222,6 +235,7 @@ def verify_reference_release(
         schema_count=len(schemas),
         catalog_document_count=len(documents),
         catalog_checked=catalog_root is not None,
+        conformance=conformance,
     )
 
 

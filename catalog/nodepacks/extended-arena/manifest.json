@@ -1,0 +1,638 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.parse.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.parse.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.normalize.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.normalize.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.verify.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.verify.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.consent.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.contact.consent.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.web-change.canonicalize.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.web-change.canonicalize.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.web-change.diff.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.web-change.diff.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.web-change.corroborate.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.web-change.corroborate.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.reconciliation.normalize.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.reconciliation.normalize.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.reconciliation.match.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.reconciliation.match.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.reconciliation.balance.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.reconciliation.balance.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.pii.detect.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.pii.detect.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.pii.redact.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.pii.redact.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.pii.leakage-check.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.pii.leakage-check.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.schema-migration.transform.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.schema-migration.transform.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.schema-migration.validate.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.schema-migration.validate.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.schema-migration.shadow-compare.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.schema-migration.shadow-compare.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.incident.parse.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.incident.parse.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.incident.correlate.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.incident.correlate.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.incident.rank.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.incident.rank.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.dependency.resolve.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.dependency.resolve.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.dependency.scan.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.dependency.scan.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.dependency.policy.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.dependency.policy.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.recommendation.eligibility.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.recommendation.eligibility.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.recommendation.score.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.recommendation.score.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.recommendation.diversify.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.recommendation.diversify.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.scientific.design.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.scientific.design.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.scientific.analyze.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.scientific.analyze.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.scientific.robustness.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.scientific.robustness.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.numerical.validate.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.numerical.validate.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.numerical.solve.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.numerical.solve.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_strict_step"
+      },
+      "digest": "sha256:df5f4dd9b71790fb7b1789e9866e05c30e5fdea4c192f33a945cf6b56859d712",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.numerical.residual.strict",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_strict_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.extended_tasks:execute_heuristic_step"
+      },
+      "digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+      "media_type": "text/x-python",
+      "name": "artifact.example.extended.numerical.residual.heuristic",
+      "uri": "python://solutiongraph.examples.extended_tasks:execute_heuristic_step"
+    }
+  ],
+  "dependencies": [],
+  "description": "Strict and heuristic reference nodes for contact verification, web change monitoring, reconciliation, PII redaction, schema migration, incident triage, dependency assurance, recommendation ranking, scientific comparison, and numerical solving.",
+  "descriptor_digests": [],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "example.maturity": "cross-domain-conformance-fixture"
+  },
+  "id": "example.extended-arena-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:7741645ad30532b998a7908cde91237a6feb60c037b174074a2d468f156099fc",
+    "sha256:18d3b54300ee82cf5049adb89db45ddd753272123676541032094edb4ad4a3d5",
+    "sha256:389f90b77d0c4f7dce47af6b2f6017bb2889e8bb81aaea9efd23f80ca6910b28",
+    "sha256:37b8b89a418f15d61c247893c1cd6922b740fa8d130bf93d19e0a8c12c2de6be",
+    "sha256:7af6af040ece790337cfd923efb945802e8772d481b1f84648cf8a97d6f72e37",
+    "sha256:c08f69d44d752cdb5abed15b705bfb05353cef0ff81b133846d0a16e0a31ad05",
+    "sha256:b31e6a327c869ffc1e21198a56cbe031fc9de6f7dde2de6bece109c69e8a9b38",
+    "sha256:663217c32bc4097b3191af9f13b3be40a77f926939313bd6b7d627ac12978ea5",
+    "sha256:264ce7e716c8d8c8361eead0c9de5a71c1822f3d2081a0c623c75de3495f24a4",
+    "sha256:69ab27afd5f3e2feb175963ab5a97ec8b6df6c8a2d043e2fbc11e349c291a17a",
+    "sha256:f27a9dcd7c6d87b00ae9178a850f707e883f9ce3e8f12ded09b41e4b57408255",
+    "sha256:55703fb5c77a044400a0bc655d5066f511d3895a246c1715b59206593d9174e3",
+    "sha256:fda8f1016ac85f8fc3d89712bd9f43f6e1ff458cdb4dcd92041d211c6d3815d2",
+    "sha256:bd640788a7add3c14c26d24cf0e3a7913f794fbfd2845ba91b2f83a02334ff30",
+    "sha256:e6563972865104a97832b6c13b5d121d9a2d7efaea623e1c94b2801326add336",
+    "sha256:5cd2be4e6008bb6fd8bece725306a82112035db641d3a0df9b8aa98c3f712aeb",
+    "sha256:1e4db7f6c003a17aaeb42c6a03507bc98055c81ede1f558eb434d53af1fa0e95",
+    "sha256:393fdf9cca1f1c3c589e6e83946cb34865ac5b17573263add28e6dbaef5fdd20",
+    "sha256:4359ab5203fb8be5d6fbb3042eb5e2ca7da4bd8caec4dbceb9f52391932e019a",
+    "sha256:b96a76adc2a1c020b3e39762b725c4b903b9ff55eadb846b3643b715e84e9897",
+    "sha256:c403290f072193084beaa6cba0ed5b880dd6f4482efa9eda47f2ffde364384e8",
+    "sha256:f859d2355045c6c514c202082adf88f933f995e345c075340baa4573d8fe8db0",
+    "sha256:8881542730a153d5d9d3a089e814fbfe636351e26aa7577d8ac5ff4296487b03",
+    "sha256:4687fb30376485ef11651e3702b316c098338261cd45853cb49c66c335befe33",
+    "sha256:3aa27f3c470cec22dc12d460512b9831cacc165267321813af565f67b45601a3",
+    "sha256:456e55fa5fea5309a2517defc71e83c413682971edc60a823795bc99a300c3c8",
+    "sha256:062a94f3124709d47e9c2a60a778de4832981b6226b25dc26ed7a513335de9d2",
+    "sha256:e2faa5e663963ec01aab78da46b9477649db07aa9ac6ac62f2456851a07245de",
+    "sha256:a9fc3fc94039ca4e19900a22634d8e31646c838cc90fb4724f90ce8923e6cf65",
+    "sha256:0e1d37d4c9163948750d66d5ae32b954455254e669968a2d2217b2a80896d472",
+    "sha256:4ae12ec9f2f59a7cf97a21437c09fe9dd9a935f248a6e2b4ead17e60e8ee091e",
+    "sha256:ce9ff5eceb728da5b1c92455ea7f0190df53304618217e88fb3a6530df202961",
+    "sha256:a1301243bf4362d068c95e3a2ca2a8c6b6831331fe5c77b56e42e04aede764ac",
+    "sha256:b3ca88f81af5692d2120dd5e307872b4fa9f0fbb858f6c43a550c6d13748be4d",
+    "sha256:23bd3b48a78aad1c20a36b97a502763e608b49b20267f96cc59692272530d5b5",
+    "sha256:e35aad99d04753a33e11357fe9876b84ee1c437eba450ce644ced5df3014d511",
+    "sha256:c00307814370770551706b45a912e70c0f1303ddf253f6cd8856467cef9c573d",
+    "sha256:109fefe173dc25c57b9d8ed69718cf70ee13eb04e950991f245093bd75ecaf68",
+    "sha256:7f13575e1319888c9af96f2ecb2547ef9cdeea9306f076186b8355f6240c17fe",
+    "sha256:55a98efa1184272eb927a8cf4a7dcc8e44d1499863945f91f86424c79ceb10ec",
+    "sha256:86d049b99f9b8de5c370f7e6b0ec896141e021688be2c5d841c24debe9262388",
+    "sha256:103ff7471d3cc7541442fa8c0f56787d8c74f398b10ce5f647e4c80a13521900",
+    "sha256:4b25e9725486b226f99f845e1311091e24134bf1c49da02b92413b6a8c1ae819",
+    "sha256:8d15d05991bfc339dd389f4b7556aece3c72d30f2bb27745535ea64fc3a23fdd",
+    "sha256:dfb17cb845be9f2b2ea7e11aa478b92432b4d577214e8e620f71436afbec171b",
+    "sha256:15e9eb1f25408835ae378f5c0e3a7b7d553c548d873b8c7b9fc6b579569c996e",
+    "sha256:6195d80dc6c4fe6153c36d24d5624dfa8c770e62e79e43ea2b7dea5b38627765",
+    "sha256:8045bcb020039d3163ec9146c5329c827086a640757fc97f7113bd582eb5360d",
+    "sha256:f2026f02cc1a162f686a31e1e8fa47229d50f3fcd23cf1ea3a46832cddf5da31",
+    "sha256:04bf3fec739b54744ad5effac5d320d188d85b34e573805dc64cec78b6a652fb",
+    "sha256:af8e1030b18afd414e0f64ffb3c3ebf64d3440754afec700f6d954d1557357e3",
+    "sha256:66ff0b10926c2c47747c7ffe6538e0bbcab01d9eba5dca8045da3fea48f97987",
+    "sha256:a6061a86a46c25920b91cd0c6fdf6ef76d6b47aaba8f3a96452fb8c537f28755",
+    "sha256:4648746ccca836aa884b8fa66c6c555d22bddb54ac3c1f668382d843511b29f9",
+    "sha256:6cda1261ac3638fd430b591fb8ab73cf5294ab7868faf99098497953ad425cc9",
+    "sha256:960be7c9f3a906cb1b5be3e9cea49776276f400116dea8a7f2d4d95512b6c467",
+    "sha256:803283e19d7aa5083d0b76df12b4b61a3507a1a91e297a4494977e173bafabc5",
+    "sha256:26d69ce9e07a489cc87d9c91bb6bce007c405365423b1642bcf716b9bab2023b",
+    "sha256:d9df929f91c6e1aa9e026ecbcf63a589ce5a0b2084ba2258b1f7da2a11f12e31",
+    "sha256:496312af99e2f08bfd938d91dae843b3c78b97ff9ef221d2c4f4217377cd80c6",
+    "sha256:c4d5256d75653d2e23535860866448120f9cfa7b09fe5d536956f859d051bcf4",
+    "sha256:f6d4dd05813e3fb09f95b20da334e81c8edd75d5d0ff7c1bcdba0311f6bfc834"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

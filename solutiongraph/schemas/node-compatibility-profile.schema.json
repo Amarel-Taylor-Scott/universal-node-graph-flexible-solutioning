@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "node-compatibility-profile.schema.json",
+  "title": "SolutionGraph Node Compatibility Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["compatibility_model_version", "node_id", "node_version", "implementation_digest", "ports", "state_mode", "state_schema_digest", "state_version", "cache_mode", "secret_scopes", "hardware_requirements", "data_residencies", "compensation_node_id", "extensions"],
+  "properties": {
+    "compatibility_model_version": {"const": "0.1"},
+    "node_id": {"$ref": "common.schema.json#/$defs/id"},
+    "node_version": {"type": "string", "minLength": 1},
+    "implementation_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["direction", "port_name", "nullable", "ordering", "time_domain", "event_time_field", "data_classifications", "schema_compatibility", "description"],
+        "properties": {
+          "direction": {"enum": ["input", "output"]},
+          "port_name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "nullable": {"type": ["boolean", "null"]},
+          "ordering": {"enum": ["unordered", "stable", "sorted", "event-time", "unknown"]},
+          "time_domain": {"enum": ["none", "processing-time", "event-time", "dual", "unknown"]},
+          "event_time_field": {"type": "string"},
+          "data_classifications": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+          "schema_compatibility": {"type": "string", "minLength": 1},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "state_mode": {"enum": ["stateless", "checkpointable", "external", "unknown"]},
+    "state_schema_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+    "state_version": {"type": "string"},
+    "cache_mode": {"enum": ["never", "content", "run", "unknown"]},
+    "secret_scopes": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "hardware_requirements": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "data_residencies": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "compensation_node_id": {"type": "string"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

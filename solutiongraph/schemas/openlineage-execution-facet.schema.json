@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/main/solutiongraph/schemas/openlineage-execution-facet.schema.json",
+  "title": "SolutionGraph OpenLineage Execution Run Facet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "_producer", "_schemaURL", "receiptId", "planDigest", "programDigest",
+    "admittedSpaceDigest", "environmentDigest", "inputDigest", "taskCaseId",
+    "seed", "assignments", "metrics", "verifier", "verifierDigest",
+    "beliefRevision", "outcome", "accepted"
+  ],
+  "properties": {
+    "_producer": {"type": "string", "format": "uri"},
+    "_schemaURL": {"const": "https://raw.githubusercontent.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/main/solutiongraph/schemas/openlineage-execution-facet.schema.json"},
+    "receiptId": {"type": "string", "pattern": "^[a-z][a-z0-9_.:/-]*$"},
+    "planDigest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "programDigest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "admittedSpaceDigest": {"type": "string", "pattern": "^(|sha256:[0-9a-f]{64})$"},
+    "environmentDigest": {"type": "string", "pattern": "^(|sha256:[0-9a-f]{64})$"},
+    "inputDigest": {"type": "string", "pattern": "^(|sha256:[0-9a-f]{64})$"},
+    "taskCaseId": {"type": "string", "pattern": "^[a-z][a-z0-9_.:/-]*$"},
+    "seed": {"type": ["integer", "null"]},
+    "assignments": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z][a-z0-9_.:/-]*$"},
+      "additionalProperties": {"type": "string", "pattern": "^[a-z][a-z0-9_.:/-]*$"}
+    },
+    "metrics": {"type": "object", "additionalProperties": {"type": "number"}},
+    "verifier": {"type": "string", "pattern": "^(|[a-z][a-z0-9_.:/-]*)$"},
+    "verifierDigest": {"type": "string", "pattern": "^(|sha256:[0-9a-f]{64})$"},
+    "beliefRevision": {"type": "string"},
+    "outcome": {"enum": ["accepted", "rejected", "failed", "completed_unverified"]},
+    "accepted": {"type": ["boolean", "null"]}
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "subgraph-catalog.schema.json",
+  "title": "SolutionGraph Subgraph Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["structured_model_version", "id", "version", "graphs"],
+  "properties": {
+    "structured_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "graphs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "version", "digest"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "version": {"type": "string", "minLength": 1},
+          "digest": {"$ref": "common.schema.json#/$defs/digest"}
+        }
+      }
+    }
+  }
+}

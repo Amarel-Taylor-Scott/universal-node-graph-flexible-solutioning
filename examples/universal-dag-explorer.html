@@ -1,0 +1,1544 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Universal Dag Explorer</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: transparent !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --main-surface-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --red: light-dark(rgb(186 38 35), rgb(250 66 62));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 10px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-visualize-standalone] {
+  background-color: var(--background) !important;
+}
+
+/* Generic mobile code-block hosts provide light/dark mode but no series palette.
+   AppBlock hosts set all six variables themselves. */
+:root:not([data-app-block-surface]) {
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(#f3883b, #f59a56);
+  --viz-series-3: light-dark(#5dc977, #74d58b);
+  --viz-series-4: light-dark(#eb77b1, #f08fc0);
+  --viz-series-5: light-dark(#9b79ec, #aa91ef);
+  --viz-series-6: light-dark(#3ab9b1, #5acbc2);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface]) > body {
+  padding: 12px;
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The bundled tooltip runtime owns [data-tooltip]. AppBlock's CSS-only
+   pseudo-tooltip can widen dense grids even while hidden. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--interactive-label-primary-default, var(--primary-foreground));
+  background: var(--interactive-bg-primary-default, var(--foreground));
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(
+    in srgb,
+    var(--interactive-label-primary-default, var(--primary-foreground)) 50%,
+    transparent
+  );
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type="file"]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+</style>
+</head>
+<body>
+<style>
+  :root {
+    --bg: #f5f6f1;
+    --surface: #ffffff;
+    --surface-2: #eef1ea;
+    --ink: #16201d;
+    --muted: #64716b;
+    --line: #d9ded7;
+    --teal: #087f73;
+    --teal-soft: #d9f1ec;
+    --amber: #b96816;
+    --amber-soft: #fff0da;
+    --violet: #6d5bd0;
+    --violet-soft: #ebe7ff;
+    --red: #b94743;
+    --green: #278451;
+    --shadow: 0 16px 44px rgba(26, 41, 35, .10);
+    --radius: 16px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111714;
+      --surface: #19211e;
+      --surface-2: #222c28;
+      --ink: #eef5f1;
+      --muted: #a4b2ab;
+      --line: #33413b;
+      --teal: #50c5b5;
+      --teal-soft: #173a35;
+      --amber: #f0a652;
+      --amber-soft: #3d2c18;
+      --violet: #a99cf1;
+      --violet-soft: #2b2748;
+      --red: #eb7770;
+      --green: #59bc7f;
+      --shadow: 0 18px 48px rgba(0, 0, 0, .28);
+    }
+  }
+  * { box-sizing: border-box; }
+  .udx {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--teal) 9%, transparent), transparent 28rem),
+      radial-gradient(circle at 92% 5%, color-mix(in srgb, var(--amber) 8%, transparent), transparent 24rem),
+      var(--bg);
+    color: var(--ink);
+    font: 14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding: 26px;
+  }
+  .udx button, .udx input, .udx select { font: inherit; }
+  .udx-shell { max-width: 1680px; margin: 0 auto; }
+  .udx-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 18px;
+  }
+  .udx-eyebrow {
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .udx h1 { margin: 7px 0 6px; font-size: clamp(27px, 4vw, 48px); letter-spacing: -.045em; line-height: 1.02; }
+  .udx-lede { max-width: 850px; color: var(--muted); font-size: 15px; margin: 0; }
+  .udx-status {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .udx-stat { padding: 12px 16px; min-width: 104px; border-left: 1px solid var(--line); }
+  .udx-stat:first-child { border-left: 0; }
+  .udx-stat strong { display: block; font-size: 19px; }
+  .udx-stat span { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  .udx-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface) 93%, transparent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 10px;
+    z-index: 20;
+    backdrop-filter: blur(12px);
+  }
+  .udx-select, .udx-search {
+    min-height: 38px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 8px 11px;
+  }
+  .udx-select { min-width: 238px; }
+  .udx-search { min-width: 220px; flex: 1; }
+  .udx-chip {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 11px;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+  }
+  .udx-chip[aria-pressed="true"] { color: var(--ink); border-color: currentColor; }
+  .udx-dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
+  .udx-chip[data-route="champion"] { color: var(--teal); }
+  .udx-chip[data-route="fallback"] { color: var(--violet); }
+  .udx-chip[data-route="control"] { color: var(--amber); }
+  .udx-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; margin-top: 16px; }
+  .udx-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+  .udx-canvas-head { display: flex; justify-content: space-between; gap: 12px; align-items: start; padding: 15px 17px; border-bottom: 1px solid var(--line); }
+  .udx-canvas-head h2 { margin: 0 0 3px; font-size: 16px; }
+  .udx-canvas-head p { margin: 0; color: var(--muted); font-size: 12px; }
+  .udx-coverage { color: var(--green); font-weight: 750; white-space: nowrap; }
+  .udx-scroll { overflow-x: auto; overflow-y: hidden; padding: 18px 18px 26px; }
+  .udx-network { position: relative; min-width: 1420px; }
+  .udx-route-layer { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; overflow: visible; }
+  .udx-route-path { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: .84; }
+  .udx-route-path.is-muted { opacity: .08; }
+  .udx-route-path.champion { stroke: var(--teal); }
+  .udx-route-path.fallback { stroke: var(--violet); stroke-dasharray: 10 7; }
+  .udx-route-path.control { stroke: var(--amber); stroke-dasharray: 3 7; }
+  .udx-stages { display: flex; gap: 12px; align-items: stretch; position: relative; z-index: 4; }
+  .udx-stage {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--surface-2) 42%, transparent);
+    min-width: max-content;
+  }
+  .udx-stage-head { padding: 11px 13px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .udx-stage-head strong { font-size: 12px; letter-spacing: .03em; }
+  .udx-stage-head span { color: var(--muted); font-size: 10px; }
+  .udx-stage-body { display: flex; gap: 10px; padding: 11px; flex: 1; }
+  .udx-step { width: 146px; display: flex; flex-direction: column; }
+  .udx-step-head { min-height: 73px; padding: 0 3px 10px; }
+  .udx-step-no { color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+  .udx-step h3 { font-size: 13px; margin: 4px 0 2px; line-height: 1.2; }
+  .udx-step-purpose { color: var(--muted); font-size: 10px; line-height: 1.3; }
+  .udx-kind { display: inline-flex; margin-top: 6px; border-radius: 5px; padding: 2px 5px; font-size: 9px; font-weight: 800; text-transform: uppercase; background: var(--teal-soft); color: var(--teal); }
+  .udx-kind.branch { background: var(--amber-soft); color: var(--amber); }
+  .udx-kind.loop { background: var(--violet-soft); color: var(--violet); }
+  .udx-nodes { display: flex; flex-direction: column; gap: 8px; }
+  .udx-node {
+    position: relative;
+    z-index: 6;
+    min-height: 64px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 8px 9px;
+    text-align: left;
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, opacity .16s ease;
+  }
+  .udx-node:hover, .udx-node:focus-visible { transform: translateY(-1px); border-color: var(--teal); box-shadow: 0 7px 18px rgba(20, 46, 39, .12); outline: none; }
+  .udx-node.is-selected { box-shadow: inset 0 0 0 2px currentColor; }
+  .udx-node.is-hidden { display: none; }
+  .udx-node.is-dim { opacity: .23; }
+  .udx-node strong { display: block; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .udx-node-meta { display: flex; justify-content: space-between; gap: 5px; color: var(--muted); font-size: 9px; margin-top: 4px; }
+  .udx-score { color: var(--green); font-weight: 750; }
+  .udx-node[data-routes~="champion"] { color: var(--teal); }
+  .udx-node[data-routes~="fallback"]:not([data-routes~="champion"]) { color: var(--violet); }
+  .udx-node[data-routes~="control"]:not([data-routes~="champion"]):not([data-routes~="fallback"]) { color: var(--amber); }
+  .udx-step-foot { margin-top: auto; padding: 9px 3px 0; color: var(--muted); font-size: 9px; }
+  .udx-rail { display: flex; flex-direction: column; gap: 14px; }
+  .udx-panel { padding: 15px; }
+  .udx-panel h2 { font-size: 14px; margin: 0 0 10px; }
+  .udx-panel h3 { font-size: 11px; margin: 13px 0 5px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  .udx-node-title { font-size: 18px; font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere; }
+  .udx-node-desc { color: var(--muted); font-size: 12px; margin-top: 5px; }
+  .udx-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+  .udx-badge { background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; padding: 3px 6px; font-size: 9px; }
+  .udx-contract { display: grid; gap: 6px; }
+  .udx-port { display: flex; justify-content: space-between; gap: 8px; padding: 7px; border-radius: 8px; background: var(--surface-2); font-size: 10px; }
+  .udx-port code { color: var(--teal); }
+  .udx-feedback { display: grid; gap: 8px; }
+  .udx-feedback-row { display: grid; grid-template-columns: 76px 1fr auto; gap: 8px; align-items: center; font-size: 10px; }
+  .udx-bar { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .udx-bar span { display: block; height: 100%; border-radius: inherit; background: var(--teal); }
+  .udx-warning { margin-top: 10px; padding: 9px; border-radius: 9px; background: var(--amber-soft); color: var(--amber); font-size: 10px; }
+  .udx-tabs { display: flex; gap: 5px; border-bottom: 1px solid var(--line); padding: 0 15px; }
+  .udx-tab { border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); padding: 11px 8px 9px; cursor: pointer; }
+  .udx-tab[aria-selected="true"] { color: var(--ink); border-color: var(--teal); }
+  .udx-tabview { padding: 15px; }
+  .udx-tabview[hidden] { display: none; }
+  .udx-compare { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .udx-compare th, .udx-compare td { padding: 8px; border-bottom: 1px solid var(--line); text-align: left; }
+  .udx-compare th { color: var(--muted); font-weight: 650; }
+  .udx-good { color: var(--green); font-weight: 750; }
+  .udx-bad { color: var(--red); font-weight: 750; }
+  .udx-flow-note { display: flex; gap: 9px; align-items: center; color: var(--muted); font-size: 11px; padding: 12px 16px; border-top: 1px solid var(--line); }
+  .udx-arrow { color: var(--teal); font-size: 17px; }
+  @media (max-width: 980px) {
+    .udx { padding: 16px; }
+    .udx-hero { grid-template-columns: 1fr; }
+    .udx-status { width: max-content; }
+    .udx-layout { grid-template-columns: 1fr; }
+    .udx-rail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 620px) {
+    .udx-status { grid-template-columns: 1fr; width: 100%; }
+    .udx-stat { border-left: 0; border-top: 1px solid var(--line); }
+    .udx-stat:first-child { border-top: 0; }
+    .udx-toolbar { position: static; }
+    .udx-select, .udx-search { width: 100%; min-width: 0; }
+    .udx-rail { grid-template-columns: 1fr; }
+  }
+</style>
+
+<main class="udx">
+  <div class="udx-shell">
+    <header class="udx-hero">
+      <div>
+        <div class="udx-eyebrow">SolutionGraph 0.5 · universal DAG explorer</div>
+        <h1>Every step. Every compatible node. Every tested route.</h1>
+        <p class="udx-lede">A strictly left-to-right view of one solution family. Macro stages are visible submatrices; atomic substeps are columns; interchangeable implementations are stacked vertically. Optimization and evidence remain outside the execution path.</p>
+      </div>
+      <div class="udx-status" aria-label="Space summary">
+        <div class="udx-stat"><strong>9</strong><span>atomic steps</span></div>
+        <div class="udx-stat"><strong>27</strong><span>visible nodes</span></div>
+        <div class="udx-stat"><strong>19,683</strong><span>route upper bound</span></div>
+      </div>
+    </header>
+
+    <section class="udx-toolbar" aria-label="Explorer controls">
+      <select class="udx-select" aria-label="Solution family">
+        <option>Golden customer record · nested reference</option>
+        <option disabled>23 executable Arena examples in repository</option>
+        <option disabled>24 reusable task contracts in repository</option>
+      </select>
+      <input class="udx-search" id="udx-search" type="search" placeholder="Filter nodes, runtimes, capabilities…" aria-label="Filter nodes">
+      <button class="udx-chip" data-route="champion" aria-pressed="true"><span class="udx-dot"></span>Champion</button>
+      <button class="udx-chip" data-route="fallback" aria-pressed="true"><span class="udx-dot"></span>Fallback</button>
+      <button class="udx-chip" data-route="control" aria-pressed="true"><span class="udx-dot"></span>Negative control</button>
+    </section>
+
+    <div class="udx-layout">
+      <section class="udx-card">
+        <div class="udx-canvas-head">
+          <div><h2>Compiled solution space</h2><p>Columns never mix contracts, policies, feedback, or optimizers with executable substeps.</p></div>
+          <div class="udx-coverage" id="udx-coverage">27 of 27 nodes visible</div>
+        </div>
+        <div class="udx-scroll">
+          <div class="udx-network" id="udx-network">
+            <svg class="udx-route-layer" id="udx-routes" aria-hidden="true"></svg>
+            <div class="udx-stages">
+              <section class="udx-stage" aria-label="Stage one intake and trust">
+                <div class="udx-stage-head"><strong>01 · Intake &amp; trust</strong><span>submatrix · 3 atomic steps</span></div>
+                <div class="udx-stage-body">
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 1.1</div><h3>Capture records</h3><div class="udx-step-purpose">Acquire immutable, source-tagged inputs.</div><span class="udx-kind">atomic</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-capture-batch" data-routes="champion" data-name="Batch file capture python deterministic"><strong>capture.batch-files</strong><span class="udx-node-meta"><span>python · deterministic</span><span class="udx-score">0.98</span></span></button>
+                      <button class="udx-node" id="n-capture-api" data-routes="fallback" data-name="API snapshot http recorded"><strong>capture.api-snapshot</strong><span class="udx-node-meta"><span>http · recorded</span><span class="udx-score">0.93</span></span></button>
+                      <button class="udx-node" id="n-capture-stream" data-routes="control" data-name="Event stream window event-time"><strong>capture.event-window</strong><span class="udx-node-meta"><span>stream · event-time</span><span class="udx-score">0.81</span></span></button>
+                    </div><div class="udx-step-foot">3 / 146 registry nodes admitted</div>
+                  </article>
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 1.2</div><h3>Decode schema</h3><div class="udx-step-purpose">Produce one nominal record-bundle type.</div><span class="udx-kind">atomic</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-decode-strict" data-routes="champion fallback" data-name="Strict schema decoder json csv"><strong>decode.strict-schema</strong><span class="udx-node-meta"><span>json/csv · exact</span><span class="udx-score">0.97</span></span></button>
+                      <button class="udx-node" id="n-decode-infer" data-routes="" data-name="Schema inference arrow"><strong>decode.infer-columns</strong><span class="udx-node-meta"><span>arrow · seeded</span><span class="udx-score">0.89</span></span></button>
+                      <button class="udx-node" id="n-decode-lenient" data-routes="control" data-name="Lenient coercion python"><strong>decode.lenient-coerce</strong><span class="udx-node-meta"><span>python · heuristic</span><span class="udx-score">0.72</span></span></button>
+                    </div><div class="udx-step-foot">exact type: customer-bundle@1</div>
+                  </article>
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 1.3</div><h3>Establish provenance</h3><div class="udx-step-purpose">Bind bytes, source, time, and authority.</div><span class="udx-kind">atomic</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-prov-content" data-routes="champion fallback" data-name="Content digest provenance SLSA W3C"><strong>provenance.content-digest</strong><span class="udx-node-meta"><span>sha256 · W3C PROV</span><span class="udx-score">1.00</span></span></button>
+                      <button class="udx-node" id="n-prov-lineage" data-routes="" data-name="OpenLineage event"><strong>provenance.openlineage</strong><span class="udx-node-meta"><span>OL · facet v1</span><span class="udx-score">0.96</span></span></button>
+                      <button class="udx-node" id="n-prov-self" data-routes="control" data-name="Self asserted provenance"><strong>provenance.self-asserted</strong><span class="udx-node-meta"><span>untrusted · local</span><span class="udx-score">0.44</span></span></button>
+                    </div><div class="udx-step-foot">authority cannot be learned by search</div>
+                  </article>
+                </div>
+              </section>
+
+              <section class="udx-stage" aria-label="Stage two resolve identity">
+                <div class="udx-stage-head"><strong>02 · Resolve identity</strong><span>submatrix · branch + bounded loop</span></div>
+                <div class="udx-stage-body">
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 2.1</div><h3>Normalize fields</h3><div class="udx-step-purpose">Canonicalize without erasing evidence.</div><span class="udx-kind">atomic</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-normalize-postal" data-routes="champion" data-name="Postal conservative normalization"><strong>normalize.postal-aware</strong><span class="udx-node-meta"><span>python · idempotent</span><span class="udx-score">0.96</span></span></button>
+                      <button class="udx-node" id="n-normalize-unicode" data-routes="fallback" data-name="Unicode conservative normalization"><strong>normalize.unicode-safe</strong><span class="udx-node-meta"><span>rust · deterministic</span><span class="udx-score">0.94</span></span></button>
+                      <button class="udx-node" id="n-normalize-aggressive" data-routes="control" data-name="Aggressive lossy normalization"><strong>normalize.aggressive</strong><span class="udx-node-meta"><span>python · lossy</span><span class="udx-score">0.70</span></span></button>
+                    </div><div class="udx-step-foot">nullable, ordering, privacy checked</div>
+                  </article>
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 2.2</div><h3>Choose evidence path</h3><div class="udx-step-purpose">Select authoritative or offline verification.</div><span class="udx-kind branch">branch</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-branch-policy" data-routes="champion fallback" data-name="Policy branch deterministic"><strong>branch.authority-policy</strong><span class="udx-node-meta"><span>policy · deterministic</span><span class="udx-score">0.99</span></span></button>
+                      <button class="udx-node" id="n-branch-availability" data-routes="" data-name="Availability branch circuit"><strong>branch.connector-health</strong><span class="udx-node-meta"><span>circuit · recorded</span><span class="udx-score">0.91</span></span></button>
+                      <button class="udx-node" id="n-branch-random" data-routes="control" data-name="Random branch invalid"><strong>branch.random-choice</strong><span class="udx-node-meta"><span>random · ungrounded</span><span class="udx-score">0.38</span></span></button>
+                    </div><div class="udx-step-foot">inactive arm receives a skipped receipt</div>
+                  </article>
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 2.3</div><h3>Generate pairs</h3><div class="udx-step-purpose">Bound identity comparisons.</div><span class="udx-kind">map</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-pairs-multikey" data-routes="champion" data-name="Multi key blocking email phone address"><strong>pairs.multi-key-block</strong><span class="udx-node-meta"><span>map · stable order</span><span class="udx-score">0.95</span></span></button>
+                      <button class="udx-node" id="n-pairs-lsh" data-routes="fallback" data-name="LSH token blocking"><strong>pairs.token-lsh</strong><span class="udx-node-meta"><span>map · seeded</span><span class="udx-score">0.92</span></span></button>
+                      <button class="udx-node" id="n-pairs-all" data-routes="control" data-name="Cartesian all pairs expensive"><strong>pairs.cartesian</strong><span class="udx-node-meta"><span>map · O(n²)</span><span class="udx-score">0.55</span></span></button>
+                    </div><div class="udx-step-foot">scatter → barrier → reduce</div>
+                  </article>
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 2.4</div><h3>Refine components</h3><div class="udx-step-purpose">Repeat until stable or bound reached.</div><span class="udx-kind loop">loop · max 4</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-loop-union" data-routes="champion" data-name="Union find bounded loop"><strong>resolve.union-find</strong><span class="udx-node-meta"><span>loop · checkpointable</span><span class="udx-score">0.97</span></span></button>
+                      <button class="udx-node" id="n-loop-graph" data-routes="fallback" data-name="Graph components bounded"><strong>resolve.components</strong><span class="udx-node-meta"><span>loop · content cache</span><span class="udx-score">0.93</span></span></button>
+                      <button class="udx-node" id="n-loop-single" data-routes="control" data-name="Single pass resolver"><strong>resolve.single-pass</strong><span class="udx-node-meta"><span>pass · no convergence</span><span class="udx-score">0.67</span></span></button>
+                    </div><div class="udx-step-foot">body expands into 4 inspectable DAG copies</div>
+                  </article>
+                </div>
+              </section>
+
+              <section class="udx-stage" aria-label="Stage three publish and verify">
+                <div class="udx-stage-head"><strong>03 · Publish &amp; verify</strong><span>submatrix · 2 atomic steps</span></div>
+                <div class="udx-stage-body">
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 3.1</div><h3>Merge golden rows</h3><div class="udx-step-purpose">Choose fields with provenance.</div><span class="udx-kind">reduce</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-merge-evidence" data-routes="champion" data-name="Evidence weighted merge"><strong>merge.evidence-weighted</strong><span class="udx-node-meta"><span>reduce · deterministic</span><span class="udx-score">0.98</span></span></button>
+                      <button class="udx-node" id="n-merge-complete" data-routes="fallback" data-name="Completeness merge"><strong>merge.most-complete</strong><span class="udx-node-meta"><span>reduce · stable</span><span class="udx-score">0.91</span></span></button>
+                      <button class="udx-node" id="n-merge-first" data-routes="control" data-name="First row merge"><strong>merge.first-record</strong><span class="udx-node-meta"><span>reduce · biased</span><span class="udx-score">0.59</span></span></button>
+                    </div><div class="udx-step-foot">one record per entity component</div>
+                  </article>
+                  <article class="udx-step">
+                    <div class="udx-step-head"><div class="udx-step-no">Step 3.2</div><h3>Independent verify</h3><div class="udx-step-purpose">Gate outputs outside producing nodes.</div><span class="udx-kind">barrier</span></div>
+                    <div class="udx-nodes">
+                      <button class="udx-node" id="n-verify-oracle" data-routes="champion fallback" data-name="Independent oracle holdout"><strong>verify.fixed-oracle</strong><span class="udx-node-meta"><span>holdout · isolated</span><span class="udx-score">1.00</span></span></button>
+                      <button class="udx-node" id="n-verify-rules" data-routes="" data-name="Invariant rules verifier"><strong>verify.invariants</strong><span class="udx-node-meta"><span>rules · exact</span><span class="udx-score">0.94</span></span></button>
+                      <button class="udx-node" id="n-verify-self" data-routes="control" data-name="Self verification anti pattern"><strong>verify.self-report</strong><span class="udx-node-meta"><span>producer · invalid</span><span class="udx-score">0.31</span></span></button>
+                    </div><div class="udx-step-foot">acceptance is not a learned score</div>
+                  </article>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="udx-flow-note"><span class="udx-arrow">→</span><span>Execution is monotonic left to right. Branches, loops, maps, and composites are lowered or explicitly receipted; feedback changes the next frozen plan, never the running route.</span></div>
+      </section>
+
+      <aside class="udx-rail">
+        <section class="udx-card udx-panel" aria-live="polite">
+          <h2>Node contract</h2>
+          <div class="udx-node-title" id="udx-node-title">capture.batch-files</div>
+          <div class="udx-node-desc" id="udx-node-desc">Acquires immutable, source-tagged file records through the trusted local runtime.</div>
+          <div class="udx-badges" id="udx-badges"><span class="udx-badge">python</span><span class="udx-badge">idempotent</span><span class="udx-badge">content cache</span></div>
+          <h3>Typed ports</h3>
+          <div class="udx-contract"><div class="udx-port"><span>IN · source</span><code>file-set@1</code></div><div class="udx-port"><span>OUT · bundle</span><code>customer-bundle@1</code></div></div>
+          <h3>Operational profile</h3>
+          <div class="udx-contract"><div class="udx-port"><span>effects</span><code>filesystem.read</code></div><div class="udx-port"><span>state</span><code>stateless</code></div><div class="udx-port"><span>digest</span><code>sha256:84e…</code></div></div>
+          <div class="udx-warning">Metadata may be sparse. Unknown ordering, time, privacy, or state semantics never become an implicit compatibility claim.</div>
+        </section>
+
+        <section class="udx-card">
+          <div class="udx-tabs" role="tablist" aria-label="Evidence panels">
+            <button class="udx-tab" role="tab" aria-selected="true" data-tab="feedback">Feedback</button>
+            <button class="udx-tab" role="tab" aria-selected="false" data-tab="compare">Routes</button>
+          </div>
+          <div class="udx-tabview" id="udx-tab-feedback" role="tabpanel">
+            <div class="udx-feedback">
+              <div class="udx-feedback-row"><span>Quality</span><div class="udx-bar"><span style="width:96%"></span></div><b>0.96</b></div>
+              <div class="udx-feedback-row"><span>Reliability</span><div class="udx-bar"><span style="width:94%"></span></div><b>0.94</b></div>
+              <div class="udx-feedback-row"><span>Cost</span><div class="udx-bar"><span style="width:78%"></span></div><b>$0.08</b></div>
+              <div class="udx-feedback-row"><span>Latency</span><div class="udx-bar"><span style="width:71%"></span></div><b>318 ms</b></div>
+            </div>
+            <h3>Learning record</h3>
+            <div class="udx-contract"><div class="udx-port"><span>evidence</span><code>n=48</code></div><div class="udx-port"><span>freshness</span><code>2 days</code></div><div class="udx-port"><span>uncertainty</span><code>±0.03</code></div></div>
+          </div>
+          <div class="udx-tabview" id="udx-tab-compare" role="tabpanel" hidden>
+            <table class="udx-compare"><thead><tr><th>Route</th><th>Q</th><th>Cost</th><th>Gate</th></tr></thead><tbody><tr><td>Champion</td><td>.96</td><td>.08</td><td class="udx-good">pass</td></tr><tr><td>Fallback</td><td>.93</td><td>.05</td><td class="udx-good">pass</td></tr><tr><td>Control</td><td>.61</td><td>.02</td><td class="udx-bad">reject</td></tr></tbody></table>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<script>
+(() => {
+  const network = document.getElementById('udx-network');
+  const svg = document.getElementById('udx-routes');
+  const nodes = [...document.querySelectorAll('.udx-node')];
+  const chips = [...document.querySelectorAll('.udx-chip[data-route]')];
+  const coverage = document.getElementById('udx-coverage');
+  const search = document.getElementById('udx-search');
+  const routeIds = {
+    champion: ['n-capture-batch','n-decode-strict','n-prov-content','n-normalize-postal','n-branch-policy','n-pairs-multikey','n-loop-union','n-merge-evidence','n-verify-oracle'],
+    fallback: ['n-capture-api','n-decode-strict','n-prov-content','n-normalize-unicode','n-branch-policy','n-pairs-lsh','n-loop-graph','n-merge-complete','n-verify-oracle'],
+    control: ['n-capture-stream','n-decode-lenient','n-prov-self','n-normalize-aggressive','n-branch-random','n-pairs-all','n-loop-single','n-merge-first','n-verify-self']
+  };
+  const activeRoutes = new Set(['champion', 'fallback', 'control']);
+
+  function nodePoint(id) {
+    const node = document.getElementById(id);
+    const root = network.getBoundingClientRect();
+    const box = node.getBoundingClientRect();
+    return { x: box.left - root.left + box.width / 2, y: box.top - root.top + box.height / 2 };
+  }
+
+  function pathFor(ids) {
+    const points = ids.filter(id => document.getElementById(id)?.offsetParent).map(nodePoint);
+    if (points.length < 2) return '';
+    return points.map((point, index) => {
+      if (index === 0) return `M ${point.x} ${point.y}`;
+      const previous = points[index - 1];
+      const bend = Math.max(18, (point.x - previous.x) * .48);
+      return `C ${previous.x + bend} ${previous.y}, ${point.x - bend} ${point.y}, ${point.x} ${point.y}`;
+    }).join(' ');
+  }
+
+  function drawRoutes() {
+    const width = network.scrollWidth;
+    const height = network.scrollHeight;
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.setAttribute('width', width);
+    svg.setAttribute('height', height);
+    svg.innerHTML = Object.entries(routeIds).map(([route, ids]) => {
+      const muted = activeRoutes.has(route) ? '' : ' is-muted';
+      return `<path class="udx-route-path ${route}${muted}" d="${pathFor(ids)}"></path>`;
+    }).join('');
+  }
+
+  function filterNodes() {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+    nodes.forEach(node => {
+      const matches = !query || `${node.dataset.name} ${node.textContent}`.toLowerCase().includes(query);
+      node.classList.toggle('is-hidden', !matches);
+      visible += Number(matches);
+    });
+    coverage.textContent = `${visible} of ${nodes.length} nodes visible`;
+    requestAnimationFrame(drawRoutes);
+  }
+
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    const route = chip.dataset.route;
+    if (activeRoutes.has(route)) activeRoutes.delete(route); else activeRoutes.add(route);
+    chip.setAttribute('aria-pressed', String(activeRoutes.has(route)));
+    nodes.forEach(node => {
+      const memberships = (node.dataset.routes || '').split(' ').filter(Boolean);
+      const connected = memberships.length === 0 || memberships.some(item => activeRoutes.has(item));
+      node.classList.toggle('is-dim', !connected);
+    });
+    drawRoutes();
+  }));
+
+  nodes.forEach(node => node.addEventListener('click', () => {
+    nodes.forEach(item => item.classList.remove('is-selected'));
+    node.classList.add('is-selected');
+    document.getElementById('udx-node-title').textContent = node.querySelector('strong').textContent;
+    document.getElementById('udx-node-desc').textContent = `Selected implementation in this atomic-step column. ${node.dataset.name}. Its exact manifest, port semantics, authority, state, and evidence remain inspectable.`;
+    const tags = node.querySelector('.udx-node-meta span').textContent.split(' · ');
+    document.getElementById('udx-badges').innerHTML = tags.map(tag => `<span class="udx-badge">${tag}</span>`).join('');
+  }));
+
+  document.querySelectorAll('.udx-tab').forEach(tab => tab.addEventListener('click', () => {
+    document.querySelectorAll('.udx-tab').forEach(item => item.setAttribute('aria-selected', String(item === tab)));
+    document.querySelectorAll('.udx-tabview').forEach(view => { view.hidden = view.id !== `udx-tab-${tab.dataset.tab}`; });
+  }));
+
+  search.addEventListener('input', filterNodes);
+  window.addEventListener('resize', drawRoutes);
+  document.fonts?.ready.then(drawRoutes);
+  requestAnimationFrame(drawRoutes);
+})();
+</script>
+
+<script id="codex-visualization-tooltip">/* oxlint-disable typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-return */
+// Runs inside the visualization sandbox, not the host webview.
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide-initialization">(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body>
+</html>

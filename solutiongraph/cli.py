@@ -27,7 +27,6 @@ def _doctor() -> int:
     from solutiongraph.arena import UNIVERSAL_DAG_ARENA
     from solutiongraph.catalog import catalog_documents
     from solutiongraph.examples.tasks import EXAMPLE_TASKS
-    from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
     from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
     from solutiongraph.schemas import load_all_schemas
     from solutiongraph.template_library import REFERENCE_TEMPLATES
@@ -40,9 +39,14 @@ def _doctor() -> int:
         for node in REFERENCE_NODE_SPECS
         for problem in node.validate(f"nodes.{node.id}")
     )
+    example_nodes = {
+        (node.id, node.version, node.implementation_digest): node
+        for example in EXAMPLE_TASKS
+        for node in example.registry.nodes
+    }
     problems.extend(
         problem
-        for node in EXAMPLE_NODES
+        for node in example_nodes.values()
         for problem in node.validate(f"example_nodes.{node.id}")
     )
     node_by_id = {node.id: node for node in REFERENCE_NODE_SPECS}
@@ -65,7 +69,7 @@ def _doctor() -> int:
         f"templates={len(REFERENCE_TEMPLATES.templates)} "
         f"atomic_slots={sum(len(item.program.slots) for item in REFERENCE_TEMPLATES.templates)} "
         f"nodes={len(REFERENCE_NODE_SPECS)} "
-        f"example_nodes={len(EXAMPLE_NODES)} "
+        f"example_nodes={len(example_nodes)} "
         f"executable_examples={len(EXAMPLE_TASKS)} "
         f"arena_tasks={len(UNIVERSAL_DAG_ARENA.tasks)} "
         f"schemas={len(schemas)} "
@@ -236,6 +240,7 @@ def _verify(catalog_root: Path | None, runtime: str, as_json: bool) -> int:
             f"atomic_slots={result.atomic_slot_count} "
             f"executable_nodes={result.executable_node_count} "
             f"schemas={result.schema_count} "
+            f"conformance_checks={len(result.conformance.checks)} "
             f"catalog_documents={result.catalog_document_count} "
             f"catalog_checked={'yes' if result.catalog_checked else 'no'}"
         )
@@ -271,6 +276,100 @@ def _ledger_verify(path: Path, as_json: bool) -> int:
             f"receipts={status.receipt_count} "
             f"head={status.head_digest or 'empty'} bytes={status.byte_size}"
         )
+    return 0
+
+
+def _conformance(as_json: bool) -> int:
+    from solutiongraph.conformance import run_conformance_suite
+
+    result = run_conformance_suite()
+    if as_json:
+        print(json.dumps(result.to_dict(), indent=2, sort_keys=True))
+    else:
+        print(
+            f"SolutionGraph advanced conformance: "
+            f"{'passed' if result.ok else 'failed'} ({len(result.checks)} checks)"
+        )
+        for check in result.checks:
+            print(f"- {'PASS' if check.passed else 'FAIL'} {check.id}: {check.details}")
+    return 0 if result.ok else 1
+
+
+def _load_receipt(path: Path, receipt_id: str | None):
+    from solutiongraph.evidence import RunReceipt
+    from solutiongraph.ledger import JsonlReceiptJournal
+
+    if path.suffix.lower() == ".jsonl":
+        receipts = JsonlReceiptJournal(path).read().receipts
+        if receipt_id:
+            matches = tuple(item for item in receipts if item.id == receipt_id)
+            if len(matches) != 1:
+                raise ValueError(
+                    f"receipt id {receipt_id!r} matched {len(matches)} journal entries"
+                )
+            return matches[0]
+        if not receipts:
+            raise ValueError("receipt journal is empty")
+        return receipts[-1]
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("receipt JSON must be an object")
+    if "receipt" in payload and isinstance(payload["receipt"], dict):
+        payload = payload["receipt"]
+    elif (
+        "execution" in payload
+        and isinstance(payload["execution"], dict)
+        and isinstance(payload["execution"].get("receipt"), dict)
+    ):
+        payload = payload["execution"]["receipt"]
+    receipt = RunReceipt.from_dict(payload)
+    if receipt_id and receipt.id != receipt_id:
+        raise ValueError("receipt JSON does not contain the requested receipt id")
+    return receipt
+
+
+def _provenance_export(
+    receipt_path: Path,
+    output: Path,
+    format_: str,
+    receipt_id: str | None,
+) -> int:
+    from solutiongraph.provenance import export_provenance
+
+    receipt = _load_receipt(receipt_path, receipt_id)
+    bundle = export_provenance(receipt)
+    payload = {
+        "bundle": bundle.to_dict(),
+        "w3c-prov": bundle.w3c_prov,
+        "openlineage": bundle.openlineage,
+        "slsa": bundle.slsa_provenance,
+    }[format_]
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    print(f"wrote {format_} provenance for {receipt.id} to {output}")
+    return 0
+
+
+def _checkpoint_inspect(path: Path, as_json: bool) -> int:
+    from solutiongraph.durable import ExecutionCheckpoint
+
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("checkpoint JSON must be an object")
+    checkpoint = ExecutionCheckpoint.from_dict(payload)
+    if as_json:
+        print(json.dumps(checkpoint.to_dict(), indent=2, sort_keys=True))
+    else:
+        print(
+            f"{checkpoint.id}: status={checkpoint.status} "
+            f"completed_slots={len(checkpoint.completed_slots)} "
+            f"plan={checkpoint.plan_digest}"
+        )
+        for slot in checkpoint.completed_slots:
+            print(f"- {slot.slot_id}: {slot.candidate_id} ({slot.receipt.outcome})")
     return 0
 
 
@@ -413,6 +512,11 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
 
     commands.add_parser("doctor", help="Validate the installed reference assets")
+    conformance = commands.add_parser(
+        "conformance",
+        help="Execute advanced branch, structure, topology, stream, saga, fidelity, and provenance checks",
+    )
+    conformance.add_argument("--json", action="store_true", help="Emit JSON")
     verify = commands.add_parser(
         "verify",
         help="Compile and execute every bundled route as a release gate",
@@ -575,6 +679,37 @@ def build_parser() -> argparse.ArgumentParser:
     )
     ledger_verify.add_argument("path", type=Path)
     ledger_verify.add_argument("--json", action="store_true", help="Emit JSON")
+
+    provenance = commands.add_parser(
+        "provenance", help="Export portable provenance from a run receipt"
+    )
+    provenance_commands = provenance.add_subparsers(
+        dest="provenance_command", required=True
+    )
+    provenance_export = provenance_commands.add_parser(
+        "export", help="Export W3C PROV, OpenLineage, SLSA, or all formats"
+    )
+    provenance_export.add_argument("receipt", type=Path)
+    provenance_export.add_argument("--receipt-id")
+    provenance_export.add_argument(
+        "--format",
+        dest="provenance_format",
+        choices=("bundle", "w3c-prov", "openlineage", "slsa"),
+        default="bundle",
+    )
+    provenance_export.add_argument("--output", type=Path, required=True)
+
+    checkpoint = commands.add_parser(
+        "checkpoint", help="Inspect a durable reference-executor checkpoint"
+    )
+    checkpoint_commands = checkpoint.add_subparsers(
+        dest="checkpoint_command", required=True
+    )
+    checkpoint_inspect = checkpoint_commands.add_parser(
+        "inspect", help="Validate and display one checkpoint JSON file"
+    )
+    checkpoint_inspect.add_argument("path", type=Path)
+    checkpoint_inspect.add_argument("--json", action="store_true", help="Emit JSON")
     return parser
 
 
@@ -584,6 +719,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if args.command == "doctor":
             return _doctor()
+        if args.command == "conformance":
+            return _conformance(args.json)
         if args.command == "verify":
             return _verify(args.catalog_root, args.runtime, args.json)
         if args.command == "init":
@@ -638,6 +775,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
         if args.command == "ledger" and args.ledger_command == "verify":
             return _ledger_verify(args.path, args.json)
+        if args.command == "provenance" and args.provenance_command == "export":
+            return _provenance_export(
+                args.receipt,
+                args.output,
+                args.provenance_format,
+                args.receipt_id,
+            )
+        if args.command == "checkpoint" and args.checkpoint_command == "inspect":
+            return _checkpoint_inspect(args.path, args.json)
     except (ExecutionError, OSError, ValueError) as exc:
         parser.exit(2, f"solutiongraph: error: {exc}\n")
     parser.error("unsupported command")

@@ -9,7 +9,7 @@
     "edges", "inputs", "outputs", "allowed_effects", "granted_permissions", "invariants"
   ],
   "properties": {
-    "model_version": {"const": "0.1"},
+    "model_version": {"const": "0.2"},
     "id": {"$ref": "common.schema.json#/$defs/id"},
     "version": {"type": "string", "minLength": 1},
     "task": {"type": "string", "minLength": 1},
@@ -22,7 +22,8 @@
         "additionalProperties": false,
         "required": [
           "id", "purpose", "inputs", "outputs", "success_contract", "kind",
-          "group", "required_capabilities", "allowed_effects", "optional", "subgraph_ref"
+          "group", "required_capabilities", "allowed_effects", "optional", "subgraph_ref",
+          "activation_slot", "activation_port", "activation_values"
         ],
         "properties": {
           "id": {"$ref": "common.schema.json#/$defs/id"},
@@ -43,7 +44,12 @@
             "uniqueItems": true
           },
           "optional": {"type": "boolean"},
-          "subgraph_ref": {"type": "string"}
+          "subgraph_ref": {"type": "string"},
+          "activation_slot": {"type": "string"},
+          "activation_port": {"type": "string"},
+          "activation_values": {
+            "type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true
+          }
         }
       }
     },
@@ -85,4 +91,3 @@
     "invariants": {"type": "array", "items": {"type": "string"}}
   }
 }
-

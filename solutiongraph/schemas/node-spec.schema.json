@@ -11,7 +11,7 @@
     "postconditions", "invariants", "failure_modes", "resources", "verifier", "source"
   ],
   "properties": {
-    "model_version": {"const": "0.1"},
+    "model_version": {"const": "0.2"},
     "id": {"$ref": "common.schema.json#/$defs/id"},
     "version": {"type": "string", "minLength": 1},
     "implementation_digest": {"$ref": "common.schema.json#/$defs/digest"},
@@ -85,4 +85,3 @@
     "source": {"type": "string"}
   }
 }
-

@@ -126,7 +126,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -143,6 +143,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.define"
@@ -186,6 +189,9 @@
         "success_contract": "Load versioned desired state, environment, and ownership and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.define"
@@ -229,6 +235,9 @@
         "success_contract": "Resolve providers, modules, images, and immutable dependencies and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.define"
@@ -272,6 +281,9 @@
         "success_contract": "Define security, residency, cost, resilience, and naming policies and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.discover"
@@ -315,6 +327,9 @@
         "success_contract": "Authenticate to the declared provider and account scope and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.discover"
@@ -358,6 +373,9 @@
         "success_contract": "Read current resources, state, drift, and locks and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.discover"
@@ -401,6 +419,9 @@
         "success_contract": "Detect and explicitly reconcile unmanaged resources and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.plan"
@@ -444,6 +465,9 @@
         "success_contract": "Compute create, update, replace, and destroy operations and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.plan"
@@ -487,6 +511,9 @@
         "success_contract": "Estimate one-time and recurring cost deltas and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.plan"
@@ -530,6 +557,9 @@
         "success_contract": "Evaluate security, compliance, blast radius, and approval policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.plan"
@@ -573,6 +603,9 @@
         "success_contract": "Record authorized approval for the exact plan digest and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.apply"
@@ -616,6 +649,9 @@
         "success_contract": "Acquire an environment-scoped mutation lock and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.apply"
@@ -659,6 +695,9 @@
         "success_contract": "Apply changes idempotently with bounded retries and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.apply"
@@ -702,6 +741,9 @@
         "success_contract": "Recover, continue, or rollback partial application by policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"
@@ -745,6 +787,9 @@
         "success_contract": "Verify actual resources, configuration, connectivity, and health and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"
@@ -788,6 +833,9 @@
         "success_contract": "Verify identity, network, encryption, secrets, and logging controls and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"
@@ -831,6 +879,9 @@
         "success_contract": "Publish protected state, outputs, drift baseline, and receipt and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.verify"

@@ -7,13 +7,15 @@
     "latency"
   ],
   "arena_model_version": "0.1",
-  "executable_example_ids": [],
+  "executable_example_ids": [
+    "recommendation-ranking"
+  ],
   "external_requirements": [],
   "id": "arena.recommendation-ranking",
   "input_contract": "User/event context, eligible items, policies, and evaluation split.",
   "output_contract": "Ranked items with scores, explanations, policy results, and offline evidence.",
   "problem": "Build candidate sets, features, scores, constraints, diversification, and evaluation.",
-  "readiness": "template",
+  "readiness": "executable_fixture",
   "stage_families": [
     "eligibility",
     "candidate generation",

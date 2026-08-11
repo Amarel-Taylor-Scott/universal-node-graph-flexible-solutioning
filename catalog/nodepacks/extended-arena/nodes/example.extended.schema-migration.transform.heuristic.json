@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    "extended.schema-migration.transform"
+  ],
+  "description": "Heuristic reference implementation for schema-migration/transform.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.extended_tasks:execute_heuristic_step",
+  "failure_modes": [],
+  "id": "example.extended.schema-migration.transform.heuristic",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:53f4c71e606d719aa600962a0d1c5e20b695f1dbc9a145d7c2e2766357d3f760",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.extended-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.extended-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "schema-migration"
+      ],
+      "default": null,
+      "description": "",
+      "name": "domain",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "transform"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/extended_tasks.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

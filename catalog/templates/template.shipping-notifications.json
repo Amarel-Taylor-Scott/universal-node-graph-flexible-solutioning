@@ -114,7 +114,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -131,6 +131,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -174,6 +177,9 @@
         "success_contract": "Receive carrier, warehouse, and order events idempotently and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -217,6 +223,9 @@
         "success_contract": "Authenticate event sources and verify integrity and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -260,6 +269,9 @@
         "success_contract": "Normalize provider payloads into a versioned event schema and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.ingest"
@@ -303,6 +315,9 @@
         "success_contract": "Detect replayed or semantically duplicate events and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.reconcile"
@@ -346,6 +361,9 @@
         "success_contract": "Resolve event identifiers to the correct shipment and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.reconcile"
@@ -389,6 +407,9 @@
         "success_contract": "Order late and out-of-order events under declared semantics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.reconcile"
@@ -432,6 +453,9 @@
         "success_contract": "Derive the current shipment status and confidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.reconcile"
@@ -475,6 +499,9 @@
         "success_contract": "Detect delay, damage, address, and delivery exceptions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decide"
@@ -518,6 +545,9 @@
         "success_contract": "Apply customer, jurisdiction, urgency, and suppression policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decide"
@@ -561,6 +591,9 @@
         "success_contract": "Resolve an authorized recipient and channel preference and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.decide"
@@ -604,6 +637,9 @@
         "success_contract": "Render localized, privacy-safe notification content and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -647,6 +683,9 @@
         "success_contract": "Dispatch through an admitted delivery provider and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -690,6 +729,9 @@
         "success_contract": "Observe provider and downstream delivery state and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -733,6 +775,9 @@
         "success_contract": "Retry, fail over, suppress, or escalate by failure class and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"

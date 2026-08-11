@@ -19,7 +19,7 @@ from typing import Any
 ID_RE = re.compile(r"^[a-z][a-z0-9_.:/-]*$")
 PORT_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 DIGEST_RE = re.compile(r"^sha256:[0-9a-f]{64}$")
-SEMANTIC_MODEL_VERSION = "0.1"
+SEMANTIC_MODEL_VERSION = "0.2"
 
 
 def canonical_json(value: Any) -> str:
@@ -389,6 +389,9 @@ class SemanticSlot:
     allowed_effects: tuple[str, ...] = ()
     optional: bool = False
     subgraph_ref: str = ""
+    activation_slot: str = ""
+    activation_port: str = ""
+    activation_values: tuple[str, ...] = ()
 
     def validate(self, path: str = "slot") -> list[str]:
         problems: list[str] = []
@@ -404,10 +407,30 @@ class SemanticSlot:
                 problems.append(f"{path}.{label} must have unique names")
             for index, port in enumerate(ports):
                 problems.extend(port.validate(f"{path}.{label}[{index}]"))
-        if self.kind == SlotKind.COMPOSITE and not self.subgraph_ref:
-            problems.append(f"{path}.subgraph_ref is required for composite slots")
-        if self.kind != SlotKind.COMPOSITE and self.subgraph_ref:
-            problems.append(f"{path}.subgraph_ref is valid only for composite slots")
+        if self.kind in (SlotKind.COMPOSITE, SlotKind.LOOP) and not self.subgraph_ref:
+            problems.append(f"{path}.subgraph_ref is required for composite and loop slots")
+        if self.kind not in (SlotKind.COMPOSITE, SlotKind.LOOP) and self.subgraph_ref:
+            problems.append(
+                f"{path}.subgraph_ref is valid only for composite and loop slots"
+            )
+        activation_fields = (
+            bool(self.activation_slot),
+            bool(self.activation_port),
+            bool(self.activation_values),
+        )
+        if any(activation_fields) and not all(activation_fields):
+            problems.append(
+                f"{path}.activation_slot, activation_port, and activation_values "
+                "must be declared together"
+            )
+        if self.activation_slot and not ID_RE.fullmatch(self.activation_slot):
+            problems.append(f"{path}.activation_slot must be a namespaced identifier")
+        if self.activation_port and not PORT_RE.fullmatch(self.activation_port):
+            problems.append(f"{path}.activation_port must be snake_case")
+        if len(self.activation_values) != len(set(self.activation_values)):
+            problems.append(f"{path}.activation_values must be unique")
+        if any(not isinstance(value, str) or not value for value in self.activation_values):
+            problems.append(f"{path}.activation_values must contain nonempty strings")
         for label, values in (
             ("group", self.group),
             ("required_capabilities", self.required_capabilities),
@@ -436,6 +459,9 @@ class SemanticSlot:
             "allowed_effects": list(self.allowed_effects),
             "optional": self.optional,
             "subgraph_ref": self.subgraph_ref,
+            "activation_slot": self.activation_slot,
+            "activation_port": self.activation_port,
+            "activation_values": list(self.activation_values),
         }
 
 

@@ -16,10 +16,16 @@ large prompt into every vendor-specific file.
 | `.agents/skills/execute-solution-graph/SKILL.md` | Runtime, artifact, fallback, verification, and executable-domain workflow | Loaded for frozen-plan execution work |
 | `.agents/skills/benchmark-solution-graph/SKILL.md` | Search-budget, receipt, holdout, and Pareto workflow | Loaded for route experiments |
 | `.agents/skills/design-autoresearch-campaign/SKILL.md` | Population lineage, generated-code quarantine, evaluator isolation, and promotion workflow | Loaded for iterative LLM-generated improvement campaigns |
+| `.agents/skills/design-topology-family/SKILL.md` | Alternative graph-shape contracts, budgets, lineage, and comparison workflow | Loaded when the harness may insert/remove/reorder semantic obligations |
+| `.agents/skills/author-structured-workflow/SKILL.md` | Conditional, merge, composite, and bounded-loop authoring workflow | Loaded when the task needs data-dependent or iterative control |
 | `UNIVERSAL_NODE_GRAPH_SPEC.md` | Normative architecture | Read for design or implementation work |
 | `NODE_REPOSITORY_PROTOCOL.md` | Node packs, sparse metadata, embeddings, handshake, and snapshots | Read for catalogue or discovery work |
 | `SOLUTION_TEMPLATE_PROTOCOL.md` | Cross-domain stages, atomic slots, pass-through, refinement | Read for decomposition/template work |
 | `EXECUTION_PROTOCOL.md` | Frozen-plan execution, runtime adapters, artifacts, recovery, and receipts | Read for runtime or notebook work |
+| `STRUCTURED_CONTROL_PROTOCOL.md` | Branch, merge, composite, loop, map, reduce, and barrier rules | Read before implementing control flow |
+| `TOPOLOGY_SEARCH_PROTOCOL.md` | Explicit graph variants and full search accounting | Read before topology generation or selection |
+| `STREAMING_PROTOCOL.md` | Event-time and production streaming boundaries | Read for stream graphs or adapters |
+| `PROVENANCE_AND_RESUME.md` | Exact local resume and interoperable provenance | Read for durable or lineage integrations |
 | `AGENT_PLAYBOOK.md` | Patterns, anti-patterns, and end-to-end delivery workflow | Read before implementing a new domain |
 | `RESEARCH_FOUNDATIONS.md` | Primary-source rationale | Read when evaluating or changing a tradeoff |
 | `AUTORESEARCH_REVIEW.md` | Verified AutoResearch/package lessons and numerical-node decomposition | Read for autonomous campaigns or solver packages |
@@ -47,16 +53,19 @@ The command fails on an existing destination and records the exact selected
 template digest. It never invents implementations, authority, or evidence.
 
 1. Load the generated and repository root instruction files.
-2. Activate the narrow template, node-pack, executor, benchmark, AutoResearch,
-   or end-to-end skill for the requested operation.
+2. Activate the narrow template, node-pack, structured-control, topology,
+   executor, benchmark, AutoResearch, or end-to-end skill for the requested operation.
 3. Negotiate node discovery and freeze a receipt-backed registry snapshot.
-4. Compile the semantic program and freeze a plan before implementing runtime adapters.
+4. If the task needs structured control, lower it deterministically. If graph
+   shape is a variable, freeze a `TopologyFamily`. Then compile the semantic
+   program and freeze a plan before implementing runtime adapters.
 5. Reconstruct the plan at execution, use explicit runtime authority, and retain
    artifacts plus an independent verification receipt. Prefer the subprocess
    adapter for trusted local lifecycle separation, set
    `allow_in_process_python=False`, and append every result immediately to a
    receipt journal. Use a stronger external boundary for untrusted code.
-6. Run universal conformance tests before domain-specific integration tests.
+6. Run `solutiongraph conformance` and universal tests before domain-specific
+   integration tests.
 7. Include discovery receipts, compiler diagnostics, search reports, frozen
    plan/admitted-space digests, execution receipts, rejected cases, and
    limitations in the review output; do not rely on prose assurance.

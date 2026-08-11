@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "structured-lowering-receipt.schema.json",
+  "title": "SolutionGraph Structured Lowering Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["structured_model_version", "source_program_digest", "lowered_program_digest", "catalog_digest", "expansions"],
+  "properties": {
+    "structured_model_version": {"const": "0.1"},
+    "source_program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "lowered_program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "catalog_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "expansions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slot_id", "kind", "subgraph_id", "subgraph_digest", "expanded_slot_ids", "iterations"],
+        "properties": {
+          "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+          "kind": {"enum": ["composite", "loop"]},
+          "subgraph_id": {"$ref": "common.schema.json#/$defs/id"},
+          "subgraph_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "expanded_slot_ids": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/id"}},
+          "iterations": {"type": "integer", "minimum": 1}
+        }
+      }
+    }
+  }
+}

@@ -186,7 +186,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -203,6 +203,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -246,6 +249,9 @@
         "success_contract": "Load train, test, metadata, and sample submission assets and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -289,6 +295,9 @@
         "success_contract": "Identify target, evaluation metric, and submission schema and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.acquire"
@@ -332,6 +341,9 @@
         "success_contract": "Profile columns, types, cardinalities, and missingness and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -375,6 +387,9 @@
         "success_contract": "Define a leakage-safe validation and resampling strategy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -418,6 +433,9 @@
         "success_contract": "Audit temporal, entity, target, and duplicate leakage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -461,6 +479,9 @@
         "success_contract": "Measure duplicates, invalid values, drift, and anomalies and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -504,6 +525,9 @@
         "success_contract": "Analyze univariate target and feature distributions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.investigate"
@@ -547,6 +571,9 @@
         "success_contract": "Analyze feature relationships and target associations and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -590,6 +617,9 @@
         "success_contract": "Resolve duplicate rows and conflicting entities and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -633,6 +663,9 @@
         "success_contract": "Repair semantic types and parse malformed values and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -676,6 +709,9 @@
         "success_contract": "Represent or impute missing values without leakage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -719,6 +755,9 @@
         "success_contract": "Detect and handle outliers under an explicit policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -762,6 +801,9 @@
         "success_contract": "Encode categorical values with fold-safe fitting and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.prepare"
@@ -805,6 +847,9 @@
         "success_contract": "Transform numeric values when the downstream model requires it and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.features"
@@ -848,6 +893,9 @@
         "success_contract": "Generate domain, interaction, aggregate, and temporal features and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.features"
@@ -891,6 +939,9 @@
         "success_contract": "Select a stable feature set using training-only evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -934,6 +985,9 @@
         "success_contract": "Fit a simple reproducible baseline and establish a floor and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -977,6 +1031,9 @@
         "success_contract": "Fit a diverse pool of admitted model families and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -1020,6 +1077,9 @@
         "success_contract": "Evaluate each route using the declared validation protocol and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -1063,6 +1123,9 @@
         "success_contract": "Produce complete out-of-fold predictions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -1106,6 +1169,9 @@
         "success_contract": "Calibrate predictions when the metric or use case requires it and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -1149,6 +1215,9 @@
         "success_contract": "Select complementary models using holdout-safe evidence and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.model"
@@ -1192,6 +1261,9 @@
         "success_contract": "Fit ensemble weights or stacker without validation leakage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -1235,6 +1307,9 @@
         "success_contract": "Run the independent holdout and robustness checks and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -1278,6 +1353,9 @@
         "success_contract": "Apply contract-preserving prediction postprocessing and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"
@@ -1321,6 +1399,9 @@
         "success_contract": "Create and schema-check the submission artifact and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.deliver"

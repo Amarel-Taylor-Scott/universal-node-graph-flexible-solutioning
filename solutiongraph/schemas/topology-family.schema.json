@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "topology-family.schema.json",
+  "title": "SolutionGraph Topology Family",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["topology_model_version", "id", "version", "task", "success_contract", "variants"],
+  "properties": {
+    "topology_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "task": {"type": "string", "minLength": 1},
+    "success_contract": {"type": "string", "minLength": 1},
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["topology_model_version", "id", "title", "program_id", "program_version", "program_digest", "rationale", "prior_log_weight", "parent_variant_id", "operators", "tags"],
+        "properties": {
+          "topology_model_version": {"const": "0.1"},
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "title": {"type": "string", "minLength": 1},
+          "program_id": {"$ref": "common.schema.json#/$defs/id"},
+          "program_version": {"type": "string", "minLength": 1},
+          "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "rationale": {"type": "string", "minLength": 1},
+          "prior_log_weight": {"type": "number"},
+          "parent_variant_id": {"type": "string"},
+          "operators": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+          "tags": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}}
+        }
+      }
+    }
+  }
+}

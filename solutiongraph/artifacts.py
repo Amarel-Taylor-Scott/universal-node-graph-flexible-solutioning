@@ -19,6 +19,20 @@ from uuid import uuid4
 from solutiongraph.model import DIGEST_RE, canonical_json
 
 
+def _fsync_directory(path: Path) -> None:
+    """Persist a directory entry where the platform exposes directory fsync."""
+    if not hasattr(os, "O_DIRECTORY"):
+        return
+    try:
+        descriptor = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
+    except OSError:
+        return
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
 def digest_bytes(payload: bytes) -> str:
     """Return the canonical digest identity for arbitrary bytes."""
     return "sha256:" + hashlib.sha256(payload).hexdigest()
@@ -99,6 +113,10 @@ class MemoryArtifactStore:
     def put_bytes(
         self, payload: bytes, *, media_type: str = "application/octet-stream"
     ) -> StoredArtifact:
+        if not isinstance(payload, bytes):
+            raise TypeError("artifact payload must be bytes")
+        if not isinstance(media_type, str) or not media_type.strip():
+            raise ValueError("artifact media_type must not be empty")
         digest = digest_bytes(payload)
         self._values.setdefault(digest, payload)
         return StoredArtifact(digest, media_type, len(payload), f"memory://{digest}")
@@ -144,21 +162,34 @@ class FileArtifactStore:
     def put_bytes(
         self, payload: bytes, *, media_type: str = "application/octet-stream"
     ) -> StoredArtifact:
+        if not isinstance(payload, bytes):
+            raise TypeError("artifact payload must be bytes")
+        if not isinstance(media_type, str) or not media_type.strip():
+            raise ValueError("artifact media_type must not be empty")
         digest = digest_bytes(payload)
         target = self._path(digest)
         target.parent.mkdir(parents=True, exist_ok=True)
         if not target.exists():
             temporary = target.with_name(f".{target.name}.{uuid4().hex}.tmp")
             try:
-                temporary.write_bytes(payload)
+                with temporary.open("wb") as handle:
+                    handle.write(payload)
+                    handle.flush()
+                    os.fsync(handle.fileno())
                 os.replace(temporary, target)
+                _fsync_directory(target.parent)
             finally:
                 if temporary.exists():
                     temporary.unlink()
+        elif digest_bytes(target.read_bytes()) != digest:
+            raise ValueError(f"artifact store contains corrupt content for {digest}")
         return StoredArtifact(digest, media_type, len(payload), target.as_uri())
 
     def get_bytes(self, digest: str) -> bytes:
-        return self._path(digest).read_bytes()
+        payload = self._path(digest).read_bytes()
+        if digest_bytes(payload) != digest:
+            raise ValueError(f"artifact store contains corrupt content for {digest}")
+        return payload
 
     def put_json(self, value: Any) -> StoredArtifact:
         payload = json.dumps(

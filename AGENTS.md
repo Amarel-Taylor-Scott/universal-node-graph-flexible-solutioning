@@ -17,9 +17,11 @@ engine.
 2. `NODE_REPOSITORY_PROTOCOL.md` — discovery sidecars, embeddings, handshake, snapshots.
 3. `SOLUTION_TEMPLATE_PROTOCOL.md` — stages, atomic slots, and refinement loops.
 4. `EXECUTION_PROTOCOL.md` — frozen plans, runtime adapters, artifacts, fallbacks, and receipts.
-5. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
-6. `AUTORESEARCH_REVIEW.md` — generated-code campaigns, evaluator isolation, and numerical nodes.
-7. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
+5. `STRUCTURED_CONTROL_PROTOCOL.md` and `TOPOLOGY_SEARCH_PROTOCOL.md` — control flow and graph-shape search.
+6. `STREAMING_PROTOCOL.md` and `PROVENANCE_AND_RESUME.md` — event time, recovery, and lineage boundaries.
+7. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
+8. `AUTORESEARCH_REVIEW.md` — generated-code campaigns, evaluator isolation, and numerical nodes.
+9. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
 
 Use the narrowest matching workspace skill:
 
@@ -28,6 +30,8 @@ Use the narrowest matching workspace skill:
 - `.agents/skills/benchmark-solution-graph/SKILL.md` for route experiments;
 - `.agents/skills/execute-solution-graph/SKILL.md` for runtimes, artifacts, and executable examples;
 - `.agents/skills/design-autoresearch-campaign/SKILL.md` for bounded LLM-generated improvement campaigns;
+- `.agents/skills/design-topology-family/SKILL.md` for explicit graph-shape alternatives;
+- `.agents/skills/author-structured-workflow/SKILL.md` for branches, composites, loops, and compensation;
 - `.agents/skills/solve-universal-dag/SKILL.md` for UniversalSolver and Arena task implementation;
 - `.agents/skills/model-solution-graph/SKILL.md` for end-to-end modeling.
 
@@ -54,6 +58,10 @@ steps as if they were more steps.
 - Never perform an implicit type conversion. Add an explicit typed adapter node.
 - Keep loops/branches as structured or composite nodes with nested graphs; do
   not add informal backward edges to a semantic DAG.
+- Conditional outputs feed compatible guarded consumers or optional ports on
+  an explicit merge; they never directly promise a required graph output.
+- Lower composites and bounded loops before admission and retain the lowering
+  receipt. Search graph-shape alternatives only as explicit `TopologyVariant`s.
 - Optimizer scores can order only compiler-valid routes. A score cannot grant
   authority or repair an invalid route.
 - Examine the full registry during admission. Do not hide compatible candidates
@@ -97,6 +105,8 @@ objects, not in `NodeSpec`.
 - Call receipt-derived node effects observational unless assignment supports a
   causal claim.
 - Select fallbacks for failure diversity as well as rank.
+- Execute multi-fidelity rungs through a fixed evaluator and retain every
+  promotion plus resource unit; a planned allocation is not measured evidence.
 - Preserve multiple candidate lineages during generated-code campaigns; do not
   collapse all evidence into one greedy incumbent.
 - Candidate code must not write its evaluator. Hidden cases require a
@@ -117,6 +127,14 @@ objects, not in `NodeSpec`.
 
 - `solutiongraph/` — domain-neutral semantic model, compiler, search, solver, evidence.
 - `solutiongraph/solver.py` — guarded multi-round search, experiment, ranking, champion, and route-fallback orchestration.
+- `solutiongraph/structured.py` — deterministic composite and bounded-loop lowering.
+- `solutiongraph/topology.py` — alternative graph families and route accounting.
+- `solutiongraph/durable.py` — exact local completed-prefix checkpoints and resume.
+- `solutiongraph/streaming.py` — finite event-time conformance adapter.
+- `solutiongraph/saga.py` — reference compensation runner for effectful nodes.
+- `solutiongraph/compatibility.py` — optional operational compatibility sidecars.
+- `solutiongraph/provenance.py` — W3C PROV, OpenLineage, and SLSA projections.
+- `solutiongraph/conformance.py` — installed-wheel advanced mechanism gate.
 - `solutiongraph/arena.py` — cross-domain task contracts, readiness, and executable suite harness.
 - `solutiongraph/template_authoring.py` — strict linear blueprint compiler.
 - `solutiongraph/executor.py` — strict reference frozen-plan executor and runtime seam.
@@ -126,7 +144,7 @@ objects, not in `NodeSpec`.
 - `solutiongraph/experiments.py` — receipt-producing experiment allocation.
 - `solutiongraph/scaffold.py` — non-destructive starter workspaces for coding harnesses.
 - `solutiongraph/campaign.py` — population ancestry, budgets, decisions, and evaluator boundaries.
-- `solutiongraph/examples/` — 13 dependency-free executable domain examples using one shared registry.
+- `solutiongraph/examples/` — 23 dependency-free executable domain examples using two Arena registries.
 - `solutiongraph/schemas/` — strict portable wire schemas.
 - `catalog/` — generated semantic templates and reference node pack.
 - `browsergraph/` — browser runtime adapter and original proof of concept.
@@ -140,6 +158,7 @@ Core changes:
 
 ```bash
 solutiongraph doctor
+solutiongraph conformance
 solutiongraph verify --catalog-root catalog
 solutiongraph verify --catalog-root catalog --runtime subprocess
 pytest tests/test_solutiongraph*.py tests/test_workbench.py -q

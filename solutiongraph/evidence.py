@@ -11,7 +11,7 @@ from solutiongraph.model import DIGEST_RE, ID_RE, PORT_RE
 from solutiongraph.search import BeliefModel, CandidateWeight, InteractionWeight
 
 RUN_OUTCOMES = ("accepted", "rejected", "failed", "completed_unverified")
-NODE_RUN_OUTCOMES = ("succeeded", "failed", "blocked")
+NODE_RUN_OUTCOMES = ("succeeded", "failed", "blocked", "skipped")
 
 
 def _is_finite_number(value: Any) -> bool:
@@ -215,6 +215,10 @@ class RunReceipt:
             problems.append("assignment slots and candidates must be identifiers")
         if self.accepted is not None and not isinstance(self.accepted, bool):
             problems.append("accepted must be boolean or null")
+        if self.seed is not None and (
+            isinstance(self.seed, bool) or not isinstance(self.seed, int)
+        ):
+            problems.append("seed must be an integer or null")
         if self.failure_class and not ID_RE.fullmatch(self.failure_class):
             problems.append("failure_class must be empty or an identifier")
         problems.extend(_metric_problems(self.metrics, "metrics"))

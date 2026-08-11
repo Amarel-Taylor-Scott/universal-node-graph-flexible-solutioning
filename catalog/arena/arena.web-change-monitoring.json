@@ -6,13 +6,15 @@
     "noise rate"
   ],
   "arena_model_version": "0.1",
-  "executable_example_ids": [],
+  "executable_example_ids": [
+    "web-change-monitoring"
+  ],
   "external_requirements": [],
   "id": "arena.web-change-monitoring",
   "input_contract": "Authorized page targets, prior captures, and significance policy.",
   "output_contract": "Evidence-backed change events with confidence and alert disposition.",
   "problem": "Capture pages, remove expected noise, compare semantic content, and corroborate changes.",
-  "readiness": "template",
+  "readiness": "executable_fixture",
   "stage_families": [
     "capture",
     "canonicalize",

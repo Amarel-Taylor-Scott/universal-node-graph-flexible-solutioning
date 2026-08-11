@@ -1,7 +1,7 @@
 # Semantic Solution Template Protocol
 
-Status: research preview 0.1  
-Normative Python model: `solutiongraph.templates`  
+Status: research preview 0.1
+Normative Python model: `solutiongraph.templates`
 Reference catalogue: `solutiongraph.template_library` and `catalog/templates/`
 
 A solution template is a reusable decomposition of a problem class into typed

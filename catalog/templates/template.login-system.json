@@ -108,7 +108,7 @@
       }
     ],
     "invariants": [],
-    "model_version": "0.1",
+    "model_version": "0.2",
     "outputs": [
       {
         "name": "result",
@@ -125,6 +125,9 @@
     ],
     "slots": [
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -168,6 +171,9 @@
         "success_contract": "Define actors, credentials, sessions, and assurance levels and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -211,6 +217,9 @@
         "success_contract": "Model abuse, disclosure, replay, enumeration, and recovery threats and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.contract"
@@ -254,6 +263,9 @@
         "success_contract": "Select an admitted authentication protocol and trust boundary and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -297,6 +309,9 @@
         "success_contract": "Implement protected identity and credential storage and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -340,6 +355,9 @@
         "success_contract": "Implement registration and proofing under policy and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -383,6 +401,9 @@
         "success_contract": "Verify credentials without leaking sensitive state and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -426,6 +447,9 @@
         "success_contract": "Issue bounded, revocable sessions and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -469,6 +493,9 @@
         "success_contract": "Verify session integrity, expiry, audience, and revocation and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -512,6 +539,9 @@
         "success_contract": "Revoke sessions and propagate logout semantics and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.implement"
@@ -555,6 +585,9 @@
         "success_contract": "Implement abuse-resistant account recovery and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.protect"
@@ -598,6 +631,9 @@
         "success_contract": "Apply privacy-preserving rate and abuse limits and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.protect"
@@ -641,6 +677,9 @@
         "success_contract": "Emit redacted, auditable identity security events and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"
@@ -684,6 +723,9 @@
         "success_contract": "Run protocol, authorization, session, and abuse tests and preserve every invariant required by later slots."
       },
       {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
         "allowed_effects": [],
         "group": [
           "stage.assure"

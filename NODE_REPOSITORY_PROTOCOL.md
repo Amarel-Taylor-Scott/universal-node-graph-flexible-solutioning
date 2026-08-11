@@ -1,9 +1,10 @@
 # Node Repository and Discovery Protocol
 
-Status: research preview 0.1  
-Normative Python model: `solutiongraph.discovery`  
+Status: research preview 0.1
+Normative Python model: `solutiongraph.discovery`
 Portable schemas: `solutiongraph/schemas/*discovery*`, `node-descriptor`,
-`embedding-record`, `registry-capabilities`, `registry-snapshot`, and `node-pack`
+`embedding-record`, `node-compatibility-profile`, `registry-capabilities`,
+`registry-snapshot`, and `node-pack`
 
 This protocol lets independently maintained repositories publish reusable node
 contracts without forcing every publisher to use the same database, search
@@ -14,13 +15,14 @@ The central rule is:
 > Executable truth is strict and content-addressed. Discovery evidence is sparse,
 > extensible, independently versioned, and never grants compatibility.
 
-## 1. Four different objects
+## 1. Five different objects
 
 | Object | Purpose | Required for compilation? | May change independently? |
 |---|---|---:|---:|
 | `NodeSpec` | Exact executable ABI and authority contract | Yes | Only as a new digest/version |
 | `NodeDescriptor` | Human and machine discovery metadata | No | Yes |
 | `EmbeddingRecord` | One vector view in one exact space | No | Yes |
+| `NodeCompatibilityProfile` | Optional operational/semantic constraints outside the stable ABI | No | Yes, when rebound to the exact node identity |
 | `NodePackManifest` | Portable, content-addressed distribution unit | For distribution, not semantics | Yes |
 
 A registry MUST NOT copy an inferred capability, port, effect, or permission
@@ -104,7 +106,31 @@ Registries may expose any number of spaces—for node summaries, purposes, input
 meanings, output meanings, failure behavior, examples, code, or learned task
 associations. None is privileged by the architecture.
 
-## 5. Harness–registry handshake
+## 5. Compatibility profiles are strict optional sidecars
+
+`NodeCompatibilityProfile` binds the exact node ID, version, and implementation
+digest and may describe dimensions that a minimal executable ABI does not need:
+
+- per-port nullability, ordering, time domain, event-time field, and data
+  classifications;
+- state and cache modes;
+- required secret classes and hardware features;
+- permitted data-residency regions;
+- compensation-node identity; and
+- namespaced extension metadata.
+
+Sparse metadata remains unknown rather than guessed. A harness may require a
+complete profile for regulated, stateful, streaming, or effectful workloads;
+another may safely run a pure local node without one. Compatibility metadata
+MUST NOT contain empirical quality scores and MUST NOT override the node's
+nominal type, effect, permission, or implementation identity.
+
+`CompatibilityCatalog.edge_problems()` compares two exact ports and reports
+ordering, time-domain, classification, and completeness conflicts before a
+runtime is selected. Nominal compiler admission remains mandatory even when
+the sidecars appear compatible.
+
+## 6. Harness–registry handshake
 
 Before discovery, both sides exchange explicit capabilities.
 
@@ -139,7 +165,7 @@ Operational `max_page_size` is not an architectural candidate cap. A client
 uses continuation until it has the requested coverage or deliberately records
 why it stopped.
 
-## 6. Open-world discovery, closed-world compilation
+## 7. Open-world discovery, closed-world compilation
 
 “Every possible node” cannot mean every node that might ever be published on
 the internet. The protocol therefore makes the universe boundary explicit:
@@ -170,7 +196,7 @@ This separates three important claims:
 - **query completeness:** evidenced by the discovery receipt;
 - **admission completeness:** exact and testable within the snapshot.
 
-## 7. Node packs and repository layout
+## 8. Node packs and repository layout
 
 A node pack is a portable manifest containing node-contract digests, descriptor
 digests, optional embedding-record digests, artifacts, dependencies, source,
@@ -210,7 +236,7 @@ are content-addressed and annotations are namespaced. Transport compatibility
 does not make an OCI image a valid node; its `NodeSpec` and artifacts still
 have to pass this protocol and compiler admission.
 
-## 8. Query and ranking rules
+## 9. Query and ranking rules
 
 Discovery ranking is a nomination mechanism. A query may combine:
 
@@ -231,7 +257,7 @@ Federated results SHOULD preserve source registry and pack identity. Duplicate
 node contracts may be collapsed by digest; conflicting contracts sharing a
 human-readable ID MUST remain distinct and produce a diagnostic.
 
-## 9. Extension rules
+## 10. Extension rules
 
 Core records use `additionalProperties: false`. Extensibility occurs only in an
 explicit `extensions` object whose keys contain a namespace, such as:
@@ -249,7 +275,7 @@ An extension MUST NOT change the semantics of a core field. A broadly required
 extension should be proposed as a versioned core field with migration and
 conformance tests.
 
-## 10. Conformance checklist
+## 11. Conformance checklist
 
 A node repository is conforming when it can demonstrate:
 
@@ -264,9 +290,10 @@ A node repository is conforming when it can demonstrate:
 9. Every compiler run consumes an immutable registry snapshot.
 10. Admission examines the entire snapshot and retains every rejection reason.
 11. Effects, permissions, provenance, and license survive packaging.
-12. Generated files reproduce deterministically from their canonical source.
+12. Compatibility profiles bind exact nodes and never grant ABI validity.
+13. Generated files reproduce deterministically from their canonical source.
 
-## 11. Explicit non-goals
+## 12. Explicit non-goals
 
 - One mandatory vector database or embedding model.
 - A central authority deciding which nodes may exist.

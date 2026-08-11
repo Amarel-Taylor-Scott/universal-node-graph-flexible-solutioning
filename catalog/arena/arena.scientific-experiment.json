@@ -6,13 +6,15 @@
     "assumption checks"
   ],
   "arena_model_version": "0.1",
-  "executable_example_ids": [],
+  "executable_example_ids": [
+    "scientific-experiment"
+  ],
   "external_requirements": [],
   "id": "arena.scientific-experiment",
   "input_contract": "Hypothesis, variables, controls, resource budget, and measurement contract.",
   "output_contract": "Raw observations, analysis, uncertainty, provenance, and conclusion limits.",
   "problem": "Design treatments, allocate trials, execute, analyze, and test robustness.",
-  "readiness": "template",
+  "readiness": "executable_fixture",
   "stage_families": [
     "formalize",
     "design",

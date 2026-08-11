@@ -11,7 +11,7 @@
   ],
   "properties": {
     "digest": {"$ref": "common.schema.json#/$defs/digest"},
-    "model_version": {"const": "0.1"},
+    "model_version": {"const": "0.2"},
     "program_id": {"$ref": "common.schema.json#/$defs/id"},
     "program_version": {"type": "string", "minLength": 1},
     "program_digest": {"$ref": "common.schema.json#/$defs/digest"},

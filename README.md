@@ -7,7 +7,7 @@
 [![Status: developer preview](https://img.shields.io/badge/status-developer%20preview-orange)](READINESS.md)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
-Version 0.4 is a working developer preview of a different way to build software:
+Version 0.5 is a working developer preview of a different way to build software:
 compile each task
 into an ordered graph search space, expose every compatible implementation for
 every atomic substep, and learn which complete route best satisfies the task's
@@ -28,7 +28,12 @@ strict semantic programs, a content-addressed node ABI, negotiated node
 discovery, sparse descriptions and exact embedding spaces, closed-world
 registry snapshots, reusable semantic templates, complete admission, frozen
 plans, prior/beam/sprout/exhaustive search, adaptive resource allocation,
-immutable evidence, Pareto ranking, and observational prior learning.
+immutable evidence, Pareto ranking, and observational prior learning. Version
+0.5 adds compiler-checked conditional execution, deterministic composite and
+bounded-loop lowering, explicit alternative-topology search, exact local
+checkpoint/resume, finite event-time streaming semantics, saga compensation,
+executed multi-fidelity allocation, compatibility sidecars, and standard
+provenance exports.
 `browsergraph` is explicitly one concrete runtime adapter and stress test.
 
 `UniversalSolver` now joins those primitives into one guarded operation: full
@@ -36,8 +41,8 @@ registry admission, explicit multi-round search, plan freezing, receipt-backed
 experiments, observational belief updates, hard acceptance/objective gates,
 Pareto reporting, champion selection, and separately benchmarked diverse
 fallback routes. The [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md) catalogues
-24 cross-domain problem families. Ten families map to 13 executable local
-fixtures; the rest are honestly labeled templates or credentialed connectors.
+24 cross-domain problem families. Twenty families map to 23 executable local
+programs; the remaining four require credentialed external connectors.
 
 For LLM-generated improvement campaigns, the core also provides immutable
 candidate ancestry, hard campaign budgets, append-only promotion decisions,
@@ -53,6 +58,13 @@ journal. The subprocess adapter provides lifecycle isolation, timeout, a strict
 JSON/bytes ABI, and optional POSIX resource limits; it is not a hostile-code
 sandbox. Untrusted generated code still requires an enforcing microVM, Wasm,
 or remote trust boundary.
+
+The reference runtime can resume an exact completed prefix from a durable,
+content-addressed checkpoint. Identity mismatches are rejected; local resume is
+not presented as distributed exactly-once execution. `solutiongraph
+conformance` exercises the advanced control, topology, streaming, recovery,
+compensation, multi-fidelity, and provenance mechanisms from an installed
+wheel.
 
 ```text
 Task
@@ -81,17 +93,23 @@ is not mixed into the execution path as another step.
 | Reusable node ecosystem | Strict executable contracts, optional descriptors/documents/embeddings, negotiated search, discovery receipts, snapshots, and node packs |
 | Cross-domain templates | 19 checked-in templates containing 339 atomic obligations across data, ML, documents, web, media, services, operations, security, business, science, and numerical computing |
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
+| Structured control flow | One-arm conditional execution with skipped receipts; deterministic composite and explicit bounded-loop lowering into compiler-valid DAGs |
+| Alternative topology search | Versioned topology families search different compiler-validated graph shapes as well as node bindings, with complete accounting |
 | Honest route search | Fast prior, bounded beam, seeded sprouts, adaptive promotion, and uncapped streaming exhaustive modes with coverage/accounting reports |
+| Executed multi-fidelity search | Successive-halving rungs invoke a caller evaluator and retain every promotion decision and resource unit |
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
 | Universal route solver | Quick, balanced, broad, and explicit exhaustive profiles; multi-round learning; hard gates; champion and fail-diverse fallback selection |
-| Universal DAG Arena | 24 task families, ten executable fixture families, 13 runnable programs, and explicit template/credentialed-connector readiness |
+| Universal DAG Arena | 24 task families, 20 executable fixture families, 23 runnable programs, and explicit credentialed-connector readiness |
 | Generated-graph campaigns | Population-DAG ancestry, proposal digests, explicit candidate/trial/cost/fidelity budgets, evaluator isolation contracts, and evidence-backed decisions |
 | Reference execution | Frozen-plan reconstruction, runtime/effect/permission policy, implementation-digest checks, bounded retry, frozen fallback, circuit breaker, artifacts, verification, and receipts |
 | Lifecycle process execution | Strict subprocess wire ABI, wall-clock termination, optional POSIX CPU/memory limits, and recorded adapter/isolation identity |
 | Durable local evidence | Fsync-backed, duplicate-rejecting, content-chained JSONL receipt journal with full verification |
+| Durable local execution | Exact-identity prefix checkpoints, content-addressed output rehydration, and crash/resume conformance in the reference executor |
+| Streaming and effects | Finite event-time windows, watermarks, late-data/retraction receipts, plus reference saga compensation for effectful nodes |
+| Interoperable provenance | Machine-readable W3C PROV, OpenLineage, and in-toto/SLSA provenance projections from one run receipt |
 | Harness onboarding | Transactional `solutiongraph init` workspace generation from any bundled semantic template |
-| Executable domain skeleton | 13 dependency-free programs for web, products, documents, images, customer data, addresses, feeds, forecasting, entity linking, code repair, regression, and classification using one 84-node registry |
-| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and seven focused workspace Agent Skills |
+| Executable domain skeleton | 23 dependency-free programs spanning web, documents, images, data, ML, identity, reconciliation, privacy, operations, security, science, recommendation, and numerical computing using 146 executable nodes |
+| Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and nine focused workspace Agent Skills |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
 
 ## Compile and search a universal graph
@@ -121,7 +139,7 @@ plan = Compiler().compile(
 print(plan.digest, report.evaluation_coverage)
 ```
 
-## Solve and execute 13 framework programs
+## Solve and execute 23 framework programs
 
 The examples use small standard-library implementations so the complete
 compile → execute → verify → receipt path runs from a fresh checkout. They are
@@ -135,12 +153,13 @@ solutiongraph arena show arena.usps-address-verification
 solutiongraph solve golden-customer-table --profile balanced
 solutiongraph solve address-reference-verification --profile broad
 solutiongraph arena run --profile quick
+solutiongraph conformance
 solutiongraph verify --catalog-root catalog --runtime in-process
 solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 Every task has multiple frozen routes and every important slot exposes its full
-admitted candidate column. Nine declared controls are intentionally rejected
+admitted candidate column. Nineteen declared controls are intentionally rejected
 by independent oracles, preserving negative evidence while alternative routes
 pass. The address example uses an explicit offline reference fixture and never
 claims that fixture is an official USPS response. Persist artifacts with:
@@ -193,7 +212,8 @@ The [solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md) standardizes
 macro-stage submatrices, atomic semantic slots, safe pass-through candidates,
 and bounded refinement loops. The generated [catalogue](catalog/) currently
 contains 19 cross-domain templates, 339 atomic obligations, a five-node core
-reference pack, an 84-node executable Arena pack, and 24 Arena task contracts.
+reference pack, an 84-node original Arena pack, a 62-node extended Arena pack,
+and 24 Arena task contracts.
 Templates can be inspected or authored without writing Python:
 
 ```bash
@@ -212,7 +232,8 @@ the harness negotiates those modes without affecting node validity.
 For an agent or new domain adapter, follow the [agent playbook](AGENT_PLAYBOOK.md)
 and the focused workspace skills: `create-solution-template`,
 `author-node-pack`, `execute-solution-graph`, `benchmark-solution-graph`,
-`design-autoresearch-campaign`, `solve-universal-dag`, and `model-solution-graph`.
+`design-autoresearch-campaign`, `design-topology-family`,
+`author-structured-workflow`, `solve-universal-dag`, and `model-solution-graph`.
 They require a task contract and independent oracle, typed template refinement,
 receipt-backed discovery, compilation before search, and evidence-backed claims.
 
@@ -223,6 +244,7 @@ modern browser. No server, account, CDN, or build step is required.
 
 | Explorer | Purpose |
 |---|---|
+| [Universal DAG explorer](examples/universal-dag-explorer.html) | Strictly left-to-right nested submatrices, every node in every atomic step, structured-control semantics, route overlays, contracts, filters, and feedback |
 | [Template and node catalogue](examples/catalog-template-explorer.html) | 19 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and reference node packs |
 | [Full solution studio](examples/universal-graph-workbench.html) | All candidates, route rows, exhaustive adjacent network, comparison, builder, and feedback views |
 | [Compact hierarchical explorer](examples/universal-node-graph-workbench.html) | Select one macro-stage submatrix at a time and see all of its substeps, node families, bindings, and route lines |
@@ -733,6 +755,11 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 | [WORKBENCH.md](WORKBENCH.md) | hierarchical macro-stage/substep model, schemas, viewer, and extension examples |
 | [ROADMAP.md](ROADMAP.md) | evidence-driven implementation phases and release gates |
 | [READINESS.md](READINESS.md) | exact supported, experimental, unsafe, and future release surfaces |
+| [STRUCTURED_CONTROL_PROTOCOL.md](STRUCTURED_CONTROL_PROTOCOL.md) | branches, composites, bounded loops, maps, reductions, barriers, and lowering |
+| [TOPOLOGY_SEARCH_PROTOCOL.md](TOPOLOGY_SEARCH_PROTOCOL.md) | explicit graph-shape alternatives, route accounting, and topology experiments |
+| [STREAMING_PROTOCOL.md](STREAMING_PROTOCOL.md) | event time, windows, watermarks, lateness, emissions, and reference limits |
+| [PROVENANCE_AND_RESUME.md](PROVENANCE_AND_RESUME.md) | checkpoints, exact resume identity, W3C PROV, OpenLineage, and SLSA exports |
+| [EXTENDING_ARENA.md](EXTENDING_ARENA.md) | turn a task family into an honest executable fixture or connector |
 | [AUTORESEARCH_REVIEW.md](AUTORESEARCH_REVIEW.md) | verified AutoResearch/package review, evaluator trust boundary, campaign lineage, and Cholesky node decomposition |
 | [CONTRACTS.md](CONTRACTS.md) | what a node promises, and the three moments it is checked |
 | [DIMENSIONS.md](DIMENSIONS.md) | axes worth adding, and why verification matters most |
