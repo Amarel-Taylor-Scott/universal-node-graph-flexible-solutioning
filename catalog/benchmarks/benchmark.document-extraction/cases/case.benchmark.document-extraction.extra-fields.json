@@ -1,0 +1,17 @@
+{
+  "description": "Additional fields outside the requested schema.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/document-extraction/extra-fields",
+  "id": "case.benchmark.document-extraction.extra-fields",
+  "input_digest": "sha256:b2964b2952b63f4ee55fab907c415ad926262a2550f31c827fa11878ba5c5ab1",
+  "split": "validation",
+  "tags": [
+    "fixture.synthetic",
+    "domain.document",
+    "task.extraction"
+  ],
+  "task_model_version": "0.1"
+}

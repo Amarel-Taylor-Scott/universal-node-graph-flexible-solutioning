@@ -1,0 +1,17 @@
+{
+  "description": "Low-bit-depth gradient.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/image-assurance/gradient",
+  "id": "case.benchmark.image-assurance.gradient",
+  "input_digest": "sha256:84811040eeef42f16b1333079175ea48b4339babb1286435e9163787fbd80ac8",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.image",
+    "task.assurance"
+  ],
+  "task_model_version": "0.1"
+}

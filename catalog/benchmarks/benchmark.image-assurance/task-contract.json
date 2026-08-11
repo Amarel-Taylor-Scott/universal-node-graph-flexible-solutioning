@@ -1,0 +1,91 @@
+{
+  "allowed_effects": [],
+  "case_ids": [
+    "case.benchmark.image-assurance.gradient",
+    "case.benchmark.image-assurance.comments",
+    "case.benchmark.image-assurance.sparse",
+    "case.benchmark.image-assurance.holdout-case"
+  ],
+  "constraints": [
+    {
+      "description": "A route is eligible only when the independent oracle accepts it.",
+      "id": "constraint.acceptance",
+      "operator": "eq",
+      "target": "verification.accepted",
+      "unit": "",
+      "value": true
+    }
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "external_requirements": [
+    "These bundled synthetic cases prove framework mechanics; replace them with representative, licensed development and hidden holdout data before making production or domain-performance claims."
+  ],
+  "granted_permissions": [],
+  "id": "task.benchmark.image-assurance",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "Task input document.",
+      "name": "document",
+      "type": {
+        "id": "example.pgm-document",
+        "media_type": "image/x-portable-graymap",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "intent": "Decode, optionally enhance, and inspect an image.",
+  "objectives": [
+    {
+      "direction": "maximize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "quality",
+      "weight": 1.0
+    },
+    {
+      "direction": "minimize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "latency_ms",
+      "weight": 1.0
+    }
+  ],
+  "oracle": {
+    "candidate_readable": true,
+    "description": "Bundled deterministic acceptance oracle. It is separate from node implementations but readable because these are transparent fixtures.",
+    "evaluator_digest": "sha256:7327421b27719676666fa6cc70d995f7c9591cf05f1a6f1745a67f13f749a305",
+    "id": "verifier.example.image",
+    "implementation_ref": "python://solutiongraph.examples.tasks:_image_verifier",
+    "independence": "separate-implementation",
+    "kind": "property",
+    "version": "1.0.0"
+  },
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "Task output report.",
+      "name": "report",
+      "type": {
+        "id": "example.image-report",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "success_contract": "An independent verifier accepts the measured dimensions and contrast.",
+  "tags": [
+    "benchmark.synthetic",
+    "domain.image",
+    "task.assurance"
+  ],
+  "task_model_version": "0.1",
+  "title": "Check and process image",
+  "version": "1.0.0"
+}

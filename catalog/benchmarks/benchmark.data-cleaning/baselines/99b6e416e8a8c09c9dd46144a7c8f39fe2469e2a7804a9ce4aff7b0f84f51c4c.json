@@ -1,0 +1,75 @@
+{
+  "admitted_space_digest": "sha256:76011970aee4252383e35f88c9eb088c3eecd8cd50751bdb7494b4d788b6ab0e",
+  "bindings": [
+    {
+      "candidate_id": "candidate.example.data.normalize.conservative.default",
+      "implementation_digest": "sha256:fce6ffae7be4723e0316acdb6e0268f16d41ee1bcd23e29e73fcb542e9651721",
+      "node_id": "example.data.normalize.conservative",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "normalize"
+    },
+    {
+      "candidate_id": "candidate.example.data.deduplicate.exact.company",
+      "implementation_digest": "sha256:3b2b6eed1db8558acfcdbe3bf9adface51a7d2ed04556146557297eb2a6b034c",
+      "node_id": "example.data.deduplicate.exact",
+      "node_version": "1.0.0",
+      "parameters": {
+        "key_fields": [
+          "company"
+        ]
+      },
+      "slot_id": "deduplicate"
+    },
+    {
+      "candidate_id": "candidate.example.data.sort.company",
+      "implementation_digest": "sha256:21fb5b81f85a197b831534f9aa676278983a57cd4a9337f14d0fedd7eb9507d9",
+      "node_id": "example.data.sort",
+      "node_version": "1.0.0",
+      "parameters": {
+        "sort_key": "company"
+      },
+      "slot_id": "emit"
+    }
+  ],
+  "digest": "sha256:99b6e416e8a8c09c9dd46144a7c8f39fe2469e2a7804a9ce4aff7b0f84f51c4c",
+  "edges": [
+    {
+      "source_port": "records",
+      "source_slot": "normalize",
+      "target_port": "records",
+      "target_slot": "deduplicate"
+    },
+    {
+      "source_port": "records",
+      "source_slot": "deduplicate",
+      "target_port": "records",
+      "target_slot": "emit"
+    }
+  ],
+  "fallbacks": [
+    {
+      "candidate_id": "candidate.example.data.deduplicate.normalized.company",
+      "implementation_digest": "sha256:b7221cf1e31df9f2d3ec413f5249be516156aaf4551f49884966b004bc747c6b",
+      "node_id": "example.data.deduplicate.normalized",
+      "node_version": "1.0.0",
+      "parameters": {
+        "key_fields": [
+          "company"
+        ]
+      },
+      "priority": 1,
+      "slot_id": "deduplicate"
+    }
+  ],
+  "model_version": "0.2",
+  "program_digest": "sha256:3cde95e42f6f1f46c8f9ab7ff13fe918af139e75472929101c46c6fc692fc04c",
+  "program_id": "example.data-cleanup",
+  "program_version": "1.0.0",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "topological_order": [
+    "normalize",
+    "deduplicate",
+    "emit"
+  ]
+}

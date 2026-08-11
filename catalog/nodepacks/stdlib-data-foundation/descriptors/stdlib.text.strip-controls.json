@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "text.strip-controls"
+  ],
+  "aliases": [
+    "text strip-controls"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.text.strip-controls",
+      "language": "und",
+      "source_digest": "sha256:3a435f255a6b8ea9b4c6d5e81c63514027e3ce4cf66f5091b91371ff14d66b96",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Remove Unicode control characters under an explicit newline policy. Inputs: text. Outputs: text."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.text.strip-controls",
+  "node_spec_digest": "sha256:3a435f255a6b8ea9b4c6d5e81c63514027e3ce4cf66f5091b91371ff14d66b96",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed text input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "text"
+    },
+    {
+      "concepts": [],
+      "description": "Typed text output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "text"
+    }
+  ],
+  "purposes": [
+    "Remove Unicode control characters under an explicit newline policy."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Remove Unicode control characters under an explicit newline policy.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Strip Controls"
+}

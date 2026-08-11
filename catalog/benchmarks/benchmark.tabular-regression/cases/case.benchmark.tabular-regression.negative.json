@@ -1,0 +1,17 @@
+{
+  "description": "Negative slope.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/tabular-regression/negative",
+  "id": "case.benchmark.tabular-regression.negative",
+  "input_digest": "sha256:7619696ee16555689ac6f9cabcfc42f37e36b965e7d95984f3773af32976c756",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.ml",
+    "task.regression"
+  ],
+  "task_model_version": "0.1"
+}

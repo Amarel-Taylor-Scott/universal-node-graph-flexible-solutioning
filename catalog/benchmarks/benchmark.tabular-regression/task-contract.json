@@ -1,0 +1,91 @@
+{
+  "allowed_effects": [],
+  "case_ids": [
+    "case.benchmark.tabular-regression.positive",
+    "case.benchmark.tabular-regression.negative",
+    "case.benchmark.tabular-regression.fractional",
+    "case.benchmark.tabular-regression.holdout-case"
+  ],
+  "constraints": [
+    {
+      "description": "A route is eligible only when the independent oracle accepts it.",
+      "id": "constraint.acceptance",
+      "operator": "eq",
+      "target": "verification.accepted",
+      "unit": "",
+      "value": true
+    }
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "external_requirements": [
+    "These bundled synthetic cases prove framework mechanics; replace them with representative, licensed development and hidden holdout data before making production or domain-performance claims."
+  ],
+  "granted_permissions": [],
+  "id": "task.benchmark.tabular-regression",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "Task input dataset.",
+      "name": "dataset",
+      "type": {
+        "id": "example.regression-dataset",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "intent": "Split tabular data, fit a regression candidate, and measure holdout behavior.",
+  "objectives": [
+    {
+      "direction": "maximize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "quality",
+      "weight": 1.0
+    },
+    {
+      "direction": "minimize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "latency_ms",
+      "weight": 1.0
+    }
+  ],
+  "oracle": {
+    "candidate_readable": true,
+    "description": "Bundled deterministic acceptance oracle. It is separate from node implementations but readable because these are transparent fixtures.",
+    "evaluator_digest": "sha256:07652ad736e97e7a27280d5385dee9f6ee3c5497f1b7acf2afa514d7d148cd33",
+    "id": "verifier.example.ml",
+    "implementation_ref": "python://solutiongraph.examples.tasks:_ml_verifier",
+    "independence": "separate-implementation",
+    "kind": "property",
+    "version": "1.0.0"
+  },
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "Task output result.",
+      "name": "result",
+      "type": {
+        "id": "example.regression-result",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "success_contract": "An independent verifier accepts finite predictions below the RMSE limit.",
+  "tags": [
+    "benchmark.synthetic",
+    "domain.ml",
+    "task.regression"
+  ],
+  "task_model_version": "0.1",
+  "title": "Data science regression",
+  "version": "1.0.0"
+}

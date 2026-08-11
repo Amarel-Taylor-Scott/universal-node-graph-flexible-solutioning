@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from pathlib import Path
+from typing import Any
 
 from solutiongraph import __version__
 from solutiongraph.executor import ExecutionError
@@ -25,10 +26,16 @@ def _template(template_id: str):
 
 def _doctor() -> int:
     from solutiongraph.arena import UNIVERSAL_DAG_ARENA
+    from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
     from solutiongraph.catalog import catalog_documents
-    from solutiongraph.examples.tasks import EXAMPLE_TASKS
+    from solutiongraph.examples.tasks import all_examples
     from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
     from solutiongraph.schemas import load_all_schemas
+    from solutiongraph.stdlib_pack import (
+        STANDARD_LIBRARY_DESCRIPTORS,
+        STANDARD_LIBRARY_NODE_PACK,
+        STANDARD_LIBRARY_NODE_SPECS,
+    )
     from solutiongraph.template_library import REFERENCE_TEMPLATES
 
     problems: list[str] = []
@@ -36,12 +43,18 @@ def _doctor() -> int:
     problems.extend(REFERENCE_TEMPLATES.validate())
     problems.extend(
         problem
+        for bundle in REFERENCE_BENCHMARKS
+        for problem in bundle.validate()
+    )
+    problems.extend(STANDARD_LIBRARY_NODE_PACK.validate())
+    problems.extend(
+        problem
         for node in REFERENCE_NODE_SPECS
         for problem in node.validate(f"nodes.{node.id}")
     )
     example_nodes = {
         (node.id, node.version, node.implementation_digest): node
-        for example in EXAMPLE_TASKS
+        for example in all_examples()
         for node in example.registry.nodes
     }
     problems.extend(
@@ -57,6 +70,14 @@ def _doctor() -> int:
                 f"descriptors.{descriptor.node_id}",
             )
         )
+    stdlib_by_id = {node.id: node for node in STANDARD_LIBRARY_NODE_SPECS}
+    for descriptor in STANDARD_LIBRARY_DESCRIPTORS:
+        problems.extend(
+            descriptor.validate(
+                stdlib_by_id.get(descriptor.node_id),
+                f"stdlib_descriptors.{descriptor.node_id}",
+            )
+        )
     schemas = load_all_schemas()
     documents = catalog_documents()
     if problems:
@@ -69,9 +90,11 @@ def _doctor() -> int:
         f"templates={len(REFERENCE_TEMPLATES.templates)} "
         f"atomic_slots={sum(len(item.program.slots) for item in REFERENCE_TEMPLATES.templates)} "
         f"nodes={len(REFERENCE_NODE_SPECS)} "
+        f"stdlib_nodes={len(STANDARD_LIBRARY_NODE_SPECS)} "
         f"example_nodes={len(example_nodes)} "
-        f"executable_examples={len(EXAMPLE_TASKS)} "
+        f"executable_examples={len(all_examples())} "
         f"arena_tasks={len(UNIVERSAL_DAG_ARENA.tasks)} "
+        f"benchmarks={len(REFERENCE_BENCHMARKS)} "
         f"schemas={len(schemas)} "
         f"catalog_documents={len(documents)}"
     )
@@ -158,7 +181,7 @@ def _catalog_export(output: Path) -> int:
 
 
 def _examples_list(as_json: bool) -> int:
-    from solutiongraph.examples import EXAMPLE_TASKS
+    from solutiongraph.examples import all_examples
 
     rows = [
         {
@@ -168,7 +191,7 @@ def _examples_list(as_json: bool) -> int:
             "slots": len(example.program.slots),
             "routes": [route.id for route in example.routes],
         }
-        for example in EXAMPLE_TASKS
+        for example in all_examples()
     ]
     if as_json:
         print(json.dumps(rows, indent=2, sort_keys=True))
@@ -222,6 +245,204 @@ def _examples_run(
     return 0
 
 
+def _benchmarks_list(as_json: bool) -> int:
+    from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
+
+    rows = [
+        {
+            "id": bundle.id,
+            "title": bundle.definition.suite.title,
+            "claim_scope": bundle.definition.suite.claim_scope,
+            "cases": len(bundle.definition.task_cases),
+            "arms": len(bundle.definition.suite.arms),
+            "route_count_upper_bound": (
+                bundle.definition.example.compile()[0].route_count_upper_bound
+            ),
+            "solution_pack_id": bundle.solution_pack.id,
+        }
+        for bundle in REFERENCE_BENCHMARKS
+    ]
+    if as_json:
+        print(json.dumps(rows, indent=2, sort_keys=True))
+        return 0
+    print("ID\tCASES\tARMS\tSPACE\tCLAIM\tTITLE")
+    for row in rows:
+        print(
+            f"{row['id']}\t{row['cases']}\t{row['arms']}\t"
+            f"{row['route_count_upper_bound']}\t{row['claim_scope']}\t{row['title']}"
+        )
+    return 0
+
+
+def _benchmarks_show(benchmark_id: str, as_json: bool) -> int:
+    from solutiongraph.benchmark_library import get_benchmark
+
+    bundle = get_benchmark(benchmark_id)
+    payload = {
+        "suite": bundle.definition.suite.to_dict(),
+        "suite_digest": bundle.definition.suite.digest,
+        "task_contract": bundle.definition.task_contract.to_dict(),
+        "task_contract_digest": bundle.definition.task_contract.digest,
+        "solution_pack": bundle.solution_pack.to_dict(),
+        "solution_pack_digest": bundle.solution_pack.digest,
+        "task_cases": [item.to_dict() for item in bundle.definition.task_cases],
+        "closure_valid": not bundle.validate(),
+    }
+    if as_json:
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        return 0
+    suite = bundle.definition.suite
+    print(f"{suite.id}@{suite.version} — {suite.title}")
+    print(suite.description)
+    print(f"claim scope: {suite.claim_scope}")
+    print(f"task contract: {bundle.definition.task_contract.id} ({bundle.definition.task_contract.digest})")
+    print(f"solution pack: {bundle.solution_pack.id} ({bundle.solution_pack.digest})")
+    print(f"cases: {len(bundle.definition.task_cases)}; holdouts: {len(suite.holdout_case_ids)}")
+    for arm in suite.arms:
+        allocation = arm.route_id or arm.solver_profile
+        anchors = f"; anchors={','.join(arm.anchor_route_ids)}" if arm.anchor_route_ids else ""
+        print(f"- {arm.id}: {arm.kind}={allocation}{anchors}")
+    return 0
+
+
+def _write_json(path: Path, payload: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def _benchmarks_run(
+    benchmark_id: str,
+    runtime: str,
+    artifact_dir: Path | None,
+    receipt_journal: Path | None,
+    report_html: Path | None,
+    report_json: Path | None,
+    as_json: bool,
+) -> int:
+    from solutiongraph.benchmark_library import run_benchmark
+    from solutiongraph.benchmarking import write_benchmark_report
+    from solutiongraph.ledger import JsonlReceiptJournal
+
+    journal = JsonlReceiptJournal(receipt_journal) if receipt_journal else None
+    report = run_benchmark(
+        benchmark_id,
+        runtime=runtime,
+        artifact_root=str(artifact_dir) if artifact_dir else None,
+        receipt_sink=journal,
+    )
+    if report_html:
+        write_benchmark_report(report, report_html)
+    if report_json:
+        _write_json(report_json, report.to_dict())
+    if as_json:
+        print(json.dumps(report.to_dict(), indent=2, sort_keys=True))
+    else:
+        print(
+            f"{benchmark_id}: {'verified' if report.ok else 'problems'} "
+            f"runtime={runtime} report={report.digest} claim={report.suite.claim_scope}"
+        )
+        for arm in report.arm_results:
+            print(
+                f"- {arm.arm_id}: {arm.status} champion="
+                f"{arm.accepted_runs}/{arm.champion_run_count} "
+                f"plans={arm.evaluated_plan_count}/{arm.route_count_upper_bound} "
+                f"holdout={'yes' if arm.holdout_confirmed else 'no'} "
+                f"optimality={'proven' if arm.optimality_proven else 'not-claimed'}"
+            )
+        if report_html:
+            print(f"HTML report: {report_html}")
+        if report_json:
+            print(f"JSON report: {report_json}")
+    return 0 if report.ok else 1
+
+
+def _benchmarks_run_all(
+    runtime: str,
+    report_dir: Path,
+    as_json: bool,
+) -> int:
+    from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS, run_benchmark
+    from solutiongraph.benchmarking import write_benchmark_report
+
+    summaries = []
+    report_dir.mkdir(parents=True, exist_ok=True)
+    for bundle in REFERENCE_BENCHMARKS:
+        report = run_benchmark(bundle.id, runtime=runtime)
+        stem = bundle.id.removeprefix("benchmark.")
+        write_benchmark_report(report, report_dir / f"{stem}.html")
+        _write_json(report_dir / f"{stem}.json", report.to_dict())
+        summaries.append(
+            {
+                "id": bundle.id,
+                "ok": report.ok,
+                "digest": report.digest,
+                "html": f"{stem}.html",
+                "json": f"{stem}.json",
+            }
+        )
+    _write_json(report_dir / "index.json", {"runtime": runtime, "reports": summaries})
+    if as_json:
+        print(json.dumps(summaries, indent=2, sort_keys=True))
+    else:
+        print(
+            f"benchmark arena: {sum(item['ok'] for item in summaries)}/"
+            f"{len(summaries)} verified; reports={report_dir}"
+        )
+        for item in summaries:
+            print(f"- {item['id']}: {'verified' if item['ok'] else 'problems'} ({item['html']})")
+    return 0 if all(item["ok"] for item in summaries) else 1
+
+
+def _packs_list(as_json: bool) -> int:
+    from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
+
+    rows = [
+        {
+            "id": bundle.solution_pack.id,
+            "version": bundle.solution_pack.version,
+            "readiness": bundle.solution_pack.readiness,
+            "digest": bundle.solution_pack.digest,
+            "benchmark_id": bundle.id,
+        }
+        for bundle in REFERENCE_BENCHMARKS
+    ]
+    if as_json:
+        print(json.dumps(rows, indent=2, sort_keys=True))
+        return 0
+    print("ID\tREADINESS\tBENCHMARK\tDIGEST")
+    for row in rows:
+        print(f"{row['id']}\t{row['readiness']}\t{row['benchmark_id']}\t{row['digest']}")
+    return 0
+
+
+def _packs_show(pack_id: str, as_json: bool) -> int:
+    from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
+
+    try:
+        bundle = next(item for item in REFERENCE_BENCHMARKS if item.solution_pack.id == pack_id)
+    except StopIteration as exc:
+        known = ", ".join(item.solution_pack.id for item in REFERENCE_BENCHMARKS)
+        raise ValueError(f"unknown solution pack {pack_id!r}; known packs: {known}") from exc
+    payload = bundle.solution_pack.to_dict()
+    if as_json:
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        return 0
+    print(f"{bundle.solution_pack.id}@{bundle.solution_pack.version}")
+    print(bundle.solution_pack.description)
+    print(f"readiness: {bundle.solution_pack.readiness}")
+    print(f"digest: {bundle.solution_pack.digest}")
+    print(f"closure: {'valid' if not bundle.validate() else 'invalid'}")
+    print(f"task: {bundle.definition.task_contract.id}")
+    print(f"programs: {len(bundle.solution_pack.program_digests)}")
+    print(f"node packs: {len(bundle.solution_pack.node_pack_digests)}")
+    print(f"cases: {len(bundle.solution_pack.task_case_digests)}")
+    print(f"baselines: {len(bundle.solution_pack.baseline_plan_digests)}")
+    return 0
+
+
 def _verify(catalog_root: Path | None, runtime: str, as_json: bool) -> int:
     from solutiongraph.verification import verify_reference_release
 
@@ -241,6 +462,8 @@ def _verify(catalog_root: Path | None, runtime: str, as_json: bool) -> int:
             f"executable_nodes={result.executable_node_count} "
             f"schemas={result.schema_count} "
             f"conformance_checks={len(result.conformance.checks)} "
+            f"benchmarks={result.benchmark_count} "
+            f"solution_packs={result.solution_pack_count} "
             f"catalog_documents={result.catalog_document_count} "
             f"catalog_checked={'yes' if result.catalog_checked else 'no'}"
         )
@@ -614,6 +837,59 @@ def build_parser() -> argparse.ArgumentParser:
     )
     examples_run.add_argument("--json", action="store_true", help="Emit full JSON")
 
+    benchmarks = commands.add_parser(
+        "benchmarks",
+        help="Inspect and run portable task contracts, controls, solver arms, and reports",
+    )
+    benchmark_commands = benchmarks.add_subparsers(
+        dest="benchmark_command", required=True
+    )
+    benchmark_list = benchmark_commands.add_parser(
+        "list", help="List bundled cross-domain benchmark suites"
+    )
+    benchmark_list.add_argument("--json", action="store_true", help="Emit JSON")
+    benchmark_show = benchmark_commands.add_parser(
+        "show", help="Show one task contract and solution-pack closure"
+    )
+    benchmark_show.add_argument("benchmark_id")
+    benchmark_show.add_argument("--json", action="store_true", help="Emit JSON")
+    benchmark_run = benchmark_commands.add_parser(
+        "run", help="Run every allocation arm for one benchmark"
+    )
+    benchmark_run.add_argument("benchmark_id")
+    benchmark_run.add_argument(
+        "--runtime",
+        choices=("in-process", "subprocess"),
+        default="in-process",
+    )
+    benchmark_run.add_argument("--artifact-dir", type=Path)
+    benchmark_run.add_argument("--receipt-journal", type=Path)
+    benchmark_run.add_argument("--report-html", type=Path)
+    benchmark_run.add_argument("--report-json", type=Path)
+    benchmark_run.add_argument("--json", action="store_true", help="Emit full JSON")
+    benchmark_all = benchmark_commands.add_parser(
+        "run-all", help="Run all bundled suites and write HTML/JSON evidence"
+    )
+    benchmark_all.add_argument(
+        "--runtime",
+        choices=("in-process", "subprocess"),
+        default="in-process",
+    )
+    benchmark_all.add_argument(
+        "--report-dir", type=Path, default=Path("benchmark-reports")
+    )
+    benchmark_all.add_argument("--json", action="store_true", help="Emit JSON")
+
+    packs = commands.add_parser(
+        "packs", help="Inspect content-addressed portable solution packs"
+    )
+    pack_commands = packs.add_subparsers(dest="pack_command", required=True)
+    pack_list = pack_commands.add_parser("list", help="List solution packs")
+    pack_list.add_argument("--json", action="store_true", help="Emit JSON")
+    pack_show = pack_commands.add_parser("show", help="Show and validate one solution pack")
+    pack_show.add_argument("pack_id")
+    pack_show.add_argument("--json", action="store_true", help="Emit JSON")
+
     solve = commands.add_parser(
         "solve",
         help="Search, benchmark, rank, and select a route for one executable example",
@@ -748,6 +1024,32 @@ def main(argv: Sequence[str] | None = None) -> int:
                     args.receipt_journal,
                     args.json,
                 )
+        if args.command == "benchmarks":
+            if args.benchmark_command == "list":
+                return _benchmarks_list(args.json)
+            if args.benchmark_command == "show":
+                return _benchmarks_show(args.benchmark_id, args.json)
+            if args.benchmark_command == "run":
+                return _benchmarks_run(
+                    args.benchmark_id,
+                    args.runtime,
+                    args.artifact_dir,
+                    args.receipt_journal,
+                    args.report_html,
+                    args.report_json,
+                    args.json,
+                )
+            if args.benchmark_command == "run-all":
+                return _benchmarks_run_all(
+                    args.runtime,
+                    args.report_dir,
+                    args.json,
+                )
+        if args.command == "packs":
+            if args.pack_command == "list":
+                return _packs_list(args.json)
+            if args.pack_command == "show":
+                return _packs_show(args.pack_id, args.json)
         if args.command == "solve":
             return _solve_example(
                 args.example_id,

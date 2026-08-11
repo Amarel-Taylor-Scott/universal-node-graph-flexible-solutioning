@@ -1,0 +1,36 @@
+{
+  "acceptance_signals": [
+    "precision",
+    "recall",
+    "calibration",
+    "loss avoided",
+    "customer friction",
+    "latency"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.fraud-risk-decision",
+  "input_contract": "Source-identified events, historical observations, risk policy, and intervention budget.",
+  "output_contract": "Calibrated risk, reasons, proportionate action, and eventual outcome evidence.",
+  "problem": "Resolve identities, derive point-in-time features, combine detectors, choose actions, and learn from outcomes.",
+  "readiness": "template",
+  "stage_families": [
+    "observe",
+    "resolve identity",
+    "features",
+    "rules",
+    "anomaly",
+    "model",
+    "combine",
+    "decide",
+    "learn"
+  ],
+  "tags": [
+    "fraud",
+    "risk",
+    "classification"
+  ],
+  "template_id": "template.fraud-risk",
+  "title": "Events to calibrated fraud-risk decisions"
+}

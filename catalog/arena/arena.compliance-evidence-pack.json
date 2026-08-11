@@ -1,0 +1,34 @@
+{
+  "acceptance_signals": [
+    "control coverage",
+    "evidence authenticity",
+    "test reproducibility",
+    "exception closure",
+    "freshness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.compliance-evidence-pack",
+  "input_contract": "Authoritative requirements, applicability, control inventory, systems, owners, and test policy.",
+  "output_contract": "Control findings, samples, exceptions, remediation evidence, and bounded attestation.",
+  "problem": "Map requirements, collect authentic evidence, test controls, resolve exceptions, and attest within claim limits.",
+  "readiness": "template",
+  "stage_families": [
+    "map",
+    "collect",
+    "authenticate",
+    "sample",
+    "test",
+    "cross-check",
+    "remediate",
+    "attest"
+  ],
+  "tags": [
+    "compliance",
+    "audit",
+    "evidence"
+  ],
+  "template_id": "template.compliance-evidence",
+  "title": "Requirements to a replayable control evidence pack"
+}

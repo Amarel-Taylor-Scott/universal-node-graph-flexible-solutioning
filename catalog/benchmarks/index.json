@@ -1,0 +1,66 @@
+{
+  "benchmark_count": 6,
+  "benchmark_model_version": "0.1",
+  "benchmarks": [
+    {
+      "arm_count": 4,
+      "case_count": 4,
+      "claim_scope": "mechanism-fixture",
+      "digest": "sha256:ce3ac81e1f61cb73ca4b03e9202fab0bf976657b4614226933a8eab41792b37a",
+      "id": "benchmark.document-extraction",
+      "path": "benchmarks/benchmark.document-extraction/suite.json",
+      "solution_pack_digest": "sha256:c68d9120312af02f9b30eecbaf82d604e5836dd537df542e072f300c077f14f8",
+      "version": "1.0.0"
+    },
+    {
+      "arm_count": 4,
+      "case_count": 4,
+      "claim_scope": "mechanism-fixture",
+      "digest": "sha256:319a12088622ebaf93333bb92d4fdd32aeddf71fe80145098b45175d45b600eb",
+      "id": "benchmark.image-assurance",
+      "path": "benchmarks/benchmark.image-assurance/suite.json",
+      "solution_pack_digest": "sha256:be866acd08251429402ae40d723e7241e1d90c43526eecc9ca86dee070d0a92e",
+      "version": "1.0.0"
+    },
+    {
+      "arm_count": 4,
+      "case_count": 4,
+      "claim_scope": "mechanism-fixture",
+      "digest": "sha256:1889d32e530642e9185703b3464c4ecc2e4f03edd175d8f969b162c9008d15f3",
+      "id": "benchmark.data-cleaning",
+      "path": "benchmarks/benchmark.data-cleaning/suite.json",
+      "solution_pack_digest": "sha256:92f3046f15d32636f30ddf06405c7636a2139e32aa7e6e6e48ec8aa635c08dee",
+      "version": "1.0.0"
+    },
+    {
+      "arm_count": 4,
+      "case_count": 4,
+      "claim_scope": "mechanism-fixture",
+      "digest": "sha256:4bf402d76a7287217b635d72dac6b435ce9ae9927afef4d7a89c38de0608884a",
+      "id": "benchmark.tabular-regression",
+      "path": "benchmarks/benchmark.tabular-regression/suite.json",
+      "solution_pack_digest": "sha256:e6330aedda96a0fa7ceb6e06c378fc5e2f3d64144d5b0e9e9fcdbab1c9b7b223",
+      "version": "1.0.0"
+    },
+    {
+      "arm_count": 4,
+      "case_count": 4,
+      "claim_scope": "mechanism-fixture",
+      "digest": "sha256:f87972b734fbca8a5d64412b624b85d199ee7112f2dce986a9789233635ffc4b",
+      "id": "benchmark.tabular-classification",
+      "path": "benchmarks/benchmark.tabular-classification/suite.json",
+      "solution_pack_digest": "sha256:c405d7babd48789ab34c2648b03ebf9448ad9e9f7ed1e4785216388b7a62952c",
+      "version": "1.0.0"
+    },
+    {
+      "arm_count": 4,
+      "case_count": 4,
+      "claim_scope": "mechanism-fixture",
+      "digest": "sha256:29773558700e9f976e584b5ec2fb03148a9cd0ad6e0b82b49945acbf9829f3e1",
+      "id": "benchmark.stdlib-data-quality",
+      "path": "benchmarks/benchmark.stdlib-data-quality/suite.json",
+      "solution_pack_digest": "sha256:9efe51c8157e2a06b8a3be2a16a76f8847ba6e9b890dfd97540a79de04c7c2d3",
+      "version": "1.0.0"
+    }
+  ]
+}

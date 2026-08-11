@@ -1,0 +1,73 @@
+{
+  "admitted_space_digest": "sha256:776fa15ef45730cd35fd4e6930d268d4a74ff21b0097c298cd8e6039fa71b97b",
+  "bindings": [
+    {
+      "candidate_id": "candidate.example.ml.split.tail.default",
+      "implementation_digest": "sha256:fcfba6180aae014ad6949315ffdb492402915374327abd13ba6806d18bdd2914",
+      "node_id": "example.ml.split.tail",
+      "node_version": "1.0.0",
+      "parameters": {
+        "holdout_size": 2
+      },
+      "slot_id": "split"
+    },
+    {
+      "candidate_id": "candidate.example.ml.train.mean.default",
+      "implementation_digest": "sha256:6e5b71e26ccf0682fe3b988cf5a9d7a58bcafd2790a17a66e21e05d48142fff8",
+      "node_id": "example.ml.train.mean",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "train"
+    },
+    {
+      "candidate_id": "candidate.example.ml.evaluate.default",
+      "implementation_digest": "sha256:74b02f64dafc7d7d683cce89f89cc25fadb1a03867309fc1d69638417d05325a",
+      "node_id": "example.ml.evaluate",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "evaluate"
+    }
+  ],
+  "digest": "sha256:93b21f2267d7ae0c7b455662c7b27fa2ed226202c381971c07d46c32830f6cc4",
+  "edges": [
+    {
+      "source_port": "split",
+      "source_slot": "split",
+      "target_port": "split",
+      "target_slot": "train"
+    },
+    {
+      "source_port": "split",
+      "source_slot": "split",
+      "target_port": "split",
+      "target_slot": "evaluate"
+    },
+    {
+      "source_port": "model",
+      "source_slot": "train",
+      "target_port": "model",
+      "target_slot": "evaluate"
+    }
+  ],
+  "fallbacks": [
+    {
+      "candidate_id": "candidate.example.ml.train.linear.default",
+      "implementation_digest": "sha256:a548a6c1a38edcf29ccbcc5c943a52208d58a54a66ae44b8f2127b8fbf76dcb2",
+      "node_id": "example.ml.train.linear",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "priority": 1,
+      "slot_id": "train"
+    }
+  ],
+  "model_version": "0.2",
+  "program_digest": "sha256:ea43895821a852419c2b5ead02aee7fc852310659c2e6c7e24001b08f0a2ee4f",
+  "program_id": "example.tabular-regression",
+  "program_version": "1.0.0",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "topological_order": [
+    "split",
+    "train",
+    "evaluate"
+  ]
+}

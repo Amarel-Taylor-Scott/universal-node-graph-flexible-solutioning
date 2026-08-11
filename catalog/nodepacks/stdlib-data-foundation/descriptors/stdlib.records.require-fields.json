@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "records.require-fields"
+  ],
+  "aliases": [
+    "records require-fields"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.require-fields",
+      "language": "und",
+      "source_digest": "sha256:bfad09dc62bdc0174c56a31723de8c771d3fd08f97a4b5a6f052992e0008844f",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Reject records missing configured nonempty fields. Inputs: records. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.require-fields",
+  "node_spec_digest": "sha256:bfad09dc62bdc0174c56a31723de8c771d3fd08f97a4b5a6f052992e0008844f",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Reject records missing configured nonempty fields."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Reject records missing configured nonempty fields.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Require Fields"
+}

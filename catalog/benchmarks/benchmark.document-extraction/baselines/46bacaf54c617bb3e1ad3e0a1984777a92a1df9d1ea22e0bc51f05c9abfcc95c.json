@@ -1,0 +1,70 @@
+{
+  "admitted_space_digest": "sha256:ec197a7a588f937c645f646e1578269853f1fb114e1b10bdfee6c47cb0043b07",
+  "bindings": [
+    {
+      "candidate_id": "candidate.example.document.normalize.conservative.default",
+      "implementation_digest": "sha256:89906e1df2f5cfc918f977050f3d224bfe4a137ea7ee36744b720f234ed4ff31",
+      "node_id": "example.document.normalize.conservative",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "normalize"
+    },
+    {
+      "candidate_id": "candidate.example.document.extract.lines.default",
+      "implementation_digest": "sha256:6acded8319fa5a269a9a4cb1f2f9a88e2806843e9ba03191862920c42ca52b08",
+      "node_id": "example.document.extract.lines",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "extract"
+    },
+    {
+      "candidate_id": "candidate.example.document.project.schema.invoice",
+      "implementation_digest": "sha256:7c2229fe550f03559285019eae8c1fea8a39c248423030ebb0bbef0bbd87c6fe",
+      "node_id": "example.document.project.schema",
+      "node_version": "1.0.0",
+      "parameters": {
+        "required_fields": [
+          "name",
+          "invoice_total"
+        ]
+      },
+      "slot_id": "project"
+    }
+  ],
+  "digest": "sha256:46bacaf54c617bb3e1ad3e0a1984777a92a1df9d1ea22e0bc51f05c9abfcc95c",
+  "edges": [
+    {
+      "source_port": "text",
+      "source_slot": "normalize",
+      "target_port": "text",
+      "target_slot": "extract"
+    },
+    {
+      "source_port": "fields",
+      "source_slot": "extract",
+      "target_port": "fields",
+      "target_slot": "project"
+    }
+  ],
+  "fallbacks": [
+    {
+      "candidate_id": "candidate.example.document.extract.regex.default",
+      "implementation_digest": "sha256:0c2ef84aaf0f938f594b221c1633c5cf1425c040feec33bb2490513a065c16c5",
+      "node_id": "example.document.extract.regex",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "priority": 1,
+      "slot_id": "extract"
+    }
+  ],
+  "model_version": "0.2",
+  "program_digest": "sha256:aef755b59b8045be696f35d56944a910281e5d1fc11bd6cc08ac359b4872f749",
+  "program_id": "example.document-to-schema",
+  "program_version": "1.0.0",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "topological_order": [
+    "normalize",
+    "extract",
+    "project"
+  ]
+}

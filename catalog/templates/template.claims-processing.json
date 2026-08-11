@@ -1,0 +1,1031 @@
+{
+  "description": "An intake, evidence, adjudication, exception, and settlement scaffold.",
+  "domains": [
+    "business.claims",
+    "software.workflow"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.claims-processing",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "receive_claim",
+        "target_port": "state",
+        "target_slot": "authenticate_claimant"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authenticate_claimant",
+        "target_port": "state",
+        "target_slot": "validate_submission"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_submission",
+        "target_port": "state",
+        "target_slot": "extract_claim_facts"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_claim_facts",
+        "target_port": "state",
+        "target_slot": "retrieve_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "retrieve_policy",
+        "target_port": "state",
+        "target_slot": "corroborate_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "corroborate_evidence",
+        "target_port": "state",
+        "target_slot": "detect_conflicts"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_conflicts",
+        "target_port": "state",
+        "target_slot": "determine_eligibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "determine_eligibility",
+        "target_port": "state",
+        "target_slot": "calculate_benefit"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "calculate_benefit",
+        "target_port": "state",
+        "target_slot": "explain_decision"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "explain_decision",
+        "target_port": "state",
+        "target_slot": "triage_exception"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "triage_exception",
+        "target_port": "state",
+        "target_slot": "request_information"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "request_information",
+        "target_port": "state",
+        "target_slot": "conduct_human_review"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "conduct_human_review",
+        "target_port": "state",
+        "target_slot": "authorize_settlement"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authorize_settlement",
+        "target_port": "state",
+        "target_slot": "execute_settlement"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "execute_settlement",
+        "target_port": "state",
+        "target_slot": "notify_parties"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "notify_parties",
+        "target_port": "state",
+        "target_slot": "audit_claim"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.claims-processing",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "receive_claim",
+        "type": {
+          "id": "template.claims-processing.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "audit_claim",
+        "type": {
+          "id": "template.claims-processing.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.intake"
+        ],
+        "id": "receive_claim",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Receive a source-identified claim and attachments idempotently.",
+        "required_capabilities": [
+          "template.claims-processing.receive_claim.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Receive a source-identified claim and attachments idempotently and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.intake"
+        ],
+        "id": "authenticate_claimant",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Authenticate authorized parties and consent scope.",
+        "required_capabilities": [
+          "template.claims-processing.authenticate_claimant.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Authenticate authorized parties and consent scope and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.intake"
+        ],
+        "id": "validate_submission",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate required forms, dates, signatures, and schemas.",
+        "required_capabilities": [
+          "template.claims-processing.validate_submission.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate required forms, dates, signatures, and schemas and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.evidence"
+        ],
+        "id": "extract_claim_facts",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Extract typed facts with exact document grounding.",
+        "required_capabilities": [
+          "template.claims-processing.extract_claim_facts.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Extract typed facts with exact document grounding and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.evidence"
+        ],
+        "id": "retrieve_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retrieve the applicable policy and versioned coverage terms.",
+        "required_capabilities": [
+          "template.claims-processing.retrieve_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retrieve the applicable policy and versioned coverage terms and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.evidence"
+        ],
+        "id": "corroborate_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Corroborate providers, events, amounts, and prior claims.",
+        "required_capabilities": [
+          "template.claims-processing.corroborate_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Corroborate providers, events, amounts, and prior claims and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.evidence"
+        ],
+        "id": "detect_conflicts",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify missing, inconsistent, or potentially fraudulent evidence.",
+        "required_capabilities": [
+          "template.claims-processing.detect_conflicts.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify missing, inconsistent, or potentially fraudulent evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.adjudicate"
+        ],
+        "id": "determine_eligibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate eligibility and coverage prerequisites.",
+        "required_capabilities": [
+          "template.claims-processing.determine_eligibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate eligibility and coverage prerequisites and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.adjudicate"
+        ],
+        "id": "calculate_benefit",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Calculate covered amount, limits, deductibles, and coordination.",
+        "required_capabilities": [
+          "template.claims-processing.calculate_benefit.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Calculate covered amount, limits, deductibles, and coordination and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.adjudicate"
+        ],
+        "id": "explain_decision",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Produce rule-level reasons and source evidence.",
+        "required_capabilities": [
+          "template.claims-processing.explain_decision.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Produce rule-level reasons and source evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "triage_exception",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Classify uncertainty, missing evidence, fraud, and policy exceptions.",
+        "required_capabilities": [
+          "template.claims-processing.triage_exception.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Classify uncertainty, missing evidence, fraud, and policy exceptions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "request_information",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Request only the missing authorized information.",
+        "required_capabilities": [
+          "template.claims-processing.request_information.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Request only the missing authorized information and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "conduct_human_review",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Route consequential or ambiguous decisions for accountable review.",
+        "required_capabilities": [
+          "template.claims-processing.conduct_human_review.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Route consequential or ambiguous decisions for accountable review and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.settle"
+        ],
+        "id": "authorize_settlement",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Authorize payment or denial under separation-of-duties policy.",
+        "required_capabilities": [
+          "template.claims-processing.authorize_settlement.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Authorize payment or denial under separation-of-duties policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.settle"
+        ],
+        "id": "execute_settlement",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute the frozen settlement with idempotency controls.",
+        "required_capabilities": [
+          "template.claims-processing.execute_settlement.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute the frozen settlement with idempotency controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.settle"
+        ],
+        "id": "notify_parties",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Deliver privacy-safe decision and appeal information.",
+        "required_capabilities": [
+          "template.claims-processing.notify_parties.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Deliver privacy-safe decision and appeal information and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.settle"
+        ],
+        "id": "audit_claim",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.claims-processing.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish a replayable evidence, decision, and action receipt.",
+        "required_capabilities": [
+          "template.claims-processing.audit_claim.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish a replayable evidence, decision, and action receipt and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Insurance and benefits claims processing obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.claims-processing.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.claims-processing.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Identify and validate the claim package.",
+      "extensions": {},
+      "id": "stage.intake",
+      "slot_ids": [
+        "receive_claim",
+        "authenticate_claimant",
+        "validate_submission"
+      ],
+      "title": "Intake"
+    },
+    {
+      "description": "Build a traceable evidence record.",
+      "extensions": {},
+      "id": "stage.evidence",
+      "slot_ids": [
+        "extract_claim_facts",
+        "retrieve_policy",
+        "corroborate_evidence",
+        "detect_conflicts"
+      ],
+      "title": "Evidence"
+    },
+    {
+      "description": "Apply rules and admitted decision models.",
+      "extensions": {},
+      "id": "stage.adjudicate",
+      "slot_ids": [
+        "determine_eligibility",
+        "calculate_benefit",
+        "explain_decision"
+      ],
+      "title": "Adjudicate"
+    },
+    {
+      "description": "Resolve uncertainty and consequential exceptions.",
+      "extensions": {},
+      "id": "stage.review",
+      "slot_ids": [
+        "triage_exception",
+        "request_information",
+        "conduct_human_review"
+      ],
+      "title": "Review"
+    },
+    {
+      "description": "Execute and verify the approved outcome.",
+      "extensions": {},
+      "id": "stage.settle",
+      "slot_ids": [
+        "authorize_settlement",
+        "execute_settlement",
+        "notify_parties",
+        "audit_claim"
+      ],
+      "title": "Settle"
+    }
+  ],
+  "tags": [
+    "adjudication",
+    "documents",
+    "human-review"
+  ],
+  "template_model_version": "0.1",
+  "title": "Insurance and benefits claims processing",
+  "version": "1.0.0"
+}

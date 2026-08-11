@@ -1,0 +1,73 @@
+{
+  "admitted_space_digest": "sha256:fd02879617bdb59c8fa8cee2f702105ecd2d26d055329cd3f309156ec1f9960f",
+  "bindings": [
+    {
+      "candidate_id": "candidate.example.ml.classification.split.tail.default",
+      "implementation_digest": "sha256:a7a16097f42766a2bb9cf6cd64a48a7c0729d704524e8d2419224b7577f0d5d1",
+      "node_id": "example.ml.classification.split.tail",
+      "node_version": "1.0.0",
+      "parameters": {
+        "holdout_size": 2
+      },
+      "slot_id": "split"
+    },
+    {
+      "candidate_id": "candidate.example.ml.classification.train.majority.default",
+      "implementation_digest": "sha256:a0595eb109583cdbf65def5fc5e90d6c7dd3ea52ecb7a479c9eb0b50375c326b",
+      "node_id": "example.ml.classification.train.majority",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "train"
+    },
+    {
+      "candidate_id": "candidate.example.ml.classification.evaluate.default",
+      "implementation_digest": "sha256:858861bb59ab34780851b42a717e5fdcc0c672e16e610a5b410c76a1cd6a7347",
+      "node_id": "example.ml.classification.evaluate",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "evaluate"
+    }
+  ],
+  "digest": "sha256:aab98bb1971eb3c981211bf9a8cb36ae6fd9bb874fd085c3983bf46c3d7530b0",
+  "edges": [
+    {
+      "source_port": "split",
+      "source_slot": "split",
+      "target_port": "split",
+      "target_slot": "train"
+    },
+    {
+      "source_port": "split",
+      "source_slot": "split",
+      "target_port": "split",
+      "target_slot": "evaluate"
+    },
+    {
+      "source_port": "model",
+      "source_slot": "train",
+      "target_port": "model",
+      "target_slot": "evaluate"
+    }
+  ],
+  "fallbacks": [
+    {
+      "candidate_id": "candidate.example.ml.classification.train.threshold.default",
+      "implementation_digest": "sha256:9940122c765a586e4d4ef26e0c942e36129506cb45a1d6c07e4213805ab8469e",
+      "node_id": "example.ml.classification.train.threshold",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "priority": 1,
+      "slot_id": "train"
+    }
+  ],
+  "model_version": "0.2",
+  "program_digest": "sha256:340c585e1a4c88986a28739f6bbca4a99dd0fd11568876a85272d39703178fe6",
+  "program_id": "example.tabular-classification",
+  "program_version": "1.0.0",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "topological_order": [
+    "split",
+    "train",
+    "evaluate"
+  ]
+}

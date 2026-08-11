@@ -69,15 +69,17 @@ def test_blueprint_rejects_unknown_fields_duplicates_and_missing_capabilities():
 def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert main(["doctor"]) == 0
     doctor = capsys.readouterr().out
-    assert "templates=19" in doctor
-    assert "atomic_slots=339" in doctor
+    assert "templates=31" in doctor
+    assert "atomic_slots=544" in doctor
     assert f"schemas={len(SCHEMA_NAMES)}" in doctor
-    assert "executable_examples=23" in doctor
-    assert "arena_tasks=24" in doctor
+    assert "stdlib_nodes=19" in doctor
+    assert "executable_examples=24" in doctor
+    assert "arena_tasks=36" in doctor
+    assert "benchmarks=6" in doctor
 
     assert main(["conformance"]) == 0
     conformance = capsys.readouterr().out
-    assert "passed (8 checks)" in conformance
+    assert "passed (11 checks)" in conformance
     assert "conformance.durable-resume" in conformance
 
     assert main(["templates", "list"]) == 0
@@ -112,10 +114,10 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert "tabular-classification" in examples
 
 
-def test_reference_catalog_spans_nineteen_templates_and_339_atomic_slots():
+def test_reference_catalog_spans_thirty_one_templates_and_544_atomic_slots():
     assert REFERENCE_TEMPLATES.validate() == []
-    assert len(REFERENCE_TEMPLATES.templates) == 19
-    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 339
+    assert len(REFERENCE_TEMPLATES.templates) == 31
+    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 544
     assert {
         "template.api-service",
         "template.document-intelligence",
@@ -124,4 +126,7 @@ def test_reference_catalog_spans_nineteen_templates_and_339_atomic_slots():
         "template.numerical-linear-system",
         "template.scientific-experiment",
         "template.web-automation",
+        "template.knowledge-retrieval",
+        "template.optimization-scheduling",
+        "template.database-migration",
     }.issubset({template.id for template in REFERENCE_TEMPLATES.templates})

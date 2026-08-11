@@ -160,8 +160,8 @@ class ParameterSpec:
             "name": self.name,
             "value_type": self.value_type,
             "required": self.required,
-            "default": self.default,
-            "choices": list(self.choices),
+            "default": json.loads(canonical_json(self.default)),
+            "choices": json.loads(canonical_json(self.choices)),
             "description": self.description,
         }
 
@@ -369,7 +369,7 @@ class Candidate:
             "node_id": self.node_id,
             "node_version": self.node_version,
             "implementation_digest": self.implementation_digest,
-            "parameters": dict(self.parameters),
+            "parameters": json.loads(canonical_json(dict(self.parameters))),
             "deployment": self.deployment,
         }
 
@@ -669,7 +669,7 @@ class PlanBinding:
             "node_id": self.node_id,
             "node_version": self.node_version,
             "implementation_digest": self.implementation_digest,
-            "parameters": dict(self.parameters),
+            "parameters": json.loads(canonical_json(dict(self.parameters))),
         }
 
 
@@ -693,7 +693,7 @@ class PlanFallback:
             "node_id": self.node_id,
             "node_version": self.node_version,
             "implementation_digest": self.implementation_digest,
-            "parameters": dict(self.parameters),
+            "parameters": json.loads(canonical_json(dict(self.parameters))),
         }
 
 

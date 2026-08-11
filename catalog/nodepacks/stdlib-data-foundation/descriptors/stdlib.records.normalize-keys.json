@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "records.normalize-keys"
+  ],
+  "aliases": [
+    "records normalize-keys"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.normalize-keys",
+      "language": "und",
+      "source_digest": "sha256:045d0555920c86fc7fa5a6cf6f48b3e22c0dce3e14cfd42a0e6dbbdc160b398b",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Normalize top-level record keys with collision detection. Inputs: records. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.normalize-keys",
+  "node_spec_digest": "sha256:045d0555920c86fc7fa5a6cf6f48b3e22c0dce3e14cfd42a0e6dbbdc160b398b",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Normalize top-level record keys with collision detection."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Normalize top-level record keys with collision detection.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Normalize Keys"
+}

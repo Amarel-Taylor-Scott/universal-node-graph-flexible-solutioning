@@ -14,14 +14,15 @@ engine.
 ## Read before architectural changes
 
 1. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative model and invariants.
-2. `NODE_REPOSITORY_PROTOCOL.md` — discovery sidecars, embeddings, handshake, snapshots.
-3. `SOLUTION_TEMPLATE_PROTOCOL.md` — stages, atomic slots, and refinement loops.
-4. `EXECUTION_PROTOCOL.md` — frozen plans, runtime adapters, artifacts, fallbacks, and receipts.
-5. `STRUCTURED_CONTROL_PROTOCOL.md` and `TOPOLOGY_SEARCH_PROTOCOL.md` — control flow and graph-shape search.
-6. `STREAMING_PROTOCOL.md` and `PROVENANCE_AND_RESUME.md` — event time, recovery, and lineage boundaries.
-7. `RESEARCH_FOUNDATIONS.md` — source-backed design rationale.
-8. `AUTORESEARCH_REVIEW.md` — generated-code campaigns, evaluator isolation, and numerical nodes.
-9. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
+2. `TASK_AND_SOLUTION_PACK_PROTOCOL.md` — stable task meaning, cases, oracle, and exact closure.
+3. `NODE_REPOSITORY_PROTOCOL.md` and `NODE_AUTHORING_GUIDE.md` — executable ABI, discovery sidecars, embeddings, handshake, snapshots.
+4. `SOLUTION_TEMPLATE_PROTOCOL.md` — stages, atomic slots, and refinement loops.
+5. `BENCHMARK_PROTOCOL.md` — controlled arms, holdouts, claim scopes, and evidence.
+6. `EXECUTION_PROTOCOL.md` — frozen plans, runtime adapters, artifacts, fallbacks, and receipts.
+7. `STRUCTURED_CONTROL_PROTOCOL.md` and `TOPOLOGY_SEARCH_PROTOCOL.md` — control flow and graph-shape search.
+8. `STREAMING_PROTOCOL.md` and `PROVENANCE_AND_RESUME.md` — event time, recovery, and lineage boundaries.
+9. `RESEARCH_FOUNDATIONS.md` and `AUTORESEARCH_REVIEW.md` — source-backed tradeoffs, campaigns, evaluator isolation, and numerical nodes.
+10. `ARCHITECTURE.md` and `UNIVERSAL_GRAPH_SYSTEM.md` — existing runtime and viewer.
 
 Use the narrowest matching workspace skill:
 
@@ -33,11 +34,16 @@ Use the narrowest matching workspace skill:
 - `.agents/skills/design-topology-family/SKILL.md` for explicit graph-shape alternatives;
 - `.agents/skills/author-structured-workflow/SKILL.md` for branches, composites, loops, and compensation;
 - `.agents/skills/solve-universal-dag/SKILL.md` for UniversalSolver and Arena task implementation;
+- `.agents/skills/package-solution-graph/SKILL.md` for task/asset closure;
+- `.agents/skills/run-benchmark-arena/SKILL.md` for controlled solution-space experiments;
+- `.agents/skills/expand-node-library/SKILL.md` for reusable source-bound primitives;
 - `.agents/skills/model-solution-graph/SKILL.md` for end-to-end modeling.
 
 ## Non-negotiable ontology
 
 - A task contract defines required outcome and independent acceptance.
+- A task case fixes one input identity and evaluation split; it is not a mutable fixture path.
+- A solution pack fixes the exact task/program/registry/node-pack/case/oracle closure.
 - A semantic slot defines an obligation. It is not an implementation.
 - A node definition is a reusable implementation ABI.
 - A candidate is one exact node version/digest plus parameter binding.
@@ -45,6 +51,8 @@ Use the narrowest matching workspace skill:
 - A belief model contains mutable learned priors. It is not program semantics.
 - A frozen plan contains one exact candidate per slot and no mutable score.
 - A receipt records observation. It never rewrites a definition or prior result.
+- A benchmark suite fixes arms, cases, seeds, holdouts, and claim scope. A report
+  records completion; `ok` does not mean every arm found an accepted route.
 - A campaign record preserves candidate ancestry and proposal identity. It does
   not grant admission or replace execution evidence.
 
@@ -102,6 +110,10 @@ objects, not in `NodeSpec`.
   policy over an unexplained scalar score.
 - Use baselines, repeated seeds, holdout cases, independent verification, and
   best-so-far-vs-budget curves for claims about optimization.
+- Compare fixed-route and solver arms against the identical task, cases, seeds,
+  repetitions, oracle, and runtime class. Do not leak runtime state across arms.
+- Treat `completed-no-accepted-route` as a valid bounded-search result. Only a
+  complete exhaustive arm may claim optimality over its declared snapshot.
 - Call receipt-derived node effects observational unless assignment supports a
   causal claim.
 - Select fallbacks for failure diversity as well as rank.
@@ -144,9 +156,13 @@ objects, not in `NodeSpec`.
 - `solutiongraph/experiments.py` — receipt-producing experiment allocation.
 - `solutiongraph/scaffold.py` — non-destructive starter workspaces for coding harnesses.
 - `solutiongraph/campaign.py` — population ancestry, budgets, decisions, and evaluator boundaries.
-- `solutiongraph/examples/` — 23 dependency-free executable domain examples using two Arena registries.
+- `solutiongraph/tasking.py` — portable task contracts, cases, oracles, and exact solution-pack closure.
+- `solutiongraph/authoring.py` — source-bound Python node authoring and exact candidate expansion.
+- `solutiongraph/benchmarking.py` — controlled benchmark arms and offline evidence reports.
+- `solutiongraph/stdlib_pack.py` — 19 dependency-free reusable nodes and 32 bindings.
+- `solutiongraph/examples/` — 24 dependency-free executable domain examples.
 - `solutiongraph/schemas/` — strict portable wire schemas.
-- `catalog/` — generated semantic templates and reference node pack.
+- `catalog/` — generated templates, node packs, Arena tasks, solution packs, and benchmarks.
 - `browsergraph/` — browser runtime adapter and original proof of concept.
 - `examples/` — generated viewers, canonical data, and executable examples.
 - `tests/test_solutiongraph.py` — universal conformance tests.

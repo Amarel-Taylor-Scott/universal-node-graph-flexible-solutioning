@@ -1,0 +1,1031 @@
+{
+  "description": "A telemetry, detection, diagnosis, mitigation, and learning scaffold.",
+  "domains": [
+    "operations.sre",
+    "software.observability"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.observability-sre",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_service_model",
+        "target_port": "state",
+        "target_slot": "define_slos"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_slos",
+        "target_port": "state",
+        "target_slot": "instrument_telemetry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "instrument_telemetry",
+        "target_port": "state",
+        "target_slot": "ingest_telemetry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ingest_telemetry",
+        "target_port": "state",
+        "target_slot": "normalize_telemetry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_telemetry",
+        "target_port": "state",
+        "target_slot": "verify_telemetry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_telemetry",
+        "target_port": "state",
+        "target_slot": "evaluate_slos"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "evaluate_slos",
+        "target_port": "state",
+        "target_slot": "detect_anomalies"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_anomalies",
+        "target_port": "state",
+        "target_slot": "correlate_alerts"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "correlate_alerts",
+        "target_port": "state",
+        "target_slot": "triage_incident"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "triage_incident",
+        "target_port": "state",
+        "target_slot": "diagnose_cause"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "diagnose_cause",
+        "target_port": "state",
+        "target_slot": "select_mitigation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_mitigation",
+        "target_port": "state",
+        "target_slot": "verify_recovery"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_recovery",
+        "target_port": "state",
+        "target_slot": "reconstruct_timeline"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconstruct_timeline",
+        "target_port": "state",
+        "target_slot": "identify_actions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "identify_actions",
+        "target_port": "state",
+        "target_slot": "verify_actions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_actions",
+        "target_port": "state",
+        "target_slot": "revise_routing"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.observability-sre",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_service_model",
+        "type": {
+          "id": "template.observability-sre.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "revise_routing",
+        "type": {
+          "id": "template.observability-sre.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.instrument"
+        ],
+        "id": "define_service_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define services, dependencies, owners, critical paths, and user journeys.",
+        "required_capabilities": [
+          "template.observability-sre.define_service_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define services, dependencies, owners, critical paths, and user journeys and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.instrument"
+        ],
+        "id": "define_slos",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define indicators, objectives, error budgets, and measurement windows.",
+        "required_capabilities": [
+          "template.observability-sre.define_slos.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define indicators, objectives, error budgets, and measurement windows and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.instrument"
+        ],
+        "id": "instrument_telemetry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Instrument metrics, logs, traces, profiles, and events with privacy controls.",
+        "required_capabilities": [
+          "template.observability-sre.instrument_telemetry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Instrument metrics, logs, traces, profiles, and events with privacy controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "ingest_telemetry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Ingest typed telemetry with event-time, source, and sampling metadata.",
+        "required_capabilities": [
+          "template.observability-sre.ingest_telemetry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Ingest typed telemetry with event-time, source, and sampling metadata and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "normalize_telemetry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize resource, service, trace, and error identities.",
+        "required_capabilities": [
+          "template.observability-sre.normalize_telemetry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize resource, service, trace, and error identities and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "verify_telemetry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify completeness, freshness, cardinality, and pipeline health.",
+        "required_capabilities": [
+          "template.observability-sre.verify_telemetry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify completeness, freshness, cardinality, and pipeline health and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.detect"
+        ],
+        "id": "evaluate_slos",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate SLO windows and error-budget consumption.",
+        "required_capabilities": [
+          "template.observability-sre.evaluate_slos.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate SLO windows and error-budget consumption and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.detect"
+        ],
+        "id": "detect_anomalies",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect changes relative to service-appropriate baselines.",
+        "required_capabilities": [
+          "template.observability-sre.detect_anomalies.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect changes relative to service-appropriate baselines and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.detect"
+        ],
+        "id": "correlate_alerts",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Correlate symptoms by topology, time, deployment, and causality.",
+        "required_capabilities": [
+          "template.observability-sre.correlate_alerts.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Correlate symptoms by topology, time, deployment, and causality and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "triage_incident",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate impact, urgency, ownership, and affected users.",
+        "required_capabilities": [
+          "template.observability-sre.triage_incident.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate impact, urgency, ownership, and affected users and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "diagnose_cause",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Test causal hypotheses using cross-signal evidence.",
+        "required_capabilities": [
+          "template.observability-sre.diagnose_cause.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Test causal hypotheses using cross-signal evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "select_mitigation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select reversible mitigation under blast-radius controls.",
+        "required_capabilities": [
+          "template.observability-sre.select_mitigation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select reversible mitigation under blast-radius controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "verify_recovery",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify SLO recovery and absence of hidden degradation.",
+        "required_capabilities": [
+          "template.observability-sre.verify_recovery.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify SLO recovery and absence of hidden degradation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "reconstruct_timeline",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconstruct a source-grounded incident timeline.",
+        "required_capabilities": [
+          "template.observability-sre.reconstruct_timeline.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconstruct a source-grounded incident timeline and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "identify_actions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify systemic prevention, detection, and response improvements.",
+        "required_capabilities": [
+          "template.observability-sre.identify_actions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify systemic prevention, detection, and response improvements and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "verify_actions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify completed actions against the original failure mode.",
+        "required_capabilities": [
+          "template.observability-sre.verify_actions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify completed actions against the original failure mode and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "revise_routing",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.observability-sre.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Revise alert and mitigation route priors from observed outcomes.",
+        "required_capabilities": [
+          "template.observability-sre.revise_routing.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Revise alert and mitigation route priors from observed outcomes and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Observability and SRE response obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.observability-sre.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.observability-sre.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define observable service contracts.",
+      "extensions": {},
+      "id": "stage.instrument",
+      "slot_ids": [
+        "define_service_model",
+        "define_slos",
+        "instrument_telemetry"
+      ],
+      "title": "Instrument"
+    },
+    {
+      "description": "Create trustworthy telemetry streams.",
+      "extensions": {},
+      "id": "stage.collect",
+      "slot_ids": [
+        "ingest_telemetry",
+        "normalize_telemetry",
+        "verify_telemetry"
+      ],
+      "title": "Collect"
+    },
+    {
+      "description": "Identify actionable service degradation.",
+      "extensions": {},
+      "id": "stage.detect",
+      "slot_ids": [
+        "evaluate_slos",
+        "detect_anomalies",
+        "correlate_alerts"
+      ],
+      "title": "Detect"
+    },
+    {
+      "description": "Diagnose and mitigate safely.",
+      "extensions": {},
+      "id": "stage.respond",
+      "slot_ids": [
+        "triage_incident",
+        "diagnose_cause",
+        "select_mitigation",
+        "verify_recovery"
+      ],
+      "title": "Respond"
+    },
+    {
+      "description": "Improve system and response quality.",
+      "extensions": {},
+      "id": "stage.learn",
+      "slot_ids": [
+        "reconstruct_timeline",
+        "identify_actions",
+        "verify_actions",
+        "revise_routing"
+      ],
+      "title": "Learn"
+    }
+  ],
+  "tags": [
+    "telemetry",
+    "reliability",
+    "incident"
+  ],
+  "template_model_version": "0.1",
+  "title": "Observability and SRE response",
+  "version": "1.0.0"
+}

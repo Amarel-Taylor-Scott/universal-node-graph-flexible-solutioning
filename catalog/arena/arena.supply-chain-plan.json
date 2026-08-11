@@ -1,0 +1,36 @@
+{
+  "acceptance_signals": [
+    "service level",
+    "cost",
+    "feasibility",
+    "resilience",
+    "inventory",
+    "emissions"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.supply-chain-plan",
+  "input_contract": "Reconciled demand, inventory, capacity, network, policy, scenarios, and planning horizon.",
+  "output_contract": "Feasible approved plan, tradeoff evidence, dispatched actions, observations, and replan triggers.",
+  "problem": "Forecast uncertain demand and lead time, optimize candidate plans, stress them, approve, dispatch, and replan.",
+  "readiness": "template",
+  "stage_families": [
+    "state",
+    "forecast",
+    "scenarios",
+    "constraints",
+    "optimize",
+    "stress",
+    "approve",
+    "execute",
+    "replan"
+  ],
+  "tags": [
+    "supply-chain",
+    "planning",
+    "optimization"
+  ],
+  "template_id": "template.supply-chain-planning",
+  "title": "Demand and supply state to a resilient execution plan"
+}

@@ -1,0 +1,17 @@
+{
+  "description": "Company punctuation and email casing variation.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/data-cleaning/company-punctuation",
+  "id": "case.benchmark.data-cleaning.company-punctuation",
+  "input_digest": "sha256:a996f6c3bfe2ed686c54ae14750bc5e3cbdaa64121a7a4e1c30254a8efd959fa",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.cleaning"
+  ],
+  "task_model_version": "0.1"
+}

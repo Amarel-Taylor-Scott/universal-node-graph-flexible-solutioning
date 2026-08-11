@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task-case.schema.json",
+  "title": "SolutionGraph immutable task case",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_model_version", "id", "split", "input_digest", "fixture_ref",
+    "expected_output_digest", "description", "tags", "extensions"
+  ],
+  "properties": {
+    "task_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "split": {"enum": ["development", "validation", "holdout", "stress"]},
+    "input_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "fixture_ref": {"type": "string", "minLength": 1},
+    "expected_output_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+    "description": {"type": "string"},
+    "tags": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

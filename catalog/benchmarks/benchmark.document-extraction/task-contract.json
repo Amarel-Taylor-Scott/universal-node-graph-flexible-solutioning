@@ -1,0 +1,91 @@
+{
+  "allowed_effects": [],
+  "case_ids": [
+    "case.benchmark.document-extraction.canonical",
+    "case.benchmark.document-extraction.spacing",
+    "case.benchmark.document-extraction.extra-fields",
+    "case.benchmark.document-extraction.holdout-case"
+  ],
+  "constraints": [
+    {
+      "description": "A route is eligible only when the independent oracle accepts it.",
+      "id": "constraint.acceptance",
+      "operator": "eq",
+      "target": "verification.accepted",
+      "unit": "",
+      "value": true
+    }
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "external_requirements": [
+    "These bundled synthetic cases prove framework mechanics; replace them with representative, licensed development and hidden holdout data before making production or domain-performance claims."
+  ],
+  "granted_permissions": [],
+  "id": "task.benchmark.document-extraction",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "Task input document.",
+      "name": "document",
+      "type": {
+        "id": "example.document-text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "intent": "Extract a requested schema from an unknown key/value document.",
+  "objectives": [
+    {
+      "direction": "maximize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "quality",
+      "weight": 1.0
+    },
+    {
+      "direction": "minimize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "latency_ms",
+      "weight": 1.0
+    }
+  ],
+  "oracle": {
+    "candidate_readable": true,
+    "description": "Bundled deterministic acceptance oracle. It is separate from node implementations but readable because these are transparent fixtures.",
+    "evaluator_digest": "sha256:b30086a4ce79a5fb2dfdc1af7c26a54854592c70c4618286f16260ae6ff1a8a2",
+    "id": "verifier.example.document",
+    "implementation_ref": "python://solutiongraph.examples.tasks:_document_verifier",
+    "independence": "separate-implementation",
+    "kind": "property",
+    "version": "1.0.0"
+  },
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "Task output result.",
+      "name": "result",
+      "type": {
+        "id": "example.document-record",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "success_contract": "An independent verifier matches every required field to expected evidence.",
+  "tags": [
+    "benchmark.synthetic",
+    "domain.document",
+    "task.extraction"
+  ],
+  "task_model_version": "0.1",
+  "title": "Ingest and extract into schema",
+  "version": "1.0.0"
+}

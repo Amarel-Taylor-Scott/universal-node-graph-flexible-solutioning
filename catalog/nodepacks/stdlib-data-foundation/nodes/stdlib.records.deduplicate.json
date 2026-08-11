@@ -1,0 +1,72 @@
+{
+  "capabilities": [
+    "records.deduplicate"
+  ],
+  "description": "Deduplicate by exact or canonicalized configured keys.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:deduplicate_records",
+  "failure_modes": [],
+  "id": "stdlib.records.deduplicate",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:4631be0b42dbcdc094914b10ed299589d8b93443924ce8ab90ddfb9fdf1ed1c4",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": null,
+      "description": "",
+      "name": "key_fields",
+      "required": true,
+      "value_type": "array[string]"
+    },
+    {
+      "choices": [
+        false,
+        true
+      ],
+      "default": false,
+      "description": "",
+      "name": "canonical",
+      "required": false,
+      "value_type": "boolean"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

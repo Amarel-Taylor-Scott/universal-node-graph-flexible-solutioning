@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task-contract.schema.json",
+  "title": "SolutionGraph task contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_model_version", "id", "version", "title", "intent", "inputs",
+    "outputs", "success_contract", "oracle", "objectives", "constraints",
+    "allowed_effects", "granted_permissions", "case_ids", "tags",
+    "external_requirements", "extensions"
+  ],
+  "properties": {
+    "task_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "intent": {"type": "string", "minLength": 1},
+    "inputs": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/port"}},
+    "outputs": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/port"}},
+    "success_contract": {"type": "string", "minLength": 1},
+    "oracle": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "id", "version", "kind", "evaluator_digest", "implementation_ref",
+        "independence", "candidate_readable", "description"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "version": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["exact", "property", "cross-implementation", "statistical", "human", "external-authority"]},
+        "evaluator_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "implementation_ref": {"type": "string", "minLength": 1},
+        "independence": {"enum": ["independent", "separate-implementation", "producer-self-check"]},
+        "candidate_readable": {"type": "boolean"},
+        "description": {"type": "string"}
+      }
+    },
+    "objectives": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["metric", "direction", "weight", "hard_minimum", "hard_maximum"],
+        "properties": {
+          "metric": {"type": "string", "minLength": 1},
+          "direction": {"enum": ["maximize", "minimize"]},
+          "weight": {"type": "number", "minimum": 0},
+          "hard_minimum": {"type": ["number", "null"]},
+          "hard_maximum": {"type": ["number", "null"]}
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "target", "operator", "value", "unit", "description"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "target": {"type": "string", "minLength": 1},
+          "operator": {"enum": ["eq", "ne", "lt", "lte", "gt", "gte", "in", "not-in"]},
+          "value": true,
+          "unit": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "allowed_effects": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "granted_permissions": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "case_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "tags": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "external_requirements": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

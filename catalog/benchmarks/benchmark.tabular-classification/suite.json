@@ -1,0 +1,73 @@
+{
+  "arms": [
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the declared control route without route search.",
+      "id": "arm.fixed-control",
+      "kind": "fixed-route",
+      "route_id": "control",
+      "solver_profile": "",
+      "title": "Fixed control"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the stronger hand-authored candidate without route search.",
+      "id": "arm.fixed-candidate",
+      "kind": "fixed-route",
+      "route_id": "threshold",
+      "solver_profile": "",
+      "title": "Fixed candidate"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Use one prior-guided proposal under the explicit quick allocation.",
+      "id": "arm.solver-quick",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "quick",
+      "title": "Quick solver"
+    },
+    {
+      "anchor_route_ids": [
+        "threshold"
+      ],
+      "description": "Use prior plus bounded beam search and retain evidence-diverse fallbacks.",
+      "id": "arm.solver-balanced",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "balanced",
+      "title": "Balanced solver"
+    }
+  ],
+  "benchmark_model_version": "0.1",
+  "claim_scope": "mechanism-fixture",
+  "dataset_license": "CC0-1.0",
+  "description": "Compare majority and threshold classifiers across shifted deterministic binary decision boundaries.",
+  "example_id": "tabular-classification",
+  "holdout_case_ids": [
+    "case.benchmark.tabular-classification.holdout-case"
+  ],
+  "id": "benchmark.tabular-classification",
+  "notes": [
+    "All inputs are small synthetic fixtures committed by value digest.",
+    "Latency is observed runtime evidence, not a cross-machine performance claim.",
+    "Only a complete exhaustive arm may claim optimality over the admitted space."
+  ],
+  "program_digest": "sha256:340c585e1a4c88986a28739f6bbca4a99dd0fd11568876a85272d39703178fe6",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "repetitions": 1,
+  "seeds": [
+    0,
+    1729
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:7112e1c1e3af58427421d758deb75c785c578e338773884bc4a53cf80bca1b15",
+    "sha256:053758c7290eebb21e80466516b817b623054a4c34488c3ff8e92f443e48cf76",
+    "sha256:7318daf19014b7035505af6d75eb58eb1114f0147ebd00c146256cea95796465",
+    "sha256:00e726d4a7ceefbcbe3318eb5a101e14f779b10a96cd2a593e6d095328876a57"
+  ],
+  "task_contract_digest": "sha256:580e0dc7381cbb0fab550dd30415c22821ee0b010bca43021cf4efb07b453e9e",
+  "title": "Data science classification arena",
+  "version": "1.0.0"
+}

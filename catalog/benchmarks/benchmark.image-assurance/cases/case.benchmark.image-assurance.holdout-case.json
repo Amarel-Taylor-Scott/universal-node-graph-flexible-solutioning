@@ -1,0 +1,17 @@
+{
+  "description": "Held-out descending intensity pattern.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/image-assurance/holdout-case",
+  "id": "case.benchmark.image-assurance.holdout-case",
+  "input_digest": "sha256:1ceb5fa66b7dab364e021f5902d098364cc65947c17c492d30ed6accdbddb944",
+  "split": "holdout",
+  "tags": [
+    "fixture.synthetic",
+    "domain.image",
+    "task.assurance"
+  ],
+  "task_model_version": "0.1"
+}

@@ -35,6 +35,25 @@ from solutiongraph.artifacts import (
     digest_value,
     store_value,
 )
+from solutiongraph.authoring import (
+    AUTHORING_MODEL_VERSION,
+    PythonNodeDefinition,
+    bind_candidate,
+    build_python_registry,
+    define_python_node,
+    enumerate_candidates,
+    validate_python_signature,
+)
+from solutiongraph.benchmarking import (
+    BENCHMARK_MODEL_VERSION,
+    BenchmarkArm,
+    BenchmarkArmResult,
+    BenchmarkDefinition,
+    BenchmarkReport,
+    BenchmarkRunner,
+    BenchmarkSuite,
+    write_benchmark_report,
+)
 from solutiongraph.campaign import (
     CAMPAIGN_MODEL_VERSION,
     CampaignBudget,
@@ -220,6 +239,16 @@ from solutiongraph.subprocess_runtime import (
     SUBPROCESS_PROTOCOL_VERSION,
     SubprocessPythonRuntime,
 )
+from solutiongraph.tasking import (
+    SOLUTION_PACK_MODEL_VERSION,
+    TASK_MODEL_VERSION,
+    SolutionPackManifest,
+    TaskCaseSpec,
+    TaskConstraint,
+    TaskContract,
+    TaskOracle,
+    validate_solution_pack_closure,
+)
 from solutiongraph.template_authoring import (
     BLUEPRINT_MODEL_VERSION,
     LinearTemplateBlueprint,
@@ -251,10 +280,14 @@ from solutiongraph.verification import (
     verify_reference_release,
 )
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 __all__ = [
     "SEMANTIC_MODEL_VERSION",
+    "AUTHORING_MODEL_VERSION",
+    "BENCHMARK_MODEL_VERSION",
+    "TASK_MODEL_VERSION",
+    "SOLUTION_PACK_MODEL_VERSION",
     "DISCOVERY_PROTOCOL_VERSION",
     "TEMPLATE_MODEL_VERSION",
     "BLUEPRINT_MODEL_VERSION",
@@ -276,6 +309,12 @@ __all__ = [
     "AdmittedSpace",
     "AdmissionDecision",
     "ArtifactStore",
+    "BenchmarkArm",
+    "BenchmarkArmResult",
+    "BenchmarkDefinition",
+    "BenchmarkReport",
+    "BenchmarkRunner",
+    "BenchmarkSuite",
     "ArenaCatalog",
     "ArenaTask",
     "BeliefModel",
@@ -349,6 +388,7 @@ __all__ = [
     "PromotionDecision",
     "ProgramGraph",
     "PythonRuntime",
+    "PythonNodeDefinition",
     "ProvenanceBundle",
     "ReferenceStreamEngine",
     "ReferenceExecutor",
@@ -388,6 +428,7 @@ __all__ = [
     "QueryMode",
     "SemanticSlot",
     "SolutionTemplate",
+    "SolutionPackManifest",
     "SlotBlueprint",
     "StageBlueprint",
     "StreamEmission",
@@ -404,6 +445,10 @@ __all__ = [
     "TemplateCatalog",
     "TemplateStage",
     "TrialObservation",
+    "TaskCaseSpec",
+    "TaskConstraint",
+    "TaskContract",
+    "TaskOracle",
     "UNIVERSAL_DAG_ARENA",
     "UniversalSolver",
     "StoredArtifact",
@@ -426,11 +471,15 @@ __all__ = [
     "callable_implementation_digest",
     "canonical_json",
     "build_reference_linear_template",
+    "bind_candidate",
+    "build_python_registry",
     "cartesian_routes",
     "descriptors_by_node",
     "default_project_id",
     "digest_bytes",
     "digest_value",
+    "define_python_node",
+    "enumerate_candidates",
     "export_provenance",
     "learn_observational_beliefs",
     "load_linear_blueprint",
@@ -451,4 +500,7 @@ __all__ = [
     "to_w3c_prov",
     "write_solution_template",
     "verify_reference_release",
+    "validate_python_signature",
+    "validate_solution_pack_closure",
+    "write_benchmark_report",
 ]

@@ -1,0 +1,978 @@
+{
+  "description": "A requirement mapping, evidence collection, testing, exception, and attestation scaffold.",
+  "domains": [
+    "governance.compliance",
+    "software.assurance"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.compliance-evidence",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_requirements",
+        "target_port": "state",
+        "target_slot": "map_controls"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "map_controls",
+        "target_port": "state",
+        "target_slot": "define_tests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_tests",
+        "target_port": "state",
+        "target_slot": "request_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "request_evidence",
+        "target_port": "state",
+        "target_slot": "authenticate_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authenticate_evidence",
+        "target_port": "state",
+        "target_slot": "normalize_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_evidence",
+        "target_port": "state",
+        "target_slot": "test_design"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "test_design",
+        "target_port": "state",
+        "target_slot": "sample_operation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "sample_operation",
+        "target_port": "state",
+        "target_slot": "test_operation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "test_operation",
+        "target_port": "state",
+        "target_slot": "cross_check_findings"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "cross_check_findings",
+        "target_port": "state",
+        "target_slot": "classify_exception"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "classify_exception",
+        "target_port": "state",
+        "target_slot": "assign_remediation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "assign_remediation",
+        "target_port": "state",
+        "target_slot": "verify_remediation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_remediation",
+        "target_port": "state",
+        "target_slot": "aggregate_control_status"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "aggregate_control_status",
+        "target_port": "state",
+        "target_slot": "review_attestation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "review_attestation",
+        "target_port": "state",
+        "target_slot": "publish_evidence_pack"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.compliance-evidence",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_requirements",
+        "type": {
+          "id": "template.compliance-evidence.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_evidence_pack",
+        "type": {
+          "id": "template.compliance-evidence.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.map"
+        ],
+        "id": "load_requirements",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load authoritative requirement versions and applicability.",
+        "required_capabilities": [
+          "template.compliance-evidence.load_requirements.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load authoritative requirement versions and applicability and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.map"
+        ],
+        "id": "map_controls",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Map requirements to owners, systems, controls, and evidence expectations.",
+        "required_capabilities": [
+          "template.compliance-evidence.map_controls.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Map requirements to owners, systems, controls, and evidence expectations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.map"
+        ],
+        "id": "define_tests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define independent design and operating-effectiveness tests.",
+        "required_capabilities": [
+          "template.compliance-evidence.define_tests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define independent design and operating-effectiveness tests and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "request_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Request minimally sufficient evidence from authorized systems and owners.",
+        "required_capabilities": [
+          "template.compliance-evidence.request_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Request minimally sufficient evidence from authorized systems and owners and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "authenticate_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify evidence source, time range, completeness, and integrity.",
+        "required_capabilities": [
+          "template.compliance-evidence.authenticate_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify evidence source, time range, completeness, and integrity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "normalize_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize evidence into typed control observations.",
+        "required_capabilities": [
+          "template.compliance-evidence.normalize_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize evidence into typed control observations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.test"
+        ],
+        "id": "test_design",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Test whether control design addresses the mapped obligation.",
+        "required_capabilities": [
+          "template.compliance-evidence.test_design.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Test whether control design addresses the mapped obligation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.test"
+        ],
+        "id": "sample_operation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select reproducible, bias-aware operating samples.",
+        "required_capabilities": [
+          "template.compliance-evidence.sample_operation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select reproducible, bias-aware operating samples and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.test"
+        ],
+        "id": "test_operation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Test observed operation against exact control criteria.",
+        "required_capabilities": [
+          "template.compliance-evidence.test_operation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Test observed operation against exact control criteria and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.test"
+        ],
+        "id": "cross_check_findings",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Cross-check material findings through an independent source or method.",
+        "required_capabilities": [
+          "template.compliance-evidence.cross_check_findings.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Cross-check material findings through an independent source or method and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "classify_exception",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Classify severity, scope, recurrence, and compensating controls.",
+        "required_capabilities": [
+          "template.compliance-evidence.classify_exception.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Classify severity, scope, recurrence, and compensating controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "assign_remediation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Assign accountable remediation, deadline, and verification plan.",
+        "required_capabilities": [
+          "template.compliance-evidence.assign_remediation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Assign accountable remediation, deadline, and verification plan and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.resolve"
+        ],
+        "id": "verify_remediation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify the changed control on new evidence.",
+        "required_capabilities": [
+          "template.compliance-evidence.verify_remediation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify the changed control on new evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.attest"
+        ],
+        "id": "aggregate_control_status",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Aggregate findings without hiding population or sample limits.",
+        "required_capabilities": [
+          "template.compliance-evidence.aggregate_control_status.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Aggregate findings without hiding population or sample limits and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.attest"
+        ],
+        "id": "review_attestation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Require accountable review for material conclusions.",
+        "required_capabilities": [
+          "template.compliance-evidence.review_attestation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Require accountable review for material conclusions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.attest"
+        ],
+        "id": "publish_evidence_pack",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.compliance-evidence.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish requirements, evidence, tests, exceptions, and signed receipts.",
+        "required_capabilities": [
+          "template.compliance-evidence.publish_evidence_pack.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish requirements, evidence, tests, exceptions, and signed receipts and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Compliance control evidence obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.compliance-evidence.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.compliance-evidence.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Translate obligations into testable controls.",
+      "extensions": {},
+      "id": "stage.map",
+      "slot_ids": [
+        "load_requirements",
+        "map_controls",
+        "define_tests"
+      ],
+      "title": "Map"
+    },
+    {
+      "description": "Acquire immutable control evidence.",
+      "extensions": {},
+      "id": "stage.collect",
+      "slot_ids": [
+        "request_evidence",
+        "authenticate_evidence",
+        "normalize_evidence"
+      ],
+      "title": "Collect"
+    },
+    {
+      "description": "Evaluate controls reproducibly.",
+      "extensions": {},
+      "id": "stage.test",
+      "slot_ids": [
+        "test_design",
+        "sample_operation",
+        "test_operation",
+        "cross_check_findings"
+      ],
+      "title": "Test"
+    },
+    {
+      "description": "Manage failures without rewriting evidence.",
+      "extensions": {},
+      "id": "stage.resolve",
+      "slot_ids": [
+        "classify_exception",
+        "assign_remediation",
+        "verify_remediation"
+      ],
+      "title": "Resolve"
+    },
+    {
+      "description": "Publish bounded conclusions.",
+      "extensions": {},
+      "id": "stage.attest",
+      "slot_ids": [
+        "aggregate_control_status",
+        "review_attestation",
+        "publish_evidence_pack"
+      ],
+      "title": "Attest"
+    }
+  ],
+  "tags": [
+    "controls",
+    "audit",
+    "evidence"
+  ],
+  "template_model_version": "0.1",
+  "title": "Compliance control evidence",
+  "version": "1.0.0"
+}

@@ -31,8 +31,11 @@ def test_focused_workspace_skills_are_triggerable_and_progressively_disclosed():
         "create-solution-template",
         "design-autoresearch-campaign",
         "design-topology-family",
+        "expand-node-library",
         "execute-solution-graph",
         "model-solution-graph",
+        "package-solution-graph",
+        "run-benchmark-arena",
         "solve-universal-dag",
     }
     assert expected == {path.parent.name for path in skill_root.glob("*/SKILL.md")}

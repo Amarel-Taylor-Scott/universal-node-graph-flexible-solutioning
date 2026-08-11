@@ -1,0 +1,228 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:identity_records"
+      },
+      "digest": "sha256:508e22b1fde06b32769b75b2fc7c03ecad6ed5a275d951971d2c05a3dedef88b",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.identity",
+      "uri": "python://solutiongraph.stdlib_nodes:identity_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:normalize_unicode"
+      },
+      "digest": "sha256:ab854bcfed4d80d1489666ff58861d6a9097731d637026a83741bf6df908d34b",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.text.normalize-unicode",
+      "uri": "python://solutiongraph.stdlib_nodes:normalize_unicode"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:normalize_whitespace"
+      },
+      "digest": "sha256:56221605a1ee5c95f90081383d5085c58240db90e080d3cf631b181f4952a5ac",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.text.normalize-whitespace",
+      "uri": "python://solutiongraph.stdlib_nodes:normalize_whitespace"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:strip_control_characters"
+      },
+      "digest": "sha256:53c44ffa6c825f8e735afed302ebc73f1aa26c95498405fa56961780f83890c9",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.text.strip-controls",
+      "uri": "python://solutiongraph.stdlib_nodes:strip_control_characters"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:parse_json_value"
+      },
+      "digest": "sha256:baa9340edb3dceb573e5a5d12e09bbe7faca7291301f63a57b7e042eebe5a5d9",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.data.parse-json",
+      "uri": "python://solutiongraph.stdlib_nodes:parse_json_value"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:parse_json_lines"
+      },
+      "digest": "sha256:67617bda62bed8d20f5d05b7759433ebff65dc7fa63d9e60c5a7760233f95af1",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.data.parse-jsonl",
+      "uri": "python://solutiongraph.stdlib_nodes:parse_json_lines"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:parse_delimited_records"
+      },
+      "digest": "sha256:d56da34e0e7bf9a4c3d53d81da9a36a95e2f309a0e4b67b73fbfa7177ab47258",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.data.parse-delimited",
+      "uri": "python://solutiongraph.stdlib_nodes:parse_delimited_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:normalize_record_keys"
+      },
+      "digest": "sha256:9fd41150f37b40d02859f519b69a2a18f2118a69837dda831a7ad5cfe21e0d59",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.normalize-keys",
+      "uri": "python://solutiongraph.stdlib_nodes:normalize_record_keys"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:trim_record_strings"
+      },
+      "digest": "sha256:f8d897910bd5e2d55091a82c6a1f083d0784f90768bb48e2b1117e897e0a3bb4",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.trim-strings",
+      "uri": "python://solutiongraph.stdlib_nodes:trim_record_strings"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:normalize_missing_values"
+      },
+      "digest": "sha256:988f9347134373e4487e053934a356728006b144a6290e644c1c80fd170076ab",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.normalize-missing",
+      "uri": "python://solutiongraph.stdlib_nodes:normalize_missing_values"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:casefold_record_fields"
+      },
+      "digest": "sha256:faebeff2d75173558ad1c51e8723f8dc04c5eedd7498f026ed417d33987ea16e",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.casefold-fields",
+      "uri": "python://solutiongraph.stdlib_nodes:casefold_record_fields"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:project_record_fields"
+      },
+      "digest": "sha256:9f3c367aef7d11ae738c8cae8f0f151a3a68ad261ec354ed9af1c9f8add13920",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.project-fields",
+      "uri": "python://solutiongraph.stdlib_nodes:project_record_fields"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:require_record_fields"
+      },
+      "digest": "sha256:c0677e873b833047ab92cbeff40e52d2ce0eda0e2dbfb3d7b57936c750f3adcc",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.require-fields",
+      "uri": "python://solutiongraph.stdlib_nodes:require_record_fields"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:filter_complete_records"
+      },
+      "digest": "sha256:a452ff84f72fdd7af46c9982ca89fa0e6f5d51b183847cd40c63a0358ed99b47",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.filter-complete",
+      "uri": "python://solutiongraph.stdlib_nodes:filter_complete_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:deduplicate_records"
+      },
+      "digest": "sha256:4631be0b42dbcdc094914b10ed299589d8b93443924ce8ab90ddfb9fdf1ed1c4",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.deduplicate",
+      "uri": "python://solutiongraph.stdlib_nodes:deduplicate_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:sort_records"
+      },
+      "digest": "sha256:dc484e84790d2f18949e9c3441c28adfe4489112947da5f6457840c0c1c9ffc0",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.sort",
+      "uri": "python://solutiongraph.stdlib_nodes:sort_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:profile_records"
+      },
+      "digest": "sha256:f9689d7d5f81acd727cfd6599feef8f2f7a71fad3b6d3d2b7267d8fcda6b976f",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.profile",
+      "uri": "python://solutiongraph.stdlib_nodes:profile_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:hash_records"
+      },
+      "digest": "sha256:205bc95889316c9a8b887615c7b937070d990b74734c07f3277afa714ae8e9bc",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.hash",
+      "uri": "python://solutiongraph.stdlib_nodes:hash_records"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.stdlib_nodes:emit_records_with_profile"
+      },
+      "digest": "sha256:2d221520451eaeb41cceaebb2659bd41c82b7cd4443d7add6ef10ee63bcc45ad",
+      "media_type": "text/x-python",
+      "name": "artifact.stdlib.records.emit-profile",
+      "uri": "python://solutiongraph.stdlib_nodes:emit_records_with_profile"
+    }
+  ],
+  "dependencies": [],
+  "description": "Reusable, dependency-free, typed text and record primitives with explicit no-op candidates, curated parameter bindings, and discovery sidecars.",
+  "descriptor_digests": [
+    "sha256:6de360e4d0012a5c294bb9cb0a172df6550b7c30c82ec7ceb74ea9441075878b",
+    "sha256:4e6f6b8ae5b96b1bc3ff9d27a3d1e09e65068970215ca014b5378eb11f867f36",
+    "sha256:f060d1ee7e67940165a47ab8ccd17289c3e11fc56e432f9c7a960c738eac4969",
+    "sha256:4311a436235b136b60725edee793e0fab12875038af5de84b1440d2e8ead0b46",
+    "sha256:b800b040b64e7c489909593e22c07fcce3362916acef7fe66be3fce253a60391",
+    "sha256:dfd91a4ec9048489bd3766292fb3f841494a75ca0c2d5d318640b8d7070a71d9",
+    "sha256:8a38c54c1dc1e594d0fdaeba8e9d602f907907cb0e778cd03fc3a09af962f06c",
+    "sha256:2105f58408c0e19c12a44703db18e05b5dc923f47c6bd2e7bf6cbf032a70d547",
+    "sha256:18b104cead44e5d8bd812e3d0b839f8ae9f7a35f56a5c383b2317bcc8544c088",
+    "sha256:c48142183df1527dd59c784b373985d2aec876ecc68ab78590b21fff8df149bd",
+    "sha256:651f78a2e29683575e5730494a7944f3f85aebea8044f0d5928c024d8b371696",
+    "sha256:ceed271c4554c49a3e4f4b4d221f22a7ba1cd29c52c033679e6bfae96430d78b",
+    "sha256:281c0802e7ef60307989c365809a0a94ad34e72d2a7c176fdd28fb1280848178",
+    "sha256:cef8a23c1a6e9b38a07917d50b15d4c4bfebf1e3a9cceee68a07a408fe9ea8f7",
+    "sha256:8921bd8e9492cc275ee49d24559fcfdb60765a39b7b886035048124ce0357f29",
+    "sha256:28768dd792c8d7d45d9291252c943fd3979de31cfb51d211b255028fc3034bcd",
+    "sha256:95d0198f2b21555306ecfdcc9e213cbbbe3cd182ec556cff09b83a0079f72b8b",
+    "sha256:abf6e3ea895356bf4ce85fc1cb60467e9b3a04d5de2c78fde091a10593dad41d",
+    "sha256:a74d93a14e9c7a52e048299ffd1e964e5d7f2a7d9b45850221f2d60d5ab24c05"
+  ],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "id": "stdlib.data-foundation-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:6813de2f964868a1aea99aa323cd52870c11a57e8c654d2be15b3362b423c1e0",
+    "sha256:2c29accf932ad4e37ef17399f8c5de37c875daf4f289233fce09c1fed5f52f2b",
+    "sha256:2d185c591f9ea8b28bbb2985aa054d86abcc32b6174d13dcaede95b5461c8ce1",
+    "sha256:3a435f255a6b8ea9b4c6d5e81c63514027e3ce4cf66f5091b91371ff14d66b96",
+    "sha256:ebb5911ecad2e0c6cb745fd9508510e1b69087473c28dc7bba15af253e6b62a7",
+    "sha256:11f4fb233a9f731c22e6a5ca95ee232024d2b4f803f7c9b2eb4a250005ba7731",
+    "sha256:6447674cff4c964f17b5d317b0bc3cc7ed5ddd730bcaf47cc927ba18c3cd4dc6",
+    "sha256:045d0555920c86fc7fa5a6cf6f48b3e22c0dce3e14cfd42a0e6dbbdc160b398b",
+    "sha256:e84614d49097fe655aa74a152bf32c77ec159add4256d728eb21282530b26692",
+    "sha256:72b09b670e946a0bd1c6e7fd8b7007070d55f649e80ecd59ff2cfd7ac2b64c3c",
+    "sha256:fb3de73ceb23f1025118f7247204727d4c54b3d410c788393ec8a229388df5b5",
+    "sha256:c6e22c43a77b4ff220b3d3c18878d80e8095b30753c0c320ad30e5f62a1544de",
+    "sha256:bfad09dc62bdc0174c56a31723de8c771d3fd08f97a4b5a6f052992e0008844f",
+    "sha256:56e56fdd3c034a0cd0553abed0a4a54d695c1d5f888da5ead5fecb9cb1975a85",
+    "sha256:ffed1e9384e0b54020326db157eebe1f928de4dd7260afc34bb0823912892895",
+    "sha256:2cd42174d80769ce4b2ff96a11ab9af30fe2505bf50630d7b6612844679a5958",
+    "sha256:d900bf6ac1efb40bc23e8e1d9580e351b13ea7222f81a9cafc52488820abc60a",
+    "sha256:7ae8cc88696b2e0d4e2b1b5744b83e0560ede97a801308cb97dc24d8c7662feb",
+    "sha256:cef69d6a54880672ced9fc99bc0025562e850f29cbe7b6abcab7c03962b1d232"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

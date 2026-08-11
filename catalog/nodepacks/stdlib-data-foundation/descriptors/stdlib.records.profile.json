@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "records.profile"
+  ],
+  "aliases": [
+    "records profile"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.profile",
+      "language": "und",
+      "source_digest": "sha256:d900bf6ac1efb40bc23e8e1d9580e351b13ea7222f81a9cafc52488820abc60a",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Measure row count, field union, and missingness deterministically. Inputs: records. Outputs: profile."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.profile",
+  "node_spec_digest": "sha256:d900bf6ac1efb40bc23e8e1d9580e351b13ea7222f81a9cafc52488820abc60a",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed profile output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "profile"
+    }
+  ],
+  "purposes": [
+    "Measure row count, field union, and missingness deterministically."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Measure row count, field union, and missingness deterministically.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Profile"
+}

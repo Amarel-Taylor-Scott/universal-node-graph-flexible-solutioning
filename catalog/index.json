@@ -2,7 +2,13 @@
   "arena": {
     "executable_fixture_count": 20,
     "path": "arena/index.json",
-    "task_count": 24
+    "task_count": 36
+  },
+  "benchmarks": {
+    "benchmark_count": 6,
+    "path": "benchmarks/index.json",
+    "solution_pack_count": 6,
+    "task_case_count": 24
   },
   "catalog_model_version": "0.1",
   "node_packs": [
@@ -13,6 +19,15 @@
       "id": "reference.core-node-pack",
       "node_count": 5,
       "path": "nodepacks/reference-core/manifest.json",
+      "version": "1.0.0"
+    },
+    {
+      "descriptor_count": 19,
+      "digest": "sha256:d75470c8b76b9431a2fa8f07942969ca3c44c606ac9beb4c08d31c53dab5fa28",
+      "embedding_record_count": 0,
+      "id": "stdlib.data-foundation-node-pack",
+      "node_count": 19,
+      "path": "nodepacks/stdlib-data-foundation/manifest.json",
       "version": "1.0.0"
     },
     {
@@ -52,6 +67,22 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 16,
+      "digest": "sha256:521e797bdaa161a3d84967ec3ad39093501c4e65537cf72c45ef77b901c9b20a",
+      "domains": [
+        "media.audio",
+        "ai.speech"
+      ],
+      "id": "template.audio-speech",
+      "path": "templates/template.audio-speech.json",
+      "tags": [
+        "audio",
+        "speech",
+        "transcription"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 18,
       "digest": "sha256:892fa5c7ba06de4c527a29200f2c5e4388a272e9437e6ef7b05917adb62d1376",
       "domains": [
@@ -63,6 +94,54 @@
         "etl",
         "lineage",
         "data-quality"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:d79fd0a363aa9f7e71faa4ed5fae0cc8f5d0edadaf6972619eeae479c0345d35",
+      "domains": [
+        "business.claims",
+        "software.workflow"
+      ],
+      "id": "template.claims-processing",
+      "path": "templates/template.claims-processing.json",
+      "tags": [
+        "adjudication",
+        "documents",
+        "human-review"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 16,
+      "digest": "sha256:1104256e110ab82eb736d72defd459327f14c451b950231ad6ec95137c6d1abe",
+      "domains": [
+        "governance.compliance",
+        "software.assurance"
+      ],
+      "id": "template.compliance-evidence",
+      "path": "templates/template.compliance-evidence.json",
+      "tags": [
+        "controls",
+        "audit",
+        "evidence"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:2c7e7dc4bc67e420866c1edada59f94eb038f2f5b0c276ffd2c91fe3648de2cb",
+      "domains": [
+        "trust-safety.moderation",
+        "ai.classification"
+      ],
+      "id": "template.content-moderation",
+      "path": "templates/template.content-moderation.json",
+      "tags": [
+        "policy",
+        "safety",
+        "human-review"
       ],
       "version": "1.0.0"
     },
@@ -83,6 +162,22 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 18,
+      "digest": "sha256:ef76bd911e56442727389275db71dc65870d76426e45dfd90e9c340d5eb314db",
+      "domains": [
+        "security.defensive",
+        "operations.investigation"
+      ],
+      "id": "template.cybersecurity-investigation",
+      "path": "templates/template.cybersecurity-investigation.json",
+      "tags": [
+        "incident",
+        "forensics",
+        "threat-detection"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 15,
       "digest": "sha256:b255b753590d3d345d577497fbe0eb266e83e12743f144378007f026e0fd7947",
       "domains": [
@@ -95,6 +190,22 @@
         "cleaning",
         "validation",
         "external-reference"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 18,
+      "digest": "sha256:e24205f02a7ae2a18cc1edb926dad459270213ece36be7407471e8cb271770d7",
+      "domains": [
+        "data.database",
+        "software.migration"
+      ],
+      "id": "template.database-migration",
+      "path": "templates/template.database-migration.json",
+      "tags": [
+        "migration",
+        "cdc",
+        "reconciliation"
       ],
       "version": "1.0.0"
     },
@@ -143,6 +254,38 @@
         "events",
         "messaging",
         "reliability"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 18,
+      "digest": "sha256:8dcccf9e84b7cde17236b267c070013520be5d545f6ee1135f86478a714e9a0f",
+      "domains": [
+        "risk.fraud",
+        "machine-learning.classification"
+      ],
+      "id": "template.fraud-risk",
+      "path": "templates/template.fraud-risk.json",
+      "tags": [
+        "risk",
+        "anomaly",
+        "decisioning"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 16,
+      "digest": "sha256:91d1d41c80cc4b092ae67f70d6d2b42bdee4cb7cbda4a72ab3a95ff58e9f42c5",
+      "domains": [
+        "data.geospatial",
+        "analytics.spatial"
+      ],
+      "id": "template.geospatial-analytics",
+      "path": "templates/template.geospatial-analytics.json",
+      "tags": [
+        "gis",
+        "coordinates",
+        "spatial-analysis"
       ],
       "version": "1.0.0"
     },
@@ -211,6 +354,22 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 18,
+      "digest": "sha256:f41f9e79612f61fcb027604f0cade26f7399256ae1d402878628e0aa42f92866",
+      "domains": [
+        "ai.knowledge-systems",
+        "data-engineering.documents"
+      ],
+      "id": "template.knowledge-retrieval",
+      "path": "templates/template.knowledge-retrieval.json",
+      "tags": [
+        "retrieval",
+        "grounding",
+        "rag"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 14,
       "digest": "sha256:1b6244544a18887f507cb5b140770a5e00f9701d409c80d82c14ea2439e602e5",
       "domains": [
@@ -239,6 +398,38 @@
         "linear-system",
         "factorization",
         "numerical-stability"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:beb12c27061a469036ec2aca5c4c014de76cf7543e366564f6aafe29f2ef6a81",
+      "domains": [
+        "operations.sre",
+        "software.observability"
+      ],
+      "id": "template.observability-sre",
+      "path": "templates/template.observability-sre.json",
+      "tags": [
+        "telemetry",
+        "reliability",
+        "incident"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:b0e9d8198429b8f4bba4ea05d7c7eb2e3bd8168b6d24c23bb817df2d404add4c",
+      "domains": [
+        "optimization.operations-research",
+        "software.scheduling"
+      ],
+      "id": "template.optimization-scheduling",
+      "path": "templates/template.optimization-scheduling.json",
+      "tags": [
+        "constraints",
+        "solver",
+        "scheduling"
       ],
       "version": "1.0.0"
     },
@@ -302,6 +493,22 @@
         "notifications",
         "integration",
         "workflow"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:a2e809c56ad940ba3517efb5408d3d15ee9cf216b01bdbf08912fdd0de26b177",
+      "domains": [
+        "operations.supply-chain",
+        "optimization.planning"
+      ],
+      "id": "template.supply-chain-planning",
+      "path": "templates/template.supply-chain-planning.json",
+      "tags": [
+        "inventory",
+        "forecasting",
+        "planning"
       ],
       "version": "1.0.0"
     },

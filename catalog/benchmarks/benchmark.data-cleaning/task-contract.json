@@ -1,0 +1,91 @@
+{
+  "allowed_effects": [],
+  "case_ids": [
+    "case.benchmark.data-cleaning.company-punctuation",
+    "case.benchmark.data-cleaning.spacing",
+    "case.benchmark.data-cleaning.exact-repeat",
+    "case.benchmark.data-cleaning.holdout-case"
+  ],
+  "constraints": [
+    {
+      "description": "A route is eligible only when the independent oracle accepts it.",
+      "id": "constraint.acceptance",
+      "operator": "eq",
+      "target": "verification.accepted",
+      "unit": "",
+      "value": true
+    }
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "external_requirements": [
+    "These bundled synthetic cases prove framework mechanics; replace them with representative, licensed development and hidden holdout data before making production or domain-performance claims."
+  ],
+  "granted_permissions": [],
+  "id": "task.benchmark.data-cleaning",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "Task input records.",
+      "name": "records",
+      "type": {
+        "id": "example.raw-records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "intent": "Normalize, deduplicate, and deterministically emit business records.",
+  "objectives": [
+    {
+      "direction": "maximize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "quality",
+      "weight": 1.0
+    },
+    {
+      "direction": "minimize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "latency_ms",
+      "weight": 1.0
+    }
+  ],
+  "oracle": {
+    "candidate_readable": true,
+    "description": "Bundled deterministic acceptance oracle. It is separate from node implementations but readable because these are transparent fixtures.",
+    "evaluator_digest": "sha256:83572e6d9178218789c4f01896ca7a6dd1c51b9f57ea2059140b201d87234646",
+    "id": "verifier.example.data",
+    "implementation_ref": "python://solutiongraph.examples.tasks:_data_verifier",
+    "independence": "separate-implementation",
+    "kind": "property",
+    "version": "1.0.0"
+  },
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "Task output records.",
+      "name": "records",
+      "type": {
+        "id": "example.clean-records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "success_contract": "An independent verifier finds the expected unique entities.",
+  "tags": [
+    "benchmark.synthetic",
+    "domain.data",
+    "task.cleaning"
+  ],
+  "task_model_version": "0.1",
+  "title": "Data cleanup",
+  "version": "1.0.0"
+}

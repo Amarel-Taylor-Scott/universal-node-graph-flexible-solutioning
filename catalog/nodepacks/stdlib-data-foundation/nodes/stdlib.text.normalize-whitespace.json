@@ -1,0 +1,64 @@
+{
+  "capabilities": [
+    "text.normalize-whitespace"
+  ],
+  "description": "Normalize whitespace while preserving lines or compacting all whitespace.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:normalize_whitespace",
+  "failure_modes": [],
+  "id": "stdlib.text.normalize-whitespace",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:56221605a1ee5c95f90081383d5085c58240db90e080d3cf631b181f4952a5ac",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "lines",
+        "compact"
+      ],
+      "default": "lines",
+      "description": "",
+      "name": "mode",
+      "required": false,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

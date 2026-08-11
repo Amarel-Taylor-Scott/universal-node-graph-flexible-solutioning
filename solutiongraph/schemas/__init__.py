@@ -55,6 +55,11 @@ SCHEMA_NAMES = (
     "openlineage-artifact-facet.schema.json",
     "saga-result.schema.json",
     "conformance-result.schema.json",
+    "task-case.schema.json",
+    "task-contract.schema.json",
+    "solution-pack.schema.json",
+    "benchmark-suite.schema.json",
+    "benchmark-report.schema.json",
 )
 
 

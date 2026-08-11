@@ -1,0 +1,64 @@
+{
+  "capabilities": [
+    "text.normalize-unicode"
+  ],
+  "description": "Normalize text using an explicitly bound Unicode normalization form.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:normalize_unicode",
+  "failure_modes": [],
+  "id": "stdlib.text.normalize-unicode",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:ab854bcfed4d80d1489666ff58861d6a9097731d637026a83741bf6df908d34b",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "NFC",
+        "NFKC"
+      ],
+      "default": "NFKC",
+      "description": "",
+      "name": "form",
+      "required": false,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

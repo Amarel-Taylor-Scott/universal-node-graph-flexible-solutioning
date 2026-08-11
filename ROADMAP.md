@@ -31,8 +31,9 @@ diagram or candidate count is not, by itself, progress.
   every candidate/slot pair and n-ary configuration constraints.
 - Negotiated registry discovery with sparse descriptors, exact named embedding
   spaces, graceful query fallback, coverage receipts, and closed-world snapshots.
-- Portable node packs and a deterministic reference catalogue containing five
-  node contracts and 19 cross-domain templates with 339 atomic obligations.
+- Portable node packs and a deterministic reference catalogue containing a
+  five-node core pack, a 19-node/32-binding standard-library pack, two Arena
+  packs, and 31 cross-domain templates with 544 atomic obligations.
 - Dependency-free template authoring CLI, strict linear-blueprint schema, and
   focused workspace skills for templates, node packs, and benchmarking.
 - Prior-guided, beam, seeded-sprout, and uncapped exhaustive route search with explicit
@@ -65,12 +66,22 @@ diagram or candidate count is not, by itself, progress.
 - Transactional `solutiongraph init` starter workspaces that bind a selected
   semantic template, task intake, and coding-agent instructions without
   inventing nodes or evidence.
-- Twenty-three dependency-free executable programs spanning 20 Arena task
+- Twenty-four dependency-free executable programs spanning 20 Arena task
   families, including data, identity, privacy, operations, security, science,
   recommendation, and numerical workflows in addition to the five notebooks.
 - Campaign contracts for bounded generated candidates/trials, immutable
   proposal ancestry, append-only evidence decisions, and explicit evaluator
   trust boundaries, plus a harness skill for population-based campaigns.
+- Versioned task contracts, task cases, evaluator identity, exact solution-pack
+  closure, and five strict JSON Schemas for portable task/benchmark evidence.
+- A source-bound Python node-authoring SDK plus 19 dependency-free reusable
+  primitives wrapped through that same public API.
+- Six executable benchmark packs containing 24 cases, fixed controls, bounded
+  solver policies, clean holdout reporting, complete search accounting, and
+  self-contained HTML/JSON evidence reports.
+- Twelve additional semantic templates for knowledge, claims, fraud,
+  cybersecurity, compliance, geospatial, audio, supply chain, scheduling,
+  database migration, SRE, and content moderation.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 

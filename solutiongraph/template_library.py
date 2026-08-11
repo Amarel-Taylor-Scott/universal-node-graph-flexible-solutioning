@@ -12,6 +12,7 @@ from solutiongraph.template_authoring import (
     build_reference_linear_template as _template,
 )
 from solutiongraph.template_library_extended import EXTENDED_TEMPLATES
+from solutiongraph.template_library_market import MARKET_TEMPLATES
 from solutiongraph.templates import TemplateCatalog
 
 KAGGLE_TABULAR = _template(
@@ -413,6 +414,7 @@ REFERENCE_TEMPLATES = TemplateCatalog(
                 QA_ENGINEERING,
                 SHIPPING_NOTIFICATIONS,
                 *EXTENDED_TEMPLATES,
+                *MARKET_TEMPLATES,
             ),
             key=lambda template: (template.id, template.version),
         )

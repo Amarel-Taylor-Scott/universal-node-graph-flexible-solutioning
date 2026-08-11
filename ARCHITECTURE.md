@@ -13,6 +13,14 @@ solutiongraph/
 ├── template_authoring.py strict linear blueprint parser/compiler
 ├── template_library.py   original reference decompositions
 ├── template_library_extended.py  thirteen additional application templates
+├── template_library_market.py    twelve additional cross-domain templates
+├── tasking.py            task/case/oracle contracts + exact solution-pack closure
+├── authoring.py          source-bound Python node definitions and candidate expansion
+├── stdlib_nodes.py       dependency-free reusable text/data primitives
+├── stdlib_pack.py        19-node/32-binding reference pack + executable graph
+├── pack_library.py       canonical portable node-pack collection
+├── benchmarking.py       controlled arms, runner, evidence model, offline report
+├── benchmark_library.py  six bundled task/solution benchmark packs
 ├── search.py             prior, beam, sprout, exhaustive search + honest accounting
 ├── topology.py           explicit alternative DAG families + route search accounting
 ├── structured.py         composite and bounded-loop lowering to atomic DAGs
@@ -30,16 +38,18 @@ solutiongraph/
 ├── ledger.py             content-chained, fsync-backed local receipt journal
 ├── experiments.py        receipt-producing plan/case/seed allocation
 ├── campaign.py           population lineage, hard budgets, and evaluator boundaries
-├── examples/             23 executable cross-domain node/program examples
+├── examples/             24 executable cross-domain node/program examples
 ├── reference_nodes.py    small executable node-pack demonstration
 ├── catalog.py            deterministic catalogue projection
 ├── scaffold.py           transactional coding-harness starter workspaces
 └── schemas/              strict portable JSON Schema 2020-12 wire contracts
 
 catalog/
-├── index.json            content-addressed template/node-pack index
-├── templates/            339 atomic obligations across 19 varied domains
-└── nodepacks/            three portable registries and discovery sidecars
+├── index.json            content-addressed template/node-pack/benchmark index
+├── templates/            544 atomic obligations across 31 varied templates
+├── nodepacks/            four portable registries and discovery sidecars
+├── arena/                36 cross-domain task-family contracts
+└── benchmarks/           six task/solution packs and 24 immutable cases
 
 browsergraph/
 ├── ports.py              BrowserPort protocol + Context — the seam

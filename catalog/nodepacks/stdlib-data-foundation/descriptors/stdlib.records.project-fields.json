@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "records.project-fields"
+  ],
+  "aliases": [
+    "records project-fields"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.project-fields",
+      "language": "und",
+      "source_digest": "sha256:c6e22c43a77b4ff220b3d3c18878d80e8095b30753c0c320ad30e5f62a1544de",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Project records to an explicitly ordered field set. Inputs: records. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.project-fields",
+  "node_spec_digest": "sha256:c6e22c43a77b4ff220b3d3c18878d80e8095b30753c0c320ad30e5f62a1544de",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Project records to an explicitly ordered field set."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Project records to an explicitly ordered field set.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Project Fields"
+}

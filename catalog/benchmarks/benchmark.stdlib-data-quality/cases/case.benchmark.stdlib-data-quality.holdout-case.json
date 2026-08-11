@@ -1,0 +1,17 @@
+{
+  "description": "Held-out mixed key, case, and outer-whitespace variation.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/stdlib-data-quality/holdout-case",
+  "id": "case.benchmark.stdlib-data-quality.holdout-case",
+  "input_digest": "sha256:880e7283637e8475d2e6fc906d1e53c7588291b3ff3abd91a18e55efa4fe91ca",
+  "split": "holdout",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.quality"
+  ],
+  "task_model_version": "0.1"
+}

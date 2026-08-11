@@ -1,0 +1,76 @@
+{
+  "capabilities": [
+    "records.emit-profile"
+  ],
+  "description": "Emit cleaned records and a quality profile as separately typed outputs.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:emit_records_with_profile",
+  "failure_modes": [],
+  "id": "stdlib.records.emit-profile",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:2d221520451eaeb41cceaebb2659bd41c82b7cd4443d7add6ef10ee63bcc45ad",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "profile",
+      "type": {
+        "id": "stdlib.records-profile",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        true,
+        false
+      ],
+      "default": true,
+      "description": "",
+      "name": "include_digest",
+      "required": false,
+      "value_type": "boolean"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

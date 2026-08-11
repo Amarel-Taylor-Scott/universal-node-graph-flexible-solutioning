@@ -1,0 +1,17 @@
+{
+  "description": "Canonical line-oriented invoice.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/document-extraction/canonical",
+  "id": "case.benchmark.document-extraction.canonical",
+  "input_digest": "sha256:82ebde0b6451ab3ff592530e5be520a2a015ddfb360d1388c63bb61472d9721b",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.document",
+    "task.extraction"
+  ],
+  "task_model_version": "0.1"
+}

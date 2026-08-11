@@ -1,0 +1,40 @@
+{
+  "artifacts": [],
+  "baseline_plan_digests": [
+    "sha256:c8f870bd0fe5d3b0078038a41915ca06332933df060d90ee751cb91ba3e0435b",
+    "sha256:e7b45e0e2365ebef22609148fc9588e0dfb00cd957d4f048fa3d9a21964ca024"
+  ],
+  "benchmark_suite_digests": [
+    "sha256:29773558700e9f976e584b5ec2fb03148a9cd0ad6e0b82b49945acbf9829f3e1"
+  ],
+  "description": "Content-addressed task, program, registry, node pack, cases, oracle, fixed baselines, and benchmark allocation for this executable fixture.",
+  "evaluator_digests": [
+    "sha256:dbecd7ed6599ecffc83d00af64174a66bfc9acf33f628ade267e1adc690819bc"
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "id": "solution-pack.stdlib-data-quality",
+  "license": "MIT",
+  "node_pack_digests": [
+    "sha256:d75470c8b76b9431a2fa8f07942969ca3c44c606ac9beb4c08d31c53dab5fa28"
+  ],
+  "program_digests": [
+    "sha256:521647ccd9cec9498f4e25f1f07d35a8e9a8f15da74e1b3eb97018f8fc88dbad"
+  ],
+  "readiness": "executable-fixture",
+  "registry_digests": [
+    "sha256:0fa593a6f73baa6fc378cb01fe42c35712961d89dceea6ba3d807658e918ca71"
+  ],
+  "solution_pack_model_version": "0.1",
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:24293c75fd635f5e6e353650a784f70ed9e63341be054cdfb31e5961e6f7b04f",
+    "sha256:bc3d5ad5ed6ed9c2b899087020467952f93d0004204c3afa918bbcc890183deb",
+    "sha256:7c4e59c756ffc6ea838fba06bde1958369bee460c72e447a46b2488cbb58a1d3",
+    "sha256:aa49b2b946e0b03f9bebaf145f3e54bd2570005bf6a1beed0c5d89c7c6db91c3"
+  ],
+  "task_contract_digest": "sha256:0c13d908eb12b5eece2d2b8d0b6d220d25218166ba260dc81ed1c8d336e29b38",
+  "title": "Reusable standard-library data quality solution pack",
+  "version": "1.0.0"
+}

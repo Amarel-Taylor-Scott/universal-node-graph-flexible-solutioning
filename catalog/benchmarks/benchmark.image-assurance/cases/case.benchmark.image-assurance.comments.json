@@ -1,0 +1,17 @@
+{
+  "description": "Commented header and wider range.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/image-assurance/comments",
+  "id": "case.benchmark.image-assurance.comments",
+  "input_digest": "sha256:fbf1f4e635a0655179fa20f5b793c950ea5d8bd9471939281a6ab9f0eac75fd4",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.image",
+    "task.assurance"
+  ],
+  "task_model_version": "0.1"
+}

@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "text.normalize-unicode"
+  ],
+  "aliases": [
+    "text normalize-unicode"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.text.normalize-unicode",
+      "language": "und",
+      "source_digest": "sha256:2c29accf932ad4e37ef17399f8c5de37c875daf4f289233fce09c1fed5f52f2b",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Normalize text using an explicitly bound Unicode normalization form. Inputs: text. Outputs: text."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.text.normalize-unicode",
+  "node_spec_digest": "sha256:2c29accf932ad4e37ef17399f8c5de37c875daf4f289233fce09c1fed5f52f2b",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed text input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "text"
+    },
+    {
+      "concepts": [],
+      "description": "Typed text output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "text"
+    }
+  ],
+  "purposes": [
+    "Normalize text using an explicitly bound Unicode normalization form."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Normalize text using an explicitly bound Unicode normalization form.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Normalize Unicode"
+}

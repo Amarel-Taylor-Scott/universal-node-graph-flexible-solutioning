@@ -1,0 +1,17 @@
+{
+  "description": "Lower decision boundary.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/tabular-classification/low-boundary",
+  "id": "case.benchmark.tabular-classification.low-boundary",
+  "input_digest": "sha256:f022241e65628955f88a9b94815492659619c15b1825ad1834ece135b1781d0b",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.ml",
+    "task.classification"
+  ],
+  "task_model_version": "0.1"
+}

@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "text.normalize-whitespace"
+  ],
+  "aliases": [
+    "text normalize-whitespace"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.text.normalize-whitespace",
+      "language": "und",
+      "source_digest": "sha256:2d185c591f9ea8b28bbb2985aa054d86abcc32b6174d13dcaede95b5461c8ce1",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Normalize whitespace while preserving lines or compacting all whitespace. Inputs: text. Outputs: text."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.text.normalize-whitespace",
+  "node_spec_digest": "sha256:2d185c591f9ea8b28bbb2985aa054d86abcc32b6174d13dcaede95b5461c8ce1",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed text input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "text"
+    },
+    {
+      "concepts": [],
+      "description": "Typed text output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "text"
+    }
+  ],
+  "purposes": [
+    "Normalize whitespace while preserving lines or compacting all whitespace."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Normalize whitespace while preserving lines or compacting all whitespace.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Normalize Whitespace"
+}

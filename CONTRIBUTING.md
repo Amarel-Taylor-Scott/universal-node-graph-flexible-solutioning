@@ -21,8 +21,9 @@ Optional engine tests may skip when their runtimes are unavailable.
 
 ## Add a reusable node
 
-1. Define one implementation with a stable namespaced identity.
-2. Declare typed input and output ports.
+1. Read `NODE_AUTHORING_GUIDE.md`; for Python, wrap one importable top-level
+   function with `define_python_node` so signature and source identity cannot drift.
+2. Define one implementation with a stable namespaced identity and typed ports.
 3. Declare capabilities, parameter choices, dependencies, permissions,
    effects, runtime requirements, resources, and provenance.
 4. Materialize selectable parameter bindings as distinct candidate IDs.
@@ -74,6 +75,23 @@ nodes, and optimization remains outside the execution path.
    multiple slots.
 7. Test tampering, permissions, effects, retries, fallbacks, artifacts, and
    verifier rejection.
+
+## Add a solution pack or benchmark
+
+1. Read `TASK_AND_SOLUTION_PACK_PROTOCOL.md` and `BENCHMARK_PROTOCOL.md`.
+2. Freeze a task contract, exact case splits, and independently identified
+   oracle before allocating route experiments.
+3. Validate every program against the task and every registry/node pack by
+   content digest.
+4. Include fixed control/candidate arms and bounded solver arms under identical
+   cases, seeds, repetitions, oracle, objectives, and runtime class.
+5. Preserve unsuccessful arms, holdout state, unvisited routes, and claim scope.
+6. Validate exact `SolutionPackManifest` closure and regenerate `catalog/`.
+7. Add machine-readable JSON evidence; HTML is a human projection, not the
+   authoritative record.
+
+Use `@package-solution-graph` and `@run-benchmark-arena` in a compatible coding
+harness for the full checklists.
 
 Run `pytest tests/test_solutiongraph_execution.py -q` in addition to the core
 suite. Mechanism fixtures are welcome when labeled; production claims require

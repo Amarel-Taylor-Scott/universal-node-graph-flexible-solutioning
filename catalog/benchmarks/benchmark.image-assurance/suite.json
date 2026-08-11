@@ -1,0 +1,73 @@
+{
+  "arms": [
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the declared control route without route search.",
+      "id": "arm.fixed-control",
+      "kind": "fixed-route",
+      "route_id": "baseline",
+      "solver_profile": "",
+      "title": "Fixed control"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the stronger hand-authored candidate without route search.",
+      "id": "arm.fixed-candidate",
+      "kind": "fixed-route",
+      "route_id": "enhanced",
+      "solver_profile": "",
+      "title": "Fixed candidate"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Use one prior-guided proposal under the explicit quick allocation.",
+      "id": "arm.solver-quick",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "quick",
+      "title": "Quick solver"
+    },
+    {
+      "anchor_route_ids": [
+        "enhanced"
+      ],
+      "description": "Use prior plus bounded beam search and retain evidence-diverse fallbacks.",
+      "id": "arm.solver-balanced",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "balanced",
+      "title": "Balanced solver"
+    }
+  ],
+  "benchmark_model_version": "0.1",
+  "claim_scope": "mechanism-fixture",
+  "dataset_license": "CC0-1.0",
+  "description": "Compare decode, enhancement, and measurement combinations on deterministic portable grayscale images.",
+  "example_id": "image-check-and-process",
+  "holdout_case_ids": [
+    "case.benchmark.image-assurance.holdout-case"
+  ],
+  "id": "benchmark.image-assurance",
+  "notes": [
+    "All inputs are small synthetic fixtures committed by value digest.",
+    "Latency is observed runtime evidence, not a cross-machine performance claim.",
+    "Only a complete exhaustive arm may claim optimality over the admitted space."
+  ],
+  "program_digest": "sha256:bb7fab8eb00a68a7a86c0f6ccedf1019bbb6f76c578a78def878e123eef33775",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "repetitions": 1,
+  "seeds": [
+    0,
+    1729
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:25abfeb735ae10e3565490addc6d9a46d860079bab7b62a4d19bc7e3af499360",
+    "sha256:30afeb6d6baffeb9000479ee0c617041efe1c49425519f56c3c47b8fd20db158",
+    "sha256:656aa653eac4daece95e76a42f87d8a5f5d98ba92d0b8d98fd4e60266d4cde68",
+    "sha256:cbcc9fd7b2d1e69fbe15a4b4cfbfc16ecab2d108675c79b9c8639ed84c870a22"
+  ],
+  "task_contract_digest": "sha256:863d14bba1f5c3ab089bc767bcc92f198493861e2275a5181a769f17ff659bf4",
+  "title": "Check and process image arena",
+  "version": "1.0.0"
+}

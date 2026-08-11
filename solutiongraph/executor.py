@@ -803,6 +803,14 @@ class ReferenceExecutor:
                 if completed:
                     break
             if not completed:
+                if not failure_class:
+                    # Every frozen candidate can be skipped by the circuit
+                    # breaker.  Preserve that as an explicit failed run rather
+                    # than falling through and later indexing absent outputs.
+                    failure_class = "runtime.circuit-open"
+                    error_message = (
+                        f"every frozen candidate for slot {slot_id} was blocked"
+                    )
                 break
 
         outputs: dict[str, Any] = {}

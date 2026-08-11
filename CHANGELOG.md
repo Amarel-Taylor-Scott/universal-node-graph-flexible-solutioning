@@ -4,6 +4,58 @@ All notable changes to this proof of concept are documented here.
 
 ## Unreleased
 
+## 0.6.0 — 2026-08-10
+
+### Added
+
+- Portable `TaskContract`, `TaskCaseSpec`, `TaskOracle`, hard-constraint, and
+  `SolutionPackManifest` models that keep problem meaning independent from
+  programs, nodes, registries, plans, search priors, and observations.
+- Exact solution-pack closure validation: missing and undeclared programs,
+  registries, node packs, cases, evaluators, baseline plans, or benchmark suites
+  are rejected by digest.
+- A public Python node-authoring SDK with callable-signature checks, importable
+  entrypoints, source-derived implementation digests, stable parameter-bound
+  candidates, explicit finite Cartesian limits, and registry construction.
+- A dependency-free standard-library pack containing 19 reusable text/data
+  nodes, 32 exact candidate bindings, discovery descriptors/documents, an
+  explicit identity candidate, and an executable seven-slot data-quality graph
+  with 1,728 compiler-valid routes.
+- `BenchmarkSuite`, fixed-route and solver-profile arms, common case/seed/
+  repetition allocation, clean holdout status, claim scopes, complete route
+  accounting, JSON evidence, and self-contained offline HTML reports.
+- Six benchmark/solution packs spanning document extraction, image assurance,
+  data cleaning, tabular regression, tabular classification, and reusable
+  standard-library data quality, with 24 immutable synthetic cases.
+- Twelve new cross-domain templates and Arena task families for grounded
+  knowledge, claims, fraud, defensive cybersecurity, compliance, geospatial
+  analytics, audio/speech, supply chain, scheduling, database migration,
+  SRE/observability, and content moderation.
+- Five strict JSON Schemas for task contracts, task cases, solution packs,
+  benchmark suites, and benchmark reports.
+- `solutiongraph benchmarks list/show/run/run-all` and `solutiongraph packs
+  list/show` commands, including report/artifact/journal options.
+- Normative task/solution-pack and benchmark protocols, a source-bound node
+  authoring guide, an adoption/market-boundary guide, and three focused coding-
+  harness skills for solution packaging, benchmark execution, and node-library
+  expansion.
+- Conformance checks for Python node authoring, exact solution-pack closure,
+  and complete circuit-breaker exhaustion.
+
+### Changed
+
+- Bumped the distribution and `solutiongraph` import version to 0.6.0.
+- Expanded the catalog to 31 templates with 544 atomic slots, four node packs,
+  36 Arena tasks, six benchmark/solution packs, and 330 generated documents.
+- Expanded release verification to 24 executable examples, 165 unique nodes,
+  54 declared routes, 33 accepted observations, 21 intentional negative
+  controls, 53 schemas, and 11 conformance mechanisms.
+- Fixed frozen candidate/parameter serialization so tuple-valued bindings
+  round-trip through strict JSON without changing content identity.
+- Fixed reference execution when every candidate for a slot has an open circuit:
+  the run now emits an explicit `runtime.circuit-open` failure instead of
+  attempting to read nonexistent graph outputs.
+
 ## 0.5.0 — 2026-08-10
 
 ### Added

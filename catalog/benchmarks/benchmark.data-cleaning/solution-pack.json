@@ -1,0 +1,40 @@
+{
+  "artifacts": [],
+  "baseline_plan_digests": [
+    "sha256:99b6e416e8a8c09c9dd46144a7c8f39fe2469e2a7804a9ce4aff7b0f84f51c4c",
+    "sha256:d804399f692a481bef5dc826fe25a1883ff59ee7b7d147246e2f136409b07e09"
+  ],
+  "benchmark_suite_digests": [
+    "sha256:1889d32e530642e9185703b3464c4ecc2e4f03edd175d8f969b162c9008d15f3"
+  ],
+  "description": "Content-addressed task, program, registry, node pack, cases, oracle, fixed baselines, and benchmark allocation for this executable fixture.",
+  "evaluator_digests": [
+    "sha256:83572e6d9178218789c4f01896ca7a6dd1c51b9f57ea2059140b201d87234646"
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "id": "solution-pack.data-cleaning",
+  "license": "MIT",
+  "node_pack_digests": [
+    "sha256:c44ff58b53954478a057c15bcb0aad4c15a491f4ca87263e400cf9210f702278"
+  ],
+  "program_digests": [
+    "sha256:3cde95e42f6f1f46c8f9ab7ff13fe918af139e75472929101c46c6fc692fc04c"
+  ],
+  "readiness": "executable-fixture",
+  "registry_digests": [
+    "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4"
+  ],
+  "solution_pack_model_version": "0.1",
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:6c9227e9e322b284f1ee8707a805aa7b3d94bcab64a2248a1190516f526eeb7f",
+    "sha256:adf4573233b3edf1a0c039fb7e9026a83a5101d88583c17343fa383a74ce3d6d",
+    "sha256:4d40a2a23b4e18b14405ffc5f48bb8c1d2f87e71777021a4526155b7331a0f0f",
+    "sha256:a40f42b51bc86de3ef2618321d4c3a5d3475a54ea2c348d7054b8fd37c085740"
+  ],
+  "task_contract_digest": "sha256:0d6b350e0366616792bdcdcdf2043cbe00f8c875683627392357844b219b28ea",
+  "title": "Data cleanup solution pack",
+  "version": "1.0.0"
+}

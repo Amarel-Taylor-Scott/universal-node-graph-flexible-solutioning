@@ -1,0 +1,17 @@
+{
+  "description": "Exact repeat control.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/data-cleaning/exact-repeat",
+  "id": "case.benchmark.data-cleaning.exact-repeat",
+  "input_digest": "sha256:7f6dea7dc5ac8d77622901913a07ba7e0d63610101cf12bc03b7b847537ffb8d",
+  "split": "validation",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.cleaning"
+  ],
+  "task_model_version": "0.1"
+}

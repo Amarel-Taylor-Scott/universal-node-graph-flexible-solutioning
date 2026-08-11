@@ -18,6 +18,7 @@ from solutiongraph.durable import MemoryCheckpointStore
 from solutiongraph.evidence import RunReceipt
 from solutiongraph.executor import (
     CallableVerifier,
+    CircuitBreaker,
     ExecutionPolicy,
     NodeExecutionFailure,
     ReferenceExecutor,
@@ -482,6 +483,99 @@ def _fidelity_check() -> bool:
     return len(run.rungs) == 3 and run.finalist_plan_digests == (plans[-1],)
 
 
+def _authoring_check() -> bool:
+    from solutiongraph.authoring import (
+        build_python_registry,
+        define_python_node,
+        enumerate_candidates,
+    )
+
+    definition = define_python_node(
+        node_id="conformance.authored-preserve",
+        function=preserve,
+        inputs=(Port("value", CONTROL_VALUE),),
+        outputs=(Port("value", CONTROL_VALUE),),
+        capabilities=("conformance.authoring",),
+        description="Authoring SDK conformance primitive.",
+    )
+    candidates = enumerate_candidates(definition.spec)
+    registry = build_python_registry(
+        "registry.conformance-authoring",
+        "1.0.0",
+        (definition,),
+        candidates=candidates,
+    )
+    return (
+        definition.validate() == []
+        and len(candidates) == 1
+        and registry.nodes == (definition.spec,)
+        and registry.candidates == candidates
+    )
+
+
+def _solution_pack_check() -> bool:
+    from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
+
+    return bool(REFERENCE_BENCHMARKS) and all(
+        bundle.validate() == [] for bundle in REFERENCE_BENCHMARKS
+    )
+
+
+def _circuit_breaker_exhaustion_check() -> bool:
+    node = _node(
+        "conformance.circuit-preserve",
+        preserve,
+        "conformance.circuit",
+        (Port("value", CONTROL_VALUE),),
+        (Port("value", CONTROL_VALUE),),
+    )
+    registry = _registry("registry.conformance-circuit", (node,))
+    program = ProgramGraph(
+        "program.conformance-circuit",
+        "1.0.0",
+        "Exercise an already-open candidate circuit.",
+        "Execution fails with an explicit circuit-open receipt.",
+        (
+            SemanticSlot(
+                "preserve",
+                "Preserve a value.",
+                (Port("value", CONTROL_VALUE),),
+                (Port("value", CONTROL_VALUE),),
+                "Value is preserved.",
+                required_capabilities=("conformance.circuit",),
+            ),
+        ),
+        (),
+        (GraphInput("value", CONTROL_VALUE, "preserve", "value"),),
+        (GraphOutput("value", CONTROL_VALUE, "preserve", "value"),),
+    )
+    compiler = Compiler()
+    space = compiler.admit(program, registry)
+    plan = compiler.compile(
+        program,
+        registry,
+        space,
+        {"preserve": registry.candidates[0].id},
+    )
+    breaker = CircuitBreaker(failure_threshold=1)
+    breaker.record_failure(registry.candidates[0].id)
+    result = ReferenceExecutor(circuit_breaker=breaker).execute(
+        plan,
+        program,
+        registry,
+        space,
+        {"value": 3},
+        task_case_id="case.conformance-circuit",
+        verifier=None,
+        policy=ExecutionPolicy(require_task_verifier=False),
+    )
+    return (
+        not result.ok
+        and result.receipt.failure_class == "runtime.circuit-open"
+        and result.outputs == {}
+    )
+
+
 def run_conformance_suite() -> ConformanceResult:
     checks: list[ConformanceCheck] = []
     branch_receipt: RunReceipt | None = None
@@ -492,6 +586,9 @@ def run_conformance_suite() -> ConformanceResult:
         ("conformance.durable-resume", _durable_check),
         ("conformance.saga-compensation", _saga_check),
         ("conformance.multi-fidelity", _fidelity_check),
+        ("conformance.node-authoring", _authoring_check),
+        ("conformance.solution-pack-closure", _solution_pack_check),
+        ("conformance.circuit-exhaustion", _circuit_breaker_exhaustion_check),
     )
     try:
         passed, branch_receipt = _branch_run()

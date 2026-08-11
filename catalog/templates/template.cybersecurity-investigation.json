@@ -1,0 +1,1084 @@
+{
+  "description": "A scoped collection, enrichment, hypothesis, verification, and response scaffold.",
+  "domains": [
+    "security.defensive",
+    "operations.investigation"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.cybersecurity-investigation",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "authorize_investigation",
+        "target_port": "state",
+        "target_slot": "define_hypotheses"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_hypotheses",
+        "target_port": "state",
+        "target_slot": "preserve_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "preserve_evidence",
+        "target_port": "state",
+        "target_slot": "collect_events"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "collect_events",
+        "target_port": "state",
+        "target_slot": "normalize_events"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_events",
+        "target_port": "state",
+        "target_slot": "order_timeline"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "order_timeline",
+        "target_port": "state",
+        "target_slot": "resolve_assets"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "resolve_assets",
+        "target_port": "state",
+        "target_slot": "enrich_indicators"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "enrich_indicators",
+        "target_port": "state",
+        "target_slot": "build_activity_graph"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_activity_graph",
+        "target_port": "state",
+        "target_slot": "baseline_behavior"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "baseline_behavior",
+        "target_port": "state",
+        "target_slot": "detect_techniques"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_techniques",
+        "target_port": "state",
+        "target_slot": "correlate_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "correlate_evidence",
+        "target_port": "state",
+        "target_slot": "test_hypotheses"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "test_hypotheses",
+        "target_port": "state",
+        "target_slot": "estimate_confidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_confidence",
+        "target_port": "state",
+        "target_slot": "select_response"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_response",
+        "target_port": "state",
+        "target_slot": "execute_containment"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "execute_containment",
+        "target_port": "state",
+        "target_slot": "verify_recovery"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_recovery",
+        "target_port": "state",
+        "target_slot": "publish_case"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.cybersecurity-investigation",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "authorize_investigation",
+        "type": {
+          "id": "template.cybersecurity-investigation.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_case",
+        "type": {
+          "id": "template.cybersecurity-investigation.state-18",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scope"
+        ],
+        "id": "authorize_investigation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record defensive scope, systems, time window, and approvals.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.authorize_investigation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record defensive scope, systems, time window, and approvals and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scope"
+        ],
+        "id": "define_hypotheses",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define testable benign and malicious hypotheses.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.define_hypotheses.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define testable benign and malicious hypotheses and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scope"
+        ],
+        "id": "preserve_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define evidence integrity, retention, and chain-of-custody controls.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.preserve_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define evidence integrity, retention, and chain-of-custody controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "collect_events",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Collect admitted endpoint, identity, network, cloud, and application events.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.collect_events.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Collect admitted endpoint, identity, network, cloud, and application events and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "normalize_events",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize events while preserving raw source references.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.normalize_events.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize events while preserving raw source references and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.collect"
+        ],
+        "id": "order_timeline",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Order event-time observations and represent clock uncertainty.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.order_timeline.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Order event-time observations and represent clock uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.enrich"
+        ],
+        "id": "resolve_assets",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve devices, users, services, and ownership.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.resolve_assets.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve devices, users, services, and ownership and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.enrich"
+        ],
+        "id": "enrich_indicators",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Enrich indicators from admitted internal and external intelligence.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.enrich_indicators.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Enrich indicators from admitted internal and external intelligence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.enrich"
+        ],
+        "id": "build_activity_graph",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build entity, process, network, and credential relationships.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.build_activity_graph.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build entity, process, network, and credential relationships and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.enrich"
+        ],
+        "id": "baseline_behavior",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare activity to asset- and role-specific baselines.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.baseline_behavior.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare activity to asset- and role-specific baselines and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "detect_techniques",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Map supported observations to versioned defensive technique taxonomies.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.detect_techniques.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Map supported observations to versioned defensive technique taxonomies and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "correlate_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Correlate temporally and causally related observations.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.correlate_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Correlate temporally and causally related observations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "test_hypotheses",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Seek confirming and disconfirming evidence for each hypothesis.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.test_hypotheses.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Seek confirming and disconfirming evidence for each hypothesis and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "estimate_confidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate confidence, impact, and remaining uncertainty.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.estimate_confidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate confidence, impact, and remaining uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "select_response",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select proportionate reversible defensive actions.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.select_response.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select proportionate reversible defensive actions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "execute_containment",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute authorized containment with rollback and blast-radius controls.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.execute_containment.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute authorized containment with rollback and blast-radius controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "verify_recovery",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify eradication, recovery, and absence of recurrence signals.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.verify_recovery.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify eradication, recovery, and absence of recurrence signals and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.respond"
+        ],
+        "id": "publish_case",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.cybersecurity-investigation.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish findings, evidence, actions, and lessons with access controls.",
+        "required_capabilities": [
+          "template.cybersecurity-investigation.publish_case.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish findings, evidence, actions, and lessons with access controls and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Defensive cybersecurity investigation obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.cybersecurity-investigation.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.cybersecurity-investigation.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Establish defensive authority and preservation rules.",
+      "extensions": {},
+      "id": "stage.scope",
+      "slot_ids": [
+        "authorize_investigation",
+        "define_hypotheses",
+        "preserve_evidence"
+      ],
+      "title": "Scope"
+    },
+    {
+      "description": "Acquire relevant defensive telemetry.",
+      "extensions": {},
+      "id": "stage.collect",
+      "slot_ids": [
+        "collect_events",
+        "normalize_events",
+        "order_timeline"
+      ],
+      "title": "Collect"
+    },
+    {
+      "description": "Resolve context and relationships.",
+      "extensions": {},
+      "id": "stage.enrich",
+      "slot_ids": [
+        "resolve_assets",
+        "enrich_indicators",
+        "build_activity_graph",
+        "baseline_behavior"
+      ],
+      "title": "Enrich"
+    },
+    {
+      "description": "Test hypotheses with independent checks.",
+      "extensions": {},
+      "id": "stage.analyze",
+      "slot_ids": [
+        "detect_techniques",
+        "correlate_evidence",
+        "test_hypotheses",
+        "estimate_confidence"
+      ],
+      "title": "Analyze"
+    },
+    {
+      "description": "Contain safely and preserve learning.",
+      "extensions": {},
+      "id": "stage.respond",
+      "slot_ids": [
+        "select_response",
+        "execute_containment",
+        "verify_recovery",
+        "publish_case"
+      ],
+      "title": "Respond"
+    }
+  ],
+  "tags": [
+    "incident",
+    "forensics",
+    "threat-detection"
+  ],
+  "template_model_version": "0.1",
+  "title": "Defensive cybersecurity investigation",
+  "version": "1.0.0"
+}

@@ -1,0 +1,36 @@
+{
+  "acceptance_signals": [
+    "category precision and recall",
+    "severity calibration",
+    "appeal overturn rate",
+    "consistency",
+    "latency"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.content-policy-moderation",
+  "input_contract": "Content, conversation and product context, policy version, jurisdiction, audience, and action authority.",
+  "output_contract": "Policy categories, calibrated severity, action, reasons, review state, and appeal evidence.",
+  "problem": "Bind policy context, extract multimodal evidence, combine detectors, act proportionately, review, and appeal.",
+  "readiness": "template",
+  "stage_families": [
+    "policy",
+    "decode",
+    "language",
+    "signals",
+    "rules",
+    "models",
+    "cross-check",
+    "decide",
+    "review",
+    "appeal"
+  ],
+  "tags": [
+    "moderation",
+    "policy",
+    "safety"
+  ],
+  "template_id": "template.content-moderation",
+  "title": "Multimodal content to a reviewable policy action"
+}

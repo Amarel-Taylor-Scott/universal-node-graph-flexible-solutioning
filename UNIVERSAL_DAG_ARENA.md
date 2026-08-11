@@ -41,7 +41,7 @@ response provenance, retention policy, and stable failure taxonomy.
 
 | Arena task | Executable examples | Core candidate matrix |
 |---|---|---|
-| Golden customer table | `data-cleanup`, `golden-customer-table` | normalization × validation/deduplication × identity resolution × field merge |
+| Golden customer table | `data-cleanup`, `golden-customer-table`, `stdlib-data-quality` | normalization × validation/deduplication × identity resolution × field merge/profile |
 | Address verification | `address-reference-verification` | parsing × normalization × reference match × emission |
 | Verified product scrape | `browse-and-scrape`, `verified-product-dataset` | acquisition × extraction × money normalization × corroboration |
 | Invoice schema | `document-to-schema` | text normalization × extraction × schema projection |
@@ -62,15 +62,22 @@ response provenance, retention policy, and stable failure taxonomy.
 | Scientific experiment | `scientific-experiment` | allocate observations × compare × robustness check |
 | Numerical linear system | `numerical-linear-system` | validate structure × solve × residual verification |
 
-Together these map to 23 programs and 51 declared reference routes. The two
-Arena registries contain 146 executable nodes. Thirty-two routes are accepted
-by independent fixture oracles and 19 are deliberate negative controls. The
+Together these map to 24 programs and 54 declared reference routes. The Arena
+and standard-library registries contain 165 unique executable nodes. Thirty-three
+routes are accepted by independent fixture oracles and 21 are deliberate
+negative controls. The
 declared routes are release-gate fixtures; `UniversalSolver` searches
 additional combinations from the complete compiler-admitted matrix.
 
 ## Other included DAG families
 
-The four remaining catalog families require production connectors for:
+Twelve additional Arena entries are strict templates for grounded knowledge,
+claims, fraud, defensive cybersecurity, compliance evidence, geospatial data,
+audio/speech, supply-chain planning, constraint scheduling, database migration,
+SRE/observability, and content moderation. They expose 205 additional atomic
+obligations without pretending placeholder functions are implementations.
+
+Four catalog families require production connectors for:
 
 - shipping-event normalization and notifications;
 - geospatial and authority enrichment;

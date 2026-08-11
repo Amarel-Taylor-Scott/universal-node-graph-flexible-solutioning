@@ -1,7 +1,8 @@
 # Executable real-world example skeleton
 
-The repository now includes 23 dependency-free programs, including five
-notebook task families and 17 additional Arena fixtures, that pass through
+The repository now includes 24 dependency-free programs, including five
+notebook task families, 18 additional Arena fixtures, and one reusable
+standard-library data-quality program, that pass through
 the same universal lifecycle: full registry admission, route compilation,
 frozen fallbacks, execution, content-addressed artifacts, independent
 verification, and immutable receipts.
@@ -39,6 +40,7 @@ solutiongraph examples run dependency-assurance
 solutiongraph examples run recommendation-ranking
 solutiongraph examples run scientific-experiment
 solutiongraph examples run numerical-linear-system
+solutiongraph examples run stdlib-data-quality
 ```
 
 Use the bounded child-process adapter and persist each completed receipt before
@@ -90,14 +92,20 @@ solutiongraph examples run tabular-regression \
 | Recommendation ranking | score → policy → diversify | strict/heuristic relevance and constraint handling | eligible, deterministic diverse ranking |
 | Scientific experiment | allocate → compare → robustness | strict/heuristic analysis paths | expected effect and robustness verdict |
 | Numerical solve | validate → solve → residual | strict/heuristic 2×2 solver and verification paths | exact solution within residual tolerance |
+| Standard-library data quality | normalize keys → trim → normalize missing → case-fold/pass → filter/pass → deduplicate/pass → profile | 19 reusable source-bound primitives expanded into 32 candidate bindings | exact normalized records, profile, and deterministic digest |
 
 Both ML examples are real DAGs rather than only lists: each split artifact fans
 out to training and evaluation, while the trained model joins evaluation.
 
-Nineteen controls are expected to be rejected by their independent oracles.
+Twenty-one controls are expected to be rejected by their independent oracles.
 Preserving those valid-but-poor routes is part of the evidence model. The
-release gate compiles and executes all 51 declared routes through both runtime
+release gate compiles and executes all 54 declared routes through both runtime
 adapters.
+
+Six of the programs are also packaged as controlled benchmark suites with exact
+task/case/oracle identities, fixed controls, quick and balanced solver arms,
+holdout status, and JSON/HTML evidence. Run `solutiongraph benchmarks list` and
+read `BENCHMARK_PROTOCOL.md`.
 
 ## Let the universal solver choose routes
 

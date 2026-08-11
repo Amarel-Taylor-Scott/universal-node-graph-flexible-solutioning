@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "records.filter-complete"
+  ],
+  "aliases": [
+    "records filter-complete"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.filter-complete",
+      "language": "und",
+      "source_digest": "sha256:56e56fdd3c034a0cd0553abed0a4a54d695c1d5f888da5ead5fecb9cb1975a85",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Keep records containing every configured nonempty field. Inputs: records. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.filter-complete",
+  "node_spec_digest": "sha256:56e56fdd3c034a0cd0553abed0a4a54d695c1d5f888da5ead5fecb9cb1975a85",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Keep records containing every configured nonempty field."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Keep records containing every configured nonempty field.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Filter Complete"
+}

@@ -1,0 +1,67 @@
+{
+  "capabilities": [
+    "records.require-fields"
+  ],
+  "description": "Reject records missing configured nonempty fields.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:require_record_fields",
+  "failure_modes": [
+    {
+      "code": "records.required-field-missing",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "stdlib.records.require-fields",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:c0677e873b833047ab92cbeff40e52d2ce0eda0e2dbfb3d7b57936c750f3adcc",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": null,
+      "description": "",
+      "name": "fields",
+      "required": true,
+      "value_type": "array[string]"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

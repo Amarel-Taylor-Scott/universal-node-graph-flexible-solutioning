@@ -1,0 +1,61 @@
+{
+  "capabilities": [
+    "records.filter-complete"
+  ],
+  "description": "Keep records containing every configured nonempty field.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:filter_complete_records",
+  "failure_modes": [],
+  "id": "stdlib.records.filter-complete",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:a452ff84f72fdd7af46c9982ca89fa0e6f5d51b183847cd40c63a0358ed99b47",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": null,
+      "description": "",
+      "name": "fields",
+      "required": true,
+      "value_type": "array[string]"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

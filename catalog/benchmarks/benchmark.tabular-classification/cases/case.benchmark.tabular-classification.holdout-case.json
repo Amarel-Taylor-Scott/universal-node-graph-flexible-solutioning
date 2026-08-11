@@ -1,0 +1,17 @@
+{
+  "description": "Held-out negative feature range.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/tabular-classification/holdout-case",
+  "id": "case.benchmark.tabular-classification.holdout-case",
+  "input_digest": "sha256:058a9297ff1fe3a9e2a60de7a4e49940c82c1a91f86a2696aef76f25a479b6ee",
+  "split": "holdout",
+  "tags": [
+    "fixture.synthetic",
+    "domain.ml",
+    "task.classification"
+  ],
+  "task_model_version": "0.1"
+}

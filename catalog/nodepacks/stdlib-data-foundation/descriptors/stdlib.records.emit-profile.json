@@ -1,0 +1,67 @@
+{
+  "actions": [
+    "records.emit-profile"
+  ],
+  "aliases": [
+    "records emit-profile"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.emit-profile",
+      "language": "und",
+      "source_digest": "sha256:cef69d6a54880672ced9fc99bc0025562e850f29cbe7b6abcab7c03962b1d232",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Emit cleaned records and a quality profile as separately typed outputs. Inputs: records. Outputs: records, profile."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.emit-profile",
+  "node_spec_digest": "sha256:cef69d6a54880672ced9fc99bc0025562e850f29cbe7b6abcab7c03962b1d232",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed profile output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "profile"
+    }
+  ],
+  "purposes": [
+    "Emit cleaned records and a quality profile as separately typed outputs."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Emit cleaned records and a quality profile as separately typed outputs.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Emit Profile"
+}

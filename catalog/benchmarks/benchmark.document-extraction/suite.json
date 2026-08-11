@@ -1,0 +1,73 @@
+{
+  "arms": [
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the declared control route without route search.",
+      "id": "arm.fixed-control",
+      "kind": "fixed-route",
+      "route_id": "baseline",
+      "solver_profile": "",
+      "title": "Fixed control"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the stronger hand-authored candidate without route search.",
+      "id": "arm.fixed-candidate",
+      "kind": "fixed-route",
+      "route_id": "alternative",
+      "solver_profile": "",
+      "title": "Fixed candidate"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Use one prior-guided proposal under the explicit quick allocation.",
+      "id": "arm.solver-quick",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "quick",
+      "title": "Quick solver"
+    },
+    {
+      "anchor_route_ids": [
+        "alternative"
+      ],
+      "description": "Use prior plus bounded beam search and retain evidence-diverse fallbacks.",
+      "id": "arm.solver-balanced",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "balanced",
+      "title": "Balanced solver"
+    }
+  ],
+  "benchmark_model_version": "0.1",
+  "claim_scope": "mechanism-fixture",
+  "dataset_license": "CC0-1.0",
+  "description": "Compare fixed and solver-selected normalization/extraction routes over format variations of one typed invoice contract.",
+  "example_id": "document-to-schema",
+  "holdout_case_ids": [
+    "case.benchmark.document-extraction.holdout-case"
+  ],
+  "id": "benchmark.document-extraction",
+  "notes": [
+    "All inputs are small synthetic fixtures committed by value digest.",
+    "Latency is observed runtime evidence, not a cross-machine performance claim.",
+    "Only a complete exhaustive arm may claim optimality over the admitted space."
+  ],
+  "program_digest": "sha256:aef755b59b8045be696f35d56944a910281e5d1fc11bd6cc08ac359b4872f749",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "repetitions": 1,
+  "seeds": [
+    0,
+    1729
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:60ad0842efbeb80551e4db0f6136a991f488c1bb757b1f135842b70f9111ac57",
+    "sha256:b3413448917268fe0118e4c49cb8355a87118f6ef6bed6cc700f63fd680320ef",
+    "sha256:f08550adbc1b4b03cd88674a419e46b9b81b8bf19a811955c6a6d8a0234444b1",
+    "sha256:e327d3212773b8a531f0da77b3223364554a71e7f9c85032daa73d9d4a1f7188"
+  ],
+  "task_contract_digest": "sha256:1571faacd345233c40e9d68e1077673d46f8906af0986df7735db94c3384f753",
+  "title": "Ingest and extract into schema arena",
+  "version": "1.0.0"
+}

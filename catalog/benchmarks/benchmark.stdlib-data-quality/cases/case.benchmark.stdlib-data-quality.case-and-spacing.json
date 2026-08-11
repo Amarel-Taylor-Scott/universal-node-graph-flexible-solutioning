@@ -1,0 +1,17 @@
+{
+  "description": "Key, case, whitespace, and missing-sentinel variation.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/stdlib-data-quality/case-and-spacing",
+  "id": "case.benchmark.stdlib-data-quality.case-and-spacing",
+  "input_digest": "sha256:d86130e502fca3893304d6513ccd770c0b5da25872d2baf9f7731425864c8fba",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.quality"
+  ],
+  "task_model_version": "0.1"
+}

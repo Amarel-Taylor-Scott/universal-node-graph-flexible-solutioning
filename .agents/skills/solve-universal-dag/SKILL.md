@@ -5,7 +5,9 @@ description: Model and solve a real task with the UniversalSolver or extend the 
 
 # Solve a universal DAG
 
-Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md`, `../../../EXECUTION_PROTOCOL.md`,
+Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md`,
+`../../../TASK_AND_SOLUTION_PACK_PROTOCOL.md`,
+`../../../EXECUTION_PROTOCOL.md`,
 `../../../STRUCTURED_CONTROL_PROTOCOL.md`,
 `../../../TOPOLOGY_SEARCH_PROTOCOL.md`, and
 `../../../REAL_WORLD_EXAMPLES.md`. For generated-node campaigns, also use
@@ -14,7 +16,8 @@ Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md`, `../../../EXECUTION_PROTOCOL.md`,
 ## Establish the task boundary
 
 1. Write the input contract, output contract, independent acceptance oracle,
-   hard constraints, objectives, budget, and authority policy before nodes.
+   exact case splits, hard constraints, objectives, budget, and authority policy
+   before nodes.
 2. Select an Arena task or semantic template with `solutiongraph arena list`
    and `solutiongraph templates list`. A template is a starting decomposition,
    not proof that a task is solved.
@@ -102,5 +105,7 @@ pytest -q
 Regenerate `catalog/` after changing templates, registries, nodes, or Arena
 entries. Report evaluated and total routes, unvisited space, search budgets,
 accepted/rejected/failed receipts, Pareto routes, champion, fallback diversity,
-lowering/topology/checkpoint identities, and remaining external or production gates. Synthetic fixture success proves
-the framework mechanism only; it is not domain-level production validation.
+lowering/topology/checkpoint identities, exact solution-pack closure, benchmark
+claim scope, and remaining external or production gates. Synthetic fixture
+success proves the framework mechanism only; it is not domain-level production
+validation.

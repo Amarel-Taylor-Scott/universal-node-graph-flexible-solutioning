@@ -1,0 +1,61 @@
+{
+  "admitted_space_digest": "sha256:76011970aee4252383e35f88c9eb088c3eecd8cd50751bdb7494b4d788b6ab0e",
+  "bindings": [
+    {
+      "candidate_id": "candidate.example.data.normalize.aggressive.default",
+      "implementation_digest": "sha256:14fb8e62a816965035be3959b4e92da0780bf936b344552bea21986a33485bcb",
+      "node_id": "example.data.normalize.aggressive",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "normalize"
+    },
+    {
+      "candidate_id": "candidate.example.data.deduplicate.normalized.company",
+      "implementation_digest": "sha256:b7221cf1e31df9f2d3ec413f5249be516156aaf4551f49884966b004bc747c6b",
+      "node_id": "example.data.deduplicate.normalized",
+      "node_version": "1.0.0",
+      "parameters": {
+        "key_fields": [
+          "company"
+        ]
+      },
+      "slot_id": "deduplicate"
+    },
+    {
+      "candidate_id": "candidate.example.data.sort.company",
+      "implementation_digest": "sha256:21fb5b81f85a197b831534f9aa676278983a57cd4a9337f14d0fedd7eb9507d9",
+      "node_id": "example.data.sort",
+      "node_version": "1.0.0",
+      "parameters": {
+        "sort_key": "company"
+      },
+      "slot_id": "emit"
+    }
+  ],
+  "digest": "sha256:d804399f692a481bef5dc826fe25a1883ff59ee7b7d147246e2f136409b07e09",
+  "edges": [
+    {
+      "source_port": "records",
+      "source_slot": "normalize",
+      "target_port": "records",
+      "target_slot": "deduplicate"
+    },
+    {
+      "source_port": "records",
+      "source_slot": "deduplicate",
+      "target_port": "records",
+      "target_slot": "emit"
+    }
+  ],
+  "fallbacks": [],
+  "model_version": "0.2",
+  "program_digest": "sha256:3cde95e42f6f1f46c8f9ab7ff13fe918af139e75472929101c46c6fc692fc04c",
+  "program_id": "example.data-cleanup",
+  "program_version": "1.0.0",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "topological_order": [
+    "normalize",
+    "deduplicate",
+    "emit"
+  ]
+}

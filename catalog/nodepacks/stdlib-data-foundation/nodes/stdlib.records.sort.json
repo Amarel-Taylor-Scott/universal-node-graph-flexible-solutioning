@@ -1,0 +1,72 @@
+{
+  "capabilities": [
+    "records.sort"
+  ],
+  "description": "Sort records deterministically by configured fields.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:sort_records",
+  "failure_modes": [],
+  "id": "stdlib.records.sort",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:dc484e84790d2f18949e9c3441c28adfe4489112947da5f6457840c0c1c9ffc0",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [],
+      "default": null,
+      "description": "",
+      "name": "fields",
+      "required": true,
+      "value_type": "array[string]"
+    },
+    {
+      "choices": [
+        false,
+        true
+      ],
+      "default": false,
+      "description": "",
+      "name": "reverse",
+      "required": false,
+      "value_type": "boolean"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

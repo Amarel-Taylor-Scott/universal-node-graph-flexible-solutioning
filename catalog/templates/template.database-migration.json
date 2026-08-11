@@ -1,0 +1,1084 @@
+{
+  "description": "A schema, backfill, dual-run, cutover, and rollback scaffold.",
+  "domains": [
+    "data.database",
+    "software.migration"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.database-migration",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "inventory_schema",
+        "target_port": "state",
+        "target_slot": "map_schema"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "map_schema",
+        "target_port": "state",
+        "target_slot": "define_cutover_slo"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_cutover_slo",
+        "target_port": "state",
+        "target_slot": "create_target_schema"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "create_target_schema",
+        "target_port": "state",
+        "target_slot": "build_transformations"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_transformations",
+        "target_port": "state",
+        "target_slot": "configure_change_capture"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "configure_change_capture",
+        "target_port": "state",
+        "target_slot": "snapshot_source"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "snapshot_source",
+        "target_port": "state",
+        "target_slot": "backfill_data"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "backfill_data",
+        "target_port": "state",
+        "target_slot": "apply_changes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_changes",
+        "target_port": "state",
+        "target_slot": "handle_schema_drift"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "handle_schema_drift",
+        "target_port": "state",
+        "target_slot": "reconcile_counts"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_counts",
+        "target_port": "state",
+        "target_slot": "reconcile_values"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_values",
+        "target_port": "state",
+        "target_slot": "shadow_workload"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "shadow_workload",
+        "target_port": "state",
+        "target_slot": "verify_lag"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_lag",
+        "target_port": "state",
+        "target_slot": "freeze_cutover_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "freeze_cutover_plan",
+        "target_port": "state",
+        "target_slot": "switch_traffic"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "switch_traffic",
+        "target_port": "state",
+        "target_slot": "verify_cutover"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_cutover",
+        "target_port": "state",
+        "target_slot": "retire_or_rollback"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.database-migration",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "inventory_schema",
+        "type": {
+          "id": "template.database-migration.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "retire_or_rollback",
+        "type": {
+          "id": "template.database-migration.state-18",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assess"
+        ],
+        "id": "inventory_schema",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Inventory schemas, constraints, volumes, dependencies, and workloads.",
+        "required_capabilities": [
+          "template.database-migration.inventory_schema.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Inventory schemas, constraints, volumes, dependencies, and workloads and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assess"
+        ],
+        "id": "map_schema",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Map source to target types, semantics, keys, and unsupported constructs.",
+        "required_capabilities": [
+          "template.database-migration.map_schema.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Map source to target types, semantics, keys, and unsupported constructs and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assess"
+        ],
+        "id": "define_cutover_slo",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define correctness, downtime, performance, rollback, and retention limits.",
+        "required_capabilities": [
+          "template.database-migration.define_cutover_slo.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define correctness, downtime, performance, rollback, and retention limits and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "create_target_schema",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Create versioned target schema and constraints safely.",
+        "required_capabilities": [
+          "template.database-migration.create_target_schema.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Create versioned target schema and constraints safely and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "build_transformations",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build explicit data and type transformations with rejects.",
+        "required_capabilities": [
+          "template.database-migration.build_transformations.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build explicit data and type transformations with rejects and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "configure_change_capture",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Configure ordered, resumable change capture with source offsets.",
+        "required_capabilities": [
+          "template.database-migration.configure_change_capture.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Configure ordered, resumable change capture with source offsets and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.move"
+        ],
+        "id": "snapshot_source",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Establish a consistent source snapshot and starting offset.",
+        "required_capabilities": [
+          "template.database-migration.snapshot_source.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Establish a consistent source snapshot and starting offset and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.move"
+        ],
+        "id": "backfill_data",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Backfill bounded partitions with checksums and checkpoints.",
+        "required_capabilities": [
+          "template.database-migration.backfill_data.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Backfill bounded partitions with checksums and checkpoints and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.move"
+        ],
+        "id": "apply_changes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply captured changes idempotently in source order.",
+        "required_capabilities": [
+          "template.database-migration.apply_changes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply captured changes idempotently in source order and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.move"
+        ],
+        "id": "handle_schema_drift",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Handle source schema changes under an explicit compatibility policy.",
+        "required_capabilities": [
+          "template.database-migration.handle_schema_drift.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Handle source schema changes under an explicit compatibility policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "reconcile_counts",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile counts, keys, partitions, and reject populations.",
+        "required_capabilities": [
+          "template.database-migration.reconcile_counts.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile counts, keys, partitions, and reject populations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "reconcile_values",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare checksums, sampled rows, aggregates, and invariants.",
+        "required_capabilities": [
+          "template.database-migration.reconcile_values.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare checksums, sampled rows, aggregates, and invariants and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "shadow_workload",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Replay or shadow representative reads and writes.",
+        "required_capabilities": [
+          "template.database-migration.shadow_workload.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Replay or shadow representative reads and writes and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "verify_lag",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify replication lag and offset completeness.",
+        "required_capabilities": [
+          "template.database-migration.verify_lag.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify replication lag and offset completeness and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.cutover"
+        ],
+        "id": "freeze_cutover_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Freeze traffic, ownership, communication, and rollback steps.",
+        "required_capabilities": [
+          "template.database-migration.freeze_cutover_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Freeze traffic, ownership, communication, and rollback steps and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.cutover"
+        ],
+        "id": "switch_traffic",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Switch bounded traffic through observable gates.",
+        "required_capabilities": [
+          "template.database-migration.switch_traffic.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Switch bounded traffic through observable gates and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.cutover"
+        ],
+        "id": "verify_cutover",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify correctness, performance, and downstream consumers.",
+        "required_capabilities": [
+          "template.database-migration.verify_cutover.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify correctness, performance, and downstream consumers and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.cutover"
+        ],
+        "id": "retire_or_rollback",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.database-migration.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Rollback or retire the source only under the declared policy.",
+        "required_capabilities": [
+          "template.database-migration.retire_or_rollback.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Rollback or retire the source only under the declared policy and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Database migration and change-data capture obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.database-migration.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.database-migration.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define source, target, and compatibility contracts.",
+      "extensions": {},
+      "id": "stage.assess",
+      "slot_ids": [
+        "inventory_schema",
+        "map_schema",
+        "define_cutover_slo"
+      ],
+      "title": "Assess"
+    },
+    {
+      "description": "Create target structures and transformations.",
+      "extensions": {},
+      "id": "stage.prepare",
+      "slot_ids": [
+        "create_target_schema",
+        "build_transformations",
+        "configure_change_capture"
+      ],
+      "title": "Prepare"
+    },
+    {
+      "description": "Backfill and replicate without losing mutations.",
+      "extensions": {},
+      "id": "stage.move",
+      "slot_ids": [
+        "snapshot_source",
+        "backfill_data",
+        "apply_changes",
+        "handle_schema_drift"
+      ],
+      "title": "Move"
+    },
+    {
+      "description": "Compare source and target independently.",
+      "extensions": {},
+      "id": "stage.verify",
+      "slot_ids": [
+        "reconcile_counts",
+        "reconcile_values",
+        "shadow_workload",
+        "verify_lag"
+      ],
+      "title": "Verify"
+    },
+    {
+      "description": "Switch traffic reversibly.",
+      "extensions": {},
+      "id": "stage.cutover",
+      "slot_ids": [
+        "freeze_cutover_plan",
+        "switch_traffic",
+        "verify_cutover",
+        "retire_or_rollback"
+      ],
+      "title": "Cut over"
+    }
+  ],
+  "tags": [
+    "migration",
+    "cdc",
+    "reconciliation"
+  ],
+  "template_model_version": "0.1",
+  "title": "Database migration and change-data capture",
+  "version": "1.0.0"
+}

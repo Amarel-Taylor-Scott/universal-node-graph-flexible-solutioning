@@ -1,0 +1,17 @@
+{
+  "description": "Shifted feature range.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/tabular-classification/shifted",
+  "id": "case.benchmark.tabular-classification.shifted",
+  "input_digest": "sha256:11595e99e1a3894d04b77e984b3da54ba45fb0d99ffec7f0e9337f5237c88449",
+  "split": "validation",
+  "tags": [
+    "fixture.synthetic",
+    "domain.ml",
+    "task.classification"
+  ],
+  "task_model_version": "0.1"
+}

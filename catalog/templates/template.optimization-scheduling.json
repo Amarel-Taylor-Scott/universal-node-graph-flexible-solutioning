@@ -1,0 +1,1031 @@
+{
+  "description": "A formalization, decomposition, solve, verify, and operationalization scaffold.",
+  "domains": [
+    "optimization.operations-research",
+    "software.scheduling"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.optimization-scheduling",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_variables",
+        "target_port": "state",
+        "target_slot": "define_constraints"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_constraints",
+        "target_port": "state",
+        "target_slot": "define_objectives"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_objectives",
+        "target_port": "state",
+        "target_slot": "validate_instance"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_instance",
+        "target_port": "state",
+        "target_slot": "presolve_model"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "presolve_model",
+        "target_port": "state",
+        "target_slot": "decompose_problem"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "decompose_problem",
+        "target_port": "state",
+        "target_slot": "select_formulation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_formulation",
+        "target_port": "state",
+        "target_slot": "select_solver"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_solver",
+        "target_port": "state",
+        "target_slot": "construct_incumbent"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "construct_incumbent",
+        "target_port": "state",
+        "target_slot": "run_search"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_search",
+        "target_port": "state",
+        "target_slot": "refine_solution"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "refine_solution",
+        "target_port": "state",
+        "target_slot": "verify_feasibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_feasibility",
+        "target_port": "state",
+        "target_slot": "recompute_objectives"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "recompute_objectives",
+        "target_port": "state",
+        "target_slot": "verify_bound"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_bound",
+        "target_port": "state",
+        "target_slot": "explain_schedule"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "explain_schedule",
+        "target_port": "state",
+        "target_slot": "publish_schedule"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "publish_schedule",
+        "target_port": "state",
+        "target_slot": "monitor_deviation"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.optimization-scheduling",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_variables",
+        "type": {
+          "id": "template.optimization-scheduling.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "monitor_deviation",
+        "type": {
+          "id": "template.optimization-scheduling.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.formalize"
+        ],
+        "id": "define_variables",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define decision variables, domains, indices, and units.",
+        "required_capabilities": [
+          "template.optimization-scheduling.define_variables.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define decision variables, domains, indices, and units and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.formalize"
+        ],
+        "id": "define_constraints",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define hard constraints separately from preferences.",
+        "required_capabilities": [
+          "template.optimization-scheduling.define_constraints.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define hard constraints separately from preferences and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.formalize"
+        ],
+        "id": "define_objectives",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define ordered or weighted objectives and acceptable gaps.",
+        "required_capabilities": [
+          "template.optimization-scheduling.define_objectives.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define ordered or weighted objectives and acceptable gaps and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.formalize"
+        ],
+        "id": "validate_instance",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate data, bounds, feasibility prerequisites, and scale.",
+        "required_capabilities": [
+          "template.optimization-scheduling.validate_instance.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate data, bounds, feasibility prerequisites, and scale and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "presolve_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Eliminate fixed variables and redundant constraints with a receipt.",
+        "required_capabilities": [
+          "template.optimization-scheduling.presolve_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Eliminate fixed variables and redundant constraints with a receipt and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "decompose_problem",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Decompose by time, geography, resource, scenario, or coupling structure.",
+        "required_capabilities": [
+          "template.optimization-scheduling.decompose_problem.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Decompose by time, geography, resource, scenario, or coupling structure and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "select_formulation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select alternative exact or approximate formulations.",
+        "required_capabilities": [
+          "template.optimization-scheduling.select_formulation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select alternative exact or approximate formulations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.solve"
+        ],
+        "id": "select_solver",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select an admitted CP, LP, MILP, SAT, heuristic, or hybrid solver.",
+        "required_capabilities": [
+          "template.optimization-scheduling.select_solver.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select an admitted CP, LP, MILP, SAT, heuristic, or hybrid solver and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.solve"
+        ],
+        "id": "construct_incumbent",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Construct an initial feasible incumbent when useful.",
+        "required_capabilities": [
+          "template.optimization-scheduling.construct_incumbent.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Construct an initial feasible incumbent when useful and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.solve"
+        ],
+        "id": "run_search",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run bounded optimization with checkpoints and solver evidence.",
+        "required_capabilities": [
+          "template.optimization-scheduling.run_search.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run bounded optimization with checkpoints and solver evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.solve"
+        ],
+        "id": "refine_solution",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply local search, repair, polishing, or decomposition iterations.",
+        "required_capabilities": [
+          "template.optimization-scheduling.refine_solution.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply local search, repair, polishing, or decomposition iterations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "verify_feasibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Independently check every hard constraint on the emitted solution.",
+        "required_capabilities": [
+          "template.optimization-scheduling.verify_feasibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Independently check every hard constraint on the emitted solution and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "recompute_objectives",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Recompute objective values outside the producing solver.",
+        "required_capabilities": [
+          "template.optimization-scheduling.recompute_objectives.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Recompute objective values outside the producing solver and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "verify_bound",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify optimality gap or explicitly label heuristic-only status.",
+        "required_capabilities": [
+          "template.optimization-scheduling.verify_bound.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify optimality gap or explicitly label heuristic-only status and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.deploy"
+        ],
+        "id": "explain_schedule",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Explain assignments, binding constraints, and major tradeoffs.",
+        "required_capabilities": [
+          "template.optimization-scheduling.explain_schedule.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Explain assignments, binding constraints, and major tradeoffs and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.deploy"
+        ],
+        "id": "publish_schedule",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish versioned decisions with stable entity identities.",
+        "required_capabilities": [
+          "template.optimization-scheduling.publish_schedule.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish versioned decisions with stable entity identities and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.deploy"
+        ],
+        "id": "monitor_deviation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.optimization-scheduling.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Monitor execution deviations and determine bounded repair versus re-solve.",
+        "required_capabilities": [
+          "template.optimization-scheduling.monitor_deviation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Monitor execution deviations and determine bounded repair versus re-solve and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Constraint optimization and scheduling obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.optimization-scheduling.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.optimization-scheduling.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Create an exact decision model.",
+      "extensions": {},
+      "id": "stage.formalize",
+      "slot_ids": [
+        "define_variables",
+        "define_constraints",
+        "define_objectives",
+        "validate_instance"
+      ],
+      "title": "Formalize"
+    },
+    {
+      "description": "Generate equivalent admitted formulations.",
+      "extensions": {},
+      "id": "stage.transform",
+      "slot_ids": [
+        "presolve_model",
+        "decompose_problem",
+        "select_formulation"
+      ],
+      "title": "Transform"
+    },
+    {
+      "description": "Explore solver and parameter candidates.",
+      "extensions": {},
+      "id": "stage.solve",
+      "slot_ids": [
+        "select_solver",
+        "construct_incumbent",
+        "run_search",
+        "refine_solution"
+      ],
+      "title": "Solve"
+    },
+    {
+      "description": "Establish feasibility and claim limits.",
+      "extensions": {},
+      "id": "stage.verify",
+      "slot_ids": [
+        "verify_feasibility",
+        "recompute_objectives",
+        "verify_bound"
+      ],
+      "title": "Verify"
+    },
+    {
+      "description": "Turn a solution into safe operations.",
+      "extensions": {},
+      "id": "stage.deploy",
+      "slot_ids": [
+        "explain_schedule",
+        "publish_schedule",
+        "monitor_deviation"
+      ],
+      "title": "Deploy"
+    }
+  ],
+  "tags": [
+    "constraints",
+    "solver",
+    "scheduling"
+  ],
+  "template_model_version": "0.1",
+  "title": "Constraint optimization and scheduling",
+  "version": "1.0.0"
+}

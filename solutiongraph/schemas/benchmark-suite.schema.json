@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "benchmark-suite.schema.json",
+  "title": "SolutionGraph benchmark suite",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "benchmark_model_version", "id", "version", "title", "description",
+    "example_id", "task_contract_digest", "program_digest", "registry_digest",
+    "task_case_digests", "arms", "seeds", "repetitions", "holdout_case_ids",
+    "claim_scope", "dataset_license", "source", "notes"
+  ],
+  "properties": {
+    "benchmark_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "example_id": {"$ref": "common.schema.json#/$defs/id"},
+    "task_contract_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "task_case_digests": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "arms": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "title", "description", "kind", "route_id", "solver_profile", "anchor_route_ids"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "title": {"type": "string", "minLength": 1},
+          "description": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["fixed-route", "solver-profile"]},
+          "route_id": {"type": "string"},
+          "solver_profile": {"type": "string"},
+          "anchor_route_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}}
+        }
+      }
+    },
+    "seeds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer"}},
+    "repetitions": {"type": "integer", "minimum": 1},
+    "holdout_case_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "claim_scope": {"enum": ["mechanism-fixture", "internal-dataset", "public-benchmark", "production-shadow"]},
+    "dataset_license": {"type": "string", "minLength": 1},
+    "source": {"type": "string"},
+    "notes": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  }
+}

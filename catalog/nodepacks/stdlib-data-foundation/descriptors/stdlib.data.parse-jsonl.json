@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "data.parse-records"
+  ],
+  "aliases": [
+    "data parse-records"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.data.parse-jsonl",
+      "language": "und",
+      "source_digest": "sha256:11f4fb233a9f731c22e6a5ca95ee232024d2b4f803f7c9b2eb4a250005ba7731",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Parse newline-delimited JSON objects. Inputs: text. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.data.parse-jsonl",
+  "node_spec_digest": "sha256:11f4fb233a9f731c22e6a5ca95ee232024d2b4f803f7c9b2eb4a250005ba7731",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed text input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "text"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Parse newline-delimited JSON objects."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Parse newline-delimited JSON objects.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Parse Jsonl"
+}

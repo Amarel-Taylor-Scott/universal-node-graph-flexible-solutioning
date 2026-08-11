@@ -13,14 +13,19 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.catalog import catalog_documents
 from solutiongraph.conformance import ConformanceResult, run_conformance_suite
-from solutiongraph.examples import EXAMPLE_TASKS, run_example
+from solutiongraph.examples import all_examples, run_example
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
     REFERENCE_NODE_SPECS,
 )
 from solutiongraph.schemas import load_all_schemas
+from solutiongraph.stdlib_pack import (
+    STANDARD_LIBRARY_DESCRIPTORS,
+    STANDARD_LIBRARY_NODE_SPECS,
+)
 from solutiongraph.template_library import REFERENCE_TEMPLATES
 
 
@@ -74,6 +79,8 @@ class ReleaseVerification:
     catalog_document_count: int
     catalog_checked: bool
     conformance: ConformanceResult
+    benchmark_count: int
+    solution_pack_count: int
 
     @property
     def ok(self) -> bool:
@@ -101,8 +108,10 @@ class ReleaseVerification:
             "schema_count": self.schema_count,
             "catalog_document_count": self.catalog_document_count,
             "catalog_checked": self.catalog_checked,
+            "benchmark_count": self.benchmark_count,
+            "solution_pack_count": self.solution_pack_count,
             "conformance": self.conformance.to_dict(),
-            "example_count": len(EXAMPLE_TASKS),
+            "example_count": len(all_examples()),
             "route_count": len(self.route_results),
             "accepted_routes": self.accepted_routes,
             "rejected_controls": self.rejected_controls,
@@ -157,10 +166,22 @@ def verify_reference_release(
                 f"descriptors.{descriptor.node_id}",
             )
         )
+    stdlib_by_id = {node.id: node for node in STANDARD_LIBRARY_NODE_SPECS}
+    for descriptor in STANDARD_LIBRARY_DESCRIPTORS:
+        problems.extend(
+            descriptor.validate(
+                stdlib_by_id.get(descriptor.node_id),
+                f"stdlib_descriptors.{descriptor.node_id}",
+            )
+        )
+    for bundle in REFERENCE_BENCHMARKS:
+        problems.extend(
+            f"{bundle.id}: {problem}" for problem in bundle.validate()
+        )
 
     executable_nodes = {
         node.id: node
-        for example in EXAMPLE_TASKS
+        for example in all_examples()
         for node in example.registry.nodes
     }
     for node in executable_nodes.values():
@@ -172,7 +193,7 @@ def verify_reference_release(
         problems.extend(_catalog_problems(Path(catalog_root), documents))
 
     route_results: list[RouteVerification] = []
-    for example in EXAMPLE_TASKS:
+    for example in all_examples():
         try:
             space, plans = example.compile()
             if len(plans) != len(example.routes):
@@ -236,6 +257,8 @@ def verify_reference_release(
         catalog_document_count=len(documents),
         catalog_checked=catalog_root is not None,
         conformance=conformance,
+        benchmark_count=len(REFERENCE_BENCHMARKS),
+        solution_pack_count=len(REFERENCE_BENCHMARKS),
     )
 
 

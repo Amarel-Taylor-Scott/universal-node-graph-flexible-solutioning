@@ -1,0 +1,142 @@
+{
+  "admitted_space_digest": "sha256:787738985c6d4ce6fc964771101d05c36aecc290b9d31fc0e0d803540c0ecfe1",
+  "bindings": [
+    {
+      "candidate_id": "candidate.stdlib.records.normalize-keys.lower",
+      "implementation_digest": "sha256:9fd41150f37b40d02859f519b69a2a18f2118a69837dda831a7ad5cfe21e0d59",
+      "node_id": "stdlib.records.normalize-keys",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mode": "lower"
+      },
+      "slot_id": "normalize_keys"
+    },
+    {
+      "candidate_id": "candidate.stdlib.records.trim-strings.shallow",
+      "implementation_digest": "sha256:f8d897910bd5e2d55091a82c6a1f083d0784f90768bb48e2b1117e897e0a3bb4",
+      "node_id": "stdlib.records.trim-strings",
+      "node_version": "1.0.0",
+      "parameters": {
+        "recursive": false
+      },
+      "slot_id": "trim_strings"
+    },
+    {
+      "candidate_id": "candidate.stdlib.records.normalize-missing.common",
+      "implementation_digest": "sha256:988f9347134373e4487e053934a356728006b144a6290e644c1c80fd170076ab",
+      "node_id": "stdlib.records.normalize-missing",
+      "node_version": "1.0.0",
+      "parameters": {
+        "sentinels": [
+          "",
+          "na",
+          "n/a",
+          "null",
+          "none"
+        ]
+      },
+      "slot_id": "normalize_missing"
+    },
+    {
+      "candidate_id": "candidate.stdlib.records.casefold-fields.company",
+      "implementation_digest": "sha256:faebeff2d75173558ad1c51e8723f8dc04c5eedd7498f026ed417d33987ea16e",
+      "node_id": "stdlib.records.casefold-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "company"
+        ]
+      },
+      "slot_id": "casefold_fields"
+    },
+    {
+      "candidate_id": "candidate.stdlib.records.deduplicate.email-exact",
+      "implementation_digest": "sha256:4631be0b42dbcdc094914b10ed299589d8b93443924ce8ab90ddfb9fdf1ed1c4",
+      "node_id": "stdlib.records.deduplicate",
+      "node_version": "1.0.0",
+      "parameters": {
+        "canonical": false,
+        "key_fields": [
+          "email"
+        ]
+      },
+      "slot_id": "deduplicate"
+    },
+    {
+      "candidate_id": "candidate.stdlib.records.require-fields.email",
+      "implementation_digest": "sha256:c0677e873b833047ab92cbeff40e52d2ce0eda0e2dbfb3d7b57936c750f3adcc",
+      "node_id": "stdlib.records.require-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "email"
+        ]
+      },
+      "slot_id": "validate"
+    },
+    {
+      "candidate_id": "candidate.stdlib.records.emit-profile.with-digest",
+      "implementation_digest": "sha256:2d221520451eaeb41cceaebb2659bd41c82b7cd4443d7add6ef10ee63bcc45ad",
+      "node_id": "stdlib.records.emit-profile",
+      "node_version": "1.0.0",
+      "parameters": {
+        "include_digest": true
+      },
+      "slot_id": "emit"
+    }
+  ],
+  "digest": "sha256:c8f870bd0fe5d3b0078038a41915ca06332933df060d90ee751cb91ba3e0435b",
+  "edges": [
+    {
+      "source_port": "records",
+      "source_slot": "normalize_keys",
+      "target_port": "records",
+      "target_slot": "trim_strings"
+    },
+    {
+      "source_port": "records",
+      "source_slot": "trim_strings",
+      "target_port": "records",
+      "target_slot": "normalize_missing"
+    },
+    {
+      "source_port": "records",
+      "source_slot": "normalize_missing",
+      "target_port": "records",
+      "target_slot": "casefold_fields"
+    },
+    {
+      "source_port": "records",
+      "source_slot": "casefold_fields",
+      "target_port": "records",
+      "target_slot": "deduplicate"
+    },
+    {
+      "source_port": "records",
+      "source_slot": "deduplicate",
+      "target_port": "records",
+      "target_slot": "validate"
+    },
+    {
+      "source_port": "records",
+      "source_slot": "validate",
+      "target_port": "records",
+      "target_slot": "emit"
+    }
+  ],
+  "fallbacks": [],
+  "model_version": "0.2",
+  "program_digest": "sha256:521647ccd9cec9498f4e25f1f07d35a8e9a8f15da74e1b3eb97018f8fc88dbad",
+  "program_id": "example.stdlib-data-quality",
+  "program_version": "1.0.0",
+  "registry_digest": "sha256:0fa593a6f73baa6fc378cb01fe42c35712961d89dceea6ba3d807658e918ca71",
+  "topological_order": [
+    "normalize_keys",
+    "trim_strings",
+    "normalize_missing",
+    "casefold_fields",
+    "deduplicate",
+    "validate",
+    "emit"
+  ]
+}

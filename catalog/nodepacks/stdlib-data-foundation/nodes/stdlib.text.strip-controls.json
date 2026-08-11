@@ -1,0 +1,64 @@
+{
+  "capabilities": [
+    "text.strip-controls"
+  ],
+  "description": "Remove Unicode control characters under an explicit newline policy.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:strip_control_characters",
+  "failure_modes": [],
+  "id": "stdlib.text.strip-controls",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:53c44ffa6c825f8e735afed302ebc73f1aa26c95498405fa56961780f83890c9",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        true,
+        false
+      ],
+      "default": true,
+      "description": "",
+      "name": "preserve_newlines",
+      "required": false,
+      "value_type": "boolean"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

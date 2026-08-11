@@ -1,0 +1,17 @@
+{
+  "description": "Email casing variation across duplicate entities.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/stdlib-data-quality/email-case",
+  "id": "case.benchmark.stdlib-data-quality.email-case",
+  "input_digest": "sha256:1013c5eb7278d40d5d6b646c6cf5358323d2341d14b88db023ea32eef4ba4a41",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.quality"
+  ],
+  "task_model_version": "0.1"
+}

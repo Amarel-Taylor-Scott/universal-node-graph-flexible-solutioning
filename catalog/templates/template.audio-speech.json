@@ -1,0 +1,978 @@
+{
+  "description": "An audio decode, enhancement, segmentation, recognition, and assurance scaffold.",
+  "domains": [
+    "media.audio",
+    "ai.speech"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.audio-speech",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_audio",
+        "target_port": "state",
+        "target_slot": "decode_audio"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "decode_audio",
+        "target_port": "state",
+        "target_slot": "validate_audio"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_audio",
+        "target_port": "state",
+        "target_slot": "normalize_channels"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_channels",
+        "target_port": "state",
+        "target_slot": "resample_audio"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "resample_audio",
+        "target_port": "state",
+        "target_slot": "enhance_audio"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "enhance_audio",
+        "target_port": "state",
+        "target_slot": "detect_activity"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_activity",
+        "target_port": "state",
+        "target_slot": "segment_speakers"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "segment_speakers",
+        "target_port": "state",
+        "target_slot": "align_timestamps"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "align_timestamps",
+        "target_port": "state",
+        "target_slot": "transcribe_speech"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "transcribe_speech",
+        "target_port": "state",
+        "target_slot": "classify_audio"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "classify_audio",
+        "target_port": "state",
+        "target_slot": "extract_audio_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_audio_features",
+        "target_port": "state",
+        "target_slot": "reconcile_transcripts"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_transcripts",
+        "target_port": "state",
+        "target_slot": "verify_transcript"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_transcript",
+        "target_port": "state",
+        "target_slot": "apply_redaction"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_redaction",
+        "target_port": "state",
+        "target_slot": "publish_audio_report"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.audio-speech",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_audio",
+        "type": {
+          "id": "template.audio-speech.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_audio_report",
+        "type": {
+          "id": "template.audio-speech.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "load_audio",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load exact audio bytes and source metadata.",
+        "required_capabilities": [
+          "template.audio-speech.load_audio.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load exact audio bytes and source metadata and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "decode_audio",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Decode channels, sample format, rate, duration, and container.",
+        "required_capabilities": [
+          "template.audio-speech.decode_audio.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Decode channels, sample format, rate, duration, and container and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "validate_audio",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect truncation, clipping, silence, and unsupported structure.",
+        "required_capabilities": [
+          "template.audio-speech.validate_audio.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect truncation, clipping, silence, and unsupported structure and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "normalize_channels",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select, mix, or preserve channels under an explicit policy.",
+        "required_capabilities": [
+          "template.audio-speech.normalize_channels.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select, mix, or preserve channels under an explicit policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "resample_audio",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resample with declared filter and rate provenance.",
+        "required_capabilities": [
+          "template.audio-speech.resample_audio.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resample with declared filter and rate provenance and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.prepare"
+        ],
+        "id": "enhance_audio",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Denoise, dereverberate, or level audio without hiding transformations.",
+        "required_capabilities": [
+          "template.audio-speech.enhance_audio.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Denoise, dereverberate, or level audio without hiding transformations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.segment"
+        ],
+        "id": "detect_activity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect speech, music, silence, and relevant sound activity.",
+        "required_capabilities": [
+          "template.audio-speech.detect_activity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect speech, music, silence, and relevant sound activity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.segment"
+        ],
+        "id": "segment_speakers",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Segment and cluster speakers with uncertainty.",
+        "required_capabilities": [
+          "template.audio-speech.segment_speakers.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Segment and cluster speakers with uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.segment"
+        ],
+        "id": "align_timestamps",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Establish stable segment and word time boundaries.",
+        "required_capabilities": [
+          "template.audio-speech.align_timestamps.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Establish stable segment and word time boundaries and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.interpret"
+        ],
+        "id": "transcribe_speech",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Transcribe speech with language and token confidence.",
+        "required_capabilities": [
+          "template.audio-speech.transcribe_speech.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Transcribe speech with language and token confidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.interpret"
+        ],
+        "id": "classify_audio",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Classify requested acoustic events or properties.",
+        "required_capabilities": [
+          "template.audio-speech.classify_audio.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Classify requested acoustic events or properties and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.interpret"
+        ],
+        "id": "extract_audio_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Extract admitted spectral, prosodic, or embedding features.",
+        "required_capabilities": [
+          "template.audio-speech.extract_audio_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Extract admitted spectral, prosodic, or embedding features and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.interpret"
+        ],
+        "id": "reconcile_transcripts",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile model candidates against timestamps and dictionaries.",
+        "required_capabilities": [
+          "template.audio-speech.reconcile_transcripts.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile model candidates against timestamps and dictionaries and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "verify_transcript",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Check alignment, terminology, formatting, and sampled accuracy.",
+        "required_capabilities": [
+          "template.audio-speech.verify_transcript.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Check alignment, terminology, formatting, and sampled accuracy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "apply_redaction",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply policy-bound audio and transcript redaction.",
+        "required_capabilities": [
+          "template.audio-speech.apply_redaction.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply policy-bound audio and transcript redaction and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.deliver"
+        ],
+        "id": "publish_audio_report",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.audio-speech.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish outputs, segments, confidence, and transformation receipts.",
+        "required_capabilities": [
+          "template.audio-speech.publish_audio_report.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish outputs, segments, confidence, and transformation receipts and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Audio and speech processing obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.audio-speech.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.audio-speech.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Decode and identify exact audio content.",
+      "extensions": {},
+      "id": "stage.ingest",
+      "slot_ids": [
+        "load_audio",
+        "decode_audio",
+        "validate_audio"
+      ],
+      "title": "Ingest"
+    },
+    {
+      "description": "Produce analysis-ready signals.",
+      "extensions": {},
+      "id": "stage.prepare",
+      "slot_ids": [
+        "normalize_channels",
+        "resample_audio",
+        "enhance_audio"
+      ],
+      "title": "Prepare"
+    },
+    {
+      "description": "Identify meaningful temporal regions.",
+      "extensions": {},
+      "id": "stage.segment",
+      "slot_ids": [
+        "detect_activity",
+        "segment_speakers",
+        "align_timestamps"
+      ],
+      "title": "Segment"
+    },
+    {
+      "description": "Produce typed content observations.",
+      "extensions": {},
+      "id": "stage.interpret",
+      "slot_ids": [
+        "transcribe_speech",
+        "classify_audio",
+        "extract_audio_features",
+        "reconcile_transcripts"
+      ],
+      "title": "Interpret"
+    },
+    {
+      "description": "Verify and publish temporal evidence.",
+      "extensions": {},
+      "id": "stage.deliver",
+      "slot_ids": [
+        "verify_transcript",
+        "apply_redaction",
+        "publish_audio_report"
+      ],
+      "title": "Deliver"
+    }
+  ],
+  "tags": [
+    "audio",
+    "speech",
+    "transcription"
+  ],
+  "template_model_version": "0.1",
+  "title": "Audio and speech processing",
+  "version": "1.0.0"
+}

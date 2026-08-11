@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "answer correctness",
+    "citation validity",
+    "retrieval recall",
+    "unsupported claim rate",
+    "freshness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.grounded-knowledge-system",
+  "input_contract": "Versioned source corpus, access policy, query classes, and answer schema.",
+  "output_contract": "Typed answers or abstentions with source spans, verification, and retrieval receipts.",
+  "problem": "Ingest governed sources, build replaceable indexes, retrieve evidence, answer, and verify grounding.",
+  "readiness": "template",
+  "stage_families": [
+    "contract",
+    "ingest",
+    "segment",
+    "index",
+    "retrieve",
+    "rerank",
+    "answer",
+    "ground",
+    "verify"
+  ],
+  "tags": [
+    "knowledge",
+    "retrieval",
+    "grounding"
+  ],
+  "template_id": "template.knowledge-retrieval",
+  "title": "Source corpus to grounded answers with citations"
+}

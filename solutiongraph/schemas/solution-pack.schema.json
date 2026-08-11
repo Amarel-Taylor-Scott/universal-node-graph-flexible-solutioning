@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "solution-pack.schema.json",
+  "title": "SolutionGraph portable solution pack manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "solution_pack_model_version", "id", "version", "title", "description",
+    "readiness", "task_contract_digest", "program_digests", "registry_digests",
+    "node_pack_digests", "task_case_digests", "evaluator_digests",
+    "baseline_plan_digests", "benchmark_suite_digests", "artifacts", "source",
+    "license", "extensions"
+  ],
+  "properties": {
+    "solution_pack_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "readiness": {"enum": ["template", "executable-fixture", "credentialed-connector", "production-adapter"]},
+    "task_contract_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "program_digests": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "registry_digests": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "node_pack_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "task_case_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "evaluator_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "baseline_plan_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "benchmark_suite_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "artifacts": {"type": "array", "items": {"$ref": "common.schema.json#/$defs/artifact_reference"}},
+    "source": {"type": "string"},
+    "license": {"type": "string"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"readiness": {"not": {"const": "template"}}}},
+      "then": {
+        "properties": {
+          "task_case_digests": {"minItems": 1},
+          "evaluator_digests": {"minItems": 1}
+        }
+      }
+    }
+  ]
+}

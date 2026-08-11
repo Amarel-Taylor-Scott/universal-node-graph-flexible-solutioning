@@ -1,0 +1,17 @@
+{
+  "description": "Held-out range and slope.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/tabular-regression/holdout-case",
+  "id": "case.benchmark.tabular-regression.holdout-case",
+  "input_digest": "sha256:b73d4889944133abe8d68f7de8b7aca9e5b3d228171db6977461c7aa5914734d",
+  "split": "holdout",
+  "tags": [
+    "fixture.synthetic",
+    "domain.ml",
+    "task.regression"
+  ],
+  "task_model_version": "0.1"
+}

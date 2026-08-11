@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "records.hash"
+  ],
+  "aliases": [
+    "records hash"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.hash",
+      "language": "und",
+      "source_digest": "sha256:7ae8cc88696b2e0d4e2b1b5744b83e0560ede97a801308cb97dc24d8c7662feb",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Content-address an exact ordered record collection. Inputs: records. Outputs: digest."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.hash",
+  "node_spec_digest": "sha256:7ae8cc88696b2e0d4e2b1b5744b83e0560ede97a801308cb97dc24d8c7662feb",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed digest output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "digest"
+    }
+  ],
+  "purposes": [
+    "Content-address an exact ordered record collection."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Content-address an exact ordered record collection.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Hash"
+}

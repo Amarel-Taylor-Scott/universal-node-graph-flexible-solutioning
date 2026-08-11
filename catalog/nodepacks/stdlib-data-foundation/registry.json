@@ -1,0 +1,1563 @@
+{
+  "candidates": [
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.identity.default",
+      "implementation_digest": "sha256:508e22b1fde06b32769b75b2fc7c03ecad6ed5a275d951971d2c05a3dedef88b",
+      "node_id": "stdlib.records.identity",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.text.normalize-unicode.nfc",
+      "implementation_digest": "sha256:ab854bcfed4d80d1489666ff58861d6a9097731d637026a83741bf6df908d34b",
+      "node_id": "stdlib.text.normalize-unicode",
+      "node_version": "1.0.0",
+      "parameters": {
+        "form": "NFC"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.text.normalize-unicode.nfkc",
+      "implementation_digest": "sha256:ab854bcfed4d80d1489666ff58861d6a9097731d637026a83741bf6df908d34b",
+      "node_id": "stdlib.text.normalize-unicode",
+      "node_version": "1.0.0",
+      "parameters": {
+        "form": "NFKC"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.text.normalize-whitespace.lines",
+      "implementation_digest": "sha256:56221605a1ee5c95f90081383d5085c58240db90e080d3cf631b181f4952a5ac",
+      "node_id": "stdlib.text.normalize-whitespace",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mode": "lines"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.text.normalize-whitespace.compact",
+      "implementation_digest": "sha256:56221605a1ee5c95f90081383d5085c58240db90e080d3cf631b181f4952a5ac",
+      "node_id": "stdlib.text.normalize-whitespace",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mode": "compact"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.text.strip-controls.preserve-lines",
+      "implementation_digest": "sha256:53c44ffa6c825f8e735afed302ebc73f1aa26c95498405fa56961780f83890c9",
+      "node_id": "stdlib.text.strip-controls",
+      "node_version": "1.0.0",
+      "parameters": {
+        "preserve_newlines": true
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.text.strip-controls.all",
+      "implementation_digest": "sha256:53c44ffa6c825f8e735afed302ebc73f1aa26c95498405fa56961780f83890c9",
+      "node_id": "stdlib.text.strip-controls",
+      "node_version": "1.0.0",
+      "parameters": {
+        "preserve_newlines": false
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.data.parse-json.strict",
+      "implementation_digest": "sha256:baa9340edb3dceb573e5a5d12e09bbe7faca7291301f63a57b7e042eebe5a5d9",
+      "node_id": "stdlib.data.parse-json",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.data.parse-jsonl.strict",
+      "implementation_digest": "sha256:67617bda62bed8d20f5d05b7759433ebff65dc7fa63d9e60c5a7760233f95af1",
+      "node_id": "stdlib.data.parse-jsonl",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.data.parse-delimited.csv",
+      "implementation_digest": "sha256:d56da34e0e7bf9a4c3d53d81da9a36a95e2f309a0e4b67b73fbfa7177ab47258",
+      "node_id": "stdlib.data.parse-delimited",
+      "node_version": "1.0.0",
+      "parameters": {
+        "delimiter": ","
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.data.parse-delimited.semicolon",
+      "implementation_digest": "sha256:d56da34e0e7bf9a4c3d53d81da9a36a95e2f309a0e4b67b73fbfa7177ab47258",
+      "node_id": "stdlib.data.parse-delimited",
+      "node_version": "1.0.0",
+      "parameters": {
+        "delimiter": ";"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.data.parse-delimited.tsv",
+      "implementation_digest": "sha256:d56da34e0e7bf9a4c3d53d81da9a36a95e2f309a0e4b67b73fbfa7177ab47258",
+      "node_id": "stdlib.data.parse-delimited",
+      "node_version": "1.0.0",
+      "parameters": {
+        "delimiter": "\t"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.normalize-keys.lower",
+      "implementation_digest": "sha256:9fd41150f37b40d02859f519b69a2a18f2118a69837dda831a7ad5cfe21e0d59",
+      "node_id": "stdlib.records.normalize-keys",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mode": "lower"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.normalize-keys.snake",
+      "implementation_digest": "sha256:9fd41150f37b40d02859f519b69a2a18f2118a69837dda831a7ad5cfe21e0d59",
+      "node_id": "stdlib.records.normalize-keys",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mode": "snake"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.trim-strings.shallow",
+      "implementation_digest": "sha256:f8d897910bd5e2d55091a82c6a1f083d0784f90768bb48e2b1117e897e0a3bb4",
+      "node_id": "stdlib.records.trim-strings",
+      "node_version": "1.0.0",
+      "parameters": {
+        "recursive": false
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.trim-strings.recursive",
+      "implementation_digest": "sha256:f8d897910bd5e2d55091a82c6a1f083d0784f90768bb48e2b1117e897e0a3bb4",
+      "node_id": "stdlib.records.trim-strings",
+      "node_version": "1.0.0",
+      "parameters": {
+        "recursive": true
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.normalize-missing.common",
+      "implementation_digest": "sha256:988f9347134373e4487e053934a356728006b144a6290e644c1c80fd170076ab",
+      "node_id": "stdlib.records.normalize-missing",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.casefold-fields.email",
+      "implementation_digest": "sha256:faebeff2d75173558ad1c51e8723f8dc04c5eedd7498f026ed417d33987ea16e",
+      "node_id": "stdlib.records.casefold-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.casefold-fields.company",
+      "implementation_digest": "sha256:faebeff2d75173558ad1c51e8723f8dc04c5eedd7498f026ed417d33987ea16e",
+      "node_id": "stdlib.records.casefold-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "company"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.casefold-fields.company-email",
+      "implementation_digest": "sha256:faebeff2d75173558ad1c51e8723f8dc04c5eedd7498f026ed417d33987ea16e",
+      "node_id": "stdlib.records.casefold-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "company",
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.project-fields.entity-core",
+      "implementation_digest": "sha256:9f3c367aef7d11ae738c8cae8f0f151a3a68ad261ec354ed9af1c9f8add13920",
+      "node_id": "stdlib.records.project-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "id",
+          "company",
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.require-fields.email",
+      "implementation_digest": "sha256:c0677e873b833047ab92cbeff40e52d2ce0eda0e2dbfb3d7b57936c750f3adcc",
+      "node_id": "stdlib.records.require-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.require-fields.company-email",
+      "implementation_digest": "sha256:c0677e873b833047ab92cbeff40e52d2ce0eda0e2dbfb3d7b57936c750f3adcc",
+      "node_id": "stdlib.records.require-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "company",
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.filter-complete.company-email",
+      "implementation_digest": "sha256:a452ff84f72fdd7af46c9982ca89fa0e6f5d51b183847cd40c63a0358ed99b47",
+      "node_id": "stdlib.records.filter-complete",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "company",
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.deduplicate.email-exact",
+      "implementation_digest": "sha256:4631be0b42dbcdc094914b10ed299589d8b93443924ce8ab90ddfb9fdf1ed1c4",
+      "node_id": "stdlib.records.deduplicate",
+      "node_version": "1.0.0",
+      "parameters": {
+        "canonical": false,
+        "key_fields": [
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.deduplicate.email-canonical",
+      "implementation_digest": "sha256:4631be0b42dbcdc094914b10ed299589d8b93443924ce8ab90ddfb9fdf1ed1c4",
+      "node_id": "stdlib.records.deduplicate",
+      "node_version": "1.0.0",
+      "parameters": {
+        "canonical": true,
+        "key_fields": [
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.deduplicate.company-email-canonical",
+      "implementation_digest": "sha256:4631be0b42dbcdc094914b10ed299589d8b93443924ce8ab90ddfb9fdf1ed1c4",
+      "node_id": "stdlib.records.deduplicate",
+      "node_version": "1.0.0",
+      "parameters": {
+        "canonical": true,
+        "key_fields": [
+          "company",
+          "email"
+        ]
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.sort.company-ascending",
+      "implementation_digest": "sha256:dc484e84790d2f18949e9c3441c28adfe4489112947da5f6457840c0c1c9ffc0",
+      "node_id": "stdlib.records.sort",
+      "node_version": "1.0.0",
+      "parameters": {
+        "fields": [
+          "company"
+        ],
+        "reverse": false
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.profile.basic",
+      "implementation_digest": "sha256:f9689d7d5f81acd727cfd6599feef8f2f7a71fad3b6d3d2b7267d8fcda6b976f",
+      "node_id": "stdlib.records.profile",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.hash.sha256",
+      "implementation_digest": "sha256:205bc95889316c9a8b887615c7b937070d990b74734c07f3277afa714ae8e9bc",
+      "node_id": "stdlib.records.hash",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.emit-profile.with-digest",
+      "implementation_digest": "sha256:2d221520451eaeb41cceaebb2659bd41c82b7cd4443d7add6ef10ee63bcc45ad",
+      "node_id": "stdlib.records.emit-profile",
+      "node_version": "1.0.0",
+      "parameters": {
+        "include_digest": true
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.stdlib.records.emit-profile.without-digest",
+      "implementation_digest": "sha256:2d221520451eaeb41cceaebb2659bd41c82b7cd4443d7add6ef10ee63bcc45ad",
+      "node_id": "stdlib.records.emit-profile",
+      "node_version": "1.0.0",
+      "parameters": {
+        "include_digest": false
+      }
+    }
+  ],
+  "id": "registry.solutiongraph-stdlib",
+  "model_version": "0.2",
+  "nodes": [
+    {
+      "capabilities": [
+        "control.identity",
+        "records.normalize-keys",
+        "records.trim-strings",
+        "records.normalize-missing",
+        "records.casefold-fields",
+        "records.deduplicate",
+        "records.require-fields",
+        "records.filter-complete",
+        "records.sort"
+      ],
+      "description": "Explicit no-op candidate that copies records and can occupy optional cleanup steps.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:identity_records",
+      "failure_modes": [],
+      "id": "stdlib.records.identity",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:508e22b1fde06b32769b75b2fc7c03ecad6ed5a275d951971d2c05a3dedef88b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "text.normalize-unicode"
+      ],
+      "description": "Normalize text using an explicitly bound Unicode normalization form.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:normalize_unicode",
+      "failure_modes": [],
+      "id": "stdlib.text.normalize-unicode",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:ab854bcfed4d80d1489666ff58861d6a9097731d637026a83741bf6df908d34b",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "NFC",
+            "NFKC"
+          ],
+          "default": "NFKC",
+          "description": "",
+          "name": "form",
+          "required": false,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "text.normalize-whitespace"
+      ],
+      "description": "Normalize whitespace while preserving lines or compacting all whitespace.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:normalize_whitespace",
+      "failure_modes": [],
+      "id": "stdlib.text.normalize-whitespace",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:56221605a1ee5c95f90081383d5085c58240db90e080d3cf631b181f4952a5ac",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "lines",
+            "compact"
+          ],
+          "default": "lines",
+          "description": "",
+          "name": "mode",
+          "required": false,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "text.strip-controls"
+      ],
+      "description": "Remove Unicode control characters under an explicit newline policy.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:strip_control_characters",
+      "failure_modes": [],
+      "id": "stdlib.text.strip-controls",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:53c44ffa6c825f8e735afed302ebc73f1aa26c95498405fa56961780f83890c9",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            true,
+            false
+          ],
+          "default": true,
+          "description": "",
+          "name": "preserve_newlines",
+          "required": false,
+          "value_type": "boolean"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.parse-json"
+      ],
+      "description": "Parse strict JSON without repair.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:parse_json_value",
+      "failure_modes": [
+        {
+          "code": "data.invalid-json",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "stdlib.data.parse-json",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:baa9340edb3dceb573e5a5d12e09bbe7faca7291301f63a57b7e042eebe5a5d9",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.json-text",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "value",
+          "type": {
+            "id": "stdlib.json-value",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.parse-records"
+      ],
+      "description": "Parse newline-delimited JSON objects.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:parse_json_lines",
+      "failure_modes": [
+        {
+          "code": "data.invalid-jsonl",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "stdlib.data.parse-jsonl",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:67617bda62bed8d20f5d05b7759433ebff65dc7fa63d9e60c5a7760233f95af1",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "data.parse-records"
+      ],
+      "description": "Parse comma-, semicolon-, or tab-delimited records.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:parse_delimited_records",
+      "failure_modes": [
+        {
+          "code": "data.invalid-delimited",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "stdlib.data.parse-delimited",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:d56da34e0e7bf9a4c3d53d81da9a36a95e2f309a0e4b67b73fbfa7177ab47258",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "text",
+          "type": {
+            "id": "stdlib.text",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            ",",
+            ";",
+            "\t"
+          ],
+          "default": ",",
+          "description": "",
+          "name": "delimiter",
+          "required": false,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.normalize-keys"
+      ],
+      "description": "Normalize top-level record keys with collision detection.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:normalize_record_keys",
+      "failure_modes": [
+        {
+          "code": "records.key-collision",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "stdlib.records.normalize-keys",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:9fd41150f37b40d02859f519b69a2a18f2118a69837dda831a7ad5cfe21e0d59",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "lower",
+            "snake"
+          ],
+          "default": "snake",
+          "description": "",
+          "name": "mode",
+          "required": false,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.trim-strings"
+      ],
+      "description": "Trim string fields with a shallow or recursive policy.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:trim_record_strings",
+      "failure_modes": [],
+      "id": "stdlib.records.trim-strings",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:f8d897910bd5e2d55091a82c6a1f083d0784f90768bb48e2b1117e897e0a3bb4",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            false,
+            true
+          ],
+          "default": false,
+          "description": "",
+          "name": "recursive",
+          "required": false,
+          "value_type": "boolean"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.normalize-missing"
+      ],
+      "description": "Map an explicitly configured set of string sentinels to null.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:normalize_missing_values",
+      "failure_modes": [],
+      "id": "stdlib.records.normalize-missing",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:988f9347134373e4487e053934a356728006b144a6290e644c1c80fd170076ab",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": [
+            "",
+            "na",
+            "n/a",
+            "null",
+            "none"
+          ],
+          "description": "",
+          "name": "sentinels",
+          "required": false,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.casefold-fields"
+      ],
+      "description": "Case-fold only explicitly selected fields.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:casefold_record_fields",
+      "failure_modes": [],
+      "id": "stdlib.records.casefold-fields",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:faebeff2d75173558ad1c51e8723f8dc04c5eedd7498f026ed417d33987ea16e",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.project-fields"
+      ],
+      "description": "Project records to an explicitly ordered field set.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:project_record_fields",
+      "failure_modes": [],
+      "id": "stdlib.records.project-fields",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:9f3c367aef7d11ae738c8cae8f0f151a3a68ad261ec354ed9af1c9f8add13920",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.require-fields"
+      ],
+      "description": "Reject records missing configured nonempty fields.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:require_record_fields",
+      "failure_modes": [
+        {
+          "code": "records.required-field-missing",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "stdlib.records.require-fields",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c0677e873b833047ab92cbeff40e52d2ce0eda0e2dbfb3d7b57936c750f3adcc",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.filter-complete"
+      ],
+      "description": "Keep records containing every configured nonempty field.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:filter_complete_records",
+      "failure_modes": [],
+      "id": "stdlib.records.filter-complete",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:a452ff84f72fdd7af46c9982ca89fa0e6f5d51b183847cd40c63a0358ed99b47",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "fields",
+          "required": true,
+          "value_type": "array[string]"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.deduplicate"
+      ],
+      "description": "Deduplicate by exact or canonicalized configured keys.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:deduplicate_records",
+      "failure_modes": [],
+      "id": "stdlib.records.deduplicate",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:4631be0b42dbcdc094914b10ed299589d8b93443924ce8ab90ddfb9fdf1ed1c4",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "key_fields",
+          "required": true,
+          "value_type": "array[string]"
+        },
+        {
+          "choices": [
+            false,
+            true
+          ],
+          "default": false,
+          "description": "",
+          "name": "canonical",
+          "required": false,
+          "value_type": "boolean"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.sort"
+      ],
+      "description": "Sort records deterministically by configured fields.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:sort_records",
+      "failure_modes": [],
+      "id": "stdlib.records.sort",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:dc484e84790d2f18949e9c3441c28adfe4489112947da5f6457840c0c1c9ffc0",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [],
+          "default": null,
+          "description": "",
+          "name": "fields",
+          "required": true,
+          "value_type": "array[string]"
+        },
+        {
+          "choices": [
+            false,
+            true
+          ],
+          "default": false,
+          "description": "",
+          "name": "reverse",
+          "required": false,
+          "value_type": "boolean"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.profile"
+      ],
+      "description": "Measure row count, field union, and missingness deterministically.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:profile_records",
+      "failure_modes": [],
+      "id": "stdlib.records.profile",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:f9689d7d5f81acd727cfd6599feef8f2f7a71fad3b6d3d2b7267d8fcda6b976f",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "profile",
+          "type": {
+            "id": "stdlib.records-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.hash"
+      ],
+      "description": "Content-address an exact ordered record collection.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:hash_records",
+      "failure_modes": [],
+      "id": "stdlib.records.hash",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:205bc95889316c9a8b887615c7b937070d990b74734c07f3277afa714ae8e9bc",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "digest",
+          "type": {
+            "id": "stdlib.content-digest",
+            "media_type": "text/plain",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "records.emit-profile"
+      ],
+      "description": "Emit cleaned records and a quality profile as separately typed outputs.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.stdlib_nodes:emit_records_with_profile",
+      "failure_modes": [],
+      "id": "stdlib.records.emit-profile",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:2d221520451eaeb41cceaebb2659bd41c82b7cd4443d7add6ef10ee63bcc45ad",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "stdlib.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "profile",
+          "type": {
+            "id": "stdlib.records-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            true,
+            false
+          ],
+          "default": true,
+          "description": "",
+          "name": "include_digest",
+          "required": false,
+          "value_type": "boolean"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/stdlib_nodes.py",
+      "verifier": "",
+      "version": "1.0.0"
+    }
+  ],
+  "version": "1.0.0"
+}

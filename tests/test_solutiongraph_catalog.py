@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
+from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.catalog import catalog_documents, write_catalog
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
@@ -17,6 +18,10 @@ from solutiongraph.reference_nodes import (
     identity_json,
     parse_json,
     require_keys,
+)
+from solutiongraph.stdlib_pack import (
+    STANDARD_LIBRARY_DESCRIPTORS,
+    STANDARD_LIBRARY_NODE_SPECS,
 )
 from solutiongraph.template_library import REFERENCE_TEMPLATES
 
@@ -42,8 +47,8 @@ def test_reference_nodes_execute_and_all_contracts_and_descriptors_validate():
 
 def test_reference_templates_cover_unrelated_domains_and_atomic_obligations():
     assert REFERENCE_TEMPLATES.validate() == []
-    assert len(REFERENCE_TEMPLATES.templates) == 19
-    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 339
+    assert len(REFERENCE_TEMPLATES.templates) == 31
+    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 544
     assert {
         "template.kaggle-tabular",
         "template.data-quality",
@@ -51,6 +56,9 @@ def test_reference_templates_cover_unrelated_domains_and_atomic_obligations():
         "template.login-system",
         "template.deployment-release",
         "template.shipping-notifications",
+        "template.knowledge-retrieval",
+        "template.database-migration",
+        "template.observability-sre",
     }.issubset({template.id for template in REFERENCE_TEMPLATES.templates})
 
 
@@ -58,31 +66,45 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     first = catalog_documents()
     second = catalog_documents()
     assert first == second
-    assert len(first) == (
-        3
-        + 5
-        + 5
-        + 3
-        + len(EXAMPLE_NODES)
-        + 3
-        + len(EXTENDED_NODES)
-        + 19
+    expected = (
+        (3 + 5 + 5)
+        + (3 + len(EXAMPLE_NODES))
+        + (3 + len(EXTENDED_NODES))
+        + (
+            3
+            + len(STANDARD_LIBRARY_NODE_SPECS)
+            + len(STANDARD_LIBRARY_DESCRIPTORS)
+        )
+        + len(REFERENCE_TEMPLATES.templates)
         + len(UNIVERSAL_DAG_ARENA.tasks)
+        + 1
+        + sum(
+            3 + len(bundle.definition.task_cases) + len(bundle.baseline_plans)
+            for bundle in REFERENCE_BENCHMARKS
+        )
         + 1
         + 1
     )
+    assert len(first) == expected
     index = first["index.json"]
-    assert len(index["templates"]) == 19
+    assert len(index["templates"]) == 31
     assert index["arena"] == {
         "path": "arena/index.json",
-        "task_count": 24,
+        "task_count": 36,
         "executable_fixture_count": 20,
     }
     assert [item["node_count"] for item in index["node_packs"]] == [
         5,
+        len(STANDARD_LIBRARY_NODE_SPECS),
         len(EXAMPLE_NODES),
         len(EXTENDED_NODES),
     ]
+    assert index["benchmarks"] == {
+        "path": "benchmarks/index.json",
+        "benchmark_count": 6,
+        "task_case_count": 24,
+        "solution_pack_count": 6,
+    }
     assert index["node_packs"][0]["embedding_record_count"] == 0
     capabilities = first["nodepacks/reference-core/registry-capabilities.json"]
     assert [mode["id"] for mode in capabilities["query_modes"]] == [
@@ -121,6 +143,7 @@ def test_catalogue_explorer_is_self_contained_and_exposes_every_reference_templa
     assert all(template.id in html for template in REFERENCE_TEMPLATES.templates)
     assert all(node.id in html for node in REFERENCE_NODE_SPECS)
     assert all(node.id in html for node in EXAMPLE_NODES)
+    assert all(node.id in html for node in STANDARD_LIBRARY_NODE_SPECS)
     assert all(node.description in html for node in REFERENCE_NODE_SPECS)
     assert all(
         slot.id in html and slot.purpose in html

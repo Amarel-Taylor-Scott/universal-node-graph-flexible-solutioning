@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "feasibility",
+    "objective value",
+    "optimality gap",
+    "runtime",
+    "stability"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.constraint-scheduling",
+  "input_contract": "Decision variables, hard constraints, objectives, instance data, budget, and acceptable optimality gap.",
+  "output_contract": "Feasible schedule, recomputed objectives, bound status, explanations, and execution monitor.",
+  "problem": "Formalize, transform, solve, refine, independently verify, and operationalize scheduling decisions.",
+  "readiness": "template",
+  "stage_families": [
+    "formalize",
+    "validate",
+    "presolve",
+    "decompose",
+    "solve",
+    "refine",
+    "verify",
+    "publish",
+    "monitor"
+  ],
+  "tags": [
+    "scheduling",
+    "constraints",
+    "optimization"
+  ],
+  "template_id": "template.optimization-scheduling",
+  "title": "Constraints and objectives to a verified schedule"
+}

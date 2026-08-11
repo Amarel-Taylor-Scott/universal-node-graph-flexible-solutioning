@@ -18,6 +18,10 @@ def _viewer_data() -> tuple[list[dict[str, object]], list[dict[str, object]]]:
         REFERENCE_DESCRIPTORS,
         REFERENCE_NODE_SPECS,
     )
+    from solutiongraph.stdlib_pack import (
+        STANDARD_LIBRARY_DESCRIPTORS,
+        STANDARD_LIBRARY_NODE_SPECS,
+    )
     from solutiongraph.template_library import REFERENCE_TEMPLATES
 
     templates = [
@@ -58,6 +62,18 @@ def _viewer_data() -> tuple[list[dict[str, object]], list[dict[str, object]]]:
             "summary": node.description,
         }
         for node in EXAMPLE_NODES
+    ] + [
+        {
+            "id": node.id,
+            "capability": node.capabilities[0],
+            "effects": list(node.effects),
+            "summary": descriptor.summary,
+        }
+        for node, descriptor in zip(
+            STANDARD_LIBRARY_NODE_SPECS,
+            STANDARD_LIBRARY_DESCRIPTORS,
+            strict=True,
+        )
     ]
     return templates, nodes
 

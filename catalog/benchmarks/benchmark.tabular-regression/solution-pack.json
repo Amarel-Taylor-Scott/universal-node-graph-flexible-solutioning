@@ -1,0 +1,40 @@
+{
+  "artifacts": [],
+  "baseline_plan_digests": [
+    "sha256:93b21f2267d7ae0c7b455662c7b27fa2ed226202c381971c07d46c32830f6cc4",
+    "sha256:9055752f3f497e83abe0742bf2f04096cd102cfd47dd08882eeedc200f11d180"
+  ],
+  "benchmark_suite_digests": [
+    "sha256:4bf402d76a7287217b635d72dac6b435ce9ae9927afef4d7a89c38de0608884a"
+  ],
+  "description": "Content-addressed task, program, registry, node pack, cases, oracle, fixed baselines, and benchmark allocation for this executable fixture.",
+  "evaluator_digests": [
+    "sha256:07652ad736e97e7a27280d5385dee9f6ee3c5497f1b7acf2afa514d7d148cd33"
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "id": "solution-pack.tabular-regression",
+  "license": "MIT",
+  "node_pack_digests": [
+    "sha256:c44ff58b53954478a057c15bcb0aad4c15a491f4ca87263e400cf9210f702278"
+  ],
+  "program_digests": [
+    "sha256:ea43895821a852419c2b5ead02aee7fc852310659c2e6c7e24001b08f0a2ee4f"
+  ],
+  "readiness": "executable-fixture",
+  "registry_digests": [
+    "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4"
+  ],
+  "solution_pack_model_version": "0.1",
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:763a773b35b02a36264850495d6ca71b90c907afa8952ef5b1416acb268d0eda",
+    "sha256:baa279001dbd8560011f6e9ce07acbc2a707e71a3fac7dbe5f17fd09fa7186c1",
+    "sha256:e2524bfb0e49861ebec5899702195e8b61144bd9b60ff35739af3cad081dfc09",
+    "sha256:baac0114dcbde65ee9d990384144b4d9f7e0b09e93653c1166aed08b9514c041"
+  ],
+  "task_contract_digest": "sha256:2fe6c7b95800b75c70f1f37e2abfbb25e8b551142508e9bd5127c54b925fc493",
+  "title": "Data science regression solution pack",
+  "version": "1.0.0"
+}

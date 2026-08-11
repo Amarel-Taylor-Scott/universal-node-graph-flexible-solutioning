@@ -1,0 +1,58 @@
+{
+  "capabilities": [
+    "data.parse-records"
+  ],
+  "description": "Parse newline-delimited JSON objects.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:parse_json_lines",
+  "failure_modes": [
+    {
+      "code": "data.invalid-jsonl",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "stdlib.data.parse-jsonl",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:67617bda62bed8d20f5d05b7759433ebff65dc7fa63d9e60c5a7760233f95af1",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

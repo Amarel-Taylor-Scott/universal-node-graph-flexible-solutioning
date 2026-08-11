@@ -1,0 +1,17 @@
+{
+  "description": "Held-out symbol and phone-format variation.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/data-cleaning/holdout-case",
+  "id": "case.benchmark.data-cleaning.holdout-case",
+  "input_digest": "sha256:3f7f70316626ea21e8868893fc55cfb1a260777089382cafbd2e5abfe3c709b6",
+  "split": "holdout",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.cleaning"
+  ],
+  "task_model_version": "0.1"
+}

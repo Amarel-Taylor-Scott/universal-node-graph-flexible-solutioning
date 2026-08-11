@@ -1,0 +1,76 @@
+{
+  "actions": [
+    "control.identity",
+    "records.normalize-keys",
+    "records.trim-strings",
+    "records.normalize-missing",
+    "records.casefold-fields",
+    "records.deduplicate",
+    "records.require-fields",
+    "records.filter-complete",
+    "records.sort"
+  ],
+  "aliases": [
+    "control identity",
+    "records normalize-keys",
+    "records trim-strings",
+    "records normalize-missing",
+    "records casefold-fields",
+    "records deduplicate",
+    "records require-fields",
+    "records filter-complete",
+    "records sort"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.identity",
+      "language": "und",
+      "source_digest": "sha256:6813de2f964868a1aea99aa323cd52870c11a57e8c654d2be15b3362b423c1e0",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Explicit no-op candidate that copies records and can occupy optional cleanup steps. Inputs: records. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.identity",
+  "node_spec_digest": "sha256:6813de2f964868a1aea99aa323cd52870c11a57e8c654d2be15b3362b423c1e0",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Explicit no-op candidate that copies records and can occupy optional cleanup steps."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Explicit no-op candidate that copies records and can occupy optional cleanup steps.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Identity"
+}

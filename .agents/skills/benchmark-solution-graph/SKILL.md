@@ -5,17 +5,21 @@ description: Design, run, audit, or report a Universal Node Graph route experime
 
 # Benchmark a solution graph
 
-Read `../model-solution-graph/references/experiments.md` and
+Read `../../../BENCHMARK_PROTOCOL.md`,
+`../../../TASK_AND_SOLUTION_PACK_PROTOCOL.md`,
+`../model-solution-graph/references/experiments.md`, and
 `../../../AGENT_PLAYBOOK.md` before designing the experiment.
 
 ## Establish the experiment
 
-1. Freeze the task contract, independent oracle, program digest, registry
-   snapshot, node digests, environment, dataset/case identities, and budget.
+1. Freeze a validated `TaskContract`, independently identified `TaskOracle`,
+   exact `TaskCaseSpec` splits, program digest, registry snapshot, node digests,
+   environment, and budget.
 2. Compile the admitted space before proposing routes. Invalid configurations
    are compiler rejections, not poor-scoring trials.
-3. Select a fixed baseline and representative development cases. Reserve
-   holdout cases that cannot update the search policy.
+3. Select fixed control and fixed candidate arms plus bounded solver arms.
+   Give every arm identical cases, seeds, repetitions, oracle, and runtime
+   class. Reserve holdouts that cannot update the search policy.
 4. Record quality, acceptance, cost, latency, reliability, policy, and resource
    objectives without hiding tradeoffs in an unexplained scalar.
 
@@ -40,3 +44,11 @@ dependency and failure-mode diversity as well as rank.
 Call learned candidate effects observational unless randomized assignment or a
 valid identification strategy supports a causal claim. Never call
 self-optimization proven from synthetic fixtures or one benchmark task.
+Treat `completed-no-accepted-route` as a valid outcome. Report per-arm
+acceptance separately from report protocol completion. Claim optimality only
+when exhaustive evidence covers the complete declared admitted space.
+
+Before publication, validate a `SolutionPackManifest` whose closure exactly
+matches the task, program, registry, node pack, cases, evaluator, baselines, and
+benchmark suite used by the run. Publish JSON as the evidence authority and
+HTML only as its human-readable projection.

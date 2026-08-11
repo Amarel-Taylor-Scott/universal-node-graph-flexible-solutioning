@@ -1,0 +1,1084 @@
+{
+  "description": "A source-governance, indexing, retrieval, grounding, and feedback scaffold.",
+  "domains": [
+    "ai.knowledge-systems",
+    "data-engineering.documents"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.knowledge-retrieval",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_corpus",
+        "target_port": "state",
+        "target_slot": "define_queries"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_queries",
+        "target_port": "state",
+        "target_slot": "define_grounding_oracle"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_grounding_oracle",
+        "target_port": "state",
+        "target_slot": "acquire_sources"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "acquire_sources",
+        "target_port": "state",
+        "target_slot": "decode_sources"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "decode_sources",
+        "target_port": "state",
+        "target_slot": "segment_units"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "segment_units",
+        "target_port": "state",
+        "target_slot": "enrich_units"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "enrich_units",
+        "target_port": "state",
+        "target_slot": "select_representations"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_representations",
+        "target_port": "state",
+        "target_slot": "build_indexes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_indexes",
+        "target_port": "state",
+        "target_slot": "verify_index"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_index",
+        "target_port": "state",
+        "target_slot": "rewrite_query"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "rewrite_query",
+        "target_port": "state",
+        "target_slot": "retrieve_candidates"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "retrieve_candidates",
+        "target_port": "state",
+        "target_slot": "rerank_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "rerank_evidence",
+        "target_port": "state",
+        "target_slot": "assemble_context"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "assemble_context",
+        "target_port": "state",
+        "target_slot": "produce_answer"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "produce_answer",
+        "target_port": "state",
+        "target_slot": "ground_claims"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ground_claims",
+        "target_port": "state",
+        "target_slot": "verify_answer"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_answer",
+        "target_port": "state",
+        "target_slot": "record_feedback"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.knowledge-retrieval",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_corpus",
+        "type": {
+          "id": "template.knowledge-retrieval.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "record_feedback",
+        "type": {
+          "id": "template.knowledge-retrieval.state-18",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_corpus",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define admitted sources, ownership, freshness, and access policy.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.define_corpus.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define admitted sources, ownership, freshness, and access policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_queries",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define query classes, answer schema, and abstention behavior.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.define_queries.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define query classes, answer schema, and abstention behavior and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_grounding_oracle",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define citation, coverage, and unsupported-claim checks.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.define_grounding_oracle.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define citation, coverage, and unsupported-claim checks and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "acquire_sources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Acquire immutable source snapshots with provenance.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.acquire_sources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Acquire immutable source snapshots with provenance and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "decode_sources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Decode text, layout, metadata, and structured regions.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.decode_sources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Decode text, layout, metadata, and structured regions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "segment_units",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Segment semantically coherent units with stable source spans.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.segment_units.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Segment semantically coherent units with stable source spans and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "enrich_units",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Add authorized metadata, entities, and topic descriptors.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.enrich_units.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Add authorized metadata, entities, and topic descriptors and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.index"
+        ],
+        "id": "select_representations",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select lexical, dense, sparse, graph, or hybrid representations.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.select_representations.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select lexical, dense, sparse, graph, or hybrid representations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.index"
+        ],
+        "id": "build_indexes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build content-addressed indexes under a declared version.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.build_indexes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build content-addressed indexes under a declared version and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.index"
+        ],
+        "id": "verify_index",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify coverage, freshness, access filtering, and retrievability.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.verify_index.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify coverage, freshness, access filtering, and retrievability and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.retrieve"
+        ],
+        "id": "rewrite_query",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize or decompose the query without changing user intent.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.rewrite_query.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize or decompose the query without changing user intent and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.retrieve"
+        ],
+        "id": "retrieve_candidates",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retrieve candidates through admitted index strategies.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.retrieve_candidates.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retrieve candidates through admitted index strategies and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.retrieve"
+        ],
+        "id": "rerank_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Rerank for relevance, diversity, permissions, and source quality.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.rerank_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Rerank for relevance, diversity, permissions, and source quality and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.retrieve"
+        ],
+        "id": "assemble_context",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Assemble a token- and evidence-bounded context.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.assemble_context.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Assemble a token- and evidence-bounded context and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.answer"
+        ],
+        "id": "produce_answer",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Produce the requested typed answer or abstention.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.produce_answer.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Produce the requested typed answer or abstention and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.answer"
+        ],
+        "id": "ground_claims",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Bind claims to exact source spans and evidence digests.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.ground_claims.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Bind claims to exact source spans and evidence digests and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.answer"
+        ],
+        "id": "verify_answer",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Check entailment, completeness, policy, and citation validity.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.verify_answer.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Check entailment, completeness, policy, and citation validity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.answer"
+        ],
+        "id": "record_feedback",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.knowledge-retrieval.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Record queries, outcomes, corrections, and index revision evidence.",
+        "required_capabilities": [
+          "template.knowledge-retrieval.record_feedback.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Record queries, outcomes, corrections, and index revision evidence and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Grounded knowledge ingestion and retrieval obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.knowledge-retrieval.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.knowledge-retrieval.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Bound the corpus and answer contract.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_corpus",
+        "define_queries",
+        "define_grounding_oracle"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Create source-grounded units.",
+      "extensions": {},
+      "id": "stage.ingest",
+      "slot_ids": [
+        "acquire_sources",
+        "decode_sources",
+        "segment_units",
+        "enrich_units"
+      ],
+      "title": "Ingest"
+    },
+    {
+      "description": "Build independently replaceable indexes.",
+      "extensions": {},
+      "id": "stage.index",
+      "slot_ids": [
+        "select_representations",
+        "build_indexes",
+        "verify_index"
+      ],
+      "title": "Index"
+    },
+    {
+      "description": "Produce a bounded evidence set.",
+      "extensions": {},
+      "id": "stage.retrieve",
+      "slot_ids": [
+        "rewrite_query",
+        "retrieve_candidates",
+        "rerank_evidence",
+        "assemble_context"
+      ],
+      "title": "Retrieve"
+    },
+    {
+      "description": "Generate and independently verify grounded output.",
+      "extensions": {},
+      "id": "stage.answer",
+      "slot_ids": [
+        "produce_answer",
+        "ground_claims",
+        "verify_answer",
+        "record_feedback"
+      ],
+      "title": "Answer"
+    }
+  ],
+  "tags": [
+    "retrieval",
+    "grounding",
+    "rag"
+  ],
+  "template_model_version": "0.1",
+  "title": "Grounded knowledge ingestion and retrieval",
+  "version": "1.0.0"
+}

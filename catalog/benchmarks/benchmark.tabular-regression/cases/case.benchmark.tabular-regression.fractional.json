@@ -1,0 +1,17 @@
+{
+  "description": "Fractional slope.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/tabular-regression/fractional",
+  "id": "case.benchmark.tabular-regression.fractional",
+  "input_digest": "sha256:53b467771d88e3f9f9ae209f60c2608c556994777d63d561b9af5cdde3f961c1",
+  "split": "validation",
+  "tags": [
+    "fixture.synthetic",
+    "domain.ml",
+    "task.regression"
+  ],
+  "task_model_version": "0.1"
+}

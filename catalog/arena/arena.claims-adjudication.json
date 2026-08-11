@@ -1,0 +1,34 @@
+{
+  "acceptance_signals": [
+    "decision accuracy",
+    "benefit reconciliation",
+    "evidence coverage",
+    "review calibration",
+    "cycle time"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.claims-adjudication",
+  "input_contract": "Authenticated claim package, policy version, coverage context, and decision authority.",
+  "output_contract": "Approved settlement or explained denial with evidence, review state, and audit receipt.",
+  "problem": "Extract claim facts, retrieve policy, corroborate evidence, adjudicate, review exceptions, and settle.",
+  "readiness": "template",
+  "stage_families": [
+    "intake",
+    "extract",
+    "retrieve policy",
+    "corroborate",
+    "adjudicate",
+    "review",
+    "settle",
+    "audit"
+  ],
+  "tags": [
+    "claims",
+    "adjudication",
+    "documents"
+  ],
+  "template_id": "template.claims-processing",
+  "title": "Claim package to evidence-grounded adjudication"
+}

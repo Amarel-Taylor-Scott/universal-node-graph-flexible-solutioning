@@ -1,0 +1,978 @@
+{
+  "description": "A coordinate, topology, enrichment, analysis, and map-product scaffold.",
+  "domains": [
+    "data.geospatial",
+    "analytics.spatial"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.geospatial-analytics",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_spatial_sources",
+        "target_port": "state",
+        "target_slot": "detect_crs"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_crs",
+        "target_port": "state",
+        "target_slot": "validate_geometry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_geometry",
+        "target_port": "state",
+        "target_slot": "repair_geometry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "repair_geometry",
+        "target_port": "state",
+        "target_slot": "transform_crs"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "transform_crs",
+        "target_port": "state",
+        "target_slot": "normalize_resolution"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_resolution",
+        "target_port": "state",
+        "target_slot": "index_space"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "index_space",
+        "target_port": "state",
+        "target_slot": "geocode_entities"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "geocode_entities",
+        "target_port": "state",
+        "target_slot": "spatial_join"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "spatial_join",
+        "target_port": "state",
+        "target_slot": "reconcile_boundaries"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_boundaries",
+        "target_port": "state",
+        "target_slot": "derive_spatial_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "derive_spatial_features",
+        "target_port": "state",
+        "target_slot": "run_spatial_model"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_spatial_model",
+        "target_port": "state",
+        "target_slot": "quantify_uncertainty"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "quantify_uncertainty",
+        "target_port": "state",
+        "target_slot": "verify_spatial_output"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_spatial_output",
+        "target_port": "state",
+        "target_slot": "render_map_product"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "render_map_product",
+        "target_port": "state",
+        "target_slot": "publish_spatial_data"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.geospatial-analytics",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_spatial_sources",
+        "type": {
+          "id": "template.geospatial-analytics.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_spatial_data",
+        "type": {
+          "id": "template.geospatial-analytics.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "load_spatial_sources",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load geometry, raster, tabular, and temporal sources by digest.",
+        "required_capabilities": [
+          "template.geospatial-analytics.load_spatial_sources.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load geometry, raster, tabular, and temporal sources by digest and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "detect_crs",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect or require coordinate reference systems and axis order.",
+        "required_capabilities": [
+          "template.geospatial-analytics.detect_crs.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect or require coordinate reference systems and axis order and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "validate_geometry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate geometry encoding, bounds, and dimensionality.",
+        "required_capabilities": [
+          "template.geospatial-analytics.validate_geometry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate geometry encoding, bounds, and dimensionality and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "repair_geometry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Repair or quarantine invalid geometry under a declared policy.",
+        "required_capabilities": [
+          "template.geospatial-analytics.repair_geometry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Repair or quarantine invalid geometry under a declared policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "transform_crs",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Transform coordinates with an exact operation and datum provenance.",
+        "required_capabilities": [
+          "template.geospatial-analytics.transform_crs.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Transform coordinates with an exact operation and datum provenance and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "normalize_resolution",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize raster resolution, extent, and nodata semantics.",
+        "required_capabilities": [
+          "template.geospatial-analytics.normalize_resolution.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize raster resolution, extent, and nodata semantics and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.normalize"
+        ],
+        "id": "index_space",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build admitted spatial indexes or tiling structures.",
+        "required_capabilities": [
+          "template.geospatial-analytics.index_space.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build admitted spatial indexes or tiling structures and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.integrate"
+        ],
+        "id": "geocode_entities",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve entities to locations with candidates and confidence.",
+        "required_capabilities": [
+          "template.geospatial-analytics.geocode_entities.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve entities to locations with candidates and confidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.integrate"
+        ],
+        "id": "spatial_join",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Join by an explicit predicate, tolerance, and multiplicity contract.",
+        "required_capabilities": [
+          "template.geospatial-analytics.spatial_join.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Join by an explicit predicate, tolerance, and multiplicity contract and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.integrate"
+        ],
+        "id": "reconcile_boundaries",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile administrative or temporal boundary versions.",
+        "required_capabilities": [
+          "template.geospatial-analytics.reconcile_boundaries.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile administrative or temporal boundary versions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "derive_spatial_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Derive distance, density, adjacency, accessibility, and terrain features.",
+        "required_capabilities": [
+          "template.geospatial-analytics.derive_spatial_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Derive distance, density, adjacency, accessibility, and terrain features and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "run_spatial_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run admitted interpolation, clustering, routing, or prediction methods.",
+        "required_capabilities": [
+          "template.geospatial-analytics.run_spatial_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run admitted interpolation, clustering, routing, or prediction methods and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "quantify_uncertainty",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Quantify coordinate, boundary, sampling, and model uncertainty.",
+        "required_capabilities": [
+          "template.geospatial-analytics.quantify_uncertainty.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Quantify coordinate, boundary, sampling, and model uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "verify_spatial_output",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify CRS, geometry, coverage, topology, and numerical invariants.",
+        "required_capabilities": [
+          "template.geospatial-analytics.verify_spatial_output.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify CRS, geometry, coverage, topology, and numerical invariants and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "render_map_product",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Render accessible map or tile products under a declared style.",
+        "required_capabilities": [
+          "template.geospatial-analytics.render_map_product.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Render accessible map or tile products under a declared style and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.publish"
+        ],
+        "id": "publish_spatial_data",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.geospatial-analytics.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish versioned data, metadata, rejects, and lineage.",
+        "required_capabilities": [
+          "template.geospatial-analytics.publish_spatial_data.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish versioned data, metadata, rejects, and lineage and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Geospatial data integration and analysis obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.geospatial-analytics.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.geospatial-analytics.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Identify spatial sources and reference systems.",
+      "extensions": {},
+      "id": "stage.ingest",
+      "slot_ids": [
+        "load_spatial_sources",
+        "detect_crs",
+        "validate_geometry"
+      ],
+      "title": "Ingest"
+    },
+    {
+      "description": "Create compatible spatial representations.",
+      "extensions": {},
+      "id": "stage.normalize",
+      "slot_ids": [
+        "repair_geometry",
+        "transform_crs",
+        "normalize_resolution",
+        "index_space"
+      ],
+      "title": "Normalize"
+    },
+    {
+      "description": "Relate sources with loss accounting.",
+      "extensions": {},
+      "id": "stage.integrate",
+      "slot_ids": [
+        "geocode_entities",
+        "spatial_join",
+        "reconcile_boundaries"
+      ],
+      "title": "Integrate"
+    },
+    {
+      "description": "Compute spatial evidence.",
+      "extensions": {},
+      "id": "stage.analyze",
+      "slot_ids": [
+        "derive_spatial_features",
+        "run_spatial_model",
+        "quantify_uncertainty"
+      ],
+      "title": "Analyze"
+    },
+    {
+      "description": "Verify and publish reusable products.",
+      "extensions": {},
+      "id": "stage.publish",
+      "slot_ids": [
+        "verify_spatial_output",
+        "render_map_product",
+        "publish_spatial_data"
+      ],
+      "title": "Publish"
+    }
+  ],
+  "tags": [
+    "gis",
+    "coordinates",
+    "spatial-analysis"
+  ],
+  "template_model_version": "0.1",
+  "title": "Geospatial data integration and analysis",
+  "version": "1.0.0"
+}

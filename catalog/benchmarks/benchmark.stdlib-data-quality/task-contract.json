@@ -1,0 +1,103 @@
+{
+  "allowed_effects": [],
+  "case_ids": [
+    "case.benchmark.stdlib-data-quality.case-and-spacing",
+    "case.benchmark.stdlib-data-quality.email-case",
+    "case.benchmark.stdlib-data-quality.exact-repeat",
+    "case.benchmark.stdlib-data-quality.holdout-case"
+  ],
+  "constraints": [
+    {
+      "description": "A route is eligible only when the independent oracle accepts it.",
+      "id": "constraint.acceptance",
+      "operator": "eq",
+      "target": "verification.accepted",
+      "unit": "",
+      "value": true
+    }
+  ],
+  "extensions": {
+    "benchmark.claim-scope": "mechanism-fixture"
+  },
+  "external_requirements": [
+    "These bundled synthetic cases prove framework mechanics; replace them with representative, licensed development and hidden holdout data before making production or domain-performance claims."
+  ],
+  "granted_permissions": [],
+  "id": "task.benchmark.stdlib-data-quality",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "Task input records.",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "intent": "Clean, deduplicate, validate, and profile a generic record collection.",
+  "objectives": [
+    {
+      "direction": "maximize",
+      "hard_maximum": null,
+      "hard_minimum": 1.0,
+      "metric": "quality",
+      "weight": 1.0
+    },
+    {
+      "direction": "minimize",
+      "hard_maximum": null,
+      "hard_minimum": null,
+      "metric": "latency_ms",
+      "weight": 0.1
+    }
+  ],
+  "oracle": {
+    "candidate_readable": true,
+    "description": "Bundled deterministic acceptance oracle. It is separate from node implementations but readable because these are transparent fixtures.",
+    "evaluator_digest": "sha256:dbecd7ed6599ecffc83d00af64174a66bfc9acf33f628ade267e1adc690819bc",
+    "id": "verifier.stdlib.data-quality",
+    "implementation_ref": "python://solutiongraph.stdlib_pack:_stdlib_verifier",
+    "independence": "separate-implementation",
+    "kind": "property",
+    "version": "1.0.0"
+  },
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "Task output records.",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "Task output profile.",
+      "name": "profile",
+      "type": {
+        "id": "stdlib.records-profile",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "success_contract": "An independent verifier accepts unique normalized emails, complete entity fields, and a profile bound to the emitted records.",
+  "tags": [
+    "benchmark.synthetic",
+    "domain.data",
+    "task.quality"
+  ],
+  "task_model_version": "0.1",
+  "title": "Reusable standard-library data quality",
+  "version": "1.0.0"
+}

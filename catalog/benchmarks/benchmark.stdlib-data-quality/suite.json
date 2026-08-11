@@ -1,0 +1,73 @@
+{
+  "arms": [
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the declared control route without route search.",
+      "id": "arm.fixed-control",
+      "kind": "fixed-route",
+      "route_id": "control",
+      "solver_profile": "",
+      "title": "Fixed control"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the stronger hand-authored candidate without route search.",
+      "id": "arm.fixed-candidate",
+      "kind": "fixed-route",
+      "route_id": "robust",
+      "solver_profile": "",
+      "title": "Fixed candidate"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Use one prior-guided proposal under the explicit quick allocation.",
+      "id": "arm.solver-quick",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "quick",
+      "title": "Quick solver"
+    },
+    {
+      "anchor_route_ids": [
+        "robust"
+      ],
+      "description": "Use prior plus bounded beam search and retain evidence-diverse fallbacks.",
+      "id": "arm.solver-balanced",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "balanced",
+      "title": "Balanced solver"
+    }
+  ],
+  "benchmark_model_version": "0.1",
+  "claim_scope": "mechanism-fixture",
+  "dataset_license": "CC0-1.0",
+  "description": "Exercise a reusable node pack across a 1,728-route admitted cleanup space, including explicit pass-through candidates at every optional transformation.",
+  "example_id": "stdlib-data-quality",
+  "holdout_case_ids": [
+    "case.benchmark.stdlib-data-quality.holdout-case"
+  ],
+  "id": "benchmark.stdlib-data-quality",
+  "notes": [
+    "All inputs are small synthetic fixtures committed by value digest.",
+    "Latency is observed runtime evidence, not a cross-machine performance claim.",
+    "Only a complete exhaustive arm may claim optimality over the admitted space."
+  ],
+  "program_digest": "sha256:521647ccd9cec9498f4e25f1f07d35a8e9a8f15da74e1b3eb97018f8fc88dbad",
+  "registry_digest": "sha256:0fa593a6f73baa6fc378cb01fe42c35712961d89dceea6ba3d807658e918ca71",
+  "repetitions": 1,
+  "seeds": [
+    0,
+    1729
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:24293c75fd635f5e6e353650a784f70ed9e63341be054cdfb31e5961e6f7b04f",
+    "sha256:bc3d5ad5ed6ed9c2b899087020467952f93d0004204c3afa918bbcc890183deb",
+    "sha256:7c4e59c756ffc6ea838fba06bde1958369bee460c72e447a46b2488cbb58a1d3",
+    "sha256:aa49b2b946e0b03f9bebaf145f3e54bd2570005bf6a1beed0c5d89c7c6db91c3"
+  ],
+  "task_contract_digest": "sha256:0c13d908eb12b5eece2d2b8d0b6d220d25218166ba260dc81ed1c8d336e29b38",
+  "title": "Reusable standard-library data quality arena",
+  "version": "1.0.0"
+}

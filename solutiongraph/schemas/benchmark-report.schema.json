@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "benchmark-report.schema.json",
+  "title": "SolutionGraph benchmark evidence report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "benchmark_model_version", "ok", "suite", "suite_digest", "task_contract",
+    "task_contract_digest", "runtime", "generated_at", "claim_scope", "problems",
+    "arms", "report_digest"
+  ],
+  "properties": {
+    "benchmark_model_version": {"const": "0.1"},
+    "ok": {"type": "boolean"},
+    "suite": {"$ref": "benchmark-suite.schema.json"},
+    "suite_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "task_contract": {"$ref": "task-contract.schema.json"},
+    "task_contract_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "runtime": {"enum": ["in-process", "subprocess"]},
+    "generated_at": {"type": "string", "minLength": 1},
+    "claim_scope": {"enum": ["mechanism-fixture", "internal-dataset", "public-benchmark", "production-shadow"]},
+    "problems": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "arms": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": [
+          "arm_id", "kind", "status", "route_count_upper_bound",
+          "evaluated_plan_count", "receipt_count", "champion_run_count",
+          "accepted_runs", "acceptance_rate", "champion_plan_digest",
+          "champion_selection", "fallback_plan_digests", "pareto_plan_digests",
+          "objective_means", "objective_variances", "holdout_confirmed",
+          "optimality_proven", "details"
+        ],
+        "properties": {
+          "arm_id": {"$ref": "common.schema.json#/$defs/id"},
+          "kind": {"enum": ["fixed-route", "solver-profile"]},
+          "status": {"enum": ["completed", "completed-no-accepted-route"]},
+          "route_count_upper_bound": {"type": "integer", "minimum": 0},
+          "evaluated_plan_count": {"type": "integer", "minimum": 0},
+          "receipt_count": {"type": "integer", "minimum": 0},
+          "champion_run_count": {"type": "integer", "minimum": 0},
+          "accepted_runs": {"type": "integer", "minimum": 0},
+          "acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1},
+          "champion_plan_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+          "champion_selection": {"type": "object", "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}},
+          "fallback_plan_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+          "pareto_plan_digests": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+          "objective_means": {"type": "object", "additionalProperties": {"type": "number"}},
+          "objective_variances": {"type": "object", "additionalProperties": {"type": "number"}},
+          "holdout_confirmed": {"type": "boolean"},
+          "optimality_proven": {"type": "boolean"},
+          "details": {"type": "object"}
+        }
+      }
+    },
+    "report_digest": {"$ref": "common.schema.json#/$defs/digest"}
+  }
+}

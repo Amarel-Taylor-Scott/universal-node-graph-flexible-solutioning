@@ -94,7 +94,7 @@ it works” loop is invalid.
 
 ## 6. Reference template catalogue
 
-The repository ships 19 deliberately varied templates containing 339 atomic
+The repository ships 31 deliberately varied templates containing 544 atomic
 obligations:
 
 | Template | Atomic slots | What it demonstrates |
@@ -118,6 +118,18 @@ obligations:
 | `template.infrastructure-provisioning` | 17 | desired state, drift, policy plan, approval, apply, lifecycle |
 | `template.scientific-experiment` | 20 | hypotheses, preregistration, measurement, sensitivity, replication |
 | `template.numerical-linear-system` | 22 | structure/SPD qualification, conditioning, solver families, factorization, residual verification, fallbacks |
+| `template.knowledge-retrieval` | 18 | corpus authority, retrieval, reranking, grounding, citation, freshness, evaluation |
+| `template.claims-processing` | 17 | intake, coverage, evidence, adjudication, payment, human review, audit |
+| `template.fraud-risk` | 18 | identity, features, rules/models, calibration, policy, action, monitoring |
+| `template.cybersecurity-investigation` | 18 | scoped evidence, enrichment, correlation, hypotheses, containment, learning |
+| `template.compliance-evidence` | 16 | controls, evidence collection, testing, exceptions, attestation, audit |
+| `template.geospatial-analytics` | 16 | CRS, geometry repair, enrichment, spatial analysis, validation, publication |
+| `template.audio-speech` | 16 | decoding, segmentation, transcription, diarization, quality, safety, encoding |
+| `template.supply-chain-planning` | 17 | demand, inventory, constraints, optimization, simulation, release, monitoring |
+| `template.optimization-scheduling` | 17 | variables, constraints, objective, solver strategies, feasibility, sensitivity |
+| `template.database-migration` | 18 | inventory, schema/data conversion, CDC, verification, cutover, rollback |
+| `template.observability-sre` | 17 | signals, SLOs, detection, correlation, response, remediation, learning |
+| `template.content-moderation` | 17 | policy, multimodal detection, context, decision, appeal, monitoring, audit |
 
 These are test fixtures for the universal abstraction, not claims that every
 project needs exactly these steps. Their value is that agents can start with a

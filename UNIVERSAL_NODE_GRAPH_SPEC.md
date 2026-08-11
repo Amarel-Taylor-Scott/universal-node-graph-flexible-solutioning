@@ -37,12 +37,15 @@ An implementation is conforming only if it keeps these objects distinct:
 | Representation | Question answered | May contain learned scores? |
 |---|---|---:|
 | Task contract | What outcome is required, under what constraints, and who verifies it? | No |
+| Task cases and oracle identity | Which immutable inputs/splits are evaluated, and what exact evaluator decides acceptance? | No |
 | Semantic program graph | What obligations and data/control dependencies define the solution? | No |
 | Node registry | What exact implementations and parameter bindings exist? | No |
 | Admitted candidate space | Which candidates satisfy each obligation, and why was each rejected or admitted? | No |
 | Belief model | Which valid choices currently look promising, with what evidence and uncertainty? | Yes |
 | Frozen execution plan | Which exact implementations, versions, digests, and parameters will execute? | No |
 | Run receipt / evidence ledger | What actually ran and what was observed? | Observations only |
+| Solution-pack manifest | Which exact task, programs, registries, node packs, cases, evaluator, baselines, and suites form the portable closure? | No |
+| Benchmark suite/report | Which controlled arms were allocated, and what did each observe under the declared claim scope? | Allocation: no; report: observations only |
 
 The optimizer MUST NOT change program meaning, grant authority, coerce a type,
 or make an invalid configuration valid. It proposes configurations only inside
@@ -167,6 +170,39 @@ Topology search MUST validate and admit every variant independently. Node-route
 counts, topology exclusions, heuristic skips, and unvisited space MUST be
 reported separately; an optimizer cannot smuggle an unvalidated graph rewrite
 inside a node-selection proposal.
+
+### 3.7 Task cases, oracle, and solution pack
+
+A `TaskCaseSpec` content-addresses one immutable input and declares whether it
+belongs to development, validation, holdout, or stress evaluation. Loaded input
+bytes MUST match the declared digest. Holdout observations MUST NOT update the
+proposal policy that selected the route being confirmed.
+
+A `TaskOracle` identifies evaluator kind, implementation digest, implementation
+reference, independence, and candidate readability. Read-only access is still
+readability. A confidential holdout evaluator MUST live outside the candidate's
+trust domain.
+
+A `SolutionPackManifest` is an exact content-addressed closure over one task and
+its programs, registry snapshots, node packs, task cases, evaluator, fixed
+baseline plans, benchmark suites, and external artifact references. Closure
+validation MUST reject both missing and undeclared assets. Readiness labels
+describe implementation state; they do not imply performance or certification.
+See `TASK_AND_SOLUTION_PACK_PROTOCOL.md`.
+
+### 3.8 Benchmark suite and report
+
+A benchmark suite defines fixed-route and bounded solver arms, exact task/case/
+program/registry identities, common seeds and repetitions, holdout cases,
+dataset source/license, and claim scope. Mutable runtime state MUST NOT leak
+between arms. An arm that completes without an accepted route is valid negative
+evidence.
+
+A benchmark report distinguishes protocol completion, per-arm acceptance,
+evaluated plans, total receipts, champion observations, route-space coverage,
+holdout confirmation, Pareto/fallback identities, and exhaustive optimality.
+Only complete evaluation of the declared admitted space may prove optimality
+over that space. See `BENCHMARK_PROTOCOL.md`.
 
 ## 4. Compilation
 
@@ -359,7 +395,9 @@ This repository implements Level 1 as a general Python core and now includes a
 trusted-local Level 2 reference slice: admitted-space-bound frozen plans,
 content-addressed memory/file artifacts, implementation-digest checks, bounded
 retry, frozen fallbacks, independent verification, receipts, and five
-executable domain examples. The bundled Python adapter is in-process and is not
+notebook families within 24 executable domain programs. Version 0.6 also adds
+portable task/solution-pack closure and controlled benchmark evidence. The
+bundled Python adapter is in-process and is not
 a least-privilege sandbox, durable crash-replay engine, or production Level 2
 claim. Version 0.3 also includes a bounded subprocess lifecycle adapter and a
 hash-chained local receipt journal; neither is an adversarial sandbox,
@@ -379,5 +417,7 @@ A domain adapter is not complete until it can demonstrate all of the following:
 6. Prior, bounded, and exhaustive search agree on validity and disclose coverage.
 7. Receipts permit independent replay/analysis.
 8. A benchmark can compare routes, select a Pareto front, and identify a diverse fallback.
-9. An agent can implement the adapter by following the repository instructions
+9. A solution pack exactly closes over task, cases, oracle, programs,
+   registries, node packs, baselines, and benchmark suites.
+10. An agent can implement the adapter by following the repository instructions
    without inventing hidden steps or conflating slots with candidates.

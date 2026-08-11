@@ -2140,11 +2140,21 @@ from solutiongraph.examples.extended_tasks import EXTENDED_EXAMPLE_TASKS  # noqa
 EXAMPLE_TASKS = (*EXAMPLE_TASKS, *EXTENDED_EXAMPLE_TASKS)
 
 
+def all_examples() -> tuple[ExecutableExample, ...]:
+    """Return core fixtures plus lazily loaded reusable-pack compositions."""
+    # Lazy import avoids making the foundational example dataclasses depend on
+    # the standard-library pack while that pack itself is being imported.
+    from solutiongraph.stdlib_pack import STDLIB_DATA_QUALITY_EXAMPLE
+
+    return (*EXAMPLE_TASKS, STDLIB_DATA_QUALITY_EXAMPLE)
+
+
 def get_example(example_id: str) -> ExecutableExample:
+    examples = all_examples()
     try:
-        return next(example for example in EXAMPLE_TASKS if example.id == example_id)
+        return next(example for example in examples if example.id == example_id)
     except StopIteration as exc:
-        known = ", ".join(example.id for example in EXAMPLE_TASKS)
+        known = ", ".join(example.id for example in examples)
         raise ValueError(f"unknown example {example_id!r}; known examples: {known}") from exc
 
 
@@ -2252,6 +2262,7 @@ __all__ = [
     "IMAGE_PROGRAM",
     "ML_PROGRAM",
     "NODES",
+    "all_examples",
     "get_example",
     "run_example",
 ]

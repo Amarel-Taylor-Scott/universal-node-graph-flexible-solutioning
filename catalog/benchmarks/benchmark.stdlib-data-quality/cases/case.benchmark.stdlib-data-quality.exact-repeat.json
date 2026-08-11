@@ -1,0 +1,17 @@
+{
+  "description": "Exact duplicate control.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/stdlib-data-quality/exact-repeat",
+  "id": "case.benchmark.stdlib-data-quality.exact-repeat",
+  "input_digest": "sha256:011696b7f21b7e677ffec34a9493e5cc669108cf58c0bdba9d3a9f51cb9bf9c2",
+  "split": "validation",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.quality"
+  ],
+  "task_model_version": "0.1"
+}

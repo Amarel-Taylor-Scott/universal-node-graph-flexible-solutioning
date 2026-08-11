@@ -1,0 +1,64 @@
+{
+  "capabilities": [
+    "records.trim-strings"
+  ],
+  "description": "Trim string fields with a shallow or recursive policy.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:trim_record_strings",
+  "failure_modes": [],
+  "id": "stdlib.records.trim-strings",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:f8d897910bd5e2d55091a82c6a1f083d0784f90768bb48e2b1117e897e0a3bb4",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        false,
+        true
+      ],
+      "default": false,
+      "description": "",
+      "name": "recursive",
+      "required": false,
+      "value_type": "boolean"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

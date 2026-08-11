@@ -1,0 +1,1031 @@
+{
+  "description": "A demand, inventory, network, plan, execution, and replanning scaffold.",
+  "domains": [
+    "operations.supply-chain",
+    "optimization.planning"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.supply-chain-planning",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "ingest_demand",
+        "target_port": "state",
+        "target_slot": "ingest_supply"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ingest_supply",
+        "target_port": "state",
+        "target_slot": "reconcile_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_state",
+        "target_port": "state",
+        "target_slot": "forecast_demand"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "forecast_demand",
+        "target_port": "state",
+        "target_slot": "forecast_lead_time"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "forecast_lead_time",
+        "target_port": "state",
+        "target_slot": "generate_scenarios"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_scenarios",
+        "target_port": "state",
+        "target_slot": "formulate_constraints"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "formulate_constraints",
+        "target_port": "state",
+        "target_slot": "optimize_inventory"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "optimize_inventory",
+        "target_port": "state",
+        "target_slot": "optimize_network"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "optimize_network",
+        "target_port": "state",
+        "target_slot": "stress_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "stress_plan",
+        "target_port": "state",
+        "target_slot": "compare_plans"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "compare_plans",
+        "target_port": "state",
+        "target_slot": "resolve_exceptions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "resolve_exceptions",
+        "target_port": "state",
+        "target_slot": "approve_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "approve_plan",
+        "target_port": "state",
+        "target_slot": "dispatch_orders"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "dispatch_orders",
+        "target_port": "state",
+        "target_slot": "observe_execution"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "observe_execution",
+        "target_port": "state",
+        "target_slot": "verify_outcomes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_outcomes",
+        "target_port": "state",
+        "target_slot": "trigger_replan"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.supply-chain-planning",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "ingest_demand",
+        "type": {
+          "id": "template.supply-chain-planning.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "trigger_replan",
+        "type": {
+          "id": "template.supply-chain-planning.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.state"
+        ],
+        "id": "ingest_demand",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Ingest orders, forecasts, promotions, and causal demand signals.",
+        "required_capabilities": [
+          "template.supply-chain-planning.ingest_demand.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Ingest orders, forecasts, promotions, and causal demand signals and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.state"
+        ],
+        "id": "ingest_supply",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Ingest inventory, capacity, lead time, purchase, and production state.",
+        "required_capabilities": [
+          "template.supply-chain-planning.ingest_supply.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Ingest inventory, capacity, lead time, purchase, and production state and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.state"
+        ],
+        "id": "reconcile_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile units, calendars, locations, products, and stale observations.",
+        "required_capabilities": [
+          "template.supply-chain-planning.reconcile_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile units, calendars, locations, products, and stale observations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.predict"
+        ],
+        "id": "forecast_demand",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Forecast demand distributions at the required hierarchy and horizon.",
+        "required_capabilities": [
+          "template.supply-chain-planning.forecast_demand.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Forecast demand distributions at the required hierarchy and horizon and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.predict"
+        ],
+        "id": "forecast_lead_time",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Forecast supplier, production, and transport lead-time distributions.",
+        "required_capabilities": [
+          "template.supply-chain-planning.forecast_lead_time.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Forecast supplier, production, and transport lead-time distributions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.predict"
+        ],
+        "id": "generate_scenarios",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate coherent demand, disruption, and capacity scenarios.",
+        "required_capabilities": [
+          "template.supply-chain-planning.generate_scenarios.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate coherent demand, disruption, and capacity scenarios and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.optimize"
+        ],
+        "id": "formulate_constraints",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Formulate service, capacity, flow, policy, and integrality constraints.",
+        "required_capabilities": [
+          "template.supply-chain-planning.formulate_constraints.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Formulate service, capacity, flow, policy, and integrality constraints and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.optimize"
+        ],
+        "id": "optimize_inventory",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Optimize safety stock, reorder, allocation, and substitution decisions.",
+        "required_capabilities": [
+          "template.supply-chain-planning.optimize_inventory.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Optimize safety stock, reorder, allocation, and substitution decisions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.optimize"
+        ],
+        "id": "optimize_network",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Optimize sourcing, production, routing, and fulfillment choices.",
+        "required_capabilities": [
+          "template.supply-chain-planning.optimize_network.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Optimize sourcing, production, routing, and fulfillment choices and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.optimize"
+        ],
+        "id": "stress_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Stress candidate plans across declared scenarios.",
+        "required_capabilities": [
+          "template.supply-chain-planning.stress_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Stress candidate plans across declared scenarios and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "compare_plans",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare cost, service, resilience, emissions, and execution risk.",
+        "required_capabilities": [
+          "template.supply-chain-planning.compare_plans.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare cost, service, resilience, emissions, and execution risk and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "resolve_exceptions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve infeasibility, shortages, and policy exceptions.",
+        "required_capabilities": [
+          "template.supply-chain-planning.resolve_exceptions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve infeasibility, shortages, and policy exceptions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "approve_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Freeze the selected plan and accountable approvals.",
+        "required_capabilities": [
+          "template.supply-chain-planning.approve_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Freeze the selected plan and accountable approvals and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "dispatch_orders",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Dispatch exact procurement, transfer, production, and fulfillment actions.",
+        "required_capabilities": [
+          "template.supply-chain-planning.dispatch_orders.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Dispatch exact procurement, transfer, production, and fulfillment actions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "observe_execution",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Observe acknowledgements, deviations, and downstream state changes.",
+        "required_capabilities": [
+          "template.supply-chain-planning.observe_execution.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Observe acknowledgements, deviations, and downstream state changes and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "verify_outcomes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify service, cost, inventory, and constraint outcomes.",
+        "required_capabilities": [
+          "template.supply-chain-planning.verify_outcomes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify service, cost, inventory, and constraint outcomes and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "trigger_replan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.supply-chain-planning.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Trigger bounded replanning from material state changes.",
+        "required_capabilities": [
+          "template.supply-chain-planning.trigger_replan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Trigger bounded replanning from material state changes and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Supply-chain planning and fulfillment obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.supply-chain-planning.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.supply-chain-planning.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Build a trustworthy planning state.",
+      "extensions": {},
+      "id": "stage.state",
+      "slot_ids": [
+        "ingest_demand",
+        "ingest_supply",
+        "reconcile_state"
+      ],
+      "title": "State"
+    },
+    {
+      "description": "Represent uncertain future conditions.",
+      "extensions": {},
+      "id": "stage.predict",
+      "slot_ids": [
+        "forecast_demand",
+        "forecast_lead_time",
+        "generate_scenarios"
+      ],
+      "title": "Predict"
+    },
+    {
+      "description": "Generate feasible candidate plans.",
+      "extensions": {},
+      "id": "stage.optimize",
+      "slot_ids": [
+        "formulate_constraints",
+        "optimize_inventory",
+        "optimize_network",
+        "stress_plan"
+      ],
+      "title": "Optimize"
+    },
+    {
+      "description": "Select an accountable plan.",
+      "extensions": {},
+      "id": "stage.decide",
+      "slot_ids": [
+        "compare_plans",
+        "resolve_exceptions",
+        "approve_plan"
+      ],
+      "title": "Decide"
+    },
+    {
+      "description": "Dispatch, observe, and replan.",
+      "extensions": {},
+      "id": "stage.execute",
+      "slot_ids": [
+        "dispatch_orders",
+        "observe_execution",
+        "verify_outcomes",
+        "trigger_replan"
+      ],
+      "title": "Execute"
+    }
+  ],
+  "tags": [
+    "inventory",
+    "forecasting",
+    "planning"
+  ],
+  "template_model_version": "0.1",
+  "title": "Supply-chain planning and fulfillment",
+  "version": "1.0.0"
+}

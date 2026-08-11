@@ -13,7 +13,7 @@ from solutiongraph import (
     get_solver_profile,
 )
 from solutiongraph.arena import run_arena, solve_example
-from solutiongraph.examples import EXAMPLE_TASKS, get_example
+from solutiongraph.examples import all_examples, get_example
 from solutiongraph.schemas import SCHEMA_NAMES, load_all_schemas
 
 
@@ -48,7 +48,7 @@ def test_arena_is_valid_cross_domain_and_honest_about_external_authorities():
 
 
 def test_every_arena_executable_points_to_a_real_typed_example():
-    examples = {example.id: example for example in EXAMPLE_TASKS}
+    examples = {example.id: example for example in all_examples()}
     executable_tasks = UNIVERSAL_DAG_ARENA.matching(readiness="executable_fixture")
     assert len(executable_tasks) == 20
     for task in executable_tasks:

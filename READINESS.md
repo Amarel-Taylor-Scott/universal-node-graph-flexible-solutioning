@@ -1,6 +1,6 @@
 # Readiness and support levels
 
-Current release line: **0.5 Developer Preview / external alpha**.
+Current release line: **0.6 Developer Preview / external alpha**.
 
 SolutionGraph is ready for developers and researchers to model typed solution
 spaces, author reusable node contracts, compile frozen routes, execute trusted
@@ -11,7 +11,7 @@ yet a turnkey production scheduler or a hostile-code execution service.
 
 | Surface | Status | Supported use |
 |---|---|---|
-| Semantic model and 48 strict schemas | Alpha-supported | Typed task graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streaming events/results, sagas, compatibility catalogs, multi-fidelity runs, OpenLineage facets, provenance, and conformance |
+| Semantic model and 53 strict schemas | Alpha-supported | Typed task contracts/cases, solution packs, benchmark suites/reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
 | Compiler and complete snapshot admission | Alpha-supported | Reject invalid types, authority, effects, topology, bindings, and constraints before execution |
 | Conditional branches | Alpha-supported locally | Data-dependent activation, exactly receipted skips, and compiler rejection of unsafe conditional outputs without an explicit merge |
 | Composite and bounded-loop lowering | Alpha-supported locally | Deterministic namespaced expansion into ordinary compiler-valid DAGs with a content-addressed lowering receipt |
@@ -19,8 +19,12 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Prior, beam, sprout, adaptive, exhaustive search | Alpha-supported | Explicitly budgeted proposal ordering over compiler-valid routes |
 | Executed successive halving | Alpha-supported locally | Caller-supplied evaluation at explicit fidelity rungs with complete promotion and resource records |
 | UniversalSolver | Alpha-supported locally | Full admission, multi-round search, frozen-plan experiments, learned observational priors, hard gates, ranking, champion, and benchmarked route-level fallbacks |
-| Universal DAG Arena | Alpha-supported as a mechanism suite | 24 typed task contracts and 23 executable programs across 20 task families; four task families remain credentialed connectors |
-| Templates and offline viewers | Alpha-supported | Explore 19 templates and every bundled slot/candidate projection |
+| Task and solution-pack protocol | Alpha-supported | Exact task/program/registry/node-pack/case/oracle/baseline/benchmark closure with content digests and strict JSON Schemas |
+| Python node-authoring SDK | Alpha-supported for importable functions | Signature checks, source-derived implementation identity, stable bindings, exact finite expansion, and registry construction |
+| Reusable standard-library pack | Alpha-supported as a reference pack | 19 dependency-free text/data nodes, 32 exact bindings, discovery sidecars, and a seven-slot 1,728-route data-quality example |
+| Benchmark runner and reports | Alpha-supported as mechanism evidence | Six suites, fixed controls, bounded solver arms, common seeds/cases, holdout status, exact coverage, JSON reports, and offline HTML projections |
+| Universal DAG Arena | Alpha-supported as a mechanism suite | 36 typed task families, 24 executable programs across 20 fixture families, 12 additional template families, and four credentialed-connector families |
+| Templates and offline viewers | Alpha-supported | Explore 31 templates, 544 atomic slots, every bundled slot/candidate projection, and a generated benchmark report |
 | Trusted in-process Python runtime | Development only | Fast fixtures, tests, and notebooks using trusted code |
 | Bounded subprocess Python runtime | Alpha-supported lifecycle isolation | Trusted code needing process separation, strict JSON/bytes ABI, timeout, and optional POSIX CPU/memory limits |
 | Content-addressed artifacts | Alpha-supported locally | Reproducible fixture outputs and local checkpoints |
@@ -30,7 +34,7 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Saga compensation reference | Experimental | Reverse-order compensation using ordinary effectful `NodeSpec` contracts and idempotency keys; not a transaction manager |
 | Compatibility sidecars | Experimental | Optional ordering, time-domain, nullability, classification, state, secret, hardware, residency, and compensation metadata without polluting the node ABI |
 | W3C PROV/OpenLineage/SLSA projections | Alpha-supported export | Machine-readable projections from immutable run receipts; external backends remain adapters |
-| Installed-wheel conformance suite | Alpha-supported | Eight executable checks covering control, lowering, topology, recovery, streaming, compensation, multi-fidelity, and provenance |
+| Installed-wheel conformance suite | Alpha-supported | Eleven executable checks covering control, lowering, topology, recovery, streaming, compensation, multi-fidelity, provenance, node authoring, solution-pack closure, and circuit exhaustion |
 | LLM-generated campaign contracts | Experimental | Freeze budgets, ancestry, proposal identity, and evaluator boundary before orchestration |
 | BrowserGraph adapters | Experimental/optional | Browser and HTTP demonstrations when optional runtimes are installed |
 | Hostile generated-code execution | Not provided | Requires an external microVM, Wasm, or remote trust boundary |
@@ -46,6 +50,8 @@ yet a turnkey production scheduler or a hostile-code execution service.
 - Define exact task contracts, templates, nodes, registries, and independent
   verifiers.
 - Compare trusted local routes and persist all positive and negative receipts.
+- Package exact task/program/registry/case/oracle closures and run fixed-route
+  versus bounded-solver mechanism benchmarks with explicit claim scopes.
 - Run `solutiongraph solve` or the executable Arena suite with explicit search
   coverage, accepted champion, and diverse fallback reporting.
 - Build third-party runtime, registry, node-pack, optimizer, and artifact-store
@@ -101,7 +107,7 @@ configured.
 
 Beta requires at least one enforcing isolated runtime adapter, distributed
 crash-resumable campaign execution, larger mature-library node packs, and
-held-out multi-seed benchmarks on real external tasks. Version 0.5 demonstrates the complete local
+held-out multi-seed benchmarks on real external tasks. Version 0.6 demonstrates the complete local
 task → graph → admission → search → execution → evidence → belief-update →
 champion/fallback loop plus structured control and recovery, but only on small
 trusted fixtures.

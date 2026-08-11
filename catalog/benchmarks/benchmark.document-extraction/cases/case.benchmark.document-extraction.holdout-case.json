@@ -1,0 +1,17 @@
+{
+  "description": "Held-out key spelling variation.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/document-extraction/holdout-case",
+  "id": "case.benchmark.document-extraction.holdout-case",
+  "input_digest": "sha256:b297f583dc15b22880ed4fcc072591dad9cdb3eb5a40904921dc43416c0924c4",
+  "split": "holdout",
+  "tags": [
+    "fixture.synthetic",
+    "domain.document",
+    "task.extraction"
+  ],
+  "task_model_version": "0.1"
+}

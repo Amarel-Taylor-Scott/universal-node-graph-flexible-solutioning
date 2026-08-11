@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "data.parse-json"
+  ],
+  "aliases": [
+    "data parse-json"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.data.parse-json",
+      "language": "und",
+      "source_digest": "sha256:ebb5911ecad2e0c6cb745fd9508510e1b69087473c28dc7bba15af253e6b62a7",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Parse strict JSON without repair. Inputs: text. Outputs: value."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.data.parse-json",
+  "node_spec_digest": "sha256:ebb5911ecad2e0c6cb745fd9508510e1b69087473c28dc7bba15af253e6b62a7",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed text input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "text"
+    },
+    {
+      "concepts": [],
+      "description": "Typed value output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "value"
+    }
+  ],
+  "purposes": [
+    "Parse strict JSON without repair."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Parse strict JSON without repair.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Parse Json"
+}

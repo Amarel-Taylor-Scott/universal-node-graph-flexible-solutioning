@@ -2,7 +2,7 @@
 
 Universal Node Graph can be explored without a browser, model provider, vector
 database, or network service. The domain-neutral core uses only the Python
-standard library. Version 0.5 is a developer preview; read `READINESS.md`
+standard library. Version 0.6 is a developer preview; read `READINESS.md`
 before production integration.
 
 ## 1. Install and verify
@@ -18,9 +18,10 @@ solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 The doctor command validates all bundled schemas, templates, reference nodes,
-descriptors, and generated catalog projections. The release verifier then
-compiles and executes all 51 frozen reference routes, checks 19 declared
-negative controls, and rejects stale checked-in catalog JSON.
+descriptors, solution packs, benchmark closures, and generated catalog
+projections. The release verifier then compiles and executes all 54 frozen
+reference routes, checks 21 declared negative controls, runs 11 installed-wheel
+conformance mechanisms, and rejects stale checked-in catalog JSON.
 
 For a non-editable installation directly from GitHub:
 
@@ -57,7 +58,7 @@ solutiongraph templates show template.document-intelligence
 solutiongraph templates show template.kaggle-tabular --json
 ```
 
-The library contains 19 domain templates and 339 atomic obligations. A template
+The library contains 31 domain templates and 544 atomic obligations. A template
 describes what must happen; node registries independently provide the possible
 ways to accomplish each obligation.
 
@@ -97,6 +98,9 @@ Agents that support workspace skills can be asked to use:
 - `@design-topology-family` to author and benchmark alternative graph shapes;
 - `@author-structured-workflow` to implement branches, composites, and bounded loops safely;
 - `@solve-universal-dag` to implement or solve an Arena task with evidence-backed route selection;
+- `@package-solution-graph` to freeze a task, cases, evaluator, programs, registries, and baselines into one exact solution-pack closure;
+- `@run-benchmark-arena` to compare fixed routes and bounded solver policies under one controlled suite;
+- `@expand-node-library` to add source-bound reusable primitives and discovery sidecars;
 - `@model-solution-graph` for the complete end-to-end workflow.
 
 The skills guide the agent, while schemas, compiler diagnostics, tests, and CI
@@ -130,7 +134,7 @@ duplicates, unvisited routes, seeds, and belief revision.
 
 ## 8. Solve and execute the reference domain skeletons
 
-Inspect all 24 Arena contracts and execute or solve the 23 local programs:
+Inspect all 36 Arena contracts and execute or solve the 24 local programs:
 
 ```bash
 solutiongraph examples list
@@ -139,6 +143,28 @@ solutiongraph arena show arena.validated-analytical-dataset
 solutiongraph solve multi-feed-analytical-dataset --profile balanced
 solutiongraph arena run --profile quick
 ```
+
+Inspect the six portable solution packs and run controlled fixed-route versus
+solver comparisons:
+
+```bash
+solutiongraph packs list
+solutiongraph packs show solution-pack.stdlib-data-quality
+solutiongraph benchmarks list
+solutiongraph benchmarks run benchmark.stdlib-data-quality \
+  --runtime subprocess \
+  --artifact-dir .artifacts/stdlib-benchmark \
+  --receipt-journal .artifacts/benchmark-receipts.jsonl \
+  --report-html .artifacts/stdlib-benchmark.html \
+  --report-json .artifacts/stdlib-benchmark.json
+python examples/solution_pack_benchmark_quickstart.py \
+  --output-dir .artifacts/solution-pack-quickstart
+```
+
+These bundled cases are transparent mechanism fixtures. Replace them with
+representative licensed development data and a candidate-inaccessible holdout
+before making domain-performance or production claims. See
+`TASK_AND_SOLUTION_PACK_PROTOCOL.md` and `BENCHMARK_PROTOCOL.md`.
 
 Run the same frozen routes through the bounded subprocess adapter and retain
 durable evidence:

@@ -7,9 +7,8 @@ from pathlib import Path
 from typing import Any
 
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
+from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.discovery import (
-    ArtifactReference,
-    NodePackManifest,
     QueryMode,
     RegistryCapabilities,
     SchemaSupport,
@@ -20,10 +19,21 @@ from solutiongraph.examples.extended_tasks import (
 )
 from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
+from solutiongraph.pack_library import (
+    EXTENDED_ARENA_NODE_PACK,
+    REAL_WORLD_EXAMPLE_NODE_PACK,
+    REFERENCE_CORE_NODE_PACK,
+)
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
     REFERENCE_NODE_SPECS,
     REFERENCE_REGISTRY,
+)
+from solutiongraph.stdlib_pack import (
+    STANDARD_LIBRARY_DESCRIPTORS,
+    STANDARD_LIBRARY_NODE_PACK,
+    STANDARD_LIBRARY_NODE_SPECS,
+    STANDARD_LIBRARY_REGISTRY,
 )
 from solutiongraph.template_library import REFERENCE_TEMPLATES
 
@@ -117,90 +127,51 @@ def extended_registry_capabilities() -> RegistryCapabilities:
     )
 
 
+def standard_library_registry_capabilities() -> RegistryCapabilities:
+    """Advertise strict and lexical discovery for reusable standard nodes."""
+    return RegistryCapabilities(
+        registry_id=STANDARD_LIBRARY_REGISTRY.id,
+        registry_version=STANDARD_LIBRARY_REGISTRY.version,
+        registry_digest=STANDARD_LIBRARY_REGISTRY.digest,
+        protocol_versions=("0.1",),
+        schemas=(
+            SchemaSupport("node-spec", ("0.2",)),
+            SchemaSupport("node-descriptor", ("0.1",)),
+            SchemaSupport("node-pack", ("0.1",)),
+        ),
+        query_modes=(
+            QueryMode("exact", fields=("node_id", "node_spec_digest")),
+            QueryMode(
+                "lexical",
+                fields=("title", "summary", "purposes", "actions", "documents"),
+                supports_filters=True,
+                supports_scores=True,
+                supports_explanations=True,
+            ),
+            QueryMode("enumeration", supports_cursor=True),
+        ),
+        descriptor_fields=(
+            "title", "summary", "purposes", "solutions", "actions",
+            "domains", "tags", "ports", "documents",
+        ),
+        supports_enumeration=True,
+        supports_snapshots=True,
+        supports_continuation=True,
+        supports_explanations=True,
+        max_page_size=1000,
+        extensions=(("stdlib.maturity", "reference"),),
+    )
+
+
 def catalog_documents() -> dict[str, dict[str, Any]]:
     """Return every generated catalogue document keyed by portable relative path."""
-    artifacts = tuple(
-        ArtifactReference(
-            name=f"artifact.{node.id}",
-            media_type="text/x-python",
-            digest=node.implementation_digest,
-            uri=f"python://{node.entrypoint}",
-            annotations=(("org.opencontainers.image.title", node.entrypoint),),
-        )
-        for node in REFERENCE_NODE_SPECS
-    )
-    node_pack = NodePackManifest(
-        id="reference.core-node-pack",
-        version="1.0.0",
-        description=(
-            "Executable demonstration primitives, identity behavior, and explicit "
-            "filesystem/network connectors."
-        ),
-        node_spec_digests=tuple(node.digest for node in REFERENCE_NODE_SPECS),
-        descriptor_digests=tuple(descriptor.digest for descriptor in REFERENCE_DESCRIPTORS),
-        artifacts=artifacts,
-        source=("https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning"),
-        license="MIT",
-        extensions=(("reference.maturity", "demonstration"),),
-    )
+    node_pack = REFERENCE_CORE_NODE_PACK
     capabilities = reference_registry_capabilities()
-    example_artifacts = tuple(
-        ArtifactReference(
-            name=f"artifact.{node.id}",
-            media_type="text/x-python",
-            digest=node.implementation_digest,
-            uri=f"python://{node.entrypoint}",
-            annotations=(("org.opencontainers.image.title", node.entrypoint),),
-        )
-        for node in EXAMPLE_NODES
-    )
-    example_pack = NodePackManifest(
-        id="example.real-world-node-pack",
-        version="1.0.0",
-        description=(
-            "Dependency-free executable teaching nodes for web, document, image, "
-            "data quality, address verification, entity linking, forecasting, "
-            "code repair, feed validation, regression, and classification examples."
-        ),
-        node_spec_digests=tuple(node.digest for node in EXAMPLE_NODES),
-        artifacts=example_artifacts,
-        source=(
-            "https://github.com/Amarel-Taylor-Scott/"
-            "universal-node-graph-flexible-solutioning"
-        ),
-        license="MIT",
-        extensions=(("example.maturity", "executable-teaching-fixture"),),
-    )
+    example_pack = REAL_WORLD_EXAMPLE_NODE_PACK
     example_capabilities = example_registry_capabilities()
-    extended_artifacts = tuple(
-        ArtifactReference(
-            name=f"artifact.{node.id}",
-            media_type="text/x-python",
-            digest=node.implementation_digest,
-            uri=f"python://{node.entrypoint}",
-            annotations=(("org.opencontainers.image.title", node.entrypoint),),
-        )
-        for node in EXTENDED_NODES
-    )
-    extended_pack = NodePackManifest(
-        id="example.extended-arena-node-pack",
-        version="1.0.0",
-        description=(
-            "Strict and heuristic reference nodes for contact verification, web "
-            "change monitoring, reconciliation, PII redaction, schema migration, "
-            "incident triage, dependency assurance, recommendation ranking, "
-            "scientific comparison, and numerical solving."
-        ),
-        node_spec_digests=tuple(node.digest for node in EXTENDED_NODES),
-        artifacts=extended_artifacts,
-        source=(
-            "https://github.com/Amarel-Taylor-Scott/"
-            "universal-node-graph-flexible-solutioning"
-        ),
-        license="MIT",
-        extensions=(("example.maturity", "cross-domain-conformance-fixture"),),
-    )
+    extended_pack = EXTENDED_ARENA_NODE_PACK
     extended_capabilities = extended_registry_capabilities()
+    stdlib_capabilities = standard_library_registry_capabilities()
     documents: dict[str, dict[str, Any]] = {
         "nodepacks/reference-core/manifest.json": node_pack.to_dict(),
         "nodepacks/reference-core/registry.json": REFERENCE_REGISTRY.to_dict(),
@@ -215,6 +186,15 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "nodepacks/extended-arena/registry-capabilities.json": (
             extended_capabilities.to_dict()
         ),
+        "nodepacks/stdlib-data-foundation/manifest.json": (
+            STANDARD_LIBRARY_NODE_PACK.to_dict()
+        ),
+        "nodepacks/stdlib-data-foundation/registry.json": (
+            STANDARD_LIBRARY_REGISTRY.to_dict()
+        ),
+        "nodepacks/stdlib-data-foundation/registry-capabilities.json": (
+            stdlib_capabilities.to_dict()
+        ),
     }
     for node in REFERENCE_NODE_SPECS:
         documents[f"nodepacks/reference-core/nodes/{node.id}.json"] = node.to_dict()
@@ -228,12 +208,52 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         )
     for node in EXTENDED_NODES:
         documents[f"nodepacks/extended-arena/nodes/{node.id}.json"] = node.to_dict()
+    for node in STANDARD_LIBRARY_NODE_SPECS:
+        documents[f"nodepacks/stdlib-data-foundation/nodes/{node.id}.json"] = (
+            node.to_dict()
+        )
+    for descriptor in STANDARD_LIBRARY_DESCRIPTORS:
+        documents[
+            f"nodepacks/stdlib-data-foundation/descriptors/{descriptor.node_id}.json"
+        ] = descriptor.to_dict()
     for template in REFERENCE_TEMPLATES.templates:
         documents[f"templates/{template.id}.json"] = template.to_dict()
     for task in UNIVERSAL_DAG_ARENA.tasks:
         documents[f"arena/{task.id}.json"] = task.to_dict()
 
     documents["arena/index.json"] = UNIVERSAL_DAG_ARENA.to_dict()
+
+    for bundle in REFERENCE_BENCHMARKS:
+        root = f"benchmarks/{bundle.id}"
+        documents[f"{root}/suite.json"] = bundle.definition.suite.to_dict()
+        documents[f"{root}/task-contract.json"] = (
+            bundle.definition.task_contract.to_dict()
+        )
+        documents[f"{root}/solution-pack.json"] = bundle.solution_pack.to_dict()
+        for case in bundle.definition.task_cases:
+            documents[f"{root}/cases/{case.id}.json"] = case.to_dict()
+        for plan in bundle.baseline_plans:
+            documents[f"{root}/baselines/{plan.digest.removeprefix('sha256:')}.json"] = (
+                plan.to_dict()
+            )
+
+    documents["benchmarks/index.json"] = {
+        "benchmark_model_version": "0.1",
+        "benchmark_count": len(REFERENCE_BENCHMARKS),
+        "benchmarks": [
+            {
+                "id": bundle.id,
+                "version": bundle.definition.suite.version,
+                "digest": bundle.definition.suite.digest,
+                "solution_pack_digest": bundle.solution_pack.digest,
+                "claim_scope": bundle.definition.suite.claim_scope,
+                "case_count": len(bundle.definition.task_cases),
+                "arm_count": len(bundle.definition.suite.arms),
+                "path": f"benchmarks/{bundle.id}/suite.json",
+            }
+            for bundle in REFERENCE_BENCHMARKS
+        ],
+    }
 
     documents["index.json"] = {
         "catalog_model_version": "0.1",
@@ -257,6 +277,15 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "path": "nodepacks/reference-core/manifest.json",
                 "node_count": len(REFERENCE_NODE_SPECS),
                 "descriptor_count": len(REFERENCE_DESCRIPTORS),
+                "embedding_record_count": 0,
+            },
+            {
+                "id": STANDARD_LIBRARY_NODE_PACK.id,
+                "version": STANDARD_LIBRARY_NODE_PACK.version,
+                "digest": STANDARD_LIBRARY_NODE_PACK.digest,
+                "path": "nodepacks/stdlib-data-foundation/manifest.json",
+                "node_count": len(STANDARD_LIBRARY_NODE_SPECS),
+                "descriptor_count": len(STANDARD_LIBRARY_DESCRIPTORS),
                 "embedding_record_count": 0,
             },
             {
@@ -285,6 +314,14 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 UNIVERSAL_DAG_ARENA.matching(readiness="executable_fixture")
             ),
         },
+        "benchmarks": {
+            "path": "benchmarks/index.json",
+            "benchmark_count": len(REFERENCE_BENCHMARKS),
+            "task_case_count": sum(
+                len(bundle.definition.task_cases) for bundle in REFERENCE_BENCHMARKS
+            ),
+            "solution_pack_count": len(REFERENCE_BENCHMARKS),
+        },
     }
     return dict(sorted(documents.items()))
 
@@ -309,5 +346,6 @@ __all__ = [
     "example_registry_capabilities",
     "extended_registry_capabilities",
     "reference_registry_capabilities",
+    "standard_library_registry_capabilities",
     "write_catalog",
 ]

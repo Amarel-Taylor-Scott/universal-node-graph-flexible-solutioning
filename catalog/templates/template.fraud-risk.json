@@ -1,0 +1,1084 @@
+{
+  "description": "A streaming/batch feature, detection, investigation, decision, and learning scaffold.",
+  "domains": [
+    "risk.fraud",
+    "machine-learning.classification"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.fraud-risk",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "receive_event",
+        "target_port": "state",
+        "target_slot": "resolve_identity"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "resolve_identity",
+        "target_port": "state",
+        "target_slot": "validate_event"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_event",
+        "target_port": "state",
+        "target_slot": "retrieve_history"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "retrieve_history",
+        "target_port": "state",
+        "target_slot": "derive_velocity"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "derive_velocity",
+        "target_port": "state",
+        "target_slot": "derive_graph_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "derive_graph_features",
+        "target_port": "state",
+        "target_slot": "verify_feature_freshness"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_feature_freshness",
+        "target_port": "state",
+        "target_slot": "apply_rules"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_rules",
+        "target_port": "state",
+        "target_slot": "score_anomaly"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "score_anomaly",
+        "target_port": "state",
+        "target_slot": "score_model"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "score_model",
+        "target_port": "state",
+        "target_slot": "combine_signals"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "combine_signals",
+        "target_port": "state",
+        "target_slot": "estimate_consequence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_consequence",
+        "target_port": "state",
+        "target_slot": "select_action"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_action",
+        "target_port": "state",
+        "target_slot": "explain_risk"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "explain_risk",
+        "target_port": "state",
+        "target_slot": "observe_outcome"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "observe_outcome",
+        "target_port": "state",
+        "target_slot": "audit_bias"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_bias",
+        "target_port": "state",
+        "target_slot": "revise_beliefs"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "revise_beliefs",
+        "target_port": "state",
+        "target_slot": "publish_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.fraud-risk",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "receive_event",
+        "type": {
+          "id": "template.fraud-risk.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_receipt",
+        "type": {
+          "id": "template.fraud-risk.state-18",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.observe"
+        ],
+        "id": "receive_event",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Receive the exact event with source and event-time identity.",
+        "required_capabilities": [
+          "template.fraud-risk.receive_event.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Receive the exact event with source and event-time identity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.observe"
+        ],
+        "id": "resolve_identity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve account, device, merchant, and related entities.",
+        "required_capabilities": [
+          "template.fraud-risk.resolve_identity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve account, device, merchant, and related entities and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.observe"
+        ],
+        "id": "validate_event",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate event schema, integrity, duplication, and lateness.",
+        "required_capabilities": [
+          "template.fraud-risk.validate_event.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate event schema, integrity, duplication, and lateness and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.features"
+        ],
+        "id": "retrieve_history",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retrieve only causally available historical observations.",
+        "required_capabilities": [
+          "template.fraud-risk.retrieve_history.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retrieve only causally available historical observations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.features"
+        ],
+        "id": "derive_velocity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Derive time-windowed frequency and amount features.",
+        "required_capabilities": [
+          "template.fraud-risk.derive_velocity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Derive time-windowed frequency and amount features and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.features"
+        ],
+        "id": "derive_graph_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Derive relationship, community, and novelty features.",
+        "required_capabilities": [
+          "template.fraud-risk.derive_graph_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Derive relationship, community, and novelty features and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.features"
+        ],
+        "id": "verify_feature_freshness",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify point-in-time correctness and feature freshness.",
+        "required_capabilities": [
+          "template.fraud-risk.verify_feature_freshness.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify point-in-time correctness and feature freshness and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.detect"
+        ],
+        "id": "apply_rules",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply versioned deterministic risk and compliance rules.",
+        "required_capabilities": [
+          "template.fraud-risk.apply_rules.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply versioned deterministic risk and compliance rules and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.detect"
+        ],
+        "id": "score_anomaly",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure deviation from peer and historical behavior.",
+        "required_capabilities": [
+          "template.fraud-risk.score_anomaly.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure deviation from peer and historical behavior and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.detect"
+        ],
+        "id": "score_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply a calibrated supervised or representation model.",
+        "required_capabilities": [
+          "template.fraud-risk.score_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply a calibrated supervised or representation model and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.detect"
+        ],
+        "id": "combine_signals",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Combine signals with explicit missingness and confidence semantics.",
+        "required_capabilities": [
+          "template.fraud-risk.combine_signals.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Combine signals with explicit missingness and confidence semantics and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "estimate_consequence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate loss, customer harm, and intervention cost.",
+        "required_capabilities": [
+          "template.fraud-risk.estimate_consequence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate loss, customer harm, and intervention cost and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "select_action",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select allow, challenge, hold, block, or review under policy.",
+        "required_capabilities": [
+          "template.fraud-risk.select_action.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select allow, challenge, hold, block, or review under policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "explain_risk",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Produce reviewable reasons without exposing protected controls.",
+        "required_capabilities": [
+          "template.fraud-risk.explain_risk.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Produce reviewable reasons without exposing protected controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "observe_outcome",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Capture confirmed fraud, disputes, reviews, and false positives.",
+        "required_capabilities": [
+          "template.fraud-risk.observe_outcome.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Capture confirmed fraud, disputes, reviews, and false positives and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "audit_bias",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Audit performance, drift, and disparate impact.",
+        "required_capabilities": [
+          "template.fraud-risk.audit_bias.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Audit performance, drift, and disparate impact and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "revise_beliefs",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Revise route priors without changing task or policy semantics.",
+        "required_capabilities": [
+          "template.fraud-risk.revise_beliefs.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Revise route priors without changing task or policy semantics and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "publish_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.fraud-risk.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish event, features, route, decision, and outcome provenance.",
+        "required_capabilities": [
+          "template.fraud-risk.publish_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish event, features, route, decision, and outcome provenance and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Fraud detection and risk decisioning obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.fraud-risk.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.fraud-risk.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Create an event and identity contract.",
+      "extensions": {},
+      "id": "stage.observe",
+      "slot_ids": [
+        "receive_event",
+        "resolve_identity",
+        "validate_event"
+      ],
+      "title": "Observe"
+    },
+    {
+      "description": "Produce leakage-safe risk evidence.",
+      "extensions": {},
+      "id": "stage.features",
+      "slot_ids": [
+        "retrieve_history",
+        "derive_velocity",
+        "derive_graph_features",
+        "verify_feature_freshness"
+      ],
+      "title": "Features"
+    },
+    {
+      "description": "Combine diverse admitted detectors.",
+      "extensions": {},
+      "id": "stage.detect",
+      "slot_ids": [
+        "apply_rules",
+        "score_anomaly",
+        "score_model",
+        "combine_signals"
+      ],
+      "title": "Detect"
+    },
+    {
+      "description": "Choose a proportionate action.",
+      "extensions": {},
+      "id": "stage.decide",
+      "slot_ids": [
+        "estimate_consequence",
+        "select_action",
+        "explain_risk"
+      ],
+      "title": "Decide"
+    },
+    {
+      "description": "Verify outcomes and update safely.",
+      "extensions": {},
+      "id": "stage.learn",
+      "slot_ids": [
+        "observe_outcome",
+        "audit_bias",
+        "revise_beliefs",
+        "publish_receipt"
+      ],
+      "title": "Learn"
+    }
+  ],
+  "tags": [
+    "risk",
+    "anomaly",
+    "decisioning"
+  ],
+  "template_model_version": "0.1",
+  "title": "Fraud detection and risk decisioning",
+  "version": "1.0.0"
+}

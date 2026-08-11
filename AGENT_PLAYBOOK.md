@@ -12,8 +12,9 @@ and CI decide whether an artifact is acceptable.
 ### 1. Restate the task contract
 
 Record concrete inputs, required outputs, hard policy/resource constraints, and
-an independent acceptance oracle. If the oracle is missing, stop and make that
-gap explicit. Do not use “the node returned success” as sufficient evidence.
+an independent acceptance oracle. Define development, validation, holdout, and
+stress case identities before search. If the oracle is missing, stop and make
+that gap explicit. Do not use “the node returned success” as sufficient evidence.
 
 ### 2. Select and critique a semantic template
 
@@ -76,6 +77,11 @@ For an LLM-generated campaign, freeze an `EvaluationBoundary` and
 proposal digest; quarantine and recompile every mutation or crossover. Use the
 `design-autoresearch-campaign` skill for the full workflow.
 
+Run fixed control and candidate arms beside solver arms under the same task,
+cases, seeds, repetitions, oracle, and runtime class. A bounded arm that finds
+no accepted route is valid negative evidence. Do not reuse circuit-breaker or
+other mutable runtime state across arms.
+
 ### 9. Learn conservatively
 
 Append receipts. Update a new belief revision with evidence counts and
@@ -86,7 +92,9 @@ for failure and dependency diversity, not merely second-place score.
 
 Report the template revision, discovery receipt, registry snapshot, compiler
 diagnostics, search coverage, frozen plan, receipts, tests, limitations, and
-unvisited space. Avoid claims not supported by real execution.
+unvisited space. Validate a `SolutionPackManifest` whose digests exactly equal
+the task, programs, registries, node packs, cases, evaluator, baselines, and
+benchmark suites actually used. Avoid claims not supported by real execution.
 
 ## Patterns
 
@@ -110,6 +118,10 @@ unvisited space. Avoid claims not supported by real execution.
   failure classes as well as mean performance.
 - **Population DAG:** retain diverse seeds, mutations, crossovers, negative
   outcomes, and ancestry instead of overwriting one incumbent branch.
+- **Portable solution closure:** transfer a task and its complete experiment
+  universe as one exact digest set rather than copying a mutable workspace.
+- **Controlled arm:** compare fixed and adaptive policies under the same cases,
+  seeds, oracle, and runtime identity.
 - **Topology family:** make graph-shape alternatives explicit, content-distinct,
   compiler-valid programs and account for routes skipped with their topology.
 - **Structured lowering:** compile composites and bounded loops into inspectable
@@ -134,6 +146,9 @@ unvisited space. Avoid claims not supported by real execution.
 | Search winner reported from training cases | Overstates generalization | Reserve holdout cases and report best-so-far curves |
 | Second-ranked route as fallback | Shared dependency may fail simultaneously | Optimize failure/dependency diversity |
 | Synthetic benchmark presented as production proof | Confuses mechanism with evidence | Label fixture results and run real task cases |
+| Report `ok` interpreted as every arm succeeded | Protocol completion differs from route acceptance | Inspect each arm status, accepted runs, holdout state, and problems |
+| Bounded search winner called globally optimal | Unvisited valid routes still exist | Disclose coverage; reserve optimality for complete exhaustive evidence |
+| Manifest describes mutable workspace state | Declared and executed bytes can diverge | Validate exact solution-pack closure by content digest |
 | In-process adapter called a sandbox | Declared policy is mistaken for enforced containment | Label it trusted-local or install an enforcing runtime adapter |
 | Candidate-readable hidden evaluator | Read-only is confused with confidential | Move evaluator and hidden cases into a separate trust domain |
 | Generated child inherits parent validity | Mutation can change every contract | Quarantine and compile the complete child as a new candidate |

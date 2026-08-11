@@ -1,0 +1,17 @@
+{
+  "description": "Separator and key-case variation.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/data-cleaning/spacing",
+  "id": "case.benchmark.data-cleaning.spacing",
+  "input_digest": "sha256:6a81365ae48409fb4bdc68b0eebe11284d7a9a96cdda37f40ca7a6f0b72e79c5",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.data",
+    "task.cleaning"
+  ],
+  "task_model_version": "0.1"
+}

@@ -1,0 +1,1031 @@
+{
+  "description": "A policy, perception, classification, decision, review, and appeal scaffold.",
+  "domains": [
+    "trust-safety.moderation",
+    "ai.classification"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.content-moderation",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "identify_context",
+        "target_port": "state",
+        "target_slot": "load_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "load_policy",
+        "target_port": "state",
+        "target_slot": "define_harm_oracle"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_harm_oracle",
+        "target_port": "state",
+        "target_slot": "decode_content"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "decode_content",
+        "target_port": "state",
+        "target_slot": "detect_language"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_language",
+        "target_port": "state",
+        "target_slot": "extract_signals"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "extract_signals",
+        "target_port": "state",
+        "target_slot": "apply_rules"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_rules",
+        "target_port": "state",
+        "target_slot": "apply_models"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_models",
+        "target_port": "state",
+        "target_slot": "cross_check_signals"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "cross_check_signals",
+        "target_port": "state",
+        "target_slot": "estimate_uncertainty"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_uncertainty",
+        "target_port": "state",
+        "target_slot": "apply_policy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_policy",
+        "target_port": "state",
+        "target_slot": "select_action"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_action",
+        "target_port": "state",
+        "target_slot": "generate_reason"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_reason",
+        "target_port": "state",
+        "target_slot": "route_human_review"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "route_human_review",
+        "target_port": "state",
+        "target_slot": "process_appeal"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "process_appeal",
+        "target_port": "state",
+        "target_slot": "audit_performance"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_performance",
+        "target_port": "state",
+        "target_slot": "publish_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.content-moderation",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "identify_context",
+        "type": {
+          "id": "template.content-moderation.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_receipt",
+        "type": {
+          "id": "template.content-moderation.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.policy"
+        ],
+        "id": "identify_context",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify surface, audience, jurisdiction, age, and product context.",
+        "required_capabilities": [
+          "template.content-moderation.identify_context.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify surface, audience, jurisdiction, age, and product context and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.policy"
+        ],
+        "id": "load_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load the applicable policy version, thresholds, and exceptions.",
+        "required_capabilities": [
+          "template.content-moderation.load_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load the applicable policy version, thresholds, and exceptions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.policy"
+        ],
+        "id": "define_harm_oracle",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define category, severity, context, and appeal evaluation criteria.",
+        "required_capabilities": [
+          "template.content-moderation.define_harm_oracle.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define category, severity, context, and appeal evaluation criteria and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "decode_content",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Decode text, image, audio, video, metadata, and conversational context.",
+        "required_capabilities": [
+          "template.content-moderation.decode_content.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Decode text, image, audio, video, metadata, and conversational context and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "detect_language",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect language, dialect, code-switching, and obfuscation.",
+        "required_capabilities": [
+          "template.content-moderation.detect_language.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect language, dialect, code-switching, and obfuscation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "extract_signals",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Extract policy-relevant entities, spans, regions, audio, and relationships.",
+        "required_capabilities": [
+          "template.content-moderation.extract_signals.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Extract policy-relevant entities, spans, regions, audio, and relationships and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.classify"
+        ],
+        "id": "apply_rules",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply deterministic hashes, lists, syntax, and context rules.",
+        "required_capabilities": [
+          "template.content-moderation.apply_rules.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply deterministic hashes, lists, syntax, and context rules and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.classify"
+        ],
+        "id": "apply_models",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply admitted calibrated content and context models.",
+        "required_capabilities": [
+          "template.content-moderation.apply_models.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply admitted calibrated content and context models and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.classify"
+        ],
+        "id": "cross_check_signals",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Cross-check conflicting modalities and detector families.",
+        "required_capabilities": [
+          "template.content-moderation.cross_check_signals.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Cross-check conflicting modalities and detector families and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.classify"
+        ],
+        "id": "estimate_uncertainty",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate category, severity, and contextual uncertainty.",
+        "required_capabilities": [
+          "template.content-moderation.estimate_uncertainty.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate category, severity, and contextual uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "apply_policy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Map evidence to policy categories and exceptions.",
+        "required_capabilities": [
+          "template.content-moderation.apply_policy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Map evidence to policy categories and exceptions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "select_action",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select allow, label, limit, remove, report, or review.",
+        "required_capabilities": [
+          "template.content-moderation.select_action.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select allow, label, limit, remove, report, or review and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "generate_reason",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate a policy-grounded reason and user-safe explanation.",
+        "required_capabilities": [
+          "template.content-moderation.generate_reason.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate a policy-grounded reason and user-safe explanation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "route_human_review",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Route uncertain or consequential cases to trained reviewers.",
+        "required_capabilities": [
+          "template.content-moderation.route_human_review.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Route uncertain or consequential cases to trained reviewers and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "process_appeal",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Process appeals against preserved policy and evidence versions.",
+        "required_capabilities": [
+          "template.content-moderation.process_appeal.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Process appeals against preserved policy and evidence versions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "audit_performance",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Audit accuracy, calibration, drift, consistency, and disparate errors.",
+        "required_capabilities": [
+          "template.content-moderation.audit_performance.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Audit accuracy, calibration, drift, consistency, and disparate errors and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "publish_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.content-moderation.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish access-controlled evidence, route, policy, action, and review receipts.",
+        "required_capabilities": [
+          "template.content-moderation.publish_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish access-controlled evidence, route, policy, action, and review receipts and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Content moderation and policy enforcement obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.content-moderation.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.content-moderation.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Bind content to an exact policy context.",
+      "extensions": {},
+      "id": "stage.policy",
+      "slot_ids": [
+        "identify_context",
+        "load_policy",
+        "define_harm_oracle"
+      ],
+      "title": "Policy"
+    },
+    {
+      "description": "Extract relevant multimodal evidence.",
+      "extensions": {},
+      "id": "stage.perceive",
+      "slot_ids": [
+        "decode_content",
+        "detect_language",
+        "extract_signals"
+      ],
+      "title": "Perceive"
+    },
+    {
+      "description": "Apply diverse policy detectors.",
+      "extensions": {},
+      "id": "stage.classify",
+      "slot_ids": [
+        "apply_rules",
+        "apply_models",
+        "cross_check_signals",
+        "estimate_uncertainty"
+      ],
+      "title": "Classify"
+    },
+    {
+      "description": "Select a proportionate policy action.",
+      "extensions": {},
+      "id": "stage.decide",
+      "slot_ids": [
+        "apply_policy",
+        "select_action",
+        "generate_reason"
+      ],
+      "title": "Decide"
+    },
+    {
+      "description": "Preserve accountability and learning.",
+      "extensions": {},
+      "id": "stage.review",
+      "slot_ids": [
+        "route_human_review",
+        "process_appeal",
+        "audit_performance",
+        "publish_receipt"
+      ],
+      "title": "Review"
+    }
+  ],
+  "tags": [
+    "policy",
+    "safety",
+    "human-review"
+  ],
+  "template_model_version": "0.1",
+  "title": "Content moderation and policy enforcement",
+  "version": "1.0.0"
+}

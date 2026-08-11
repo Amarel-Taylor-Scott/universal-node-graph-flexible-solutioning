@@ -18,9 +18,16 @@ large prompt into every vendor-specific file.
 | `.agents/skills/design-autoresearch-campaign/SKILL.md` | Population lineage, generated-code quarantine, evaluator isolation, and promotion workflow | Loaded for iterative LLM-generated improvement campaigns |
 | `.agents/skills/design-topology-family/SKILL.md` | Alternative graph-shape contracts, budgets, lineage, and comparison workflow | Loaded when the harness may insert/remove/reorder semantic obligations |
 | `.agents/skills/author-structured-workflow/SKILL.md` | Conditional, merge, composite, and bounded-loop authoring workflow | Loaded when the task needs data-dependent or iterative control |
+| `.agents/skills/package-solution-graph/SKILL.md` | Task, cases, evaluator, program, registry, baseline, and suite closure | Loaded before publishing or transferring a complete solution universe |
+| `.agents/skills/run-benchmark-arena/SKILL.md` | Fixed controls, bounded solver arms, holdouts, claim scopes, and reports | Loaded for controlled cross-route comparisons |
+| `.agents/skills/expand-node-library/SKILL.md` | Source-bound primitives, exact bindings, sidecars, packs, and conformance | Loaded when extending reusable implementation inventory |
 | `UNIVERSAL_NODE_GRAPH_SPEC.md` | Normative architecture | Read for design or implementation work |
+| `TASK_AND_SOLUTION_PACK_PROTOCOL.md` | Stable problem meaning and exact portable asset closure | Read before packaging an executable or benchmark |
 | `NODE_REPOSITORY_PROTOCOL.md` | Node packs, sparse metadata, embeddings, handshake, and snapshots | Read for catalogue or discovery work |
+| `NODE_AUTHORING_GUIDE.md` | Public Python authoring SDK and standard-library reference | Read before wrapping Python implementations |
 | `SOLUTION_TEMPLATE_PROTOCOL.md` | Cross-domain stages, atomic slots, pass-through, refinement | Read for decomposition/template work |
+| `BENCHMARK_PROTOCOL.md` | Controlled arms, splits, evidence fields, claims, and publication | Read before making route-performance claims |
+| `ADOPTION_GUIDE.md` | Product boundary, first deployment, ecosystem integration, and market tests | Read when deciding where the architecture fits |
 | `EXECUTION_PROTOCOL.md` | Frozen-plan execution, runtime adapters, artifacts, recovery, and receipts | Read for runtime or notebook work |
 | `STRUCTURED_CONTROL_PROTOCOL.md` | Branch, merge, composite, loop, map, reduce, and barrier rules | Read before implementing control flow |
 | `TOPOLOGY_SEARCH_PROTOCOL.md` | Explicit graph variants and full search accounting | Read before topology generation or selection |
@@ -53,22 +60,29 @@ The command fails on an existing destination and records the exact selected
 template digest. It never invents implementations, authority, or evidence.
 
 1. Load the generated and repository root instruction files.
-2. Activate the narrow template, node-pack, structured-control, topology,
-   executor, benchmark, AutoResearch, or end-to-end skill for the requested operation.
-3. Negotiate node discovery and freeze a receipt-backed registry snapshot.
-4. If the task needs structured control, lower it deterministically. If graph
+2. Activate the narrow template, node-library, node-pack, structured-control,
+   topology, executor, solution-pack, benchmark, AutoResearch, or end-to-end
+   skill for the requested operation.
+3. Freeze a `TaskContract`, exact cases, and an independently identified oracle.
+   Do not let generated nodes define what counts as their own success.
+4. Negotiate node discovery and freeze a receipt-backed registry snapshot.
+5. If the task needs structured control, lower it deterministically. If graph
    shape is a variable, freeze a `TopologyFamily`. Then compile the semantic
    program and freeze a plan before implementing runtime adapters.
-5. Reconstruct the plan at execution, use explicit runtime authority, and retain
+6. Reconstruct the plan at execution, use explicit runtime authority, and retain
    artifacts plus an independent verification receipt. Prefer the subprocess
    adapter for trusted local lifecycle separation, set
    `allow_in_process_python=False`, and append every result immediately to a
    receipt journal. Use a stronger external boundary for untrusted code.
-6. Run `solutiongraph conformance` and universal tests before domain-specific
+7. Validate exact `SolutionPackManifest` closure before publishing or moving an
+   experiment between workspaces.
+8. Run fixed controls and bounded solver arms against identical cases, seeds,
+   repetitions, oracle, and runtime class. Preserve unsuccessful arms.
+9. Run `solutiongraph conformance` and universal tests before domain-specific
    integration tests.
-7. Include discovery receipts, compiler diagnostics, search reports, frozen
+10. Include discovery receipts, compiler diagnostics, search reports, frozen
    plan/admitted-space digests, execution receipts, rejected cases, and
    limitations in the review output; do not rely on prose assurance.
-8. For generated-code campaigns, freeze the evaluation boundary before the
+11. For generated-code campaigns, freeze the evaluation boundary before the
    first proposal, preserve a population DAG and negative evidence, and keep
    candidate code unable to redefine or inspect hidden evaluation assets.

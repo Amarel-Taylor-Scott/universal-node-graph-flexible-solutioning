@@ -17,6 +17,18 @@ should preserve.
 | [Parnas, module decomposition criteria](https://doi.org/10.1145/361598.361623) | Good modularity hides likely-to-change decisions behind stable interfaces | Provider, framework, model, and binary details stay behind the node ABI |
 | [Kubeflow reusable components](https://www.kubeflow.org/docs/components/pipelines/user-guides/components/) and [pipeline IR](https://www.kubeflow.org/docs/components/pipelines/concepts/ir-yaml/) | Components have typed inputs/outputs and pipelines compile into a portable intermediate representation | Semantic templates and node implementations are different artifacts; task graphs compile before execution |
 
+## Ecosystem composition and benchmark portability
+
+| Primary source | Relevant idea | Consequence here |
+|---|---|---|
+| [Dagster](https://docs.dagster.io/) and [Prefect](https://docs.prefect.io/v3/get-started/quickstart) documentation | Mature orchestrators model and observe operational workflows and deploy executable work | SolutionGraph should export frozen plans to orchestrator adapters instead of rebuilding every scheduler capability |
+| [Temporal](https://docs.temporal.io/) documentation | Durable execution is a specialized platform concern with persisted workflow state and failure recovery | The portable compiler/experiment layer remains separate from a production durable-execution adapter |
+| [LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) | Agent applications may use stateful graphs, conditional edges, and runtime execution | Agent graphs can be node implementations or topology adapters; their state semantics do not replace SolutionGraph task and evidence contracts |
+| [Ray Tune](https://docs.ray.io/en/latest/tune/index.html) | Distributed experiment execution separates search algorithms, schedulers, trainables, and trial resources | A Ray adapter may allocate benchmark arms while SolutionGraph retains route identity, compiler validity, case/oracle identity, and receipts |
+| [DSPy](https://dspy.ai/) | Declarative language-model programs can be optimized against metrics | DSPy modules and optimizers can be candidate nodes or proposal policies; model/prompt choices remain visible and independently verified |
+| [OpenML benchmarking](https://docs.openml.org/benchmark/) | Reusable benchmark suites fix datasets, tasks, splits, and evaluation procedures | `TaskContract`, `TaskCaseSpec`, and `BenchmarkSuite` content-address the analogous problem/evaluation boundary across domains |
+| [WorkflowHub](https://workflowhub.eu/) and [RO-Crate](https://www.researchobject.org/ro-crate/) | Workflows and their research artifacts benefit from findable, interoperable, reusable packaging and metadata | A solution pack is a portable digest closure and can later project to ecosystem packaging standards without weakening core identity |
+
 ## Discovery, federation, and supply chain
 
 | Primary source | Relevant idea | Consequence here |

@@ -1,0 +1,17 @@
+{
+  "description": "Irregular spacing and CRLF line endings.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/document-extraction/spacing",
+  "id": "case.benchmark.document-extraction.spacing",
+  "input_digest": "sha256:a11c9ad97f0db742c4746504aa6786d097624f39476ff4f5c8769b49e311daca",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.document",
+    "task.extraction"
+  ],
+  "task_model_version": "0.1"
+}

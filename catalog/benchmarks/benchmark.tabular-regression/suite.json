@@ -1,0 +1,73 @@
+{
+  "arms": [
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the declared control route without route search.",
+      "id": "arm.fixed-control",
+      "kind": "fixed-route",
+      "route_id": "control",
+      "solver_profile": "",
+      "title": "Fixed control"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Execute the stronger hand-authored candidate without route search.",
+      "id": "arm.fixed-candidate",
+      "kind": "fixed-route",
+      "route_id": "linear",
+      "solver_profile": "",
+      "title": "Fixed candidate"
+    },
+    {
+      "anchor_route_ids": [],
+      "description": "Use one prior-guided proposal under the explicit quick allocation.",
+      "id": "arm.solver-quick",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "quick",
+      "title": "Quick solver"
+    },
+    {
+      "anchor_route_ids": [
+        "linear"
+      ],
+      "description": "Use prior plus bounded beam search and retain evidence-diverse fallbacks.",
+      "id": "arm.solver-balanced",
+      "kind": "solver-profile",
+      "route_id": "",
+      "solver_profile": "balanced",
+      "title": "Balanced solver"
+    }
+  ],
+  "benchmark_model_version": "0.1",
+  "claim_scope": "mechanism-fixture",
+  "dataset_license": "CC0-1.0",
+  "description": "Compare split/model paths on exact synthetic linear relationships with a separate holdout and bounded search allocations.",
+  "example_id": "tabular-regression",
+  "holdout_case_ids": [
+    "case.benchmark.tabular-regression.holdout-case"
+  ],
+  "id": "benchmark.tabular-regression",
+  "notes": [
+    "All inputs are small synthetic fixtures committed by value digest.",
+    "Latency is observed runtime evidence, not a cross-machine performance claim.",
+    "Only a complete exhaustive arm may claim optimality over the admitted space."
+  ],
+  "program_digest": "sha256:ea43895821a852419c2b5ead02aee7fc852310659c2e6c7e24001b08f0a2ee4f",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "repetitions": 1,
+  "seeds": [
+    0,
+    1729
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "task_case_digests": [
+    "sha256:763a773b35b02a36264850495d6ca71b90c907afa8952ef5b1416acb268d0eda",
+    "sha256:baa279001dbd8560011f6e9ce07acbc2a707e71a3fac7dbe5f17fd09fa7186c1",
+    "sha256:e2524bfb0e49861ebec5899702195e8b61144bd9b60ff35739af3cad081dfc09",
+    "sha256:baac0114dcbde65ee9d990384144b4d9f7e0b09e93653c1166aed08b9514c041"
+  ],
+  "task_contract_digest": "sha256:2fe6c7b95800b75c70f1f37e2abfbb25e8b551142508e9bd5127c54b925fc493",
+  "title": "Data science regression arena",
+  "version": "1.0.0"
+}

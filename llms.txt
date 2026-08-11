@@ -12,14 +12,18 @@
 - [AutoResearch and Cholesky review](AUTORESEARCH_REVIEW.md): Package identity, campaign isolation, lineage, promotion, and numerical nodes
 - [LLM harness integration](LLM_HARNESS.md): Repository instruction and skill map
 - [Node repository protocol](NODE_REPOSITORY_PROTOCOL.md): Reusable packs, descriptors, embeddings, handshake, snapshots
+- [Node authoring guide](NODE_AUTHORING_GUIDE.md): Source-bound Python nodes, exact candidate expansion, standard-library reference, and publication checks
 - [Solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md): Cross-domain stages, atomic slots, and bounded refinement
+- [Task and solution-pack protocol](TASK_AND_SOLUTION_PACK_PROTOCOL.md): Stable task meaning, cases, oracle identity, and exact portable closure
+- [Benchmark protocol](BENCHMARK_PROTOCOL.md): Controlled arms, holdouts, coverage, claim scopes, and evidence reports
+- [Adoption guide](ADOPTION_GUIDE.md): Practical market wedge, integrations, LLM-harness loop, and production boundary
 - [Execution protocol](EXECUTION_PROTOCOL.md): Frozen plans, runtimes, artifacts, recovery, verification, and receipts
 - [Structured control](STRUCTURED_CONTROL_PROTOCOL.md): Conditional branches, composites, explicit bounded loops, and lowering receipts
 - [Topology search](TOPOLOGY_SEARCH_PROTOCOL.md): Alternative DAG shapes, budgets, proposal lineage, and complete accounting
 - [Streaming](STREAMING_PROTOCOL.md): Event-time windows, watermarks, lateness, retractions, and production boundaries
 - [Provenance and resume](PROVENANCE_AND_RESUME.md): Exact local checkpoints and W3C PROV/OpenLineage/SLSA projections
-- [Executable examples](REAL_WORLD_EXAMPLES.md): 23 runnable programs, declared controls, solver commands, and extension gates
-- [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md): 24 task contracts, 23 executable programs, solver profiles, and honest external boundaries
+- [Executable examples](REAL_WORLD_EXAMPLES.md): 24 runnable programs, 54 declared routes, controls, solver commands, and extension gates
+- [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md): 36 task families, 24 executable programs, solver profiles, and honest external boundaries
 - [Extending the Arena](EXTENDING_ARENA.md): Required fixture, connector, catalog, conformance, and confirmation gates
 - [Agent playbook](AGENT_PLAYBOOK.md): Patterns, anti-patterns, and implementation workflow
 - [Full architecture blueprint](UNIVERSAL_GRAPH_SYSTEM.md): Extended design and viewer model
@@ -38,21 +42,28 @@
 - [Saga runner](solutiongraph/saga.py): Reverse-order compensation over effectful node contracts
 - [Compatibility sidecars](solutiongraph/compatibility.py): Optional port/state/secret/hardware/residency constraints
 - [Provenance export](solutiongraph/provenance.py): W3C PROV, OpenLineage, and SLSA projections
-- [Advanced conformance](solutiongraph/conformance.py): Installed-wheel execution of eight advanced mechanisms
+- [Advanced conformance](solutiongraph/conformance.py): Installed-wheel execution of eleven advanced mechanisms
 - [Workspace scaffold](solutiongraph/scaffold.py): Transactional coding-harness task initialization
 - [Campaign contracts](solutiongraph/campaign.py): Hard budgets, population ancestry, evaluator boundaries, and decisions
 - [Artifact stores](solutiongraph/artifacts.py): Content-addressed memory and local-file stores
 - [Universal solver](solutiongraph/solver.py): Multi-round search, receipt-backed ranking, champion, and diverse route fallbacks
 - [DAG Arena](solutiongraph/arena.py): Cross-domain problem catalog and executable suite harness
-- [Executable domain packs](solutiongraph/examples/): 23 trusted local programs and 146 nodes across data, web, documents, media, ML, identity, operations, security, science, recommendation, and numerical solving
+- [Python node authoring](solutiongraph/authoring.py): Source-bound definitions, signature checks, stable bindings, and exact finite expansion
+- [Task/solution packs](solutiongraph/tasking.py): Portable task contracts, cases, oracle identity, and exact closure validation
+- [Benchmark runner](solutiongraph/benchmarking.py): Controlled fixed/solver arms and offline JSON/HTML evidence
+- [Standard-library nodes](solutiongraph/stdlib_pack.py): 19 dependency-free nodes, 32 bindings, discovery sidecars, and a 1,728-route data-quality program
+- [Executable domain packs](solutiongraph/examples/): 24 trusted local programs and 165 nodes across data, web, documents, media, ML, identity, operations, security, science, recommendation, and numerical solving
 - [Example notebooks](notebooks/): Five end-to-end compile, execute, verify, and receipt notebooks
 - [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
-- [Reference catalogue](catalog/): 19 semantic templates and three portable node packs
+- [Reference catalogue](catalog/): 31 semantic templates, four node packs, 36 Arena tasks, and six benchmark/solution packs
 - [Browser adapter](browsergraph/): Concrete runtime proof
 - [Universal conformance tests](tests/test_solutiongraph.py): Executable architecture requirements
 - [Create-template skill](.agents/skills/create-solution-template/SKILL.md): Strict template authoring workflow
 - [Author-node-pack skill](.agents/skills/author-node-pack/SKILL.md): Reusable node publication workflow
 - [Benchmark skill](.agents/skills/benchmark-solution-graph/SKILL.md): Route experiment workflow
+- [Solution-pack skill](.agents/skills/package-solution-graph/SKILL.md): Exact task/case/oracle/asset closure workflow
+- [Benchmark Arena skill](.agents/skills/run-benchmark-arena/SKILL.md): Controlled suite execution and reporting workflow
+- [Node-library skill](.agents/skills/expand-node-library/SKILL.md): Reusable source-bound primitive expansion workflow
 - [Execution skill](.agents/skills/execute-solution-graph/SKILL.md): Runtime and executable-domain workflow
 - [AutoResearch campaign skill](.agents/skills/design-autoresearch-campaign/SKILL.md): Bounded generated-code improvement workflow
 - [Topology-family skill](.agents/skills/design-topology-family/SKILL.md): Alternative graph-shape authoring and experimentation workflow

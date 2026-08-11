@@ -1,0 +1,34 @@
+{
+  "acceptance_signals": [
+    "geometry validity",
+    "coverage",
+    "join loss",
+    "positional error",
+    "numerical accuracy"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.geospatial-data-product",
+  "input_contract": "Versioned geometries, rasters, tables, CRS declarations, predicates, and analytical objective.",
+  "output_contract": "Verified spatial dataset, analysis, uncertainty, visualization, rejects, and lineage.",
+  "problem": "Normalize coordinate systems, repair topology, integrate sources, analyze, quantify uncertainty, and publish.",
+  "readiness": "template",
+  "stage_families": [
+    "ingest",
+    "validate geometry",
+    "transform CRS",
+    "index",
+    "spatial join",
+    "analyze",
+    "uncertainty",
+    "publish"
+  ],
+  "tags": [
+    "geospatial",
+    "gis",
+    "analytics"
+  ],
+  "template_id": "template.geospatial-analytics",
+  "title": "Spatial sources to a verified analytical map product"
+}

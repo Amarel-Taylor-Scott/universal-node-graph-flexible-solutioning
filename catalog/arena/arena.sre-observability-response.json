@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "detection delay",
+    "precision",
+    "time to recovery",
+    "SLO recovery",
+    "recurrence"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.sre-observability-response",
+  "input_contract": "Service topology, telemetry, SLOs, ownership, mitigation authority, and error-budget policy.",
+  "output_contract": "Impact, causal evidence, mitigation, recovery verification, and follow-up actions.",
+  "problem": "Collect trustworthy telemetry, detect SLO degradation, correlate symptoms, diagnose, mitigate, and learn.",
+  "readiness": "template",
+  "stage_families": [
+    "instrument",
+    "collect",
+    "verify telemetry",
+    "detect",
+    "correlate",
+    "diagnose",
+    "mitigate",
+    "recover",
+    "learn"
+  ],
+  "tags": [
+    "sre",
+    "observability",
+    "reliability"
+  ],
+  "template_id": "template.observability-sre",
+  "title": "Telemetry to a verified reliability response"
+}

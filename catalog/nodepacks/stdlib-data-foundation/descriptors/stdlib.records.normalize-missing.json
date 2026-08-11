@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "records.normalize-missing"
+  ],
+  "aliases": [
+    "records normalize-missing"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.records.normalize-missing",
+      "language": "und",
+      "source_digest": "sha256:72b09b670e946a0bd1c6e7fd8b7007070d55f649e80ecd59ff2cfd7ac2b64c3c",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Map an explicitly configured set of string sentinels to null. Inputs: records. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.records.normalize-missing",
+  "node_spec_digest": "sha256:72b09b670e946a0bd1c6e7fd8b7007070d55f649e80ecd59ff2cfd7ac2b64c3c",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Map an explicitly configured set of string sentinels to null."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Map an explicitly configured set of string sentinels to null.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Normalize Missing"
+}

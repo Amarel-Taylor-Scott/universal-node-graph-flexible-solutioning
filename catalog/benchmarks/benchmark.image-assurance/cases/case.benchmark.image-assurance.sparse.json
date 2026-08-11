@@ -1,0 +1,17 @@
+{
+  "description": "Sparse histogram with an extreme pixel.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/image-assurance/sparse",
+  "id": "case.benchmark.image-assurance.sparse",
+  "input_digest": "sha256:919b08dc61d1e3efafc4dd34b8a9451a36c0338b3b2cf8927ada7b9c6f3a4919",
+  "split": "validation",
+  "tags": [
+    "fixture.synthetic",
+    "domain.image",
+    "task.assurance"
+  ],
+  "task_model_version": "0.1"
+}

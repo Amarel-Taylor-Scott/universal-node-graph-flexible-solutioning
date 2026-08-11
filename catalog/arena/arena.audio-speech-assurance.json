@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "word error rate",
+    "alignment error",
+    "speaker error",
+    "policy recall",
+    "signal quality"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.audio-speech-assurance",
+  "input_contract": "Exact audio bytes, language hints, requested outputs, terminology, and redaction policy.",
+  "output_contract": "Timestamped transcript, speakers, acoustic findings, confidence, redactions, and receipt.",
+  "problem": "Decode, enhance, segment, diarize, transcribe, classify, verify, and redact audio evidence.",
+  "readiness": "template",
+  "stage_families": [
+    "decode",
+    "validate",
+    "enhance",
+    "activity",
+    "diarize",
+    "transcribe",
+    "align",
+    "verify",
+    "redact"
+  ],
+  "tags": [
+    "audio",
+    "speech",
+    "transcription"
+  ],
+  "template_id": "template.audio-speech",
+  "title": "Audio to aligned transcript and assurance report"
+}

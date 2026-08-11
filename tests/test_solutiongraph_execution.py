@@ -304,11 +304,12 @@ def test_reference_release_gate_executes_all_routes_and_detects_catalog_drift(
 ):
     result = verify_reference_release(catalog_root="catalog")
     assert result.ok
-    assert len(result.route_results) == 51
-    assert result.accepted_routes == 32
-    assert result.rejected_controls == 19
+    assert len(result.route_results) == 54
+    assert result.accepted_routes == 33
+    assert result.rejected_controls == 21
     assert result.conformance.ok
-    assert len(result.conformance.checks) == 8
+    assert len(result.conformance.checks) == 11
+    assert result.benchmark_count == result.solution_pack_count == 6
     assert all(route.ok for route in result.route_results)
 
     stale_catalog = tmp_path / "catalog"

@@ -1,0 +1,60 @@
+{
+  "actions": [
+    "data.parse-records"
+  ],
+  "aliases": [
+    "data parse-records"
+  ],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.stdlib.data.parse-delimited",
+      "language": "und",
+      "source_digest": "sha256:6447674cff4c964f17b5d317b0bc3cc7ed5ddd730bcaf47cc927ba18c3cd4dc6",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Parse comma-, semicolon-, or tab-delimited records. Inputs: text. Outputs: records."
+    }
+  ],
+  "domains": [
+    "data.engineering"
+  ],
+  "extensions": {
+    "stdlib.maturity": "reference"
+  },
+  "node_id": "stdlib.data.parse-delimited",
+  "node_spec_digest": "sha256:6447674cff4c964f17b5d317b0bc3cc7ed5ddd730bcaf47cc927ba18c3cd4dc6",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed text input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "text"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    }
+  ],
+  "purposes": [
+    "Parse comma-, semicolon-, or tab-delimited records."
+  ],
+  "solutions": [
+    "Compose this primitive into typed data preparation graphs."
+  ],
+  "summary": "Parse comma-, semicolon-, or tab-delimited records.",
+  "tags": [
+    "stdlib.reusable",
+    "runtime.python"
+  ],
+  "title": "Parse Delimited"
+}

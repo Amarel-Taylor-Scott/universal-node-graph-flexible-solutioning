@@ -1,0 +1,17 @@
+{
+  "description": "Positive slope and nonzero intercept.",
+  "expected_output_digest": "",
+  "extensions": {
+    "fixture.license": "CC0-1.0"
+  },
+  "fixture_ref": "inline://solutiongraph/benchmark/tabular-regression/positive",
+  "id": "case.benchmark.tabular-regression.positive",
+  "input_digest": "sha256:9fcd7eecd3aa1f272087a0f7182238fac56f3eccea4e21d213f60a661d0b6014",
+  "split": "development",
+  "tags": [
+    "fixture.synthetic",
+    "domain.ml",
+    "task.regression"
+  ],
+  "task_model_version": "0.1"
+}

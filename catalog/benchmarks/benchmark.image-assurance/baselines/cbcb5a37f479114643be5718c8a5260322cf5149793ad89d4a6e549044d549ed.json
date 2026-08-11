@@ -1,0 +1,55 @@
+{
+  "admitted_space_digest": "sha256:9fa788a64210832f47c570dd8943c945409019ffbc6d200508fd76b88e4ff39d",
+  "bindings": [
+    {
+      "candidate_id": "candidate.example.image.decode.tokens.default",
+      "implementation_digest": "sha256:043d186804a502c5bef78020a53d576b4a53b87253b0e82e54ef3854befa6b27",
+      "node_id": "example.image.decode.tokens",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "decode"
+    },
+    {
+      "candidate_id": "candidate.example.image.enhance.identity.default",
+      "implementation_digest": "sha256:6a241c6682df07a69af44180be74c35f48726ba324cc0206f93c34e5c8a0597b",
+      "node_id": "example.image.enhance.identity",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "enhance"
+    },
+    {
+      "candidate_id": "candidate.example.image.inspect.mean.default",
+      "implementation_digest": "sha256:7a6c6c49953a06ab510d14fd351da669dd8fcb28b559fa61c1d353ce733d7fe0",
+      "node_id": "example.image.inspect.mean",
+      "node_version": "1.0.0",
+      "parameters": {},
+      "slot_id": "inspect"
+    }
+  ],
+  "digest": "sha256:cbcb5a37f479114643be5718c8a5260322cf5149793ad89d4a6e549044d549ed",
+  "edges": [
+    {
+      "source_port": "image",
+      "source_slot": "decode",
+      "target_port": "image",
+      "target_slot": "enhance"
+    },
+    {
+      "source_port": "image",
+      "source_slot": "enhance",
+      "target_port": "image",
+      "target_slot": "inspect"
+    }
+  ],
+  "fallbacks": [],
+  "model_version": "0.2",
+  "program_digest": "sha256:bb7fab8eb00a68a7a86c0f6ccedf1019bbb6f76c578a78def878e123eef33775",
+  "program_id": "example.image-check-and-process",
+  "program_version": "1.0.0",
+  "registry_digest": "sha256:b74288efb449ae87b36bef5a86d69c9a4828c0a6ad3ea8bf70e44c922e8f94f4",
+  "topological_order": [
+    "decode",
+    "enhance",
+    "inspect"
+  ]
+}

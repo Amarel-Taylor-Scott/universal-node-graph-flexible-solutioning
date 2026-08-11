@@ -7,6 +7,9 @@ description: Model, implement, validate, or benchmark a software problem using t
 
 Read `../../../UNIVERSAL_NODE_GRAPH_SPEC.md` before changing the ontology. Read
 `../../../RESEARCH_FOUNDATIONS.md` when making a new architectural tradeoff.
+Read `../../../TASK_AND_SOLUTION_PACK_PROTOCOL.md` before transferring or
+publishing a task universe, and `../../../BENCHMARK_PROTOCOL.md` before making
+route-performance claims.
 
 Load only the reference needed for the active operation:
 
@@ -20,13 +23,15 @@ Load only the reference needed for the active operation:
 1. State the task independently of any implementation.
 2. Define typed external inputs, outputs, hard policy/resource limits, and an
    independent success oracle.
-3. Decompose the task into semantic obligations. Split an obligation again when
+3. Freeze development, validation, holdout, and stress case identities. Keep
+   candidate code unable to rewrite the evaluator or inspect hidden cases.
+4. Decompose the task into semantic obligations. Split an obligation again when
    its candidates would not be genuine substitutes.
-4. Group related obligations into nested subgraphs/submatrices for human
+5. Group related obligations into nested subgraphs/submatrices for human
    navigation without hiding the atomic slots.
-5. Represent branch, loop, map, reduce, barrier, and long-lived control as
+6. Represent branch, loop, map, reduce, barrier, and long-lived control as
    structured/composite slots. Keep the current semantic level acyclic.
-6. Connect named typed ports. Insert explicit adapter nodes for conversions.
+7. Connect named typed ports. Insert explicit adapter nodes for conversions.
 
 ## Build the implementation registry
 

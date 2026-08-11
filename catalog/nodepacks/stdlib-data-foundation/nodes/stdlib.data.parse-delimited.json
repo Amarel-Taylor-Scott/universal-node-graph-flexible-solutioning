@@ -1,0 +1,71 @@
+{
+  "capabilities": [
+    "data.parse-records"
+  ],
+  "description": "Parse comma-, semicolon-, or tab-delimited records.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.stdlib_nodes:parse_delimited_records",
+  "failure_modes": [
+    {
+      "code": "data.invalid-delimited",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "stdlib.data.parse-delimited",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:d56da34e0e7bf9a4c3d53d81da9a36a95e2f309a0e4b67b73fbfa7177ab47258",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "text",
+      "type": {
+        "id": "stdlib.text",
+        "media_type": "text/plain",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "stdlib.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        ",",
+        ";",
+        "\t"
+      ],
+      "default": ",",
+      "description": "",
+      "name": "delimiter",
+      "required": false,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/stdlib_nodes.py",
+  "verifier": "",
+  "version": "1.0.0"
+}
