@@ -11,10 +11,12 @@ inside the first.
 ## Closed topology family
 
 A `TopologyFamily` contains content-distinct `TopologyVariant` objects that
-share the exact task and success contract. Every variant contains a complete
+share the exact task, success contract, and named external input/output value
+contracts. Internal endpoint slots may differ, but a variant cannot silently
+rename or retype the family interface. Every variant contains a complete
 `ProgramGraph`, rationale, optional prior log weight, optional parent variant,
 and explicit operator labels such as `operator.insert-slot` or
-`operator.add-verifier`.
+`operator.add-verifier`. Parent lineage must be acyclic.
 
 Operators describe lineage; they do not grant validity. `admit_all()` validates
 and fully admits every variant against the registry independently. A generated
@@ -62,6 +64,20 @@ slot-to-candidate assignment. `TopologySearchEngine.compile()` resolves the
 variant and invokes the ordinary compiler. The resulting `FrozenPlan` is then
 evaluated under the same verifier, cases, seeds, and resources as competing
 topologies.
+
+`GraphExperimentRunner` performs that evaluation as one typed operation. A
+`GraphExperimentSpec` freezes the family, registry, cases, objectives, exact
+control selection, search budget, runtime policy, beliefs, seeds, repetitions,
+holdouts, and acceptance gate. It always executes the exact `GraphControl`,
+groups searched plans by program, and returns cross-topology receipt aggregates,
+control deltas, Pareto membership, and a transparent weighted projection.
+
+When `require_complete_grid=True`, the runner requires uncapped exhaustive
+route and topology search and fails if a result limit would hide an enumerated
+plan from execution. `complete_grid_evaluated` requires both complete search
+accounting and completion of every case/seed/repetition allocation. See
+`GRAPH_EXPERIMENTS.md` and
+`examples/control_vs_mutated_graph_experiment.py`.
 
 Do not compare shapes with different success contracts, hidden preprocessing,
 or unequal evaluator access. Use paired/interleaved measurements where runtime

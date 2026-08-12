@@ -48,10 +48,26 @@ All notable changes to this proof of concept are documented here.
   routes per graph, rejected minimal controls, accepted robust and alternate
   routes, accepted hybrid compositions, Arena contracts, and a lifecycle
   extension guide mapped to the supplied 560-technique inventory.
+- A typed control-versus-topology-mutation experiment layer with one exact
+  fixed control, common case/seed/repetition allocation, complete route-grid
+  execution, control deltas, Pareto membership, transparent weighted ranking,
+  and a strict machine-readable report.
+- A dependency-free six-route control/mutation quickstart whose cleaning and
+  estimation implementations are separated from graph and experiment config.
+- A reusable post-execution ranking module and `ExperimentBundle` dataclass for
+  shorter orchestration interfaces without weakening content identities.
+- A role-based documentation map, runnable examples index, graph-experiment
+  guide, and repository-wide code review with staged modularity recommendations.
+- Contributor guidance for reproducible control-versus-mutation experiments
+  and future typed topology-mutation operators.
 
 ### Changed
 
-- The strict wire-schema set now contains 60 schemas.
+- The strict wire-schema set now contains 61 schemas.
+- Topology families now reject mismatched external port contracts, self-parent
+  variants, and cyclic mutation ancestry before admission or search.
+- `UniversalSolver` and graph experiments share the same evidence-only hard
+  gates, Pareto flags, and normalized weighted projection.
 - Release verification now covers 47 executable examples, 379 unique nodes, 120
   declared routes, 76 accepted observations, 44 intentional negative controls,
   six node packs, and 568 generated catalogue documents.

@@ -46,6 +46,7 @@ An implementation is conforming only if it keeps these objects distinct:
 | Run receipt / evidence ledger | What actually ran and what was observed? | Observations only |
 | Solution-pack manifest | Which exact task, programs, registries, node packs, cases, evaluator, baselines, and suites form the portable closure? | No |
 | Benchmark suite/report | Which controlled arms were allocated, and what did each observe under the declared claim scope? | Allocation: no; report: observations only |
+| Graph experiment spec/report | Which fixed control, explicit topology mutations, compatible route grids, and common trials were compared? | Spec: no; report: observations only |
 
 The optimizer MUST NOT change program meaning, grant authority, coerce a type,
 or make an invalid configuration valid. It proposes configurations only inside
@@ -166,6 +167,9 @@ single-value port is invalid unless an explicit merge node exists.
 A topology family is a versioned collection of complete `ProgramGraph`
 alternatives that satisfy one task and success contract. Each variant declares
 its rationale, prior weight, optional parent, and explicit topology operators.
+Every variant MUST expose the same named external input/output value contracts,
+and the parent-variant lineage MUST be acyclic. Internal slot endpoints may
+differ without changing that external interface.
 Topology search MUST validate and admit every variant independently. Node-route
 counts, topology exclusions, heuristic skips, and unvisited space MUST be
 reported separately; an optimizer cannot smuggle an unvalidated graph rewrite
@@ -323,6 +327,14 @@ A credible benchmark includes:
 - best-so-far versus cost/time curves, not only final winners;
 - failure taxonomy and fallback recovery rate;
 - route-space coverage and optimizer regret when ground truth is available.
+
+`GraphExperimentRunner` is the reference controlled-topology layer. It freezes
+one exact control plan, searches explicit `TopologyVariant` route grids, executes
+selected plans under identical cases, seeds, repetitions, verifier, policy, and
+objectives, and reports control deltas, Pareto membership, and the transparent
+weighted projection. Complete-grid claims require every feasible route in the
+declared family and registry snapshot to execute; a bounded result retains its
+exact unvisited count.
 
 The current evidence module supplies immutable ledgers, experiment design,
 aggregate means/variances, Pareto fronts, and smoothed success priors. Learned

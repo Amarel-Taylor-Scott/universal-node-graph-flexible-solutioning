@@ -159,6 +159,8 @@ objects, not in `NodeSpec`.
 - `solutiongraph/tasking.py` — portable task contracts, cases, oracles, and exact solution-pack closure.
 - `solutiongraph/authoring.py` — source-bound Python node authoring and exact candidate expansion.
 - `solutiongraph/benchmarking.py` — controlled benchmark arms and offline evidence reports.
+- `solutiongraph/graph_experiments.py` — exact controls, topology mutations, common trials, and cross-graph evidence.
+- `solutiongraph/ranking.py` — reusable receipt-derived gates, Pareto flags, and weighted projections.
 - `solutiongraph/stdlib_pack.py` — 19 dependency-free reusable nodes and 32 bindings.
 - `solutiongraph/examples/` — 47 dependency-free executable domain examples,
   including ten three-strategy data-science lifecycle graphs.

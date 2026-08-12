@@ -241,6 +241,17 @@ change admission or select a winner while runs are underway. It returns an
 immutable `EvidenceLedger`, per-plan aggregates, Pareto plan identities, and
 explicit holdout receipt IDs.
 
+`ExperimentBundle` carries the design, plans, cases, program, registry,
+admitted space, execution policy, and belief revision as one frozen dataclass.
+It is a quality-of-life boundary, not a merged identity: bundle validation still
+checks every digest and exact mapping before execution.
+
+`GraphExperimentRunner` composes topology search and ordinary experiment
+execution. It always includes one exact `GraphControl`, groups plans by their
+content-distinct program, executes common cases/seeds/repetitions, and compares
+receipt-derived evidence across control-topology alternatives and mutations.
+The runner never mutates a graph or searches inside node execution.
+
 Use the existing successive-halving and early-stopping primitives only through
 an explicit multi-fidelity supervisor. `run_successive_halving` invokes the
 supplied evaluator at each resource rung and records every observation,

@@ -46,6 +46,7 @@ SCHEMA_NAMES = (
     "compatibility-catalog.schema.json",
     "execution-checkpoint.schema.json",
     "topology-search-report.schema.json",
+    "graph-experiment-report.schema.json",
     "stream-window-policy.schema.json",
     "stream-event.schema.json",
     "stream-emission.schema.json",

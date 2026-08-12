@@ -11,11 +11,12 @@ yet a turnkey production scheduler or a hostile-code execution service.
 
 | Surface | Status | Supported use |
 |---|---|---|
-| Semantic model and 60 strict schemas | Alpha-supported | Typed task contracts/cases, task fingerprints, historical memory and update receipts, search initialization, linked harness and evidence bundles, solution packs, benchmark suites/reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
+| Semantic model and 61 strict schemas | Alpha-supported | Typed task contracts/cases, task fingerprints, historical memory and update receipts, search initialization, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
 | Compiler and complete snapshot admission | Alpha-supported | Reject invalid types, authority, effects, topology, bindings, and constraints before execution |
 | Conditional branches | Alpha-supported locally | Data-dependent activation, exactly receipted skips, and compiler rejection of unsafe conditional outputs without an explicit merge |
 | Composite and bounded-loop lowering | Alpha-supported locally | Deterministic namespaced expansion into ordinary compiler-valid DAGs with a content-addressed lowering receipt |
 | Alternative topology families | Alpha-supported locally | Search explicit compiler-valid graph shapes and node routes with separate topology/route budgets and complete accounting |
+| Control-versus-mutation graph experiments | Alpha-supported locally | One exact control, explicit acyclic topology mutations with equal external interfaces, compatible route grids, common cases/seeds/objectives, raw deltas, Pareto/champion evidence, and optional complete-grid proof |
 | Prior, beam, sprout, adaptive, exhaustive search | Alpha-supported | Explicitly budgeted proposal ordering over compiler-valid routes |
 | Executed successive halving | Alpha-supported locally | Caller-supplied evaluation at explicit fidelity rungs with complete promotion and resource records |
 | UniversalSolver | Alpha-supported locally | Full admission, multi-round search, frozen-plan experiments, learned observational priors, hard gates, ranking, champion, and benchmarked route-level fallbacks |

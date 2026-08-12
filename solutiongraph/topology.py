@@ -27,6 +27,18 @@ from solutiongraph.search import (
 TOPOLOGY_MODEL_VERSION = "0.1"
 
 
+def _external_interface(program: ProgramGraph) -> tuple[tuple[Any, ...], tuple[Any, ...]]:
+    """Return endpoint-independent external port contracts for family comparison."""
+
+    inputs = tuple(sorted(
+        (item.name, item.value_type.to_dict()) for item in program.inputs
+    ))
+    outputs = tuple(sorted(
+        (item.name, item.value_type.to_dict()) for item in program.outputs
+    ))
+    return inputs, outputs
+
+
 @dataclass(frozen=True)
 class TopologyVariant:
     """One explicit semantic DAG alternative in a topology family."""
@@ -110,6 +122,16 @@ class TopologyFamily:
         if len(digests) != len(set(digests)):
             problems.append("topology programs must be content-distinct")
         known = set(ids)
+        parents = {
+            variant.id: variant.parent_variant_id
+            for variant in self.variants
+            if variant.parent_variant_id
+        }
+        reference_interface = (
+            _external_interface(self.variants[0].program)
+            if self.variants
+            else None
+        )
         for index, variant in enumerate(self.variants):
             problems.extend(
                 f"variants[{index}]: {problem}" for problem in variant.validate()
@@ -118,12 +140,33 @@ class TopologyFamily:
                 problems.append(
                     f"variants[{index}]: parent_variant_id is not in this family"
                 )
+            if variant.parent_variant_id == variant.id:
+                problems.append(f"variants[{index}]: topology variant cannot parent itself")
             if variant.program.task != self.task:
                 problems.append(f"variants[{index}]: program task differs from family task")
             if variant.program.success_contract != self.success_contract:
                 problems.append(
                     f"variants[{index}]: program success contract differs from family"
                 )
+            if (
+                reference_interface is not None
+                and _external_interface(variant.program) != reference_interface
+            ):
+                problems.append(
+                    f"variants[{index}]: program external inputs and outputs differ "
+                    "from the topology family interface"
+                )
+        for variant_id in parents:
+            visited: set[str] = set()
+            current = variant_id
+            while current in parents:
+                if current in visited:
+                    problems.append(
+                        f"topology parent lineage contains a cycle at {current}"
+                    )
+                    break
+                visited.add(current)
+                current = parents[current]
         return problems
 
     def get(self, variant_id: str) -> TopologyVariant:

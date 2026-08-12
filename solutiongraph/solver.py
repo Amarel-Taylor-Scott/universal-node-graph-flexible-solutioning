@@ -30,6 +30,7 @@ from solutiongraph.intelligence import (
     merge_belief_models,
 )
 from solutiongraph.model import AdmittedSpace, FrozenPlan, ProgramGraph, Registry, sha256_digest
+from solutiongraph.ranking import rank_route_aggregates
 from solutiongraph.search import (
     BeliefModel,
     RouteProposal,
@@ -828,97 +829,36 @@ class UniversalSolver:
         profile: SolverProfile,
     ) -> tuple[RankedRoute, ...]:
         del registry  # reserved for future resource/cost normalization policies
-        constraint_ok = {
-            aggregate.plan_digest: all(
-                objective.metric in aggregate.metric_means
-                and (
-                    objective.hard_minimum is None
-                    or aggregate.metric_means[objective.metric] >= objective.hard_minimum
-                )
-                and (
-                    objective.hard_maximum is None
-                    or aggregate.metric_means[objective.metric] <= objective.hard_maximum
-                )
-                for objective in objectives
-            )
-            for aggregate in aggregates
-        }
-        eligible_for_normalization = tuple(
-            aggregate
-            for aggregate in aggregates
-            if aggregate.acceptance_rate >= profile.minimum_acceptance_rate
-            and constraint_ok[aggregate.plan_digest]
+        scores = rank_route_aggregates(
+            aggregates,
+            objectives,
+            minimum_acceptance_rate=profile.minimum_acceptance_rate,
         )
-        bounds: dict[str, tuple[float, float]] = {}
-        for objective in objectives:
-            values = [
-                aggregate.metric_means[objective.metric]
-                for aggregate in eligible_for_normalization
-                if objective.metric in aggregate.metric_means
-            ]
-            if values:
-                bounds[objective.metric] = (min(values), max(values))
-
-        weight_total = sum(objective.weight for objective in objectives)
-        pareto_digests = {item.plan_digest for item in pareto_front(aggregates, objectives)}
-        unranked: list[RankedRoute] = []
-        for aggregate in aggregates:
-            gate = aggregate.acceptance_rate >= profile.minimum_acceptance_rate
-            score_parts: list[tuple[float, float]] = []
-            for objective in objectives:
-                value = aggregate.metric_means.get(objective.metric)
-                bound = bounds.get(objective.metric)
-                if value is None or bound is None:
-                    normalized = 0.0
-                elif bound[0] == bound[1]:
-                    normalized = 1.0
-                elif objective.direction == "maximize":
-                    normalized = (value - bound[0]) / (bound[1] - bound[0])
-                else:
-                    normalized = (bound[1] - value) / (bound[1] - bound[0])
-                score_parts.append((objective.weight, normalized))
-            score = (
-                sum(weight * value for weight, value in score_parts) / weight_total
-                if weight_total > 0
-                else 0.0
+        return tuple(
+            RankedRoute(
+                rank=score.rank,
+                plan_digest=score.plan_digest,
+                selection=UniversalSolver._plan_selection(plans[score.plan_digest]),
+                acceptance_rate=score.acceptance_rate,
+                accepted_runs=score.accepted_runs,
+                runs=score.runs,
+                objective_means={
+                    objective.metric: score.metric_means[objective.metric]
+                    for objective in objectives
+                    if objective.metric in score.metric_means
+                },
+                objective_variances={
+                    objective.metric: score.metric_variances[objective.metric]
+                    for objective in objectives
+                    if objective.metric in score.metric_variances
+                },
+                weighted_score=score.weighted_score,
+                meets_acceptance_gate=score.meets_acceptance_gate,
+                meets_objective_constraints=score.meets_objective_constraints,
+                pareto=score.pareto,
             )
-            if not gate or not constraint_ok[aggregate.plan_digest]:
-                score = 0.0
-            plan = plans[aggregate.plan_digest]
-            unranked.append(
-                RankedRoute(
-                    rank=0,
-                    plan_digest=aggregate.plan_digest,
-                    selection=UniversalSolver._plan_selection(plan),
-                    acceptance_rate=aggregate.acceptance_rate,
-                    accepted_runs=aggregate.accepted_runs,
-                    runs=aggregate.runs,
-                    objective_means={
-                        objective.metric: aggregate.metric_means[objective.metric]
-                        for objective in objectives
-                        if objective.metric in aggregate.metric_means
-                    },
-                    objective_variances={
-                        objective.metric: aggregate.metric_variances[objective.metric]
-                        for objective in objectives
-                        if objective.metric in aggregate.metric_variances
-                    },
-                    weighted_score=score,
-                    meets_acceptance_gate=gate,
-                    meets_objective_constraints=constraint_ok[aggregate.plan_digest],
-                    pareto=aggregate.plan_digest in pareto_digests,
-                )
-            )
-        ordered = sorted(
-            unranked,
-            key=lambda item: (
-                not (item.meets_acceptance_gate and item.meets_objective_constraints),
-                -item.weighted_score,
-                -item.acceptance_rate,
-                item.plan_digest,
-            ),
+            for score in scores
         )
-        return tuple(replace(item, rank=index) for index, item in enumerate(ordered, 1))
 
     @staticmethod
     def _select_fallbacks(

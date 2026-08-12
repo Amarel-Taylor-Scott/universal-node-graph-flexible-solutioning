@@ -133,10 +133,22 @@ from solutiongraph.executor import (
     callable_implementation_digest,
 )
 from solutiongraph.experiments import (
+    ExperimentBundle,
     ExperimentCase,
     ExperimentResult,
     ExperimentRunner,
     ReceiptSink,
+)
+from solutiongraph.graph_experiments import (
+    GRAPH_EXPERIMENT_MODEL_VERSION,
+    GRAPH_EXPERIMENT_STATUSES,
+    GRAPH_ROUTE_ROLES,
+    GraphControl,
+    GraphExperimentReport,
+    GraphExperimentRunner,
+    GraphExperimentSpec,
+    GraphRouteComparison,
+    GraphVariantExperimentResult,
 )
 from solutiongraph.harnessing import (
     CANDIDATE_VISIBILITIES,
@@ -234,6 +246,7 @@ from solutiongraph.provenance import (
     to_slsa_provenance,
     to_w3c_prov,
 )
+from solutiongraph.ranking import RankedAggregate, rank_route_aggregates
 from solutiongraph.saga import (
     SAGA_MODEL_VERSION,
     SagaAttemptReceipt,
@@ -363,6 +376,7 @@ __all__ = [
     "CHECKPOINT_MODEL_VERSION",
     "TASK_CATEGORY_MODEL_VERSION",
     "TASK_INTELLIGENCE_MODEL_VERSION",
+    "GRAPH_EXPERIMENT_MODEL_VERSION",
     "HARNESS_EVIDENCE_MODEL_VERSION",
     "HARNESS_MODEL_VERSION",
     "COMPATIBILITY_MODEL_VERSION",
@@ -417,9 +431,16 @@ __all__ = [
     "ExecutionPolicy",
     "ExecutionResult",
     "ExperimentCase",
+    "ExperimentBundle",
     "ExperimentDesign",
     "ExperimentResult",
     "ExperimentRunner",
+    "GraphControl",
+    "GraphExperimentReport",
+    "GraphExperimentRunner",
+    "GraphExperimentSpec",
+    "GraphRouteComparison",
+    "GraphVariantExperimentResult",
     "FileArtifactStore",
     "FileCheckpointStore",
     "FidelityRung",
@@ -477,6 +498,7 @@ __all__ = [
     "ReleaseVerification",
     "ResourceClaim",
     "RouteAggregate",
+    "RankedAggregate",
     "RankedRoute",
     "RouteVerification",
     "RouteProposal",
@@ -580,6 +602,8 @@ __all__ = [
     "validate_solution_pack_closure",
     "write_benchmark_report",
     "COMMON_DAG_TASK_CATEGORIES",
+    "GRAPH_EXPERIMENT_STATUSES",
+    "GRAPH_ROUTE_ROLES",
     "CANDIDATE_VISIBILITIES",
     "DEFAULT_SIMILARITY_CHANNELS",
     "DEFAULT_TASK_CATEGORY_REGISTRY",
@@ -622,4 +646,5 @@ __all__ = [
     "historical_episode_from_receipts",
     "merge_belief_models",
     "profile_tabular_records",
+    "rank_route_aggregates",
 ]

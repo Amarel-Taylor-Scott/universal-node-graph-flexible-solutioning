@@ -97,6 +97,26 @@ Run `pytest tests/test_solutiongraph_execution.py -q` in addition to the core
 suite. Mechanism fixtures are welcome when labeled; production claims require
 held-out real tasks and enforcing runtimes.
 
+## Add a control-versus-mutation graph experiment
+
+1. Read `GRAPH_EXPERIMENTS.md` and declare a content-distinct `TopologyFamily`.
+2. Keep task, success contract, and named external input/output value contracts
+   identical across variants.
+3. Record acyclic parent lineage and explicit mutation operators.
+4. Freeze one exact `GraphControl`; never let search silently replace it.
+5. Run every selected plan on identical cases, seeds, repetitions, verifier,
+   objectives, and execution policy.
+6. Use `require_complete_grid=True` only for uncapped exhaustive searches whose
+   result limits expose every feasible plan.
+7. Validate the report with `graph-experiment-report.schema.json` and retain
+   rejected controls, failed mutations, raw receipts, Pareto flags, and budget
+   accounting.
+
+For generated topology proposals, contribute a typed, deterministic mutation
+operator that emits ordinary `ProgramGraph` variants. The normal compiler must
+remain the compatibility authority; do not bypass admission or claim that an
+undeclared graph universe was searched.
+
 ## Add an LLM-generated improvement campaign
 
 1. Read `AUTORESEARCH_REVIEW.md` and use `@design-autoresearch-campaign`.

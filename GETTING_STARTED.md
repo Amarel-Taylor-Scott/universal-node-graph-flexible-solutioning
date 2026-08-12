@@ -19,8 +19,8 @@ solutiongraph verify --catalog-root catalog --runtime subprocess
 
 The doctor command validates all bundled schemas, templates, reference nodes,
 descriptors, solution packs, benchmark closures, and generated catalog
-projections. The release verifier then compiles and executes all 54 frozen
-reference routes, checks 21 declared negative controls, runs 11 installed-wheel
+projections. The release verifier then compiles and executes all 120 frozen
+reference routes, checks 44 declared negative controls, runs 11 installed-wheel
 conformance mechanisms, and rejects stale checked-in catalog JSON.
 
 For a non-editable installation directly from GitHub:
@@ -121,16 +121,20 @@ registry snapshot can make it runnable.
 
 ## 7. Compile and search
 
-Run the minimal executable example:
+Run the minimal compiler example and the complete control/mutation experiment:
 
 ```bash
 python examples/solutiongraph_quickstart.py
+python examples/control_vs_mutated_graph_experiment.py
 python examples/discovery_and_templates.py
 ```
 
 Choose prior, beam, seeded-sprout, or explicitly exhaustive search according to
 the available budget. Search reports preserve coverage, skips, invalid routes,
-duplicates, unvisited routes, seeds, and belief revision.
+duplicates, unvisited routes, seeds, and belief revision. The graph experiment
+executes one exact control beside explicit topology mutations, uses common
+cases/seeds/objectives, and reports raw control deltas, Pareto membership, and a
+transparent weighted projection. See `GRAPH_EXPERIMENTS.md`.
 
 ## 8. Solve and execute the reference domain skeletons
 

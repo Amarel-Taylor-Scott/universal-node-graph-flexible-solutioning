@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graph-experiment-report.schema.json",
+  "title": "SolutionGraph control and topology-mutation experiment report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "graph_experiment_model_version", "status", "experiment_id", "spec_digest",
+    "family_digest", "registry_digest", "control_variant_id", "control_plan_digest",
+    "total_cartesian_routes", "selected_plan_count", "executed_plan_count",
+    "complete_grid_evaluated", "declared_grid_optimality_proven",
+    "champion_plan_digest", "pareto_plan_digests", "configuration", "search",
+    "comparisons", "variants"
+  ],
+  "properties": {
+    "graph_experiment_model_version": {"const": "0.1"},
+    "status": {"enum": ["completed", "completed-no-accepted-route"]},
+    "experiment_id": {"$ref": "common.schema.json#/$defs/id"},
+    "spec_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "family_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "control_variant_id": {"$ref": "common.schema.json#/$defs/id"},
+    "control_plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "total_cartesian_routes": {"type": "integer", "minimum": 0},
+    "selected_plan_count": {"type": "integer", "minimum": 1},
+    "executed_plan_count": {"type": "integer", "minimum": 1},
+    "complete_grid_evaluated": {"type": "boolean"},
+    "declared_grid_optimality_proven": {"type": "boolean"},
+    "champion_plan_digest": {
+      "oneOf": [
+        {"const": ""},
+        {"$ref": "common.schema.json#/$defs/digest"}
+      ]
+    },
+    "pareto_plan_digests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "configuration": {"$ref": "#/$defs/configuration"},
+    "search": {"$ref": "topology-search-report.schema.json"},
+    "comparisons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/comparison"}
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/variant_result"}
+    }
+  },
+  "$defs": {
+    "nullable_number": {
+      "oneOf": [{"type": "null"}, {"type": "number"}]
+    },
+    "nullable_positive_integer": {
+      "oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]
+    },
+    "metrics": {
+      "type": "object",
+      "propertyNames": {"type": "string", "minLength": 1},
+      "additionalProperties": {"type": "number"}
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric", "direction", "weight", "hard_minimum", "hard_maximum"],
+      "properties": {
+        "metric": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["maximize", "minimize"]},
+        "weight": {"type": "number", "minimum": 0},
+        "hard_minimum": {"$ref": "#/$defs/nullable_number"},
+        "hard_maximum": {"$ref": "#/$defs/nullable_number"}
+      }
+    },
+    "belief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision", "default_log_weight", "candidate_weights", "interaction_weights"
+      ],
+      "properties": {
+        "revision": {"type": "string", "minLength": 1},
+        "default_log_weight": {"type": "number"},
+        "candidate_weights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slot_id", "candidate_id", "log_weight", "evidence_count", "uncertainty"
+            ],
+            "properties": {
+              "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+              "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
+              "log_weight": {"type": "number"},
+              "evidence_count": {"type": "integer", "minimum": 0},
+              "uncertainty": {"type": "number", "minimum": 0}
+            }
+          }
+        },
+        "interaction_weights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "left_slot", "left_candidate", "right_slot", "right_candidate",
+              "log_weight", "evidence_count"
+            ],
+            "properties": {
+              "left_slot": {"$ref": "common.schema.json#/$defs/id"},
+              "left_candidate": {"$ref": "common.schema.json#/$defs/id"},
+              "right_slot": {"$ref": "common.schema.json#/$defs/id"},
+              "right_candidate": {"$ref": "common.schema.json#/$defs/id"},
+              "log_weight": {"type": "number"},
+              "evidence_count": {"type": "integer", "minimum": 0}
+            }
+          }
+        }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "graph_experiment_model_version", "id", "family_digest", "registry_digest",
+        "cases", "objectives", "control", "search_budget", "execution_policy",
+        "beliefs", "seeds", "repetitions", "holdout_case_ids",
+        "minimum_acceptance_rate", "require_complete_grid"
+      ],
+      "properties": {
+        "graph_experiment_model_version": {"const": "0.1"},
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "family_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "input_digest", "verifier", "verifier_digest"],
+            "properties": {
+              "id": {"$ref": "common.schema.json#/$defs/id"},
+              "input_digest": {"$ref": "common.schema.json#/$defs/digest"},
+              "verifier": {"$ref": "common.schema.json#/$defs/id"},
+              "verifier_digest": {"$ref": "common.schema.json#/$defs/digest"}
+            }
+          }
+        },
+        "objectives": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/objective"}
+        },
+        "control": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["variant_id", "selection"],
+          "properties": {
+            "variant_id": {"$ref": "common.schema.json#/$defs/id"},
+            "selection": {
+              "type": "object",
+              "propertyNames": {"$ref": "common.schema.json#/$defs/id"},
+              "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}
+            }
+          }
+        },
+        "search_budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "route_budget", "topology_limit", "global_evaluation_limit", "result_limit"
+          ],
+          "properties": {
+            "route_budget": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "mode", "evaluation_limit", "result_limit", "beam_width", "random_seed",
+                "sampling_attempt_limit", "mutation_probability"
+              ],
+              "properties": {
+                "mode": {"enum": ["prior", "beam", "sprout", "exhaustive"]},
+                "evaluation_limit": {"$ref": "#/$defs/nullable_positive_integer"},
+                "result_limit": {"type": "integer", "minimum": 1},
+                "beam_width": {"type": "integer", "minimum": 1},
+                "random_seed": {
+                  "oneOf": [{"type": "null"}, {"type": "integer"}]
+                },
+                "sampling_attempt_limit": {"$ref": "#/$defs/nullable_positive_integer"},
+                "mutation_probability": {"type": "number", "minimum": 0, "maximum": 1}
+              }
+            },
+            "topology_limit": {"$ref": "#/$defs/nullable_positive_integer"},
+            "global_evaluation_limit": {"$ref": "#/$defs/nullable_positive_integer"},
+            "result_limit": {"type": "integer", "minimum": 1}
+          }
+        },
+        "execution_policy": {"$ref": "execution-policy.schema.json"},
+        "beliefs": {
+          "type": "object",
+          "propertyNames": {"$ref": "common.schema.json#/$defs/id"},
+          "additionalProperties": {"$ref": "#/$defs/belief"}
+        },
+        "seeds": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "integer"}
+        },
+        "repetitions": {"type": "integer", "minimum": 1},
+        "holdout_case_ids": {
+          "type": "array", "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "minimum_acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "require_complete_grid": {"type": "boolean"}
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rank", "plan_digest", "variant_id", "role", "selection", "runs",
+        "accepted_runs", "acceptance_rate", "objective_means", "objective_variances",
+        "objective_deltas_from_control", "weighted_score", "meets_acceptance_gate",
+        "meets_objective_constraints", "pareto"
+      ],
+      "properties": {
+        "rank": {"type": "integer", "minimum": 1},
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "variant_id": {"$ref": "common.schema.json#/$defs/id"},
+        "role": {"enum": ["control", "control-topology-alternative", "mutation"]},
+        "selection": {
+          "type": "object",
+          "propertyNames": {"$ref": "common.schema.json#/$defs/id"},
+          "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "runs": {"type": "integer", "minimum": 1},
+        "accepted_runs": {"type": "integer", "minimum": 0},
+        "acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "objective_means": {"$ref": "#/$defs/metrics"},
+        "objective_variances": {"$ref": "#/$defs/metrics"},
+        "objective_deltas_from_control": {"$ref": "#/$defs/metrics"},
+        "weighted_score": {"type": "number"},
+        "meets_acceptance_gate": {"type": "boolean"},
+        "meets_objective_constraints": {"type": "boolean"},
+        "pareto": {"type": "boolean"}
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_digest", "runs", "accepted_runs", "acceptance_rate", "metric_means",
+        "metric_variances", "failure_classes"
+      ],
+      "properties": {
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "runs": {"type": "integer", "minimum": 1},
+        "accepted_runs": {"type": "integer", "minimum": 0},
+        "acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "metric_means": {"$ref": "#/$defs/metrics"},
+        "metric_variances": {"$ref": "#/$defs/metrics"},
+        "failure_classes": {
+          "type": "object",
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "experiment_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "experiment_id", "scheduled_runs", "completed_runs", "holdout_receipt_ids",
+        "pareto_plan_digests", "aggregates", "receipts"
+      ],
+      "properties": {
+        "experiment_id": {"$ref": "common.schema.json#/$defs/id"},
+        "scheduled_runs": {"type": "integer", "minimum": 1},
+        "completed_runs": {"type": "integer", "minimum": 0},
+        "holdout_receipt_ids": {
+          "type": "array", "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "pareto_plan_digests": {
+          "type": "array", "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/digest"}
+        },
+        "aggregates": {"type": "array", "items": {"$ref": "#/$defs/aggregate"}},
+        "receipts": {"type": "array", "items": {"$ref": "run-receipt.schema.json"}}
+      }
+    },
+    "variant_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "variant_id", "program_digest", "admitted_space_digest",
+        "route_count_upper_bound", "plan_digests", "experiment"
+      ],
+      "properties": {
+        "variant_id": {"$ref": "common.schema.json#/$defs/id"},
+        "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "admitted_space_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "route_count_upper_bound": {"type": "integer", "minimum": 1},
+        "plan_digests": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/digest"}
+        },
+        "experiment": {"$ref": "#/$defs/experiment_result"}
+      }
+    }
+  }
+}

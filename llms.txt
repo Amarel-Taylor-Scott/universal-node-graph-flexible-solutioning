@@ -5,6 +5,7 @@
 ## Start here
 
 - [README](README.md): Project overview and runnable examples
+- [Documentation map](DOCUMENTATION.md): Role-based shortest paths through the repository guides
 - [Getting started](GETTING_STARTED.md): Install, explore, author, validate, and contribute
 - [Readiness](READINESS.md): Supported, experimental, unsafe, and unavailable surfaces
 - [Normative specification](UNIVERSAL_NODE_GRAPH_SPEC.md): Required ontology and invariants
@@ -20,6 +21,7 @@
 - [Execution protocol](EXECUTION_PROTOCOL.md): Frozen plans, runtimes, artifacts, recovery, verification, and receipts
 - [Structured control](STRUCTURED_CONTROL_PROTOCOL.md): Conditional branches, composites, explicit bounded loops, and lowering receipts
 - [Topology search](TOPOLOGY_SEARCH_PROTOCOL.md): Alternative DAG shapes, budgets, proposal lineage, and complete accounting
+- [Graph experiments](GRAPH_EXPERIMENTS.md): Exact controls, topology mutations, compatible route grids, common trials, and evidence ranking
 - [Streaming](STREAMING_PROTOCOL.md): Event-time windows, watermarks, lateness, retractions, and production boundaries
 - [Provenance and resume](PROVENANCE_AND_RESUME.md): Exact local checkpoints and W3C PROV/OpenLineage/SLSA projections
 - [Executable examples](REAL_WORLD_EXAMPLES.md): 47 runnable programs, 120 declared routes, controls, solver commands, and extension gates
@@ -41,6 +43,8 @@
 - [Checkpoint protocol](solutiongraph/durable.py): Exact-identity completed-prefix persistence and resume
 - [Structured compiler](solutiongraph/structured.py): Composite and bounded-loop lowering to ordinary DAGs
 - [Topology search](solutiongraph/topology.py): Explicit graph variants plus compiler-valid route search
+- [Graph experiment runner](solutiongraph/graph_experiments.py): Fixed controls plus comparable topology/route execution and reporting
+- [Evidence ranking](solutiongraph/ranking.py): Shared hard gates, Pareto flags, and transparent weighted projection
 - [Streaming reference](solutiongraph/streaming.py): Finite event-time windows, watermarks, late data, and retractions
 - [Saga runner](solutiongraph/saga.py): Reverse-order compensation over effectful node contracts
 - [Compatibility sidecars](solutiongraph/compatibility.py): Optional port/state/secret/hardware/residency constraints

@@ -17,6 +17,32 @@ integration, and extension development. It is not a production multi-tenant
 platform or a hostile-code sandbox. The exact supported, experimental, and
 unavailable surfaces are listed in [READINESS.md](READINESS.md).
 
+## Start in five minutes
+
+```bash
+git clone https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning.git
+cd universal-node-graph-flexible-solutioning
+python -m pip install -e .
+solutiongraph doctor
+python examples/control_vs_mutated_graph_experiment.py
+```
+
+That last command builds a fixed one-node control graph and a two-node mutation,
+admits two routes in the control topology and four in the mutation, executes all
+six under the same verifier, and reports the accepted Pareto/champion evidence.
+It runs locally with no optional dependency or network call. Read
+[the graph-experiment guide](GRAPH_EXPERIMENTS.md) to switch from exhaustive
+grid execution to bounded beam, seeded sprouts, learned priors, or additional
+topology mutations.
+
+Choose a path:
+
+- **Try examples:** [examples/README.md](examples/README.md)
+- **Build a task or node:** [GETTING_STARTED.md](GETTING_STARTED.md)
+- **Understand the architecture:** [UNIVERSAL_NODE_GRAPH_SPEC.md](UNIVERSAL_NODE_GRAPH_SPEC.md)
+- **Find the right guide:** [DOCUMENTATION.md](DOCUMENTATION.md)
+- **Read the repository-wide review:** [CODE_REVIEW_2026-08-12.md](CODE_REVIEW_2026-08-12.md)
+
 The framework does not prescribe a fixed six-step pipeline or a fixed node
 catalogue. Macro stages and atomic substeps are task data; node definitions,
 parameter bindings, contracts, routes, objectives, and feedback are separate
@@ -129,6 +155,7 @@ is not mixed into the execution path as another step.
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
 | Structured control flow | One-arm conditional execution with skipped receipts; deterministic composite and explicit bounded-loop lowering into compiler-valid DAGs |
 | Alternative topology search | Versioned topology families search different compiler-validated graph shapes as well as node bindings, with complete accounting |
+| Control-versus-mutation experiments | Frozen dataclass configuration, exact fixed control, comparable topology/route grids, common cases/seeds, control deltas, Pareto ranking, and complete-grid evidence |
 | Honest route search | Fast prior, bounded beam, seeded sprouts, adaptive promotion, and uncapped streaming exhaustive modes with coverage/accounting reports |
 | Executed multi-fidelity search | Successive-halving rungs invoke a caller evaluator and retain every promotion decision and resource unit |
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
@@ -821,6 +848,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 
 | | |
 |---|---|
+| [DOCUMENTATION.md](DOCUMENTATION.md) | role-based map to the shortest relevant guide |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | the Protocol-vs-base-class seam |
 | [UNIVERSAL_GRAPH_SYSTEM.md](UNIVERSAL_GRAPH_SYSTEM.md) | the complete universal solution-graph architecture and implementation blueprint |
 | [TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md](TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md) | task attributes, common DAG taxonomy, historical retrieval, intelligent sprouts, optimizer/effort portfolios, schemas, and rollout plan |
@@ -829,6 +857,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 | [READINESS.md](READINESS.md) | exact supported, experimental, unsafe, and future release surfaces |
 | [STRUCTURED_CONTROL_PROTOCOL.md](STRUCTURED_CONTROL_PROTOCOL.md) | branches, composites, bounded loops, maps, reductions, barriers, and lowering |
 | [TOPOLOGY_SEARCH_PROTOCOL.md](TOPOLOGY_SEARCH_PROTOCOL.md) | explicit graph-shape alternatives, route accounting, and topology experiments |
+| [GRAPH_EXPERIMENTS.md](GRAPH_EXPERIMENTS.md) | fixed control graphs, explicit mutations, compatible route grids, and evidence comparison |
 | [STREAMING_PROTOCOL.md](STREAMING_PROTOCOL.md) | event time, windows, watermarks, lateness, emissions, and reference limits |
 | [PROVENANCE_AND_RESUME.md](PROVENANCE_AND_RESUME.md) | checkpoints, exact resume identity, W3C PROV, OpenLineage, and SLSA exports |
 | [EXTENDING_ARENA.md](EXTENDING_ARENA.md) | turn a task family into an honest executable fixture or connector |

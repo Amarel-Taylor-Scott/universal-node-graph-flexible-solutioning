@@ -23,9 +23,11 @@ solutiongraph/
 ├── benchmark_library.py  six bundled task/solution benchmark packs
 ├── search.py             prior, beam, sprout, exhaustive search + honest accounting
 ├── topology.py           explicit alternative DAG families + route search accounting
+├── graph_experiments.py  fixed controls + comparable topology/route execution evidence
 ├── structured.py         composite and bounded-loop lowering to atomic DAGs
 ├── adaptive.py           planned/executed successive promotion + explicit early stopping
 ├── evidence.py           receipts, experiments, Pareto fronts, learned priors
+├── ranking.py            reusable post-execution hard gates, Pareto flags, weighted projection
 ├── artifacts.py          replaceable content-addressed memory/file store boundary
 ├── durable.py            exact-identity completed-prefix checkpoints and resume
 ├── executor.py           strict frozen-plan recheck + reference Python runtime
@@ -41,7 +43,7 @@ solutiongraph/
 ├── harnessing.py         linked graph roles, authorities, flows, and feedback firewall
 ├── intelligence.py       task fingerprints, historical retrieval, starts, and effort
 ├── task_categories.py    open 95-category multi-label DAG taxonomy
-├── examples/             47 executable cross-domain node/program examples
+├── examples/             47 release-gated programs + modular control/mutation quickstart
 ├── reference_nodes.py    small executable node-pack demonstration
 ├── catalog.py            deterministic catalogue projection
 ├── scaffold.py           transactional coding-harness starter workspaces
@@ -98,6 +100,7 @@ task contract
   → AdmittedSpace + rejection reasons
   → BeliefModel-guided topology + prior / beam / seeded sprouts / adaptive allocation
   → content-addressed FrozenPlan
+  → optional fixed-control versus explicit-topology experiment allocation
   → executor policy recheck + runtime adapter
   → exact checkpoint after each successful/skipped prefix
   → content-addressed node and graph-output artifacts
