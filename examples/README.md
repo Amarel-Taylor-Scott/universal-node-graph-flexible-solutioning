@@ -9,6 +9,8 @@ dependency-free and run without browser, model-provider, or network access.
 |---|---|---|
 | Compile and search a two-slot graph | `python examples/solutiongraph_quickstart.py` | Full admission, exhaustive route ordering, and a frozen plan |
 | Compare control and mutated graphs | `python examples/control_vs_mutated_graph_experiment.py` | Six compatible routes, fixed control, topology mutation, execution, Pareto/champion evidence |
+| Learn starts and study a mutation | `python examples/intelligent_solutioning_study.py` | Cold solve, immutable history closure, warm starts, blind lanes, mutation experiment, and paired verdicts |
+| Normalize an external benchmark | `python examples/external_benchmark_adapter.py` | Exact source/version/claim metadata without fetching, submitting, or overstating external evidence |
 | Discover nodes and templates | `python examples/discovery_and_templates.py` | Capability negotiation, discovery receipt, snapshot, and template inspection |
 | Run a portable benchmark pack | `python examples/solution_pack_benchmark_quickstart.py --output-dir .artifacts/quickstart` | Fixed/solver arms, holdout status, receipts, JSON, and HTML evidence |
 
@@ -20,6 +22,9 @@ solutiongraph examples run dataset-profiling-and-drift --route all --json
 solutiongraph solve golden-customer-table --profile balanced
 solutiongraph arena list
 solutiongraph benchmarks list
+solutiongraph benchmarks adapters
+solutiongraph solutioning inspect data-cleanup --effort 1
+solutiongraph solutioning run data-cleanup --effort 1
 ```
 
 The 47 bundled programs cover data quality, documents, images, GIS, APIs,

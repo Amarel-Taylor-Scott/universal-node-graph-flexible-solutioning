@@ -24,6 +24,21 @@ All notable changes to this proof of concept are documented here.
 - Exact solver plan-to-start/optimizer/budget/receipt attribution and an atomic
   history-closure transaction that persists every development outcome as a
   content-addressed memory snapshot while excluding holdout receipts.
+- A frozen `TaskSolutionRequest`/binding/result façade with public validate,
+  recognize, retrieve, search, bind, route, execute, evidence, learn, and
+  one-call solve operations over the existing compiler and solver authorities.
+- Five deterministic topology mutation operators for inserting typed input,
+  internal-edge, and output obligations, removing an unambiguous linear slot,
+  and refining a slot contract, with compiler gating and explicit ancestry,
+  hypothesis, interface, and parameter receipts.
+- Paired experiment-study analysis over immutable receipts, including exact
+  comparability keys, deterministic bootstrap intervals, practical-effect and
+  acceptance gates, unmatched observations, and promote/reject/continue
+  recommendations.
+- Claim-safe external benchmark manifest adapters for Kaggle, MLE-bench,
+  SkillsBench, SWE-bench, BrowserGym, and DueCare-style evaluations. The
+  adapters normalize exact sources and limitations without fetching,
+  credential use, execution, submission, or external score claims.
 - A strict linked-graph `HarnessBundle` model and wire schema with exact graph
   identities, separate authorities, candidate visibility, disjoint development
   and holdout cases, human promotion approval, and a deny-only sealed-evaluation
@@ -58,12 +73,14 @@ All notable changes to this proof of concept are documented here.
   shorter orchestration interfaces without weakening content identities.
 - A role-based documentation map, runnable examples index, graph-experiment
   guide, and repository-wide code review with staged modularity recommendations.
-- Contributor guidance for reproducible control-versus-mutation experiments
-  and future typed topology-mutation operators.
+- An intelligent-solutioning guide, cold/warm history and paired-mutation
+  example, external benchmark normalization example, solutioning inspect/run
+  CLI, external adapter discovery CLI, and contributor guidance for controlled
+  graph improvement.
 
 ### Changed
 
-- The strict wire-schema set now contains 61 schemas.
+- The strict wire-schema set now contains 65 schemas.
 - Topology families now reject mismatched external port contracts, self-parent
   variants, and cyclic mutation ancestry before admission or search.
 - `UniversalSolver` and graph experiments share the same evidence-only hard
@@ -75,6 +92,9 @@ All notable changes to this proof of concept are documented here.
   inspectable search/trial budget from the initialization effort policy,
   evaluates the proposed starting portfolio in round one, and records the
   initialization digest in the result.
+- Negative-transfer assessment now consumes explicit history-blind attribution
+  when available, avoiding a false prior-miss result for cold-start fixed
+  baselines whose lane name does not contain `history-blind`.
 
 ## 0.6.0 — 2026-08-10
 

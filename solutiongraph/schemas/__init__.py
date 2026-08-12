@@ -47,6 +47,8 @@ SCHEMA_NAMES = (
     "execution-checkpoint.schema.json",
     "topology-search-report.schema.json",
     "graph-experiment-report.schema.json",
+    "graph-mutation-receipt.schema.json",
+    "experiment-study-report.schema.json",
     "stream-window-policy.schema.json",
     "stream-event.schema.json",
     "stream-emission.schema.json",
@@ -65,9 +67,11 @@ SCHEMA_NAMES = (
     "historical-memory.schema.json",
     "historical-memory-update.schema.json",
     "search-initialization.schema.json",
+    "task-solution-report.schema.json",
     "solution-pack.schema.json",
     "benchmark-suite.schema.json",
     "benchmark-report.schema.json",
+    "external-benchmark-bundle.schema.json",
 )
 
 

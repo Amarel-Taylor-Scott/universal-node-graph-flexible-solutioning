@@ -21,10 +21,11 @@ TopologyFamily
 ```
 
 The topology universe is explicit: the runner searches the variants declared in
-one `TopologyFamily`. It does not claim to generate every possible DAG. A future
-typed mutation generator can produce additional variants, but those variants
-must retain their derivation metadata and pass the same family validation and
-ordinary compiler admission before this runner will execute them.
+one `TopologyFamily`. It does not claim to generate every possible DAG.
+`solutiongraph.mutations` now supplies five conservative typed operators for
+input, internal-edge, output, linear-ablation, and contract-refinement edits.
+Generated variants retain derivation metadata and must pass the same family
+validation and ordinary compiler admission before this runner will execute them.
 
 ## Run the six-route quickstart
 
@@ -40,7 +41,8 @@ The example is intentionally small and dependency-free:
 - mutation topology: two cleaners × two estimators = four routes;
 - complete declared grid: six routes;
 - fixed control: direct arithmetic mean;
-- mutation operator: `operator.insert-slot`;
+- mutation operator: `operator.insert-slot-after-input`, applied through
+  `GraphMutationEngine` and recorded in a strict mutation receipt;
 - metrics: verifier quality and measured latency;
 - outcome: all six plans execute, negative evidence is retained, and the
   outlier-clipping/mean mutation wins the declared weighted projection.
@@ -80,6 +82,13 @@ pass-through argument lists while retaining every underlying content identity.
 
 `ExperimentBundle` provides the same quality-of-life improvement one layer
 down for an already compiled plan/case experiment.
+
+`ExperimentStudyRunner` provides the post-execution layer. It pairs control and
+candidate receipts on exact case, seed, input, verifier, and environment
+identity, then reports deterministic bootstrap intervals, practical-effect and
+acceptance gates, unmatched evidence, and conservative promote/reject/continue
+recommendations. See `INTELLIGENT_SOLUTIONING.md` and
+`examples/intelligent_solutioning_study.py`.
 
 ## Complete grid versus reasonable combinations
 

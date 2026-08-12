@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "graph-mutation-receipt.schema.json",
+  "title": "SolutionGraph typed topology mutation receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mutation_model_version", "id", "operator_id", "parent_variant_id",
+    "child_variant_id", "parent_program_digest", "child_program_digest",
+    "hypothesis", "proposer_id", "parameters", "external_interface_preserved"
+  ],
+  "properties": {
+    "mutation_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "operator_id": {"$ref": "common.schema.json#/$defs/id"},
+    "parent_variant_id": {"$ref": "common.schema.json#/$defs/id"},
+    "child_variant_id": {"$ref": "common.schema.json#/$defs/id"},
+    "parent_program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "child_program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "hypothesis": {"type": "string", "minLength": 1},
+    "proposer_id": {"$ref": "common.schema.json#/$defs/id"},
+    "parameters": {"type": "object"},
+    "external_interface_preserved": {"const": true}
+  }
+}

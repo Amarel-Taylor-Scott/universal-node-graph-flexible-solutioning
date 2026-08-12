@@ -2591,6 +2591,7 @@ class LaneOutcome:
     budget_digest: str
     normalized_lift: float
     accepted: bool
+    history_blind: bool | None = None
 
     def validate(self, path: str = "lane_outcome") -> list[str]:
         problems: list[str] = []
@@ -2600,6 +2601,8 @@ class LaneOutcome:
             problems.append(f"{path}.budget_digest must be a sha256 digest")
         if not isfinite(self.normalized_lift):
             problems.append(f"{path}.normalized_lift must be finite")
+        if self.history_blind is not None and not isinstance(self.history_blind, bool):
+            problems.append(f"{path}.history_blind must be boolean or null")
         return problems
 
 
@@ -2641,10 +2644,15 @@ def assess_negative_transfer(
         by_budget[outcome.budget_digest].append(outcome)
     matched = []
     for items in by_budget.values():
+        def is_history_blind(item: LaneOutcome) -> bool:
+            if item.history_blind is not None:
+                return item.history_blind
+            return "history-blind" in item.source_lane
+
         historical = [
-            item.normalized_lift for item in items if "history-blind" not in item.source_lane
+            item.normalized_lift for item in items if not is_history_blind(item)
         ]
-        blind = [item.normalized_lift for item in items if "history-blind" in item.source_lane]
+        blind = [item.normalized_lift for item in items if is_history_blind(item)]
         if historical and blind:
             matched.append((max(historical), max(blind)))
     if not matched:

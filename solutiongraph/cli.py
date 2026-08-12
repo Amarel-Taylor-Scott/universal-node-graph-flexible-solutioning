@@ -305,6 +305,32 @@ def _benchmarks_show(benchmark_id: str, as_json: bool) -> int:
     return 0
 
 
+def _benchmarks_adapters(as_json: bool) -> int:
+    from solutiongraph.benchmark_adapters import REFERENCE_BENCHMARK_ADAPTER_PROFILES
+
+    rows = [
+        {
+            "id": profile.id,
+            "source_kind": profile.source_kind,
+            "default_task_family": profile.default_task_family,
+            "required_metadata": list(profile.required_metadata),
+            "tags": list(profile.tags),
+            "limitations": list(profile.default_limitations),
+        }
+        for profile in REFERENCE_BENCHMARK_ADAPTER_PROFILES
+    ]
+    if as_json:
+        print(json.dumps(rows, indent=2, sort_keys=True))
+        return 0
+    print("ID\tSOURCE\tTASK_FAMILY\tREQUIRED_METADATA")
+    for row in rows:
+        print(
+            f"{row['id']}\t{row['source_kind']}\t{row['default_task_family']}\t"
+            f"{','.join(row['required_metadata'])}"
+        )
+    return 0
+
+
 def _write_json(path: Path, payload: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -643,6 +669,101 @@ def _solve_example(
     return 0 if result["status"] == "solved" else 1
 
 
+def _solutioning_inspect(example_id: str, effort: str, as_json: bool) -> int:
+    from solutiongraph.examples.intelligent_solutioning import example_solution_request
+    from solutiongraph.solutioning import TaskSolutionEngine
+
+    request = example_solution_request(example_id, effort=effort)
+    engine = TaskSolutionEngine()
+    binding = engine.bind(request)
+    plans = engine.route(request, binding)
+    payload = {
+        "request": request.to_dict(),
+        "binding": binding.to_dict(),
+        "starting_plans": {
+            start_id: plan.digest for start_id, plan in sorted(plans.items())
+        },
+    }
+    if as_json:
+        print(json.dumps(payload, indent=2, sort_keys=True))
+        return 0
+    print(
+        f"{example_id}: family="
+        f"{binding.fingerprint.attribute_map['task.family'].value} "
+        f"space={binding.admitted_space.route_count_upper_bound} "
+        f"starts={len(binding.initialization.starts)} "
+        f"history={len(binding.initialization.recommendations)}"
+    )
+    for start in binding.initialization.starts:
+        print(
+            f"- {start.id}: lane={start.source_lane} "
+            f"history_blind={str(start.history_blind).lower()} "
+            f"uncertainty={start.uncertainty:.3f}"
+        )
+    for allocation in binding.initialization.optimizer_allocations:
+        print(
+            f"- {allocation.optimizer_id}: budget={allocation.budget_fraction:.3f} "
+            f"protected={str(allocation.protected).lower()}"
+        )
+    return 0
+
+
+def _solutioning_run(
+    example_id: str,
+    effort: str,
+    runtime: str,
+    artifact_dir: Path | None,
+    receipt_journal: Path | None,
+    as_json: bool,
+) -> int:
+    from dataclasses import replace
+
+    from solutiongraph.artifacts import FileArtifactStore
+    from solutiongraph.examples.intelligent_solutioning import example_solution_request
+    from solutiongraph.executor import PythonRuntime, ReferenceExecutor, RuntimeRegistry
+    from solutiongraph.ledger import JsonlReceiptJournal
+    from solutiongraph.solutioning import TaskSolutionEngine
+    from solutiongraph.solver import UniversalSolver
+    from solutiongraph.subprocess_runtime import SubprocessPythonRuntime
+
+    request = example_solution_request(example_id, effort=effort)
+    if runtime == "subprocess":
+        request = replace(
+            request,
+            policy=replace(request.policy, allow_in_process_python=False),
+        )
+        adapter = SubprocessPythonRuntime()
+    else:
+        adapter = PythonRuntime()
+    executor = ReferenceExecutor(runtimes=RuntimeRegistry({"python": adapter}))
+    engine = TaskSolutionEngine(solver=UniversalSolver(executor=executor))
+    journal = JsonlReceiptJournal(receipt_journal) if receipt_journal else None
+    artifact_factory = (
+        (lambda: FileArtifactStore(artifact_dir)) if artifact_dir is not None else None
+    )
+    result = engine.solve(
+        request,
+        artifact_store_factory=artifact_factory,
+        receipt_sink=journal,
+    )
+    payload = result.to_dict()
+    if as_json:
+        print(json.dumps(payload, indent=2, sort_keys=True))
+    else:
+        print(
+            f"{example_id}: {result.status} effort={result.solver.profile.id} "
+            f"space={result.binding.admitted_space.route_count_upper_bound} "
+            f"evaluated={len(result.solver.plans)}"
+        )
+        print(f"champion: {result.solver.champion_plan_digest or 'none'}")
+        print(
+            "history transfer: "
+            f"{result.negative_transfer.status} "
+            f"matched_budgets={result.negative_transfer.matched_budget_count}"
+        )
+    return 0 if result.status == "solved" else 1
+
+
 def _arena_list(readiness: str | None, tags: tuple[str, ...], as_json: bool) -> int:
     from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 
@@ -853,6 +974,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     benchmark_show.add_argument("benchmark_id")
     benchmark_show.add_argument("--json", action="store_true", help="Emit JSON")
+    benchmark_adapters = benchmark_commands.add_parser(
+        "adapters", help="List claim-safe external benchmark manifest adapters"
+    )
+    benchmark_adapters.add_argument("--json", action="store_true", help="Emit JSON")
     benchmark_run = benchmark_commands.add_parser(
         "run", help="Run every allocation arm for one benchmark"
     )
@@ -914,6 +1039,31 @@ def build_parser() -> argparse.ArgumentParser:
         help="Acknowledge that exhaustive mode has no implicit route cap",
     )
     solve.add_argument("--json", action="store_true", help="Emit full JSON")
+
+    solutioning = commands.add_parser(
+        "solutioning",
+        help="Recognize, initialize, compile, and solve a task through the public façade",
+    )
+    solutioning_commands = solutioning.add_subparsers(
+        dest="solutioning_command", required=True
+    )
+    solutioning_inspect = solutioning_commands.add_parser(
+        "inspect", help="Inspect fingerprint, history, starts, and optimizer allocation"
+    )
+    solutioning_inspect.add_argument("example_id")
+    solutioning_inspect.add_argument("--effort", default="1")
+    solutioning_inspect.add_argument("--json", action="store_true", help="Emit JSON")
+    solutioning_run = solutioning_commands.add_parser(
+        "run", help="Execute the complete history-informed solutioning lifecycle"
+    )
+    solutioning_run.add_argument("example_id")
+    solutioning_run.add_argument("--effort", default="1")
+    solutioning_run.add_argument(
+        "--runtime", choices=("in-process", "subprocess"), default="in-process"
+    )
+    solutioning_run.add_argument("--artifact-dir", type=Path)
+    solutioning_run.add_argument("--receipt-journal", type=Path)
+    solutioning_run.add_argument("--json", action="store_true", help="Emit full JSON")
 
     arena = commands.add_parser(
         "arena", help="Inspect and run the cross-domain Universal DAG Arena"
@@ -1029,6 +1179,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 return _benchmarks_list(args.json)
             if args.benchmark_command == "show":
                 return _benchmarks_show(args.benchmark_id, args.json)
+            if args.benchmark_command == "adapters":
+                return _benchmarks_adapters(args.json)
             if args.benchmark_command == "run":
                 return _benchmarks_run(
                     args.benchmark_id,
@@ -1060,6 +1212,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                 args.allow_exhaustive,
                 args.json,
             )
+        if args.command == "solutioning":
+            if args.solutioning_command == "inspect":
+                return _solutioning_inspect(args.example_id, args.effort, args.json)
+            if args.solutioning_command == "run":
+                return _solutioning_run(
+                    args.example_id,
+                    args.effort,
+                    args.runtime,
+                    args.artifact_dir,
+                    args.receipt_journal,
+                    args.json,
+                )
         if args.command == "arena":
             if args.arena_command == "list":
                 return _arena_list(args.readiness, tuple(args.tag), args.json)

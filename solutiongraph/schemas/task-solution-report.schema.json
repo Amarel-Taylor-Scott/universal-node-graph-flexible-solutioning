@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task-solution-report.schema.json",
+  "title": "Taedri end-to-end task solution report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_solution_model_version", "status", "request_id", "request_digest",
+    "binding_digest", "fingerprint", "initialization", "negative_transfer", "solver"
+  ],
+  "properties": {
+    "task_solution_model_version": {"const": "0.1"},
+    "status": {
+      "enum": ["solved", "no-accepted-route", "no-holdout-confirmed-route"]
+    },
+    "request_id": {"$ref": "common.schema.json#/$defs/id"},
+    "request_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "binding_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "fingerprint": {"$ref": "task-fingerprint.schema.json"},
+    "initialization": {"$ref": "search-initialization.schema.json"},
+    "negative_transfer": {"$ref": "#/$defs/negativeTransfer"},
+    "solver": {"$ref": "solver-result.schema.json"}
+  },
+  "$defs": {
+    "optionalNumber": {
+      "oneOf": [{"type": "null"}, {"type": "number"}]
+    },
+    "negativeTransfer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status", "prior_miss", "matched_budget_count", "history_best_lift",
+        "history_blind_best_lift", "regret", "recommended_lanes"
+      ],
+      "properties": {
+        "status": {"$ref": "common.schema.json#/$defs/id"},
+        "prior_miss": {"type": "boolean"},
+        "matched_budget_count": {"type": "integer", "minimum": 0},
+        "history_best_lift": {"$ref": "#/$defs/optionalNumber"},
+        "history_blind_best_lift": {"$ref": "#/$defs/optionalNumber"},
+        "regret": {"$ref": "#/$defs/optionalNumber"},
+        "recommended_lanes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        }
+      }
+    }
+  }
+}

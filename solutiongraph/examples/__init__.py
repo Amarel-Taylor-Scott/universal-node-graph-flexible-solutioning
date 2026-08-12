@@ -21,6 +21,7 @@ from solutiongraph.examples.data_science_tasks import (
     DATA_SCIENCE_EXAMPLE_TASKS,
     DATA_SCIENCE_REGISTRY,
 )
+from solutiongraph.examples.intelligent_solutioning import example_solution_request
 
 __all__ = [
     "EXAMPLE_TASKS",
@@ -35,4 +36,5 @@ __all__ = [
     "DATA_SCIENCE_REGISTRY",
     "SHOWCASE_EXAMPLE_TASKS",
     "SHOWCASE_REGISTRY",
+    "example_solution_request",
 ]

@@ -44,6 +44,9 @@
 - [Structured compiler](solutiongraph/structured.py): Composite and bounded-loop lowering to ordinary DAGs
 - [Topology search](solutiongraph/topology.py): Explicit graph variants plus compiler-valid route search
 - [Graph experiment runner](solutiongraph/graph_experiments.py): Fixed controls plus comparable topology/route execution and reporting
+- [Typed graph mutations](solutiongraph/mutations.py): Deterministic topology operators, ancestry, hypotheses, and compiler validation
+- [Experiment studies](solutiongraph/studies.py): Paired receipt analysis, uncertainty, and promote/reject/continue recommendations
+- [Task solutioning](solutiongraph/solutioning.py): Staged recognition, historical starts, binding, execution, evidence, and immutable learning
 - [Evidence ranking](solutiongraph/ranking.py): Shared hard gates, Pareto flags, and transparent weighted projection
 - [Streaming reference](solutiongraph/streaming.py): Finite event-time windows, watermarks, late data, and retractions
 - [Saga runner](solutiongraph/saga.py): Reverse-order compensation over effectful node contracts
@@ -58,6 +61,7 @@
 - [Python node authoring](solutiongraph/authoring.py): Source-bound definitions, signature checks, stable bindings, and exact finite expansion
 - [Task/solution packs](solutiongraph/tasking.py): Portable task contracts, cases, oracle identity, and exact closure validation
 - [Benchmark runner](solutiongraph/benchmarking.py): Controlled fixed/solver arms and offline JSON/HTML evidence
+- [External benchmark adapters](solutiongraph/benchmark_adapters.py): Claim-safe source-manifest normalization for six external ecosystems
 - [Standard-library nodes](solutiongraph/stdlib_pack.py): 19 dependency-free nodes, 32 bindings, discovery sidecars, and a 1,728-route data-quality program
 - [Executable domain packs](solutiongraph/examples/): 47 trusted local programs and 379 nodes across data, streaming, GIS, APIs, frontend testing, rendering, web, documents, media, ML, identity, operations, security, science, synthetic data, reinforcement learning, MLOps, and LLM evaluation
 - [Example notebooks](notebooks/): Five end-to-end compile, execute, verify, and receipt notebooks

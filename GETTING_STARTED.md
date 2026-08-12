@@ -132,11 +132,33 @@ python examples/discovery_and_templates.py
 Choose prior, beam, seeded-sprout, or explicitly exhaustive search according to
 the available budget. Search reports preserve coverage, skips, invalid routes,
 duplicates, unvisited routes, seeds, and belief revision. The graph experiment
-executes one exact control beside explicit topology mutations, uses common
+executes one exact control beside compiler-gated typed topology mutations, uses common
 cases/seeds/objectives, and reports raw control deltas, Pareto membership, and a
 transparent weighted projection. See `GRAPH_EXPERIMENTS.md`.
 
-## 8. Solve and execute the reference domain skeletons
+## 8. Use intelligent task solutioning
+
+Inspect a complete task binding before any execution, then run it:
+
+```bash
+solutiongraph solutioning inspect data-cleanup --effort 1
+solutiongraph solutioning run data-cleanup --effort 1
+python examples/intelligent_solutioning_study.py
+```
+
+The inspect command shows task classification, fingerprint attributes, exact
+compiler admission, the effort policy, historical recommendations, randomized
+sprouts, and protected history-blind starting lanes. The run command continues
+through frozen plans, ordinary execution and verification, ranking, and
+matched-budget negative-transfer assessment.
+
+The Python example closes cold-start development receipts into a new immutable
+history snapshot, reuses it for a warm start, generates a topology mutation,
+and analyzes matched control/candidate receipts with uncertainty and practical-
+effect thresholds. History remains a prior, not an admission or acceptance
+authority. See `INTELLIGENT_SOLUTIONING.md`.
+
+## 9. Solve and execute the reference domain skeletons
 
 Inspect all 52 Arena contracts and execute or solve the 40 Arena-linked local programs:
 
@@ -155,6 +177,7 @@ solver comparisons:
 solutiongraph packs list
 solutiongraph packs show solution-pack.stdlib-data-quality
 solutiongraph benchmarks list
+solutiongraph benchmarks adapters
 solutiongraph benchmarks run benchmark.stdlib-data-quality \
   --runtime subprocess \
   --artifact-dir .artifacts/stdlib-benchmark \
@@ -169,6 +192,12 @@ These bundled cases are transparent mechanism fixtures. Replace them with
 representative licensed development data and a candidate-inaccessible holdout
 before making domain-performance or production claims. See
 `TASK_AND_SOLUTION_PACK_PROTOCOL.md` and `BENCHMARK_PROTOCOL.md`.
+
+`solutiongraph benchmarks adapters` lists strict manifest profiles for Kaggle,
+MLE-bench, SkillsBench, SWE-bench, BrowserGym, and DueCare-style evaluations.
+Run `python examples/external_benchmark_adapter.py` for a side-effect-free
+normalization example. Fetching, credential use, execution, submission, and
+external score claims remain separate authorized integrations.
 
 Run the same frozen routes through the bounded subprocess adapter and retain
 durable evidence:
@@ -202,7 +231,7 @@ node with a credentialed, policy-aware connector before making USPS validation
 claims. The Arena preserves this limitation in its task metadata and verifier
 details.
 
-## 9. Validate a contribution
+## 10. Validate a contribution
 
 ```bash
 solutiongraph catalog export --output catalog

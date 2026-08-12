@@ -21,9 +21,12 @@ solutiongraph/
 ├── pack_library.py       canonical portable node-pack collection
 ├── benchmarking.py       controlled arms, runner, evidence model, offline report
 ├── benchmark_library.py  six bundled task/solution benchmark packs
+├── benchmark_adapters.py strict external source-manifest normalization seams
 ├── search.py             prior, beam, sprout, exhaustive search + honest accounting
 ├── topology.py           explicit alternative DAG families + route search accounting
 ├── graph_experiments.py  fixed controls + comparable topology/route execution evidence
+├── mutations.py          deterministic compiler-gated topology authoring operators
+├── studies.py            paired uncertainty analysis over immutable run receipts
 ├── structured.py         composite and bounded-loop lowering to atomic DAGs
 ├── adaptive.py           planned/executed successive promotion + explicit early stopping
 ├── evidence.py           receipts, experiments, Pareto fronts, learned priors
@@ -42,6 +45,7 @@ solutiongraph/
 ├── campaign.py           population lineage, hard budgets, and evaluator boundaries
 ├── harnessing.py         linked graph roles, authorities, flows, and feedback firewall
 ├── intelligence.py       task fingerprints, historical retrieval, starts, and effort
+├── solutioning.py        staged task-to-history solutioning quality-of-life façade
 ├── task_categories.py    open 95-category multi-label DAG taxonomy
 ├── examples/             47 release-gated programs + modular control/mutation quickstart
 ├── reference_nodes.py    small executable node-pack demonstration
@@ -93,6 +97,8 @@ browsergraph/
 
 ```text
 task contract
+  → task recognition + progressive fingerprint
+  → historical retrieval + diverse effort portfolio + protected blind lanes
   → semantic template + task-specific ProgramGraph or TopologyFamily
   → deterministic structured-control lowering when required
   → registry capability negotiation + DiscoveryQuery
@@ -106,9 +112,11 @@ task contract
   → content-addressed node and graph-output artifacts
   → independent verifier
   → immutable RunReceipt
+  → paired receipt study + promote/reject/continue recommendation when requested
   → W3C PROV / OpenLineage / SLSA projection when requested
   → CampaignDecision + preserved population lineage
   → new BeliefModel revision
+  → immutable development-history snapshot when explicitly closed
 ```
 
 Only the compiler crosses the definition-to-plan boundaries. Beliefs cannot
@@ -133,6 +141,15 @@ compiled proposal as a `CandidateRecord`, preserves all parents in a
 `CampaignLedger`, and binds the campaign to a `CampaignBudget` and immutable
 `EvaluationBoundary`. These records are orchestration contracts, not a sandbox,
 optimizer implementation, or second compiler. See `AUTORESEARCH_REVIEW.md`.
+
+`TaskSolutionEngine` composes the recognition, initialization, compiler,
+solver, evidence, and history-closure stages without merging their authority.
+`GraphMutationEngine` produces complete child programs with explicit ancestry;
+the ordinary compiler decides whether they are valid. `ExperimentStudyRunner`
+reads immutable receipts and never edits experiment evidence. External
+benchmark adapters normalize exact source manifests but perform no network,
+credential, execution, submission, or certification action. See
+`INTELLIGENT_SOLUTIONING.md`.
 
 Discovery is deliberately asymmetric: registries may evolve continuously, but
 a compiler consumes an immutable receipt-backed snapshot. Optional descriptions

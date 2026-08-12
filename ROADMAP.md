@@ -27,6 +27,9 @@ diagram or candidate count is not, by itself, progress.
   with content-addressed expansion receipts.
 - Explicit topology families and search over alternative compiler-valid graph
   shapes in addition to node bindings, with independent budget accounting.
+- Five deterministic typed mutation operators that construct complete child
+  graphs, preserve public interfaces, record ancestry/hypotheses, and require
+  ordinary compiler validation before entering a topology family.
 - Full registry-to-slot admission handshake with an inspectable decision for
   every candidate/slot pair and n-ary configuration constraints.
 - Negotiated registry discovery with sparse descriptors, exact named embedding
@@ -43,6 +46,9 @@ diagram or candidate count is not, by itself, progress.
   decisions, and total resource accounting.
 - Immutable run receipts, Pareto comparison, observational belief fitting, and
   repository instructions for Codex, Claude, Gemini, Copilot, and other agents.
+- Paired control/candidate study reports with deterministic bootstrap intervals,
+  practical-effect thresholds, acceptance and hard-objective gates, unmatched
+  evidence accounting, and promote/reject/continue recommendations.
 - A trusted-local reference executor that reconstructs frozen plans, verifies
   implementation digests, content-addresses outputs, applies bounded retries
   and frozen fallbacks, invokes an independent verifier, and emits receipts.
@@ -82,6 +88,12 @@ diagram or candidate count is not, by itself, progress.
 - Twelve additional semantic templates for knowledge, claims, fraud,
   cybersecurity, compliance, geospatial, audio, supply chain, scheduling,
   database migration, SRE, and content moderation.
+- A staged `TaskSolutionEngine` that composes validation, task recognition,
+  historical retrieval, diverse effort portfolios, compilation, execution,
+  evidence access, negative-transfer assessment, and immutable history closure.
+- Claim-safe manifest adapters for Kaggle, MLE-bench, SkillsBench, SWE-bench,
+  BrowserGym, and DueCare-style evaluations without external side effects or
+  score claims.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 
@@ -132,8 +144,9 @@ and receipt set.
 - Preserve negative evidence, rejected routes, evidence freshness, and drift
   invalidation.
 - Extend the campaign-ledger skeleton with diverse frontier selection,
-  paired/interleaved statistical promotion, focused outcome retrieval, and
-  hardware-aware confirmation runs.
+  interleaved sequential promotion, focused outcome retrieval, and hardware-
+  aware confirmation runs. The local paired-receipt bootstrap study is the
+  reference fixed-allocation foundation, not a sequential causal engine.
 - Support generated-node proposals only through quarantine, fixtures,
   sandboxing, and independent admission.
 
@@ -144,8 +157,9 @@ without weakening contracts or authority.
 
 - Federate registries across languages, runtimes, tenants, and environments.
 - Extend the implemented local composite/loop lowering with remote child-graph
-  resolution, signed subgraph packs, and topology mutations generated under
-  explicit operator contracts.
+  resolution, signed subgraph packs, and branch/join/subgraph topology mutations
+  generated under explicit operator contracts. Linear typed mutation authoring
+  is implemented locally.
 - Add distributed scheduling, resource locality, effect-conflict controls,
   tenancy, authorization, usage accounting, and operational budgets.
 - Benchmark across document extraction, web automation, image processing, data

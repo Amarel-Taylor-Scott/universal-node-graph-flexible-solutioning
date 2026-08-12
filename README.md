@@ -25,15 +25,21 @@ cd universal-node-graph-flexible-solutioning
 python -m pip install -e .
 solutiongraph doctor
 python examples/control_vs_mutated_graph_experiment.py
+solutiongraph solutioning inspect data-cleanup --effort 1
+solutiongraph solutioning run data-cleanup --effort 1
 ```
 
-That last command builds a fixed one-node control graph and a two-node mutation,
-admits two routes in the control topology and four in the mutation, executes all
-six under the same verifier, and reports the accepted Pareto/champion evidence.
-It runs locally with no optional dependency or network call. Read
+The graph experiment generates a compiler-validated two-node mutation from a
+fixed one-node control, admits two routes in the control topology and four in
+the mutation, executes all six under the same verifier, and reports the
+accepted Pareto/champion evidence. The two solutioning commands then expose and
+run the complete task recognition, history retrieval, effort portfolio,
+protected blind-lane, compilation, execution, ranking, and negative-transfer
+lifecycle. They run locally with no optional dependency or network call. Read
 [the graph-experiment guide](GRAPH_EXPERIMENTS.md) to switch from exhaustive
 grid execution to bounded beam, seeded sprouts, learned priors, or additional
-topology mutations.
+topology mutations, and the
+[intelligent-solutioning guide](INTELLIGENT_SOLUTIONING.md) for the staged API.
 
 Choose a path:
 
@@ -76,7 +82,9 @@ diverse historical and history-blind starting points, arbitrary effort
 policies, matched-budget negative-transfer detection, exact plan/lane/receipt
 attribution, and content-addressed history-closure snapshots. Historical outcomes
 remain advisory priors: they never bypass admission, compilation, execution,
-or acceptance gates. See
+or acceptance gates. A public `TaskSolutionEngine` now exposes validate,
+recognize, retrieve, bind, route, execute, evidence, and immutable learning
+seams, while `solve_task()` supplies the short path. See
 [TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md](TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md).
 
 The engineering-showcase layer applies those primitives to thirteen additional
@@ -156,16 +164,20 @@ is not mixed into the execution path as another step.
 | Structured control flow | One-arm conditional execution with skipped receipts; deterministic composite and explicit bounded-loop lowering into compiler-valid DAGs |
 | Alternative topology search | Versioned topology families search different compiler-validated graph shapes as well as node bindings, with complete accounting |
 | Control-versus-mutation experiments | Frozen dataclass configuration, exact fixed control, comparable topology/route grids, common cases/seeds, control deltas, Pareto ranking, and complete-grid evidence |
+| Compiler-gated mutation authoring | Five deterministic typed operators for input, edge, output, ablation, and contract-refinement edits; exact ancestry, hypothesis, interface preservation, and mutation receipts |
 | Honest route search | Fast prior, bounded beam, seeded sprouts, adaptive promotion, and uncapped streaming exhaustive modes with coverage/accounting reports |
 | Executed multi-fidelity search | Successive-halving rungs invoke a caller evaluator and retain every promotion decision and resource unit |
 | Experimental evidence | Append-only receipts, reproducible experiment designs, Pareto fronts, and uncertainty-bearing learned priors |
 | Universal route solver | Quick, balanced, broad, and explicit exhaustive profiles; multi-round learning; hard gates; champion and fail-diverse fallback selection |
 | History-informed task intelligence | Open DAG taxonomy, progressive fingerprints, independent retrieval channels, uncertainty-bearing route priors, diverse start portfolios, protected history-blind lanes, arbitrary effort policies, plan/lane/receipt attribution, immutable memory closure, and negative-transfer assessment |
+| End-to-end task solutioning | Frozen request/binding/result dataclasses and inspectable validate, recognize, retrieve, bind, route, execute, evidence, and learn operations plus one-call solving |
+| Paired experiment studies | Immutable-receipt pairing, deterministic bootstrap intervals, practical-effect and acceptance gates, unmatched-evidence accounting, and promote/reject/continue recommendations |
 | Linked evaluation harnesses | Exact scenario, solution, development-evaluation, improvement, promotion, and sealed outer-evaluation graph identities plus typed judgments, panels, failure clusters, sanitized outer summaries, human approvals, and feedback firewalls |
 | Universal DAG Arena | 52 task families, 36 executable fixture families, 12 additional template families, four credentialed-connector families, and 40 runnable programs |
 | Engineering showcase pack | Thirteen additional executable fixtures and 154 source-bound nodes covering data contracts, event-time windows, GIS boundaries, APIs, frontend release gates, document rendering, geotemporal enrichment, user journeys, synthetic data, grounded documents, reinforcement learning, and DueCare-style evaluation/red teaming |
 | Data-science lifecycle pack | Ten executable six-stage fixtures, 60 source-bound nodes, 180 exact candidates, 729 admitted routes per graph, and accepted robust, alternate, and hybrid paths across profiling, feature engineering, modeling, evaluation, explainability, ensembling, and MLOps |
 | Reproducible benchmark arena | Six solution packs, 24 immutable cases, fixed controls, quick/balanced solver arms, holdouts, explicit claim scopes, JSON evidence, and self-contained HTML reports |
+| External benchmark manifests | Claim-safe, side-effect-free profiles for Kaggle, MLE-bench, SkillsBench, SWE-bench, BrowserGym, and DueCare-style harnesses with exact source/version/limitation closure |
 | Generated-graph campaigns | Population-DAG ancestry, proposal digests, explicit candidate/trial/cost/fidelity budgets, evaluator isolation contracts, and evidence-backed decisions |
 | Reference execution | Frozen-plan reconstruction, runtime/effect/permission policy, implementation-digest checks, bounded retry, frozen fallback, circuit breaker, artifacts, verification, and receipts |
 | Lifecycle process execution | Strict subprocess wire ABI, wall-clock termination, optional POSIX CPU/memory limits, and recorded adapter/isolation identity |
@@ -248,6 +260,7 @@ both machine-readable evidence and a self-contained visual report:
 ```bash
 solutiongraph packs list
 solutiongraph benchmarks list
+solutiongraph benchmarks adapters
 solutiongraph benchmarks run benchmark.stdlib-data-quality \
   --runtime subprocess \
   --artifact-dir .artifacts/stdlib-benchmark \
@@ -264,6 +277,13 @@ finds an accepted holdout-confirmed route while correctly leaving optimality
 unproven. Read the [benchmark protocol](BENCHMARK_PROTOCOL.md),
 [task/solution-pack protocol](TASK_AND_SOLUTION_PACK_PROTOCOL.md), and
 [adoption guide](ADOPTION_GUIDE.md) before making broader claims.
+
+External adapter profiles normalize explicitly licensed and versioned Kaggle,
+MLE-bench, SkillsBench, SWE-bench, BrowserGym, or DueCare-style source
+manifests into strict task/case bundles. They never download data, resolve
+credentials, execute a system, submit a result, or certify an external score.
+See the [intelligent-solutioning guide](INTELLIGENT_SOLUTIONING.md) and run
+`python examples/external_benchmark_adapter.py`.
 
 Open the five notebooks in `notebooks/`, or read
 [the executable-example guide](REAL_WORLD_EXAMPLES.md),
@@ -342,7 +362,7 @@ modern browser. No server, account, CDN, or build step is required.
 | Explorer | Purpose |
 |---|---|
 | [Universal DAG explorer](examples/universal-dag-explorer.html) | Strictly left-to-right nested submatrices, every node in every atomic step, structured-control semantics, route overlays, contracts, filters, and feedback |
-| [Template and node catalogue](examples/catalog-template-explorer.html) | 31 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and five reference node packs |
+| [Template and node catalogue](examples/catalog-template-explorer.html) | 31 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and six reference node packs |
 | [Benchmark evidence report](examples/universal-dag-benchmark-report.html) | Fixed controls and bounded solver policies, left-to-right champion routes, holdout state, route coverage, and complete embedded evidence |
 | [Full solution studio](examples/universal-graph-workbench.html) | All candidates, route rows, exhaustive adjacent network, comparison, builder, and feedback views |
 | [Compact hierarchical explorer](examples/universal-node-graph-workbench.html) | Select one macro-stage submatrix at a time and see all of its substeps, node families, bindings, and route lines |
@@ -851,6 +871,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 | [DOCUMENTATION.md](DOCUMENTATION.md) | role-based map to the shortest relevant guide |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | the Protocol-vs-base-class seam |
 | [UNIVERSAL_GRAPH_SYSTEM.md](UNIVERSAL_GRAPH_SYSTEM.md) | the complete universal solution-graph architecture and implementation blueprint |
+| [INTELLIGENT_SOLUTIONING.md](INTELLIGENT_SOLUTIONING.md) | staged task solutioning, learned starting points, typed graph mutations, paired studies, benchmark adapters, and common engineering mappings |
 | [TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md](TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md) | task attributes, common DAG taxonomy, historical retrieval, intelligent sprouts, optimizer/effort portfolios, schemas, and rollout plan |
 | [WORKBENCH.md](WORKBENCH.md) | hierarchical macro-stage/substep model, schemas, viewer, and extension examples |
 | [ROADMAP.md](ROADMAP.md) | evidence-driven implementation phases and release gates |

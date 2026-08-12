@@ -16,7 +16,6 @@ from solutiongraph.executor import CallableVerifier, ExecutionPolicy, Verificati
 from solutiongraph.experiments import ExperimentCase
 from solutiongraph.graph_experiments import GraphControl, GraphExperimentSpec
 from solutiongraph.model import (
-    Edge,
     GraphInput,
     GraphOutput,
     Idempotency,
@@ -25,8 +24,13 @@ from solutiongraph.model import (
     SemanticSlot,
     ValueType,
 )
+from solutiongraph.mutations import (
+    GraphMutationEngine,
+    InsertSlotAfterInput,
+    MutationContext,
+)
 from solutiongraph.search import SearchBudget, SearchMode
-from solutiongraph.topology import TopologyFamily, TopologySearchBudget, TopologyVariant
+from solutiongraph.topology import TopologySearchBudget, TopologyVariant
 
 PAYLOAD = ValueType("example.control-mutation-payload")
 TASK = "Estimate the robust center of a small numeric payload."
@@ -112,43 +116,39 @@ CONTROL_PROGRAM = ProgramGraph(
     (GraphOutput("result", PAYLOAD, "estimate", "payload"),),
 )
 
-MUTATED_PROGRAM = ProgramGraph(
-    "example.control-mutation-staged",
-    "1.0.0",
-    TASK,
-    SUCCESS,
-    (
-        _slot("clean", "experiment.clean", "Apply one explicit cleaning policy."),
-        _slot("estimate", "experiment.estimate", "Estimate after the cleaning policy."),
-    ),
-    (Edge("clean", "payload", "estimate", "payload"),),
-    (GraphInput("payload", PAYLOAD, "clean", "payload"),),
-    (GraphOutput("result", PAYLOAD, "estimate", "payload"),),
+CONTROL_VARIANT = TopologyVariant(
+    "topology.example.direct-control",
+    "Direct control graph",
+    CONTROL_PROGRAM,
+    "Establish a one-node control topology.",
+    tags=("topology.role.control",),
 )
 
-CONTROL_MUTATION_FAMILY = TopologyFamily(
-    "topology.example.control-mutation",
-    "1.0.0",
-    TASK,
-    SUCCESS,
-    (
-        TopologyVariant(
-            "topology.example.direct-control",
-            "Direct control graph",
-            CONTROL_PROGRAM,
-            "Establish a one-node control topology.",
-            tags=("topology.role.control",),
-        ),
-        TopologyVariant(
-            "topology.example.cleaning-mutation",
-            "Cleaning-stage mutation",
-            MUTATED_PROGRAM,
-            "Insert an independently replaceable cleaning obligation before estimation.",
-            parent_variant_id="topology.example.direct-control",
-            operators=("operator.insert-slot",),
-            tags=("topology.role.mutation",),
-        ),
+CONTROL_MUTATION_RESULT = GraphMutationEngine().apply(
+    CONTROL_VARIANT,
+    InsertSlotAfterInput(
+        _slot("clean", "experiment.clean", "Apply one explicit cleaning policy."),
+        "payload",
+        "payload",
+        "payload",
     ),
+    MutationContext(
+        child_variant_id="topology.example.cleaning-mutation",
+        child_title="Cleaning-stage mutation",
+        child_program_id="example.control-mutation-staged",
+        child_program_version="1.0.0",
+        rationale="Insert an independently replaceable cleaning obligation before estimation.",
+        hypothesis="A typed cleaning stage can improve robust center estimation.",
+        proposer_id="proposer.reference-example",
+        tags=("topology.role.mutation",),
+    ),
+)
+MUTATED_PROGRAM = CONTROL_MUTATION_RESULT.variant.program
+CONTROL_MUTATION_FAMILY = GraphMutationEngine.family(
+    family_id="topology.example.control-mutation",
+    version="1.0.0",
+    parent=CONTROL_VARIANT,
+    mutations=(CONTROL_MUTATION_RESULT,),
 )
 
 
@@ -203,6 +203,8 @@ __all__ = [
     "CONTROL_MUTATION_DEFINITIONS",
     "CONTROL_MUTATION_FAMILY",
     "CONTROL_MUTATION_REGISTRY",
+    "CONTROL_MUTATION_RESULT",
+    "CONTROL_VARIANT",
     "CONTROL_PROGRAM",
     "MUTATED_PROGRAM",
     "control_mutation_experiment_spec",

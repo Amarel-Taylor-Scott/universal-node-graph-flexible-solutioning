@@ -8,7 +8,9 @@ Choose the shortest path for what you are doing.
 2. `examples/README.md` — runnable examples grouped by goal.
 3. `GRAPH_EXPERIMENTS.md` — compare a fixed control graph with explicit graph
    mutations and node-route grids.
-4. `REAL_WORLD_EXAMPLES.md` — executable cross-domain mechanism fixtures.
+4. `INTELLIGENT_SOLUTIONING.md` — inspect and run the full learned-start,
+   mutation, study, and benchmark-adapter lifecycle.
+5. `REAL_WORLD_EXAMPLES.md` — executable cross-domain mechanism fixtures.
 
 ## I want to understand the model
 
@@ -27,12 +29,14 @@ Choose the shortest path for what you are doing.
 
 ## I want to search or benchmark solutions
 
-1. `GRAPH_EXPERIMENTS.md` — control/mutation topology experiments.
-2. `TOPOLOGY_SEARCH_PROTOCOL.md` — explicit graph-shape alternatives.
-3. `BENCHMARK_PROTOCOL.md` — controlled arms, holdouts, and claims.
-4. `TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md` — learned starting
+1. `INTELLIGENT_SOLUTIONING.md` — staged public API, learned portfolios, typed
+   mutations, paired studies, and external source manifests.
+2. `GRAPH_EXPERIMENTS.md` — control/mutation topology experiments.
+3. `TOPOLOGY_SEARCH_PROTOCOL.md` — explicit graph-shape alternatives.
+4. `BENCHMARK_PROTOCOL.md` — controlled arms, holdouts, and claims.
+5. `TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md` — learned starting
    points, sprouts, effort, history, and negative transfer.
-5. `AUTORESEARCH_REVIEW.md` — bounded generated-code campaigns.
+6. `AUTORESEARCH_REVIEW.md` — bounded generated-code campaigns.
 
 ## I want to integrate a runtime or harness
 

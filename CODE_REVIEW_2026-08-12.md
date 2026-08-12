@@ -25,7 +25,7 @@ fitness.
 | P2 | Evidence ranking was private logic embedded in the 1,000-line solver, preventing exact reuse by other experiment harnesses. | **IMPLEMENTED:** `solutiongraph.ranking` is a small evidence-only module used by the solver and graph experiments. |
 | P2 | The shortest runnable experiment was buried in a long README; there was no role-based documentation map or examples index. | **IMPLEMENTED:** README five-minute paths, `DOCUMENTATION.md`, `examples/README.md`, and `GRAPH_EXPERIMENTS.md`. |
 | P2 | `GETTING_STARTED.md` still described 54 routes and 21 controls after the repository had reached 120 routes and 44 controls. | **IMPLEMENTED:** corrected counts and added a documentation consistency test for release-facing numbers. |
-| P2 | Topology search selects among explicit, fully declared graph variants; it does not synthesize arbitrary DAG structures from every node permutation. | **RECOMMENDED:** retain that safe boundary and add a typed mutation grammar incrementally (`insert-slot`, `remove-optional-slot`, `replace-subgraph`, `branch`, `join`) whose outputs must pass the ordinary compiler. Never imply that an unbounded DAG universe was searched. |
+| P2 | Topology search selects among explicit, fully declared graph variants; it does not synthesize arbitrary DAG structures from every node permutation. | **PARTIALLY IMPLEMENTED:** five compiler-gated operators now cover input/edge/output insertion, linear-slot ablation, and contract refinement with strict mutation receipts. Branch, join, and subgraph rewrites remain incremental future operators. The API never implies that an unbounded DAG universe was searched. |
 | P2 | Several modules are large enough that unrelated changes collide: `intelligence.py` (~2,700 lines), base/showcase example registries (~2,300 each), data-science fixtures (~1,600), `arena.py` (~1,300), and solver/executor/CLI/discovery (~1,000 each). | **RECOMMENDED:** staged concern-based extraction below; do not perform a wholesale rewrite while wire contracts are pre-1.0. |
 | P3 | The distribution remains named `browsergraph` while the primary import is `solutiongraph`. | **DOCUMENTED:** retain compatibility until an announced pre-1.0 migration window. |
 | P3 | In-process and subprocess runtimes are useful local mechanism adapters but are not hostile-code sandboxes or multi-tenant enforcement boundaries. | **DOCUMENTED / EXTERNAL GATE:** keep generated code and hidden evaluators in separate microVM or remote trust domains. |
@@ -37,7 +37,8 @@ Dataclasses are already used extensively and appropriately for immutable wire
 and control-plane values. The useful improvement is not “replace every function
 argument with a bag.” It is to introduce cohesive configuration objects at
 orchestration boundaries while leaving node ports explicit and typed. The new
-`ExperimentBundle` and `GraphExperimentSpec` follow that rule.
+`ExperimentBundle`, `GraphExperimentSpec`, `TaskSolutionRequest`,
+`TaskSolutionBinding`, and `StudyDesign` follow that rule.
 
 Module size alone is not a defect. Large literal fixture catalogs are mostly a
 navigation and merge-conflict problem; large files that mix policy, validation,
@@ -83,12 +84,21 @@ claims still require:
 - real external datasets and independently owned evaluators;
 - negative-transfer checks before history-informed starts become defaults.
 
-The next graph-generation milestone should therefore be a small, versioned set
-of typed mutation operators, not a free-form edge generator. Each generated
-variant should record its parent, operator, parameters, derivation seed, and
-rejection reason; compiler admission remains the sole compatibility authority.
-That creates a reproducible "reasonable combinations" grid while keeping the
-searched universe and every omission inspectable.
+The first graph-generation milestone is now implemented as a small set of typed
+mutation operators, not a free-form edge generator. Each successful variant
+records its parent, operator, parameters, proposer, hypothesis, and content
+identity; compiler admission remains the sole compatibility authority. Invalid
+proposals fail closed and can be retained by the calling campaign as negative
+evidence. This creates reproducible "reasonable combinations" while keeping
+the searched universe and every omission inspectable.
+
+Paired post-execution studies now provide deterministic bootstrap intervals,
+practical-effect thresholds, acceptance/hard-objective gates, and conservative
+promote/reject/continue recommendations. External benchmark profiles preserve
+source/version/license/harness/claim metadata without performing hidden fetch,
+credential, submission, or certification actions. These additions improve the
+experiment seam; they do not replace real holdouts, enforcing runtimes, or
+production transfer studies.
 
 Use `IMPLEMENTED`, `MEASURED`, `PARTIAL`, `PLANNED`, `BLOCKED`, and
 `RECOMMENDED` consistently. A green mechanism fixture is `IMPLEMENTED`; it is

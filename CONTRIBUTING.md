@@ -117,6 +117,18 @@ operator that emits ordinary `ProgramGraph` variants. The normal compiler must
 remain the compatibility authority; do not bypass admission or claim that an
 undeclared graph universe was searched.
 
+Use `GraphMutationEngine` for input/edge/output insertion, linear ablation, or
+slot-contract refinement. Add a narrower typed operator for any other rewrite,
+test invalid type and interface cases, and validate its strict mutation receipt.
+When comparing outcomes, pair exact control/candidate receipts with a frozen
+`StudyDesign`; report unmatched observations and `study.continue` instead of
+promoting under insufficient evidence.
+
+External benchmark contributions must preserve the exact source, version,
+license, evaluator/harness identity, leakage policy, claim scope, and known
+limitations. A manifest adapter must not fetch data, use credentials, submit a
+result, or present local fixtures as an externally certified score.
+
 ## Add an LLM-generated improvement campaign
 
 1. Read `AUTORESEARCH_REVIEW.md` and use `@design-autoresearch-campaign`.

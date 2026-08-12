@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "experiment-study-report.schema.json",
+  "title": "SolutionGraph paired experiment study report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "study_model_version", "status", "study_id", "design_digest",
+    "evidence_digest", "receipt_ids", "recommended_plan_digests",
+    "configuration", "arms", "limitations"
+  ],
+  "properties": {
+    "study_model_version": {"const": "0.1"},
+    "status": {"enum": ["study.completed", "study.completed-no-candidates"]},
+    "study_id": {"$ref": "common.schema.json#/$defs/id"},
+    "design_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "evidence_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "receipt_ids": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "recommended_plan_digests": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "configuration": {"$ref": "#/$defs/design"},
+    "arms": {"type": "array", "items": {"$ref": "#/$defs/arm"}},
+    "limitations": {
+      "type": "array", "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "optionalNumber": {
+      "oneOf": [{"type": "null"}, {"type": "number"}]
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric", "direction", "weight", "hard_minimum", "hard_maximum"],
+      "properties": {
+        "metric": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["maximize", "minimize"]},
+        "weight": {"type": "number", "minimum": 0},
+        "hard_minimum": {"$ref": "#/$defs/optionalNumber"},
+        "hard_maximum": {"$ref": "#/$defs/optionalNumber"}
+      }
+    },
+    "design": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "study_model_version", "id", "control_plan_digest",
+        "candidate_plan_digests", "objectives", "task_case_ids",
+        "confidence_level", "bootstrap_resamples", "random_seed",
+        "minimum_pairs", "practical_effect_thresholds",
+        "acceptance_noninferiority_margin", "minimum_acceptance_rate"
+      ],
+      "properties": {
+        "study_model_version": {"const": "0.1"},
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "control_plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "candidate_plan_digests": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/digest"}
+        },
+        "objectives": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/objective"}},
+        "task_case_ids": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "confidence_level": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "bootstrap_resamples": {"type": "integer", "minimum": 1},
+        "random_seed": {"type": "integer"},
+        "minimum_pairs": {"type": "integer", "minimum": 1},
+        "practical_effect_thresholds": {
+          "type": "object",
+          "additionalProperties": {"type": "number", "minimum": 0}
+        },
+        "acceptance_noninferiority_margin": {"type": "number", "minimum": 0, "maximum": 1},
+        "minimum_acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric", "direction", "pairs", "control_mean", "candidate_mean",
+        "raw_mean_delta", "oriented_mean_delta", "oriented_median_delta",
+        "confidence_lower", "confidence_upper", "win_rate", "tie_rate",
+        "practical_effect_threshold", "inference"
+      ],
+      "properties": {
+        "metric": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["maximize", "minimize"]},
+        "pairs": {"type": "integer", "minimum": 0},
+        "control_mean": {"type": "number"},
+        "candidate_mean": {"type": "number"},
+        "raw_mean_delta": {"type": "number"},
+        "oriented_mean_delta": {"type": "number"},
+        "oriented_median_delta": {"type": "number"},
+        "confidence_lower": {"type": "number"},
+        "confidence_upper": {"type": "number"},
+        "win_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "tie_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "practical_effect_threshold": {"type": "number", "minimum": 0},
+        "inference": {"enum": ["better", "worse", "inconclusive", "insufficient"]}
+      }
+    },
+    "arm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_plan_digest", "verdict", "stopping_recommendation",
+        "paired_observations", "unmatched_receipts", "acceptance",
+        "objectives", "reasons"
+      ],
+      "properties": {
+        "candidate_plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "verdict": {"enum": ["study.promote", "study.reject", "study.continue"]},
+        "stopping_recommendation": {"$ref": "common.schema.json#/$defs/id"},
+        "paired_observations": {"type": "integer", "minimum": 0},
+        "unmatched_receipts": {"type": "integer", "minimum": 0},
+        "acceptance": {"$ref": "#/$defs/metric"},
+        "objectives": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/metric"}},
+        "reasons": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}
