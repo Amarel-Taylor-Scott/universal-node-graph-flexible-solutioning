@@ -1,0 +1,181 @@
+{
+  "claim_scope": "claim.mechanism-fixture",
+  "description": "A mechanism fixture linking solution, scenario, evaluation, improvement, promotion, and sealed outer-evaluation graphs through explicit artifact flows.",
+  "development_boundary": {
+    "candidate_can_read_evaluator": false,
+    "candidate_can_write_evaluator": false,
+    "candidate_isolation": "subprocess",
+    "candidate_network_access": false,
+    "dataset_digest": "sha256:cb95e3e16028f2d8f795fd4ebc373ea8d0b28e847716d83d2a39fa24f1d99c65",
+    "environment_digest": "sha256:110579391efb2f718443a5cd9600c9829c7975451654518d1c5768ff2f559867",
+    "evaluator_digest": "sha256:879b904086c96ae61c7e3ec6231e10f6262ca2ad6653bcd65754b90f9a2b30e0",
+    "evaluator_isolation": "subprocess",
+    "hidden_case_ids": [],
+    "id": "boundary.duecare-development",
+    "trust_level": "trusted"
+  },
+  "development_case_ids": [
+    "case.duecare-development"
+  ],
+  "extensions": {},
+  "flows": [
+    {
+      "artifact_class": "artifact.development-scenarios",
+      "exposure": "full",
+      "extensions": {},
+      "purpose": "Development scenarios become typed SUT inputs.",
+      "source_graph_id": "graph.duecare-scenarios",
+      "target_graph_id": "graph.duecare-solution"
+    },
+    {
+      "artifact_class": "artifact.candidate-responses",
+      "exposure": "full",
+      "extensions": {},
+      "purpose": "Development responses enter independent grading.",
+      "source_graph_id": "graph.duecare-solution",
+      "target_graph_id": "graph.duecare-evaluation"
+    },
+    {
+      "artifact_class": "artifact.development-diagnostics",
+      "exposure": "aggregate",
+      "extensions": {},
+      "purpose": "Only development diagnostics inform proposals.",
+      "source_graph_id": "graph.duecare-evaluation",
+      "target_graph_id": "graph.duecare-improvement"
+    },
+    {
+      "artifact_class": "artifact.quarantined-proposal",
+      "exposure": "full",
+      "extensions": {},
+      "purpose": "Human governance reviews the exact proposed graph.",
+      "source_graph_id": "graph.duecare-improvement",
+      "target_graph_id": "graph.duecare-promotion"
+    },
+    {
+      "artifact_class": "artifact.outer-candidate-responses",
+      "exposure": "full",
+      "extensions": {},
+      "purpose": "The sealed evaluator reads candidate outputs.",
+      "source_graph_id": "graph.duecare-solution",
+      "target_graph_id": "graph.duecare-outer"
+    },
+    {
+      "artifact_class": "artifact.outer-verdict",
+      "exposure": "aggregate",
+      "extensions": {},
+      "purpose": "Outer verdicts may support promotion decisions.",
+      "source_graph_id": "graph.duecare-outer",
+      "target_graph_id": "graph.duecare-promotion"
+    },
+    {
+      "artifact_class": "artifact.hidden-outer-feedback",
+      "exposure": "deny",
+      "extensions": {},
+      "purpose": "A feedback firewall prevents holdout leakage into optimization.",
+      "source_graph_id": "graph.duecare-outer",
+      "target_graph_id": "graph.duecare-improvement"
+    }
+  ],
+  "graphs": [
+    {
+      "authorities": [
+        "harness.execute-solution"
+      ],
+      "candidate_visibility": "development",
+      "extensions": {},
+      "human_approval_required": false,
+      "id": "graph.duecare-solution",
+      "program_digest": "sha256:3f313908a554b245c7c075a32562c7a5e26788aedcc15ca81a85761b1432bdbf",
+      "purpose": "Produce candidate responses under an exact harness configuration.",
+      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "role": "graph.role.solution"
+    },
+    {
+      "authorities": [
+        "harness.generate-scenarios"
+      ],
+      "candidate_visibility": "inputs-only",
+      "extensions": {},
+      "human_approval_required": false,
+      "id": "graph.duecare-scenarios",
+      "program_digest": "sha256:e0947d167d3cf457678efabd5dc765a82f5a6844805af2ee1b67d55755eeab9a",
+      "purpose": "Generate direct, adversarial, metamorphic, and benign-neighbor cases.",
+      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "role": "graph.role.scenario"
+    },
+    {
+      "authorities": [
+        "harness.evaluate-development"
+      ],
+      "candidate_visibility": "outputs-only",
+      "extensions": {},
+      "human_approval_required": false,
+      "id": "graph.duecare-evaluation",
+      "program_digest": "sha256:c1be920eaf91a133cc82e218741bc663019b21835efdabf6a6f57f36368d4d5a",
+      "purpose": "Combine deterministic checks, rubric scores, panel disagreement, and claims.",
+      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "role": "graph.role.evaluation"
+    },
+    {
+      "authorities": [
+        "harness.propose-improvement"
+      ],
+      "candidate_visibility": "aggregate-only",
+      "extensions": {},
+      "human_approval_required": false,
+      "id": "graph.duecare-improvement",
+      "program_digest": "sha256:cc1d4166913c4a2a4996076931814e6734d4b421e826a86c7ebbba533514ab55",
+      "purpose": "Propose a new quarantined route from development evidence only.",
+      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "role": "graph.role.improvement"
+    },
+    {
+      "authorities": [
+        "harness.approve-promotion"
+      ],
+      "candidate_visibility": "aggregate-only",
+      "extensions": {},
+      "human_approval_required": true,
+      "id": "graph.duecare-promotion",
+      "program_digest": "sha256:5beba639742cbcd775a2f43a9adde920de3d4281da2a8381d25e804b53c39559",
+      "purpose": "Approve or reject promotion with named human authority.",
+      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "role": "graph.role.promotion"
+    },
+    {
+      "authorities": [
+        "harness.evaluate-outer"
+      ],
+      "candidate_visibility": "none",
+      "extensions": {},
+      "human_approval_required": false,
+      "id": "graph.duecare-outer",
+      "program_digest": "sha256:e3ef6730156c6af908ff882c5572c76c26d613ae8af093c9f224345a13c44c54",
+      "purpose": "Evaluate untouched holdouts in a candidate-unreadable trust domain.",
+      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "role": "graph.role.outer-evaluation"
+    }
+  ],
+  "harness_model_version": "0.1",
+  "holdout_case_ids": [
+    "case.duecare-hidden-holdout"
+  ],
+  "id": "harness.duecare-example",
+  "outer_boundary": {
+    "candidate_can_read_evaluator": false,
+    "candidate_can_write_evaluator": false,
+    "candidate_isolation": "microvm",
+    "candidate_network_access": false,
+    "dataset_digest": "sha256:030ae6b5c2c766450e3e5f12f842b3b1bdf5bf6a1fe099e4b132d7afe39ae2f5",
+    "environment_digest": "sha256:df0ab11465a8deda169afddec179b9230210e702681bd1c7d1c5e64505812411",
+    "evaluator_digest": "sha256:84ba2ce713bc9a8f70fdb9fce4f806c0715380d21db0163e5021e48196289ffc",
+    "evaluator_isolation": "remote",
+    "hidden_case_ids": [
+      "case.duecare-hidden-holdout"
+    ],
+    "id": "boundary.duecare-outer",
+    "trust_level": "untrusted"
+  },
+  "title": "DueCare-style linked graph evaluation harness",
+  "version": "0.1.0"
+}

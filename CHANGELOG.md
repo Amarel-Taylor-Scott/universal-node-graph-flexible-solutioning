@@ -4,6 +4,47 @@ All notable changes to this proof of concept are documented here.
 
 ## Unreleased
 
+### Added
+
+- An extensible 95-category, multi-label DAG task registry spanning acquisition,
+  preparation, verification, enrichment, generation, learning, LLM/RAG/agent
+  evaluation, serving, operations, governance, and human workflows.
+- Progressive, missing-aware task fingerprints with attribute provenance,
+  aggregate-only tabular profiling, exact embedding-space identity, and strict
+  schemas for fingerprints, historical memory, and search initialization.
+- Multi-channel historical retrieval with uncertainty, empirical-Bayes
+  shrinkage, dataset-family deduplication, preserved failures/conflicts, and
+  explicit negative-transfer risk.
+- A receipt-to-history adapter that seals one exact plan's raw/oriented
+  objective aggregates, uncertainty, failures, environment, budget, costs, and
+  receipt lineage into an immutable historical episode.
+- Diverse start portfolios, protected history-blind controls, compatible
+  historical replay/repair starts, arbitrary positive effort levels, optimizer
+  allocations, and direct `UniversalSolver` initialization.
+- A strict linked-graph `HarnessBundle` model and wire schema with exact graph
+  identities, separate authorities, candidate visibility, disjoint development
+  and holdout cases, human promotion approval, and a deny-only sealed-evaluation
+  feedback firewall.
+- Seven dependency-free engineering showcases for geotemporal enrichment, user
+  journeys, synthetic tabular augmentation, synthetic LLM curricula, grounded
+  document extraction, reinforcement learning, and DueCare-style LLM
+  evaluation/red teaming, each with a negative control and independently
+  accepted route.
+- A portable 82-node engineering-showcase pack, deterministic harness catalogue
+  artifact, and an implementation/research guide for common engineering DAGs
+  and evaluation architectures.
+
+### Changed
+
+- The strict wire-schema set now contains 58 schemas.
+- Release verification now covers 31 executable examples, 247 unique nodes, 68
+  declared routes, 40 accepted observations, 28 intentional negative controls,
+  five node packs, and 416 generated catalogue documents.
+- `UniversalSolver.solve(profile=None, initialization=...)` derives its
+  inspectable search/trial budget from the initialization effort policy,
+  evaluates the proposed starting portfolio in round one, and records the
+  initialization digest in the result.
+
 ## 0.6.0 — 2026-08-10
 
 ### Added

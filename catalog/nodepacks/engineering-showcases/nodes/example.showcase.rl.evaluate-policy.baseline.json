@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    "showcase.rl.evaluate-policy"
+  ],
+  "description": "Baseline fixture for the rl/evaluate-policy obligation.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.showcase_tasks:execute_baseline_step",
+  "failure_modes": [],
+  "id": "example.showcase.rl.evaluate-policy.baseline",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.engineering-showcase-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.engineering-showcase-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "rl"
+      ],
+      "default": null,
+      "description": "",
+      "name": "domain",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "evaluate-policy"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/showcase_tasks.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

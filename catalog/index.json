@@ -11,6 +11,15 @@
     "task_case_count": 24
   },
   "catalog_model_version": "0.1",
+  "harnesses": [
+    {
+      "digest": "sha256:8699292839d41f34ff2dee9b2d89ed8ec40cd5de59ff54b7d9295e2296021338",
+      "graph_count": 6,
+      "id": "harness.duecare-example",
+      "path": "harnesses/duecare-example.json",
+      "version": "0.1.0"
+    }
+  ],
   "node_packs": [
     {
       "descriptor_count": 5,
@@ -46,6 +55,15 @@
       "id": "example.extended-arena-node-pack",
       "node_count": 62,
       "path": "nodepacks/extended-arena/manifest.json",
+      "version": "1.0.0"
+    },
+    {
+      "descriptor_count": 0,
+      "digest": "sha256:5441d415b1bca5f85a59acc4b6026c370d7c18b748df09d07136aceda637750c",
+      "embedding_record_count": 0,
+      "id": "example.engineering-showcase-node-pack",
+      "node_count": 82,
+      "path": "nodepacks/engineering-showcases/manifest.json",
       "version": "1.0.0"
     }
   ],

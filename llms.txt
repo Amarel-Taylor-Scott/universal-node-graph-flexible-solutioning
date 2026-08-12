@@ -22,7 +22,8 @@
 - [Topology search](TOPOLOGY_SEARCH_PROTOCOL.md): Alternative DAG shapes, budgets, proposal lineage, and complete accounting
 - [Streaming](STREAMING_PROTOCOL.md): Event-time windows, watermarks, lateness, retractions, and production boundaries
 - [Provenance and resume](PROVENANCE_AND_RESUME.md): Exact local checkpoints and W3C PROV/OpenLineage/SLSA projections
-- [Executable examples](REAL_WORLD_EXAMPLES.md): 24 runnable programs, 54 declared routes, controls, solver commands, and extension gates
+- [Executable examples](REAL_WORLD_EXAMPLES.md): 31 runnable programs, 68 declared routes, controls, solver commands, and extension gates
+- [Engineering DAG and DueCare harness showcase](ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md): common engineering taxonomy, seven executable showcases, linked harness roles, feedback firewall, research anchors, and roadmap
 - [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md): 36 task families, 24 executable programs, solver profiles, and honest external boundaries
 - [Extending the Arena](EXTENDING_ARENA.md): Required fixture, connector, catalog, conformance, and confirmation gates
 - [Agent playbook](AGENT_PLAYBOOK.md): Patterns, anti-patterns, and implementation workflow
@@ -52,10 +53,10 @@
 - [Task/solution packs](solutiongraph/tasking.py): Portable task contracts, cases, oracle identity, and exact closure validation
 - [Benchmark runner](solutiongraph/benchmarking.py): Controlled fixed/solver arms and offline JSON/HTML evidence
 - [Standard-library nodes](solutiongraph/stdlib_pack.py): 19 dependency-free nodes, 32 bindings, discovery sidecars, and a 1,728-route data-quality program
-- [Executable domain packs](solutiongraph/examples/): 24 trusted local programs and 165 nodes across data, web, documents, media, ML, identity, operations, security, science, recommendation, and numerical solving
+- [Executable domain packs](solutiongraph/examples/): 31 trusted local programs and 247 nodes across data, web, documents, media, ML, identity, operations, security, science, recommendation, numerical solving, synthetic data, reinforcement learning, and LLM evaluation
 - [Example notebooks](notebooks/): Five end-to-end compile, execute, verify, and receipt notebooks
 - [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
-- [Reference catalogue](catalog/): 31 semantic templates, four node packs, 36 Arena tasks, and six benchmark/solution packs
+- [Reference catalogue](catalog/): 31 semantic templates, five node packs, one linked-graph harness, 36 Arena tasks, and six benchmark/solution packs
 - [Browser adapter](browsergraph/): Concrete runtime proof
 - [Universal conformance tests](tests/test_solutiongraph.py): Executable architecture requirements
 - [Create-template skill](.agents/skills/create-solution-template/SKILL.md): Strict template authoring workflow

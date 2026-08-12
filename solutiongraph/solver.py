@@ -24,6 +24,7 @@ from solutiongraph.evidence import (
 )
 from solutiongraph.executor import ExecutionPolicy, ReferenceExecutor
 from solutiongraph.experiments import ExperimentCase, ExperimentRunner, ReceiptSink
+from solutiongraph.intelligence import SearchInitialization, merge_belief_models
 from solutiongraph.model import AdmittedSpace, FrozenPlan, ProgramGraph, Registry, sha256_digest
 from solutiongraph.search import (
     BeliefModel,
@@ -252,6 +253,7 @@ class SolverResult:
     holdout_confirmed_plan_digests: tuple[str, ...]
     initial_beliefs: BeliefModel
     learned_beliefs: BeliefModel
+    search_initialization_digest: str = ""
 
     @property
     def champion(self) -> FrozenPlan | None:
@@ -285,6 +287,7 @@ class SolverResult:
             "rankings": [ranking.to_dict() for ranking in self.rankings],
             "initial_belief_revision": self.initial_beliefs.revision,
             "learned_belief_revision": self.learned_beliefs.revision,
+            "search_initialization_digest": self.search_initialization_digest,
         }
         if include_receipts:
             payload["receipts"] = [
@@ -330,8 +333,9 @@ class UniversalSolver:
         cases: Sequence[ExperimentCase],
         objectives: tuple[Objective, ...],
         policy: ExecutionPolicy | None = None,
-        profile: str | SolverProfile = "balanced",
+        profile: str | SolverProfile | None = None,
         beliefs: BeliefModel | None = None,
+        initialization: SearchInitialization | None = None,
         baseline_selection: Mapping[str, str] | None = None,
         anchors: Sequence[Mapping[str, str]] = (),
         holdout_case_ids: tuple[str, ...] = (),
@@ -340,7 +344,20 @@ class UniversalSolver:
         allow_exhaustive: bool = False,
     ) -> SolverResult:
         """Solve one typed task without weakening compiler or verifier gates."""
-        selected_profile = get_solver_profile(profile)
+        if profile is None and initialization is not None:
+            effort = initialization.effort_policy
+            selected_profile = get_solver_profile(
+                SolverProfile(
+                    id=effort.id,
+                    search_rounds=effort.search_rounds,
+                    seeds=effort.seeds,
+                    repetitions=effort.repetitions,
+                    minimum_acceptance_rate=effort.minimum_acceptance_rate,
+                    fallback_count=effort.fallback_count,
+                )
+            )
+        else:
+            selected_profile = get_solver_profile(profile or "balanced")
         if not cases:
             raise ValueError("solver cases must not be empty")
         if not objectives:
@@ -367,12 +384,24 @@ class UniversalSolver:
         if policy_problems:
             raise ValueError("invalid execution policy: " + "; ".join(policy_problems))
         artifact_store_factory = artifact_store_factory or MemoryArtifactStore
-        initial_beliefs = beliefs or BeliefModel(revision="solver.cold-start")
+        space = self.compiler.admit(program, registry)
+        if initialization is not None:
+            initialization_problems = initialization.validate(space)
+            if initialization_problems:
+                raise ValueError(
+                    "invalid search initialization: "
+                    + "; ".join(initialization_problems)
+                )
+        if beliefs is not None and initialization is not None:
+            initial_beliefs = merge_belief_models(initialization.beliefs, beliefs)
+        elif initialization is not None:
+            initial_beliefs = initialization.beliefs
+        else:
+            initial_beliefs = beliefs or BeliefModel(revision="solver.cold-start")
         belief_problems = initial_beliefs.validate()
         if belief_problems:
             raise ValueError("invalid initial beliefs: " + "; ".join(belief_problems))
 
-        space = self.compiler.admit(program, registry)
         case_map = {case.id: case for case in cases}
         development_case_map = {case.id: case for case in development_cases or cases}
         all_plans: dict[str, FrozenPlan] = {}
@@ -382,6 +411,12 @@ class UniversalSolver:
         current_beliefs = initial_beliefs
         baseline_key: tuple[tuple[str, str], ...] | None = None
         full_anchors = [dict(anchor) for anchor in anchors]
+        initialization_starts = (
+            initialization.starts if initialization is not None else ()
+        )
+        full_anchors.extend(
+            dict(start.selection) for start in initialization_starts
+        )
 
         if baseline_selection is not None:
             baseline_plan = self.compiler.compile(
@@ -408,15 +443,25 @@ class UniversalSolver:
                 anchors=tuple(full_anchors),
             )
             proposals = list(report.proposals)
-            if round_index == 1 and baseline_selection is not None:
-                proposals.insert(
-                    0,
+            if round_index == 1:
+                fixed_proposals = [
                     RouteProposal(
-                        self._selection_key(baseline_selection, program),
-                        float("-inf"),
-                        (("fixed-baseline", 0.0),),
-                    ),
-                )
+                        self._selection_key(dict(start.selection), program),
+                        start.predicted_utility,
+                        ((f"history-start:{start.id}", start.predicted_utility),),
+                    )
+                    for start in initialization_starts
+                ]
+                if baseline_selection is not None:
+                    fixed_proposals.insert(
+                        0,
+                        RouteProposal(
+                            self._selection_key(baseline_selection, program),
+                            float("-inf"),
+                            (("fixed-baseline", 0.0),),
+                        ),
+                    )
+                proposals = fixed_proposals + proposals
 
             new_plans: dict[str, FrozenPlan] = {}
             for proposal in proposals:
@@ -624,6 +669,9 @@ class UniversalSolver:
             holdout_confirmed_plan_digests=confirmed_digests,
             initial_beliefs=initial_beliefs,
             learned_beliefs=current_beliefs,
+            search_initialization_digest=(
+                initialization.digest if initialization is not None else ""
+            ),
         )
 
     @staticmethod

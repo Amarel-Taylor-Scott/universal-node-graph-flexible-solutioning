@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "search-initialization.schema.json",
+  "title": "History-informed search initialization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_intelligence_model_version", "query_fingerprint_digest",
+    "memory_digest", "retrieval_policy", "effort_policy", "recommendations",
+    "starts", "optimizer_allocations", "beliefs", "warnings"
+  ],
+  "properties": {
+    "task_intelligence_model_version": {"const": "0.1"},
+    "query_fingerprint_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "memory_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "retrieval_policy": {"$ref": "#/$defs/retrievalPolicy"},
+    "effort_policy": {"$ref": "#/$defs/effortPolicy"},
+    "recommendations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/recommendation"}
+    },
+    "starts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/start"}
+    },
+    "optimizer_allocations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/optimizerAllocation"}
+    },
+    "beliefs": {"$ref": "#/$defs/beliefs"},
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "nullablePositiveInteger": {
+      "oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]
+    },
+    "nullableInteger": {
+      "oneOf": [{"type": "null"}, {"type": "integer"}]
+    },
+    "idArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "searchBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode", "evaluation_limit", "result_limit", "beam_width",
+        "random_seed", "sampling_attempt_limit", "mutation_probability"
+      ],
+      "properties": {
+        "mode": {"enum": ["prior", "beam", "sprout", "exhaustive"]},
+        "evaluation_limit": {"$ref": "#/$defs/nullablePositiveInteger"},
+        "result_limit": {"type": "integer", "minimum": 1},
+        "beam_width": {"type": "integer", "minimum": 1},
+        "random_seed": {"$ref": "#/$defs/nullableInteger"},
+        "sampling_attempt_limit": {"$ref": "#/$defs/nullablePositiveInteger"},
+        "mutation_probability": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "retrievalPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "top_k", "channel_weights", "minimum_channel_coverage",
+        "empirical_bayes_prior_strength", "deduplicate_dataset_families",
+        "preserve_conflicts"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "top_k": {"type": "integer", "minimum": 1},
+        "channel_weights": {
+          "type": "object",
+          "additionalProperties": {"type": "number", "minimum": 0}
+        },
+        "minimum_channel_coverage": {
+          "type": "number", "minimum": 0, "maximum": 1
+        },
+        "empirical_bayes_prior_strength": {"type": "number", "minimum": 0},
+        "deduplicate_dataset_families": {"type": "boolean"},
+        "preserve_conflicts": {"type": "boolean"}
+      }
+    },
+    "effortPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "level", "fingerprint_layer", "historical_start_limit",
+        "random_start_count", "contrast_start_count", "portfolio_limit",
+        "sampling_attempt_limit", "minimum_history_coverage",
+        "search_rounds", "seeds", "repetitions", "minimum_acceptance_rate",
+        "fallback_count", "protected_history_blind_lane", "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "level": {"type": "integer", "minimum": 1},
+        "fingerprint_layer": {"type": "string", "pattern": "^K[0-9]+$"},
+        "historical_start_limit": {"type": "integer", "minimum": 1},
+        "random_start_count": {"type": "integer", "minimum": 1},
+        "contrast_start_count": {"type": "integer", "minimum": 1},
+        "portfolio_limit": {"type": "integer", "minimum": 1},
+        "sampling_attempt_limit": {"type": "integer", "minimum": 1},
+        "minimum_history_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "search_rounds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/searchBudget"}
+        },
+        "seeds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "integer"}
+        },
+        "repetitions": {"type": "integer", "minimum": 1},
+        "minimum_acceptance_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "fallback_count": {"type": "integer", "minimum": 0},
+        "protected_history_blind_lane": {"type": "boolean"},
+        "extensions": {"type": "object"}
+      }
+    },
+    "channelScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel_id", "similarity", "coverage", "confidence",
+        "effective", "explanations"
+      ],
+      "properties": {
+        "channel_id": {"$ref": "common.schema.json#/$defs/id"},
+        "similarity": {"type": "number", "minimum": 0, "maximum": 1},
+        "coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "effective": {"type": "number", "minimum": 0, "maximum": 1},
+        "explanations": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_id", "selection", "episode_ids", "dataset_family_ids",
+        "channel_scores", "fused_similarity", "expected_normalized_lift",
+        "uncertainty", "negative_transfer_risk", "accepted_rate",
+        "ranking_score", "recommended_use", "conflicting_episode_ids"
+      ],
+      "properties": {
+        "route_id": {"$ref": "common.schema.json#/$defs/id"},
+        "selection": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "episode_ids": {"$ref": "#/$defs/idArray"},
+        "dataset_family_ids": {"$ref": "#/$defs/idArray"},
+        "channel_scores": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/channelScore"}
+        },
+        "fused_similarity": {"type": "number", "minimum": 0, "maximum": 1},
+        "expected_normalized_lift": {"type": "number"},
+        "uncertainty": {"type": "number", "minimum": 0},
+        "negative_transfer_risk": {"type": "number", "minimum": 0, "maximum": 1},
+        "accepted_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "ranking_score": {"type": "number"},
+        "recommended_use": {"type": "string", "minLength": 1},
+        "conflicting_episode_ids": {"$ref": "#/$defs/idArray"}
+      }
+    },
+    "start": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "source_lane", "selection", "history_blind",
+        "predicted_utility", "uncertainty", "novelty",
+        "parent_episode_ids", "rationale", "random_seed"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "source_lane": {"$ref": "common.schema.json#/$defs/id"},
+        "selection": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "history_blind": {"type": "boolean"},
+        "predicted_utility": {"type": "number"},
+        "uncertainty": {"type": "number", "minimum": 0},
+        "novelty": {"type": "number", "minimum": 0, "maximum": 1},
+        "parent_episode_ids": {"$ref": "#/$defs/idArray"},
+        "rationale": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "random_seed": {"$ref": "#/$defs/nullableInteger"}
+      }
+    },
+    "optimizerAllocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["optimizer_id", "budget_fraction", "protected", "rationale"],
+      "properties": {
+        "optimizer_id": {"$ref": "common.schema.json#/$defs/id"},
+        "budget_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "protected": {"type": "boolean"},
+        "rationale": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "candidateWeight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id", "candidate_id", "log_weight", "evidence_count", "uncertainty"
+      ],
+      "properties": {
+        "slot_id": {"$ref": "common.schema.json#/$defs/id"},
+        "candidate_id": {"$ref": "common.schema.json#/$defs/id"},
+        "log_weight": {"type": "number"},
+        "evidence_count": {"type": "integer", "minimum": 0},
+        "uncertainty": {"type": "number", "minimum": 0}
+      }
+    },
+    "interactionWeight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "left_slot", "left_candidate", "right_slot", "right_candidate",
+        "log_weight", "evidence_count"
+      ],
+      "properties": {
+        "left_slot": {"$ref": "common.schema.json#/$defs/id"},
+        "left_candidate": {"$ref": "common.schema.json#/$defs/id"},
+        "right_slot": {"$ref": "common.schema.json#/$defs/id"},
+        "right_candidate": {"$ref": "common.schema.json#/$defs/id"},
+        "log_weight": {"type": "number"},
+        "evidence_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "beliefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision", "default_log_weight",
+        "candidate_weights", "interaction_weights"
+      ],
+      "properties": {
+        "revision": {"type": "string", "minLength": 1},
+        "default_log_weight": {"type": "number"},
+        "candidate_weights": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/candidateWeight"}
+        },
+        "interaction_weights": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/interactionWeight"}
+        }
+      }
+    }
+  }
+}

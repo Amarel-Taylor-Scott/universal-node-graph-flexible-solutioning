@@ -11,7 +11,8 @@
     "champion_plan_digest", "fallbacks", "pareto_plan_digests",
     "development_receipt_ids", "holdout_receipt_ids",
     "holdout_confirmed_plan_digests", "rankings",
-    "initial_belief_revision", "learned_belief_revision"
+    "initial_belief_revision", "learned_belief_revision",
+    "search_initialization_digest"
   ],
   "properties": {
     "solver_model_version": {"const": "0.1"},
@@ -64,6 +65,12 @@
     },
     "initial_belief_revision": {"type": "string", "minLength": 1},
     "learned_belief_revision": {"type": "string", "minLength": 1},
+    "search_initialization_digest": {
+      "oneOf": [
+        {"const": ""},
+        {"$ref": "common.schema.json#/$defs/digest"}
+      ]
+    },
     "receipts": {
       "type": "array", "items": {"$ref": "run-receipt.schema.json"}
     }

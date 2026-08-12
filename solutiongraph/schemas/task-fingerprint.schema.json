@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task-fingerprint.schema.json",
+  "title": "Progressive task fingerprint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_intelligence_model_version", "task_contract_digest", "task_id",
+    "dataset_family_id", "knowledge_layer", "legal_information_boundary",
+    "profile_policy_id", "attributes", "category_matches", "embeddings",
+    "warnings", "extensions"
+  ],
+  "properties": {
+    "task_intelligence_model_version": {"const": "0.1"},
+    "task_contract_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "task_id": {"$ref": "common.schema.json#/$defs/id"},
+    "dataset_family_id": {"$ref": "#/$defs/optionalId"},
+    "knowledge_layer": {"type": "string", "pattern": "^K[0-9]+$"},
+    "legal_information_boundary": {"$ref": "common.schema.json#/$defs/id"},
+    "profile_policy_id": {"$ref": "common.schema.json#/$defs/id"},
+    "attributes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/attribute"}
+    },
+    "category_matches": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/categoryMatch"}
+    },
+    "embeddings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/embedding"}
+    },
+    "warnings": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "extensions": {"type": "object"}
+  },
+  "$defs": {
+    "optionalId": {
+      "oneOf": [
+        {"const": ""},
+        {"$ref": "common.schema.json#/$defs/id"}
+      ]
+    },
+    "optionalDigest": {
+      "oneOf": [
+        {"const": ""},
+        {"$ref": "common.schema.json#/$defs/digest"}
+      ]
+    },
+    "nullableInteger": {
+      "oneOf": [{"type": "null"}, {"type": "integer"}]
+    },
+    "nullableNonNegativeInteger": {
+      "oneOf": [{"type": "null"}, {"type": "integer", "minimum": 0}]
+    },
+    "attribute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key", "value", "availability", "evidence_kind", "compute_tier",
+        "confidence", "uncertainty", "sample_size", "random_seed", "source"
+      ],
+      "properties": {
+        "key": {"$ref": "common.schema.json#/$defs/id"},
+        "value": {},
+        "availability": {"$ref": "common.schema.json#/$defs/id"},
+        "evidence_kind": {"$ref": "common.schema.json#/$defs/id"},
+        "compute_tier": {"$ref": "common.schema.json#/$defs/id"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "uncertainty": {"type": "number", "minimum": 0},
+        "sample_size": {"$ref": "#/$defs/nullableNonNegativeInteger"},
+        "random_seed": {"$ref": "#/$defs/nullableInteger"},
+        "source": {"type": "string"}
+      }
+    },
+    "categoryMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category_id", "score", "matched_terms", "evidence_kind"],
+      "properties": {
+        "category_id": {"$ref": "common.schema.json#/$defs/id"},
+        "score": {"type": "number", "minimum": 0, "maximum": 1},
+        "matched_terms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "evidence_kind": {"$ref": "common.schema.json#/$defs/id"}
+      }
+    },
+    "embedding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind", "encoder_id", "encoder_version", "encoder_digest",
+        "input_manifest_digest", "privacy_class", "confidence", "vector"
+      ],
+      "properties": {
+        "kind": {"$ref": "common.schema.json#/$defs/id"},
+        "encoder_id": {"$ref": "common.schema.json#/$defs/id"},
+        "encoder_version": {"type": "string", "minLength": 1},
+        "encoder_digest": {"$ref": "#/$defs/optionalDigest"},
+        "input_manifest_digest": {"$ref": "#/$defs/optionalDigest"},
+        "privacy_class": {"$ref": "common.schema.json#/$defs/id"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "vector": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "number"}
+        }
+      }
+    }
+  }
+}

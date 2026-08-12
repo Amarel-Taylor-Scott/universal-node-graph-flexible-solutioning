@@ -1,8 +1,9 @@
 # Executable real-world example skeleton
 
-The repository now includes 24 dependency-free programs, including five
+The repository now includes 31 dependency-free programs, including five
 notebook task families, 18 additional Arena fixtures, and one reusable
-standard-library data-quality program, that pass through
+standard-library data-quality program, plus seven engineering and evaluation
+showcases, that pass through
 the same universal lifecycle: full registry admission, route compilation,
 frozen fallbacks, execution, content-addressed artifacts, independent
 verification, and immutable receipts.
@@ -40,6 +41,13 @@ solutiongraph examples run dependency-assurance
 solutiongraph examples run recommendation-ranking
 solutiongraph examples run scientific-experiment
 solutiongraph examples run numerical-linear-system
+solutiongraph examples run geotemporal-enrichment
+solutiongraph examples run user-journey-modeling
+solutiongraph examples run synthetic-tabular-augmentation
+solutiongraph examples run synthetic-llm-curriculum
+solutiongraph examples run grounded-document-extraction
+solutiongraph examples run reinforcement-learning-loop
+solutiongraph examples run duecare-llm-evaluation-harness
 solutiongraph examples run stdlib-data-quality
 ```
 
@@ -92,15 +100,26 @@ solutiongraph examples run tabular-regression \
 | Recommendation ranking | score → policy → diversify | strict/heuristic relevance and constraint handling | eligible, deterministic diverse ranking |
 | Scientific experiment | allocate → compare → robustness | strict/heuristic analysis paths | expected effect and robustness verdict |
 | Numerical solve | validate → solve → residual | strict/heuristic 2×2 solver and verification paths | exact solution within residual tolerance |
+| Geotemporal enrichment | normalize → reference match → timezone → time features → city/date context | permissive/strict processing at every operation | canonical record, explicit local-reference authority, UTC/time features, and provenance-bearing event join |
+| User journey modeling | normalize/dedupe → sessionize → transitions → funnel → anomalies | permissive/strict event processing | exact sessions, completed funnel, and impossible-flow anomaly |
+| Synthetic tabular augmentation | profile → latent aggregate → generate → constraints → privacy/utility screens → lineage split | weak/gated synthesis routes | valid novel rows, explicit non-guarantee, acceptable utility, and untouched holdout |
+| Synthetic LLM curriculum | facts → views → counterfactuals → hard negatives → benign controls → family split → gates | weak/fact-grounded curriculum routes | supported examples, isolated families, lineage, and no hidden chain-of-thought target |
+| Grounded document extraction | detect → layout parse → extract → ground → schema → provenance | weak/grounded extraction routes | exact values tied to source blocks and content digest |
+| Reinforcement-learning loop | validate environment → propose policies → estimate → select → outer comparison | weak/bounded policy routes | correct finite-environment policy and untouched holdout |
+| DueCare-style LLM harness | scenarios → SUT → deterministic grades → panel → claims → improvement → sealed receipt | self-serving/grounded harness routes | direct, benign, adversarial, disagreement, claim, lineage, and firewall checks |
 | Standard-library data quality | normalize keys → trim → normalize missing → case-fold/pass → filter/pass → deduplicate/pass → profile | 19 reusable source-bound primitives expanded into 32 candidate bindings | exact normalized records, profile, and deterministic digest |
 
 Both ML examples are real DAGs rather than only lists: each split artifact fans
 out to training and evaluation, while the trained model joins evaluation.
 
-Twenty-one controls are expected to be rejected by their independent oracles.
+Twenty-eight controls are expected to be rejected by their independent oracles.
 Preserving those valid-but-poor routes is part of the evidence model. The
-release gate compiles and executes all 54 declared routes through both runtime
+release gate compiles and executes all 68 declared routes through both runtime
 adapters.
+
+The seven showcase mechanisms and the linked-graph DueCare-style boundary are
+explained in
+[ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md](ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md).
 
 Six of the programs are also packaged as controlled benchmark suites with exact
 task/case/oracle identities, fixed controls, quick and balanced solver arms,

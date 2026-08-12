@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harness-bundle.schema.json",
+  "title": "Linked Graph Evaluation Harness Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "harness_model_version", "id", "version", "title", "description",
+    "graphs", "flows", "development_boundary", "outer_boundary",
+    "development_case_ids", "holdout_case_ids", "claim_scope", "extensions"
+  ],
+  "properties": {
+    "harness_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "graphs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/graph"}
+    },
+    "flows": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/flow"}
+    },
+    "development_boundary": {
+      "$ref": "evaluation-boundary.schema.json"
+    },
+    "outer_boundary": {
+      "$ref": "evaluation-boundary.schema.json"
+    },
+    "development_case_ids": {"$ref": "#/$defs/idArray"},
+    "holdout_case_ids": {"$ref": "#/$defs/idArray"},
+    "claim_scope": {"$ref": "common.schema.json#/$defs/id"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "$defs": {
+    "idArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "role", "program_digest", "registry_digest", "purpose",
+        "authorities", "candidate_visibility", "human_approval_required",
+        "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "role": {"$ref": "common.schema.json#/$defs/id"},
+        "program_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "purpose": {"type": "string", "minLength": 1},
+        "authorities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "candidate_visibility": {
+          "enum": [
+            "none", "inputs-only", "outputs-only", "development",
+            "aggregate-only"
+          ]
+        },
+        "human_approval_required": {"type": "boolean"},
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    },
+    "flow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_graph_id", "target_graph_id", "artifact_class", "exposure",
+        "purpose", "extensions"
+      ],
+      "properties": {
+        "source_graph_id": {"$ref": "common.schema.json#/$defs/id"},
+        "target_graph_id": {"$ref": "common.schema.json#/$defs/id"},
+        "artifact_class": {"$ref": "common.schema.json#/$defs/id"},
+        "exposure": {"enum": ["full", "aggregate", "digest", "deny"]},
+        "purpose": {"type": "string", "minLength": 1},
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    }
+  }
+}

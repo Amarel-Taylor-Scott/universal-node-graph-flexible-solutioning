@@ -73,7 +73,7 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert "atomic_slots=544" in doctor
     assert f"schemas={len(SCHEMA_NAMES)}" in doctor
     assert "stdlib_nodes=19" in doctor
-    assert "executable_examples=24" in doctor
+    assert "executable_examples=31" in doctor
     assert "arena_tasks=36" in doctor
     assert "benchmarks=6" in doctor
 
@@ -101,9 +101,7 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert "valid template.example-csv-report" in capsys.readouterr().out
 
     output = tmp_path / "compiled.json"
-    assert main(
-        ["templates", "create", str(EXAMPLE), "--output", str(output)]
-    ) == 0
+    assert main(["templates", "create", str(EXAMPLE), "--output", str(output)]) == 0
     assert output.exists()
     assert json.loads(output.read_text(encoding="utf-8"))["template_model_version"] == "0.1"
 

@@ -9,6 +9,7 @@ from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.catalog import catalog_documents, write_catalog
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
+from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
@@ -38,9 +39,7 @@ def test_reference_nodes_execute_and_all_contracts_and_descriptors_validate():
     assert all(node.validate() == [] for node in REFERENCE_NODE_SPECS)
     assert all(
         descriptor.validate(node) == []
-        for node, descriptor in zip(
-            REFERENCE_NODE_SPECS, REFERENCE_DESCRIPTORS, strict=True
-        )
+        for node, descriptor in zip(REFERENCE_NODE_SPECS, REFERENCE_DESCRIPTORS, strict=True)
     )
     assert len(REFERENCE_REGISTRY.nodes) == 5
 
@@ -70,11 +69,9 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         (3 + 5 + 5)
         + (3 + len(EXAMPLE_NODES))
         + (3 + len(EXTENDED_NODES))
-        + (
-            3
-            + len(STANDARD_LIBRARY_NODE_SPECS)
-            + len(STANDARD_LIBRARY_DESCRIPTORS)
-        )
+        + (3 + len(STANDARD_LIBRARY_NODE_SPECS) + len(STANDARD_LIBRARY_DESCRIPTORS))
+        + (3 + len(SHOWCASE_NODES))
+        + 1
         + len(REFERENCE_TEMPLATES.templates)
         + len(UNIVERSAL_DAG_ARENA.tasks)
         + 1
@@ -98,6 +95,7 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         len(STANDARD_LIBRARY_NODE_SPECS),
         len(EXAMPLE_NODES),
         len(EXTENDED_NODES),
+        len(SHOWCASE_NODES),
     ]
     assert index["benchmarks"] == {
         "path": "benchmarks/index.json",
@@ -113,9 +111,7 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         "enumeration",
     ]
     assert capabilities["embedding_spaces"] == []
-    example_capabilities = first[
-        "nodepacks/real-world-examples/registry-capabilities.json"
-    ]
+    example_capabilities = first["nodepacks/real-world-examples/registry-capabilities.json"]
     assert [mode["id"] for mode in example_capabilities["query_modes"]] == [
         "exact",
         "enumeration",
@@ -143,6 +139,8 @@ def test_catalogue_explorer_is_self_contained_and_exposes_every_reference_templa
     assert all(template.id in html for template in REFERENCE_TEMPLATES.templates)
     assert all(node.id in html for node in REFERENCE_NODE_SPECS)
     assert all(node.id in html for node in EXAMPLE_NODES)
+    assert all(node.id in html for node in EXTENDED_NODES)
+    assert all(node.id in html for node in SHOWCASE_NODES)
     assert all(node.id in html for node in STANDARD_LIBRARY_NODE_SPECS)
     assert all(node.description in html for node in REFERENCE_NODE_SPECS)
     assert all(
@@ -153,18 +151,15 @@ def test_catalogue_explorer_is_self_contained_and_exposes_every_reference_templa
 
 
 def test_universal_dag_explorer_is_linear_complete_and_self_contained():
-    html = (
-        Path(__file__).parents[1] / "examples" / "universal-dag-explorer.html"
-    ).read_text(encoding="utf-8")
+    html = (Path(__file__).parents[1] / "examples" / "universal-dag-explorer.html").read_text(
+        encoding="utf-8"
+    )
     assert "fetch(" not in html
     assert "XMLHttpRequest" not in html
-    assert "<script id=\"codex-visualization-floating-ui-core\"" not in html
+    assert '<script id="codex-visualization-floating-ui-core"' not in html
     assert html.count('class="udx-stage"') == 3
     assert html.count('class="udx-step"') == 9
     assert html.count('class="udx-node"') == 27
     assert "Every step. Every compatible node. Every tested route." in html
     assert "Execution is monotonic left to right" in html
-    assert all(
-        f"data-route=\"{route}\"" in html
-        for route in ("champion", "fallback", "control")
-    )
+    assert all(f'data-route="{route}"' in html for route in ("champion", "fallback", "control"))
