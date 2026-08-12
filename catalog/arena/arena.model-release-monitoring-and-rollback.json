@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "replay identity",
+    "quality delta",
+    "drift threshold",
+    "human authority",
+    "rollback readiness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "model-release-monitoring-and-rollback"
+  ],
+  "external_requirements": [],
+  "id": "arena.model-release-monitoring-and-rollback",
+  "input_contract": "Candidate and previous models, replay batch, labels, feature snapshots, schema, and release policy.",
+  "output_contract": "Package digests, replay and shadow evidence, drift verdict, human-gated decision, and rollback target.",
+  "problem": "Package exact model identity, replay inference, compare in shadow, detect drift, apply a fail-closed policy, and prepare a non-automatic rollback.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "package",
+    "replay",
+    "shadow",
+    "drift",
+    "gate",
+    "rollback"
+  ],
+  "tags": [
+    "data-science",
+    "mlops",
+    "monitoring",
+    "rollback"
+  ],
+  "template_id": "template.deployment-release",
+  "title": "Candidate models to a gated release and rollback receipt"
+}

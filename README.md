@@ -40,7 +40,7 @@ registry admission, explicit multi-round search, plan freezing, receipt-backed
 experiments, observational belief updates, hard acceptance/objective gates,
 Pareto reporting, champion selection, and separately benchmarked diverse
 fallback routes. The [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md) catalogues
-42 cross-domain problem families. Twenty-six families map to 30 executable local
+52 cross-domain problem families. Thirty-six families map to 40 executable local
 programs; twelve more are strict semantic templates and four require
 credentialed external connectors.
 
@@ -63,6 +63,17 @@ visibility, development/holdout, human-promotion, and sealed-feedback
 boundaries. Atomic judgments, blinded panels, failure clusters, aggregate-only
 outer summaries, and human promotion decisions are strict evidence objects. See
 [ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md](ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md).
+
+The data-science lifecycle pack adds ten six-stage executable graphs for
+profiling/drift, feature reduction, imbalanced classification, robust
+regression, temporal backtesting, text modeling, clustering/anomalies,
+explainability/stability, ensembles, and model release/rollback. Its 60 nodes
+expose three candidates per stage, so each example admits 729 composable routes
+while the release gate runs a rejected control and three accepted evidence
+routes. See
+[DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md](DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md)
+and the preserved
+[560-technique Taedri inventory](TAEDRI_DATA_SCIENCE_TECHNIQUE_TAXONOMY.md).
 
 For LLM-generated improvement campaigns, the core also provides immutable
 candidate ancestry, hard campaign budgets, append-only promotion decisions,
@@ -124,8 +135,9 @@ is not mixed into the execution path as another step.
 | Universal route solver | Quick, balanced, broad, and explicit exhaustive profiles; multi-round learning; hard gates; champion and fail-diverse fallback selection |
 | History-informed task intelligence | Open DAG taxonomy, progressive fingerprints, independent retrieval channels, uncertainty-bearing route priors, diverse start portfolios, protected history-blind lanes, arbitrary effort policies, plan/lane/receipt attribution, immutable memory closure, and negative-transfer assessment |
 | Linked evaluation harnesses | Exact scenario, solution, development-evaluation, improvement, promotion, and sealed outer-evaluation graph identities plus typed judgments, panels, failure clusters, sanitized outer summaries, human approvals, and feedback firewalls |
-| Universal DAG Arena | 42 task families, 26 executable fixture families, 12 additional template families, four credentialed-connector families, and 30 runnable programs |
+| Universal DAG Arena | 52 task families, 36 executable fixture families, 12 additional template families, four credentialed-connector families, and 40 runnable programs |
 | Engineering showcase pack | Thirteen additional executable fixtures and 154 source-bound nodes covering data contracts, event-time windows, GIS boundaries, APIs, frontend release gates, document rendering, geotemporal enrichment, user journeys, synthetic data, grounded documents, reinforcement learning, and DueCare-style evaluation/red teaming |
+| Data-science lifecycle pack | Ten executable six-stage fixtures, 60 source-bound nodes, 180 exact candidates, 729 admitted routes per graph, and accepted robust, alternate, and hybrid paths across profiling, feature engineering, modeling, evaluation, explainability, ensembling, and MLOps |
 | Reproducible benchmark arena | Six solution packs, 24 immutable cases, fixed controls, quick/balanced solver arms, holdouts, explicit claim scopes, JSON evidence, and self-contained HTML reports |
 | Generated-graph campaigns | Population-DAG ancestry, proposal digests, explicit candidate/trial/cost/fidelity budgets, evaluator isolation contracts, and evidence-backed decisions |
 | Reference execution | Frozen-plan reconstruction, runtime/effect/permission policy, implementation-digest checks, bounded retry, frozen fallback, circuit breaker, artifacts, verification, and receipts |
@@ -135,7 +147,7 @@ is not mixed into the execution path as another step.
 | Streaming and effects | Finite event-time windows, watermarks, late-data/retraction receipts, plus reference saga compensation for effectful nodes |
 | Interoperable provenance | Machine-readable W3C PROV, OpenLineage, and in-toto/SLSA provenance projections from one run receipt |
 | Harness onboarding | Transactional `solutiongraph init` workspace generation from any bundled semantic template |
-| Executable domain skeleton | 37 dependency-free programs spanning web, documents, images, data, ML, identity, reconciliation, privacy, operations, security, science, recommendation, numerical computing, streaming, GIS, APIs, frontend release gates, document rendering, synthetic data, reinforcement learning, and LLM harnesses using 319 executable nodes |
+| Executable domain skeleton | 47 dependency-free programs spanning web, documents, images, data, ML, identity, reconciliation, privacy, operations, security, science, recommendation, numerical computing, streaming, GIS, APIs, frontend release gates, document rendering, synthetic data, reinforcement learning, MLOps, and LLM harnesses using 379 executable nodes |
 | Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and twelve focused workspace Agent Skills |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
 
@@ -166,7 +178,7 @@ plan = Compiler().compile(
 print(plan.digest, report.evaluation_coverage)
 ```
 
-## Solve and execute 37 framework programs
+## Solve and execute 47 framework programs
 
 The examples use small standard-library implementations so the complete
 compile → execute → verify → receipt path runs from a fresh checkout. They are
@@ -186,9 +198,9 @@ solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 Every task has multiple frozen routes and every important slot exposes its full
-admitted candidate column. Thirty-four declared controls are intentionally rejected
+admitted candidate column. Forty-four declared controls are intentionally rejected
 by independent oracles, preserving negative evidence while alternative routes
-pass across 80 declared routes. The address examples use explicit offline
+pass across 120 declared routes. The address examples use explicit offline
 reference fixtures and never claim that a fixture is an official USPS
 response. Persist artifacts with:
 
@@ -267,8 +279,8 @@ finite parameters into visible candidate bindings.
 The [solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md) standardizes
 macro-stage submatrices, atomic semantic slots, safe pass-through candidates,
 and bounded refinement loops. The generated [catalogue](catalog/) currently
-contains 31 cross-domain templates, 544 atomic obligations, five portable node
-packs, 42 Arena task contracts, six portable solution packs, 24 benchmark cases,
+contains 31 cross-domain templates, 544 atomic obligations, six portable node
+packs, 52 Arena task contracts, six portable solution packs, 24 benchmark cases,
 six benchmark suites, one strict linked-graph harness bundle, and one typed
 harness-evidence example.
 Templates can be inspected or authored without writing Python:

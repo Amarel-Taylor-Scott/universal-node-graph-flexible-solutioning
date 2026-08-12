@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "schema coverage",
+    "missingness accounting",
+    "duplicate accuracy",
+    "drift evidence",
+    "lineage"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "dataset-profiling-and-drift"
+  ],
+  "external_requirements": [],
+  "id": "arena.dataset-profiling-and-drift",
+  "input_contract": "Reference and current records with stable column semantics.",
+  "output_contract": "Schema, profiles, missingness patterns, duplicates, drift scores, and a content-addressed quality report.",
+  "problem": "Infer schema, profile distributions and missingness, find duplicate content, compare snapshots, and bind the findings to source evidence.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "infer schema",
+    "profile",
+    "missingness",
+    "duplicates",
+    "drift",
+    "report"
+  ],
+  "tags": [
+    "data-science",
+    "profiling",
+    "data-quality",
+    "drift"
+  ],
+  "template_id": "template.data-quality",
+  "title": "Dataset snapshots to a drift-aware quality report"
+}

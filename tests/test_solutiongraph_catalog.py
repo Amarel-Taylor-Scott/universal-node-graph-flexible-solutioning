@@ -8,6 +8,7 @@ import pytest
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.catalog import catalog_documents, write_catalog
+from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
@@ -71,6 +72,7 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + (3 + len(EXTENDED_NODES))
         + (3 + len(STANDARD_LIBRARY_NODE_SPECS) + len(STANDARD_LIBRARY_DESCRIPTORS))
         + (3 + len(SHOWCASE_NODES))
+        + (3 + len(DATA_SCIENCE_NODES))
         + 1
         + 1
         + len(REFERENCE_TEMPLATES.templates)
@@ -88,8 +90,8 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     assert len(index["templates"]) == 31
     assert index["arena"] == {
         "path": "arena/index.json",
-        "task_count": 42,
-        "executable_fixture_count": 26,
+        "task_count": 52,
+        "executable_fixture_count": 36,
     }
     assert [item["node_count"] for item in index["node_packs"]] == [
         5,
@@ -97,6 +99,7 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         len(EXAMPLE_NODES),
         len(EXTENDED_NODES),
         len(SHOWCASE_NODES),
+        len(DATA_SCIENCE_NODES),
     ]
     assert index["benchmarks"] == {
         "path": "benchmarks/index.json",

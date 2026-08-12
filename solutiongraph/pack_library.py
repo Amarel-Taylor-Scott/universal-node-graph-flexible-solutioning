@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from solutiongraph.discovery import ArtifactReference, NodePackManifest
+from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
@@ -89,17 +90,34 @@ ENGINEERING_SHOWCASE_NODE_PACK = NodePackManifest(
     extensions=(("example.maturity", "mechanism-fixture"),),
 )
 
+DATA_SCIENCE_LIFECYCLE_NODE_PACK = NodePackManifest(
+    id="example.data-science-lifecycle-node-pack",
+    version="1.0.0",
+    description=(
+        "Three-strategy executable nodes for dataset profiling, feature reduction, "
+        "classification, regression, time series, text, clustering, explainability, "
+        "ensembles, model release monitoring, and rollback."
+    ),
+    node_spec_digests=tuple(node.digest for node in DATA_SCIENCE_NODES),
+    artifacts=_artifacts(DATA_SCIENCE_NODES),
+    source=REPOSITORY_SOURCE,
+    license="MIT",
+    extensions=(("example.maturity", "deterministic-mechanism-fixture"),),
+)
+
 REFERENCE_NODE_PACKS = (
     REFERENCE_CORE_NODE_PACK,
     REAL_WORLD_EXAMPLE_NODE_PACK,
     EXTENDED_ARENA_NODE_PACK,
     ENGINEERING_SHOWCASE_NODE_PACK,
+    DATA_SCIENCE_LIFECYCLE_NODE_PACK,
 )
 
 
 __all__ = [
     "EXTENDED_ARENA_NODE_PACK",
     "ENGINEERING_SHOWCASE_NODE_PACK",
+    "DATA_SCIENCE_LIFECYCLE_NODE_PACK",
     "REAL_WORLD_EXAMPLE_NODE_PACK",
     "REFERENCE_CORE_NODE_PACK",
     "REFERENCE_NODE_PACKS",

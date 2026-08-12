@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "no missing output",
+    "variance removal",
+    "relevance",
+    "feature count",
+    "lineage"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "wide-table-feature-reduction"
+  ],
+  "external_requirements": [],
+  "id": "arena.wide-table-feature-reduction",
+  "input_contract": "Typed feature rows, target identity, and transformation policy.",
+  "output_contract": "Reduced matrix, selected and removed features, fitted transformations, and source lineage.",
+  "problem": "Repair permitted missing values, scale, remove constants, group collinearity, select relevant representatives, and preserve a feature manifest.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "impute",
+    "scale",
+    "variance",
+    "collinearity",
+    "select",
+    "project"
+  ],
+  "tags": [
+    "data-science",
+    "feature-engineering",
+    "feature-selection",
+    "tabular"
+  ],
+  "template_id": "template.kaggle-tabular",
+  "title": "Wide tables to a traceable reduced feature matrix"
+}

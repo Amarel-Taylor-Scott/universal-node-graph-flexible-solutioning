@@ -1,0 +1,91 @@
+{
+  "capabilities": [
+    "data-science.time-series-feature-backtest.build-lag-windows"
+  ],
+  "description": "Execute the build-lag-windows obligation in the time-series-feature-backtest lifecycle fixture.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.data_science_tasks:execute_data_science_step",
+  "failure_modes": [],
+  "id": "example.data-science.time-series-feature-backtest.build-lag-windows",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.data-science.time-series-feature-backtest-state",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [
+    "Raw input evidence remains available for independent verification."
+  ],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.data-science.time-series-feature-backtest-state",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "time-series-feature-backtest"
+      ],
+      "default": null,
+      "description": "",
+      "name": "pipeline",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "build-lag-windows"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "minimal",
+        "robust",
+        "alternate"
+      ],
+      "default": null,
+      "description": "",
+      "name": "strategy",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [
+    "The methods ledger records build-lag-windows."
+  ],
+  "preconditions": [
+    "The payload preserves raw fixture evidence."
+  ],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/data_science_tasks.py",
+  "verifier": "verifier.example.data-science",
+  "version": "1.0.0"
+}

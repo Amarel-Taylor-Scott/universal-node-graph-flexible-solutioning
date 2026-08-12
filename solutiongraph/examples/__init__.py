@@ -1,7 +1,7 @@
 """Executable, dependency-free domain examples for the universal runtime."""
 
-# Import order is intentional: showcase_tasks reuses the task dataclasses and
-# tasks attaches the showcase tuple after those dataclasses are defined.
+# Import order is intentional: the extended modules reuse the task dataclasses,
+# and tasks attaches their example tuples after those dataclasses are defined.
 # ruff: noqa: I001
 from solutiongraph.examples.tasks import (
     EXAMPLE_TASKS,
@@ -17,6 +17,10 @@ from solutiongraph.examples.showcase_tasks import (
     SHOWCASE_EXAMPLE_TASKS,
     SHOWCASE_REGISTRY,
 )
+from solutiongraph.examples.data_science_tasks import (
+    DATA_SCIENCE_EXAMPLE_TASKS,
+    DATA_SCIENCE_REGISTRY,
+)
 
 __all__ = [
     "EXAMPLE_TASKS",
@@ -27,6 +31,8 @@ __all__ = [
     "run_example",
     "DUECARE_HARNESS_BUNDLE",
     "DUECARE_HARNESS_EVIDENCE",
+    "DATA_SCIENCE_EXAMPLE_TASKS",
+    "DATA_SCIENCE_REGISTRY",
     "SHOWCASE_EXAMPLE_TASKS",
     "SHOWCASE_REGISTRY",
 ]

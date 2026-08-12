@@ -1,9 +1,9 @@
 # Executable real-world example skeleton
 
-The repository now includes 37 dependency-free programs, including five
+The repository now includes 47 dependency-free programs, including five
 notebook task families, 18 additional Arena fixtures, and one reusable
 standard-library data-quality program, plus thirteen engineering and evaluation
-showcases, that pass through
+showcases and ten data-science lifecycle graphs, that pass through
 the same universal lifecycle: full registry admission, route compilation,
 frozen fallbacks, execution, content-addressed artifacts, independent
 verification, and immutable receipts.
@@ -54,6 +54,16 @@ solutiongraph examples run synthetic-llm-curriculum
 solutiongraph examples run grounded-document-extraction
 solutiongraph examples run reinforcement-learning-loop
 solutiongraph examples run duecare-llm-evaluation-harness
+solutiongraph examples run dataset-profiling-and-drift
+solutiongraph examples run wide-table-feature-reduction
+solutiongraph examples run imbalanced-classification-and-calibration
+solutiongraph examples run robust-regression-and-conformal
+solutiongraph examples run time-series-feature-backtest
+solutiongraph examples run text-classification-pipeline
+solutiongraph examples run unsupervised-segmentation-and-anomaly
+solutiongraph examples run model-explainability-and-stability
+solutiongraph examples run ensemble-selection-and-stacking
+solutiongraph examples run model-release-monitoring-and-rollback
 solutiongraph examples run stdlib-data-quality
 ```
 
@@ -119,19 +129,32 @@ solutiongraph examples run tabular-regression \
 | Grounded document extraction | detect → layout parse → extract → ground → schema → provenance | weak/grounded extraction routes | exact values tied to source blocks and content digest |
 | Reinforcement-learning loop | validate environment → propose policies → estimate → select → outer comparison | weak/bounded policy routes | correct finite-environment policy and untouched holdout |
 | DueCare-style LLM harness | scenarios → SUT → deterministic grades → panel → claims → improvement → sealed receipt | self-serving/grounded harness routes | direct, benign, adversarial, disagreement, claim, lineage, and firewall checks |
+| Dataset profiling/drift | schema → distributions → missingness → duplicates → drift → report | minimal/robust/alternate candidates at every stage | exact accounting, duplicate and missing findings, drift, and source-bound report |
+| Wide-table feature reduction | impute → scale → variance → collinearity → relevance → project | minimal/robust/alternate candidates at every stage | non-missing reduced matrix and selected/removed feature manifest |
+| Imbalanced classification | split → rebalance → fit → calibrate → threshold → slices | minimal/robust/alternate candidates at every stage | perfect fixture holdout, minority recall, slice coverage, and split lineage |
+| Robust regression | group split → outliers → fit → predict → intervals → stress | minimal/robust/alternate candidates at every stage | exact outlier ledger, low held-group error, coverage, and sensitivity evidence |
+| Time-series backtest | chronology → interpolate → calendar → lags → walk-forward → forecast | minimal/robust/alternate candidates at every stage | gap evidence, no shuffle, low backtest error, and ordered forecast intervals |
+| Text classification | normalize → tokenize → n-grams → vectorize → fit → evaluate | minimal/robust/alternate candidates at every stage | untouched-document predictions and fixture accuracy |
+| Segmentation/anomaly | scale → choose k → cluster → assign → anomaly → profile | minimal/robust/alternate candidates at every stage | cluster evidence, complete assignments, anomaly, and segment summaries |
+| Explainability/stability | register → importance → resample → slices → counterfactual → card | minimal/robust/alternate candidates at every stage | model/data identity, stable ranking, slice results, scoped counterfactual, limitations |
+| Ensemble/stacking | collect OOF → lineage → prune → blend → calibrate → holdout | minimal/robust/alternate candidates at every stage | no fold leakage, weak-model removal, weights, and untouched-holdout error |
+| Model release/rollback | package → replay → shadow → drift → gate → rollback | minimal/robust/alternate candidates at every stage | exact identities, non-mutating shadow, human-gated approval, rollback target |
 | Standard-library data quality | normalize keys → trim → normalize missing → case-fold/pass → filter/pass → deduplicate/pass → profile | 19 reusable source-bound primitives expanded into 32 candidate bindings | exact normalized records, profile, and deterministic digest |
 
 Both ML examples are real DAGs rather than only lists: each split artifact fans
 out to training and evaluation, while the trained model joins evaluation.
 
-Thirty-four controls are expected to be rejected by their independent oracles.
+Forty-four controls are expected to be rejected by their independent oracles.
 Preserving those valid-but-poor routes is part of the evidence model. The
-release gate compiles and executes all 80 declared routes through both runtime
+release gate compiles and executes all 120 declared routes through both runtime
 adapters.
 
 The thirteen showcase mechanisms and the linked-graph DueCare-style boundary are
 explained in
 [ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md](ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md).
+The broader 560-technique lifecycle mapping, 729-route composition model, and
+node-pack extension seams are documented in
+[DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md](DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md).
 The catalog also publishes a strict evidence closure containing criterion-level
 judgments, blinded panels, a development failure cluster, an aggregate-only
 outer summary, and a two-human promotion decision with rollback identity.

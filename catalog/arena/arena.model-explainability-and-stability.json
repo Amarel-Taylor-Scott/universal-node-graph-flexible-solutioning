@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "identity binding",
+    "ranking stability",
+    "slice coverage",
+    "counterfactual scope",
+    "limitations"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "model-explainability-and-stability"
+  ],
+  "external_requirements": [],
+  "id": "arena.model-explainability-and-stability",
+  "input_contract": "Immutable model, evaluation rows, group labels, feature order, and counterfactual request.",
+  "output_contract": "Model digest, importance evidence, stability runs, slice metrics, counterfactual, and model card.",
+  "problem": "Bind the model and data, compute explanations, test ranking stability, inspect slices, form a bounded counterfactual, and publish limitations.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "register",
+    "importance",
+    "stability",
+    "slices",
+    "counterfactual",
+    "model card"
+  ],
+  "tags": [
+    "data-science",
+    "explainability",
+    "stability",
+    "model-card"
+  ],
+  "template_id": "template.compliance-evidence",
+  "title": "Registered models to stability-aware explanation evidence"
+}

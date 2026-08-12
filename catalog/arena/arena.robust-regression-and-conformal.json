@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "group isolation",
+    "outlier traceability",
+    "RMSE",
+    "interval coverage",
+    "stability"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "robust-regression-and-conformal"
+  ],
+  "external_requirements": [],
+  "id": "arena.robust-regression-and-conformal",
+  "input_contract": "Regression rows with group identity, target, feature, and holdout policy.",
+  "output_contract": "Model, outlier ledger, held-group predictions, intervals, coverage, error, and perturbation evidence.",
+  "problem": "Hold out an entire group, screen training outliers, fit a robust regressor, predict, construct residual intervals, and stress the result.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "group split",
+    "outliers",
+    "robust fit",
+    "predict",
+    "intervals",
+    "stress"
+  ],
+  "tags": [
+    "data-science",
+    "regression",
+    "robustness",
+    "uncertainty"
+  ],
+  "template_id": "template.kaggle-tabular",
+  "title": "Grouped observations to robust predictions and intervals"
+}

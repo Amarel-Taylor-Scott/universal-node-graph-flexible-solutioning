@@ -73,8 +73,8 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert "atomic_slots=544" in doctor
     assert f"schemas={len(SCHEMA_NAMES)}" in doctor
     assert "stdlib_nodes=19" in doctor
-    assert "executable_examples=37" in doctor
-    assert "arena_tasks=42" in doctor
+    assert "executable_examples=47" in doctor
+    assert "arena_tasks=52" in doctor
     assert "benchmarks=6" in doctor
 
     assert main(["conformance"]) == 0

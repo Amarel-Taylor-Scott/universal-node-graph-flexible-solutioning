@@ -40,13 +40,21 @@ All notable changes to this proof of concept are documented here.
 - A portable 154-node engineering-showcase pack, deterministic harness catalogue
   artifact, and an implementation/research guide for common engineering DAGs
   and evaluation architectures.
+- Ten executable data-science lifecycle graphs spanning profiling/drift,
+  feature reduction, imbalanced classification, robust regression, temporal
+  backtesting, text classification, clustering/anomalies, explainability,
+  ensembles, and model release/rollback.
+- A portable 60-node, 180-candidate data-science pack with 729 compiler-admitted
+  routes per graph, rejected minimal controls, accepted robust and alternate
+  routes, accepted hybrid compositions, Arena contracts, and a lifecycle
+  extension guide mapped to the supplied 560-technique inventory.
 
 ### Changed
 
 - The strict wire-schema set now contains 60 schemas.
-- Release verification now covers 37 executable examples, 319 unique nodes, 80
-  declared routes, 46 accepted observations, 34 intentional negative controls,
-  five node packs, and 495 generated catalogue documents.
+- Release verification now covers 47 executable examples, 379 unique nodes, 120
+  declared routes, 76 accepted observations, 44 intentional negative controls,
+  six node packs, and 568 generated catalogue documents.
 - `UniversalSolver.solve(profile=None, initialization=...)` derives its
   inspectable search/trial budget from the initialization effort policy,
   evaluates the proposed starting portfolio in round one, and records the

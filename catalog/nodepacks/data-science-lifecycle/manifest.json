@@ -1,0 +1,618 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.dataset-profiling-and-drift.infer-schema",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.dataset-profiling-and-drift.profile-distributions",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.dataset-profiling-and-drift.analyze-missingness",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.dataset-profiling-and-drift.detect-duplicates",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.dataset-profiling-and-drift.compare-drift",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.dataset-profiling-and-drift.emit-quality-report",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.wide-table-feature-reduction.repair-missing",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.wide-table-feature-reduction.scale-features",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.wide-table-feature-reduction.remove-low-variance",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.wide-table-feature-reduction.group-collinearity",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.wide-table-feature-reduction.select-relevant",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.wide-table-feature-reduction.emit-reduced-matrix",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.imbalanced-classification-and-calibration.stratified-split",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.imbalanced-classification-and-calibration.rebalance-training",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.imbalanced-classification-and-calibration.fit-classifier",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.imbalanced-classification-and-calibration.calibrate-probabilities",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.imbalanced-classification-and-calibration.optimize-threshold",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.imbalanced-classification-and-calibration.evaluate-slices",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.robust-regression-and-conformal.group-aware-split",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.robust-regression-and-conformal.repair-outliers",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.robust-regression-and-conformal.fit-robust-model",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.robust-regression-and-conformal.generate-predictions",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.robust-regression-and-conformal.conformal-intervals",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.robust-regression-and-conformal.stress-evaluate",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.time-series-feature-backtest.order-and-gap-check",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.time-series-feature-backtest.interpolate-missing",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.time-series-feature-backtest.derive-calendar-features",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.time-series-feature-backtest.build-lag-windows",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.time-series-feature-backtest.walk-forward-backtest",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.time-series-feature-backtest.forecast-with-intervals",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.text-classification-pipeline.normalize-text",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.text-classification-pipeline.tokenize",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.text-classification-pipeline.build-ngrams",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.text-classification-pipeline.vectorize",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.text-classification-pipeline.fit-text-model",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.text-classification-pipeline.evaluate-text-model",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.unsupervised-segmentation-and-anomaly.robust-scale",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.unsupervised-segmentation-and-anomaly.choose-cluster-count",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.unsupervised-segmentation-and-anomaly.fit-clusters",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.unsupervised-segmentation-and-anomaly.assign-segments",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.unsupervised-segmentation-and-anomaly.score-anomalies",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.unsupervised-segmentation-and-anomaly.characterize-segments",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-explainability-and-stability.register-model",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-explainability-and-stability.permutation-importance",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-explainability-and-stability.bootstrap-stability",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-explainability-and-stability.evaluate-slices",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-explainability-and-stability.generate-counterfactual",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-explainability-and-stability.emit-model-card",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.ensemble-selection-and-stacking.collect-base-predictions",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.ensemble-selection-and-stacking.validate-oof-lineage",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.ensemble-selection-and-stacking.prune-redundancy",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.ensemble-selection-and-stacking.fit-ensemble",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.ensemble-selection-and-stacking.calibrate-ensemble",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.ensemble-selection-and-stacking.evaluate-holdout",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-release-monitoring-and-rollback.package-model",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-release-monitoring-and-rollback.replay-batch-inference",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-release-monitoring-and-rollback.run-shadow-comparison",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-release-monitoring-and-rollback.detect-drift",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-release-monitoring-and-rollback.evaluate-release-policy",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.data_science_tasks:execute_data_science_step"
+      },
+      "digest": "sha256:bb31b0a2caeebf9c3f9be9e8be5afcf9d1c795b4c0027b717d3811e21d771a07",
+      "media_type": "text/x-python",
+      "name": "artifact.example.data-science.model-release-monitoring-and-rollback.prepare-rollback",
+      "uri": "python://solutiongraph.examples.data_science_tasks:execute_data_science_step"
+    }
+  ],
+  "dependencies": [],
+  "description": "Three-strategy executable nodes for dataset profiling, feature reduction, classification, regression, time series, text, clustering, explainability, ensembles, model release monitoring, and rollback.",
+  "descriptor_digests": [],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "example.maturity": "deterministic-mechanism-fixture"
+  },
+  "id": "example.data-science-lifecycle-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:e6b993b771edcad28b9dc2de9c52b625eaa8582a2387b62ea2a0ecc5f0f4eb00",
+    "sha256:1c2e2f5f1ef2f037e547c5341ce44180c83aa15cada1f2a48ed225123c4c86c5",
+    "sha256:61cd9683f9ccef216629d15bd939bc3626bf46a84b973a737f049c060671fc49",
+    "sha256:5feeb73baa2c4f29008d85b3fa2f7f5a954b79c6bf3a0779803c739e18a97806",
+    "sha256:fa4c03d14a067b97d0ff2ef5dc84ec77a55f2199d3f84e5301ec4be99163eef5",
+    "sha256:94c3cdefd427c70d9f905c4165af78dea9c06669e0cd68f9b51faf8ba6e78338",
+    "sha256:c05ea13dd238f8195031c42fa3cb4cfa2a7ebd7e917a54b4fea0580b26de59c3",
+    "sha256:44817b71dc5d24c4a43a8eccfa158d6f8bfce2a3cf209b5b84226b8ec1149f5a",
+    "sha256:d7105bbe4d6ad1df812c402335ad3ee933e2d74f67a8456258ac8c3748f99ee8",
+    "sha256:8a6e40bdeaadc22a89f5e6e5ff9ee959ef6a74c3abd6c1ad549d82673ec70602",
+    "sha256:832942d540fdea06b384b66062da8f4787863989d2b0a5d201049e7852a6c071",
+    "sha256:59aa97e8ec87f36f6e6d0094b824ce5e9c98c966e49c5dadf07c40730e3e0395",
+    "sha256:70f63ce48a1f98603445fd61ea928a139772391f4f5d0c8ea752def87c608ef7",
+    "sha256:b52524bddf1d9410a3a01feca7f37439df8c7296d733d0efa1bfb2abd717f259",
+    "sha256:2b0578270ff22bb009a2156622759ccfa3f1398bdaf6e844cfe94eb3b1c6dd64",
+    "sha256:e772d9f26ce6754a655db1e0e143157e51990abeda833b7984ab7d6f030d16fd",
+    "sha256:49d2a5a6a265ecab690e0667933f402eb3a8852d59e4d0083ef5bad1c99cad5f",
+    "sha256:5dc51b61d9138a5e8d3a7ef03e8772be498a5b689dedb1ac8bad67602e2027b7",
+    "sha256:aee63094e16dc65069120f418db23284249ec06afe5a7ec43aca223a47910bfa",
+    "sha256:c48b5986fc6c1bd8a87c74c9528858f8bbab9023c01cbede124053b087b991b5",
+    "sha256:279579e02effc05e2c697d1f199b61b6f15b17892ad2871de99c0bee53ecf0d0",
+    "sha256:bba966b186b6c7a87bf13346f630aea4a9e24ca4e40eef3bfe10ea59f54590e6",
+    "sha256:945d575567b03985ea7ff36d96f558e4c2aaa4d3c9aec21f55250015034e8be7",
+    "sha256:c1e6045695c7100dba93a8b29085e068be2c6b2e4d9183c52ae96cfd830c4e53",
+    "sha256:fc20f9aaab80b5202ca0f33d93e71b500777dac9438f5dd2774313815bd503a1",
+    "sha256:c7fd9cd7ca9fe8b095cc482a86cacae33a2081b109ef1532ce091cd4236f2b81",
+    "sha256:c2f2012fd0848ca8665f8cd99ada18940c0daf6a2acc957d69c3bf50031d3f90",
+    "sha256:517a902eeea7001c529a5b4ce55541a5d451e106db34cd4920193df642779ded",
+    "sha256:66478f9e8262c0c77bb4afebeeaafd4ffabe05408b2d729c5588bbe61e57a718",
+    "sha256:ef515ccc7775685bffd8504c1c7c5fb86669e1e698999933946248d7678a10f0",
+    "sha256:d6b58653ab8c62285bc45c4ed0029f9524b505f8579ef15852ce22532ebcfdf6",
+    "sha256:37ddacf546cf6e39089a6d06c8e03ff6d1f15561926fa7b2142048c3c9f99067",
+    "sha256:a624b202ed5d5943028deae379366ababf54310b702fc3b5bb772178cb637b2a",
+    "sha256:797901cc0c3b8a5a33ca849d911ab87c71061baf2d0576f13da307cc0f97feb0",
+    "sha256:7a21a892a8a6416ceeb73ba86fd32f6d43b792ca0273ec0cccd8369203af12b6",
+    "sha256:a42b22902e7ec59898a72bd697e295e3ce772fec35c2f9050bc1a8b9de1dc238",
+    "sha256:6f1d1e36953182b64f45ee686fa756e3a3ec0e4b59d97407b64fb61799db2b23",
+    "sha256:2c67c8e96cac261daf45458cb27406becff626aaeab9a69646f9a7f7866c81f4",
+    "sha256:d9499b6c8b631fab638dd9380f12e038553ed024171e910f65047dac77186b81",
+    "sha256:e6fa421d5f4b16c366eaee9c3a8cd9c6ad393c0de764bccb9c54dba659208289",
+    "sha256:814c475275077344c50b268e6f53e9e0d5b434033c8fe66a8a6ba1f3cd8ed58e",
+    "sha256:d6497dde9d0da8f5de879c8dcab05320816b80968831f6b75d6e25d4befe9960",
+    "sha256:e55e981517a08287ffb83153499a366d9d96983d93041291a1835f466b74c41d",
+    "sha256:f1deecc47a3228f474bb16396813289445a939c176a7594e6d5c7963c24e5e24",
+    "sha256:225d5b577048e77f8423043dfd5f9af1dedda67ce0835da9386eab5c675a4a48",
+    "sha256:1146024a93e3bdc1d360e874bc84ad03c5166943f79f5686aded7624d0bb7835",
+    "sha256:a0e028156ef9c885b7a7d43092c022b424f6c94f5d1dacc16655510b116fee63",
+    "sha256:49d03be0a11211af1bb86f6290be6cd0e8da832c5f3afb8cbfd87029c336d643",
+    "sha256:5578f1fd50f343a259c6c2e09698b616161382724f51ad09be6615a5add3f621",
+    "sha256:11f032a4706be9661a5cede5d4b56664b1e8767718634292e715d469c2096b45",
+    "sha256:b335a5ddc828fb2a0dc5d5ee94c932fb639e828c8ccffb2ae1fd5dbe25a0121c",
+    "sha256:e6e70bf284c675eee369106d3f73287f6e4d2d6dd6fca14f99358c9b9d0854f4",
+    "sha256:7adb16b1b3360fc20b4b4ee81ef3a6c357e3bda5a6b125d729676c7795a440b9",
+    "sha256:22208dfa3fd86ae8c01bfdd2bab920569efd4b6a4165f126082c1613464e7747",
+    "sha256:0768e652eee81611d9294d44432ed90ab2b8668d805d0779fa3218c3c94d1f75",
+    "sha256:988f7811d6d4a613cacdf19f8cfa35c748268ca9c1441f5c568f6db3ab5e75f8",
+    "sha256:c3cb3e18b0e1372746e089438dea8256a2ad60e722f0832296f735b700b3bc69",
+    "sha256:464f573f81207f29cf215a9e9bfc8e73d00121d06ff535604da04919a26110ae",
+    "sha256:bddd6e87cbf2b3e299efe74d6cd0f6540f2bb68527ff524040a6fe25642cab2a",
+    "sha256:a152e0ddc40c45efb5d50e4f4ec52ad885d3c73608f151acc6ef576f7aaeb69b"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

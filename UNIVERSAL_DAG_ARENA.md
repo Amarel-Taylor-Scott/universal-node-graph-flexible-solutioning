@@ -61,10 +61,26 @@ response provenance, retention policy, and stable failure taxonomy.
 | Recommendation ranking | `recommendation-ranking` | score × eligibility/policy × diversification |
 | Scientific experiment | `scientific-experiment` | allocate observations × compare × robustness check |
 | Numerical linear system | `numerical-linear-system` | validate structure × solve × residual verification |
+| Conflict-aware data contract | `conflict-aware-data-contract` | profile × missing repair × conflict resolution × contract × quarantine |
+| Event-time windowing | `event-time-windowing` | normalize × deduplicate × watermark × windows × late data × retractions |
+| Exact GIS boundary resolution | `exact-gis-boundary-resolution` | coordinate/CRS × prefilter × predicate × ambiguity × provenance |
+| Idempotent API contract | `idempotent-api-contract` | request contract × authorization × idempotency × mutation × response × audit |
+| Frontend release journey | `frontend-release-journey` | trace × accessibility × API contracts × journey × performance × release |
+| Document render and verify | `document-render-and-verify` | parse × assets × layout × render × visual checks × receipt |
+| Dataset profiling and drift | `dataset-profiling-and-drift` | schema × distributions × missingness × duplicates × drift × report |
+| Wide-table feature reduction | `wide-table-feature-reduction` | impute × scale × variance × collinearity × relevance × projection |
+| Imbalanced classification | `imbalanced-classification-and-calibration` | split × rebalance × fit × calibrate × threshold × slices |
+| Robust regression | `robust-regression-and-conformal` | group split × outliers × fit × predict × intervals × stress |
+| Time-series feature backtest | `time-series-feature-backtest` | chronology × interpolate × calendar × lags × walk-forward × forecast |
+| Text classification | `text-classification-pipeline` | normalize × tokenize × n-grams × vectorize × fit × evaluate |
+| Segmentation and anomaly | `unsupervised-segmentation-and-anomaly` | scale × choose k × cluster × assign × anomaly × profile |
+| Explainability and stability | `model-explainability-and-stability` | register × importance × resample × slices × counterfactual × model card |
+| Ensemble and stacking | `ensemble-selection-and-stacking` | collect OOF × lineage × prune × blend × calibrate × holdout |
+| Model release and rollback | `model-release-monitoring-and-rollback` | package × replay × shadow × drift × gate × rollback |
 
-Together these map to 24 programs and 54 declared reference routes. The Arena
-and standard-library registries contain 165 unique executable nodes. Thirty-three
-routes are accepted by independent fixture oracles and 21 are deliberate
+Together these map to 40 programs and 106 declared reference routes. The Arena
+and standard-library registries contain 379 unique executable nodes. Sixty-nine
+routes are accepted by independent fixture oracles and 37 are deliberate
 negative controls. The
 declared routes are release-gate fixtures; `UniversalSolver` searches
 additional combinations from the complete compiler-admitted matrix.
@@ -152,3 +168,6 @@ ensemble, and submission validation as separate slots or nested subgraphs. The
 bundled regression/classification fixtures prove the API only; a competition
 claim requires the real immutable dataset, competition metric, legal rules,
 fixed validation boundary, repeated seeds, and a submission receipt.
+The ten broader data-science fixtures and their mapping to a 560-technique
+lifecycle inventory are described in
+[the data-science pipeline guide](DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md).

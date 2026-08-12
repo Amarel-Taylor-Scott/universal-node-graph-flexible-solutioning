@@ -1,0 +1,34 @@
+{
+  "acceptance_signals": [
+    "OOF disjointness",
+    "weak-model removal",
+    "holdout isolation",
+    "ensemble error"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "ensemble-selection-and-stacking"
+  ],
+  "external_requirements": [],
+  "id": "arena.ensemble-selection-and-stacking",
+  "input_contract": "Named base predictions with fold identities, actuals, and separate holdout predictions.",
+  "output_contract": "Fold audit, retained models, ensemble weights, calibration, holdout predictions, and error.",
+  "problem": "Collect out-of-fold predictions, validate lineage, prune weak candidates, fit and calibrate a blend, and evaluate one untouched holdout.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "collect",
+    "lineage",
+    "prune",
+    "blend",
+    "calibrate",
+    "holdout"
+  ],
+  "tags": [
+    "data-science",
+    "ensemble",
+    "stacking",
+    "leakage-control"
+  ],
+  "template_id": "template.kaggle-tabular",
+  "title": "Base predictions to a leakage-checked ensemble"
+}

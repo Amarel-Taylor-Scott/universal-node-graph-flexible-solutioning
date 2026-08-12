@@ -13,6 +13,10 @@ from solutiongraph.discovery import (
     RegistryCapabilities,
     SchemaSupport,
 )
+from solutiongraph.examples.data_science_tasks import (
+    DATA_SCIENCE_NODES,
+    DATA_SCIENCE_REGISTRY,
+)
 from solutiongraph.examples.extended_tasks import (
     EXTENDED_NODES,
     EXTENDED_REGISTRY,
@@ -26,6 +30,7 @@ from solutiongraph.examples.showcase_tasks import (
 from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.pack_library import (
+    DATA_SCIENCE_LIFECYCLE_NODE_PACK,
     ENGINEERING_SHOWCASE_NODE_PACK,
     EXTENDED_ARENA_NODE_PACK,
     REAL_WORLD_EXAMPLE_NODE_PACK,
@@ -201,6 +206,29 @@ def showcase_registry_capabilities() -> RegistryCapabilities:
     )
 
 
+def data_science_registry_capabilities() -> RegistryCapabilities:
+    """Advertise exact lookup and enumeration for lifecycle mechanism fixtures."""
+    return RegistryCapabilities(
+        registry_id=DATA_SCIENCE_REGISTRY.id,
+        registry_version=DATA_SCIENCE_REGISTRY.version,
+        registry_digest=DATA_SCIENCE_REGISTRY.digest,
+        protocol_versions=("0.1",),
+        schemas=(
+            SchemaSupport("node-spec", ("0.2",)),
+            SchemaSupport("node-pack", ("0.1",)),
+        ),
+        query_modes=(
+            QueryMode("exact", fields=("node_id", "node_spec_digest")),
+            QueryMode("enumeration", supports_cursor=True),
+        ),
+        supports_enumeration=True,
+        supports_snapshots=True,
+        supports_continuation=True,
+        max_page_size=1000,
+        extensions=(("example.maturity", "deterministic-mechanism-fixture"),),
+    )
+
+
 def catalog_documents() -> dict[str, dict[str, Any]]:
     """Return every generated catalogue document keyed by portable relative path."""
     node_pack = REFERENCE_CORE_NODE_PACK
@@ -211,6 +239,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
     extended_capabilities = extended_registry_capabilities()
     stdlib_capabilities = standard_library_registry_capabilities()
     showcase_capabilities = showcase_registry_capabilities()
+    data_science_capabilities = data_science_registry_capabilities()
     documents: dict[str, dict[str, Any]] = {
         "nodepacks/reference-core/manifest.json": node_pack.to_dict(),
         "nodepacks/reference-core/registry.json": REFERENCE_REGISTRY.to_dict(),
@@ -233,6 +262,13 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "nodepacks/engineering-showcases/registry-capabilities.json": (
             showcase_capabilities.to_dict()
         ),
+        "nodepacks/data-science-lifecycle/manifest.json": (
+            DATA_SCIENCE_LIFECYCLE_NODE_PACK.to_dict()
+        ),
+        "nodepacks/data-science-lifecycle/registry.json": DATA_SCIENCE_REGISTRY.to_dict(),
+        "nodepacks/data-science-lifecycle/registry-capabilities.json": (
+            data_science_capabilities.to_dict()
+        ),
         "harnesses/duecare-example.json": DUECARE_HARNESS_BUNDLE.to_dict(),
         "harnesses/duecare-evidence-example.json": DUECARE_HARNESS_EVIDENCE.to_dict(),
     }
@@ -250,6 +286,8 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         documents[f"nodepacks/stdlib-data-foundation/nodes/{node.id}.json"] = node.to_dict()
     for node in SHOWCASE_NODES:
         documents[f"nodepacks/engineering-showcases/nodes/{node.id}.json"] = node.to_dict()
+    for node in DATA_SCIENCE_NODES:
+        documents[f"nodepacks/data-science-lifecycle/nodes/{node.id}.json"] = node.to_dict()
     for descriptor in STANDARD_LIBRARY_DESCRIPTORS:
         documents[f"nodepacks/stdlib-data-foundation/descriptors/{descriptor.node_id}.json"] = (
             descriptor.to_dict()
@@ -351,6 +389,15 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "descriptor_count": 0,
                 "embedding_record_count": 0,
             },
+            {
+                "id": DATA_SCIENCE_LIFECYCLE_NODE_PACK.id,
+                "version": DATA_SCIENCE_LIFECYCLE_NODE_PACK.version,
+                "digest": DATA_SCIENCE_LIFECYCLE_NODE_PACK.digest,
+                "path": "nodepacks/data-science-lifecycle/manifest.json",
+                "node_count": len(DATA_SCIENCE_NODES),
+                "descriptor_count": 0,
+                "embedding_record_count": 0,
+            },
         ],
         "harnesses": [
             {
@@ -401,6 +448,7 @@ def write_catalog(root: str | Path) -> tuple[Path, ...]:
 
 __all__ = [
     "catalog_documents",
+    "data_science_registry_capabilities",
     "example_registry_capabilities",
     "extended_registry_capabilities",
     "reference_registry_capabilities",

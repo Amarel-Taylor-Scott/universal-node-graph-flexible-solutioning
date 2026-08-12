@@ -2135,10 +2135,18 @@ EXAMPLE_TASKS += (
 # Import after the shared dataclasses and core examples exist.  The extended
 # module owns a separate registry so adding cross-domain fixtures does not turn
 # the original teaching registry into one misleading universal deployment.
+from solutiongraph.examples.data_science_tasks import (  # noqa: E402
+    DATA_SCIENCE_EXAMPLE_TASKS,
+)
 from solutiongraph.examples.extended_tasks import EXTENDED_EXAMPLE_TASKS  # noqa: E402
 from solutiongraph.examples.showcase_tasks import SHOWCASE_EXAMPLE_TASKS  # noqa: E402
 
-EXAMPLE_TASKS = (*EXAMPLE_TASKS, *EXTENDED_EXAMPLE_TASKS, *SHOWCASE_EXAMPLE_TASKS)
+EXAMPLE_TASKS = (
+    *EXAMPLE_TASKS,
+    *EXTENDED_EXAMPLE_TASKS,
+    *SHOWCASE_EXAMPLE_TASKS,
+    *DATA_SCIENCE_EXAMPLE_TASKS,
+)
 
 
 def all_examples() -> tuple[ExecutableExample, ...]:

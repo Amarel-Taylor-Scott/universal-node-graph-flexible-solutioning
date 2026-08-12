@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "gap accounting",
+    "temporal isolation",
+    "MAE",
+    "interval ordering",
+    "horizon completeness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "time-series-feature-backtest"
+  ],
+  "external_requirements": [],
+  "id": "arena.time-series-feature-backtest",
+  "input_contract": "Ordered timestamp/value observations, gap policy, horizon, and evaluation budget.",
+  "output_contract": "Repaired series, temporal features, lag windows, walk-forward evidence, forecasts, and intervals.",
+  "problem": "Audit chronology, repair a bounded gap, derive temporal features, build lag windows, backtest without shuffling, and issue uncertainty intervals.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "chronology",
+    "interpolate",
+    "calendar",
+    "lags",
+    "backtest",
+    "forecast"
+  ],
+  "tags": [
+    "data-science",
+    "time-series",
+    "feature-engineering",
+    "backtesting"
+  ],
+  "template_id": "template.time-series-forecasting",
+  "title": "Gapped observations to walk-forward forecasts"
+}

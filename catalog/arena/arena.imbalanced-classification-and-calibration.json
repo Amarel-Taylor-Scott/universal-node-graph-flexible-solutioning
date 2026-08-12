@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "holdout isolation",
+    "accuracy",
+    "minority recall",
+    "calibration",
+    "slice coverage"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "imbalanced-classification-and-calibration"
+  ],
+  "external_requirements": [],
+  "id": "arena.imbalanced-classification-and-calibration",
+  "input_contract": "Labeled rows, immutable split membership, features, groups, and decision objective.",
+  "output_contract": "Calibrated probabilities, threshold, predictions, minority recall, slice metrics, and split lineage.",
+  "problem": "Preserve a stratified holdout, rebalance training, fit and calibrate a classifier, tune a decision threshold, and evaluate minority and group behavior.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "split",
+    "rebalance",
+    "fit",
+    "calibrate",
+    "threshold",
+    "slice evaluation"
+  ],
+  "tags": [
+    "data-science",
+    "classification",
+    "imbalance",
+    "calibration"
+  ],
+  "template_id": "template.kaggle-tabular",
+  "title": "Imbalanced labels to calibrated, slice-checked decisions"
+}

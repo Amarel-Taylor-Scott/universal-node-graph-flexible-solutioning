@@ -1,6 +1,6 @@
 {
   "arena_model_version": "0.1",
-  "task_count": 42,
+  "task_count": 52,
   "tasks": [
     {
       "acceptance_signals": [
@@ -2192,6 +2192,353 @@
       ],
       "template_id": "template.document-intelligence",
       "title": "Structured document to visually checked output"
+    },
+    {
+      "acceptance_signals": [
+        "schema coverage",
+        "missingness accounting",
+        "duplicate accuracy",
+        "drift evidence",
+        "lineage"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "dataset-profiling-and-drift"
+      ],
+      "external_requirements": [],
+      "id": "arena.dataset-profiling-and-drift",
+      "input_contract": "Reference and current records with stable column semantics.",
+      "output_contract": "Schema, profiles, missingness patterns, duplicates, drift scores, and a content-addressed quality report.",
+      "problem": "Infer schema, profile distributions and missingness, find duplicate content, compare snapshots, and bind the findings to source evidence.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "infer schema",
+        "profile",
+        "missingness",
+        "duplicates",
+        "drift",
+        "report"
+      ],
+      "tags": [
+        "data-science",
+        "profiling",
+        "data-quality",
+        "drift"
+      ],
+      "template_id": "template.data-quality",
+      "title": "Dataset snapshots to a drift-aware quality report"
+    },
+    {
+      "acceptance_signals": [
+        "no missing output",
+        "variance removal",
+        "relevance",
+        "feature count",
+        "lineage"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "wide-table-feature-reduction"
+      ],
+      "external_requirements": [],
+      "id": "arena.wide-table-feature-reduction",
+      "input_contract": "Typed feature rows, target identity, and transformation policy.",
+      "output_contract": "Reduced matrix, selected and removed features, fitted transformations, and source lineage.",
+      "problem": "Repair permitted missing values, scale, remove constants, group collinearity, select relevant representatives, and preserve a feature manifest.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "impute",
+        "scale",
+        "variance",
+        "collinearity",
+        "select",
+        "project"
+      ],
+      "tags": [
+        "data-science",
+        "feature-engineering",
+        "feature-selection",
+        "tabular"
+      ],
+      "template_id": "template.kaggle-tabular",
+      "title": "Wide tables to a traceable reduced feature matrix"
+    },
+    {
+      "acceptance_signals": [
+        "holdout isolation",
+        "accuracy",
+        "minority recall",
+        "calibration",
+        "slice coverage"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "imbalanced-classification-and-calibration"
+      ],
+      "external_requirements": [],
+      "id": "arena.imbalanced-classification-and-calibration",
+      "input_contract": "Labeled rows, immutable split membership, features, groups, and decision objective.",
+      "output_contract": "Calibrated probabilities, threshold, predictions, minority recall, slice metrics, and split lineage.",
+      "problem": "Preserve a stratified holdout, rebalance training, fit and calibrate a classifier, tune a decision threshold, and evaluate minority and group behavior.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "split",
+        "rebalance",
+        "fit",
+        "calibrate",
+        "threshold",
+        "slice evaluation"
+      ],
+      "tags": [
+        "data-science",
+        "classification",
+        "imbalance",
+        "calibration"
+      ],
+      "template_id": "template.kaggle-tabular",
+      "title": "Imbalanced labels to calibrated, slice-checked decisions"
+    },
+    {
+      "acceptance_signals": [
+        "group isolation",
+        "outlier traceability",
+        "RMSE",
+        "interval coverage",
+        "stability"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "robust-regression-and-conformal"
+      ],
+      "external_requirements": [],
+      "id": "arena.robust-regression-and-conformal",
+      "input_contract": "Regression rows with group identity, target, feature, and holdout policy.",
+      "output_contract": "Model, outlier ledger, held-group predictions, intervals, coverage, error, and perturbation evidence.",
+      "problem": "Hold out an entire group, screen training outliers, fit a robust regressor, predict, construct residual intervals, and stress the result.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "group split",
+        "outliers",
+        "robust fit",
+        "predict",
+        "intervals",
+        "stress"
+      ],
+      "tags": [
+        "data-science",
+        "regression",
+        "robustness",
+        "uncertainty"
+      ],
+      "template_id": "template.kaggle-tabular",
+      "title": "Grouped observations to robust predictions and intervals"
+    },
+    {
+      "acceptance_signals": [
+        "gap accounting",
+        "temporal isolation",
+        "MAE",
+        "interval ordering",
+        "horizon completeness"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "time-series-feature-backtest"
+      ],
+      "external_requirements": [],
+      "id": "arena.time-series-feature-backtest",
+      "input_contract": "Ordered timestamp/value observations, gap policy, horizon, and evaluation budget.",
+      "output_contract": "Repaired series, temporal features, lag windows, walk-forward evidence, forecasts, and intervals.",
+      "problem": "Audit chronology, repair a bounded gap, derive temporal features, build lag windows, backtest without shuffling, and issue uncertainty intervals.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "chronology",
+        "interpolate",
+        "calendar",
+        "lags",
+        "backtest",
+        "forecast"
+      ],
+      "tags": [
+        "data-science",
+        "time-series",
+        "feature-engineering",
+        "backtesting"
+      ],
+      "template_id": "template.time-series-forecasting",
+      "title": "Gapped observations to walk-forward forecasts"
+    },
+    {
+      "acceptance_signals": [
+        "split isolation",
+        "vocabulary traceability",
+        "accuracy",
+        "prediction evidence"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "text-classification-pipeline"
+      ],
+      "external_requirements": [],
+      "id": "arena.text-classification-pipeline",
+      "input_contract": "Text documents with labels and immutable train/holdout membership.",
+      "output_contract": "Text transforms, vocabulary evidence, model weights, held-document predictions, and metrics.",
+      "problem": "Normalize text, tokenize, form n-grams, vectorize, fit a transparent model, and evaluate untouched documents.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "normalize",
+        "tokenize",
+        "n-grams",
+        "vectorize",
+        "fit",
+        "evaluate"
+      ],
+      "tags": [
+        "data-science",
+        "nlp",
+        "text",
+        "classification"
+      ],
+      "template_id": "template.document-intelligence",
+      "title": "Documents to evaluated text classifications"
+    },
+    {
+      "acceptance_signals": [
+        "cluster evidence",
+        "assignment coverage",
+        "anomaly detection",
+        "segment characterization"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "unsupervised-segmentation-and-anomaly"
+      ],
+      "external_requirements": [],
+      "id": "arena.unsupervised-segmentation-and-anomaly",
+      "input_contract": "Unlabeled numeric points, feature identity, and anomaly policy.",
+      "output_contract": "Cluster-count evidence, centers, assignments, anomaly scores, and human-readable segment profiles.",
+      "problem": "Robustly scale features, choose a cluster count, fit and assign clusters, score unusual points, and characterize each segment.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "scale",
+        "select k",
+        "cluster",
+        "assign",
+        "anomaly",
+        "profile"
+      ],
+      "tags": [
+        "data-science",
+        "unsupervised",
+        "clustering",
+        "anomaly-detection"
+      ],
+      "template_id": "template.scientific-experiment",
+      "title": "Unlabeled points to segments and anomaly evidence"
+    },
+    {
+      "acceptance_signals": [
+        "identity binding",
+        "ranking stability",
+        "slice coverage",
+        "counterfactual scope",
+        "limitations"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "model-explainability-and-stability"
+      ],
+      "external_requirements": [],
+      "id": "arena.model-explainability-and-stability",
+      "input_contract": "Immutable model, evaluation rows, group labels, feature order, and counterfactual request.",
+      "output_contract": "Model digest, importance evidence, stability runs, slice metrics, counterfactual, and model card.",
+      "problem": "Bind the model and data, compute explanations, test ranking stability, inspect slices, form a bounded counterfactual, and publish limitations.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "register",
+        "importance",
+        "stability",
+        "slices",
+        "counterfactual",
+        "model card"
+      ],
+      "tags": [
+        "data-science",
+        "explainability",
+        "stability",
+        "model-card"
+      ],
+      "template_id": "template.compliance-evidence",
+      "title": "Registered models to stability-aware explanation evidence"
+    },
+    {
+      "acceptance_signals": [
+        "OOF disjointness",
+        "weak-model removal",
+        "holdout isolation",
+        "ensemble error"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "ensemble-selection-and-stacking"
+      ],
+      "external_requirements": [],
+      "id": "arena.ensemble-selection-and-stacking",
+      "input_contract": "Named base predictions with fold identities, actuals, and separate holdout predictions.",
+      "output_contract": "Fold audit, retained models, ensemble weights, calibration, holdout predictions, and error.",
+      "problem": "Collect out-of-fold predictions, validate lineage, prune weak candidates, fit and calibrate a blend, and evaluate one untouched holdout.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "collect",
+        "lineage",
+        "prune",
+        "blend",
+        "calibrate",
+        "holdout"
+      ],
+      "tags": [
+        "data-science",
+        "ensemble",
+        "stacking",
+        "leakage-control"
+      ],
+      "template_id": "template.kaggle-tabular",
+      "title": "Base predictions to a leakage-checked ensemble"
+    },
+    {
+      "acceptance_signals": [
+        "replay identity",
+        "quality delta",
+        "drift threshold",
+        "human authority",
+        "rollback readiness"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "model-release-monitoring-and-rollback"
+      ],
+      "external_requirements": [],
+      "id": "arena.model-release-monitoring-and-rollback",
+      "input_contract": "Candidate and previous models, replay batch, labels, feature snapshots, schema, and release policy.",
+      "output_contract": "Package digests, replay and shadow evidence, drift verdict, human-gated decision, and rollback target.",
+      "problem": "Package exact model identity, replay inference, compare in shadow, detect drift, apply a fail-closed policy, and prepare a non-automatic rollback.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "package",
+        "replay",
+        "shadow",
+        "drift",
+        "gate",
+        "rollback"
+      ],
+      "tags": [
+        "data-science",
+        "mlops",
+        "monitoring",
+        "rollback"
+      ],
+      "template_id": "template.deployment-release",
+      "title": "Candidate models to a gated release and rollback receipt"
     },
     {
       "acceptance_signals": [
