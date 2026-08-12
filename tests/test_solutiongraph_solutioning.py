@@ -294,7 +294,9 @@ def test_paired_study_promotes_only_noninferior_improvements_and_is_deterministi
         task_case_ids=(CONTROL_MUTATION_CASE.id,),
         minimum_pairs=1,
         bootstrap_resamples=250,
-        practical_effect_thresholds=(("quality", 0.01),),
+        # This mechanism fixture keeps measured latency visible without making
+        # a one-sample scheduler fluctuation decide the study verdict.
+        practical_effect_thresholds=(("quality", 0.01), ("latency_ms", 1_000.0)),
     )
     first = ExperimentStudyRunner().analyze(design, graph.ledger)
     second = ExperimentStudyRunner().analyze(design, graph.ledger)

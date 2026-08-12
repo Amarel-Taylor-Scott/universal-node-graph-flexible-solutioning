@@ -45,7 +45,12 @@ def main() -> None:
             task_case_ids=(CONTROL_MUTATION_CASE.id,),
             minimum_pairs=1,
             bootstrap_resamples=500,
-            practical_effect_thresholds=(("quality", 0.01),),
+            # Preserve latency evidence but keep this tiny fixture's verdict
+            # independent from single-sample scheduler jitter.
+            practical_effect_thresholds=(
+                ("quality", 0.01),
+                ("latency_ms", 1_000.0),
+            ),
         ),
         graph_report.ledger,
     )
