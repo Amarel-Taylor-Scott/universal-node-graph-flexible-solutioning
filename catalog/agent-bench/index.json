@@ -4,7 +4,7 @@
   "suites": [
     {
       "claim_scope": "mechanism-fixture",
-      "digest": "sha256:26528a7ba52bc21a6b245b1a1836f114f9cff6dbb9bc1361cfc709f6957d3236",
+      "digest": "sha256:3cbdfb0a45bd8fa27ca5b8aa52db098499a4dafe55ba31bc145dfdaa3a8f2c27",
       "enabled_trial_count": 20,
       "id": "agent-benchmark.reference-smoke",
       "path": "agent-bench/suites/reference-smoke.json",
@@ -12,7 +12,7 @@
     },
     {
       "claim_scope": "internal-dataset",
-      "digest": "sha256:9314d0ddf7d48afb532730cc1fef5ba31e551004132fb3076aa28b09f68e1b69",
+      "digest": "sha256:e382ea6c052d6a6652f2271666259f47df6471e0c5401b1cfcd051f9fa36b8e8",
       "enabled_trial_count": 60,
       "id": "agent-benchmark.command-matrix-example",
       "path": "agent-bench/suites/command-matrix-example.json",

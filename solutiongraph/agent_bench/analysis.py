@@ -140,7 +140,7 @@ def _metric_effect(
     alpha = (1.0 - suite.confidence_level) / 2.0
     lower = _quantile(bootstrap, alpha)
     upper = _quantile(bootstrap, 1.0 - alpha)
-    practical = suite.practical_effect
+    practical = suite.practical_effect_for(metric)
     if lower > practical:
         inference = "solutiongraph-superior"
     elif upper < -practical:

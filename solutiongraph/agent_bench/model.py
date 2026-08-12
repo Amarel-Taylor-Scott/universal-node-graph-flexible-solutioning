@@ -396,6 +396,7 @@ class AgentBenchmarkSuite:
     bootstrap_resamples: int = 2_000
     confidence_level: float = 0.95
     practical_effect: float = 0.02
+    practical_effects: tuple[tuple[str, float], ...] = ()
     acceptance_noninferiority_margin: float = 0.0
     allow_promotion: bool = False
     limitations: tuple[str, ...] = ()
@@ -431,6 +432,10 @@ class AgentBenchmarkSuite:
             * len(self.seeds)
             * self.repetitions
         )
+
+    def practical_effect_for(self, metric: str) -> float:
+        """Return a metric-specific materiality gate or the suite default."""
+        return dict(self.practical_effects).get(metric, self.practical_effect)
 
     def validate(self, task_ids: tuple[str, ...] | None = None) -> list[str]:
         problems: list[str] = []
@@ -484,6 +489,18 @@ class AgentBenchmarkSuite:
             problems.append("suite.confidence_level must be between zero and one")
         if not isfinite(self.practical_effect) or self.practical_effect < 0:
             problems.append("suite.practical_effect must be finite and non-negative")
+        practical_metric_names = tuple(name for name, _ in self.practical_effects)
+        if len(practical_metric_names) != len(set(practical_metric_names)):
+            problems.append("suite.practical_effects metric names must be unique")
+        for index, (name, value) in enumerate(self.practical_effects):
+            if not name.strip():
+                problems.append(
+                    f"suite.practical_effects[{index}] metric name must not be empty"
+                )
+            if not isfinite(value) or value < 0:
+                problems.append(
+                    f"suite.practical_effects[{index}] must be finite and non-negative"
+                )
         if (
             not isfinite(self.acceptance_noninferiority_margin)
             or not 0 <= self.acceptance_noninferiority_margin <= 1
@@ -510,6 +527,7 @@ class AgentBenchmarkSuite:
             "bootstrap_resamples": self.bootstrap_resamples,
             "confidence_level": self.confidence_level,
             "practical_effect": self.practical_effect,
+            "practical_effects": dict(self.practical_effects),
             "acceptance_noninferiority_margin": self.acceptance_noninferiority_margin,
             "allow_promotion": self.allow_promotion,
             "limitations": list(self.limitations),

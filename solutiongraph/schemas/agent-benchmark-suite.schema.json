@@ -8,7 +8,7 @@
     "agent_bench_model_version", "id", "version", "title", "task_ids",
     "conditions", "harnesses", "models", "seeds", "repetitions", "budget",
     "claim_scope", "bootstrap_resamples", "confidence_level",
-    "practical_effect", "acceptance_noninferiority_margin", "allow_promotion",
+    "practical_effect", "practical_effects", "acceptance_noninferiority_margin", "allow_promotion",
     "limitations"
   ],
   "properties": {
@@ -61,6 +61,11 @@
     "bootstrap_resamples": {"type": "integer", "minimum": 1},
     "confidence_level": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
     "practical_effect": {"type": "number", "minimum": 0},
+    "practical_effects": {
+      "type": "object",
+      "propertyNames": {"minLength": 1},
+      "additionalProperties": {"type": "number", "minimum": 0}
+    },
     "acceptance_noninferiority_margin": {"type": "number", "minimum": 0, "maximum": 1},
     "allow_promotion": {"type": "boolean"},
     "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}

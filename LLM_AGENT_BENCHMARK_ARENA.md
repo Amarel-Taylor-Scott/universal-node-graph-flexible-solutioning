@@ -167,7 +167,9 @@ The report pairs exact task/harness/model/seed/repetition cells and computes:
 - deterministic-replay rate;
 - artifact, documentation, diagram, and protected-file completeness;
 - optional usage/cost metrics in individual receipts;
-- deterministic bootstrap intervals, win/tie rates, and practical-effect gates.
+- deterministic bootstrap intervals, win/tie rates, a suite-wide default
+  practical-effect gate, and metric-specific overrides such as a wider
+  `wall_seconds` margin for scheduler noise.
 
 Task-level effects prevent one easy family from hiding failures elsewhere.
 Overall effects answer only for the sampled suite. “Practically equivalent”
@@ -177,7 +179,8 @@ acceptance inferiority. Promotion additionally requires explicit suite
 authorization, a non-fixture claim scope, and every supporting receipt to name
 an enforcing `microvm` or `remote` isolation class.
 
-Wall time can be noisy and external model aliases can drift. Use pinned
+Wall time can be noisy and external model aliases can drift. Declare a
+`practical_effects.wall_seconds` override in the frozen suite, use pinned
 revisions where the provider supports them, counterbalanced paired cells,
 multiple seeds, comparable concurrency, warm-up policy, and a recorded runner
 environment. Do not normalize regret across unrelated metrics unless the

@@ -21,6 +21,8 @@ All notable changes to this proof of concept are documented here.
   journal, paired bootstrap effects, practical-equivalence/superiority gates,
   conservative winner/promotion authority, strict wire schemas, and
   self-contained HTML/SVG/Mermaid reporting.
+- Per-metric practical-effect overrides so noisy wall-clock measurements do
+  not reuse bounded quality-score materiality thresholds.
 - `solutiongraph agent-bench` task/config/plan/smoke/run/journal commands, a
   five-minute Python example, editable matrix, sixth numbered notebook, catalog
   projection, external benchmark bridge, and comprehensive operator runbook.

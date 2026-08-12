@@ -56,6 +56,7 @@ def reference_agent_benchmark_suite() -> AgentBenchmarkSuite:
         bootstrap_resamples=500,
         confidence_level=0.95,
         practical_effect=0.02,
+        practical_effects=(("wall_seconds", 60.0),),
         allow_promotion=False,
         limitations=(
             "The reference harness bypasses model generation and is expected to produce equivalent control/treatment outcomes.",
@@ -214,6 +215,7 @@ def command_matrix_example_suite() -> AgentBenchmarkSuite:
         bootstrap_resamples=2_000,
         confidence_level=0.95,
         practical_effect=0.02,
+        practical_effects=(("wall_seconds", 5.0),),
         acceptance_noninferiority_margin=0.02,
         allow_promotion=False,
         limitations=(
@@ -247,6 +249,7 @@ def suite_from_dict(value: dict[str, Any]) -> AgentBenchmarkSuite:
         "bootstrap_resamples",
         "confidence_level",
         "practical_effect",
+        "practical_effects",
         "acceptance_noninferiority_margin",
         "allow_promotion",
         "limitations",
@@ -340,6 +343,7 @@ def suite_from_dict(value: dict[str, Any]) -> AgentBenchmarkSuite:
         bootstrap_resamples=value["bootstrap_resamples"],
         confidence_level=value["confidence_level"],
         practical_effect=value["practical_effect"],
+        practical_effects=tuple(sorted(value["practical_effects"].items())),
         acceptance_noninferiority_margin=value["acceptance_noninferiority_margin"],
         allow_promotion=value["allow_promotion"],
         limitations=tuple(value["limitations"]),

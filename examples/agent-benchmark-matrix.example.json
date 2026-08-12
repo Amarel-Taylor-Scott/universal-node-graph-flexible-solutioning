@@ -193,6 +193,9 @@
     }
   ],
   "practical_effect": 0.02,
+  "practical_effects": {
+    "wall_seconds": 5.0
+  },
   "repetitions": 1,
   "seeds": [
     101,

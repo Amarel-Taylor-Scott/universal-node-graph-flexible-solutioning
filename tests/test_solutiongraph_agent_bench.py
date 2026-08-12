@@ -59,6 +59,8 @@ def test_reference_and_command_suites_enumerate_only_compatible_pairs():
     reference = reference_agent_benchmark_suite()
     assert reference.validate(tuple(bundle.spec.id for bundle in REFERENCE_AGENT_TASKS)) == []
     assert reference.total_trials == len(tuple(iter_trial_plans(reference))) == 20
+    assert reference.practical_effect_for("oracle_score") == 0.02
+    assert reference.practical_effect_for("wall_seconds") == 60.0
     first_conditions = [
         plan.condition
         for index, plan in enumerate(iter_trial_plans(reference))
