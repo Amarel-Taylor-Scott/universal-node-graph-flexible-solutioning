@@ -17,9 +17,15 @@ from solutiongraph.examples.extended_tasks import (
     EXTENDED_NODES,
     EXTENDED_REGISTRY,
 )
+from solutiongraph.examples.showcase_tasks import (
+    DUECARE_HARNESS_BUNDLE,
+    SHOWCASE_NODES,
+    SHOWCASE_REGISTRY,
+)
 from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.pack_library import (
+    ENGINEERING_SHOWCASE_NODE_PACK,
     EXTENDED_ARENA_NODE_PACK,
     REAL_WORLD_EXAMPLE_NODE_PACK,
     REFERENCE_CORE_NODE_PACK,
@@ -151,8 +157,15 @@ def standard_library_registry_capabilities() -> RegistryCapabilities:
             QueryMode("enumeration", supports_cursor=True),
         ),
         descriptor_fields=(
-            "title", "summary", "purposes", "solutions", "actions",
-            "domains", "tags", "ports", "documents",
+            "title",
+            "summary",
+            "purposes",
+            "solutions",
+            "actions",
+            "domains",
+            "tags",
+            "ports",
+            "documents",
         ),
         supports_enumeration=True,
         supports_snapshots=True,
@@ -160,6 +173,30 @@ def standard_library_registry_capabilities() -> RegistryCapabilities:
         supports_explanations=True,
         max_page_size=1000,
         extensions=(("stdlib.maturity", "reference"),),
+    )
+
+
+def showcase_registry_capabilities() -> RegistryCapabilities:
+    """Advertise exact lookup and enumeration for showcase mechanism fixtures."""
+    return RegistryCapabilities(
+        registry_id=SHOWCASE_REGISTRY.id,
+        registry_version=SHOWCASE_REGISTRY.version,
+        registry_digest=SHOWCASE_REGISTRY.digest,
+        protocol_versions=("0.1",),
+        schemas=(
+            SchemaSupport("node-spec", ("0.2",)),
+            SchemaSupport("node-pack", ("0.1",)),
+            SchemaSupport("harness-bundle", ("0.1",)),
+        ),
+        query_modes=(
+            QueryMode("exact", fields=("node_id", "node_spec_digest")),
+            QueryMode("enumeration", supports_cursor=True),
+        ),
+        supports_enumeration=True,
+        supports_snapshots=True,
+        supports_continuation=True,
+        max_page_size=1000,
+        extensions=(("example.maturity", "mechanism-fixture"),),
     )
 
 
@@ -172,6 +209,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
     extended_pack = EXTENDED_ARENA_NODE_PACK
     extended_capabilities = extended_registry_capabilities()
     stdlib_capabilities = standard_library_registry_capabilities()
+    showcase_capabilities = showcase_registry_capabilities()
     documents: dict[str, dict[str, Any]] = {
         "nodepacks/reference-core/manifest.json": node_pack.to_dict(),
         "nodepacks/reference-core/registry.json": REFERENCE_REGISTRY.to_dict(),
@@ -183,18 +221,18 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         ),
         "nodepacks/extended-arena/manifest.json": extended_pack.to_dict(),
         "nodepacks/extended-arena/registry.json": EXTENDED_REGISTRY.to_dict(),
-        "nodepacks/extended-arena/registry-capabilities.json": (
-            extended_capabilities.to_dict()
-        ),
-        "nodepacks/stdlib-data-foundation/manifest.json": (
-            STANDARD_LIBRARY_NODE_PACK.to_dict()
-        ),
-        "nodepacks/stdlib-data-foundation/registry.json": (
-            STANDARD_LIBRARY_REGISTRY.to_dict()
-        ),
+        "nodepacks/extended-arena/registry-capabilities.json": (extended_capabilities.to_dict()),
+        "nodepacks/stdlib-data-foundation/manifest.json": (STANDARD_LIBRARY_NODE_PACK.to_dict()),
+        "nodepacks/stdlib-data-foundation/registry.json": (STANDARD_LIBRARY_REGISTRY.to_dict()),
         "nodepacks/stdlib-data-foundation/registry-capabilities.json": (
             stdlib_capabilities.to_dict()
         ),
+        "nodepacks/engineering-showcases/manifest.json": (ENGINEERING_SHOWCASE_NODE_PACK.to_dict()),
+        "nodepacks/engineering-showcases/registry.json": SHOWCASE_REGISTRY.to_dict(),
+        "nodepacks/engineering-showcases/registry-capabilities.json": (
+            showcase_capabilities.to_dict()
+        ),
+        "harnesses/duecare-example.json": DUECARE_HARNESS_BUNDLE.to_dict(),
     }
     for node in REFERENCE_NODE_SPECS:
         documents[f"nodepacks/reference-core/nodes/{node.id}.json"] = node.to_dict()
@@ -203,19 +241,17 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
             descriptor.to_dict()
         )
     for node in EXAMPLE_NODES:
-        documents[f"nodepacks/real-world-examples/nodes/{node.id}.json"] = (
-            node.to_dict()
-        )
+        documents[f"nodepacks/real-world-examples/nodes/{node.id}.json"] = node.to_dict()
     for node in EXTENDED_NODES:
         documents[f"nodepacks/extended-arena/nodes/{node.id}.json"] = node.to_dict()
     for node in STANDARD_LIBRARY_NODE_SPECS:
-        documents[f"nodepacks/stdlib-data-foundation/nodes/{node.id}.json"] = (
-            node.to_dict()
-        )
+        documents[f"nodepacks/stdlib-data-foundation/nodes/{node.id}.json"] = node.to_dict()
+    for node in SHOWCASE_NODES:
+        documents[f"nodepacks/engineering-showcases/nodes/{node.id}.json"] = node.to_dict()
     for descriptor in STANDARD_LIBRARY_DESCRIPTORS:
-        documents[
-            f"nodepacks/stdlib-data-foundation/descriptors/{descriptor.node_id}.json"
-        ] = descriptor.to_dict()
+        documents[f"nodepacks/stdlib-data-foundation/descriptors/{descriptor.node_id}.json"] = (
+            descriptor.to_dict()
+        )
     for template in REFERENCE_TEMPLATES.templates:
         documents[f"templates/{template.id}.json"] = template.to_dict()
     for task in UNIVERSAL_DAG_ARENA.tasks:
@@ -226,9 +262,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
     for bundle in REFERENCE_BENCHMARKS:
         root = f"benchmarks/{bundle.id}"
         documents[f"{root}/suite.json"] = bundle.definition.suite.to_dict()
-        documents[f"{root}/task-contract.json"] = (
-            bundle.definition.task_contract.to_dict()
-        )
+        documents[f"{root}/task-contract.json"] = bundle.definition.task_contract.to_dict()
         documents[f"{root}/solution-pack.json"] = bundle.solution_pack.to_dict()
         for case in bundle.definition.task_cases:
             documents[f"{root}/cases/{case.id}.json"] = case.to_dict()
@@ -306,6 +340,24 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "descriptor_count": 0,
                 "embedding_record_count": 0,
             },
+            {
+                "id": ENGINEERING_SHOWCASE_NODE_PACK.id,
+                "version": ENGINEERING_SHOWCASE_NODE_PACK.version,
+                "digest": ENGINEERING_SHOWCASE_NODE_PACK.digest,
+                "path": "nodepacks/engineering-showcases/manifest.json",
+                "node_count": len(SHOWCASE_NODES),
+                "descriptor_count": 0,
+                "embedding_record_count": 0,
+            },
+        ],
+        "harnesses": [
+            {
+                "id": DUECARE_HARNESS_BUNDLE.id,
+                "version": DUECARE_HARNESS_BUNDLE.version,
+                "digest": DUECARE_HARNESS_BUNDLE.digest,
+                "path": "harnesses/duecare-example.json",
+                "graph_count": len(DUECARE_HARNESS_BUNDLE.graphs),
+            }
         ],
         "arena": {
             "path": "arena/index.json",
@@ -346,6 +398,7 @@ __all__ = [
     "example_registry_capabilities",
     "extended_registry_capabilities",
     "reference_registry_capabilities",
+    "showcase_registry_capabilities",
     "standard_library_registry_capabilities",
     "write_catalog",
 ]

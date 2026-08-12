@@ -5028,6 +5028,870 @@ svg {
     "summary": "Validate schema and report whether every row retains source lineage."
   },
   {
+    "id": "example.extended.contact.parse.strict",
+    "capability": "extended.contact.parse",
+    "effects": [],
+    "summary": "Strict reference implementation for contact/parse."
+  },
+  {
+    "id": "example.extended.contact.parse.heuristic",
+    "capability": "extended.contact.parse",
+    "effects": [],
+    "summary": "Heuristic reference implementation for contact/parse."
+  },
+  {
+    "id": "example.extended.contact.normalize.strict",
+    "capability": "extended.contact.normalize",
+    "effects": [],
+    "summary": "Strict reference implementation for contact/normalize."
+  },
+  {
+    "id": "example.extended.contact.normalize.heuristic",
+    "capability": "extended.contact.normalize",
+    "effects": [],
+    "summary": "Heuristic reference implementation for contact/normalize."
+  },
+  {
+    "id": "example.extended.contact.verify.strict",
+    "capability": "extended.contact.verify",
+    "effects": [],
+    "summary": "Strict reference implementation for contact/verify."
+  },
+  {
+    "id": "example.extended.contact.verify.heuristic",
+    "capability": "extended.contact.verify",
+    "effects": [],
+    "summary": "Heuristic reference implementation for contact/verify."
+  },
+  {
+    "id": "example.extended.contact.consent.strict",
+    "capability": "extended.contact.consent",
+    "effects": [],
+    "summary": "Strict reference implementation for contact/consent."
+  },
+  {
+    "id": "example.extended.contact.consent.heuristic",
+    "capability": "extended.contact.consent",
+    "effects": [],
+    "summary": "Heuristic reference implementation for contact/consent."
+  },
+  {
+    "id": "example.extended.web-change.canonicalize.strict",
+    "capability": "extended.web-change.canonicalize",
+    "effects": [],
+    "summary": "Strict reference implementation for web-change/canonicalize."
+  },
+  {
+    "id": "example.extended.web-change.canonicalize.heuristic",
+    "capability": "extended.web-change.canonicalize",
+    "effects": [],
+    "summary": "Heuristic reference implementation for web-change/canonicalize."
+  },
+  {
+    "id": "example.extended.web-change.diff.strict",
+    "capability": "extended.web-change.diff",
+    "effects": [],
+    "summary": "Strict reference implementation for web-change/diff."
+  },
+  {
+    "id": "example.extended.web-change.diff.heuristic",
+    "capability": "extended.web-change.diff",
+    "effects": [],
+    "summary": "Heuristic reference implementation for web-change/diff."
+  },
+  {
+    "id": "example.extended.web-change.corroborate.strict",
+    "capability": "extended.web-change.corroborate",
+    "effects": [],
+    "summary": "Strict reference implementation for web-change/corroborate."
+  },
+  {
+    "id": "example.extended.web-change.corroborate.heuristic",
+    "capability": "extended.web-change.corroborate",
+    "effects": [],
+    "summary": "Heuristic reference implementation for web-change/corroborate."
+  },
+  {
+    "id": "example.extended.reconciliation.normalize.strict",
+    "capability": "extended.reconciliation.normalize",
+    "effects": [],
+    "summary": "Strict reference implementation for reconciliation/normalize."
+  },
+  {
+    "id": "example.extended.reconciliation.normalize.heuristic",
+    "capability": "extended.reconciliation.normalize",
+    "effects": [],
+    "summary": "Heuristic reference implementation for reconciliation/normalize."
+  },
+  {
+    "id": "example.extended.reconciliation.match.strict",
+    "capability": "extended.reconciliation.match",
+    "effects": [],
+    "summary": "Strict reference implementation for reconciliation/match."
+  },
+  {
+    "id": "example.extended.reconciliation.match.heuristic",
+    "capability": "extended.reconciliation.match",
+    "effects": [],
+    "summary": "Heuristic reference implementation for reconciliation/match."
+  },
+  {
+    "id": "example.extended.reconciliation.balance.strict",
+    "capability": "extended.reconciliation.balance",
+    "effects": [],
+    "summary": "Strict reference implementation for reconciliation/balance."
+  },
+  {
+    "id": "example.extended.reconciliation.balance.heuristic",
+    "capability": "extended.reconciliation.balance",
+    "effects": [],
+    "summary": "Heuristic reference implementation for reconciliation/balance."
+  },
+  {
+    "id": "example.extended.pii.detect.strict",
+    "capability": "extended.pii.detect",
+    "effects": [],
+    "summary": "Strict reference implementation for pii/detect."
+  },
+  {
+    "id": "example.extended.pii.detect.heuristic",
+    "capability": "extended.pii.detect",
+    "effects": [],
+    "summary": "Heuristic reference implementation for pii/detect."
+  },
+  {
+    "id": "example.extended.pii.redact.strict",
+    "capability": "extended.pii.redact",
+    "effects": [],
+    "summary": "Strict reference implementation for pii/redact."
+  },
+  {
+    "id": "example.extended.pii.redact.heuristic",
+    "capability": "extended.pii.redact",
+    "effects": [],
+    "summary": "Heuristic reference implementation for pii/redact."
+  },
+  {
+    "id": "example.extended.pii.leakage-check.strict",
+    "capability": "extended.pii.leakage-check",
+    "effects": [],
+    "summary": "Strict reference implementation for pii/leakage-check."
+  },
+  {
+    "id": "example.extended.pii.leakage-check.heuristic",
+    "capability": "extended.pii.leakage-check",
+    "effects": [],
+    "summary": "Heuristic reference implementation for pii/leakage-check."
+  },
+  {
+    "id": "example.extended.schema-migration.transform.strict",
+    "capability": "extended.schema-migration.transform",
+    "effects": [],
+    "summary": "Strict reference implementation for schema-migration/transform."
+  },
+  {
+    "id": "example.extended.schema-migration.transform.heuristic",
+    "capability": "extended.schema-migration.transform",
+    "effects": [],
+    "summary": "Heuristic reference implementation for schema-migration/transform."
+  },
+  {
+    "id": "example.extended.schema-migration.validate.strict",
+    "capability": "extended.schema-migration.validate",
+    "effects": [],
+    "summary": "Strict reference implementation for schema-migration/validate."
+  },
+  {
+    "id": "example.extended.schema-migration.validate.heuristic",
+    "capability": "extended.schema-migration.validate",
+    "effects": [],
+    "summary": "Heuristic reference implementation for schema-migration/validate."
+  },
+  {
+    "id": "example.extended.schema-migration.shadow-compare.strict",
+    "capability": "extended.schema-migration.shadow-compare",
+    "effects": [],
+    "summary": "Strict reference implementation for schema-migration/shadow-compare."
+  },
+  {
+    "id": "example.extended.schema-migration.shadow-compare.heuristic",
+    "capability": "extended.schema-migration.shadow-compare",
+    "effects": [],
+    "summary": "Heuristic reference implementation for schema-migration/shadow-compare."
+  },
+  {
+    "id": "example.extended.incident.parse.strict",
+    "capability": "extended.incident.parse",
+    "effects": [],
+    "summary": "Strict reference implementation for incident/parse."
+  },
+  {
+    "id": "example.extended.incident.parse.heuristic",
+    "capability": "extended.incident.parse",
+    "effects": [],
+    "summary": "Heuristic reference implementation for incident/parse."
+  },
+  {
+    "id": "example.extended.incident.correlate.strict",
+    "capability": "extended.incident.correlate",
+    "effects": [],
+    "summary": "Strict reference implementation for incident/correlate."
+  },
+  {
+    "id": "example.extended.incident.correlate.heuristic",
+    "capability": "extended.incident.correlate",
+    "effects": [],
+    "summary": "Heuristic reference implementation for incident/correlate."
+  },
+  {
+    "id": "example.extended.incident.rank.strict",
+    "capability": "extended.incident.rank",
+    "effects": [],
+    "summary": "Strict reference implementation for incident/rank."
+  },
+  {
+    "id": "example.extended.incident.rank.heuristic",
+    "capability": "extended.incident.rank",
+    "effects": [],
+    "summary": "Heuristic reference implementation for incident/rank."
+  },
+  {
+    "id": "example.extended.dependency.resolve.strict",
+    "capability": "extended.dependency.resolve",
+    "effects": [],
+    "summary": "Strict reference implementation for dependency/resolve."
+  },
+  {
+    "id": "example.extended.dependency.resolve.heuristic",
+    "capability": "extended.dependency.resolve",
+    "effects": [],
+    "summary": "Heuristic reference implementation for dependency/resolve."
+  },
+  {
+    "id": "example.extended.dependency.scan.strict",
+    "capability": "extended.dependency.scan",
+    "effects": [],
+    "summary": "Strict reference implementation for dependency/scan."
+  },
+  {
+    "id": "example.extended.dependency.scan.heuristic",
+    "capability": "extended.dependency.scan",
+    "effects": [],
+    "summary": "Heuristic reference implementation for dependency/scan."
+  },
+  {
+    "id": "example.extended.dependency.policy.strict",
+    "capability": "extended.dependency.policy",
+    "effects": [],
+    "summary": "Strict reference implementation for dependency/policy."
+  },
+  {
+    "id": "example.extended.dependency.policy.heuristic",
+    "capability": "extended.dependency.policy",
+    "effects": [],
+    "summary": "Heuristic reference implementation for dependency/policy."
+  },
+  {
+    "id": "example.extended.recommendation.eligibility.strict",
+    "capability": "extended.recommendation.eligibility",
+    "effects": [],
+    "summary": "Strict reference implementation for recommendation/eligibility."
+  },
+  {
+    "id": "example.extended.recommendation.eligibility.heuristic",
+    "capability": "extended.recommendation.eligibility",
+    "effects": [],
+    "summary": "Heuristic reference implementation for recommendation/eligibility."
+  },
+  {
+    "id": "example.extended.recommendation.score.strict",
+    "capability": "extended.recommendation.score",
+    "effects": [],
+    "summary": "Strict reference implementation for recommendation/score."
+  },
+  {
+    "id": "example.extended.recommendation.score.heuristic",
+    "capability": "extended.recommendation.score",
+    "effects": [],
+    "summary": "Heuristic reference implementation for recommendation/score."
+  },
+  {
+    "id": "example.extended.recommendation.diversify.strict",
+    "capability": "extended.recommendation.diversify",
+    "effects": [],
+    "summary": "Strict reference implementation for recommendation/diversify."
+  },
+  {
+    "id": "example.extended.recommendation.diversify.heuristic",
+    "capability": "extended.recommendation.diversify",
+    "effects": [],
+    "summary": "Heuristic reference implementation for recommendation/diversify."
+  },
+  {
+    "id": "example.extended.scientific.design.strict",
+    "capability": "extended.scientific.design",
+    "effects": [],
+    "summary": "Strict reference implementation for scientific/design."
+  },
+  {
+    "id": "example.extended.scientific.design.heuristic",
+    "capability": "extended.scientific.design",
+    "effects": [],
+    "summary": "Heuristic reference implementation for scientific/design."
+  },
+  {
+    "id": "example.extended.scientific.analyze.strict",
+    "capability": "extended.scientific.analyze",
+    "effects": [],
+    "summary": "Strict reference implementation for scientific/analyze."
+  },
+  {
+    "id": "example.extended.scientific.analyze.heuristic",
+    "capability": "extended.scientific.analyze",
+    "effects": [],
+    "summary": "Heuristic reference implementation for scientific/analyze."
+  },
+  {
+    "id": "example.extended.scientific.robustness.strict",
+    "capability": "extended.scientific.robustness",
+    "effects": [],
+    "summary": "Strict reference implementation for scientific/robustness."
+  },
+  {
+    "id": "example.extended.scientific.robustness.heuristic",
+    "capability": "extended.scientific.robustness",
+    "effects": [],
+    "summary": "Heuristic reference implementation for scientific/robustness."
+  },
+  {
+    "id": "example.extended.numerical.validate.strict",
+    "capability": "extended.numerical.validate",
+    "effects": [],
+    "summary": "Strict reference implementation for numerical/validate."
+  },
+  {
+    "id": "example.extended.numerical.validate.heuristic",
+    "capability": "extended.numerical.validate",
+    "effects": [],
+    "summary": "Heuristic reference implementation for numerical/validate."
+  },
+  {
+    "id": "example.extended.numerical.solve.strict",
+    "capability": "extended.numerical.solve",
+    "effects": [],
+    "summary": "Strict reference implementation for numerical/solve."
+  },
+  {
+    "id": "example.extended.numerical.solve.heuristic",
+    "capability": "extended.numerical.solve",
+    "effects": [],
+    "summary": "Heuristic reference implementation for numerical/solve."
+  },
+  {
+    "id": "example.extended.numerical.residual.strict",
+    "capability": "extended.numerical.residual",
+    "effects": [],
+    "summary": "Strict reference implementation for numerical/residual."
+  },
+  {
+    "id": "example.extended.numerical.residual.heuristic",
+    "capability": "extended.numerical.residual",
+    "effects": [],
+    "summary": "Heuristic reference implementation for numerical/residual."
+  },
+  {
+    "id": "example.showcase.geotemporal.normalize-record.baseline",
+    "capability": "showcase.geotemporal.normalize-record",
+    "effects": [],
+    "summary": "Baseline fixture for the geotemporal/normalize-record obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.normalize-record.reference",
+    "capability": "showcase.geotemporal.normalize-record",
+    "effects": [],
+    "summary": "Reference fixture for the geotemporal/normalize-record obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.validate-address.baseline",
+    "capability": "showcase.geotemporal.validate-address",
+    "effects": [],
+    "summary": "Baseline fixture for the geotemporal/validate-address obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.validate-address.reference",
+    "capability": "showcase.geotemporal.validate-address",
+    "effects": [],
+    "summary": "Reference fixture for the geotemporal/validate-address obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.resolve-timezone.baseline",
+    "capability": "showcase.geotemporal.resolve-timezone",
+    "effects": [],
+    "summary": "Baseline fixture for the geotemporal/resolve-timezone obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.resolve-timezone.reference",
+    "capability": "showcase.geotemporal.resolve-timezone",
+    "effects": [],
+    "summary": "Reference fixture for the geotemporal/resolve-timezone obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.derive-time-features.baseline",
+    "capability": "showcase.geotemporal.derive-time-features",
+    "effects": [],
+    "summary": "Baseline fixture for the geotemporal/derive-time-features obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.derive-time-features.reference",
+    "capability": "showcase.geotemporal.derive-time-features",
+    "effects": [],
+    "summary": "Reference fixture for the geotemporal/derive-time-features obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.join-geotemporal-context.baseline",
+    "capability": "showcase.geotemporal.join-geotemporal-context",
+    "effects": [],
+    "summary": "Baseline fixture for the geotemporal/join-geotemporal-context obligation."
+  },
+  {
+    "id": "example.showcase.geotemporal.join-geotemporal-context.reference",
+    "capability": "showcase.geotemporal.join-geotemporal-context",
+    "effects": [],
+    "summary": "Reference fixture for the geotemporal/join-geotemporal-context obligation."
+  },
+  {
+    "id": "example.showcase.journey.normalize-events.baseline",
+    "capability": "showcase.journey.normalize-events",
+    "effects": [],
+    "summary": "Baseline fixture for the journey/normalize-events obligation."
+  },
+  {
+    "id": "example.showcase.journey.normalize-events.reference",
+    "capability": "showcase.journey.normalize-events",
+    "effects": [],
+    "summary": "Reference fixture for the journey/normalize-events obligation."
+  },
+  {
+    "id": "example.showcase.journey.sessionize-events.baseline",
+    "capability": "showcase.journey.sessionize-events",
+    "effects": [],
+    "summary": "Baseline fixture for the journey/sessionize-events obligation."
+  },
+  {
+    "id": "example.showcase.journey.sessionize-events.reference",
+    "capability": "showcase.journey.sessionize-events",
+    "effects": [],
+    "summary": "Reference fixture for the journey/sessionize-events obligation."
+  },
+  {
+    "id": "example.showcase.journey.derive-transitions.baseline",
+    "capability": "showcase.journey.derive-transitions",
+    "effects": [],
+    "summary": "Baseline fixture for the journey/derive-transitions obligation."
+  },
+  {
+    "id": "example.showcase.journey.derive-transitions.reference",
+    "capability": "showcase.journey.derive-transitions",
+    "effects": [],
+    "summary": "Reference fixture for the journey/derive-transitions obligation."
+  },
+  {
+    "id": "example.showcase.journey.score-funnel.baseline",
+    "capability": "showcase.journey.score-funnel",
+    "effects": [],
+    "summary": "Baseline fixture for the journey/score-funnel obligation."
+  },
+  {
+    "id": "example.showcase.journey.score-funnel.reference",
+    "capability": "showcase.journey.score-funnel",
+    "effects": [],
+    "summary": "Reference fixture for the journey/score-funnel obligation."
+  },
+  {
+    "id": "example.showcase.journey.detect-flow-anomalies.baseline",
+    "capability": "showcase.journey.detect-flow-anomalies",
+    "effects": [],
+    "summary": "Baseline fixture for the journey/detect-flow-anomalies obligation."
+  },
+  {
+    "id": "example.showcase.journey.detect-flow-anomalies.reference",
+    "capability": "showcase.journey.detect-flow-anomalies",
+    "effects": [],
+    "summary": "Reference fixture for the journey/detect-flow-anomalies obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.profile-source.baseline",
+    "capability": "showcase.synthetic-tabular.profile-source",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-tabular/profile-source obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.profile-source.reference",
+    "capability": "showcase.synthetic-tabular.profile-source",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-tabular/profile-source obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.fit-latent-world.baseline",
+    "capability": "showcase.synthetic-tabular.fit-latent-world",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-tabular/fit-latent-world obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.fit-latent-world.reference",
+    "capability": "showcase.synthetic-tabular.fit-latent-world",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-tabular/fit-latent-world obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.generate-records.baseline",
+    "capability": "showcase.synthetic-tabular.generate-records",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-tabular/generate-records obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.generate-records.reference",
+    "capability": "showcase.synthetic-tabular.generate-records",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-tabular/generate-records obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.constraint-gate.baseline",
+    "capability": "showcase.synthetic-tabular.constraint-gate",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-tabular/constraint-gate obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.constraint-gate.reference",
+    "capability": "showcase.synthetic-tabular.constraint-gate",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-tabular/constraint-gate obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.privacy-utility-gate.baseline",
+    "capability": "showcase.synthetic-tabular.privacy-utility-gate",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-tabular/privacy-utility-gate obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.privacy-utility-gate.reference",
+    "capability": "showcase.synthetic-tabular.privacy-utility-gate",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-tabular/privacy-utility-gate obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.lineage-split.baseline",
+    "capability": "showcase.synthetic-tabular.lineage-split",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-tabular/lineage-split obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-tabular.lineage-split.reference",
+    "capability": "showcase.synthetic-tabular.lineage-split",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-tabular/lineage-split obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.define-latent-world.baseline",
+    "capability": "showcase.synthetic-llm.define-latent-world",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-llm/define-latent-world obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.define-latent-world.reference",
+    "capability": "showcase.synthetic-llm.define-latent-world",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-llm/define-latent-world obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.render-multiview.baseline",
+    "capability": "showcase.synthetic-llm.render-multiview",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-llm/render-multiview obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.render-multiview.reference",
+    "capability": "showcase.synthetic-llm.render-multiview",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-llm/render-multiview obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.generate-counterfactuals.baseline",
+    "capability": "showcase.synthetic-llm.generate-counterfactuals",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-llm/generate-counterfactuals obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.generate-counterfactuals.reference",
+    "capability": "showcase.synthetic-llm.generate-counterfactuals",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-llm/generate-counterfactuals obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.generate-hard-negatives.baseline",
+    "capability": "showcase.synthetic-llm.generate-hard-negatives",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-llm/generate-hard-negatives obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.generate-hard-negatives.reference",
+    "capability": "showcase.synthetic-llm.generate-hard-negatives",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-llm/generate-hard-negatives obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.add-benign-controls.baseline",
+    "capability": "showcase.synthetic-llm.add-benign-controls",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-llm/add-benign-controls obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.add-benign-controls.reference",
+    "capability": "showcase.synthetic-llm.add-benign-controls",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-llm/add-benign-controls obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.lineage-family-split.baseline",
+    "capability": "showcase.synthetic-llm.lineage-family-split",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-llm/lineage-family-split obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.lineage-family-split.reference",
+    "capability": "showcase.synthetic-llm.lineage-family-split",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-llm/lineage-family-split obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.quality-gate.baseline",
+    "capability": "showcase.synthetic-llm.quality-gate",
+    "effects": [],
+    "summary": "Baseline fixture for the synthetic-llm/quality-gate obligation."
+  },
+  {
+    "id": "example.showcase.synthetic-llm.quality-gate.reference",
+    "capability": "showcase.synthetic-llm.quality-gate",
+    "effects": [],
+    "summary": "Reference fixture for the synthetic-llm/quality-gate obligation."
+  },
+  {
+    "id": "example.showcase.document.detect-format.baseline",
+    "capability": "showcase.document.detect-format",
+    "effects": [],
+    "summary": "Baseline fixture for the document/detect-format obligation."
+  },
+  {
+    "id": "example.showcase.document.detect-format.reference",
+    "capability": "showcase.document.detect-format",
+    "effects": [],
+    "summary": "Reference fixture for the document/detect-format obligation."
+  },
+  {
+    "id": "example.showcase.document.parse-layout.baseline",
+    "capability": "showcase.document.parse-layout",
+    "effects": [],
+    "summary": "Baseline fixture for the document/parse-layout obligation."
+  },
+  {
+    "id": "example.showcase.document.parse-layout.reference",
+    "capability": "showcase.document.parse-layout",
+    "effects": [],
+    "summary": "Reference fixture for the document/parse-layout obligation."
+  },
+  {
+    "id": "example.showcase.document.extract-fields.baseline",
+    "capability": "showcase.document.extract-fields",
+    "effects": [],
+    "summary": "Baseline fixture for the document/extract-fields obligation."
+  },
+  {
+    "id": "example.showcase.document.extract-fields.reference",
+    "capability": "showcase.document.extract-fields",
+    "effects": [],
+    "summary": "Reference fixture for the document/extract-fields obligation."
+  },
+  {
+    "id": "example.showcase.document.ground-fields.baseline",
+    "capability": "showcase.document.ground-fields",
+    "effects": [],
+    "summary": "Baseline fixture for the document/ground-fields obligation."
+  },
+  {
+    "id": "example.showcase.document.ground-fields.reference",
+    "capability": "showcase.document.ground-fields",
+    "effects": [],
+    "summary": "Reference fixture for the document/ground-fields obligation."
+  },
+  {
+    "id": "example.showcase.document.validate-schema.baseline",
+    "capability": "showcase.document.validate-schema",
+    "effects": [],
+    "summary": "Baseline fixture for the document/validate-schema obligation."
+  },
+  {
+    "id": "example.showcase.document.validate-schema.reference",
+    "capability": "showcase.document.validate-schema",
+    "effects": [],
+    "summary": "Reference fixture for the document/validate-schema obligation."
+  },
+  {
+    "id": "example.showcase.document.emit-provenance.baseline",
+    "capability": "showcase.document.emit-provenance",
+    "effects": [],
+    "summary": "Baseline fixture for the document/emit-provenance obligation."
+  },
+  {
+    "id": "example.showcase.document.emit-provenance.reference",
+    "capability": "showcase.document.emit-provenance",
+    "effects": [],
+    "summary": "Reference fixture for the document/emit-provenance obligation."
+  },
+  {
+    "id": "example.showcase.rl.validate-environment.baseline",
+    "capability": "showcase.rl.validate-environment",
+    "effects": [],
+    "summary": "Baseline fixture for the rl/validate-environment obligation."
+  },
+  {
+    "id": "example.showcase.rl.validate-environment.reference",
+    "capability": "showcase.rl.validate-environment",
+    "effects": [],
+    "summary": "Reference fixture for the rl/validate-environment obligation."
+  },
+  {
+    "id": "example.showcase.rl.generate-trajectories.baseline",
+    "capability": "showcase.rl.generate-trajectories",
+    "effects": [],
+    "summary": "Baseline fixture for the rl/generate-trajectories obligation."
+  },
+  {
+    "id": "example.showcase.rl.generate-trajectories.reference",
+    "capability": "showcase.rl.generate-trajectories",
+    "effects": [],
+    "summary": "Reference fixture for the rl/generate-trajectories obligation."
+  },
+  {
+    "id": "example.showcase.rl.estimate-rewards.baseline",
+    "capability": "showcase.rl.estimate-rewards",
+    "effects": [],
+    "summary": "Baseline fixture for the rl/estimate-rewards obligation."
+  },
+  {
+    "id": "example.showcase.rl.estimate-rewards.reference",
+    "capability": "showcase.rl.estimate-rewards",
+    "effects": [],
+    "summary": "Reference fixture for the rl/estimate-rewards obligation."
+  },
+  {
+    "id": "example.showcase.rl.update-policy.baseline",
+    "capability": "showcase.rl.update-policy",
+    "effects": [],
+    "summary": "Baseline fixture for the rl/update-policy obligation."
+  },
+  {
+    "id": "example.showcase.rl.update-policy.reference",
+    "capability": "showcase.rl.update-policy",
+    "effects": [],
+    "summary": "Reference fixture for the rl/update-policy obligation."
+  },
+  {
+    "id": "example.showcase.rl.evaluate-policy.baseline",
+    "capability": "showcase.rl.evaluate-policy",
+    "effects": [],
+    "summary": "Baseline fixture for the rl/evaluate-policy obligation."
+  },
+  {
+    "id": "example.showcase.rl.evaluate-policy.reference",
+    "capability": "showcase.rl.evaluate-policy",
+    "effects": [],
+    "summary": "Reference fixture for the rl/evaluate-policy obligation."
+  },
+  {
+    "id": "example.showcase.duecare.register-scenarios.baseline",
+    "capability": "showcase.duecare.register-scenarios",
+    "effects": [],
+    "summary": "Baseline fixture for the duecare/register-scenarios obligation."
+  },
+  {
+    "id": "example.showcase.duecare.register-scenarios.grounded",
+    "capability": "showcase.duecare.register-scenarios",
+    "effects": [],
+    "summary": "Grounded fixture for the duecare/register-scenarios obligation."
+  },
+  {
+    "id": "example.showcase.duecare.run-system-under-test.baseline",
+    "capability": "showcase.duecare.run-system-under-test",
+    "effects": [],
+    "summary": "Baseline fixture for the duecare/run-system-under-test obligation."
+  },
+  {
+    "id": "example.showcase.duecare.run-system-under-test.grounded",
+    "capability": "showcase.duecare.run-system-under-test",
+    "effects": [],
+    "summary": "Grounded fixture for the duecare/run-system-under-test obligation."
+  },
+  {
+    "id": "example.showcase.duecare.grade-deterministically.baseline",
+    "capability": "showcase.duecare.grade-deterministically",
+    "effects": [],
+    "summary": "Baseline fixture for the duecare/grade-deterministically obligation."
+  },
+  {
+    "id": "example.showcase.duecare.grade-deterministically.grounded",
+    "capability": "showcase.duecare.grade-deterministically",
+    "effects": [],
+    "summary": "Grounded fixture for the duecare/grade-deterministically obligation."
+  },
+  {
+    "id": "example.showcase.duecare.adjudicate-panel.baseline",
+    "capability": "showcase.duecare.adjudicate-panel",
+    "effects": [],
+    "summary": "Baseline fixture for the duecare/adjudicate-panel obligation."
+  },
+  {
+    "id": "example.showcase.duecare.adjudicate-panel.grounded",
+    "capability": "showcase.duecare.adjudicate-panel",
+    "effects": [],
+    "summary": "Grounded fixture for the duecare/adjudicate-panel obligation."
+  },
+  {
+    "id": "example.showcase.duecare.audit-claims.baseline",
+    "capability": "showcase.duecare.audit-claims",
+    "effects": [],
+    "summary": "Baseline fixture for the duecare/audit-claims obligation."
+  },
+  {
+    "id": "example.showcase.duecare.audit-claims.grounded",
+    "capability": "showcase.duecare.audit-claims",
+    "effects": [],
+    "summary": "Grounded fixture for the duecare/audit-claims obligation."
+  },
+  {
+    "id": "example.showcase.duecare.propose-improvement.baseline",
+    "capability": "showcase.duecare.propose-improvement",
+    "effects": [],
+    "summary": "Baseline fixture for the duecare/propose-improvement obligation."
+  },
+  {
+    "id": "example.showcase.duecare.propose-improvement.grounded",
+    "capability": "showcase.duecare.propose-improvement",
+    "effects": [],
+    "summary": "Grounded fixture for the duecare/propose-improvement obligation."
+  },
+  {
+    "id": "example.showcase.duecare.seal-receipt.baseline",
+    "capability": "showcase.duecare.seal-receipt",
+    "effects": [],
+    "summary": "Baseline fixture for the duecare/seal-receipt obligation."
+  },
+  {
+    "id": "example.showcase.duecare.seal-receipt.grounded",
+    "capability": "showcase.duecare.seal-receipt",
+    "effects": [],
+    "summary": "Grounded fixture for the duecare/seal-receipt obligation."
+  },
+  {
     "id": "stdlib.records.identity",
     "capability": "control.identity",
     "effects": [],

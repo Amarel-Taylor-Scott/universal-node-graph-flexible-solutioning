@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    "showcase.duecare.propose-improvement"
+  ],
+  "description": "Baseline fixture for the duecare/propose-improvement obligation.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step",
+  "failure_modes": [],
+  "id": "example.showcase.duecare.propose-improvement.baseline",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.engineering-showcase-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.engineering-showcase-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "duecare"
+      ],
+      "default": null,
+      "description": "",
+      "name": "domain",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "propose-improvement"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/showcase_tasks.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

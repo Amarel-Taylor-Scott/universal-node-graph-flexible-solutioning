@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "historical-memory.schema.json",
+  "title": "Historical task and route evidence memory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_intelligence_model_version", "id", "version", "fingerprints",
+    "fingerprint_digests", "episodes", "extensions"
+  ],
+  "properties": {
+    "task_intelligence_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "fingerprints": {
+      "type": "array",
+      "items": {"$ref": "task-fingerprint.schema.json"}
+    },
+    "fingerprint_digests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "episodes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/episode"}
+    },
+    "extensions": {"type": "object"}
+  },
+  "$defs": {
+    "optionalId": {
+      "oneOf": [
+        {"const": ""},
+        {"$ref": "common.schema.json#/$defs/id"}
+      ]
+    },
+    "optionalDigest": {
+      "oneOf": [
+        {"const": ""},
+        {"$ref": "common.schema.json#/$defs/digest"}
+      ]
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric", "direction", "raw_value", "oriented_value",
+        "normalized_lift", "uncertainty", "evidence_count", "objective_weight"
+      ],
+      "properties": {
+        "metric": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["maximize", "minimize"]},
+        "raw_value": {"type": "number"},
+        "oriented_value": {"type": "number"},
+        "normalized_lift": {
+          "oneOf": [{"type": "null"}, {"type": "number"}]
+        },
+        "uncertainty": {"type": "number", "minimum": 0},
+        "evidence_count": {"type": "integer", "minimum": 1},
+        "objective_weight": {"type": "number", "minimum": 0}
+      }
+    },
+    "episode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_intelligence_model_version", "id", "task_contract_digest",
+        "fingerprint_digest", "dataset_family_id", "route_id", "plan_digest",
+        "program_digest", "registry_digest", "admitted_space_digest",
+        "verifier_digest", "selection", "outcomes", "accepted", "status", "source_lane",
+        "optimizer_id", "effort_policy_id", "environment_digest", "budget",
+        "costs", "failures", "evidence_scope", "created_at", "extensions"
+      ],
+      "properties": {
+        "task_intelligence_model_version": {"const": "0.1"},
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "task_contract_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "fingerprint_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "dataset_family_id": {"$ref": "#/$defs/optionalId"},
+        "route_id": {"$ref": "common.schema.json#/$defs/id"},
+        "plan_digest": {"$ref": "#/$defs/optionalDigest"},
+        "program_digest": {"$ref": "#/$defs/optionalDigest"},
+        "registry_digest": {"$ref": "#/$defs/optionalDigest"},
+        "admitted_space_digest": {"$ref": "#/$defs/optionalDigest"},
+        "verifier_digest": {"$ref": "#/$defs/optionalDigest"},
+        "selection": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/outcome"}
+        },
+        "accepted": {"type": "boolean"},
+        "status": {"$ref": "common.schema.json#/$defs/id"},
+        "source_lane": {"$ref": "common.schema.json#/$defs/id"},
+        "optimizer_id": {"$ref": "common.schema.json#/$defs/id"},
+        "effort_policy_id": {"$ref": "common.schema.json#/$defs/id"},
+        "environment_digest": {"$ref": "#/$defs/optionalDigest"},
+        "budget": {
+          "type": "object",
+          "additionalProperties": {"type": "number", "minimum": 0}
+        },
+        "costs": {
+          "type": "object",
+          "additionalProperties": {"type": "number", "minimum": 0}
+        },
+        "failures": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "evidence_scope": {"$ref": "common.schema.json#/$defs/id"},
+        "created_at": {"type": "string"},
+        "extensions": {"type": "object"}
+      },
+      "anyOf": [
+        {"properties": {"outcomes": {"minItems": 1}}},
+        {"properties": {"failures": {"minItems": 1}}}
+      ]
+    }
+  }
+}

@@ -172,7 +172,8 @@ def test_permissions_and_effects_are_hard_admission_rules_not_optimizer_preferen
     space = Compiler().admit(restricted, registry)
     assert space.choices_for("extract") == ("candidate.example.extract.rules",)
     rejected = next(
-        decision for decision in space.decisions
+        decision
+        for decision in space.decisions
         if decision.slot_id == "extract"
         and decision.candidate_id == "candidate.example.extract.model"
     )
@@ -284,7 +285,8 @@ def test_evidence_is_append_only_pareto_ranked_and_can_fit_observational_priors(
         (Objective("quality", "maximize"), Objective("cost", "minimize")),
     )
     assert {item.plan_digest for item in front} == {
-        sha256_digest("plan-a"), sha256_digest("plan-b")
+        sha256_digest("plan-a"),
+        sha256_digest("plan-b"),
     }
     beliefs = learn_observational_beliefs(receipts, revision="evidence-v1")
     safe = beliefs.candidate_score("decode", "candidate.example.decode.safe")
@@ -393,10 +395,8 @@ def test_beam_search_enforces_its_explicit_evaluation_budget():
 
 def test_every_wire_representation_has_a_bundled_strict_json_schema():
     schemas = load_all_schemas()
-    assert len(SCHEMA_NAMES) == 53
+    assert len(SCHEMA_NAMES) == 58
     assert set(schemas) == set(SCHEMA_NAMES)
     assert schemas["node-spec.schema.json"]["additionalProperties"] is False
-    assert schemas["program-graph.schema.json"]["properties"]["model_version"] == {
-        "const": "0.2"
-    }
+    assert schemas["program-graph.schema.json"]["properties"]["model_version"] == {"const": "0.2"}
     assert schemas["frozen-plan.schema.json"]["required"][0] == "digest"

@@ -107,14 +107,16 @@ def _one_slot_fixture(*functions):
         version="1.0.0",
         task="Return the supplied value.",
         success_contract="An independent verifier observes structural equality.",
-        slots=(SemanticSlot(
-            id="identity",
-            purpose="Return the value.",
-            inputs=(Port("value", TEST_VALUE),),
-            outputs=(Port("value", TEST_VALUE),),
-            success_contract="Output equals input.",
-            required_capabilities=("test.identity",),
-        ),),
+        slots=(
+            SemanticSlot(
+                id="identity",
+                purpose="Return the value.",
+                inputs=(Port("value", TEST_VALUE),),
+                outputs=(Port("value", TEST_VALUE),),
+                success_contract="Output equals input.",
+                required_capabilities=("test.identity",),
+            ),
+        ),
         edges=(),
         inputs=(GraphInput("value", TEST_VALUE, "identity", "value"),),
         outputs=(GraphOutput("value", TEST_VALUE, "identity", "value"),),
@@ -125,7 +127,9 @@ def _one_slot_fixture(*functions):
 
 def _equality_verifier(context):
     accepted = context.outputs["value"] == context.inputs["value"]
-    return VerificationResult(accepted, "equal" if accepted else "different", {"quality": float(accepted)})
+    return VerificationResult(
+        accepted, "equal" if accepted else "different", {"quality": float(accepted)}
+    )
 
 
 def test_memory_and_file_artifact_stores_are_content_addressed_and_deduplicated(tmp_path):
@@ -175,9 +179,7 @@ def test_compiler_freezes_ordered_fallbacks_and_executor_activates_them():
     assert [item.outcome for item in result.receipt.node_receipts] == ["failed", "succeeded"]
     assert result.receipt.assignments == (("identity", fallback),)
     assert result.receipt.metrics["fallback_activations"] == 1.0
-    assert result.receipt.verifier_digest == callable_implementation_digest(
-        _equality_verifier
-    )
+    assert result.receipt.verifier_digest == callable_implementation_digest(_equality_verifier)
 
 
 def test_retry_requires_explicit_retryable_failure_and_idempotency():
@@ -210,15 +212,11 @@ def test_retry_requires_explicit_retryable_failure_and_idempotency():
         (retry_contract_mismatch, "runtime.failure-contract-mismatch"),
     ),
 )
-def test_executor_rejects_node_failures_that_violate_the_manifest(
-    function, expected_failure
-):
+def test_executor_rejects_node_failures_that_violate_the_manifest(function, expected_failure):
     program, registry = _one_slot_fixture(function)
     compiler = Compiler()
     space = compiler.admit(program, registry)
-    plan = compiler.compile(
-        program, registry, space, {"identity": registry.candidates[0].id}
-    )
+    plan = compiler.compile(program, registry, space, {"identity": registry.candidates[0].id})
     result = ReferenceExecutor().execute(
         plan,
         program,
@@ -241,14 +239,10 @@ def test_runtime_rechecks_policy_and_implementation_identity():
     changed_candidate = replace(
         registry.candidates[0], implementation_digest=changed_node.implementation_digest
     )
-    changed_registry = replace(
-        registry, nodes=(changed_node,), candidates=(changed_candidate,)
-    )
+    changed_registry = replace(registry, nodes=(changed_node,), candidates=(changed_candidate,))
     compiler = Compiler()
     space = compiler.admit(program, changed_registry)
-    plan = compiler.compile(
-        program, changed_registry, space, {"identity": changed_candidate.id}
-    )
+    plan = compiler.compile(program, changed_registry, space, {"identity": changed_candidate.id})
     result = ReferenceExecutor().execute(
         plan,
         program,
@@ -278,9 +272,7 @@ def test_runtime_rechecks_policy_and_implementation_identity():
 @pytest.mark.parametrize("example", EXAMPLE_TASKS, ids=lambda item: item.id)
 def test_every_real_world_example_compiles_full_registry_and_executes_real_routes(example):
     space, plans = example.compile()
-    assert len(space.decisions) == (
-        len(example.program.slots) * len(example.registry.candidates)
-    )
+    assert len(space.decisions) == (len(example.program.slots) * len(example.registry.candidates))
     assert all(space.choices_for(slot.id) for slot in example.program.slots)
     assert len({plan.digest for plan in plans.values()}) == len(plans)
 
@@ -294,9 +286,7 @@ def test_every_real_world_example_compiles_full_registry_and_executes_real_route
     for route in example.routes:
         receipt = receipt_by_digest[plans[route.id].digest]
         assert receipt["accepted"] is route.expected_accepted
-        assert receipt["outcome"] == (
-            "accepted" if route.expected_accepted else "rejected"
-        )
+        assert receipt["outcome"] == ("accepted" if route.expected_accepted else "rejected")
 
 
 def test_reference_release_gate_executes_all_routes_and_detects_catalog_drift(
@@ -304,9 +294,9 @@ def test_reference_release_gate_executes_all_routes_and_detects_catalog_drift(
 ):
     result = verify_reference_release(catalog_root="catalog")
     assert result.ok
-    assert len(result.route_results) == 54
-    assert result.accepted_routes == 33
-    assert result.rejected_controls == 21
+    assert len(result.route_results) == 68
+    assert result.accepted_routes == 40
+    assert result.rejected_controls == 28
     assert result.conformance.ok
     assert len(result.conformance.checks) == 11
     assert result.benchmark_count == result.solution_pack_count == 6
@@ -321,8 +311,7 @@ def test_reference_release_gate_executes_all_routes_and_detects_catalog_drift(
     stale_result = verify_reference_release(catalog_root=stale_catalog)
     assert not stale_result.ok
     assert (
-        "catalog document is stale: nodepacks/reference-core/registry.json"
-        in stale_result.problems
+        "catalog document is stale: nodepacks/reference-core/registry.json" in stale_result.problems
     )
 
 

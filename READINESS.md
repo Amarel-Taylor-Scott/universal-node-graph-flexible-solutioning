@@ -11,7 +11,7 @@ yet a turnkey production scheduler or a hostile-code execution service.
 
 | Surface | Status | Supported use |
 |---|---|---|
-| Semantic model and 53 strict schemas | Alpha-supported | Typed task contracts/cases, solution packs, benchmark suites/reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
+| Semantic model and 58 strict schemas | Alpha-supported | Typed task contracts/cases, task fingerprints, historical memory, search initialization, linked harness bundles, solution packs, benchmark suites/reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
 | Compiler and complete snapshot admission | Alpha-supported | Reject invalid types, authority, effects, topology, bindings, and constraints before execution |
 | Conditional branches | Alpha-supported locally | Data-dependent activation, exactly receipted skips, and compiler rejection of unsafe conditional outputs without an explicit merge |
 | Composite and bounded-loop lowering | Alpha-supported locally | Deterministic namespaced expansion into ordinary compiler-valid DAGs with a content-addressed lowering receipt |
@@ -19,11 +19,14 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Prior, beam, sprout, adaptive, exhaustive search | Alpha-supported | Explicitly budgeted proposal ordering over compiler-valid routes |
 | Executed successive halving | Alpha-supported locally | Caller-supplied evaluation at explicit fidelity rungs with complete promotion and resource records |
 | UniversalSolver | Alpha-supported locally | Full admission, multi-round search, frozen-plan experiments, learned observational priors, hard gates, ranking, champion, and benchmarked route-level fallbacks |
+| Task intelligence and history-informed initialization | Experimental local foundation | Extensible multi-label DAG taxonomy, progressive aggregate fingerprints, receipt-to-episode conversion, independent similarity channels, uncertainty-bearing historical recommendations, diverse historical/history-blind starts, arbitrary effort policies, protected exploration, and matched-budget negative-transfer assessment; automatic durable memory append and production-scale indexes remain future work |
+| Linked evaluation-harness contracts | Experimental local foundation | Six separately identified graph roles, explicit authorities and candidate visibility, development/holdout separation, human promotion gate, and sealed outer-evaluation feedback firewall; external microVM or remote enforcement remains required |
 | Task and solution-pack protocol | Alpha-supported | Exact task/program/registry/node-pack/case/oracle/baseline/benchmark closure with content digests and strict JSON Schemas |
 | Python node-authoring SDK | Alpha-supported for importable functions | Signature checks, source-derived implementation identity, stable bindings, exact finite expansion, and registry construction |
 | Reusable standard-library pack | Alpha-supported as a reference pack | 19 dependency-free text/data nodes, 32 exact bindings, discovery sidecars, and a seven-slot 1,728-route data-quality example |
 | Benchmark runner and reports | Alpha-supported as mechanism evidence | Six suites, fixed controls, bounded solver arms, common seeds/cases, holdout status, exact coverage, JSON reports, and offline HTML projections |
 | Universal DAG Arena | Alpha-supported as a mechanism suite | 36 typed task families, 24 executable programs across 20 fixture families, 12 additional template families, and four credentialed-connector families |
+| Engineering showcase pack | Alpha-supported as mechanism fixtures | Seven additional executable programs and 82 source-bound nodes covering geotemporal enrichment, user journeys, synthetic tabular/LLM data, grounded documents, reinforcement learning, and LLM evaluation/red teaming |
 | Templates and offline viewers | Alpha-supported | Explore 31 templates, 544 atomic slots, every bundled slot/candidate projection, and a generated benchmark report |
 | Trusted in-process Python runtime | Development only | Fast fixtures, tests, and notebooks using trusted code |
 | Bounded subprocess Python runtime | Alpha-supported lifecycle isolation | Trusted code needing process separation, strict JSON/bytes ABI, timeout, and optional POSIX CPU/memory limits |

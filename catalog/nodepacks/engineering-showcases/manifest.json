@@ -1,0 +1,838 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.normalize-record.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.normalize-record.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.validate-address.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.validate-address.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.resolve-timezone.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.resolve-timezone.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.derive-time-features.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.derive-time-features.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.join-geotemporal-context.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.geotemporal.join-geotemporal-context.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.normalize-events.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.normalize-events.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.sessionize-events.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.sessionize-events.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.derive-transitions.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.derive-transitions.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.score-funnel.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.score-funnel.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.detect-flow-anomalies.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.journey.detect-flow-anomalies.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.profile-source.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.profile-source.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.fit-latent-world.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.fit-latent-world.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.generate-records.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.generate-records.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.constraint-gate.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.constraint-gate.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.privacy-utility-gate.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.privacy-utility-gate.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.lineage-split.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-tabular.lineage-split.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.define-latent-world.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.define-latent-world.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.render-multiview.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.render-multiview.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.generate-counterfactuals.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.generate-counterfactuals.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.generate-hard-negatives.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.generate-hard-negatives.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.add-benign-controls.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.add-benign-controls.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.lineage-family-split.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.lineage-family-split.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.quality-gate.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.synthetic-llm.quality-gate.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.detect-format.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.detect-format.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.parse-layout.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.parse-layout.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.extract-fields.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.extract-fields.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.ground-fields.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.ground-fields.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.validate-schema.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.validate-schema.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.emit-provenance.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document.emit-provenance.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.validate-environment.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.validate-environment.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.generate-trajectories.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.generate-trajectories.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.estimate-rewards.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.estimate-rewards.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.update-policy.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.update-policy.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.evaluate-policy.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.rl.evaluate-policy.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+      },
+      "digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.register-scenarios.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+      },
+      "digest": "sha256:791773ace9a4a577ebd7474d91f0da423c0c82568900f63254749c885ba58818",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.register-scenarios.grounded",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+      },
+      "digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.run-system-under-test.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+      },
+      "digest": "sha256:791773ace9a4a577ebd7474d91f0da423c0c82568900f63254749c885ba58818",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.run-system-under-test.grounded",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+      },
+      "digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.grade-deterministically.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+      },
+      "digest": "sha256:791773ace9a4a577ebd7474d91f0da423c0c82568900f63254749c885ba58818",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.grade-deterministically.grounded",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+      },
+      "digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.adjudicate-panel.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+      },
+      "digest": "sha256:791773ace9a4a577ebd7474d91f0da423c0c82568900f63254749c885ba58818",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.adjudicate-panel.grounded",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+      },
+      "digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.audit-claims.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+      },
+      "digest": "sha256:791773ace9a4a577ebd7474d91f0da423c0c82568900f63254749c885ba58818",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.audit-claims.grounded",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+      },
+      "digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.propose-improvement.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+      },
+      "digest": "sha256:791773ace9a4a577ebd7474d91f0da423c0c82568900f63254749c885ba58818",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.propose-improvement.grounded",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+      },
+      "digest": "sha256:449de6a9e2a43c44ee3ea640c504cdb6a677def27a9dcb9be521af8f2c9348d7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.seal-receipt.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+      },
+      "digest": "sha256:791773ace9a4a577ebd7474d91f0da423c0c82568900f63254749c885ba58818",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.duecare.seal-receipt.grounded",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_duecare_grounded_step"
+    }
+  ],
+  "dependencies": [],
+  "description": "Dependency-free reference candidates for geotemporal enrichment, user journeys, synthetic tabular and LLM data, grounded documents, bounded reinforcement learning, and DueCare-style evaluation harnesses.",
+  "descriptor_digests": [],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "example.maturity": "mechanism-fixture"
+  },
+  "id": "example.engineering-showcase-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:f4913c76cc0bda44de07c1f46faf69ac5b54f563c17738f378aae8c2ef9512b6",
+    "sha256:a1d0a2f89f8245c996a023fa2f2821c7bf0524aa2efa070f963e7380b4ff8fb2",
+    "sha256:cb70bb2b02568aa956742108ff0832356132c305b79bf7f401a0799a22f55e22",
+    "sha256:6932dcd1a4411f780940f0401d9c64bca67e844634ad8ce9e727f1535c028de8",
+    "sha256:c3e23be83735d41bf2b72172830f95ea47592b62337ed92f78a952ee2d8771ad",
+    "sha256:0a35d6b13dd5aae6b9423020cfbbefbee135e46582d4caec5fe86ecfb6970c05",
+    "sha256:6d90ac58a5b6bcb12e4abf207d07f5c55845f9c6298043f65a606ee7120f8a7c",
+    "sha256:b41ff96c718581ce1274bf20c746e11874dd38a6a84cab3926983a922d29be5f",
+    "sha256:4aaa559b97ab0fbf0efb2556d355d5c13b0f74ee941deefa7ba0c78be9a1fe8e",
+    "sha256:5ca07dd31a6700cf64cea97dec349d304f9b8f30bbf4aac2c9839cf925f533f5",
+    "sha256:1ed84a9ac15c38c090345d8d822e361d27e38982bf1f105d6baac0b62c158016",
+    "sha256:c7c0faeaaf3326586f1589bb1fcc81dac680ffafc50f3d01f6d3a174d502ab86",
+    "sha256:8b65cd5d37d1f8934adfe95ae88f4c88be2033747c41da8b258f4d42b90a7d7b",
+    "sha256:f1e081371388aa8e1a5280d42b2eb1358ce390250adeca5b503f9d2ba85c6c8e",
+    "sha256:f8c0297a18140ac4dc394eb4d4e9e4f53e5e5cec64be3dee0eade6648d0f8cfb",
+    "sha256:f60ae94ea4e1f4188a5a289e196d7163e0674ea78b90e4a62a29b113dd274131",
+    "sha256:f9900957cd1761d956190dc874290ad49dc84f9070cd36af50e9c75c3511edb6",
+    "sha256:64dfd02e6f262d39de1b4897e1544839d654bbbe40a6d363ce32bee3dd964e3c",
+    "sha256:fe0bad94dc82750f798b57cd33aa29db7ee41c781fb57efe38f9efddfe602178",
+    "sha256:411d52053287ab88aec8973a6ff3b442464e65e0edc2212b4ac305b0b8519f45",
+    "sha256:4dd240c82411a99aceaac8b448b21ba8621841daaaf34853ea6f4ce2b0d38cda",
+    "sha256:96f54ccd1a62bde7e91901a8f4e4b8dd14a38f9f42d34bac07f800c034b9cd9f",
+    "sha256:3b514c925be1f1b6c8f8619f0b08728729a5e16c192cd201021997a5ce321375",
+    "sha256:281532e97986b5c4e7b43336dd14bda0d8fb26b51e97182e4ec3b8e10fca126f",
+    "sha256:7141b1bfe9746050bea048edff226bacecf5d9bc7f6f44edf696e269b440cde3",
+    "sha256:f9bcf902b6e6f1bf7167be564c1349b7d4333f6d26df23decc83aa55f63f05ad",
+    "sha256:e6d3831af64ddf5109fb16d427c7fa2f449183de4fc825deb2d4df390befb2b4",
+    "sha256:b648adfed011a1b858c6c64ca85c1448da8e630558202c053e22bd3ca50b7f5d",
+    "sha256:02afebf5d35baaefbfa3fa042ecab38c4a46d5e84dd862d972f1f25d4235927d",
+    "sha256:cd4e575c29a93c7c6910dac70288bde753a975e8f0829d4ab31100d72ce2446c",
+    "sha256:0cf103ead1da34aee3107a3b59508ef25d4b8bdcd9e6e6128dabf9191c0223dd",
+    "sha256:84adb03e4b93128e0584c57be0adf4864ea77c6f90805a8b249fdf4509a02462",
+    "sha256:cad5957a406568749e7ee5f4002e8de6c3c0d7a108b7f2f76fd47de8f665fe62",
+    "sha256:01dcc3313ce0b98b2331e005cda6e364c97191167ccd3e7517b1e1ad661e89fb",
+    "sha256:9d0e1b2362791e3e17f2b3643aa9a31d6ab99cef045bf68251abfe843cb0b55c",
+    "sha256:2ca614009ae927ab3fab7862b9b8d67bc80ace5f40c961e2bf1827004a6ad262",
+    "sha256:be9da339fa00990fadde06a8a8d57ecd17c231faa7c58051ab8dd5055f9eee7c",
+    "sha256:b19beef0cd5eba668fed21f56c359d6c0c553c0f4a8715fca4c652b606704a87",
+    "sha256:f2b8ccc885bc62a4e0ea731a3fc5ce9b80795786d6cf03628851f219c811b455",
+    "sha256:c3778a55be0731888e6e4793932ad194096b44ee16dae9fd2d87288c47eb3f3b",
+    "sha256:38c8faca145f9ae4d7108150de68e1756c528825cea63ed5e739f3ac2c59f156",
+    "sha256:109c1269fbffc44831cb4bd7ba8d94514644a5a0e7ed35bad49a06e87b1e15c8",
+    "sha256:fea6abe00ccbd78dd655c9ec4b5adc7add644704f826a9e8eefb7f4d1517a61c",
+    "sha256:1275026e56de0d4f8efd12069e663012b0d41472fd2c9f417aa4b75fda684cac",
+    "sha256:18e16764e95b2c4d4f32f44166a65693ada460b928ffb0d2b5c55e75f314722c",
+    "sha256:0ab8571e824561a7a107bcf792fa3ba87fb5650ff91e31651c07f947d9801f80",
+    "sha256:c0cf58783140459d65862129199d87b71d85014b55ec009bb55651c1e68d9c5f",
+    "sha256:d0b090171ff830017f01f771d090370fc01956b7cc8d7230f948d5cdf53f3291",
+    "sha256:8e181b95c8ca779ebba92c0feac9eb3dd6c6c6109ab4e286b932f8802c6f2aa4",
+    "sha256:ff5cbcb44802178b4f450247d82e43813e4fb107b85bf050d161da67ad7d5f95",
+    "sha256:4210ca4c803b8ea660e1d2c2983b91e3bad363b6ae23f9669e61a5b124c41993",
+    "sha256:9030542656b36a3b064d1e97e97eab693bd0fc68b676127a0703eb3ae0171713",
+    "sha256:a56734b80da925b6d1422a068cb2de37ed4a494910a43cfb63bc9a8614b78180",
+    "sha256:c2d45400336fa7f132fdbb726d58cbc8ae8516c5b21ab907190e4b24c5cbe434",
+    "sha256:69cd7936ac2782171012d3838885057c114551201f123ec10a9c78b5c55f3cd8",
+    "sha256:20c8a505f48173af079888f5da5959f19b2eedb8077352f50a76a4cfbbec6097",
+    "sha256:5157cb488dcfe8548f8a940a1bd4648d7dcf2241b8387d0224a7a74e4ce0c71d",
+    "sha256:830d83870f18e869d366326d8d2cf6b4c56d5febea411a47a9bc4d4dd013083d",
+    "sha256:3ea693c0185174e5405c14de05d29bce1df411e56de8b016efc7454bb2a7bcc5",
+    "sha256:3c99d70fbac2c166321a8b93db6f2bb43a5447004293c6d2656ac6d1f9557cfb",
+    "sha256:4f566c2130ec861fe2abc0012967672f6960e308006099bd0ac3c6390d20ff54",
+    "sha256:8e2e1b27067bc44769e50b5621fb483ec8b0fce29bb1aa85fd8205cbe1c76f12",
+    "sha256:f1b1055ef2731b3e37c61ede2d1343533009523f3b18c5653fe4c3848cffaf38",
+    "sha256:546b91c34a50f23afd8d5ddfb199381f7980ec4b6e591be1356484a548aeae61",
+    "sha256:d1700d97fd8bcc563809cdc6edfd696e47083e851fe2bc758b79101b36f36d86",
+    "sha256:093bd0500fd384d28352d572c37897470899cef88c92346db8ab8da1619ffec8",
+    "sha256:6c39ab719534e6f7fa34f5f79b68fe9c41311d9178483999d6e8e2f2dc91e801",
+    "sha256:eb4190a57bc9ed64f388469636fd4637fa2beda8e0c930c596c97f6a3c96f9a5",
+    "sha256:163577cdb428587520dac508c108d04f772e272ca874b7c3071d7a43cff8465d",
+    "sha256:7986afe2a40ac2550b0b375e5ec21c352e3ecbde1519ae5c8c3ab0989bec50c6",
+    "sha256:aa1d1cb908c3e187736192899d7b51149f2052e4c6a335c6acd53fef353430dd",
+    "sha256:3ac5496331de7f66097ffba4b17b576c37670e7af7eafa8710e9aee3f640397f",
+    "sha256:5ecf8e1a7b8c15da59c268b63d6e324fe4187fa18449c99840effa2a847a5b60",
+    "sha256:20cbeef44bcfe7a4524df7bc78ea598c049e35c1d58347cf684132ef9f30b788",
+    "sha256:0dbff8603335151197ccf6bd6caecf472d970d65031b9fa2fcdfced4db77c586",
+    "sha256:38ebe2e6d1c7b268207c61b40e194d205664f2a8a06d5999f33d47852fee55d9",
+    "sha256:23a0687c10bf8abff04f4d235ab9ffa756ad7c92f5f017b226e0fa3cda4ce8de",
+    "sha256:7107221ac47f0a2e76383d7948445aa2287086dc955fce4017ab4b1e8bd0d5dd",
+    "sha256:802f11a0bdeed503ec8aaeac94a3a85fc21c3355bb0a410a7302be8b8cabe6df",
+    "sha256:7c1d99d33a24ad1811f8e2edc6ce07f3fb18243607237b65ed18e27268efc328",
+    "sha256:bd6063af9803358040baeb44d798edd809bb3c60d03b53e73c0830835880f4e8",
+    "sha256:382ee475fc37ccd56c8a2756e4fbdaad74197b9f51424c29184483d11274c340"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

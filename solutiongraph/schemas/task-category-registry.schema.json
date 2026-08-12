@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task-category-registry.schema.json",
+  "title": "Extensible task-category registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_category_model_version", "id", "version", "description",
+    "categories", "extensions"
+  ],
+  "properties": {
+    "task_category_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "description": {"type": "string"},
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/category"}
+    },
+    "extensions": {"type": "object"}
+  },
+  "$defs": {
+    "stringArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "idArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "category": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "description", "parent_ids", "aliases",
+        "signal_terms", "typical_inputs", "typical_outputs",
+        "template_ids", "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "parent_ids": {"$ref": "#/$defs/idArray"},
+        "aliases": {"$ref": "#/$defs/stringArray"},
+        "signal_terms": {"$ref": "#/$defs/stringArray"},
+        "typical_inputs": {"$ref": "#/$defs/stringArray"},
+        "typical_outputs": {"$ref": "#/$defs/stringArray"},
+        "template_ids": {"$ref": "#/$defs/idArray"},
+        "extensions": {"type": "object"}
+      }
+    }
+  }
+}

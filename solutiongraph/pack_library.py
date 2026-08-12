@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from solutiongraph.discovery import ArtifactReference, NodePackManifest
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
+from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
 
 REPOSITORY_SOURCE = (
-    "https://github.com/Amarel-Taylor-Scott/"
-    "universal-node-graph-flexible-solutioning"
+    "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning"
 )
 
 
@@ -72,15 +72,32 @@ EXTENDED_ARENA_NODE_PACK = NodePackManifest(
     extensions=(("example.maturity", "cross-domain-conformance-fixture"),),
 )
 
+ENGINEERING_SHOWCASE_NODE_PACK = NodePackManifest(
+    id="example.engineering-showcase-node-pack",
+    version="1.0.0",
+    description=(
+        "Dependency-free reference candidates for geotemporal enrichment, user "
+        "journeys, synthetic tabular and LLM data, grounded documents, bounded "
+        "reinforcement learning, and DueCare-style evaluation harnesses."
+    ),
+    node_spec_digests=tuple(node.digest for node in SHOWCASE_NODES),
+    artifacts=_artifacts(SHOWCASE_NODES),
+    source=REPOSITORY_SOURCE,
+    license="MIT",
+    extensions=(("example.maturity", "mechanism-fixture"),),
+)
+
 REFERENCE_NODE_PACKS = (
     REFERENCE_CORE_NODE_PACK,
     REAL_WORLD_EXAMPLE_NODE_PACK,
     EXTENDED_ARENA_NODE_PACK,
+    ENGINEERING_SHOWCASE_NODE_PACK,
 )
 
 
 __all__ = [
     "EXTENDED_ARENA_NODE_PACK",
+    "ENGINEERING_SHOWCASE_NODE_PACK",
     "REAL_WORLD_EXAMPLE_NODE_PACK",
     "REFERENCE_CORE_NODE_PACK",
     "REFERENCE_NODE_PACKS",
