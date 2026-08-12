@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "window accuracy",
+    "duplicate removal",
+    "late acceptance",
+    "drop accountability",
+    "correction lineage"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "event-time-windowing"
+  ],
+  "external_requirements": [],
+  "id": "arena.event-time-windowing",
+  "input_contract": "Events with event and processing timestamps plus window and allowed-lateness policies.",
+  "output_contract": "Window emissions, dropped-event evidence, watermark trace, and explicit retraction links.",
+  "problem": "Normalize event time, deduplicate, expose watermark decisions, aggregate windows, classify lateness, and link corrections to prior emissions.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "normalize event time",
+    "deduplicate",
+    "watermark",
+    "window",
+    "late-data policy",
+    "retract"
+  ],
+  "tags": [
+    "streaming",
+    "event-time",
+    "watermark",
+    "late-data"
+  ],
+  "template_id": "template.event-driven-system",
+  "title": "Out-of-order events to correction-aware windows"
+}

@@ -87,7 +87,7 @@
       "id": "graph.duecare-solution",
       "program_digest": "sha256:3f313908a554b245c7c075a32562c7a5e26788aedcc15ca81a85761b1432bdbf",
       "purpose": "Produce candidate responses under an exact harness configuration.",
-      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "registry_digest": "sha256:bf47d9a28eb3f9f14e7734e6852d5849267fecc8dfec71e3a1c484abbd6fcaeb",
       "role": "graph.role.solution"
     },
     {
@@ -100,7 +100,7 @@
       "id": "graph.duecare-scenarios",
       "program_digest": "sha256:e0947d167d3cf457678efabd5dc765a82f5a6844805af2ee1b67d55755eeab9a",
       "purpose": "Generate direct, adversarial, metamorphic, and benign-neighbor cases.",
-      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "registry_digest": "sha256:bf47d9a28eb3f9f14e7734e6852d5849267fecc8dfec71e3a1c484abbd6fcaeb",
       "role": "graph.role.scenario"
     },
     {
@@ -113,7 +113,7 @@
       "id": "graph.duecare-evaluation",
       "program_digest": "sha256:c1be920eaf91a133cc82e218741bc663019b21835efdabf6a6f57f36368d4d5a",
       "purpose": "Combine deterministic checks, rubric scores, panel disagreement, and claims.",
-      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "registry_digest": "sha256:bf47d9a28eb3f9f14e7734e6852d5849267fecc8dfec71e3a1c484abbd6fcaeb",
       "role": "graph.role.evaluation"
     },
     {
@@ -126,7 +126,7 @@
       "id": "graph.duecare-improvement",
       "program_digest": "sha256:cc1d4166913c4a2a4996076931814e6734d4b421e826a86c7ebbba533514ab55",
       "purpose": "Propose a new quarantined route from development evidence only.",
-      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "registry_digest": "sha256:bf47d9a28eb3f9f14e7734e6852d5849267fecc8dfec71e3a1c484abbd6fcaeb",
       "role": "graph.role.improvement"
     },
     {
@@ -139,7 +139,7 @@
       "id": "graph.duecare-promotion",
       "program_digest": "sha256:5beba639742cbcd775a2f43a9adde920de3d4281da2a8381d25e804b53c39559",
       "purpose": "Approve or reject promotion with named human authority.",
-      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "registry_digest": "sha256:bf47d9a28eb3f9f14e7734e6852d5849267fecc8dfec71e3a1c484abbd6fcaeb",
       "role": "graph.role.promotion"
     },
     {
@@ -152,7 +152,7 @@
       "id": "graph.duecare-outer",
       "program_digest": "sha256:e3ef6730156c6af908ff882c5572c76c26d613ae8af093c9f224345a13c44c54",
       "purpose": "Evaluate untouched holdouts in a candidate-unreadable trust domain.",
-      "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+      "registry_digest": "sha256:bf47d9a28eb3f9f14e7734e6852d5849267fecc8dfec71e3a1c484abbd6fcaeb",
       "role": "graph.role.outer-evaluation"
     }
   ],

@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "contract conformance",
+    "authorization",
+    "duplicate suppression",
+    "response stability",
+    "audit completeness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "idempotent-api-contract"
+  ],
+  "external_requirements": [],
+  "id": "arena.idempotent-api-contract",
+  "input_contract": "Versioned request and response contracts, scoped principal, idempotency key, and operation payload.",
+  "output_contract": "Stable responses, one logical mutation, authorization verdict, idempotency evidence, and audit digest.",
+  "problem": "Validate a request contract, authorize the exact scope, enforce idempotency, execute, validate the response, and emit a secret-free audit record.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "validate request",
+    "authorize",
+    "idempotency",
+    "execute",
+    "validate response",
+    "audit"
+  ],
+  "tags": [
+    "api",
+    "backend",
+    "idempotency",
+    "authorization"
+  ],
+  "template_id": "template.api-service",
+  "title": "Retries to one authorized backend mutation"
+}

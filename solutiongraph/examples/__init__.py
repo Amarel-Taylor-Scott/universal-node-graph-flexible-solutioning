@@ -13,6 +13,7 @@ from solutiongraph.examples.tasks import (
 )
 from solutiongraph.examples.showcase_tasks import (
     DUECARE_HARNESS_BUNDLE,
+    DUECARE_HARNESS_EVIDENCE,
     SHOWCASE_EXAMPLE_TASKS,
     SHOWCASE_REGISTRY,
 )
@@ -25,6 +26,7 @@ __all__ = [
     "get_example",
     "run_example",
     "DUECARE_HARNESS_BUNDLE",
+    "DUECARE_HARNESS_EVIDENCE",
     "SHOWCASE_EXAMPLE_TASKS",
     "SHOWCASE_REGISTRY",
 ]

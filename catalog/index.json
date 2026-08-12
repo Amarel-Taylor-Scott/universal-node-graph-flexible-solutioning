@@ -1,8 +1,8 @@
 {
   "arena": {
-    "executable_fixture_count": 20,
+    "executable_fixture_count": 26,
     "path": "arena/index.json",
-    "task_count": 36
+    "task_count": 42
   },
   "benchmarks": {
     "benchmark_count": 6,
@@ -13,9 +13,13 @@
   "catalog_model_version": "0.1",
   "harnesses": [
     {
-      "digest": "sha256:8699292839d41f34ff2dee9b2d89ed8ec40cd5de59ff54b7d9295e2296021338",
+      "atomic_judgment_count": 7,
+      "digest": "sha256:560bd739576b2299b7adaedc33f2d184c1df21e8ebd0e3ac22e6557e9f6af9e2",
+      "evidence_digest": "sha256:b7d38b731d766da099fb6859ca7d2f70a8ac79f7710139ed2ebb998cb30ba390",
+      "evidence_path": "harnesses/duecare-evidence-example.json",
       "graph_count": 6,
       "id": "harness.duecare-example",
+      "panel_count": 3,
       "path": "harnesses/duecare-example.json",
       "version": "0.1.0"
     }
@@ -59,12 +63,12 @@
     },
     {
       "descriptor_count": 0,
-      "digest": "sha256:5441d415b1bca5f85a59acc4b6026c370d7c18b748df09d07136aceda637750c",
+      "digest": "sha256:d0f8c452eb3bf76d676751c5508b634bef419e776af4989b1dcd3eadc16b01f4",
       "embedding_record_count": 0,
       "id": "example.engineering-showcase-node-pack",
-      "node_count": 82,
+      "node_count": 154,
       "path": "nodepacks/engineering-showcases/manifest.json",
-      "version": "1.0.0"
+      "version": "1.1.0"
     }
   ],
   "templates": [

@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    "showcase.gis-boundary.emit-provenance"
+  ],
+  "description": "Reference fixture for the gis-boundary/emit-provenance obligation.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.showcase_tasks:execute_reference_step",
+  "failure_modes": [],
+  "id": "example.showcase.gis-boundary.emit-provenance.reference",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.engineering-showcase-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.engineering-showcase-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "gis-boundary"
+      ],
+      "default": null,
+      "description": "",
+      "name": "domain",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "emit-provenance"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/showcase_tasks.py",
+  "verifier": "",
+  "version": "1.1.0"
+}

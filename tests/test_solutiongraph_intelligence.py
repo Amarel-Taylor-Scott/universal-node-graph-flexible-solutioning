@@ -17,6 +17,7 @@ from solutiongraph import (
     HistoricalRetriever,
     HistoryInformedPlanner,
     LaneOutcome,
+    MemoryArtifactStore,
     Objective,
     Port,
     TaskCategoryMatch,
@@ -27,6 +28,7 @@ from solutiongraph import (
     UniversalSolver,
     ValueType,
     assess_negative_transfer,
+    close_solver_history,
     effort_policy,
     fingerprint_from_contract,
     historical_episode_from_receipts,
@@ -441,6 +443,34 @@ def test_planner_and_solver_execute_historical_and_history_blind_starting_points
             (query,),
             (ingested,),
         ).to_dict(),
+    )
+
+    artifact_store = MemoryArtifactStore()
+    update = close_solver_history(
+        HistoricalMemory("memory.closed-solver-history", "1"),
+        query,
+        result,
+        example.objectives,
+        artifact_store=artifact_store,
+    )
+    assert update.validate() == []
+    assert len(update.memory.episodes) == len(
+        {receipt.plan_digest for receipt in result.ledger.receipts}
+    )
+    assert {episode.source_lane for episode in update.memory.episodes}
+    assert artifact_store.get_json(update.snapshot_artifact.digest) == json.loads(
+        json.dumps(update.memory.to_dict())
+    )
+    _validate_wire("historical-memory.schema.json", update.memory.to_dict())
+    _validate_wire("historical-memory-update.schema.json", update.to_dict())
+    assert all(attribution.validate() == [] for attribution in result.lane_attributions)
+    assert all(
+        sum(
+            attribution.primary and attribution.plan_digest == plan_digest
+            for attribution in result.lane_attributions
+        )
+        == 1
+        for plan_digest in {receipt.plan_digest for receipt in result.ledger.receipts}
     )
 
 

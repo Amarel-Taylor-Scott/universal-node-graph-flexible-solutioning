@@ -12,6 +12,7 @@
     "development_receipt_ids", "holdout_receipt_ids",
     "holdout_confirmed_plan_digests", "rankings",
     "initial_belief_revision", "learned_belief_revision",
+    "lane_attributions",
     "search_initialization_digest"
   ],
   "properties": {
@@ -65,6 +66,11 @@
     },
     "initial_belief_revision": {"type": "string", "minLength": 1},
     "learned_belief_revision": {"type": "string", "minLength": 1},
+    "lane_attributions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/laneAttribution"}
+    },
     "search_initialization_digest": {
       "oneOf": [
         {"const": ""},
@@ -170,6 +176,39 @@
         "candidate_diversity": {"type": "number", "minimum": 0, "maximum": 1},
         "implementation_diversity": {"type": "number", "minimum": 0, "maximum": 1},
         "failure_mode_diversity": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "laneAttribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plan_digest", "start_id", "source_lane", "optimizer_id",
+        "history_blind", "round_index", "budget_digest", "receipt_ids",
+        "parent_episode_ids", "allocated_budget_fraction", "primary"
+      ],
+      "properties": {
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "start_id": {"$ref": "common.schema.json#/$defs/id"},
+        "source_lane": {"$ref": "common.schema.json#/$defs/id"},
+        "optimizer_id": {"$ref": "common.schema.json#/$defs/id"},
+        "history_blind": {"type": "boolean"},
+        "round_index": {"type": "integer", "minimum": 1},
+        "budget_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "receipt_ids": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "parent_episode_ids": {
+          "type": "array", "uniqueItems": true,
+          "items": {"$ref": "common.schema.json#/$defs/id"}
+        },
+        "allocated_budget_fraction": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "number", "minimum": 0, "maximum": 1}
+          ]
+        },
+        "primary": {"type": "boolean"}
       }
     }
   }

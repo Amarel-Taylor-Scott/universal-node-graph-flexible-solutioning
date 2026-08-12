@@ -24,7 +24,11 @@ from solutiongraph.evidence import (
 )
 from solutiongraph.executor import ExecutionPolicy, ReferenceExecutor
 from solutiongraph.experiments import ExperimentCase, ExperimentRunner, ReceiptSink
-from solutiongraph.intelligence import SearchInitialization, merge_belief_models
+from solutiongraph.intelligence import (
+    LaneAttribution,
+    SearchInitialization,
+    merge_belief_models,
+)
 from solutiongraph.model import AdmittedSpace, FrozenPlan, ProgramGraph, Registry, sha256_digest
 from solutiongraph.search import (
     BeliefModel,
@@ -56,9 +60,7 @@ class SolverProfile:
         if not self.search_rounds:
             problems.append("profile search_rounds must not be empty")
         for index, budget in enumerate(self.search_rounds):
-            problems.extend(
-                f"search_rounds[{index}]: {problem}" for problem in budget.validate()
-            )
+            problems.extend(f"search_rounds[{index}]: {problem}" for problem in budget.validate())
         if not self.seeds or len(self.seeds) != len(set(self.seeds)):
             problems.append("profile seeds must be nonempty and unique")
         if any(isinstance(seed, bool) or not isinstance(seed, int) for seed in self.seeds):
@@ -253,6 +255,7 @@ class SolverResult:
     holdout_confirmed_plan_digests: tuple[str, ...]
     initial_beliefs: BeliefModel
     learned_beliefs: BeliefModel
+    lane_attributions: tuple[LaneAttribution, ...]
     search_initialization_digest: str = ""
 
     @property
@@ -271,8 +274,7 @@ class SolverResult:
             "admitted_space_digest": self.admitted_space.digest,
             "route_count_upper_bound": self.admitted_space.route_count_upper_bound,
             "admitted_candidates": {
-                slot_id: list(candidates)
-                for slot_id, candidates in self.admitted_space.choices
+                slot_id: list(candidates) for slot_id, candidates in self.admitted_space.choices
             },
             "rounds": [round_.to_dict() for round_ in self.rounds],
             "evaluated_plan_count": len(self.plans),
@@ -281,18 +283,15 @@ class SolverResult:
             "pareto_plan_digests": list(self.pareto_plan_digests),
             "development_receipt_ids": list(self.development_receipt_ids),
             "holdout_receipt_ids": list(self.holdout_receipt_ids),
-            "holdout_confirmed_plan_digests": list(
-                self.holdout_confirmed_plan_digests
-            ),
+            "holdout_confirmed_plan_digests": list(self.holdout_confirmed_plan_digests),
             "rankings": [ranking.to_dict() for ranking in self.rankings],
             "initial_belief_revision": self.initial_beliefs.revision,
             "learned_belief_revision": self.learned_beliefs.revision,
+            "lane_attributions": [attribution.to_dict() for attribution in self.lane_attributions],
             "search_initialization_digest": self.search_initialization_digest,
         }
         if include_receipts:
-            payload["receipts"] = [
-                receipt.to_dict() for receipt in self.ledger.receipts
-            ]
+            payload["receipts"] = [receipt.to_dict() for receipt in self.ledger.receipts]
         return payload
 
 
@@ -304,7 +303,9 @@ def get_solver_profile(profile: str | SolverProfile) -> SolverProfile:
             selected = SOLVER_PROFILES[profile]
         except KeyError as exc:
             known = ", ".join(SOLVER_PROFILES)
-            raise ValueError(f"unknown solver profile {profile!r}; known profiles: {known}") from exc
+            raise ValueError(
+                f"unknown solver profile {profile!r}; known profiles: {known}"
+            ) from exc
     problems = selected.validate()
     if problems:
         raise ValueError("invalid solver profile: " + "; ".join(problems))
@@ -366,15 +367,13 @@ class UniversalSolver:
             raise ValueError("solver case ids must be unique")
         if set(holdout_case_ids) - {case.id for case in cases}:
             raise ValueError("holdout cases must be present in cases")
-        development_cases = tuple(
-            case for case in cases if case.id not in holdout_case_ids
-        )
+        development_cases = tuple(case for case in cases if case.id not in holdout_case_ids)
         if holdout_case_ids and not development_cases:
             raise ValueError("at least one development case is required with holdouts")
-        if any(
-            budget.mode == SearchMode.EXHAUSTIVE
-            for budget in selected_profile.search_rounds
-        ) and not allow_exhaustive:
+        if (
+            any(budget.mode == SearchMode.EXHAUSTIVE for budget in selected_profile.search_rounds)
+            and not allow_exhaustive
+        ):
             raise ValueError(
                 "exhaustive search requires allow_exhaustive=True; it has no implicit route cap"
             )
@@ -389,8 +388,7 @@ class UniversalSolver:
             initialization_problems = initialization.validate(space)
             if initialization_problems:
                 raise ValueError(
-                    "invalid search initialization: "
-                    + "; ".join(initialization_problems)
+                    "invalid search initialization: " + "; ".join(initialization_problems)
                 )
         if beliefs is not None and initialization is not None:
             initial_beliefs = merge_belief_models(initialization.beliefs, beliefs)
@@ -411,24 +409,16 @@ class UniversalSolver:
         current_beliefs = initial_beliefs
         baseline_key: tuple[tuple[str, str], ...] | None = None
         full_anchors = [dict(anchor) for anchor in anchors]
-        initialization_starts = (
-            initialization.starts if initialization is not None else ()
-        )
-        full_anchors.extend(
-            dict(start.selection) for start in initialization_starts
-        )
+        initialization_starts = initialization.starts if initialization is not None else ()
+        full_anchors.extend(dict(start.selection) for start in initialization_starts)
 
         if baseline_selection is not None:
-            baseline_plan = self.compiler.compile(
-                program, registry, space, baseline_selection
-            )
+            baseline_plan = self.compiler.compile(program, registry, space, baseline_selection)
             baseline_key = self._selection_key(baseline_selection, program)
             all_plans[baseline_plan.digest] = baseline_plan
             full_anchors.insert(0, dict(baseline_selection))
 
-        for round_index, original_budget in enumerate(
-            selected_profile.search_rounds, start=1
-        ):
+        for round_index, original_budget in enumerate(selected_profile.search_rounds, start=1):
             budget = original_budget
             if budget.mode == SearchMode.EXHAUSTIVE:
                 budget = replace(
@@ -521,9 +511,7 @@ class UniversalSolver:
                 revision=revision,
                 interactions=tuple(
                     (left.id, right.id)
-                    for left, right in zip(
-                        program.slots, program.slots[1:], strict=False
-                    )
+                    for left, right in zip(program.slots, program.slots[1:], strict=False)
                 ),
             )
             rounds.append(
@@ -531,9 +519,7 @@ class UniversalSolver:
                     index=round_index,
                     search_report=report,
                     plan_digests=tuple(new_plans),
-                    receipt_ids=tuple(
-                        receipt.id for receipt in experiment.ledger.receipts
-                    ),
+                    receipt_ids=tuple(receipt.id for receipt in experiment.ledger.receipts),
                     belief_revision_before=current_beliefs.revision,
                     belief_revision_after=next_beliefs.revision,
                 )
@@ -542,12 +528,8 @@ class UniversalSolver:
             ranked_so_far = self._rank(
                 ledger.aggregates(), all_plans, registry, objectives, selected_profile
             )
-            accepted_so_far = tuple(
-                item for item in ranked_so_far if item.meets_acceptance_gate
-            )
-            full_anchors = [
-                dict(item.selection) for item in accepted_so_far[:4]
-            ] or full_anchors
+            accepted_so_far = tuple(item for item in ranked_so_far if item.meets_acceptance_gate)
+            full_anchors = [dict(item.selection) for item in accepted_so_far[:4]] or full_anchors
 
         development_ledger = ledger
         rankings = self._rank(
@@ -558,9 +540,7 @@ class UniversalSolver:
             for ranking in rankings
             if ranking.meets_acceptance_gate and ranking.meets_objective_constraints
         )
-        provisional_champion = (
-            development_eligible[0].plan_digest if development_eligible else None
-        )
+        provisional_champion = development_eligible[0].plan_digest if development_eligible else None
         provisional_fallbacks = self._select_fallbacks(
             provisional_champion,
             development_eligible,
@@ -590,9 +570,7 @@ class UniversalSolver:
             )
             holdout_result = ExperimentRunner(self.executor).run(
                 holdout_design,
-                plans={
-                    digest: all_plans[digest] for digest in confirmation_shortlist
-                },
+                plans={digest: all_plans[digest] for digest in confirmation_shortlist},
                 cases=case_map,
                 program=program,
                 registry=registry,
@@ -603,9 +581,7 @@ class UniversalSolver:
                 belief_revision=current_beliefs.revision,
             )
             ledger = ledger.append(*holdout_result.ledger.receipts)
-            holdout_receipt_ids = tuple(
-                receipt.id for receipt in holdout_result.ledger.receipts
-            )
+            holdout_receipt_ids = tuple(receipt.id for receipt in holdout_result.ledger.receipts)
             holdout_rankings = self._rank(
                 holdout_result.aggregates,
                 all_plans,
@@ -616,21 +592,14 @@ class UniversalSolver:
             confirmed_set = {
                 ranking.plan_digest
                 for ranking in holdout_rankings
-                if ranking.meets_acceptance_gate
-                and ranking.meets_objective_constraints
+                if ranking.meets_acceptance_gate and ranking.meets_objective_constraints
             }
             development_eligible = tuple(
-                ranking
-                for ranking in development_eligible
-                if ranking.plan_digest in confirmed_set
+                ranking for ranking in development_eligible if ranking.plan_digest in confirmed_set
             )
-            confirmed_digests = tuple(
-                ranking.plan_digest for ranking in development_eligible
-            )
+            confirmed_digests = tuple(ranking.plan_digest for ranking in development_eligible)
 
-        champion_digest = (
-            development_eligible[0].plan_digest if development_eligible else None
-        )
+        champion_digest = development_eligible[0].plan_digest if development_eligible else None
         fallback_routes = self._select_fallbacks(
             champion_digest,
             development_eligible,
@@ -638,8 +607,16 @@ class UniversalSolver:
             registry,
             selected_profile.fallback_count,
         )
-        pareto = tuple(
-            item.plan_digest for item in pareto_front(ledger.aggregates(), objectives)
+        pareto = tuple(item.plan_digest for item in pareto_front(ledger.aggregates(), objectives))
+        lane_attributions = self._lane_attributions(
+            program,
+            selected_profile,
+            tuple(rounds),
+            all_plans,
+            development_ledger,
+            initialization,
+            baseline_key,
+            tuple(development_case_map),
         )
         return SolverResult(
             status=(
@@ -662,17 +639,156 @@ class UniversalSolver:
             champion_plan_digest=champion_digest,
             fallbacks=fallback_routes,
             pareto_plan_digests=pareto,
-            development_receipt_ids=tuple(
-                receipt.id for receipt in development_ledger.receipts
-            ),
+            development_receipt_ids=tuple(receipt.id for receipt in development_ledger.receipts),
             holdout_receipt_ids=holdout_receipt_ids,
             holdout_confirmed_plan_digests=confirmed_digests,
             initial_beliefs=initial_beliefs,
             learned_beliefs=current_beliefs,
+            lane_attributions=lane_attributions,
             search_initialization_digest=(
                 initialization.digest if initialization is not None else ""
             ),
         )
+
+    @classmethod
+    def _lane_attributions(
+        cls,
+        program: ProgramGraph,
+        profile: SolverProfile,
+        rounds: tuple[SolverRound, ...],
+        plans: Mapping[str, FrozenPlan],
+        ledger: EvidenceLedger,
+        initialization: SearchInitialization | None,
+        baseline_key: tuple[tuple[str, str], ...] | None,
+        development_case_ids: tuple[str, ...],
+    ) -> tuple[LaneAttribution, ...]:
+        """Derive primary proposal-lane and exact receipt attribution per plan."""
+
+        receipts_by_plan: dict[str, list[str]] = {}
+        for receipt in ledger.receipts:
+            receipts_by_plan.setdefault(receipt.plan_digest, []).append(receipt.id)
+        start_by_selection = (
+            {
+                cls._selection_key(dict(start.selection), program): start
+                for start in initialization.starts
+            }
+            if initialization is not None
+            else {}
+        )
+        allocation_by_optimizer = (
+            {
+                allocation.optimizer_id: allocation.budget_fraction
+                for allocation in initialization.optimizer_allocations
+            }
+            if initialization is not None
+            else {}
+        )
+        round_by_plan = {
+            plan_digest: round_ for round_ in rounds for plan_digest in round_.plan_digests
+        }
+        mode_optimizer = {
+            SearchMode.PRIOR: "optimizer.history-prior"
+            if initialization is not None
+            else "optimizer.cold-prior",
+            SearchMode.BEAM: "optimizer.typed-beam",
+            SearchMode.SPROUT: "optimizer.seeded-sprout",
+            SearchMode.EXHAUSTIVE: "optimizer.exhaustive",
+        }
+        mode_lane = {
+            SearchMode.PRIOR: "start.optimizer-prior",
+            SearchMode.BEAM: "start.optimizer-beam",
+            SearchMode.SPROUT: "start.optimizer-sprout",
+            SearchMode.EXHAUSTIVE: "start.optimizer-exhaustive",
+        }
+
+        attributions: list[LaneAttribution] = []
+        for plan_digest, receipt_ids in sorted(receipts_by_plan.items()):
+            plan = plans[plan_digest]
+            selection = cls._plan_selection(plan)
+            round_ = round_by_plan.get(plan_digest)
+            if round_ is None:
+                raise ValueError("evaluated plan is absent from solver round accounting")
+            budget = profile.search_rounds[round_.index - 1]
+            budget_digest = sha256_digest(
+                {
+                    "profile_id": profile.id,
+                    "round_index": round_.index,
+                    "search_budget": {
+                        "mode": budget.mode.value,
+                        "evaluation_limit": budget.evaluation_limit,
+                        "result_limit": budget.result_limit,
+                        "beam_width": budget.beam_width,
+                        "random_seed": budget.random_seed,
+                        "sampling_attempt_limit": budget.sampling_attempt_limit,
+                        "mutation_probability": budget.mutation_probability,
+                    },
+                    "seeds": profile.seeds,
+                    "repetitions": profile.repetitions,
+                    "development_case_ids": development_case_ids,
+                }
+            )
+            origins: list[tuple[str, str, str, bool, tuple[str, ...]]] = []
+            suffix = plan_digest.removeprefix("sha256:")[:20]
+            if baseline_key is not None and selection == baseline_key:
+                origins.append(
+                    (
+                        f"start.fixed-baseline-{suffix}",
+                        "start.fixed-baseline",
+                        "optimizer.fixed-control",
+                        True,
+                        (),
+                    )
+                )
+            start = start_by_selection.get(selection)
+            if start is not None:
+                optimizer_id = (
+                    "optimizer.fixed-control"
+                    if start.source_lane == "start.canonical-history-blind"
+                    else (
+                        "optimizer.seeded-sprout"
+                        if start.history_blind
+                        else "optimizer.history-prior"
+                    )
+                )
+                origins.append(
+                    (
+                        start.id,
+                        start.source_lane,
+                        optimizer_id,
+                        start.history_blind,
+                        start.parent_episode_ids,
+                    )
+                )
+            if not origins:
+                optimizer_id = mode_optimizer[budget.mode]
+                origins.append(
+                    (
+                        f"start.solver-{suffix}",
+                        mode_lane[budget.mode],
+                        optimizer_id,
+                        initialization is None,
+                        (),
+                    )
+                )
+            for index, (start_id, lane, optimizer_id, history_blind, parents) in enumerate(origins):
+                attribution = LaneAttribution(
+                    plan_digest,
+                    start_id,
+                    lane,
+                    optimizer_id,
+                    history_blind,
+                    round_.index,
+                    budget_digest,
+                    tuple(receipt_ids),
+                    parents,
+                    allocation_by_optimizer.get(optimizer_id),
+                    primary=index == 0,
+                )
+                problems = attribution.validate()
+                if problems:
+                    raise ValueError("invalid solver lane attribution: " + "; ".join(problems))
+                attributions.append(attribution)
+        return tuple(attributions)
 
     @staticmethod
     def _selection_key(
@@ -686,9 +802,7 @@ class UniversalSolver:
         return tuple((slot, by_slot[slot]) for slot in plan.topological_order)
 
     @staticmethod
-    def _belief_revision(
-        program: ProgramGraph, ledger: EvidenceLedger, round_index: int
-    ) -> str:
+    def _belief_revision(program: ProgramGraph, ledger: EvidenceLedger, round_index: int) -> str:
         digest = sha256_digest(
             {
                 "program_digest": program.digest,
@@ -719,13 +833,11 @@ class UniversalSolver:
                 objective.metric in aggregate.metric_means
                 and (
                     objective.hard_minimum is None
-                    or aggregate.metric_means[objective.metric]
-                    >= objective.hard_minimum
+                    or aggregate.metric_means[objective.metric] >= objective.hard_minimum
                 )
                 and (
                     objective.hard_maximum is None
-                    or aggregate.metric_means[objective.metric]
-                    <= objective.hard_maximum
+                    or aggregate.metric_means[objective.metric] <= objective.hard_maximum
                 )
                 for objective in objectives
             )
@@ -748,9 +860,7 @@ class UniversalSolver:
                 bounds[objective.metric] = (min(values), max(values))
 
         weight_total = sum(objective.weight for objective in objectives)
-        pareto_digests = {
-            item.plan_digest for item in pareto_front(aggregates, objectives)
-        }
+        pareto_digests = {item.plan_digest for item in pareto_front(aggregates, objectives)}
         unranked: list[RankedRoute] = []
         for aggregate in aggregates:
             gate = aggregate.acceptance_rate >= profile.minimum_acceptance_rate
@@ -821,20 +931,14 @@ class UniversalSolver:
         if champion_digest is None or count == 0:
             return ()
         ranking_by_digest = {item.plan_digest: item for item in eligible}
-        remaining = [
-            item.plan_digest
-            for item in eligible
-            if item.plan_digest != champion_digest
-        ]
+        remaining = [item.plan_digest for item in eligible if item.plan_digest != champion_digest]
         selected = [champion_digest]
         fallbacks: list[FallbackRoute] = []
         while remaining and len(fallbacks) < count:
             scored: list[tuple[float, str, tuple[float, float, float, float]]] = []
             for digest in remaining:
                 diversities = [
-                    UniversalSolver._route_diversity(
-                        plans[digest], plans[chosen], registry
-                    )
+                    UniversalSolver._route_diversity(plans[digest], plans[chosen], registry)
                     for chosen in selected
                 ]
                 minimum = min(diversities, key=lambda values: values[0])
@@ -870,12 +974,10 @@ class UniversalSolver:
         if not slots:
             return (1.0, 1.0, 1.0, 1.0)
         candidate = sum(
-            left_bindings[slot].candidate_id != right_bindings[slot].candidate_id
-            for slot in slots
+            left_bindings[slot].candidate_id != right_bindings[slot].candidate_id for slot in slots
         ) / len(slots)
         implementation = sum(
-            left_bindings[slot].implementation_digest
-            != right_bindings[slot].implementation_digest
+            left_bindings[slot].implementation_digest != right_bindings[slot].implementation_digest
             for slot in slots
         ) / len(slots)
         nodes = registry.node_map()

@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "contract pass",
+    "row preservation",
+    "conflict traceability",
+    "imputation scope",
+    "quarantine completeness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "conflict-aware-data-contract"
+  ],
+  "external_requirements": [],
+  "id": "arena.conflict-aware-data-contract",
+  "input_contract": "Source-tagged records, source priority, imputation policy, and an immutable data contract.",
+  "output_contract": "Validated records, field-level provenance, conflict and imputation ledgers, quarantine rows, and output digest.",
+  "problem": "Profile, normalize, impute permitted fields, resolve conflicting sources, validate a versioned contract, and quarantine invalid records.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "profile",
+    "normalize missing",
+    "impute",
+    "resolve conflicts",
+    "validate contract",
+    "quarantine"
+  ],
+  "tags": [
+    "data-cleaning",
+    "imputation",
+    "conflict-resolution",
+    "data-contract"
+  ],
+  "template_id": "template.data-quality",
+  "title": "Messy records to a conflict-aware contracted dataset"
+}

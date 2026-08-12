@@ -34,9 +34,9 @@
       "supports_scores": false
     }
   ],
-  "registry_digest": "sha256:1cad00694c49aa3279bcf813bfc2bddd111d823198c3b6cd3ef3eb7eec6d34bf",
+  "registry_digest": "sha256:bf47d9a28eb3f9f14e7734e6852d5849267fecc8dfec71e3a1c484abbd6fcaeb",
   "registry_id": "example.engineering-showcase-registry",
-  "registry_version": "1.0.0",
+  "registry_version": "1.1.0",
   "schemas": [
     {
       "name": "node-spec",

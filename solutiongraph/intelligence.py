@@ -18,6 +18,7 @@ from random import Random
 from statistics import fmean, median
 from typing import Any, Protocol
 
+from solutiongraph.artifacts import ArtifactStore, StoredArtifact
 from solutiongraph.evidence import Objective, RunReceipt
 from solutiongraph.model import (
     DIGEST_RE,
@@ -901,6 +902,17 @@ class HistoricalMemory:
         return replace(self, fingerprints=(*self.fingerprints, fingerprint))
 
     def append_episode(self, episode: HistoricalEpisode) -> HistoricalMemory:
+        existing = {item.id: item for item in self.episodes}.get(episode.id)
+        if existing is not None:
+            if existing.digest == episode.digest:
+                return self
+            raise ValueError(
+                f"historical episode id {episode.id!r} already exists with different content"
+            )
+        if episode.fingerprint_digest not in {
+            fingerprint.digest for fingerprint in self.fingerprints
+        }:
+            raise ValueError("historical episode references an unknown fingerprint")
         return replace(self, episodes=(*self.episodes, episode))
 
     def to_dict(self) -> dict[str, Any]:
@@ -2007,6 +2019,76 @@ class SearchInitialization:
         }
 
 
+@dataclass(frozen=True)
+class LaneAttribution:
+    """Bind one evaluated plan and its receipts to the proposal lane that caused it."""
+
+    plan_digest: str
+    start_id: str
+    source_lane: str
+    optimizer_id: str
+    history_blind: bool
+    round_index: int
+    budget_digest: str
+    receipt_ids: tuple[str, ...]
+    parent_episode_ids: tuple[str, ...] = ()
+    allocated_budget_fraction: float | None = None
+    primary: bool = True
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "lane_attribution") -> list[str]:
+        problems: list[str] = []
+        if not DIGEST_RE.fullmatch(self.plan_digest):
+            problems.append(f"{path}.plan_digest must be a sha256 digest")
+        for label, value in (
+            ("start_id", self.start_id),
+            ("source_lane", self.source_lane),
+            ("optimizer_id", self.optimizer_id),
+        ):
+            if not ID_RE.fullmatch(value):
+                problems.append(f"{path}.{label} must be a namespaced identifier")
+        if self.round_index <= 0:
+            problems.append(f"{path}.round_index must be positive")
+        if not DIGEST_RE.fullmatch(self.budget_digest):
+            problems.append(f"{path}.budget_digest must be a sha256 digest")
+        if (
+            not self.receipt_ids
+            or len(self.receipt_ids) != len(set(self.receipt_ids))
+            or any(not ID_RE.fullmatch(value) for value in self.receipt_ids)
+        ):
+            problems.append(f"{path}.receipt_ids must contain unique namespaced identifiers")
+        if len(self.parent_episode_ids) != len(set(self.parent_episode_ids)) or any(
+            not ID_RE.fullmatch(value) for value in self.parent_episode_ids
+        ):
+            problems.append(f"{path}.parent_episode_ids must contain unique namespaced identifiers")
+        if self.allocated_budget_fraction is not None and (
+            not isfinite(self.allocated_budget_fraction)
+            or not 0.0 <= self.allocated_budget_fraction <= 1.0
+        ):
+            problems.append(
+                f"{path}.allocated_budget_fraction must be null or between zero and one"
+            )
+        return problems
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "plan_digest": self.plan_digest,
+            "start_id": self.start_id,
+            "source_lane": self.source_lane,
+            "optimizer_id": self.optimizer_id,
+            "history_blind": self.history_blind,
+            "round_index": self.round_index,
+            "budget_digest": self.budget_digest,
+            "receipt_ids": list(self.receipt_ids),
+            "parent_episode_ids": list(self.parent_episode_ids),
+            "allocated_budget_fraction": self.allocated_budget_fraction,
+            "primary": self.primary,
+        }
+
+
 def _selection_distance(left: Mapping[str, str], right: Mapping[str, str]) -> float:
     keys = set(left) | set(right)
     return sum(left.get(key) != right.get(key) for key in keys) / max(1, len(keys))
@@ -2320,6 +2402,188 @@ def merge_belief_models(primary: BeliefModel, secondary: BeliefModel) -> BeliefM
     )
 
 
+class SolverEvidenceResult(Protocol):
+    """Structural result boundary used to close solver evidence into history."""
+
+    registry_digest: str
+    development_receipt_ids: tuple[str, ...]
+    lane_attributions: tuple[LaneAttribution, ...]
+    ledger: Any
+    profile: Any
+
+
+@dataclass(frozen=True)
+class HistoricalMemoryUpdate:
+    """Receipt for one atomic history-closure operation and persisted snapshot."""
+
+    previous_memory_digest: str
+    memory: HistoricalMemory
+    fingerprint_digest: str
+    episode_digests: tuple[str, ...]
+    development_receipt_ids: tuple[str, ...]
+    snapshot_artifact: StoredArtifact
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "history_update") -> list[str]:
+        problems: list[str] = []
+        for label, digest in (
+            ("previous_memory_digest", self.previous_memory_digest),
+            ("fingerprint_digest", self.fingerprint_digest),
+        ):
+            if not DIGEST_RE.fullmatch(digest):
+                problems.append(f"{path}.{label} must be a sha256 digest")
+        problems.extend(self.memory.validate())
+        if self.fingerprint_digest not in {
+            fingerprint.digest for fingerprint in self.memory.fingerprints
+        }:
+            problems.append(f"{path}.fingerprint_digest is absent from the updated memory")
+        known_episode_digests = {episode.digest for episode in self.memory.episodes}
+        if (
+            not self.episode_digests
+            or len(self.episode_digests) != len(set(self.episode_digests))
+            or any(digest not in known_episode_digests for digest in self.episode_digests)
+        ):
+            problems.append(
+                f"{path}.episode_digests must identify unique episodes in the updated memory"
+            )
+        if (
+            not self.development_receipt_ids
+            or len(self.development_receipt_ids) != len(set(self.development_receipt_ids))
+            or any(not ID_RE.fullmatch(value) for value in self.development_receipt_ids)
+        ):
+            problems.append(
+                f"{path}.development_receipt_ids must contain unique namespaced identifiers"
+            )
+        problems.extend(self.snapshot_artifact.validate())
+        if self.snapshot_artifact.media_type != "application/json":
+            problems.append(f"{path}.snapshot_artifact must be JSON")
+        return problems
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "task_intelligence_model_version": TASK_INTELLIGENCE_MODEL_VERSION,
+            "previous_memory_digest": self.previous_memory_digest,
+            "memory_digest": self.memory.digest,
+            "fingerprint_digest": self.fingerprint_digest,
+            "episode_digests": list(self.episode_digests),
+            "development_receipt_ids": list(self.development_receipt_ids),
+            "snapshot_artifact": self.snapshot_artifact.to_dict(),
+        }
+
+
+def close_solver_history(
+    memory: HistoricalMemory,
+    fingerprint: TaskFingerprint,
+    result: SolverEvidenceResult,
+    objectives: Sequence[Objective],
+    *,
+    artifact_store: ArtifactStore,
+    normalized_lifts_by_plan: Mapping[str, Mapping[str, float]] | None = None,
+    costs_by_plan: Mapping[str, Mapping[str, float]] | None = None,
+    evidence_scope: str = "evidence.mechanism-fixture",
+    dataset_family_id: str | None = None,
+) -> HistoricalMemoryUpdate:
+    """Append every development plan outcome and persist one immutable snapshot.
+
+    Holdout receipts are deliberately excluded.  This closure preserves accepted,
+    rejected, failed, neutral, and missing-objective development observations and
+    binds each episode to the solver's primary proposal-lane attribution.
+    """
+
+    memory_problems = memory.validate()
+    fingerprint_problems = fingerprint.validate()
+    if memory_problems or fingerprint_problems:
+        raise ValueError(
+            "cannot close invalid historical evidence: "
+            + "; ".join((*memory_problems, *fingerprint_problems))
+        )
+    normalized_lifts_by_plan = normalized_lifts_by_plan or {}
+    costs_by_plan = costs_by_plan or {}
+    development_ids = set(result.development_receipt_ids)
+    if not development_ids:
+        raise ValueError("history closure requires development receipts")
+    receipts = tuple(receipt for receipt in result.ledger.receipts if receipt.id in development_ids)
+    if {receipt.id for receipt in receipts} != development_ids:
+        raise ValueError("solver development receipt identities are incomplete")
+    by_plan: dict[str, list[RunReceipt]] = defaultdict(list)
+    for receipt in receipts:
+        by_plan[receipt.plan_digest].append(receipt)
+
+    attributions: dict[str, LaneAttribution] = {}
+    for attribution in result.lane_attributions:
+        if attribution.primary:
+            if attribution.plan_digest in attributions:
+                raise ValueError("each development plan must have one primary lane attribution")
+            attributions[attribution.plan_digest] = attribution
+    missing_attributions = sorted(set(by_plan) - set(attributions))
+    if missing_attributions:
+        raise ValueError(
+            "history closure is missing primary lane attribution for plans: "
+            + ", ".join(missing_attributions)
+        )
+
+    updated = memory.append_fingerprint(fingerprint)
+    new_episodes: list[HistoricalEpisode] = []
+    for plan_digest, plan_receipts in sorted(by_plan.items()):
+        attribution = attributions[plan_digest]
+        route_suffix = plan_digest.removeprefix("sha256:")[:24]
+        budget: dict[str, float] = {
+            "budget.round-index": float(attribution.round_index),
+            "budget.receipt-count": float(len(plan_receipts)),
+        }
+        if attribution.allocated_budget_fraction is not None:
+            budget["budget.allocated-fraction"] = attribution.allocated_budget_fraction
+        episode = historical_episode_from_receipts(
+            fingerprint,
+            f"route.observation-{route_suffix}",
+            plan_receipts,
+            objectives,
+            source_lane=attribution.source_lane,
+            optimizer_id=attribution.optimizer_id,
+            effort_policy_id=result.profile.id,
+            minimum_acceptance_rate=result.profile.minimum_acceptance_rate,
+            normalized_lifts=normalized_lifts_by_plan.get(plan_digest),
+            budget=budget,
+            costs=costs_by_plan.get(plan_digest),
+            evidence_scope=evidence_scope,
+            dataset_family_id=dataset_family_id,
+            registry_digest=result.registry_digest,
+        )
+        episode = replace(
+            episode,
+            extensions=(
+                *episode.extensions,
+                ("history.lane-attribution-digest", attribution.digest),
+                ("history.budget-digest", attribution.budget_digest),
+            ),
+        )
+        problems = episode.validate()
+        if problems:
+            raise ValueError("invalid lane-attributed episode: " + "; ".join(problems))
+        updated = updated.append_episode(episode)
+        new_episodes.append(episode)
+
+    updated_problems = updated.validate()
+    if updated_problems:
+        raise ValueError("invalid updated historical memory: " + "; ".join(updated_problems))
+    snapshot = artifact_store.put_json(updated.to_dict())
+    update = HistoricalMemoryUpdate(
+        memory.digest,
+        updated,
+        fingerprint.digest,
+        tuple(episode.digest for episode in new_episodes),
+        tuple(sorted(development_ids)),
+        snapshot,
+    )
+    problems = update.validate()
+    if problems:
+        raise ValueError("invalid historical memory update: " + "; ".join(problems))
+    return update
+
+
 @dataclass(frozen=True)
 class LaneOutcome:
     start_id: str
@@ -2427,6 +2691,8 @@ __all__ = [
     "HistoricalRecommendation",
     "HistoricalRetriever",
     "HistoryInformedPlanner",
+    "HistoricalMemoryUpdate",
+    "LaneAttribution",
     "LaneOutcome",
     "NegativeTransferAssessment",
     "OptimizerAllocation",
@@ -2437,6 +2703,7 @@ __all__ = [
     "TaskEmbedding",
     "TaskFingerprint",
     "assess_negative_transfer",
+    "close_solver_history",
     "effort_policy",
     "fingerprint_from_contract",
     "historical_episode_from_receipts",

@@ -6,6 +6,654 @@
       },
       "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
       "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.profile-quality.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.profile-quality.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.normalize-missing.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.normalize-missing.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.impute-values.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.impute-values.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.resolve-conflicts.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.resolve-conflicts.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.validate-contract.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.validate-contract.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.emit-quarantine.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.data-contract.emit-quarantine.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.normalize-event-time.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.normalize-event-time.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.deduplicate-events.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.deduplicate-events.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.assign-watermarks.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.assign-watermarks.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.window-events.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.window-events.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.handle-late-data.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.handle-late-data.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.emit-retractions.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.temporal-windowing.emit-retractions.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.normalize-coordinates.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.normalize-coordinates.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.declare-crs.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.declare-crs.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.candidate-prefilter.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.candidate-prefilter.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.exact-boundary-test.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.exact-boundary-test.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.resolve-ambiguity.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.resolve-ambiguity.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.emit-provenance.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.gis-boundary.emit-provenance.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.validate-request.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.validate-request.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.authorize-scope.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.authorize-scope.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.enforce-idempotency.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.enforce-idempotency.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.execute-operation.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.execute-operation.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.validate-response.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.validate-response.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.emit-audit.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.api-contract.emit-audit.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.normalize-trace.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.normalize-trace.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.check-accessibility.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.check-accessibility.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.check-contracts.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.check-contracts.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.replay-journey.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.replay-journey.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.measure-budget.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.measure-budget.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.release-gate.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.frontend-journey.release-gate.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.parse-document.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.parse-document.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.resolve-assets.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.resolve-assets.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.layout-pages.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.layout-pages.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.render-output.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.render-output.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.visual-check.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.visual-check.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.emit-render-receipt.baseline",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
+      },
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
+      "media_type": "text/x-python",
+      "name": "artifact.example.showcase.document-render.emit-render-receipt.reference",
+      "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_baseline_step"
+      },
+      "digest": "sha256:650b908fafb107f6e397b444c508f590ffa08107a87dd9167a58d7b57f06087c",
+      "media_type": "text/x-python",
       "name": "artifact.example.showcase.geotemporal.normalize-record.baseline",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_baseline_step"
     },
@@ -13,7 +661,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.geotemporal.normalize-record.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -31,7 +679,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.geotemporal.validate-address.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -49,7 +697,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.geotemporal.resolve-timezone.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -67,7 +715,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.geotemporal.derive-time-features.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -85,7 +733,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.geotemporal.join-geotemporal-context.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -103,7 +751,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.journey.normalize-events.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -121,7 +769,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.journey.sessionize-events.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -139,7 +787,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.journey.derive-transitions.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -157,7 +805,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.journey.score-funnel.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -175,7 +823,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.journey.detect-flow-anomalies.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -193,7 +841,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-tabular.profile-source.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -211,7 +859,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-tabular.fit-latent-world.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -229,7 +877,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-tabular.generate-records.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -247,7 +895,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-tabular.constraint-gate.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -265,7 +913,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-tabular.privacy-utility-gate.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -283,7 +931,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-tabular.lineage-split.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -301,7 +949,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-llm.define-latent-world.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -319,7 +967,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-llm.render-multiview.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -337,7 +985,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-llm.generate-counterfactuals.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -355,7 +1003,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-llm.generate-hard-negatives.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -373,7 +1021,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-llm.add-benign-controls.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -391,7 +1039,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-llm.lineage-family-split.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -409,7 +1057,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.synthetic-llm.quality-gate.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -427,7 +1075,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.document.detect-format.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -445,7 +1093,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.document.parse-layout.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -463,7 +1111,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.document.extract-fields.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -481,7 +1129,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.document.ground-fields.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -499,7 +1147,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.document.validate-schema.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -517,7 +1165,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.document.emit-provenance.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -535,7 +1183,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.rl.validate-environment.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -553,7 +1201,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.rl.generate-trajectories.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -571,7 +1219,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.rl.estimate-rewards.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -589,7 +1237,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.rl.update-policy.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -607,7 +1255,7 @@
       "annotations": {
         "org.opencontainers.image.title": "solutiongraph.examples.showcase_tasks:execute_reference_step"
       },
-      "digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+      "digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
       "media_type": "text/x-python",
       "name": "artifact.example.showcase.rl.evaluate-policy.reference",
       "uri": "python://solutiongraph.examples.showcase_tasks:execute_reference_step"
@@ -740,7 +1388,7 @@
     }
   ],
   "dependencies": [],
-  "description": "Dependency-free reference candidates for geotemporal enrichment, user journeys, synthetic tabular and LLM data, grounded documents, bounded reinforcement learning, and DueCare-style evaluation harnesses.",
+  "description": "Dependency-free reference candidates for contract-aware cleaning, event-time windowing, GIS boundaries, backend APIs, frontend release journeys, document rendering, geotemporal enrichment, user journeys, synthetic tabular and LLM data, grounded documents, bounded reinforcement learning, and DueCare-style evaluation harnesses.",
   "descriptor_digests": [],
   "discovery_version": "0.1",
   "embedding_record_digests": [],
@@ -750,89 +1398,161 @@
   "id": "example.engineering-showcase-node-pack",
   "license": "MIT",
   "node_spec_digests": [
-    "sha256:f4913c76cc0bda44de07c1f46faf69ac5b54f563c17738f378aae8c2ef9512b6",
-    "sha256:a1d0a2f89f8245c996a023fa2f2821c7bf0524aa2efa070f963e7380b4ff8fb2",
-    "sha256:cb70bb2b02568aa956742108ff0832356132c305b79bf7f401a0799a22f55e22",
-    "sha256:6932dcd1a4411f780940f0401d9c64bca67e844634ad8ce9e727f1535c028de8",
-    "sha256:c3e23be83735d41bf2b72172830f95ea47592b62337ed92f78a952ee2d8771ad",
-    "sha256:0a35d6b13dd5aae6b9423020cfbbefbee135e46582d4caec5fe86ecfb6970c05",
-    "sha256:6d90ac58a5b6bcb12e4abf207d07f5c55845f9c6298043f65a606ee7120f8a7c",
-    "sha256:b41ff96c718581ce1274bf20c746e11874dd38a6a84cab3926983a922d29be5f",
-    "sha256:4aaa559b97ab0fbf0efb2556d355d5c13b0f74ee941deefa7ba0c78be9a1fe8e",
-    "sha256:5ca07dd31a6700cf64cea97dec349d304f9b8f30bbf4aac2c9839cf925f533f5",
-    "sha256:1ed84a9ac15c38c090345d8d822e361d27e38982bf1f105d6baac0b62c158016",
-    "sha256:c7c0faeaaf3326586f1589bb1fcc81dac680ffafc50f3d01f6d3a174d502ab86",
-    "sha256:8b65cd5d37d1f8934adfe95ae88f4c88be2033747c41da8b258f4d42b90a7d7b",
-    "sha256:f1e081371388aa8e1a5280d42b2eb1358ce390250adeca5b503f9d2ba85c6c8e",
-    "sha256:f8c0297a18140ac4dc394eb4d4e9e4f53e5e5cec64be3dee0eade6648d0f8cfb",
-    "sha256:f60ae94ea4e1f4188a5a289e196d7163e0674ea78b90e4a62a29b113dd274131",
-    "sha256:f9900957cd1761d956190dc874290ad49dc84f9070cd36af50e9c75c3511edb6",
-    "sha256:64dfd02e6f262d39de1b4897e1544839d654bbbe40a6d363ce32bee3dd964e3c",
-    "sha256:fe0bad94dc82750f798b57cd33aa29db7ee41c781fb57efe38f9efddfe602178",
-    "sha256:411d52053287ab88aec8973a6ff3b442464e65e0edc2212b4ac305b0b8519f45",
-    "sha256:4dd240c82411a99aceaac8b448b21ba8621841daaaf34853ea6f4ce2b0d38cda",
-    "sha256:96f54ccd1a62bde7e91901a8f4e4b8dd14a38f9f42d34bac07f800c034b9cd9f",
-    "sha256:3b514c925be1f1b6c8f8619f0b08728729a5e16c192cd201021997a5ce321375",
-    "sha256:281532e97986b5c4e7b43336dd14bda0d8fb26b51e97182e4ec3b8e10fca126f",
-    "sha256:7141b1bfe9746050bea048edff226bacecf5d9bc7f6f44edf696e269b440cde3",
-    "sha256:f9bcf902b6e6f1bf7167be564c1349b7d4333f6d26df23decc83aa55f63f05ad",
-    "sha256:e6d3831af64ddf5109fb16d427c7fa2f449183de4fc825deb2d4df390befb2b4",
-    "sha256:b648adfed011a1b858c6c64ca85c1448da8e630558202c053e22bd3ca50b7f5d",
-    "sha256:02afebf5d35baaefbfa3fa042ecab38c4a46d5e84dd862d972f1f25d4235927d",
-    "sha256:cd4e575c29a93c7c6910dac70288bde753a975e8f0829d4ab31100d72ce2446c",
-    "sha256:0cf103ead1da34aee3107a3b59508ef25d4b8bdcd9e6e6128dabf9191c0223dd",
-    "sha256:84adb03e4b93128e0584c57be0adf4864ea77c6f90805a8b249fdf4509a02462",
-    "sha256:cad5957a406568749e7ee5f4002e8de6c3c0d7a108b7f2f76fd47de8f665fe62",
-    "sha256:01dcc3313ce0b98b2331e005cda6e364c97191167ccd3e7517b1e1ad661e89fb",
-    "sha256:9d0e1b2362791e3e17f2b3643aa9a31d6ab99cef045bf68251abfe843cb0b55c",
-    "sha256:2ca614009ae927ab3fab7862b9b8d67bc80ace5f40c961e2bf1827004a6ad262",
-    "sha256:be9da339fa00990fadde06a8a8d57ecd17c231faa7c58051ab8dd5055f9eee7c",
-    "sha256:b19beef0cd5eba668fed21f56c359d6c0c553c0f4a8715fca4c652b606704a87",
-    "sha256:f2b8ccc885bc62a4e0ea731a3fc5ce9b80795786d6cf03628851f219c811b455",
-    "sha256:c3778a55be0731888e6e4793932ad194096b44ee16dae9fd2d87288c47eb3f3b",
-    "sha256:38c8faca145f9ae4d7108150de68e1756c528825cea63ed5e739f3ac2c59f156",
-    "sha256:109c1269fbffc44831cb4bd7ba8d94514644a5a0e7ed35bad49a06e87b1e15c8",
-    "sha256:fea6abe00ccbd78dd655c9ec4b5adc7add644704f826a9e8eefb7f4d1517a61c",
-    "sha256:1275026e56de0d4f8efd12069e663012b0d41472fd2c9f417aa4b75fda684cac",
-    "sha256:18e16764e95b2c4d4f32f44166a65693ada460b928ffb0d2b5c55e75f314722c",
-    "sha256:0ab8571e824561a7a107bcf792fa3ba87fb5650ff91e31651c07f947d9801f80",
-    "sha256:c0cf58783140459d65862129199d87b71d85014b55ec009bb55651c1e68d9c5f",
-    "sha256:d0b090171ff830017f01f771d090370fc01956b7cc8d7230f948d5cdf53f3291",
-    "sha256:8e181b95c8ca779ebba92c0feac9eb3dd6c6c6109ab4e286b932f8802c6f2aa4",
-    "sha256:ff5cbcb44802178b4f450247d82e43813e4fb107b85bf050d161da67ad7d5f95",
-    "sha256:4210ca4c803b8ea660e1d2c2983b91e3bad363b6ae23f9669e61a5b124c41993",
-    "sha256:9030542656b36a3b064d1e97e97eab693bd0fc68b676127a0703eb3ae0171713",
-    "sha256:a56734b80da925b6d1422a068cb2de37ed4a494910a43cfb63bc9a8614b78180",
-    "sha256:c2d45400336fa7f132fdbb726d58cbc8ae8516c5b21ab907190e4b24c5cbe434",
-    "sha256:69cd7936ac2782171012d3838885057c114551201f123ec10a9c78b5c55f3cd8",
-    "sha256:20c8a505f48173af079888f5da5959f19b2eedb8077352f50a76a4cfbbec6097",
-    "sha256:5157cb488dcfe8548f8a940a1bd4648d7dcf2241b8387d0224a7a74e4ce0c71d",
-    "sha256:830d83870f18e869d366326d8d2cf6b4c56d5febea411a47a9bc4d4dd013083d",
-    "sha256:3ea693c0185174e5405c14de05d29bce1df411e56de8b016efc7454bb2a7bcc5",
-    "sha256:3c99d70fbac2c166321a8b93db6f2bb43a5447004293c6d2656ac6d1f9557cfb",
-    "sha256:4f566c2130ec861fe2abc0012967672f6960e308006099bd0ac3c6390d20ff54",
-    "sha256:8e2e1b27067bc44769e50b5621fb483ec8b0fce29bb1aa85fd8205cbe1c76f12",
-    "sha256:f1b1055ef2731b3e37c61ede2d1343533009523f3b18c5653fe4c3848cffaf38",
-    "sha256:546b91c34a50f23afd8d5ddfb199381f7980ec4b6e591be1356484a548aeae61",
-    "sha256:d1700d97fd8bcc563809cdc6edfd696e47083e851fe2bc758b79101b36f36d86",
-    "sha256:093bd0500fd384d28352d572c37897470899cef88c92346db8ab8da1619ffec8",
-    "sha256:6c39ab719534e6f7fa34f5f79b68fe9c41311d9178483999d6e8e2f2dc91e801",
-    "sha256:eb4190a57bc9ed64f388469636fd4637fa2beda8e0c930c596c97f6a3c96f9a5",
-    "sha256:163577cdb428587520dac508c108d04f772e272ca874b7c3071d7a43cff8465d",
-    "sha256:7986afe2a40ac2550b0b375e5ec21c352e3ecbde1519ae5c8c3ab0989bec50c6",
-    "sha256:aa1d1cb908c3e187736192899d7b51149f2052e4c6a335c6acd53fef353430dd",
-    "sha256:3ac5496331de7f66097ffba4b17b576c37670e7af7eafa8710e9aee3f640397f",
-    "sha256:5ecf8e1a7b8c15da59c268b63d6e324fe4187fa18449c99840effa2a847a5b60",
-    "sha256:20cbeef44bcfe7a4524df7bc78ea598c049e35c1d58347cf684132ef9f30b788",
-    "sha256:0dbff8603335151197ccf6bd6caecf472d970d65031b9fa2fcdfced4db77c586",
-    "sha256:38ebe2e6d1c7b268207c61b40e194d205664f2a8a06d5999f33d47852fee55d9",
-    "sha256:23a0687c10bf8abff04f4d235ab9ffa756ad7c92f5f017b226e0fa3cda4ce8de",
-    "sha256:7107221ac47f0a2e76383d7948445aa2287086dc955fce4017ab4b1e8bd0d5dd",
-    "sha256:802f11a0bdeed503ec8aaeac94a3a85fc21c3355bb0a410a7302be8b8cabe6df",
-    "sha256:7c1d99d33a24ad1811f8e2edc6ce07f3fb18243607237b65ed18e27268efc328",
-    "sha256:bd6063af9803358040baeb44d798edd809bb3c60d03b53e73c0830835880f4e8",
-    "sha256:382ee475fc37ccd56c8a2756e4fbdaad74197b9f51424c29184483d11274c340"
+    "sha256:22e739c4ad20937f693b6a378a4ce8b6b40a4d43d6206b8b6e7717a3dbe217c6",
+    "sha256:9c4ae3293af0cbce42a812f80a5e8b5f6745bb79ebbeda892ca1a78415ceda16",
+    "sha256:435e686ebf3ea15a9b9eb87a693e7f645055b881c8894f2320f0bff87a3aa711",
+    "sha256:d74e7b41862bc479cf4f8d6b7ffc5e1ec9995f8c07ceeaba0040f5b82e7be6ec",
+    "sha256:bfd488a3ea7faf11b653ca5f6dbedf52b6be1b03a8bbf76d487d2372337f08a9",
+    "sha256:4b5da14b667ff9251bf2edf73c37da3cbade4489a5798639c7a8af204d03f8cb",
+    "sha256:8cec54c6af15632268b50d7d4ffb3e670516c451e66b599faf7ce5455df2e8ae",
+    "sha256:5c8f27fa084042d3704fc50dfe025b73e076477cc102edb7c771c815805777ca",
+    "sha256:a85db3e685ed20bfe92101c9f08ae255b2b75e594938087105df4c7440d3d793",
+    "sha256:25f7ccd08d270deb767bb92733c7b3abf5fae97cf1fc88577b5092f4f6f2589e",
+    "sha256:8f54d4b6510b3b91dbff767e13f5475294e66207b67b5828d970481a4a9422a2",
+    "sha256:e4022dba7b4483583deaa1154e48fba2e33b298e5f7155f03c3dce037c72873e",
+    "sha256:a58228a07ffd3012581e19e78b3477bed00f31eecb1d530651ae76d404922b35",
+    "sha256:5fe1a1b718069a95e144e8495750c8291ff05644643fbc45ab5ebc8ed3410326",
+    "sha256:4b8d4f4b33b75dae310553d5136e52cddbb100e39d295bf4ff59d3f68e52893f",
+    "sha256:9e15d5fc19c4648876bf4190eb5249158b32ca4d5f504a3f4349628ec300d81c",
+    "sha256:5c85d10d10e7a3b621c9f93326d254eff6fce3992518928032d6a50c76005658",
+    "sha256:44a1243464b632ee8a4224ff5ed09231c697faddcb7b65f751a2cefd31081c00",
+    "sha256:9679e25a467989849b43c37b6df56b8e80c1a8dbf36c23f793a31a4213ccfcbf",
+    "sha256:dda5c60a44168329e1741e1f5b7528f18b764158f65d659b1698174e83ecc177",
+    "sha256:b97ab5f196600b5de080ff0a1763353a75f322b2022440423ecf8b681db30361",
+    "sha256:eb84b6f5bd7c7d1a89b02d2a83298fdd364b6719dcda7114f83d49ccdcab899d",
+    "sha256:f65d82a1aa47d3cdf20554f700746f700a5d2b83a532beee1c6d7310a363ea4d",
+    "sha256:4f9509e0edef1ea555cb9ea62422cbba8b5969318ef3fe131dd50a605a1d7102",
+    "sha256:e902b4cd9921bfb915e5d92d0b812266ba15400fc5fd105b89c83fd463530ca1",
+    "sha256:e89c3a9825c1640f5b99eb098624ba7736f3feb3995b3a4b5cbb4a8f94b678da",
+    "sha256:2eab6ac26fe8203387e71e8faec14075e2d45ac41a9e7d0bce5837d0427bd588",
+    "sha256:960c687ac58bb66a3c3788b722616fdc5dd7d43635d27fb9553ec9ba365fb54b",
+    "sha256:9e61bbff298eb3ccb7df0d0ad8e8eeaf01dc6d976695def4df87f51f53baedd6",
+    "sha256:a73d15e962a4e47f679e8144b9780c276438df72bfc1c78d650b91749ba57afd",
+    "sha256:6348051ac75859a469a01d1eaa5481168ef8aa25829c5c6b65753c519c34c55f",
+    "sha256:d1375799bf9ebf3b69a6d71c767476190ef315b26234618e15e6da52a1135ec5",
+    "sha256:4ba0728ef89e17fc810ce84504948e3e03b243f64dc2ed9ee567be319c83e35a",
+    "sha256:d9cd6aea24aa143c4ccc5aa79f660eb1a6e3405fd3fd65d681bedd980619720b",
+    "sha256:2abdfbaecb0d915177425a5b204047a12805c4c90878266675a217be67457b33",
+    "sha256:1f68114389036ea9bbb00120dd771721ff6a5ad6cf4a19cd239d2e2bd838609c",
+    "sha256:1a205713ed91bf83ddc47b44e985773945d9ac90ec358a5772ef44bcbb7c8091",
+    "sha256:d2e9076a6df46feccf72a7ec4770230f4a9f294d53ab9bf0b28a3fe75ab25345",
+    "sha256:eaf3eae7ce5b2f065639be6b8245fe273c60b5665708de13c280253632419f6b",
+    "sha256:f99be0a3e62f937405c92c633944ac632c9c224a2f8251f6b0c439bcbfea63a2",
+    "sha256:575fb0e9e2fd24b1444ca7ca7a18b33071891e1597c13380860a1e6ad8643802",
+    "sha256:07c51c578b5cd3048e31f12e4e174fcfd52c0403c25d0de7258ac650bbb748d0",
+    "sha256:584fdf3316298ff0ffd6332546ff47a200246d1479bca2598196d00b80b3da1d",
+    "sha256:aa0f9c364da838181765c72576632b55364a815021f7d4a12296ba351aec51b7",
+    "sha256:10fdf5fbeff2ad9f9f886413afe1ce7d21507a82178c463652c68a71b6d4d396",
+    "sha256:46a407c14fd45178dcc2e60c4de9ad66dce8f85762b316db8766a8e610c20c1a",
+    "sha256:545781c022f6987f299074a4ce9d15fe020f26152f6014b07081de8c6149207e",
+    "sha256:751de0b77bca918083a41efdbbfc92be1626a3f2e61483f14bab36d66bd27972",
+    "sha256:6917c518f24bcd26ce4473ab05b5b81b025e4cc7d8359c4404579e1c2af28682",
+    "sha256:0b414c66cac7a05ab19e0b318d2c1f539eb3e5e5e666d1c61252f89044b07c8c",
+    "sha256:1a483991e1f9c72409a569845e7e321e599e8ae64133f8c78088194b3e7a3a7c",
+    "sha256:8ead268fef8d335587d86ad329d07fbaf7c800a8eaeae75d355f2d821a4646d4",
+    "sha256:05e76ea7a3de42bc371f6840a71709dfb503eeb874ecc771670abedf0eeaf84c",
+    "sha256:f58ca269a74289ce802534acbdd487994672165180260424d027fe20921003fd",
+    "sha256:ae29e1483d29448a4835407ad348c8561e2597cd92598257fd6d3d22aa0564fd",
+    "sha256:ef72dfd5a7560766c640a29cf2e0b9459f2c04dbcf4699020431e78eb0a2d14b",
+    "sha256:567fb5760dd82c7c46844f95653d493695f8b6e73cc7f87d72b95ba460f5f7b8",
+    "sha256:59c81a9e31be6301100d7e46f14ab7a8ea1ca6d9585989d0e68aa1d22523e026",
+    "sha256:e959b4575deff3f88900f4662007057b5cf214e4ce4832370b3d9879d34e8040",
+    "sha256:994a91426a401b5643e33b9ef629d9fe2af68c078467acaaf9d6dca80cb1b7fb",
+    "sha256:f38402dae71dfd6f900339a9f1c6d06856bfa8f78d512d06767884194de90dd9",
+    "sha256:bda1793e3cea371fb5a813dc04dd76b5f941753b428185a988fdb39b277c12d2",
+    "sha256:08f8d69aa9cdf5219448a9ff5c0be9571d5ef69ac8d39b1f1fc84c3a942f470c",
+    "sha256:475779ab6ab1b5e239ea44eeea33054ca0d7b0551cc88ec653d34025cb93d696",
+    "sha256:fe7762333741f45815ed2030a605307979aacffa21c35da55d5c84343172ee68",
+    "sha256:8552a2de000e200b4a4561ba41242948db77a289b213c63e09640319ef996fff",
+    "sha256:6d805fc91c2ff6f463fbccd85fc93233601e1c6aaac34831a15d35a0959f4b12",
+    "sha256:93c12fa1de90e092fa38e4578a3ac8107eb92c8c714dc598cb8984e5d86089fe",
+    "sha256:b2c0e9e3fa9b6f73a1b6e5884ea7a10cf0ccfa38b9c30c481843e1e4991877f9",
+    "sha256:953c6006efbf402eab18b5db94edaccb91353b48f32cb6e1c16fd92496f5622e",
+    "sha256:6c25b45388d0398c1109c037c1d436da70773ca5a79e2133bc82cbe8a5e4718f",
+    "sha256:6c9aab0248e6f5973754095115dc0397d2e08677bd82fa4e5969458e6490575a",
+    "sha256:882fea14a92a6db50401e6b09acf21bbabe35031d57c3bfbd55cc814b5a4dc8b",
+    "sha256:45df8e298c3cd28de5a47a552c4f1cdbdeb25d7b19d90a827e6431aa7cba5e90",
+    "sha256:408a97a9208b85e0a9f0db6e1fa86f14a86f7173301944aa0ed8e2a86f4cc52c",
+    "sha256:05ba32ae9e96bbdbc91d1aa18646439e80ef280d6d89903b5a373ece298640aa",
+    "sha256:b3e50c74389d00782a4825caa7fd1fec5390f20a65c24b8941e8bf1c1e9e7b6c",
+    "sha256:058fd5862817db219868e15c0e39b052e4450393999eef0eb7085c731622098b",
+    "sha256:95f7a0fe02ddd400b4a1e3570b03787977eb2b297e29bf15b37878972d2c329a",
+    "sha256:a70fb22cdf92ee637fe4456834603ae6e092309845b7e8130dce786b05fc3097",
+    "sha256:9bfab981fdeb364403b9740a6fffb39d086330a0dd1fc22552a70c2ec1677219",
+    "sha256:86decdf59676e2ab04e17a6c9cef6fc47222d17a7f4a051748f19d5ec240054c",
+    "sha256:49da22b8e853525525e84d44cf631fc7a1aa06cbdb65a0affe1463b3b233cbe5",
+    "sha256:4f75cdd4b5727fd62196fc68367f15d43814ae0db1e49d5ae1e8b9a9c89f14cc",
+    "sha256:03bd607475c118f802ee224c70b19fcac8ae8994ebab962eb0a09694e7d53ce6",
+    "sha256:962a0b629c2cd3ab0b55f3fd291595c3bb3f7b0d4200d0ea9d2dce12c99e39e4",
+    "sha256:87dfff57a6554280481541080e6eea5d54cd02bb7b44a7decb17e5671a0a55fa",
+    "sha256:51a9d3e6aaf389c6cbd3e369a4649959397cc222b1a8a73b9a249b37820044ee",
+    "sha256:8b8b630cd4b43852806d2ee2a81f2318e1bb8ad39d886005c3949691fd207f46",
+    "sha256:cb3e7f0d2316039750c4a7ca4cb649cebecce3c19c9b092df90e7ca7e9f8eac4",
+    "sha256:05a4d3fda148e65642fa62c2ebad36b95366ba588cc5fa6e79145a68fc142554",
+    "sha256:07a986f1e16b74ca1ace246009c44a9272bd910349c6be7c152a820e7abdd964",
+    "sha256:4f09081206bb463bdf465ef42ffb0b4d0d15fc3b93beedd37ac7142e55184bad",
+    "sha256:c942f99acbed3f2604507f86e9c2aaf9a1cf43b0cc7645fcfb258f4200a63ecf",
+    "sha256:70d6460a6d95d346bcc3ac9a0bd2a512291e2b9c9d20fabbbdb47d34926352bd",
+    "sha256:e45763fab267ff6f55fd713223f9781aca3bc9a65f7ba85efa6854a501fec4fd",
+    "sha256:cbe8531e987c1032cd42b02cd536e326956a8f4ad4352049e2cbc108bf7260aa",
+    "sha256:cadd63c70b5ab1524b0eebbab295af25efacefddb91b412b95ad799c733a48c1",
+    "sha256:3caf9b4f9443e8586c549cbd28d2e9eb59ddb6b72c1d35951dbb2e9a62e9a549",
+    "sha256:6a5af6533213c3d35c70caf83f0ce8275b2e3a61e2c455352218e3e4149fcc09",
+    "sha256:d7d836436a0063c67068d96901bfbbeeb396f7c51075d660168aff39f20bdb36",
+    "sha256:0e2efaba1de73ac9ae73cc6728f07cf4f7e87a0cb489999989711f72e1be2e8b",
+    "sha256:006f34faa618dc05534f3a70c65e5c44713ac36c0c952eda57c9178b6cfdfc50",
+    "sha256:a8d3bdc2dfa6d9263be4389c08dbd9ccece1dbb9aa4d8ea6f0bf061a56fa6cc7",
+    "sha256:2e9300d8d7718395eccee9206835c0d71d1a7335dd555e4df801568cdca2fcba",
+    "sha256:dc1edfe0d05cc922b638eb6238c78b0b26af8442d79cbec012917d073cc015da",
+    "sha256:e0446816592e1b61c44ca933bb587cb7a7b76f56f8e05bd2e4e2b8b8f6b0eba9",
+    "sha256:ef7f33519c8e2a725f7a270c1277b14f992ba6490c46a204dcb59ca24c97a601",
+    "sha256:80cb7f8804a0304523f19dea28762a8edacf5289bdc49d6bfebdd3c086801579",
+    "sha256:0df854445502d25026e06175094701218c7efb789936c3a7737f414cbe0f3a6a",
+    "sha256:75be6142c7c000f25d0c69bdbd3816b4a6fa0fd6095d51d28784bf48a6eba1bc",
+    "sha256:d326d541cabaa7373c5d574db471a3863a09acf8656be289af8c32ed2e1f0680",
+    "sha256:2e2c8f2882bccce42500f4870028e0dab94843e004796e3745e9147c5a19abe8",
+    "sha256:82a6ddf73199c6985008d65477e2f67a3177ae80e1e3bc10e054828c113da470",
+    "sha256:d95be3d1ab2cfc28ff84bb021f8e04096d494742558684741600a3604e8ba247",
+    "sha256:cfea07ed4c9a8e943c3821c19b397a7f8e01e0e83cfa793a82c50d50985b63e3",
+    "sha256:1e1b897320a4100536468e025d0f50f2e55ef4cc94eb88f15d22216e85378541",
+    "sha256:331b7c2949eda662dff13470e9b85139f1e9e50259a306ad28fe5b61a44e4dc8",
+    "sha256:cb11c6b2e2d95a7b8237eb7b4ecb2045587b0bdc897c3040afbc0089c4027e4c",
+    "sha256:0f554aee636e3f22ed90039706837618a8a92a86bae7403ad49fe95071b3b5f3",
+    "sha256:5b4dcf5738ddc849e1ab39de9dc28dc8b5e95da9ff0efd0c60f1f77443b3191d",
+    "sha256:a356e17713d204481dbcd700d39a47597b37f32b8c2134872f3bc26fc858ca1d",
+    "sha256:9b3269494da6467ad1262e83c56affd0e68ee639ff480361af434624f5ce697e",
+    "sha256:0b79b6b05a7026bee012598ecece7a68f905757fa59e5db27834f4e8c0dc8272",
+    "sha256:3dbd17040f84f91cde1e720b496897152d98cb128e36e393bfaa681aea7578ff",
+    "sha256:3b468346d7561cb2ba1ceb49ff6372acf1640800b8a55181e9e846b181b652d0",
+    "sha256:c6fdcaafd359d9c90cc42537d6193b1adf321fc44c6ede284001b569438ef5cc",
+    "sha256:2e5a4dff7a7f43ed1ed5938a22b6a77bb9bbf53ad1ee12b4e18d8aba252d6921",
+    "sha256:6c134d86d1e1b2b6b0b9689eb204fd26874ecdb0b6d8317e3c87918b5ef5b515",
+    "sha256:cac81102aa6a950ca9ede6247314d58f66bc3b4b3f7635cfeaabffe013d90629",
+    "sha256:e09033202de75fb1f651113c6fed9182333fd119ada3b754b6795ffebedf1bf2",
+    "sha256:3a5ad4fb4dfbd55668769c0a03446060411946402a24b1f30a871ddac67e3cd2",
+    "sha256:8fbf1cc30c06a38054ccc4e9a028c1164e0c1d74707e16e2df744d1afae8dbf8",
+    "sha256:06b058b64bed8534544d4409f2a87a3375ea8dea7a043021c548ff3e3d88b13f",
+    "sha256:3e124f9e75b4d59b8a8c4b19622a60f0218c26579fb1639d2fe66ced9956e235",
+    "sha256:d5f65aed4f57af147e5b0bdc13883ec929e8a30952de42bd14315be5e4913b0f",
+    "sha256:8f06af9e22884d4b99df2ecf5167f2943959059093c7fae9b06bdeafd7a8b09a",
+    "sha256:8567ea9ad6ba1fb3210fb2a467285b8dd63817220ae10c6a3c8fdc7d0d11e5e4",
+    "sha256:d0f4d02825b2e1907b4951656e866665e2c44515bb22726665635a308e9efe3b",
+    "sha256:7545b5c90444857f7619d5e3dc8b9028f4061ff3e2b0f588b67187e5af547893",
+    "sha256:358b145c450ceba94d05164e7ce0739243ea9f9f5959e0d5a5ceb377893e5328",
+    "sha256:4eb6d4d2aaed77484a11c169d097ce681f1b373d78408e5d836dabf71293fd72",
+    "sha256:e126ce3eecb05a4fd7d395e49d7be67a939d5fc73e37daa40d66c6c48caebe23",
+    "sha256:d6f303da6860620fe8e4b62d52db7f9660a742780e6e6f001da4ef93796f18f8",
+    "sha256:f06f0d25fcc47fd031f33ac0b514ffe6cd3e29d40b8ef7bd856ecc56dcc7be14",
+    "sha256:6171d94c4cf774422274179a503fbd97789472622d87a76e18a48311197e3d35",
+    "sha256:60d031f1804159126fa6f0625c758859a8aed886a0857c72fdcd3f98448b72a5",
+    "sha256:df2be84a94a6793587344822d149eb714d732b7f8479064c1a3aea6b6b0453c1",
+    "sha256:12a94c04508534e34ae9b65d91a7faaecf9fd5cb1b508ae274574cf65be170bb",
+    "sha256:99ef34166178b3dd31827437eb151dba411e34ab346450854994581845f31064",
+    "sha256:46c81159605164141ea02e5971afae4fb7b79b621c2e73287b20fc448409ae97",
+    "sha256:3ac6cb3e176c48ccadcc5be2f6ae68f2c1ada2b04a0e2b0e60a819dc52500a20",
+    "sha256:9127082485d50b96f6d80c590f0e8898c06c201ce629d7a4e6c45395d1280cbe",
+    "sha256:0ea35d1c4dbeba89e54358a2354b222c5fc797de22d8a6e2aa516a017d8b0c47"
   ],
   "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

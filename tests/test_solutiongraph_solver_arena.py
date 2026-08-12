@@ -50,7 +50,7 @@ def test_arena_is_valid_cross_domain_and_honest_about_external_authorities():
 def test_every_arena_executable_points_to_a_real_typed_example():
     examples = {example.id: example for example in all_examples()}
     executable_tasks = UNIVERSAL_DAG_ARENA.matching(readiness="executable_fixture")
-    assert len(executable_tasks) == 20
+    assert len(executable_tasks) == 26
     for task in executable_tasks:
         for example_id in task.executable_example_ids:
             example = examples[example_id]
@@ -145,9 +145,9 @@ def test_holdouts_confirm_only_the_development_selected_shortlist_without_learni
         for receipt_id in result.holdout_receipt_ids
     )
     assert result.champion_plan_digest in result.holdout_confirmed_plan_digests
-    assert max(
-        weight.evidence_count for weight in result.learned_beliefs.candidate_weights
-    ) <= len(result.development_receipt_ids)
+    assert max(weight.evidence_count for weight in result.learned_beliefs.candidate_weights) <= len(
+        result.development_receipt_ids
+    )
 
 
 def test_solver_profiles_and_arena_runner_disclose_budgets_and_skips():

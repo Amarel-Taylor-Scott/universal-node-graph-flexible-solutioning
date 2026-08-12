@@ -3,12 +3,14 @@
 **Status:** executable mechanism foundation, researched and updated 2026-08-12.
 
 This document turns the universal graph model into a practical engineering
-coverage plan. The repository now has an open 95-category task taxonomy, 31
-dependency-free executable programs, 247 executable node definitions, and a
-strict six-graph evaluation-harness bundle. Seven of the programs are new
-showcases for geotemporal enrichment, user journeys, synthetic tabular data,
-synthetic LLM curricula, grounded document extraction, reinforcement learning,
-and LLM evaluation/red teaming.
+coverage plan. The repository now has an open 95-category task taxonomy, 37
+dependency-free executable programs, 319 executable node definitions, and a
+strict six-graph evaluation-harness bundle. Thirteen of the programs are
+engineering showcases: conflict-aware data contracts, event-time windowing,
+exact GIS boundary resolution, idempotent API contracts, frontend journey
+release gates, document rendering, geotemporal enrichment, user journeys,
+synthetic tabular data, synthetic LLM curricula, grounded document extraction,
+reinforcement learning, and LLM evaluation/red teaming.
 
 The claim that a finite catalogue can cover 90–95% of engineering work is a
 **coverage hypothesis**, not a measured result. The catalogue is deliberately
@@ -79,6 +81,12 @@ benchmark superiority.
 
 | Example | Slots | Demonstrated flow | Passing route verifies |
 |---|---:|---|---|
+| `conflict-aware-data-contract` | 6 | profile → missing normalization → imputation → conflict resolution → contract validation → quarantine | explicit missing semantics, source-priority conflicts, bounded imputation, and rejected-row lineage |
+| `event-time-windowing` | 6 | event-time normalization → deduplication → watermarks → windows → late-data handling → retractions | deterministic event-time windows, duplicate removal, lateness policy, and correction records |
+| `exact-gis-boundary-resolution` | 6 | coordinate normalization → CRS declaration → candidate prefilter → exact predicate → ambiguity resolution → provenance | declared CRS, exact point-in-polygon decision, explicit ambiguity handling, and boundary identity |
+| `idempotent-api-contract` | 6 | request validation → authorization → idempotency → operation → response validation → audit | schema and scope gates, replay-safe side effects, response contract, and audit lineage |
+| `frontend-release-journey` | 6 | trace normalization → journey replay → contract checks → accessibility → budgets → release gate | required states, backend contracts, accessibility checks, performance budgets, and fail-closed release decision |
+| `document-render-and-verify` | 6 | parse → assets → page layout → render → visual checks → receipt | stable page geometry, resolved assets, independent visual assertions, and content-addressed render evidence |
 | `geotemporal-enrichment` | 5 | normalize → reference match → timezone → time features → city/date context | canonical address, explicit local-fixture authority, UTC conversion, provenance-bearing event join |
 | `user-journey-modeling` | 5 | normalize/dedupe events → sessionize → transitions → funnel → anomalies | ordered sessions, funnel completion, impossible-flow finding |
 | `synthetic-tabular-augmentation` | 6 | profile → aggregate latent world → generate → constraints → privacy/utility screens → lineage split | valid novel rows, utility thresholds, explicit absence of formal privacy claim, untouched holdout |
@@ -90,6 +98,12 @@ benchmark superiority.
 Run them through the bounded child-process adapter:
 
 ```bash
+solutiongraph examples run conflict-aware-data-contract --runtime subprocess
+solutiongraph examples run event-time-windowing --runtime subprocess
+solutiongraph examples run exact-gis-boundary-resolution --runtime subprocess
+solutiongraph examples run idempotent-api-contract --runtime subprocess
+solutiongraph examples run frontend-release-journey --runtime subprocess
+solutiongraph examples run document-render-and-verify --runtime subprocess
 solutiongraph examples run geotemporal-enrichment --runtime subprocess
 solutiongraph examples run user-journey-modeling --runtime subprocess
 solutiongraph examples run synthetic-tabular-augmentation --runtime subprocess
@@ -132,6 +146,15 @@ cases, isolation requirements, and claim scope. Its validator enforces:
 - no full hidden-artifact flow into any candidate-visible graph;
 - human approval for promotion authority; and
 - separation of improvement proposal from promotion approval.
+
+The bundle now has a typed evidence companion, `HarnessEvidenceBundle`, rather
+than leaving harness outcomes in an opaque aggregate. It retains atomic
+judgments, blinded panel dispositions and disagreement, failure clusters,
+sanitized outer summaries, and human promotion decisions with rollback plans.
+Cross-reference validation rejects missing evidence, self-promotion, raw outer
+case identifiers in optimizer-visible summaries, and outer-to-improvement
+feedback. The executable example is exported as
+`catalog/harnesses/duecare-evidence-example.json`.
 
 ### Graph responsibilities
 
@@ -394,14 +417,12 @@ The main extension surfaces are:
 
 ### P0 — deepen the local reference packs
 
-- Add executable cleaning/imputation/conflict-resolution, temporal-windowing,
-  GIS boundary, API-contract, frontend journey, and document-render examples.
 - Promote shared showcase operations into focused reusable node packs with
   discovery descriptors instead of one teaching registry.
-- Package the seven showcases as immutable task/solution packs and benchmark
+- Package the thirteen showcases as immutable task/solution packs and benchmark
   suites with repeated seeds and holdouts.
-- Add harness receipt schemas for atomic judgments, judge panels, failure
-  clusters, promotion decisions, and sanitized outer summaries.
+- Add provider-backed harness adapters and calibrated human-review queues while
+  preserving the typed local evidence contract.
 
 ### P1 — explicit external adapters
 

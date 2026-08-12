@@ -74,11 +74,13 @@ EXTENDED_ARENA_NODE_PACK = NodePackManifest(
 
 ENGINEERING_SHOWCASE_NODE_PACK = NodePackManifest(
     id="example.engineering-showcase-node-pack",
-    version="1.0.0",
+    version="1.1.0",
     description=(
-        "Dependency-free reference candidates for geotemporal enrichment, user "
-        "journeys, synthetic tabular and LLM data, grounded documents, bounded "
-        "reinforcement learning, and DueCare-style evaluation harnesses."
+        "Dependency-free reference candidates for contract-aware cleaning, event-time "
+        "windowing, GIS boundaries, backend APIs, frontend release journeys, document "
+        "rendering, geotemporal enrichment, user journeys, synthetic tabular and LLM "
+        "data, grounded documents, bounded reinforcement learning, and DueCare-style "
+        "evaluation harnesses."
     ),
     node_spec_digests=tuple(node.digest for node in SHOWCASE_NODES),
     artifacts=_artifacts(SHOWCASE_NODES),

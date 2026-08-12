@@ -1738,13 +1738,15 @@ The repository now contains a dependency-free foundation for the design:
 | Cheap K0 profile | `fingerprint_from_contract` | task fingerprint |
 | Aggregate tabular K1–K4 profile | `profile_tabular_records` | task fingerprint |
 | Immutable history snapshot | `HistoricalOutcome`, `HistoricalEpisode`, `HistoricalMemory`, `historical_episode_from_receipts` | `historical-memory.schema.json` |
+| Attributed history closure | `LaneAttribution`, `close_solver_history`, `HistoricalMemoryUpdate` | `solver-result.schema.json` and `historical-memory-update.schema.json` |
 | Independent retrieval channels | exact, taxonomic, structural, statistical, semantic, embedding | initialization recommendations |
 | Diverse starts and optimizer mix | `HistoryInformedPlanner` | `search-initialization.schema.json` |
 | Arbitrary effort policy | `effort_policy(n)` or caller-defined `EffortPolicy` | initialization effort policy |
 | Negative-transfer check | `assess_negative_transfer` | assessment object |
 | Guarded execution | `UniversalSolver.solve(initialization=...)` | solver result linked to initialization digest |
 | Linked harness contract | `HarnessBundle`, `HarnessGraph`, `HarnessFlow` | `harness-bundle.schema.json` and catalog artifact |
-| Engineering mechanisms | seven showcase programs and 82 nodes | independently verified positive/negative execution receipts |
+| Typed harness evidence | `HarnessEvidenceBundle` and its atomic evidence records | `harness-evidence-bundle.schema.json` and catalog artifact |
+| Engineering mechanisms | thirteen showcase programs and 154 nodes | independently verified positive/negative execution receipts |
 
 The present classifier is deliberately transparent lexical/declared matching, and the
 tabular profiler is deliberately aggregate-only and standard-library-only. Both are
@@ -1757,7 +1759,9 @@ learned classifiers, distributed profilers, or vector services.
 from solutiongraph import (
     HistoricalMemory,
     HistoryInformedPlanner,
+    MemoryArtifactStore,
     UniversalSolver,
+    close_solver_history,
     fingerprint_from_contract,
     profile_tabular_records,
 )
@@ -1789,6 +1793,16 @@ result = UniversalSolver().solve(
     objectives=objectives,
     initialization=initialization,
 )
+
+# Close development evidence only; sealed holdout receipts are excluded.
+history_update = close_solver_history(
+    historical_memory,
+    fingerprint,
+    result,
+    objectives,
+    artifact_store=MemoryArtifactStore(),
+)
+historical_memory = history_update.memory
 ```
 
 Every start is complete, compiler-admitted, and constraint-valid before execution.
@@ -1848,9 +1862,9 @@ Priors must be invalidated or discounted when:
 | Historical retrieval | six independent local channels, uncertainty, conflict/failure retention | scalable indexes, learned calibration, task-level temporal validation |
 | Starting portfolios | canonical, compatible history, repair, contrast, and random valid starts | graph-fragment/motif grafting and topology starts |
 | Effort | arbitrary positive levels mapped to explicit fingerprint/search/trial budgets | online governor using marginal value and consequence |
-| Solver integration | first-round start evaluation, belief merge, receipt gates, digest linkage, receipt-to-episode adapter | automatic durable append and lane-level outcome attribution |
+| Solver integration | first-round start evaluation, belief merge, receipt gates, exact start/optimizer/budget/receipt lane attribution, and content-addressed development-evidence closure | concurrent durable backends, task-appropriate normalization, and retention policy |
 | Negative transfer | matched-budget assessment and escape-lane recommendation | sequential detection, automatic budget reallocation, causal transfer study |
-| LLM evaluation | executable seven-slot fixture plus strict six-graph harness/feedback-firewall contract | real provider/scenario/grader adapters, rotated sealed holdouts, remote isolation, and field evidence |
+| LLM evaluation | executable seven-slot fixture, strict six-graph harness/feedback-firewall contract, and typed atomic/panel/failure/promotion/outer-summary evidence | real provider/scenario/grader adapters, rotated sealed holdouts, remote isolation, and field evidence |
 
 The current code is a tested local foundation, not evidence that historical transfer
 already improves real workloads. That claim requires the benchmark protocol below.
@@ -1859,25 +1873,28 @@ already improves real workloads. That claim requires the benchmark protocol belo
 
 ## 29. Next build increments
 
-1. **P0 — Automatic episode append.** Wire the existing receipt-to-episode adapter to
-   experiment closure and an immutable memory sink. Add task-appropriate baseline
-   normalization and preserve invalid, rejected, timed-out, and neutral runs.
-2. **P0 — Lane attribution.** Bind every initialization start and optimizer allocation to
-   the plans and receipts it caused so negative-transfer accounting is automatic.
-3. **P1 — Task-level replay benchmark.** Use chronological, dataset-family-held-out task
+Completed in the current implementation: automatic episode append to a
+content-addressed artifact-store snapshot, preservation of accepted and unsuccessful
+development observations, exact start/optimizer/budget/receipt lane attribution, and a
+hard exclusion of sealed holdout receipts from history closure.
+
+1. **P0 — Task-level replay benchmark.** Use chronological, dataset-family-held-out task
    splits and compare history-informed starts against matched-budget history-blind,
    random, and canonical controls.
-4. **P1 — Specialized profilers.** Add graph, document/text, time-series, geospatial,
+2. **P1 — Baseline calibration and retention.** Normalize outcomes within comparable
+   cohorts and define immutable retention, revocation, compaction, and concurrent-write
+   policies for production memory sinks.
+3. **P1 — Specialized profilers.** Add graph, document/text, time-series, geospatial,
    streaming, software, synthetic-data/privacy, and LLM-harness profile packs.
-5. **P1 — Fragment memory.** Learn reusable typed subgraphs and motifs, not only complete
+4. **P1 — Fragment memory.** Learn reusable typed subgraphs and motifs, not only complete
    route selections; repair against the current admitted space.
-6. **P2 — Scalable plural retrieval.** Add sparse metadata, columnar statistics, vector,
+5. **P2 — Scalable plural retrieval.** Add sparse metadata, columnar statistics, vector,
    and graph indexes behind one immutable snapshot protocol.
-7. **P2 — Adaptive governor.** Allocate effort by expected value of information,
+6. **P2 — Adaptive governor.** Allocate effort by expected value of information,
    consequence, uncertainty, observed marginal gain, and negative-transfer signals.
-8. **P2 — LLM evaluation packs.** Implement separate scenario-generation, SUT, atomic
+7. **P2 — LLM evaluation packs.** Implement separate scenario-generation, SUT, atomic
    grader, blinded-panel, feedback, and sealed-outer-evaluation solution packs.
-9. **P3 — Meta-learning.** Train task/route encoders and optimizer policies only after
+8. **P3 — Meta-learning.** Train task/route encoders and optimizer policies only after
    the evidence and holdout protocol demonstrate calibration and transfer.
 
 This sequence makes history useful early while keeping Taedri capable of rejecting every

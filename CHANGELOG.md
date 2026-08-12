@@ -21,25 +21,32 @@ All notable changes to this proof of concept are documented here.
 - Diverse start portfolios, protected history-blind controls, compatible
   historical replay/repair starts, arbitrary positive effort levels, optimizer
   allocations, and direct `UniversalSolver` initialization.
+- Exact solver plan-to-start/optimizer/budget/receipt attribution and an atomic
+  history-closure transaction that persists every development outcome as a
+  content-addressed memory snapshot while excluding holdout receipts.
 - A strict linked-graph `HarnessBundle` model and wire schema with exact graph
   identities, separate authorities, candidate visibility, disjoint development
   and holdout cases, human promotion approval, and a deny-only sealed-evaluation
   feedback firewall.
-- Seven dependency-free engineering showcases for geotemporal enrichment, user
-  journeys, synthetic tabular augmentation, synthetic LLM curricula, grounded
-  document extraction, reinforcement learning, and DueCare-style LLM
+- Strict harness-evidence models for atomic judgments, blinded judge panels,
+  development failure clusters, sanitized outer summaries, and human promotion
+  decisions with rollback identity.
+- Thirteen dependency-free engineering showcases for conflict-aware data
+  contracts, event-time windowing, GIS boundaries, idempotent APIs, frontend
+  release journeys, document rendering, geotemporal enrichment, user journeys,
+  synthetic data, grounded document extraction, reinforcement learning, and DueCare-style LLM
   evaluation/red teaming, each with a negative control and independently
   accepted route.
-- A portable 82-node engineering-showcase pack, deterministic harness catalogue
+- A portable 154-node engineering-showcase pack, deterministic harness catalogue
   artifact, and an implementation/research guide for common engineering DAGs
   and evaluation architectures.
 
 ### Changed
 
-- The strict wire-schema set now contains 58 schemas.
-- Release verification now covers 31 executable examples, 247 unique nodes, 68
-  declared routes, 40 accepted observations, 28 intentional negative controls,
-  five node packs, and 416 generated catalogue documents.
+- The strict wire-schema set now contains 60 schemas.
+- Release verification now covers 37 executable examples, 319 unique nodes, 80
+  declared routes, 46 accepted observations, 34 intentional negative controls,
+  five node packs, and 495 generated catalogue documents.
 - `UniversalSolver.solve(profile=None, initialization=...)` derives its
   inspectable search/trial budget from the initialization effort policy,
   evaluates the proposed starting portfolio in round one, and records the

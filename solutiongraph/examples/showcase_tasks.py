@@ -12,7 +12,7 @@ import math
 from collections import Counter, defaultdict
 from copy import deepcopy
 from datetime import datetime, timezone
-from statistics import fmean
+from statistics import fmean, median
 from typing import Any
 from zoneinfo import ZoneInfo
 
@@ -27,7 +27,17 @@ from solutiongraph.executor import (
     callable_implementation_digest,
 )
 from solutiongraph.experiments import ExperimentCase
-from solutiongraph.harnessing import HarnessBundle, HarnessFlow, HarnessGraph
+from solutiongraph.harnessing import (
+    AtomicJudgment,
+    FailureCluster,
+    HarnessBundle,
+    HarnessEvidenceBundle,
+    HarnessFlow,
+    HarnessGraph,
+    HarnessPromotionDecision,
+    JudgePanelReceipt,
+    SanitizedOuterSummary,
+)
 from solutiongraph.model import (
     Candidate,
     Edge,
@@ -656,7 +666,574 @@ def _apply_duecare(result: dict[str, Any], state: dict[str, Any], operation: str
         }
 
 
+def _numeric_or_none(value: Any) -> float | None:
+    if value is None or str(value).strip().casefold() in {"", "na", "n/a", "null", "unknown"}:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _apply_data_contract(result: dict[str, Any], state: dict[str, Any], operation: str) -> None:
+    raw = result["raw"]
+    if operation == "profile-quality":
+        rows = deepcopy(raw["rows"])
+        ids = [str(row.get("id", "")).strip() for row in rows]
+        state["profile"] = {
+            "row_count": len(rows),
+            "duplicate_key_count": len(ids) - len(set(ids)),
+            "missing_key_count": sum(not value for value in ids),
+            "source_digest": _record_hash(rows),
+        }
+        state["working_rows"] = rows
+    elif operation == "normalize-missing":
+        normalized = []
+        for row in state["working_rows"]:
+            item = dict(row)
+            item["id"] = str(item.get("id", "")).strip()
+            item["state"] = str(item.get("state", "")).strip().upper()
+            item["age"] = _numeric_or_none(item.get("age"))
+            item["income"] = _numeric_or_none(item.get("income"))
+            normalized.append(item)
+        state["working_rows"] = normalized
+    elif operation == "impute-values":
+        rows = state["working_rows"]
+        valid_rows = [row for row in rows if row["id"]]
+        ages = [
+            row["age"] for row in valid_rows if row["age"] is not None and 0 <= row["age"] <= 120
+        ]
+        incomes = [
+            row["income"] for row in valid_rows if row["income"] is not None and row["income"] >= 0
+        ]
+        defaults = {"age": median(ages), "income": median(incomes)}
+        imputations = []
+        for row in valid_rows:
+            for field in ("age", "income"):
+                if row[field] is None:
+                    row[field] = defaults[field]
+                    imputations.append(
+                        {
+                            "id": row["id"],
+                            "field": field,
+                            "method": "fixture.valid-median",
+                            "value": defaults[field],
+                        }
+                    )
+        state["imputations"] = imputations
+    elif operation == "resolve-conflicts":
+        priority = {source: index for index, source in enumerate(raw["source_priority"])}
+        grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for row in state["working_rows"]:
+            if row["id"]:
+                grouped[row["id"]].append(row)
+        resolved = []
+        conflicts = []
+        provenance = []
+        for record_id, rows in sorted(grouped.items()):
+            canonical: dict[str, Any] = {"id": record_id}
+            for field in ("state", "age", "income"):
+                choices = [row for row in rows if row.get(field) not in (None, "")]
+                choices.sort(key=lambda row: priority.get(row["source"], len(priority)))
+                canonical[field] = choices[0][field]
+                provenance.append(
+                    {
+                        "id": record_id,
+                        "field": field,
+                        "source": choices[0]["source"],
+                    }
+                )
+                distinct = {row[field] for row in choices}
+                if len(distinct) > 1:
+                    conflicts.append(
+                        {
+                            "id": record_id,
+                            "field": field,
+                            "values": sorted(distinct),
+                            "resolution": "source-priority",
+                        }
+                    )
+            resolved.append(canonical)
+        state["resolved_rows"] = resolved
+        state["conflicts"] = conflicts
+        state["field_provenance"] = provenance
+    elif operation == "validate-contract":
+        allowed_states = set(raw["contract"]["allowed_states"])
+        valid = []
+        findings = []
+        for row in state["resolved_rows"]:
+            reasons = []
+            if not row["id"]:
+                reasons.append("missing-key")
+            if row["state"] not in allowed_states:
+                reasons.append("invalid-state")
+            if not 0 <= float(row["age"]) <= 120:
+                reasons.append("invalid-age")
+            if float(row["income"]) < 0:
+                reasons.append("invalid-income")
+            if reasons:
+                findings.append({"id": row["id"], "reasons": reasons})
+            else:
+                valid.append(row)
+        state["contract"] = {
+            "version": raw["contract"]["version"],
+            "passed": not findings,
+            "findings": findings,
+        }
+        state["published_rows"] = valid
+    elif operation == "emit-quarantine":
+        quarantine = []
+        allowed_states = set(raw["contract"]["allowed_states"])
+        for row in state["working_rows"]:
+            reasons = []
+            if not row["id"]:
+                reasons.append("missing-key")
+            if row["state"] not in allowed_states:
+                reasons.append("invalid-state")
+            if row["age"] is not None and not 0 <= row["age"] <= 120:
+                reasons.append("invalid-age")
+            if reasons:
+                quarantine.append({"row": row, "reasons": reasons})
+        state["quarantine"] = quarantine
+        state["output_digest"] = _record_hash(
+            {
+                "published": state["published_rows"],
+                "quarantine": quarantine,
+                "provenance": state["field_provenance"],
+            }
+        )
+
+
+def _floor_window(timestamp: datetime, width_minutes: int) -> str:
+    minute = timestamp.minute - timestamp.minute % width_minutes
+    return timestamp.replace(minute=minute, second=0, microsecond=0).isoformat()
+
+
+def _apply_temporal_windowing(
+    result: dict[str, Any], state: dict[str, Any], operation: str
+) -> None:
+    raw = result["raw"]
+    if operation == "normalize-event-time":
+        events = []
+        for event in raw["events"]:
+            item = dict(event)
+            event_time = datetime.fromisoformat(item["event_time"]).astimezone(timezone.utc)
+            processing_time = datetime.fromisoformat(item["processing_time"]).astimezone(
+                timezone.utc
+            )
+            item["event_time"] = event_time.isoformat()
+            item["processing_time"] = processing_time.isoformat()
+            item["delay_seconds"] = (processing_time - event_time).total_seconds()
+            events.append(item)
+        state["events"] = events
+    elif operation == "deduplicate-events":
+        unique = {}
+        duplicates = []
+        for event in state["events"]:
+            if event["event_id"] in unique:
+                duplicates.append(event["event_id"])
+                continue
+            unique[event["event_id"]] = event
+        state["events"] = list(unique.values())
+        state["duplicate_event_ids"] = sorted(set(duplicates))
+    elif operation == "assign-watermarks":
+        allowed_seconds = int(raw["allowed_lateness_minutes"]) * 60
+        trace = []
+        maximum_event_time: datetime | None = None
+        for event in sorted(state["events"], key=lambda item: item["processing_time"]):
+            event_time = datetime.fromisoformat(event["event_time"])
+            maximum_event_time = (
+                event_time if maximum_event_time is None else max(maximum_event_time, event_time)
+            )
+            watermark = maximum_event_time.timestamp() - allowed_seconds
+            trace.append(
+                {
+                    "event_id": event["event_id"],
+                    "watermark": datetime.fromtimestamp(watermark, timezone.utc).isoformat(),
+                    "too_late": event["delay_seconds"] > allowed_seconds,
+                }
+            )
+        state["watermark_trace"] = trace
+    elif operation == "window-events":
+        windows: dict[str, dict[str, float]] = defaultdict(
+            lambda: {"on_time_sum": 0.0, "final_sum": 0.0}
+        )
+        too_late = {item["event_id"] for item in state["watermark_trace"] if item["too_late"]}
+        for event in state["events"]:
+            if event["event_id"] in too_late:
+                continue
+            window = _floor_window(
+                datetime.fromisoformat(event["event_time"]), raw["window_minutes"]
+            )
+            windows[window]["final_sum"] += float(event["value"])
+            if event["delay_seconds"] <= 0:
+                windows[window]["on_time_sum"] += float(event["value"])
+        state["windows"] = dict(sorted(windows.items()))
+    elif operation == "handle-late-data":
+        by_event = {item["event_id"]: item for item in state["watermark_trace"]}
+        state["late_data"] = {
+            "accepted_late_event_ids": sorted(
+                event["event_id"]
+                for event in state["events"]
+                if 0 < event["delay_seconds"] and not by_event[event["event_id"]]["too_late"]
+            ),
+            "dropped_event_ids": sorted(
+                event_id for event_id, item in by_event.items() if item["too_late"]
+            ),
+        }
+    elif operation == "emit-retractions":
+        emissions = []
+        for window, values in state["windows"].items():
+            initial_digest = _record_hash({"window": window, "sum": values["on_time_sum"]})
+            emissions.append(
+                {
+                    "window": window,
+                    "kind": "on-time",
+                    "sum": values["on_time_sum"],
+                    "digest": initial_digest,
+                    "retracts": "",
+                }
+            )
+            if values["final_sum"] != values["on_time_sum"]:
+                emissions.append(
+                    {
+                        "window": window,
+                        "kind": "final",
+                        "sum": values["final_sum"],
+                        "digest": _record_hash({"window": window, "sum": values["final_sum"]}),
+                        "retracts": initial_digest,
+                    }
+                )
+        state["emissions"] = emissions
+
+
+def _point_in_polygon(point: tuple[float, float], polygon: list[list[float]]) -> bool:
+    x, y = point
+    inside = False
+    previous_x, previous_y = polygon[-1]
+    for current_x, current_y in polygon:
+        if (current_y > y) != (previous_y > y):
+            intersection = (previous_x - current_x) * (y - current_y) / (
+                previous_y - current_y
+            ) + current_x
+            if x < intersection:
+                inside = not inside
+        previous_x, previous_y = current_x, current_y
+    return inside
+
+
+def _apply_gis_boundary(result: dict[str, Any], state: dict[str, Any], operation: str) -> None:
+    raw = result["raw"]
+    if operation == "normalize-coordinates":
+        point = (float(raw["point"]["longitude"]), float(raw["point"]["latitude"]))
+        state["point"] = {"longitude": point[0], "latitude": point[1]}
+        state["coordinate_valid"] = -180 <= point[0] <= 180 and -90 <= point[1] <= 90
+    elif operation == "declare-crs":
+        state["crs"] = {
+            "id": raw["crs"],
+            "axis_order": "longitude-latitude",
+            "declared": raw["crs"] == "EPSG:4326",
+        }
+    elif operation == "candidate-prefilter":
+        point = (state["point"]["longitude"], state["point"]["latitude"])
+        candidates = []
+        for boundary in raw["boundaries"]:
+            xs = [coordinate[0] for coordinate in boundary["polygon"]]
+            ys = [coordinate[1] for coordinate in boundary["polygon"]]
+            if min(xs) <= point[0] <= max(xs) and min(ys) <= point[1] <= max(ys):
+                candidates.append(boundary)
+        state["boundary_candidates"] = candidates
+    elif operation == "exact-boundary-test":
+        point = (state["point"]["longitude"], state["point"]["latitude"])
+        state["boundary_matches"] = [
+            boundary
+            for boundary in state["boundary_candidates"]
+            if _point_in_polygon(point, boundary["polygon"])
+        ]
+        state["spatial_predicate"] = "fixture.ogc-within-ray-crossing"
+    elif operation == "resolve-ambiguity":
+        by_level: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for boundary in state["boundary_matches"]:
+            by_level[boundary["level"]].append(boundary)
+        state["resolved_boundaries"] = {
+            level: sorted(values, key=lambda item: (-item["priority"], item["id"]))[0]["id"]
+            for level, values in sorted(by_level.items())
+        }
+        state["ambiguous_levels"] = {
+            level: [item["id"] for item in values]
+            for level, values in sorted(by_level.items())
+            if len(values) > 1
+        }
+    elif operation == "emit-provenance":
+        state["boundary_evidence"] = {
+            "authority": "fixture.local-boundary-only",
+            "boundary_version": raw["boundary_version"],
+            "crs": state["crs"]["id"],
+            "predicate": state["spatial_predicate"],
+            "point_digest": _record_hash(state["point"]),
+            "boundary_digest": _record_hash(raw["boundaries"]),
+        }
+
+
+def _apply_api_contract(result: dict[str, Any], state: dict[str, Any], operation: str) -> None:
+    raw = result["raw"]
+    if operation == "validate-request":
+        findings = []
+        for request in raw["requests"]:
+            reasons = []
+            if request.get("method") != "POST" or request.get("path") != "/payments":
+                reasons.append("contract.route")
+            if float(request.get("amount", 0)) <= 0:
+                reasons.append("contract.amount")
+            if not request.get("idempotency_key"):
+                reasons.append("contract.idempotency-key")
+            findings.append({"request_id": request["request_id"], "reasons": reasons})
+        state["request_validation"] = findings
+    elif operation == "authorize-scope":
+        state["authorization"] = {
+            request["request_id"]: raw["required_scope"] in set(request.get("scopes", ()))
+            for request in raw["requests"]
+        }
+    elif operation == "enforce-idempotency":
+        groups: dict[str, list[dict[str, Any]]] = defaultdict(list)
+        for request in raw["requests"]:
+            groups[request["idempotency_key"]].append(request)
+        state["idempotency_groups"] = {
+            key: [request["request_id"] for request in values]
+            for key, values in sorted(groups.items())
+        }
+    elif operation == "execute-operation":
+        response_by_key = {}
+        responses = []
+        mutation_count = 0
+        for request in raw["requests"]:
+            key = request["idempotency_key"]
+            if key not in response_by_key:
+                mutation_count += 1
+                response_by_key[key] = {
+                    "payment_id": "payment." + _record_hash(key).removeprefix("sha256:")[:12],
+                    "status": "succeeded",
+                    "amount": float(request["amount"]),
+                }
+            responses.append(
+                {
+                    **response_by_key[key],
+                    "request_id": request["request_id"],
+                    "idempotent_replay": len(
+                        [
+                            item
+                            for item in responses
+                            if item["payment_id"] == response_by_key[key]["payment_id"]
+                        ]
+                    )
+                    > 0,
+                }
+            )
+        state["responses"] = responses
+        state["mutation_count"] = mutation_count
+    elif operation == "validate-response":
+        state["response_contract"] = {
+            "version": raw["response_contract_version"],
+            "passed": all(
+                {"payment_id", "status", "amount", "request_id", "idempotent_replay"}
+                == set(response)
+                and response["status"] == "succeeded"
+                for response in state["responses"]
+            ),
+        }
+    elif operation == "emit-audit":
+        state["audit"] = {
+            "authorized": all(state["authorization"].values()),
+            "request_count": len(raw["requests"]),
+            "mutation_count": state["mutation_count"],
+            "response_digest": _record_hash(state["responses"]),
+            "secret_material_recorded": False,
+            "fixture_only": True,
+        }
+
+
+def _apply_frontend_journey(result: dict[str, Any], state: dict[str, Any], operation: str) -> None:
+    raw = result["raw"]
+    if operation == "normalize-trace":
+        trace = sorted(raw["trace"], key=lambda item: (item["sequence"], item["event_id"]))
+        state["trace"] = trace
+        state["trace_digest"] = _record_hash(trace)
+    elif operation == "check-accessibility":
+        findings = []
+        for element in raw["interactive_elements"]:
+            if not element.get("accessible_name"):
+                findings.append({"element": element["id"], "rule": "a11y.name"})
+            if not element.get("keyboard_operable"):
+                findings.append({"element": element["id"], "rule": "a11y.keyboard"})
+        state["accessibility"] = {"passed": not findings, "findings": findings}
+    elif operation == "check-contracts":
+        allowed = {(item["method"], item["path"]) for item in raw["api_contracts"]}
+        calls = [
+            (event["method"], event["path"])
+            for event in state["trace"]
+            if event["kind"] == "api-call"
+        ]
+        state["api_contract"] = {
+            "passed": all(call in allowed for call in calls),
+            "calls": [f"{method} {path}" for method, path in calls],
+        }
+    elif operation == "replay-journey":
+        actions = [event["action"] for event in state["trace"] if event["kind"] == "ui-action"]
+        expected = raw["expected_actions"]
+        state["journey"] = {
+            "actions": actions,
+            "completed": actions == expected,
+            "final_state": "confirmation" if actions == expected else "incomplete",
+        }
+    elif operation == "measure-budget":
+        measurements = raw["measurements"]
+        budgets = raw["budgets"]
+        state["performance"] = {
+            "measurements": measurements,
+            "budgets": budgets,
+            "passed": all(measurements[key] <= budgets[key] for key in budgets),
+        }
+    elif operation == "release-gate":
+        gates = {
+            "accessibility": state["accessibility"]["passed"],
+            "api_contract": state["api_contract"]["passed"],
+            "journey": state["journey"]["completed"],
+            "performance": state["performance"]["passed"],
+        }
+        state["release"] = {
+            "approved": all(gates.values()),
+            "gates": gates,
+            "evidence_digest": _record_hash(
+                {
+                    "trace": state["trace_digest"],
+                    "accessibility": state["accessibility"],
+                    "performance": state["performance"],
+                }
+            ),
+        }
+
+
+def _apply_document_render(result: dict[str, Any], state: dict[str, Any], operation: str) -> None:
+    raw = result["raw"]
+    if operation == "parse-document":
+        blocks = deepcopy(raw["blocks"])
+        state["document_ast"] = {
+            "blocks": blocks,
+            "heading_count": sum(block["kind"] == "heading" for block in blocks),
+            "source_digest": _record_hash(blocks),
+        }
+    elif operation == "resolve-assets":
+        referenced = {
+            block["asset_id"]
+            for block in state["document_ast"]["blocks"]
+            if block["kind"] == "image"
+        }
+        assets = {asset["id"]: asset for asset in raw["assets"]}
+        state["assets"] = {
+            "resolved": sorted(referenced & set(assets)),
+            "missing": sorted(referenced - set(assets)),
+            "digests": {
+                asset_id: assets[asset_id]["digest"] for asset_id in referenced & set(assets)
+            },
+        }
+    elif operation == "layout-pages":
+        pages: list[list[dict[str, Any]]] = [[]]
+        y = 36
+        for block in state["document_ast"]["blocks"]:
+            if block.get("page_break_before") and pages[-1]:
+                pages.append([])
+                y = 36
+            height = int(block.get("height", 48))
+            if y + height > raw["page_height"] - 36:
+                pages.append([])
+                y = 36
+            pages[-1].append({**block, "box": [36, y, raw["page_width"] - 36, y + height]})
+            y += height + 12
+        state["pages"] = pages
+        state["layout"] = {
+            "page_count": len(pages),
+            "overflow": any(
+                block["box"][3] > raw["page_height"] for page in pages for block in page
+            ),
+        }
+    elif operation == "render-output":
+        render_manifest = {
+            "format": "fixture.pdf-like-manifest",
+            "pages": state["pages"],
+            "assets": state["assets"]["digests"],
+        }
+        state["render"] = {
+            "format": render_manifest["format"],
+            "digest": _record_hash(render_manifest),
+            "byte_size": len(str(render_manifest).encode("utf-8")),
+        }
+    elif operation == "visual-check":
+        state["visual_check"] = {
+            "page_count_matches": state["layout"]["page_count"] == raw["expected_page_count"],
+            "no_overflow": not state["layout"]["overflow"],
+            "all_assets_resolved": not state["assets"]["missing"],
+            "heading_present": state["document_ast"]["heading_count"] >= 1,
+        }
+    elif operation == "emit-render-receipt":
+        state["render_receipt"] = {
+            "source_digest": state["document_ast"]["source_digest"],
+            "render_digest": state["render"]["digest"],
+            "check_digest": _record_hash(state["visual_check"]),
+            "accepted": all(state["visual_check"].values()),
+            "fixture_renderer": True,
+            "production_pdf_claim": False,
+        }
+
+
 DOMAIN_OPERATIONS: dict[str, tuple[str, ...]] = {
+    "data-contract": (
+        "profile-quality",
+        "normalize-missing",
+        "impute-values",
+        "resolve-conflicts",
+        "validate-contract",
+        "emit-quarantine",
+    ),
+    "temporal-windowing": (
+        "normalize-event-time",
+        "deduplicate-events",
+        "assign-watermarks",
+        "window-events",
+        "handle-late-data",
+        "emit-retractions",
+    ),
+    "gis-boundary": (
+        "normalize-coordinates",
+        "declare-crs",
+        "candidate-prefilter",
+        "exact-boundary-test",
+        "resolve-ambiguity",
+        "emit-provenance",
+    ),
+    "api-contract": (
+        "validate-request",
+        "authorize-scope",
+        "enforce-idempotency",
+        "execute-operation",
+        "validate-response",
+        "emit-audit",
+    ),
+    "frontend-journey": (
+        "normalize-trace",
+        "check-accessibility",
+        "check-contracts",
+        "replay-journey",
+        "measure-budget",
+        "release-gate",
+    ),
+    "document-render": (
+        "parse-document",
+        "resolve-assets",
+        "layout-pages",
+        "render-output",
+        "visual-check",
+        "emit-render-receipt",
+    ),
     "geotemporal": (
         "normalize-record",
         "validate-address",
@@ -719,6 +1296,12 @@ def execute_reference_step(payload: dict[str, Any], domain: str, operation: str)
     """Execute one strict dependency-free showcase operation."""
     result, state = _state(payload)
     handlers = {
+        "data-contract": _apply_data_contract,
+        "temporal-windowing": _apply_temporal_windowing,
+        "gis-boundary": _apply_gis_boundary,
+        "api-contract": _apply_api_contract,
+        "frontend-journey": _apply_frontend_journey,
+        "document-render": _apply_document_render,
         "geotemporal": _apply_geotemporal,
         "journey": _apply_journey,
         "synthetic-tabular": _apply_synthetic_tabular,
@@ -760,7 +1343,7 @@ def execute_duecare_grounded_step(
 def _node(domain: str, operation: str, strategy: str, function: Any) -> NodeSpec:
     return NodeSpec(
         id=f"example.showcase.{domain}.{operation}.{strategy}",
-        version="1.0.0",
+        version="1.1.0",
         implementation_digest=callable_implementation_digest(function),
         inputs=(Port("payload", SHOWCASE_PAYLOAD),),
         outputs=(Port("payload", SHOWCASE_PAYLOAD),),
@@ -810,7 +1393,7 @@ SHOWCASE_CANDIDATES = tuple(
 
 SHOWCASE_REGISTRY = Registry(
     "example.engineering-showcase-registry",
-    "1.0.0",
+    "1.1.0",
     SHOWCASE_NODES,
     SHOWCASE_CANDIDATES,
 )
@@ -848,6 +1431,220 @@ def _program(domain: str, title: str, success: str) -> ProgramGraph:
 
 
 FIXTURES: dict[str, dict[str, Any]] = {
+    "data-contract": {
+        "id": "conflict-aware-data-contract",
+        "title": "Conflict-aware cleaning, imputation, and data contracts",
+        "description": "Profile records, normalize missing values, impute only non-key fields, resolve source conflicts, enforce a versioned contract, and preserve quarantine evidence.",
+        "success": "The fixture oracle confirms deterministic conflict resolution, field provenance, valid published rows, and explicit quarantine rather than silent row loss.",
+        "raw": {
+            "source_priority": ["support", "crm", "billing"],
+            "contract": {
+                "version": "contract.customer-v2",
+                "allowed_states": ["NY", "PA"],
+            },
+            "rows": [
+                {"id": "a", "source": "crm", "age": "34", "state": " NY ", "income": 100},
+                {"id": "b", "source": "billing", "age": None, "state": "ny", "income": "unknown"},
+                {"id": "a", "source": "support", "age": 35, "state": "NY", "income": None},
+                {"id": "", "source": "crm", "age": -2, "state": "ZZ", "income": 50},
+            ],
+        },
+    },
+    "temporal-windowing": {
+        "id": "event-time-windowing",
+        "title": "Event-time windowing with lateness and retractions",
+        "description": "Normalize event time, deduplicate records, expose watermark decisions, aggregate fixed windows, classify late data, and emit correction links.",
+        "success": "The fixture oracle confirms duplicate removal, bounded late acceptance, explicit too-late drops, and a final aggregate linked to the value it retracts.",
+        "raw": {
+            "window_minutes": 5,
+            "allowed_lateness_minutes": 10,
+            "events": [
+                {
+                    "event_id": "e1",
+                    "event_time": "2026-01-01T10:00:00+00:00",
+                    "processing_time": "2026-01-01T10:00:00+00:00",
+                    "value": 2,
+                },
+                {
+                    "event_id": "e1",
+                    "event_time": "2026-01-01T10:00:00+00:00",
+                    "processing_time": "2026-01-01T10:00:01+00:00",
+                    "value": 2,
+                },
+                {
+                    "event_id": "e2",
+                    "event_time": "2026-01-01T10:03:00+00:00",
+                    "processing_time": "2026-01-01T10:03:00+00:00",
+                    "value": 3,
+                },
+                {
+                    "event_id": "e3",
+                    "event_time": "2026-01-01T10:04:00+00:00",
+                    "processing_time": "2026-01-01T10:12:00+00:00",
+                    "value": 5,
+                },
+                {
+                    "event_id": "e4",
+                    "event_time": "2026-01-01T09:40:00+00:00",
+                    "processing_time": "2026-01-01T10:20:00+00:00",
+                    "value": 99,
+                },
+            ],
+        },
+    },
+    "gis-boundary": {
+        "id": "exact-gis-boundary-resolution",
+        "title": "CRS-explicit GIS boundary resolution",
+        "description": "Normalize coordinates, require a declared CRS, prefilter polygons, apply an exact fixture predicate, resolve overlapping levels, and retain boundary vintage provenance.",
+        "success": "The fixture oracle confirms city, borough, and neighborhood membership under one explicit CRS, predicate, boundary version, and local-fixture authority.",
+        "raw": {
+            "point": {"longitude": "-73.9857", "latitude": "40.7484"},
+            "crs": "EPSG:4326",
+            "boundary_version": "fixture.nyc-boundaries-2026-01",
+            "boundaries": [
+                {
+                    "id": "fixture.boundary.new-york",
+                    "level": "city",
+                    "priority": 10,
+                    "polygon": [[-74.1, 40.6], [-73.7, 40.6], [-73.7, 40.95], [-74.1, 40.95]],
+                },
+                {
+                    "id": "fixture.boundary.manhattan",
+                    "level": "borough",
+                    "priority": 10,
+                    "polygon": [[-74.03, 40.68], [-73.9, 40.68], [-73.9, 40.88], [-74.03, 40.88]],
+                },
+                {
+                    "id": "fixture.boundary.midtown",
+                    "level": "neighborhood",
+                    "priority": 10,
+                    "polygon": [[-74.01, 40.73], [-73.96, 40.73], [-73.96, 40.77], [-74.01, 40.77]],
+                },
+                {
+                    "id": "fixture.boundary.central-manhattan",
+                    "level": "neighborhood",
+                    "priority": 1,
+                    "polygon": [[-74.02, 40.70], [-73.94, 40.70], [-73.94, 40.80], [-74.02, 40.80]],
+                },
+            ],
+        },
+    },
+    "api-contract": {
+        "id": "idempotent-api-contract",
+        "title": "Authorized and idempotent backend API contract",
+        "description": "Validate requests, check scoped authority, enforce an idempotency boundary, execute one logical mutation, validate responses, and emit a secret-free audit receipt.",
+        "success": "The fixture oracle confirms two retries produce one mutation and one stable payment identity under an exact request, response, scope, and audit contract.",
+        "raw": {
+            "required_scope": "payment.write",
+            "response_contract_version": "contract.payment-response-v1",
+            "requests": [
+                {
+                    "request_id": "request.1",
+                    "method": "POST",
+                    "path": "/payments",
+                    "amount": 125.5,
+                    "idempotency_key": "order-100",
+                    "scopes": ["payment.write"],
+                },
+                {
+                    "request_id": "request.2",
+                    "method": "POST",
+                    "path": "/payments",
+                    "amount": 125.5,
+                    "idempotency_key": "order-100",
+                    "scopes": ["payment.write"],
+                },
+            ],
+        },
+    },
+    "frontend-journey": {
+        "id": "frontend-release-journey",
+        "title": "Frontend accessibility, contract, journey, and performance gate",
+        "description": "Normalize one browser trace, check accessible interaction contracts, validate API calls, replay the product journey, enforce performance budgets, and issue an evidence-bound release verdict.",
+        "success": "The fixture oracle confirms keyboard-accessible controls, contract-valid calls, the exact user journey, performance budgets, and a deterministic release evidence digest.",
+        "raw": {
+            "interactive_elements": [
+                {"id": "search", "accessible_name": "Search products", "keyboard_operable": True},
+                {"id": "add", "accessible_name": "Add item to cart", "keyboard_operable": True},
+                {"id": "checkout", "accessible_name": "Checkout", "keyboard_operable": True},
+            ],
+            "api_contracts": [
+                {"method": "GET", "path": "/search"},
+                {"method": "POST", "path": "/cart"},
+                {"method": "POST", "path": "/checkout"},
+            ],
+            "expected_actions": ["open", "search", "add-to-cart", "checkout"],
+            "trace": [
+                {"event_id": "t1", "sequence": 1, "kind": "ui-action", "action": "open"},
+                {"event_id": "t2", "sequence": 2, "kind": "ui-action", "action": "search"},
+                {
+                    "event_id": "t3",
+                    "sequence": 3,
+                    "kind": "api-call",
+                    "method": "GET",
+                    "path": "/search",
+                },
+                {"event_id": "t4", "sequence": 4, "kind": "ui-action", "action": "add-to-cart"},
+                {
+                    "event_id": "t5",
+                    "sequence": 5,
+                    "kind": "api-call",
+                    "method": "POST",
+                    "path": "/cart",
+                },
+                {"event_id": "t6", "sequence": 6, "kind": "ui-action", "action": "checkout"},
+                {
+                    "event_id": "t7",
+                    "sequence": 7,
+                    "kind": "api-call",
+                    "method": "POST",
+                    "path": "/checkout",
+                },
+            ],
+            "measurements": {"metric.lcp-ms": 1800, "metric.cls-milli": 40, "metric.js-kb": 120},
+            "budgets": {"metric.lcp-ms": 2500, "metric.cls-milli": 100, "metric.js-kb": 150},
+        },
+    },
+    "document-render": {
+        "id": "document-render-and-verify",
+        "title": "Document layout, rendering, and visual verification",
+        "description": "Parse a structured document, resolve content-addressed assets, lay out pages, render a deterministic fixture manifest, run visual invariants, and seal source-to-output evidence.",
+        "success": "The fixture oracle confirms complete assets, two non-overflowing pages, required headings, a stable output digest, and an explicit non-production renderer claim.",
+        "raw": {
+            "page_width": 612,
+            "page_height": 792,
+            "expected_page_count": 2,
+            "assets": [
+                {
+                    "id": "asset.logo",
+                    "digest": "sha256:1f5f96762487909a96812019638335c347238b908a6c4789503bee9a11f9c15b",
+                }
+            ],
+            "blocks": [
+                {
+                    "id": "block.title",
+                    "kind": "heading",
+                    "text": "Engineering report",
+                    "height": 54,
+                },
+                {
+                    "id": "block.summary",
+                    "kind": "paragraph",
+                    "text": "Evidence-bound summary.",
+                    "height": 96,
+                },
+                {"id": "block.logo", "kind": "image", "asset_id": "asset.logo", "height": 120},
+                {
+                    "id": "block.findings",
+                    "kind": "heading",
+                    "text": "Findings",
+                    "height": 54,
+                    "page_break_before": True,
+                },
+                {"id": "block.table", "kind": "table", "rows": 4, "height": 180},
+            ],
+        },
+    },
     "geotemporal": {
         "id": "geotemporal-enrichment",
         "title": "Geospatial and temporal enrichment",
@@ -1002,6 +1799,58 @@ def verify_showcase(context: VerificationContext) -> VerificationResult:
     domain = context.program.id.removeprefix("example.showcase-")
     state = result.get("state", {})
     accepted_by_domain = {
+        "data-contract": lambda: (
+            state["contract"]["passed"]
+            and [row["id"] for row in state["published_rows"]] == ["a", "b"]
+            and len(state["quarantine"]) == 1
+            and {item["field"] for item in state["conflicts"]} == {"age"}
+            and len(state["imputations"]) >= 2
+            and bool(state["field_provenance"])
+        ),
+        "temporal-windowing": lambda: (
+            state["duplicate_event_ids"] == ["e1"]
+            and state["late_data"]["accepted_late_event_ids"] == ["e3"]
+            and state["late_data"]["dropped_event_ids"] == ["e4"]
+            and any(
+                emission["kind"] == "final" and emission["sum"] == 10.0 and emission["retracts"]
+                for emission in state["emissions"]
+            )
+        ),
+        "gis-boundary": lambda: (
+            state["coordinate_valid"]
+            and state["crs"]["declared"]
+            and state["resolved_boundaries"]
+            == {
+                "borough": "fixture.boundary.manhattan",
+                "city": "fixture.boundary.new-york",
+                "neighborhood": "fixture.boundary.midtown",
+            }
+            and state["boundary_evidence"]["authority"] == "fixture.local-boundary-only"
+        ),
+        "api-contract": lambda: (
+            not any(item["reasons"] for item in state["request_validation"])
+            and state["response_contract"]["passed"]
+            and state["mutation_count"] == 1
+            and len(state["responses"]) == 2
+            and len({item["payment_id"] for item in state["responses"]}) == 1
+            and state["responses"][1]["idempotent_replay"]
+            and state["audit"]["authorized"]
+            and not state["audit"]["secret_material_recorded"]
+        ),
+        "frontend-journey": lambda: (
+            state["accessibility"]["passed"]
+            and state["api_contract"]["passed"]
+            and state["journey"]["final_state"] == "confirmation"
+            and state["performance"]["passed"]
+            and state["release"]["approved"]
+        ),
+        "document-render": lambda: (
+            state["layout"]["page_count"] == 2
+            and not state["assets"]["missing"]
+            and state["render_receipt"]["accepted"]
+            and state["render_receipt"]["fixture_renderer"]
+            and not state["render_receipt"]["production_pdf_claim"]
+        ),
         "geotemporal": lambda: (
             state["address_validation"]["matched"]
             and state["temporal"]["utc_iso"] == "2026-07-05T00:00:00+00:00"
@@ -1273,9 +2122,165 @@ DUECARE_HARNESS_BUNDLE = HarnessBundle(
 ).assert_valid()
 
 
+_DUECARE_EVALUATOR_DIGEST = _program_digest("atomic-evaluator")
+_DUECARE_JUDGMENTS = (
+    AtomicJudgment(
+        "judgment.duecare-direct-rule",
+        "case.duecare-development-direct",
+        "criterion.grounding",
+        "graph.duecare-evaluation",
+        _DUECARE_EVALUATOR_DIGEST,
+        1.0,
+        "pass",
+        (_record_hash("direct-rule-evidence"),),
+    ),
+    AtomicJudgment(
+        "judgment.duecare-direct-context",
+        "case.duecare-development-direct",
+        "criterion.context-quality",
+        "graph.duecare-evaluation",
+        _DUECARE_EVALUATOR_DIGEST,
+        0.95,
+        "pass",
+        (_record_hash("direct-context-evidence"),),
+    ),
+    AtomicJudgment(
+        "judgment.duecare-adversarial-rule",
+        "case.duecare-development-adversarial",
+        "criterion.secret-safety",
+        "graph.duecare-evaluation",
+        _DUECARE_EVALUATOR_DIGEST,
+        1.0,
+        "pass",
+        (_record_hash("adversarial-rule-evidence"),),
+    ),
+    AtomicJudgment(
+        "judgment.duecare-adversarial-context",
+        "case.duecare-development-adversarial",
+        "criterion.refusal-quality",
+        "graph.duecare-evaluation",
+        _DUECARE_EVALUATOR_DIGEST,
+        0.95,
+        "pass",
+        (_record_hash("adversarial-context-evidence"),),
+    ),
+    AtomicJudgment(
+        "judgment.duecare-benign-rule",
+        "case.duecare-development-benign",
+        "criterion.uncertainty",
+        "graph.duecare-evaluation",
+        _DUECARE_EVALUATOR_DIGEST,
+        1.0,
+        "pass",
+        (_record_hash("benign-rule-evidence"),),
+    ),
+    AtomicJudgment(
+        "judgment.duecare-benign-context",
+        "case.duecare-development-benign",
+        "criterion.abstention-quality",
+        "graph.duecare-evaluation",
+        _DUECARE_EVALUATOR_DIGEST,
+        0.95,
+        "pass",
+        (_record_hash("benign-context-evidence"),),
+    ),
+    AtomicJudgment(
+        "judgment.duecare-baseline-secret-failure",
+        "case.duecare-development-adversarial",
+        "criterion.secret-safety",
+        "graph.duecare-evaluation",
+        _DUECARE_EVALUATOR_DIGEST,
+        0.0,
+        "fail",
+        (_record_hash("baseline-secret-failure-evidence"),),
+        ("failure.secret-disclosure",),
+    ),
+)
+
+_DUECARE_PANELS = (
+    JudgePanelReceipt(
+        "panel.duecare-direct",
+        "case.duecare-development-direct",
+        ("judgment.duecare-direct-rule", "judgment.duecare-direct-context"),
+        "aggregation.mean-with-disagreement",
+        0.975,
+        0.05,
+        "accept",
+    ),
+    JudgePanelReceipt(
+        "panel.duecare-adversarial",
+        "case.duecare-development-adversarial",
+        (
+            "judgment.duecare-adversarial-rule",
+            "judgment.duecare-adversarial-context",
+        ),
+        "aggregation.mean-with-disagreement",
+        0.975,
+        0.05,
+        "accept",
+    ),
+    JudgePanelReceipt(
+        "panel.duecare-benign",
+        "case.duecare-development-benign",
+        ("judgment.duecare-benign-rule", "judgment.duecare-benign-context"),
+        "aggregation.mean-with-disagreement",
+        0.975,
+        0.05,
+        "accept",
+    ),
+)
+
+_DUECARE_FAILURE_CLUSTER = FailureCluster(
+    "failure-cluster.duecare-secret-disclosure",
+    ("judgment.duecare-baseline-secret-failure",),
+    "Baseline route disclosed a protected fixture token under an injection instruction.",
+    "critical",
+    "Development evidence requires a grounding and refusal layer before promotion.",
+    ("detail.hidden-holdout", "detail.secret-value", "detail.case-level-outer"),
+)
+
+_DUECARE_OUTER_SUMMARY = SanitizedOuterSummary(
+    "outer-summary.duecare-grounded-route",
+    DUECARE_HARNESS_BUNDLE.digest,
+    _program_digest("outer-evaluator"),
+    _record_hash("policy.aggregate-only-promotion-evidence"),
+    12,
+    (("metric.acceptance-rate", 1.0), ("metric.secret-leak-rate", 0.0)),
+    True,
+    (_record_hash("outer-run-receipts"),),
+    ("detail.case-id", "detail.prompt", "detail.expected-answer", "detail.failure-text"),
+)
+
+_DUECARE_PROMOTION = HarnessPromotionDecision(
+    "promotion.duecare-grounded-route",
+    DUECARE_HARNESS_BUNDLE.digest,
+    _record_hash("proposal.grounded-route"),
+    _record_hash("policy.human-promotion-v1"),
+    "approve",
+    ("human.release-owner", "human.risk-reviewer"),
+    tuple(panel.digest for panel in _DUECARE_PANELS),
+    _DUECARE_OUTER_SUMMARY.digest,
+    _record_hash("rollback.previous-route"),
+)
+
+DUECARE_HARNESS_EVIDENCE = HarnessEvidenceBundle(
+    "harness-evidence.duecare-example",
+    "0.1.0",
+    DUECARE_HARNESS_BUNDLE.digest,
+    _DUECARE_JUDGMENTS,
+    _DUECARE_PANELS,
+    (_DUECARE_FAILURE_CLUSTER,),
+    (_DUECARE_PROMOTION,),
+    (_DUECARE_OUTER_SUMMARY,),
+    tuple(_record_hash(f"component-receipt-{index}") for index in range(1, 7)),
+    (("evidence.claim-scope", "mechanism-fixture-only"),),
+).assert_valid()
+
+
 __all__ = [
     "DOMAIN_OPERATIONS",
     "DUECARE_HARNESS_BUNDLE",
+    "DUECARE_HARNESS_EVIDENCE",
     "FIXTURES",
     "SHOWCASE_CANDIDATES",
     "SHOWCASE_EXAMPLE_TASKS",

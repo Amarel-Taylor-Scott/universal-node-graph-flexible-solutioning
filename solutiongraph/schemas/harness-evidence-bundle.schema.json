@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "harness-evidence-bundle.schema.json",
+  "title": "Linked evaluation-harness evidence bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "harness_evidence_model_version",
+    "id",
+    "version",
+    "harness_bundle_digest",
+    "atomic_judgments",
+    "panels",
+    "failure_clusters",
+    "promotion_decisions",
+    "outer_summaries",
+    "component_receipt_digests",
+    "extensions"
+  ],
+  "properties": {
+    "harness_evidence_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "harness_bundle_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "atomic_judgments": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/atomicJudgment"}
+    },
+    "panels": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/panel"}
+    },
+    "failure_clusters": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/failureCluster"}
+    },
+    "promotion_decisions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/promotionDecision"}
+    },
+    "outer_summaries": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/outerSummary"}
+    },
+    "component_receipt_digests": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "$defs": {
+    "idArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "digestArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "atomicJudgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "case_id",
+        "criterion_id",
+        "evaluator_graph_id",
+        "evaluator_digest",
+        "score",
+        "verdict",
+        "evidence_digests",
+        "failure_codes",
+        "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "case_id": {"$ref": "common.schema.json#/$defs/id"},
+        "criterion_id": {"$ref": "common.schema.json#/$defs/id"},
+        "evaluator_graph_id": {"$ref": "common.schema.json#/$defs/id"},
+        "evaluator_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "score": {"type": "number", "minimum": 0, "maximum": 1},
+        "verdict": {"enum": ["pass", "fail", "error", "abstain"]},
+        "evidence_digests": {
+          "$ref": "#/$defs/digestArray",
+          "minItems": 1
+        },
+        "failure_codes": {"$ref": "#/$defs/idArray"},
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    },
+    "panel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "case_id",
+        "member_judgment_ids",
+        "aggregation_method",
+        "aggregate_score",
+        "disagreement",
+        "disposition",
+        "blind_to_candidate_identity",
+        "tie_breaker_judgment_id",
+        "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "case_id": {"$ref": "common.schema.json#/$defs/id"},
+        "member_judgment_ids": {
+          "$ref": "#/$defs/idArray",
+          "minItems": 2
+        },
+        "aggregation_method": {"$ref": "common.schema.json#/$defs/id"},
+        "aggregate_score": {"type": "number", "minimum": 0, "maximum": 1},
+        "disagreement": {"type": "number", "minimum": 0, "maximum": 1},
+        "disposition": {"enum": ["accept", "reject", "review", "insufficient"]},
+        "blind_to_candidate_identity": {"type": "boolean"},
+        "tie_breaker_judgment_id": {
+          "oneOf": [
+            {"const": ""},
+            {"$ref": "common.schema.json#/$defs/id"}
+          ]
+        },
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    },
+    "failureCluster": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "member_judgment_ids",
+        "signature",
+        "severity",
+        "sanitized_summary",
+        "prohibited_detail_classes",
+        "development_only",
+        "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "member_judgment_ids": {
+          "$ref": "#/$defs/idArray",
+          "minItems": 1
+        },
+        "signature": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["low", "medium", "high", "critical"]},
+        "sanitized_summary": {"type": "string", "minLength": 1},
+        "prohibited_detail_classes": {
+          "$ref": "#/$defs/idArray",
+          "minItems": 1
+        },
+        "development_only": {"type": "boolean"},
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    },
+    "promotionDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "harness_bundle_digest",
+        "proposal_digest",
+        "policy_digest",
+        "decision",
+        "approver_ids",
+        "evidence_digests",
+        "outer_summary_digest",
+        "rollback_plan_digest",
+        "human_authority",
+        "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "harness_bundle_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "proposal_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "policy_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "decision": {"enum": ["approve", "reject", "defer", "rollback"]},
+        "approver_ids": {
+          "$ref": "#/$defs/idArray",
+          "minItems": 1
+        },
+        "evidence_digests": {
+          "$ref": "#/$defs/digestArray",
+          "minItems": 1
+        },
+        "outer_summary_digest": {
+          "oneOf": [
+            {"const": ""},
+            {"$ref": "common.schema.json#/$defs/digest"}
+          ]
+        },
+        "rollback_plan_digest": {
+          "oneOf": [
+            {"const": ""},
+            {"$ref": "common.schema.json#/$defs/digest"}
+          ]
+        },
+        "human_authority": {"const": true},
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    },
+    "outerSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "harness_bundle_digest",
+        "evaluator_digest",
+        "disclosure_policy_digest",
+        "holdout_case_count",
+        "aggregate_metrics",
+        "accepted",
+        "receipt_digests",
+        "omitted_detail_classes",
+        "feedback_exposure",
+        "case_ids_included",
+        "candidate_visible",
+        "extensions"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "harness_bundle_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "evaluator_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "disclosure_policy_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "holdout_case_count": {"type": "integer", "minimum": 1},
+        "aggregate_metrics": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {"$ref": "common.schema.json#/$defs/id"},
+          "additionalProperties": {"type": "number"}
+        },
+        "accepted": {"type": "boolean"},
+        "receipt_digests": {
+          "$ref": "#/$defs/digestArray",
+          "minItems": 1
+        },
+        "omitted_detail_classes": {
+          "$ref": "#/$defs/idArray",
+          "minItems": 1
+        },
+        "feedback_exposure": {"const": "deny"},
+        "case_ids_included": {"const": false},
+        "candidate_visible": {"const": false},
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    }
+  }
+}

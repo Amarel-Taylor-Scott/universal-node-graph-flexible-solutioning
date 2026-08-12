@@ -10,6 +10,7 @@ from referencing import Resource
 from solutiongraph.catalog import catalog_documents
 from solutiongraph.examples.showcase_tasks import (
     DUECARE_HARNESS_BUNDLE,
+    DUECARE_HARNESS_EVIDENCE,
     SHOWCASE_EXAMPLE_TASKS,
     SHOWCASE_NODES,
     SHOWCASE_REGISTRY,
@@ -24,24 +25,21 @@ from solutiongraph.task_categories import (
 
 _SCHEMAS = load_all_schemas()
 _SCHEMA_REGISTRY = SchemaRegistry().with_resources(
-    (schema["$id"], Resource.from_contents(schema))
-    for schema in _SCHEMAS.values()
+    (schema["$id"], Resource.from_contents(schema)) for schema in _SCHEMAS.values()
 )
 
 
 def _validate_wire(schema_name: str, payload: object) -> None:
     errors = sorted(
-        Draft202012Validator(
-            _SCHEMAS[schema_name], registry=_SCHEMA_REGISTRY
-        ).iter_errors(payload),
+        Draft202012Validator(_SCHEMAS[schema_name], registry=_SCHEMA_REGISTRY).iter_errors(payload),
         key=lambda error: tuple(error.path),
     )
     assert not errors, "; ".join(error.message for error in errors)
 
 
-def test_engineering_showcase_pack_has_seven_executable_candidate_comparisons():
-    assert len(SHOWCASE_EXAMPLE_TASKS) == 7
-    assert len(SHOWCASE_NODES) == len(SHOWCASE_REGISTRY.candidates) == 82
+def test_engineering_showcase_pack_has_thirteen_executable_candidate_comparisons():
+    assert len(SHOWCASE_EXAMPLE_TASKS) == 13
+    assert len(SHOWCASE_NODES) == len(SHOWCASE_REGISTRY.candidates) == 154
     for example in SHOWCASE_EXAMPLE_TASKS:
         space, plans = example.compile()
         assert len(plans) == 2
@@ -102,22 +100,49 @@ def test_duecare_harness_rejects_outer_feedback_leakage_and_hidden_case_exposure
             if "harness.approve-promotion" not in graph.authorities
         ),
     )
-    assert any(
-        "harness.approve-promotion" in problem for problem in no_promotion.validate()
-    )
+    assert any("harness.approve-promotion" in problem for problem in no_promotion.validate())
 
 
 def test_showcase_harness_wire_contract_and_catalog_projection_are_strict():
     assert "harness-bundle.schema.json" in SCHEMA_NAMES
+    assert "harness-evidence-bundle.schema.json" in SCHEMA_NAMES
     schema = load_all_schemas()["harness-bundle.schema.json"]
     assert schema["additionalProperties"] is False
     _validate_wire("harness-bundle.schema.json", DUECARE_HARNESS_BUNDLE.to_dict())
+    assert DUECARE_HARNESS_EVIDENCE.validate() == []
+    _validate_wire(
+        "harness-evidence-bundle.schema.json",
+        DUECARE_HARNESS_EVIDENCE.to_dict(),
+    )
     documents = catalog_documents()
     assert documents["harnesses/duecare-example.json"] == (DUECARE_HARNESS_BUNDLE.to_dict())
     assert documents["nodepacks/engineering-showcases/registry.json"] == (
         SHOWCASE_REGISTRY.to_dict()
     )
+    assert documents["harnesses/duecare-evidence-example.json"] == (
+        DUECARE_HARNESS_EVIDENCE.to_dict()
+    )
     assert documents["index.json"]["harnesses"][0]["graph_count"] == 6
+    assert documents["index.json"]["harnesses"][0]["atomic_judgment_count"] == 7
+
+
+def test_harness_evidence_rejects_outer_leakage_and_automatic_promotion():
+    leaking_summary = replace(
+        DUECARE_HARNESS_EVIDENCE.outer_summaries[0],
+        case_ids_included=True,
+    )
+    leaking = replace(
+        DUECARE_HARNESS_EVIDENCE,
+        outer_summaries=(leaking_summary,),
+        promotion_decisions=(),
+    )
+    assert any("case identities" in problem for problem in leaking.validate())
+
+    automatic = replace(
+        DUECARE_HARNESS_EVIDENCE.promotion_decisions[0],
+        human_authority=False,
+    )
+    assert any("human_authority" in problem for problem in automatic.validate())
 
 
 def test_common_dag_registry_is_open_but_seeds_ninety_five_composable_categories():
@@ -142,7 +167,12 @@ def test_common_dag_registry_is_open_but_seeds_ninety_five_composable_categories
 
 @pytest.mark.parametrize(
     "example_id",
-    ("geotemporal-enrichment", "duecare-llm-evaluation-harness"),
+    (
+        "event-time-windowing",
+        "idempotent-api-contract",
+        "geotemporal-enrichment",
+        "duecare-llm-evaluation-harness",
+    ),
 )
 def test_boundary_showcases_execute_in_the_subprocess_lifecycle_adapter(example_id):
     result = run_example(example_id, route="all", runtime="subprocess")

@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "asset closure",
+    "page count",
+    "no overflow",
+    "visual invariants",
+    "source-output identity"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "document-render-and-verify"
+  ],
+  "external_requirements": [],
+  "id": "arena.document-render-and-verify",
+  "input_contract": "Structured blocks, content-addressed assets, page contract, output format, and visual checks.",
+  "output_contract": "Rendered artifact identity, page/layout evidence, asset closure, visual findings, and render receipt.",
+  "problem": "Parse content, resolve exact assets, lay out pages, render through a declared adapter, verify visual invariants, and bind source to output.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "parse",
+    "resolve assets",
+    "layout",
+    "render",
+    "visual verify",
+    "seal receipt"
+  ],
+  "tags": [
+    "documents",
+    "rendering",
+    "visual-verification",
+    "provenance"
+  ],
+  "template_id": "template.document-intelligence",
+  "title": "Structured document to visually checked output"
+}

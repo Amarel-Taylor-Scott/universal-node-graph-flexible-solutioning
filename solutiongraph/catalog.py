@@ -19,6 +19,7 @@ from solutiongraph.examples.extended_tasks import (
 )
 from solutiongraph.examples.showcase_tasks import (
     DUECARE_HARNESS_BUNDLE,
+    DUECARE_HARNESS_EVIDENCE,
     SHOWCASE_NODES,
     SHOWCASE_REGISTRY,
 )
@@ -233,6 +234,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
             showcase_capabilities.to_dict()
         ),
         "harnesses/duecare-example.json": DUECARE_HARNESS_BUNDLE.to_dict(),
+        "harnesses/duecare-evidence-example.json": DUECARE_HARNESS_EVIDENCE.to_dict(),
     }
     for node in REFERENCE_NODE_SPECS:
         documents[f"nodepacks/reference-core/nodes/{node.id}.json"] = node.to_dict()
@@ -357,6 +359,10 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "digest": DUECARE_HARNESS_BUNDLE.digest,
                 "path": "harnesses/duecare-example.json",
                 "graph_count": len(DUECARE_HARNESS_BUNDLE.graphs),
+                "evidence_path": "harnesses/duecare-evidence-example.json",
+                "evidence_digest": DUECARE_HARNESS_EVIDENCE.digest,
+                "atomic_judgment_count": len(DUECARE_HARNESS_EVIDENCE.atomic_judgments),
+                "panel_count": len(DUECARE_HARNESS_EVIDENCE.panels),
             }
         ],
         "arena": {

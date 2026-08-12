@@ -41,7 +41,7 @@ solutiongraph/
 ├── harnessing.py         linked graph roles, authorities, flows, and feedback firewall
 ├── intelligence.py       task fingerprints, historical retrieval, starts, and effort
 ├── task_categories.py    open 95-category multi-label DAG taxonomy
-├── examples/             31 executable cross-domain node/program examples
+├── examples/             37 executable cross-domain node/program examples
 ├── reference_nodes.py    small executable node-pack demonstration
 ├── catalog.py            deterministic catalogue projection
 ├── scaffold.py           transactional coding-harness starter workspaces
@@ -52,7 +52,7 @@ catalog/
 ├── templates/            544 atomic obligations across 31 varied templates
 ├── nodepacks/            five portable registries and discovery sidecars
 ├── harnesses/            strict linked-graph evaluation-harness artifact
-├── arena/                36 cross-domain task-family contracts
+├── arena/                42 cross-domain task-family contracts
 └── benchmarks/           six task/solution packs and 24 immutable cases
 
 browsergraph/

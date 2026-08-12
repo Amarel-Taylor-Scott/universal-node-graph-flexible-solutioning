@@ -160,7 +160,7 @@ objects, not in `NodeSpec`.
 - `solutiongraph/authoring.py` — source-bound Python node authoring and exact candidate expansion.
 - `solutiongraph/benchmarking.py` — controlled benchmark arms and offline evidence reports.
 - `solutiongraph/stdlib_pack.py` — 19 dependency-free reusable nodes and 32 bindings.
-- `solutiongraph/examples/` — 31 dependency-free executable domain examples.
+- `solutiongraph/examples/` — 37 dependency-free executable domain examples.
 - `solutiongraph/schemas/` — strict portable wire schemas.
 - `catalog/` — generated templates, node packs, Arena tasks, solution packs, and benchmarks.
 - `browsergraph/` — browser runtime adapter and original proof of concept.

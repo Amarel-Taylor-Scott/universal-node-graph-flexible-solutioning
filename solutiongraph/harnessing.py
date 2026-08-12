@@ -9,12 +9,14 @@ execute graphs, isolate candidate code, or approve their own proposals.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import isfinite
 from typing import Any
 
 from solutiongraph.campaign import EvaluationBoundary
 from solutiongraph.model import DIGEST_RE, ID_RE, canonical_json, sha256_digest
 
 HARNESS_MODEL_VERSION = "0.1"
+HARNESS_EVIDENCE_MODEL_VERSION = "0.1"
 FLOW_EXPOSURES = ("full", "aggregate", "digest", "deny")
 CANDIDATE_VISIBILITIES = (
     "none",
@@ -23,6 +25,10 @@ CANDIDATE_VISIBILITIES = (
     "development",
     "aggregate-only",
 )
+JUDGMENT_VERDICTS = ("pass", "fail", "error", "abstain")
+PANEL_DISPOSITIONS = ("accept", "reject", "review", "insufficient")
+PROMOTION_DECISIONS = ("approve", "reject", "defer", "rollback")
+FAILURE_SEVERITIES = ("low", "medium", "high", "critical")
 
 
 def _extension_problems(extensions: tuple[tuple[str, Any], ...], path: str) -> list[str]:
@@ -283,11 +289,479 @@ class HarnessBundle:
         }
 
 
+@dataclass(frozen=True)
+class AtomicJudgment:
+    """One criterion-level judgment with exact evaluator and evidence identity."""
+
+    id: str
+    case_id: str
+    criterion_id: str
+    evaluator_graph_id: str
+    evaluator_digest: str
+    score: float
+    verdict: str
+    evidence_digests: tuple[str, ...]
+    failure_codes: tuple[str, ...] = ()
+    extensions: tuple[tuple[str, Any], ...] = ()
+
+    @property
+    def passed(self) -> bool:
+        return self.verdict == "pass"
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "judgment") -> list[str]:
+        problems: list[str] = []
+        for label, value in (
+            ("id", self.id),
+            ("case_id", self.case_id),
+            ("criterion_id", self.criterion_id),
+            ("evaluator_graph_id", self.evaluator_graph_id),
+        ):
+            if not ID_RE.fullmatch(value):
+                problems.append(f"{path}.{label} must be a namespaced identifier")
+        if not DIGEST_RE.fullmatch(self.evaluator_digest):
+            problems.append(f"{path}.evaluator_digest must be a sha256 digest")
+        if not isfinite(self.score) or not 0.0 <= self.score <= 1.0:
+            problems.append(f"{path}.score must be finite and between zero and one")
+        if self.verdict not in JUDGMENT_VERDICTS:
+            problems.append(f"{path}.verdict must be one of {', '.join(JUDGMENT_VERDICTS)}")
+        if not self.evidence_digests:
+            problems.append(f"{path}.evidence_digests must not be empty")
+        if len(self.evidence_digests) != len(set(self.evidence_digests)) or any(
+            not DIGEST_RE.fullmatch(digest) for digest in self.evidence_digests
+        ):
+            problems.append(f"{path}.evidence_digests must contain unique sha256 digests")
+        if len(self.failure_codes) != len(set(self.failure_codes)) or any(
+            not ID_RE.fullmatch(code) for code in self.failure_codes
+        ):
+            problems.append(f"{path}.failure_codes must contain unique namespaced identifiers")
+        if self.verdict == "pass" and self.failure_codes:
+            problems.append(f"{path}: passing judgments cannot carry failure codes")
+        problems.extend(_extension_problems(self.extensions, f"{path}.extensions"))
+        return problems
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "case_id": self.case_id,
+            "criterion_id": self.criterion_id,
+            "evaluator_graph_id": self.evaluator_graph_id,
+            "evaluator_digest": self.evaluator_digest,
+            "score": self.score,
+            "verdict": self.verdict,
+            "evidence_digests": list(self.evidence_digests),
+            "failure_codes": list(self.failure_codes),
+            "extensions": dict(self.extensions),
+        }
+
+
+@dataclass(frozen=True)
+class JudgePanelReceipt:
+    """Blinded aggregation of separately identified atomic judgments."""
+
+    id: str
+    case_id: str
+    member_judgment_ids: tuple[str, ...]
+    aggregation_method: str
+    aggregate_score: float
+    disagreement: float
+    disposition: str
+    blind_to_candidate_identity: bool = True
+    tie_breaker_judgment_id: str = ""
+    extensions: tuple[tuple[str, Any], ...] = ()
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "panel") -> list[str]:
+        problems: list[str] = []
+        for label, value in (("id", self.id), ("case_id", self.case_id)):
+            if not ID_RE.fullmatch(value):
+                problems.append(f"{path}.{label} must be a namespaced identifier")
+        if len(self.member_judgment_ids) < 2:
+            problems.append(f"{path}.member_judgment_ids must contain at least two judgments")
+        if len(self.member_judgment_ids) != len(set(self.member_judgment_ids)) or any(
+            not ID_RE.fullmatch(value) for value in self.member_judgment_ids
+        ):
+            problems.append(
+                f"{path}.member_judgment_ids must contain unique namespaced identifiers"
+            )
+        if not ID_RE.fullmatch(self.aggregation_method):
+            problems.append(f"{path}.aggregation_method must be a namespaced identifier")
+        for label, value in (
+            ("aggregate_score", self.aggregate_score),
+            ("disagreement", self.disagreement),
+        ):
+            if not isfinite(value) or not 0.0 <= value <= 1.0:
+                problems.append(f"{path}.{label} must be finite and between zero and one")
+        if self.disposition not in PANEL_DISPOSITIONS:
+            problems.append(f"{path}.disposition must be one of {', '.join(PANEL_DISPOSITIONS)}")
+        if self.tie_breaker_judgment_id and not ID_RE.fullmatch(self.tie_breaker_judgment_id):
+            problems.append(f"{path}.tie_breaker_judgment_id must be empty or namespaced")
+        problems.extend(_extension_problems(self.extensions, f"{path}.extensions"))
+        return problems
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "case_id": self.case_id,
+            "member_judgment_ids": list(self.member_judgment_ids),
+            "aggregation_method": self.aggregation_method,
+            "aggregate_score": self.aggregate_score,
+            "disagreement": self.disagreement,
+            "disposition": self.disposition,
+            "blind_to_candidate_identity": self.blind_to_candidate_identity,
+            "tie_breaker_judgment_id": self.tie_breaker_judgment_id,
+            "extensions": dict(self.extensions),
+        }
+
+
+@dataclass(frozen=True)
+class FailureCluster:
+    """A leakage-safe grouping of development failures for improvement work."""
+
+    id: str
+    member_judgment_ids: tuple[str, ...]
+    signature: str
+    severity: str
+    sanitized_summary: str
+    prohibited_detail_classes: tuple[str, ...]
+    development_only: bool = True
+    extensions: tuple[tuple[str, Any], ...] = ()
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "failure_cluster") -> list[str]:
+        problems: list[str] = []
+        if not ID_RE.fullmatch(self.id):
+            problems.append(f"{path}.id must be a namespaced identifier")
+        if (
+            not self.member_judgment_ids
+            or len(self.member_judgment_ids) != len(set(self.member_judgment_ids))
+            or any(not ID_RE.fullmatch(value) for value in self.member_judgment_ids)
+        ):
+            problems.append(
+                f"{path}.member_judgment_ids must contain unique namespaced identifiers"
+            )
+        if not self.signature.strip() or not self.sanitized_summary.strip():
+            problems.append(f"{path}.signature and sanitized_summary must not be empty")
+        if self.severity not in FAILURE_SEVERITIES:
+            problems.append(f"{path}.severity must be one of {', '.join(FAILURE_SEVERITIES)}")
+        if (
+            not self.prohibited_detail_classes
+            or len(self.prohibited_detail_classes) != len(set(self.prohibited_detail_classes))
+            or any(not ID_RE.fullmatch(value) for value in self.prohibited_detail_classes)
+        ):
+            problems.append(
+                f"{path}.prohibited_detail_classes must contain unique namespaced identifiers"
+            )
+        problems.extend(_extension_problems(self.extensions, f"{path}.extensions"))
+        return problems
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "member_judgment_ids": list(self.member_judgment_ids),
+            "signature": self.signature,
+            "severity": self.severity,
+            "sanitized_summary": self.sanitized_summary,
+            "prohibited_detail_classes": list(self.prohibited_detail_classes),
+            "development_only": self.development_only,
+            "extensions": dict(self.extensions),
+        }
+
+
+@dataclass(frozen=True)
+class SanitizedOuterSummary:
+    """Aggregate-only holdout evidence safe for a promotion gate, not optimization."""
+
+    id: str
+    harness_bundle_digest: str
+    evaluator_digest: str
+    disclosure_policy_digest: str
+    holdout_case_count: int
+    aggregate_metrics: tuple[tuple[str, float], ...]
+    accepted: bool
+    receipt_digests: tuple[str, ...]
+    omitted_detail_classes: tuple[str, ...]
+    feedback_exposure: str = "deny"
+    case_ids_included: bool = False
+    candidate_visible: bool = False
+    extensions: tuple[tuple[str, Any], ...] = ()
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "outer_summary") -> list[str]:
+        problems: list[str] = []
+        if not ID_RE.fullmatch(self.id):
+            problems.append(f"{path}.id must be a namespaced identifier")
+        for label, digest in (
+            ("harness_bundle_digest", self.harness_bundle_digest),
+            ("evaluator_digest", self.evaluator_digest),
+            ("disclosure_policy_digest", self.disclosure_policy_digest),
+        ):
+            if not DIGEST_RE.fullmatch(digest):
+                problems.append(f"{path}.{label} must be a sha256 digest")
+        if self.holdout_case_count <= 0:
+            problems.append(f"{path}.holdout_case_count must be positive")
+        metric_names = [name for name, _ in self.aggregate_metrics]
+        if not self.aggregate_metrics or len(metric_names) != len(set(metric_names)):
+            problems.append(f"{path}.aggregate_metrics must contain unique metrics")
+        if any(not ID_RE.fullmatch(name) for name in metric_names) or any(
+            not isfinite(value) for _, value in self.aggregate_metrics
+        ):
+            problems.append(f"{path}.aggregate_metrics must use namespaced names and finite values")
+        if (
+            not self.receipt_digests
+            or len(self.receipt_digests) != len(set(self.receipt_digests))
+            or any(not DIGEST_RE.fullmatch(value) for value in self.receipt_digests)
+        ):
+            problems.append(f"{path}.receipt_digests must contain unique sha256 digests")
+        if (
+            not self.omitted_detail_classes
+            or len(self.omitted_detail_classes) != len(set(self.omitted_detail_classes))
+            or any(not ID_RE.fullmatch(value) for value in self.omitted_detail_classes)
+        ):
+            problems.append(
+                f"{path}.omitted_detail_classes must contain unique namespaced identifiers"
+            )
+        if self.feedback_exposure != "deny":
+            problems.append(f"{path}.feedback_exposure must remain deny")
+        if self.case_ids_included or self.candidate_visible:
+            problems.append(f"{path} cannot include case identities or become candidate-visible")
+        problems.extend(_extension_problems(self.extensions, f"{path}.extensions"))
+        return problems
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "harness_bundle_digest": self.harness_bundle_digest,
+            "evaluator_digest": self.evaluator_digest,
+            "disclosure_policy_digest": self.disclosure_policy_digest,
+            "holdout_case_count": self.holdout_case_count,
+            "aggregate_metrics": dict(self.aggregate_metrics),
+            "accepted": self.accepted,
+            "receipt_digests": list(self.receipt_digests),
+            "omitted_detail_classes": list(self.omitted_detail_classes),
+            "feedback_exposure": self.feedback_exposure,
+            "case_ids_included": self.case_ids_included,
+            "candidate_visible": self.candidate_visible,
+            "extensions": dict(self.extensions),
+        }
+
+
+@dataclass(frozen=True)
+class HarnessPromotionDecision:
+    """Human-governed promotion decision over an exact proposal and evidence set."""
+
+    id: str
+    harness_bundle_digest: str
+    proposal_digest: str
+    policy_digest: str
+    decision: str
+    approver_ids: tuple[str, ...]
+    evidence_digests: tuple[str, ...]
+    outer_summary_digest: str = ""
+    rollback_plan_digest: str = ""
+    human_authority: bool = True
+    extensions: tuple[tuple[str, Any], ...] = ()
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "promotion") -> list[str]:
+        problems: list[str] = []
+        if not ID_RE.fullmatch(self.id):
+            problems.append(f"{path}.id must be a namespaced identifier")
+        for label, digest in (
+            ("harness_bundle_digest", self.harness_bundle_digest),
+            ("proposal_digest", self.proposal_digest),
+            ("policy_digest", self.policy_digest),
+        ):
+            if not DIGEST_RE.fullmatch(digest):
+                problems.append(f"{path}.{label} must be a sha256 digest")
+        for label, digest in (
+            ("outer_summary_digest", self.outer_summary_digest),
+            ("rollback_plan_digest", self.rollback_plan_digest),
+        ):
+            if digest and not DIGEST_RE.fullmatch(digest):
+                problems.append(f"{path}.{label} must be empty or a sha256 digest")
+        if self.decision not in PROMOTION_DECISIONS:
+            problems.append(f"{path}.decision must be one of {', '.join(PROMOTION_DECISIONS)}")
+        if (
+            not self.approver_ids
+            or len(self.approver_ids) != len(set(self.approver_ids))
+            or any(not ID_RE.fullmatch(value) for value in self.approver_ids)
+        ):
+            problems.append(f"{path}.approver_ids must contain named human authorities")
+        if (
+            not self.evidence_digests
+            or len(self.evidence_digests) != len(set(self.evidence_digests))
+            or any(not DIGEST_RE.fullmatch(value) for value in self.evidence_digests)
+        ):
+            problems.append(f"{path}.evidence_digests must contain unique sha256 digests")
+        if not self.human_authority:
+            problems.append(f"{path}.human_authority must be true")
+        if self.decision == "approve" and not self.rollback_plan_digest:
+            problems.append(f"{path}: approval requires a rollback plan digest")
+        problems.extend(_extension_problems(self.extensions, f"{path}.extensions"))
+        return problems
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "harness_bundle_digest": self.harness_bundle_digest,
+            "proposal_digest": self.proposal_digest,
+            "policy_digest": self.policy_digest,
+            "decision": self.decision,
+            "approver_ids": list(self.approver_ids),
+            "evidence_digests": list(self.evidence_digests),
+            "outer_summary_digest": self.outer_summary_digest,
+            "rollback_plan_digest": self.rollback_plan_digest,
+            "human_authority": self.human_authority,
+            "extensions": dict(self.extensions),
+        }
+
+
+@dataclass(frozen=True)
+class HarnessEvidenceBundle:
+    """Exact closure over development judgments, promotion, and sealed aggregates."""
+
+    id: str
+    version: str
+    harness_bundle_digest: str
+    atomic_judgments: tuple[AtomicJudgment, ...]
+    panels: tuple[JudgePanelReceipt, ...]
+    failure_clusters: tuple[FailureCluster, ...]
+    promotion_decisions: tuple[HarnessPromotionDecision, ...]
+    outer_summaries: tuple[SanitizedOuterSummary, ...]
+    component_receipt_digests: tuple[str, ...]
+    extensions: tuple[tuple[str, Any], ...] = ()
+
+    @property
+    def digest(self) -> str:
+        return sha256_digest(self.to_dict())
+
+    def validate(self, path: str = "harness_evidence") -> list[str]:
+        problems: list[str] = []
+        if not ID_RE.fullmatch(self.id) or "." not in self.id:
+            problems.append(f"{path}.id must be a namespaced identifier")
+        if not self.version.strip():
+            problems.append(f"{path}.version must not be empty")
+        if not DIGEST_RE.fullmatch(self.harness_bundle_digest):
+            problems.append(f"{path}.harness_bundle_digest must be a sha256 digest")
+        collections = (
+            ("atomic_judgments", self.atomic_judgments),
+            ("panels", self.panels),
+            ("failure_clusters", self.failure_clusters),
+            ("promotion_decisions", self.promotion_decisions),
+            ("outer_summaries", self.outer_summaries),
+        )
+        all_ids: list[str] = []
+        for label, values in collections:
+            for index, value in enumerate(values):
+                problems.extend(value.validate(f"{path}.{label}[{index}]"))
+                all_ids.append(value.id)
+        if len(all_ids) != len(set(all_ids)):
+            problems.append(f"{path} evidence ids must be globally unique")
+        judgment_by_id = {value.id: value for value in self.atomic_judgments}
+        for index, panel in enumerate(self.panels):
+            unknown = sorted(set(panel.member_judgment_ids) - set(judgment_by_id))
+            if unknown:
+                problems.append(
+                    f"{path}.panels[{index}] references unknown judgments: {', '.join(unknown)}"
+                )
+            elif any(
+                judgment_by_id[judgment_id].case_id != panel.case_id
+                for judgment_id in panel.member_judgment_ids
+            ):
+                problems.append(f"{path}.panels[{index}] judgments must share its case id")
+            if (
+                panel.tie_breaker_judgment_id
+                and panel.tie_breaker_judgment_id not in judgment_by_id
+            ):
+                problems.append(f"{path}.panels[{index}] tie breaker must reference a judgment")
+        for index, cluster in enumerate(self.failure_clusters):
+            unknown = sorted(set(cluster.member_judgment_ids) - set(judgment_by_id))
+            if unknown:
+                problems.append(
+                    f"{path}.failure_clusters[{index}] references unknown judgments: "
+                    + ", ".join(unknown)
+                )
+        outer_by_digest = {summary.digest: summary for summary in self.outer_summaries}
+        for index, summary in enumerate(self.outer_summaries):
+            if summary.harness_bundle_digest != self.harness_bundle_digest:
+                problems.append(
+                    f"{path}.outer_summaries[{index}] must reference this harness bundle"
+                )
+        for index, decision in enumerate(self.promotion_decisions):
+            if decision.harness_bundle_digest != self.harness_bundle_digest:
+                problems.append(
+                    f"{path}.promotion_decisions[{index}] must reference this harness bundle"
+                )
+            if (
+                decision.outer_summary_digest
+                and decision.outer_summary_digest not in outer_by_digest
+            ):
+                problems.append(
+                    f"{path}.promotion_decisions[{index}] references an unknown outer summary"
+                )
+        if (
+            not self.component_receipt_digests
+            or len(self.component_receipt_digests) != len(set(self.component_receipt_digests))
+            or any(not DIGEST_RE.fullmatch(value) for value in self.component_receipt_digests)
+        ):
+            problems.append(f"{path}.component_receipt_digests must contain unique sha256 digests")
+        problems.extend(_extension_problems(self.extensions, f"{path}.extensions"))
+        return problems
+
+    def assert_valid(self) -> HarnessEvidenceBundle:
+        problems = self.validate()
+        if problems:
+            raise ValueError("invalid harness evidence bundle: " + "; ".join(problems))
+        return self
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "harness_evidence_model_version": HARNESS_EVIDENCE_MODEL_VERSION,
+            "id": self.id,
+            "version": self.version,
+            "harness_bundle_digest": self.harness_bundle_digest,
+            "atomic_judgments": [value.to_dict() for value in self.atomic_judgments],
+            "panels": [value.to_dict() for value in self.panels],
+            "failure_clusters": [value.to_dict() for value in self.failure_clusters],
+            "promotion_decisions": [value.to_dict() for value in self.promotion_decisions],
+            "outer_summaries": [value.to_dict() for value in self.outer_summaries],
+            "component_receipt_digests": list(self.component_receipt_digests),
+            "extensions": dict(self.extensions),
+        }
+
+
 __all__ = [
     "CANDIDATE_VISIBILITIES",
+    "FAILURE_SEVERITIES",
     "FLOW_EXPOSURES",
+    "HARNESS_EVIDENCE_MODEL_VERSION",
     "HARNESS_MODEL_VERSION",
+    "JUDGMENT_VERDICTS",
+    "PANEL_DISPOSITIONS",
+    "PROMOTION_DECISIONS",
+    "AtomicJudgment",
+    "FailureCluster",
     "HarnessBundle",
+    "HarnessEvidenceBundle",
     "HarnessFlow",
     "HarnessGraph",
+    "HarnessPromotionDecision",
+    "JudgePanelReceipt",
+    "SanitizedOuterSummary",
 ]

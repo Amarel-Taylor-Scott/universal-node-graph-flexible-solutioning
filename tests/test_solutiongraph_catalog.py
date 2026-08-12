@@ -72,6 +72,7 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + (3 + len(STANDARD_LIBRARY_NODE_SPECS) + len(STANDARD_LIBRARY_DESCRIPTORS))
         + (3 + len(SHOWCASE_NODES))
         + 1
+        + 1
         + len(REFERENCE_TEMPLATES.templates)
         + len(UNIVERSAL_DAG_ARENA.tasks)
         + 1
@@ -87,8 +88,8 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     assert len(index["templates"]) == 31
     assert index["arena"] == {
         "path": "arena/index.json",
-        "task_count": 36,
-        "executable_fixture_count": 20,
+        "task_count": 42,
+        "executable_fixture_count": 26,
     }
     assert [item["node_count"] for item in index["node_packs"]] == [
         5,

@@ -1,0 +1,35 @@
+{
+  "acceptance_signals": [
+    "accessibility pass",
+    "journey completion",
+    "contract pass",
+    "budget pass",
+    "deterministic evidence"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "frontend-release-journey"
+  ],
+  "external_requirements": [],
+  "id": "arena.frontend-release-journey",
+  "input_contract": "UI element inventory, browser trace, API contracts, expected journey, and versioned budgets.",
+  "output_contract": "Per-gate findings, replay state, performance evidence, release verdict, and evidence digest.",
+  "problem": "Check accessible controls, API contracts, a deterministic user journey, and performance budgets before release.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "normalize trace",
+    "accessibility",
+    "API contracts",
+    "journey replay",
+    "performance",
+    "release gate"
+  ],
+  "tags": [
+    "frontend",
+    "accessibility",
+    "journey",
+    "release"
+  ],
+  "template_id": "template.qa-engineering",
+  "title": "UI build and trace to an evidence-backed release gate"
+}

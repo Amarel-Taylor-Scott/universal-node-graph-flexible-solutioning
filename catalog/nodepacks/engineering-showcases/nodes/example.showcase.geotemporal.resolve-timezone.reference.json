@@ -9,7 +9,7 @@
   "failure_modes": [],
   "id": "example.showcase.geotemporal.resolve-timezone.reference",
   "idempotency": "idempotent",
-  "implementation_digest": "sha256:bcba955375bf19707884c457984d7073974e6ea6e426fd59bb4465b0660ede54",
+  "implementation_digest": "sha256:ec842b5a5b81f59fef06e4f66d5dabb668310fba6e17770448f2adea5e4a97e6",
   "inputs": [
     {
       "cardinality": "one",
@@ -69,5 +69,5 @@
   "runtime": "python",
   "source": "solutiongraph/examples/showcase_tasks.py",
   "verifier": "",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

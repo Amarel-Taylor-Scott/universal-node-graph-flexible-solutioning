@@ -1,8 +1,8 @@
 # Executable real-world example skeleton
 
-The repository now includes 31 dependency-free programs, including five
+The repository now includes 37 dependency-free programs, including five
 notebook task families, 18 additional Arena fixtures, and one reusable
-standard-library data-quality program, plus seven engineering and evaluation
+standard-library data-quality program, plus thirteen engineering and evaluation
 showcases, that pass through
 the same universal lifecycle: full registry admission, route compilation,
 frozen fallbacks, execution, content-addressed artifacts, independent
@@ -22,6 +22,12 @@ solutiongraph examples run browse-and-scrape
 solutiongraph examples run document-to-schema
 solutiongraph examples run image-check-and-process
 solutiongraph examples run data-cleanup
+solutiongraph examples run conflict-aware-data-contract
+solutiongraph examples run event-time-windowing
+solutiongraph examples run exact-gis-boundary-resolution
+solutiongraph examples run idempotent-api-contract
+solutiongraph examples run frontend-release-journey
+solutiongraph examples run document-render-and-verify
 solutiongraph examples run tabular-regression
 solutiongraph examples run tabular-classification
 solutiongraph examples run golden-customer-table
@@ -81,6 +87,12 @@ solutiongraph examples run tabular-regression \
 | Document to schema | normalize → extract → project | conservative/compact normalization; line/regex extraction | required field match |
 | Image check/process | decode → enhance → inspect | token/line decoder; identity/min-max; direct/histogram inspection | dimensions and contrast |
 | Data cleanup | normalize → deduplicate → emit | conservative/aggressive normalization; exact/normalized dedupe | unique expected entities |
+| Conflict-aware data contract | profile → normalize missing → impute → resolve conflicts → validate → quarantine | baseline/reference evidence routes | valid canonical rows, field provenance, scoped imputation, and explicit quarantine |
+| Event-time windowing | normalize time → dedupe → watermark → window → lateness → retractions | baseline/reference evidence routes | accepted late event, explicit too-late drop, and correction linked to the prior emission |
+| Exact GIS boundary | coordinate → CRS → prefilter → exact predicate → resolve overlap → provenance | baseline/reference evidence routes | city/borough/neighborhood membership with CRS, predicate, authority, and boundary vintage |
+| Idempotent API contract | validate → authorize → idempotency → execute → response contract → audit | baseline/reference evidence routes | two retries, one logical mutation, stable response, and secret-free audit evidence |
+| Frontend release journey | trace → accessibility → API contracts → journey → budgets → release | baseline/reference evidence routes | accessible controls, contract-valid calls, completed journey, performance pass, and evidence-bound gate |
+| Document render/verify | parse → assets → layout → render → visual checks → receipt | baseline/reference evidence routes | asset closure, two valid pages, source/output digests, and an explicit fixture-renderer boundary |
 | Tabular regression | split → train → evaluate | tail/alternating split; mean/OLS training | finite predictions and RMSE threshold |
 | Tabular classification | split → train → evaluate | tail/alternating split; majority/threshold training | requested labels and accuracy threshold |
 | Golden customer table | normalize → validate contacts → resolve → merge | conservative/canonical cleanup; syntax/reference checks; email/multi-key grouping; first/complete merge | entity count, verified fields, completeness, provenance |
@@ -112,14 +124,17 @@ solutiongraph examples run tabular-regression \
 Both ML examples are real DAGs rather than only lists: each split artifact fans
 out to training and evaluation, while the trained model joins evaluation.
 
-Twenty-eight controls are expected to be rejected by their independent oracles.
+Thirty-four controls are expected to be rejected by their independent oracles.
 Preserving those valid-but-poor routes is part of the evidence model. The
-release gate compiles and executes all 68 declared routes through both runtime
+release gate compiles and executes all 80 declared routes through both runtime
 adapters.
 
-The seven showcase mechanisms and the linked-graph DueCare-style boundary are
+The thirteen showcase mechanisms and the linked-graph DueCare-style boundary are
 explained in
 [ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md](ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md).
+The catalog also publishes a strict evidence closure containing criterion-level
+judgments, blinded panels, a development failure cluster, an aggregate-only
+outer summary, and a two-human promotion decision with rollback identity.
 
 Six of the programs are also packaged as controlled benchmark suites with exact
 task/case/oracle identities, fixed controls, quick and balanced solver arms,

@@ -1,6 +1,6 @@
 {
   "arena_model_version": "0.1",
-  "task_count": 36,
+  "task_count": 42,
   "tasks": [
     {
       "acceptance_signals": [
@@ -1877,6 +1877,321 @@
       ],
       "template_id": "template.observability-sre",
       "title": "Telemetry to a verified reliability response"
+    },
+    {
+      "acceptance_signals": [
+        "contract pass",
+        "row preservation",
+        "conflict traceability",
+        "imputation scope",
+        "quarantine completeness"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "conflict-aware-data-contract"
+      ],
+      "external_requirements": [],
+      "id": "arena.conflict-aware-data-contract",
+      "input_contract": "Source-tagged records, source priority, imputation policy, and an immutable data contract.",
+      "output_contract": "Validated records, field-level provenance, conflict and imputation ledgers, quarantine rows, and output digest.",
+      "problem": "Profile, normalize, impute permitted fields, resolve conflicting sources, validate a versioned contract, and quarantine invalid records.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "profile",
+        "normalize missing",
+        "impute",
+        "resolve conflicts",
+        "validate contract",
+        "quarantine"
+      ],
+      "tags": [
+        "data-cleaning",
+        "imputation",
+        "conflict-resolution",
+        "data-contract"
+      ],
+      "template_id": "template.data-quality",
+      "title": "Messy records to a conflict-aware contracted dataset"
+    },
+    {
+      "acceptance_signals": [
+        "window accuracy",
+        "duplicate removal",
+        "late acceptance",
+        "drop accountability",
+        "correction lineage"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "event-time-windowing"
+      ],
+      "external_requirements": [],
+      "id": "arena.event-time-windowing",
+      "input_contract": "Events with event and processing timestamps plus window and allowed-lateness policies.",
+      "output_contract": "Window emissions, dropped-event evidence, watermark trace, and explicit retraction links.",
+      "problem": "Normalize event time, deduplicate, expose watermark decisions, aggregate windows, classify lateness, and link corrections to prior emissions.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "normalize event time",
+        "deduplicate",
+        "watermark",
+        "window",
+        "late-data policy",
+        "retract"
+      ],
+      "tags": [
+        "streaming",
+        "event-time",
+        "watermark",
+        "late-data"
+      ],
+      "template_id": "template.event-driven-system",
+      "title": "Out-of-order events to correction-aware windows"
+    },
+    {
+      "acceptance_signals": [
+        "known-point accuracy",
+        "boundary coverage",
+        "ambiguity handling",
+        "CRS correctness",
+        "vintage traceability"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "exact-gis-boundary-resolution"
+      ],
+      "external_requirements": [
+        "P",
+        "r",
+        "o",
+        "d",
+        "u",
+        "c",
+        "t",
+        "i",
+        "o",
+        "n",
+        " ",
+        "a",
+        "u",
+        "t",
+        "h",
+        "o",
+        "r",
+        "i",
+        "t",
+        "y",
+        " ",
+        "r",
+        "e",
+        "q",
+        "u",
+        "i",
+        "r",
+        "e",
+        "s",
+        " ",
+        "c",
+        "u",
+        "r",
+        "r",
+        "e",
+        "n",
+        "t",
+        " ",
+        "a",
+        "p",
+        "p",
+        "r",
+        "o",
+        "v",
+        "e",
+        "d",
+        " ",
+        "b",
+        "o",
+        "u",
+        "n",
+        "d",
+        "a",
+        "r",
+        "y",
+        " ",
+        "d",
+        "a",
+        "t",
+        "a",
+        "s",
+        "e",
+        "t",
+        "s",
+        " ",
+        "a",
+        "n",
+        "d",
+        " ",
+        "e",
+        "x",
+        "a",
+        "c",
+        "t",
+        " ",
+        "C",
+        "R",
+        "S",
+        " ",
+        "t",
+        "r",
+        "a",
+        "n",
+        "s",
+        "f",
+        "o",
+        "r",
+        "m",
+        "a",
+        "t",
+        "i",
+        "o",
+        "n",
+        " ",
+        "l",
+        "i",
+        "b",
+        "r",
+        "a",
+        "r",
+        "i",
+        "e",
+        "s",
+        "."
+      ],
+      "id": "arena.exact-gis-boundary-resolution",
+      "input_contract": "Coordinates, CRS and axis order, versioned polygons, level policy, and authority identity.",
+      "output_contract": "Resolved memberships, ambiguity ledger, predicate identity, CRS, boundary vintage, and input/output digests.",
+      "problem": "Require CRS identity, prefilter candidate boundaries, apply an explicit spatial predicate, resolve overlaps, and retain boundary-vintage evidence.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "normalize coordinate",
+        "declare CRS",
+        "prefilter",
+        "exact predicate",
+        "resolve overlap",
+        "provenance"
+      ],
+      "tags": [
+        "gis",
+        "boundaries",
+        "crs",
+        "geospatial"
+      ],
+      "template_id": "template.geospatial-analytics",
+      "title": "Coordinates to versioned administrative membership"
+    },
+    {
+      "acceptance_signals": [
+        "contract conformance",
+        "authorization",
+        "duplicate suppression",
+        "response stability",
+        "audit completeness"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "idempotent-api-contract"
+      ],
+      "external_requirements": [],
+      "id": "arena.idempotent-api-contract",
+      "input_contract": "Versioned request and response contracts, scoped principal, idempotency key, and operation payload.",
+      "output_contract": "Stable responses, one logical mutation, authorization verdict, idempotency evidence, and audit digest.",
+      "problem": "Validate a request contract, authorize the exact scope, enforce idempotency, execute, validate the response, and emit a secret-free audit record.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "validate request",
+        "authorize",
+        "idempotency",
+        "execute",
+        "validate response",
+        "audit"
+      ],
+      "tags": [
+        "api",
+        "backend",
+        "idempotency",
+        "authorization"
+      ],
+      "template_id": "template.api-service",
+      "title": "Retries to one authorized backend mutation"
+    },
+    {
+      "acceptance_signals": [
+        "accessibility pass",
+        "journey completion",
+        "contract pass",
+        "budget pass",
+        "deterministic evidence"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "frontend-release-journey"
+      ],
+      "external_requirements": [],
+      "id": "arena.frontend-release-journey",
+      "input_contract": "UI element inventory, browser trace, API contracts, expected journey, and versioned budgets.",
+      "output_contract": "Per-gate findings, replay state, performance evidence, release verdict, and evidence digest.",
+      "problem": "Check accessible controls, API contracts, a deterministic user journey, and performance budgets before release.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "normalize trace",
+        "accessibility",
+        "API contracts",
+        "journey replay",
+        "performance",
+        "release gate"
+      ],
+      "tags": [
+        "frontend",
+        "accessibility",
+        "journey",
+        "release"
+      ],
+      "template_id": "template.qa-engineering",
+      "title": "UI build and trace to an evidence-backed release gate"
+    },
+    {
+      "acceptance_signals": [
+        "asset closure",
+        "page count",
+        "no overflow",
+        "visual invariants",
+        "source-output identity"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "document-render-and-verify"
+      ],
+      "external_requirements": [],
+      "id": "arena.document-render-and-verify",
+      "input_contract": "Structured blocks, content-addressed assets, page contract, output format, and visual checks.",
+      "output_contract": "Rendered artifact identity, page/layout evidence, asset closure, visual findings, and render receipt.",
+      "problem": "Parse content, resolve exact assets, lay out pages, render through a declared adapter, verify visual invariants, and bind source to output.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "parse",
+        "resolve assets",
+        "layout",
+        "render",
+        "visual verify",
+        "seal receipt"
+      ],
+      "tags": [
+        "documents",
+        "rendering",
+        "visual-verification",
+        "provenance"
+      ],
+      "template_id": "template.document-intelligence",
+      "title": "Structured document to visually checked output"
     },
     {
       "acceptance_signals": [

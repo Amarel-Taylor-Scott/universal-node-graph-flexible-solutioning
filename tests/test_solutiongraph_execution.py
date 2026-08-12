@@ -294,9 +294,9 @@ def test_reference_release_gate_executes_all_routes_and_detects_catalog_drift(
 ):
     result = verify_reference_release(catalog_root="catalog")
     assert result.ok
-    assert len(result.route_results) == 68
-    assert result.accepted_routes == 40
-    assert result.rejected_controls == 28
+    assert len(result.route_results) == 80
+    assert result.accepted_routes == 46
+    assert result.rejected_controls == 34
     assert result.conformance.ok
     assert len(result.conformance.checks) == 11
     assert result.benchmark_count == result.solution_pack_count == 6

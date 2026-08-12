@@ -134,7 +134,7 @@ duplicates, unvisited routes, seeds, and belief revision.
 
 ## 8. Solve and execute the reference domain skeletons
 
-Inspect all 36 Arena contracts and execute or solve the 24 local programs:
+Inspect all 42 Arena contracts and execute or solve the 30 Arena-linked local programs:
 
 ```bash
 solutiongraph examples list

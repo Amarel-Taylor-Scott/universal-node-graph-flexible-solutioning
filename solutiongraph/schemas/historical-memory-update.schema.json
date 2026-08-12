@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "historical-memory-update.schema.json",
+  "title": "Historical memory closure receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_intelligence_model_version",
+    "previous_memory_digest",
+    "memory_digest",
+    "fingerprint_digest",
+    "episode_digests",
+    "development_receipt_ids",
+    "snapshot_artifact"
+  ],
+  "properties": {
+    "task_intelligence_model_version": {"const": "0.1"},
+    "previous_memory_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "memory_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "fingerprint_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "episode_digests": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/digest"}
+    },
+    "development_receipt_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "snapshot_artifact": {"$ref": "artifact-record.schema.json"}
+  }
+}
