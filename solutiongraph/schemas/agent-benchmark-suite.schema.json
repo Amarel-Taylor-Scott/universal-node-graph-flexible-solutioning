@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-benchmark-suite.schema.json",
+  "title": "SolutionGraph coding-agent benchmark suite",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "agent_bench_model_version", "id", "version", "title", "task_ids",
+    "conditions", "harnesses", "models", "seeds", "repetitions", "budget",
+    "claim_scope", "bootstrap_resamples", "confidence_level",
+    "practical_effect", "acceptance_noninferiority_margin", "allow_promotion",
+    "limitations"
+  ],
+  "properties": {
+    "agent_bench_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "task_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "conditions": {"const": ["control", "solutiongraph"]},
+    "harnesses": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "kind", "version", "command_argv", "compatible_model_ids", "environment_allowlist", "enabled", "isolation", "notes"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "kind": {"enum": ["fixture", "command"]},
+          "version": {"type": "string", "minLength": 1},
+          "command_argv": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "compatible_model_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+          "environment_allowlist": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "enabled": {"type": "boolean"},
+          "isolation": {"type": "string", "minLength": 1},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "models": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "provider", "model", "revision", "size_class", "context_window", "settings", "enabled", "notes"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "provider": {"type": "string", "minLength": 1},
+          "model": {"type": "string", "minLength": 1},
+          "revision": {"type": "string", "minLength": 1},
+          "size_class": {"enum": ["tiny", "small", "medium", "large", "frontier", "unknown"]},
+          "context_window": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+          "settings": {"type": "object", "additionalProperties": {"type": ["string", "number", "integer", "boolean", "null"]}},
+          "enabled": {"type": "boolean"},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "seeds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer"}},
+    "repetitions": {"type": "integer", "minimum": 1},
+    "budget": {"$ref": "#/$defs/budget"},
+    "claim_scope": {"enum": ["mechanism-fixture", "internal-dataset", "public-benchmark", "production-shadow"]},
+    "bootstrap_resamples": {"type": "integer", "minimum": 1},
+    "confidence_level": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+    "practical_effect": {"type": "number", "minimum": 0},
+    "acceptance_noninferiority_margin": {"type": "number", "minimum": 0, "maximum": 1},
+    "allow_promotion": {"type": "boolean"},
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "positiveOrNull": {"oneOf": [{"type": "null"}, {"type": "number", "exclusiveMinimum": 0}]},
+    "positiveIntegerOrNull": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+    "budget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_wall_seconds", "max_output_bytes", "max_context_bytes", "max_input_tokens", "max_output_tokens", "max_cost_units"],
+      "properties": {
+        "max_wall_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "max_output_bytes": {"type": "integer", "minimum": 1},
+        "max_context_bytes": {"$ref": "#/$defs/positiveIntegerOrNull"},
+        "max_input_tokens": {"$ref": "#/$defs/positiveIntegerOrNull"},
+        "max_output_tokens": {"$ref": "#/$defs/positiveIntegerOrNull"},
+        "max_cost_units": {"$ref": "#/$defs/positiveOrNull"}
+      }
+    }
+  }
+}

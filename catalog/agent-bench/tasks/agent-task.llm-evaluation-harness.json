@@ -1,0 +1,80 @@
+{
+  "acceptance_threshold": 1.0,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "statistics",
+    "collections",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:ccd5316aad63091ac4cf7ba32d96518176053e0fc9510c4c607aaaf3899b5571",
+      "id": "agent-case.llm-harness.public",
+      "input_digest": "sha256:7b481ece59e238bb71b0f54e7c1aff6d4d8bb44189f6af874c69d2c3d599529b",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:4fbc16b169ba25bf927621265395636fc532529c4a9edceeb2981d449e60bfbc",
+      "id": "agent-case.llm-harness.holdout-a",
+      "input_digest": "sha256:959572c2b4bc64483d7e29e517c36997162b2461cbaf9f2ffe3ea3aa0cd6f76c",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:63b5c48b2bf114ae339556df14fe77862a2f6794dc4d346579304664d31608cd",
+      "id": "agent-case.llm-harness.holdout-b",
+      "input_digest": "sha256:9be4ea6ca24452e6bbbc3d89b378667dbf9f4ce6addfe1b65a43eb055118ef14",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "llm.evaluation",
+    "llm.red-teaming",
+    "governance.feedback"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.content-moderation.json",
+    "ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md"
+  ],
+  "id": "agent-task.llm-evaluation-harness",
+  "input_contract": "Development/holdout scenarios with responses, deterministic criteria, and atomic judge scores.",
+  "instructions": "Grade required/forbidden terms deterministically, preserve each panel mean and score range, cluster only development failures, report development and holdout aggregates separately, never expose holdout IDs through the sealed summary, and label improvement as development_only.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:9849d13fa28299f439f119f4a851681d5d48356379fa5769ada1aef4d7c9ca1f",
+  "oracle_id": "oracle.llm-evaluation-harness",
+  "output_contract": "Atomic judgments, development-only failure clusters, separate summaries, and feedback provenance.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "oracle_score",
+  "stages": [
+    "Load scenarios",
+    "Deterministic grade",
+    "Panel aggregate",
+    "Preserve disagreement",
+    "Cluster development",
+    "Seal outer summary"
+  ],
+  "success_contract": "Disagreement is preserved, deterministic gates are exact, and sealed data cannot enter the improvement payload.",
+  "summary": "Combine deterministic criteria and judge disagreement without leaking sealed cases into improvement.",
+  "template_id": "template.content-moderation",
+  "title": "DueCare-style LLM evaluation feedback loop",
+  "version": "1.0.0"
+}

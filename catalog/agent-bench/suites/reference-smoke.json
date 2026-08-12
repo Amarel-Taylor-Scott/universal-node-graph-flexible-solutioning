@@ -1,0 +1,73 @@
+{
+  "acceptance_noninferiority_margin": 0.0,
+  "agent_bench_model_version": "0.1",
+  "allow_promotion": false,
+  "bootstrap_resamples": 500,
+  "budget": {
+    "max_context_bytes": 1000000,
+    "max_cost_units": null,
+    "max_input_tokens": null,
+    "max_output_bytes": 1000000,
+    "max_output_tokens": null,
+    "max_wall_seconds": 60
+  },
+  "claim_scope": "mechanism-fixture",
+  "conditions": [
+    "control",
+    "solutiongraph"
+  ],
+  "confidence_level": 0.95,
+  "harnesses": [
+    {
+      "command_argv": [],
+      "compatible_model_ids": [
+        "model.reference-fixture"
+      ],
+      "enabled": true,
+      "environment_allowlist": [],
+      "id": "harness.reference-fixture",
+      "isolation": "trusted-in-process-fixture",
+      "kind": "fixture",
+      "notes": "Deterministic evaluator-owned reference; never include in model-quality claims.",
+      "version": "1.0.0"
+    }
+  ],
+  "id": "agent-benchmark.reference-smoke",
+  "limitations": [
+    "The reference harness bypasses model generation and is expected to produce equivalent control/treatment outcomes."
+  ],
+  "models": [
+    {
+      "context_window": null,
+      "enabled": true,
+      "id": "model.reference-fixture",
+      "model": "deterministic-reference",
+      "notes": "No model is called.",
+      "provider": "fixture",
+      "revision": "1.0.0",
+      "settings": {
+        "deterministic": true
+      },
+      "size_class": "unknown"
+    }
+  ],
+  "practical_effect": 0.02,
+  "repetitions": 1,
+  "seeds": [
+    101
+  ],
+  "task_ids": [
+    "agent-task.data-cleaning",
+    "agent-task.data-conflict-validation",
+    "agent-task.geotemporal-enrichment",
+    "agent-task.tabular-regression",
+    "agent-task.imbalanced-classification",
+    "agent-task.time-series-forecast",
+    "agent-task.grounded-document-extraction",
+    "agent-task.idempotent-webhook",
+    "agent-task.llm-evaluation-harness",
+    "agent-task.graph-experiment"
+  ],
+  "title": "Ten-task SolutionGraph agent benchmark transport smoke",
+  "version": "1.0.0"
+}

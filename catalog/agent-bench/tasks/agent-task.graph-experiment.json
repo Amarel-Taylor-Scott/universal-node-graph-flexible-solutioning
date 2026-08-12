@@ -1,0 +1,80 @@
+{
+  "acceptance_threshold": 1.0,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "statistics",
+    "collections",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:62f691d0b5e36a9e485535ea323636ee5c8c35577c0c2a7404d94e88de3d7822",
+      "id": "agent-case.graph-experiment.public",
+      "input_digest": "sha256:40556a9a75e645ccb4ebe0bed2ff23ce997b8a650badc44fb8160f2c0556b44b",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:1dd087c98517dda225aece30aab907917f0069a9fcd7af257f26ab5b6187e2a2",
+      "id": "agent-case.graph-experiment.holdout-a",
+      "input_digest": "sha256:9ba94a8d935a808ee5d347218143e2b78d767bea280b899863b993c7c03aec2e",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:d2b76fccbc79aa9120f3abac89c99d91d3e45e29ea083c2252d8a72fc86a0ec7",
+      "id": "agent-case.graph-experiment.holdout-b",
+      "input_digest": "sha256:52ce07e9048f351f04489975924a3d3f71b32cbbf7ecaa734c79dbbc4eef0bb4",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "graph.experiment",
+    "graph.optimization",
+    "benchmark.control"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.scientific-experiment.json",
+    "GRAPH_EXPERIMENTS.md"
+  ],
+  "id": "agent-task.graph-experiment",
+  "input_contract": "Complete graph variants with typed node chains and fixed per-case receipts.",
+  "instructions": "Reject type-incompatible variants before scoring. Aggregate receipt metrics only for compatible variants, require every receipt to be accepted, compute the quality/cost/latency Pareto set, choose highest quality then lowest cost/latency/ID, disclose coverage, and diagram the champion.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:9849d13fa28299f439f119f4a851681d5d48356379fa5769ada1aef4d7c9ca1f",
+  "oracle_id": "oracle.graph-experiment",
+  "output_contract": "Evaluated and incompatible variants, Pareto IDs, champion, coverage, and Mermaid diagram.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "oracle_score",
+  "stages": [
+    "Validate topology",
+    "Admit compatible",
+    "Aggregate receipts",
+    "Gate acceptance",
+    "Compute Pareto",
+    "Select and diagram"
+  ],
+  "success_contract": "Compatibility gates precede optimization and every selection is receipt-derived and reproducible.",
+  "summary": "Validate compatible graph variants, preserve rejections, and select from a Pareto frontier.",
+  "template_id": "template.scientific-experiment",
+  "title": "Control-versus-mutated graph experiment",
+  "version": "1.0.0"
+}

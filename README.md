@@ -27,6 +27,7 @@ solutiongraph doctor
 python examples/control_vs_mutated_graph_experiment.py
 solutiongraph solutioning inspect data-cleanup --effort 1
 solutiongraph solutioning run data-cleanup --effort 1
+solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
 ```
 
 The graph experiment generates a compiler-validated two-node mutation from a
@@ -40,6 +41,10 @@ lifecycle. They run locally with no optional dependency or network call. Read
 grid execution to bounded beam, seeded sprouts, learned priors, or additional
 topology mutations, and the
 [intelligent-solutioning guide](INTELLIGENT_SOLUTIONING.md) for the staged API.
+The final command runs ten diverse coding tasks in paired control/treatment
+workspaces and emits receipts, task diagrams, JSON evidence, and a self-contained
+HTML analysis. Its deterministic fixture validates the arena plumbing only; it
+does not call or rank a model.
 
 Choose a path:
 
@@ -178,6 +183,7 @@ is not mixed into the execution path as another step.
 | Data-science lifecycle pack | Ten executable six-stage fixtures, 60 source-bound nodes, 180 exact candidates, 729 admitted routes per graph, and accepted robust, alternate, and hybrid paths across profiling, feature engineering, modeling, evaluation, explainability, ensembling, and MLOps |
 | Reproducible benchmark arena | Six solution packs, 24 immutable cases, fixed controls, quick/balanced solver arms, holdouts, explicit claim scopes, JSON evidence, and self-contained HTML reports |
 | External benchmark manifests | Claim-safe, side-effect-free profiles for Kaggle, MLE-bench, SkillsBench, SWE-bench, BrowserGym, and DueCare-style harnesses with exact source/version/limitation closure |
+| LLM coding-agent A/B arena | Ten task families, compatible harness/model matrices, identical prompts, isolated SolutionGraph context intervention, sealed-case scoring, counterbalanced paired cells, hash-chained trial receipts, bootstrap effects, diagrams, and conservative selection/promotion gates |
 | Generated-graph campaigns | Population-DAG ancestry, proposal digests, explicit candidate/trial/cost/fidelity budgets, evaluator isolation contracts, and evidence-backed decisions |
 | Reference execution | Frozen-plan reconstruction, runtime/effect/permission policy, implementation-digest checks, bounded retry, frozen fallback, circuit breaker, artifacts, verification, and receipts |
 | Lifecycle process execution | Strict subprocess wire ABI, wall-clock termination, optional POSIX CPU/memory limits, and recorded adapter/isolation identity |
@@ -285,7 +291,30 @@ credentials, execute a system, submit a result, or certify an external score.
 See the [intelligent-solutioning guide](INTELLIGENT_SOLUTIONING.md) and run
 `python examples/external_benchmark_adapter.py`.
 
-Open the five notebooks in `notebooks/`, or read
+## Test coding agents with and without SolutionGraph
+
+The coding-agent arena freezes a compatible task × harness × model × seed grid
+and runs matched control and SolutionGraph-context workspaces. Start with its
+dependency-free mechanism check, then generate and inspect a real command suite:
+
+```bash
+solutiongraph agent-bench tasks
+solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
+solutiongraph agent-bench journal-verify \
+  .artifacts/agent-benchmark-smoke/trial-receipts.jsonl
+solutiongraph agent-bench example-config --output agent-benchmark.local.json
+solutiongraph agent-bench plan agent-benchmark.local.json
+```
+
+The editable suite includes disabled OpenCode, Aider, private-command, and
+small-to-frontier model profiles. External execution is opt-in and requires
+version pins, explicit compatible pairs, budgets, credential variable names,
+and `--allow-external`. Read the
+[LLM coding-agent benchmark arena](LLM_AGENT_BENCHMARK_ARENA.md) before enabling
+models; it documents the ten tasks, notebook, metrics, trust boundary, public
+benchmark bridge, and claim limits.
+
+Open the six numbered notebooks in `notebooks/`, or read
 [the executable-example guide](REAL_WORLD_EXAMPLES.md),
 [the Arena guide](UNIVERSAL_DAG_ARENA.md), and the
 [frozen-plan execution protocol](EXECUTION_PROTOCOL.md). `ReferenceExecutor`
@@ -329,7 +358,8 @@ and bounded refinement loops. The generated [catalogue](catalog/) currently
 contains 31 cross-domain templates, 544 atomic obligations, six portable node
 packs, 52 Arena task contracts, six portable solution packs, 24 benchmark cases,
 six benchmark suites, one strict linked-graph harness bundle, and one typed
-harness-evidence example.
+harness-evidence example, plus ten digest-only coding-agent task contracts and
+two agent-benchmark suites. Sealed evaluator payloads are not catalogued.
 Templates can be inspected or authored without writing Python:
 
 ```bash
@@ -872,6 +902,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 | [ARCHITECTURE.md](ARCHITECTURE.md) | the Protocol-vs-base-class seam |
 | [UNIVERSAL_GRAPH_SYSTEM.md](UNIVERSAL_GRAPH_SYSTEM.md) | the complete universal solution-graph architecture and implementation blueprint |
 | [INTELLIGENT_SOLUTIONING.md](INTELLIGENT_SOLUTIONING.md) | staged task solutioning, learned starting points, typed graph mutations, paired studies, benchmark adapters, and common engineering mappings |
+| [LLM_AGENT_BENCHMARK_ARENA.md](LLM_AGENT_BENCHMARK_ARENA.md) | matched coding-agent control/treatment experiments, ten sealed-evaluator task families, harness/model configuration, notebook, evidence, and public benchmark bridges |
 | [TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md](TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md) | task attributes, common DAG taxonomy, historical retrieval, intelligent sprouts, optimizer/effort portfolios, schemas, and rollout plan |
 | [WORKBENCH.md](WORKBENCH.md) | hierarchical macro-stage/substep model, schemas, viewer, and extension examples |
 | [ROADMAP.md](ROADMAP.md) | evidence-driven implementation phases and release gates |

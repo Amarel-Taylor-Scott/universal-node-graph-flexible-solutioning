@@ -25,6 +25,11 @@ def _template(template_id: str):
 
 
 def _doctor() -> int:
+    from solutiongraph.agent_bench.config import reference_agent_benchmark_suite
+    from solutiongraph.agent_bench.tasks import (
+        REFERENCE_AGENT_TASKS,
+        validate_reference_agent_tasks,
+    )
     from solutiongraph.arena import UNIVERSAL_DAG_ARENA
     from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
     from solutiongraph.catalog import catalog_documents
@@ -39,6 +44,12 @@ def _doctor() -> int:
     from solutiongraph.template_library import REFERENCE_TEMPLATES
 
     problems: list[str] = []
+    problems.extend(validate_reference_agent_tasks())
+    problems.extend(
+        reference_agent_benchmark_suite().validate(
+            tuple(bundle.spec.id for bundle in REFERENCE_AGENT_TASKS)
+        )
+    )
     problems.extend(UNIVERSAL_DAG_ARENA.validate())
     problems.extend(REFERENCE_TEMPLATES.validate())
     problems.extend(
@@ -95,6 +106,7 @@ def _doctor() -> int:
         f"executable_examples={len(all_examples())} "
         f"arena_tasks={len(UNIVERSAL_DAG_ARENA.tasks)} "
         f"benchmarks={len(REFERENCE_BENCHMARKS)} "
+        f"agent_bench_tasks={len(REFERENCE_AGENT_TASKS)} "
         f"schemas={len(schemas)} "
         f"catalog_documents={len(documents)}"
     )
@@ -893,6 +905,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Lowercase namespaced project identifier (derived from destination by default)",
     )
 
+    from solutiongraph.agent_bench.cli import add_agent_bench_parser
+
+    add_agent_bench_parser(commands)
+
     templates = commands.add_parser("templates", help="Inspect and author templates")
     template_commands = templates.add_subparsers(dest="template_command", required=True)
     list_parser = template_commands.add_parser("list", help="List reference templates")
@@ -1151,6 +1167,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _verify(args.catalog_root, args.runtime, args.json)
         if args.command == "init":
             return _init_project(args.destination, args.template, args.project_id)
+        if args.command == "agent-bench":
+            from solutiongraph.agent_bench.cli import run_agent_bench_command
+
+            return run_agent_bench_command(args)
         if args.command == "templates":
             if args.template_command == "list":
                 return _templates_list(args.json, tuple(args.domain), tuple(args.tag))

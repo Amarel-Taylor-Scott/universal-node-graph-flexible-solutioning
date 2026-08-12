@@ -76,6 +76,7 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert "executable_examples=47" in doctor
     assert "arena_tasks=52" in doctor
     assert "benchmarks=6" in doctor
+    assert "agent_bench_tasks=10" in doctor
 
     assert main(["conformance"]) == 0
     conformance = capsys.readouterr().out

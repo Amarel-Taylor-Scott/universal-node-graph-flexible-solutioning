@@ -1,0 +1,79 @@
+{
+  "acceptance_threshold": 1.0,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "collections",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:27d999fbb88f7453f08ea343d85e91696391babdba1a095d0a78a93d368f27f1",
+      "id": "agent-case.webhook.public",
+      "input_digest": "sha256:30c042d48cf515884f7266005120a5c582b9fe1e8b4f511395816f37f9efb870",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:2867791f5aa1cd8de2f40b50433b219ce9da5203b4a9766784b322e3349bc39a",
+      "id": "agent-case.webhook.holdout-a",
+      "input_digest": "sha256:6ffe07b1fbe1124642be99aac4075b0fa4732ad9a78de950b8b4c21fed189072",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:835fc82e2dc8efb4e9bfb2b45934ecf0e6e1c43be16c09d03eca1f70d947deb5",
+      "id": "agent-case.webhook.holdout-b",
+      "input_digest": "sha256:d9401a9d07dcfcf301c880ca5f13e9707f8fe680d4996174ddc9dceed6cff760",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "backend.api",
+    "events.idempotency",
+    "workflow.audit"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.event-driven-system.json",
+    "ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md"
+  ],
+  "id": "agent-task.idempotent-webhook",
+  "input_contract": "Initial JSON state plus ordered events with IDs, idempotency keys, and actions.",
+  "instructions": "Process events in arrival order. The first occurrence of each idempotency key owns the effect—even when unsupported—and every retry is recorded as duplicate_ignored. Support credit, debit, and set_status; record unsupported actions without mutation.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:9849d13fa28299f439f119f4a851681d5d48356379fa5769ada1aef4d7c9ca1f",
+  "oracle_id": "oracle.idempotent-webhook",
+  "output_contract": "Final state, one ordered audit row per event, and the count of applied effects.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "oracle_score",
+  "stages": [
+    "Validate event",
+    "Claim key",
+    "Classify duplicate",
+    "Apply effect",
+    "Audit",
+    "Reconcile state"
+  ],
+  "success_contract": "Retries never duplicate effects and every event has an explicit audit outcome.",
+  "summary": "Apply retry-prone backend events exactly once per idempotency key.",
+  "template_id": "template.event-driven-system",
+  "title": "Idempotent webhook processing",
+  "version": "1.0.0"
+}

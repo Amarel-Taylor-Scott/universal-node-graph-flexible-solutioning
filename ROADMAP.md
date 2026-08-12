@@ -74,7 +74,7 @@ diagram or candidate count is not, by itself, progress.
   inventing nodes or evidence.
 - Twenty-four dependency-free executable programs spanning 20 Arena task
   families, including data, identity, privacy, operations, security, science,
-  recommendation, and numerical workflows in addition to the five notebooks.
+  recommendation, and numerical workflows in addition to the six numbered notebooks.
 - Campaign contracts for bounded generated candidates/trials, immutable
   proposal ancestry, append-only evidence decisions, and explicit evaluator
   trust boundaries, plus a harness skill for population-based campaigns.
@@ -94,6 +94,10 @@ diagram or candidate count is not, by itself, progress.
 - Claim-safe manifest adapters for Kaggle, MLE-bench, SkillsBench, SWE-bench,
   BrowserGym, and DueCare-style evaluations without external side effects or
   score claims.
+- A ten-task coding-agent control/treatment arena with compatible harness/model
+  matrices, sealed lifecycle evaluators, counterbalanced pairs, strict budgets,
+  hash-chained receipts, uncertainty analysis, diagrams, a notebook, and a
+  deterministic model-free transport smoke.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 

@@ -72,6 +72,10 @@ SCHEMA_NAMES = (
     "benchmark-suite.schema.json",
     "benchmark-report.schema.json",
     "external-benchmark-bundle.schema.json",
+    "agent-task.schema.json",
+    "agent-benchmark-suite.schema.json",
+    "agent-trial-receipt.schema.json",
+    "agent-benchmark-report.schema.json",
 )
 
 

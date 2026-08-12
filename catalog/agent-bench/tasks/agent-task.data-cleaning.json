@@ -1,0 +1,86 @@
+{
+  "acceptance_threshold": 1.0,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "re",
+    "collections",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:9bb40168f56b2247ec354744cb27c0996af4d7c82666b8c18258e70d4aee3a9c",
+      "id": "agent-case.clean-customers.public",
+      "input_digest": "sha256:65ee4b52d26d97bca33deb8be688be9ed9b65c09a0af7b02931267b4e8d7af9a",
+      "split": "development",
+      "tags": [
+        "duplicates",
+        "missingness"
+      ]
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:d0aeeb9ecbf34ee684af688d93149bdbdb50cac3315e96f1f8e40b8eef562ad8",
+      "id": "agent-case.clean-customers.holdout-a",
+      "input_digest": "sha256:014cba90e3e0452dd611d6e3bdec0a3091ba4a4c42ab8f4843700b589669a687",
+      "split": "holdout",
+      "tags": [
+        "numeric-id"
+      ]
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:d89874b86276cbfa8247936980dd800a8805b0e62e4244452f9c00181f8016bc",
+      "id": "agent-case.clean-customers.holdout-b",
+      "input_digest": "sha256:0409c8e6b9f9680698268535b657973e2dd28514238b055db3f891845f0e45f6",
+      "split": "stress",
+      "tags": [
+        "boundary"
+      ]
+    }
+  ],
+  "categories": [
+    "data.cleaning",
+    "data.deduplication",
+    "data.validation"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.data-quality.json"
+  ],
+  "id": "agent-task.data-cleaning",
+  "input_contract": "A JSON object with records containing customer_id, name, email, and age.",
+  "instructions": "Normalize whitespace and missing tokens; uppercase customer_id; title-case names; lowercase syntactically valid email addresses; coerce age to an integer in [0,120]; quarantine missing IDs; merge duplicates by keeping the first non-null value; sort by ID; and return exact row-accounting metrics. Do not use third-party packages.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:9849d13fa28299f439f119f4a851681d5d48356379fa5769ada1aef4d7c9ca1f",
+  "oracle_id": "oracle.data-cleaning",
+  "output_contract": "An object with canonical records, ordered quarantine entries, and an exact profile.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "oracle_score",
+  "stages": [
+    "Profile",
+    "Normalize",
+    "Validate",
+    "Deduplicate",
+    "Quarantine",
+    "Report"
+  ],
+  "success_contract": "All public and sealed cases match the independently computed canonical output exactly.",
+  "summary": "Implement a deterministic, provenance-friendly customer-record cleaning pipeline.",
+  "template_id": "template.data-quality",
+  "title": "Clean and deduplicate customer records",
+  "version": "1.0.0"
+}

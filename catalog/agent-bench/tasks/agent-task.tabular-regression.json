@@ -1,0 +1,82 @@
+{
+  "acceptance_threshold": 0.1,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "math",
+    "statistics",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:694e94ba93b15255b0cc90483792214608ded1fe61614c01cbd3803938a3f7df",
+      "id": "agent-case.regression.public",
+      "input_digest": "sha256:7ef88b78cf4489b5b07998b4dd8fbd6a79fc962c8e29244f4787e3356bb9dc03",
+      "split": "development",
+      "tags": [
+        "mini-kaggle"
+      ]
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:9de8372130c38ebab959d2d9ec52c9b2c7db479d2b216f50d78e6c93c36023a1",
+      "id": "agent-case.regression.holdout-a",
+      "input_digest": "sha256:4e6b88047075e369603a518b487ec895770e66d31f9f3a3acba9d557bc7e37c6",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:815e1427abc4735b7fca8b0fb419e426b799de958996793f319b5c20fe702e62",
+      "id": "agent-case.regression.holdout-b",
+      "input_digest": "sha256:b385cdaff3bea4a3650580e3877aa16d5facb2fdf87813d0d5248dc2ee9922b8",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "ml.regression",
+    "ml.tabular",
+    "benchmark.kaggle-style"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.kaggle-tabular.json",
+    "DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md"
+  ],
+  "id": "agent-task.tabular-regression",
+  "input_contract": "Named numeric features, a target name, labeled train rows, and unlabeled test rows.",
+  "instructions": "Use only training labels, fit a deterministic linear model with an intercept over the named numeric features, and return one finite prediction per test row in original order. Do not hard-code the public coefficients or inspect evaluator files.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:f4addd7f5e308056fd6eadf2ca360feded08dd5a8c652d7e6dc66a29c0bf39a4",
+  "oracle_id": "oracle.tabular-regression",
+  "output_contract": "An object containing exactly one ordered numeric predictions array.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "minimize",
+  "score_metric": "rmse",
+  "stages": [
+    "Validate schema",
+    "Split roles",
+    "Fit",
+    "Predict",
+    "Validate submission",
+    "Score"
+  ],
+  "success_contract": "The sealed-case RMSE is at or below each predeclared threshold and the shape is exact.",
+  "summary": "Fit a general numeric regression pipeline and emit submission-shaped predictions.",
+  "template_id": "template.kaggle-tabular",
+  "title": "Mini Kaggle-style tabular regression",
+  "version": "1.0.0"
+}

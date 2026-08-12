@@ -395,7 +395,7 @@ def test_beam_search_enforces_its_explicit_evaluation_budget():
 
 def test_every_wire_representation_has_a_bundled_strict_json_schema():
     schemas = load_all_schemas()
-    assert len(SCHEMA_NAMES) == 65
+    assert len(SCHEMA_NAMES) == 69
     assert set(schemas) == set(SCHEMA_NAMES)
     assert schemas["node-spec.schema.json"]["additionalProperties"] is False
     assert schemas["program-graph.schema.json"]["properties"]["model_version"] == {"const": "0.2"}

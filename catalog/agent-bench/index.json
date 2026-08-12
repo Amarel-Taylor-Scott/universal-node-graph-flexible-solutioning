@@ -1,0 +1,165 @@
+{
+  "agent_bench_model_version": "0.1",
+  "sealed_payloads_published": false,
+  "suites": [
+    {
+      "claim_scope": "mechanism-fixture",
+      "digest": "sha256:26528a7ba52bc21a6b245b1a1836f114f9cff6dbb9bc1361cfc709f6957d3236",
+      "enabled_trial_count": 20,
+      "id": "agent-benchmark.reference-smoke",
+      "path": "agent-bench/suites/reference-smoke.json",
+      "version": "1.0.0"
+    },
+    {
+      "claim_scope": "internal-dataset",
+      "digest": "sha256:9314d0ddf7d48afb532730cc1fef5ba31e551004132fb3076aa28b09f68e1b69",
+      "enabled_trial_count": 60,
+      "id": "agent-benchmark.command-matrix-example",
+      "path": "agent-bench/suites/command-matrix-example.json",
+      "version": "1.0.0"
+    }
+  ],
+  "task_count": 10,
+  "tasks": [
+    {
+      "case_count": 3,
+      "category_ids": [
+        "data.cleaning",
+        "data.deduplication",
+        "data.validation"
+      ],
+      "digest": "sha256:96e80cab97e7e0b3359f9f59dfb345da0901775be6b80f50f31790a1c618d10a",
+      "id": "agent-task.data-cleaning",
+      "path": "agent-bench/tasks/agent-task.data-cleaning.json",
+      "sealed_case_count": 2,
+      "template_id": "template.data-quality",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "data.validation",
+        "data.reconciliation",
+        "data.quarantine"
+      ],
+      "digest": "sha256:7228fa5f5549cc31e6b91db2f98c1cad8f25038d5a04288c6dda19b406f6d442",
+      "id": "agent-task.data-conflict-validation",
+      "path": "agent-bench/tasks/agent-task.data-conflict-validation.json",
+      "sealed_case_count": 2,
+      "template_id": "template.data-quality",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "data.enrichment",
+        "geospatial.enrichment",
+        "time.enrichment"
+      ],
+      "digest": "sha256:92be1dc00da35b23dbe365e5bfb414a6d55d345c27145914bd5b36fad6fcfec0",
+      "id": "agent-task.geotemporal-enrichment",
+      "path": "agent-bench/tasks/agent-task.geotemporal-enrichment.json",
+      "sealed_case_count": 2,
+      "template_id": "template.geospatial-analytics",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "ml.regression",
+        "ml.tabular",
+        "benchmark.kaggle-style"
+      ],
+      "digest": "sha256:0e8e449e1c0cd0bdd35a61aef0d52fcd533e145f3912566c2140908f8684f9a2",
+      "id": "agent-task.tabular-regression",
+      "path": "agent-bench/tasks/agent-task.tabular-regression.json",
+      "sealed_case_count": 2,
+      "template_id": "template.kaggle-tabular",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "ml.classification",
+        "ml.imbalanced",
+        "ml.calibration"
+      ],
+      "digest": "sha256:fd0783acadc58b2b4f23d58f0543a01ed1b309bf872d5724c570e556cd99a66d",
+      "id": "agent-task.imbalanced-classification",
+      "path": "agent-bench/tasks/agent-task.imbalanced-classification.json",
+      "sealed_case_count": 2,
+      "template_id": "template.kaggle-tabular",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "ml.forecasting",
+        "time.validation",
+        "ml.backtesting"
+      ],
+      "digest": "sha256:a81ad740ec89726d21bf8b2c35b5e7e1435b942fa05537f1abfa8ddc395afc0a",
+      "id": "agent-task.time-series-forecast",
+      "path": "agent-bench/tasks/agent-task.time-series-forecast.json",
+      "sealed_case_count": 2,
+      "template_id": "template.time-series-forecasting",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "document.extraction",
+        "document.grounding",
+        "data.validation"
+      ],
+      "digest": "sha256:a0fce504224367b60c16d54b1b702508bba18fdf1ba0f9a49bd23f56b8cdb69f",
+      "id": "agent-task.grounded-document-extraction",
+      "path": "agent-bench/tasks/agent-task.grounded-document-extraction.json",
+      "sealed_case_count": 2,
+      "template_id": "template.document-intelligence",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "backend.api",
+        "events.idempotency",
+        "workflow.audit"
+      ],
+      "digest": "sha256:4fec3924e420cc10f71d93b6be72e5083891dc13d8bd686f26ada1904b21b34a",
+      "id": "agent-task.idempotent-webhook",
+      "path": "agent-bench/tasks/agent-task.idempotent-webhook.json",
+      "sealed_case_count": 2,
+      "template_id": "template.event-driven-system",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "llm.evaluation",
+        "llm.red-teaming",
+        "governance.feedback"
+      ],
+      "digest": "sha256:fdc4ed2fa010eae3a8f13c224f7f10fd4ca3a47e2132853f88fbca411ef002d1",
+      "id": "agent-task.llm-evaluation-harness",
+      "path": "agent-bench/tasks/agent-task.llm-evaluation-harness.json",
+      "sealed_case_count": 2,
+      "template_id": "template.content-moderation",
+      "version": "1.0.0"
+    },
+    {
+      "case_count": 3,
+      "category_ids": [
+        "graph.experiment",
+        "graph.optimization",
+        "benchmark.control"
+      ],
+      "digest": "sha256:91d37743bd5e7a497de0deca7fdb33be70c44ea1e2968c7c58bcb3ba2919045a",
+      "id": "agent-task.graph-experiment",
+      "path": "agent-bench/tasks/agent-task.graph-experiment.json",
+      "sealed_case_count": 2,
+      "template_id": "template.scientific-experiment",
+      "version": "1.0.0"
+    }
+  ]
+}

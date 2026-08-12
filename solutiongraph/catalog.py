@@ -6,6 +6,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+from solutiongraph.agent_bench.config import (
+    command_matrix_example_suite,
+    reference_agent_benchmark_suite,
+)
+from solutiongraph.agent_bench.tasks import REFERENCE_AGENT_TASKS
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.discovery import (
@@ -272,6 +277,44 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "harnesses/duecare-example.json": DUECARE_HARNESS_BUNDLE.to_dict(),
         "harnesses/duecare-evidence-example.json": DUECARE_HARNESS_EVIDENCE.to_dict(),
     }
+    reference_agent_suite = reference_agent_benchmark_suite()
+    command_agent_suite = command_matrix_example_suite()
+    for bundle in REFERENCE_AGENT_TASKS:
+        documents[f"agent-bench/tasks/{bundle.spec.id}.json"] = bundle.spec.to_dict()
+    documents["agent-bench/suites/reference-smoke.json"] = reference_agent_suite.to_dict()
+    documents["agent-bench/suites/command-matrix-example.json"] = command_agent_suite.to_dict()
+    documents["agent-bench/index.json"] = {
+        "agent_bench_model_version": "0.1",
+        "task_count": len(REFERENCE_AGENT_TASKS),
+        "tasks": [
+            {
+                "id": bundle.spec.id,
+                "version": bundle.spec.version,
+                "digest": bundle.spec.digest,
+                "template_id": bundle.spec.template_id,
+                "category_ids": list(bundle.spec.categories),
+                "case_count": len(bundle.spec.cases),
+                "sealed_case_count": len(bundle.spec.sealed_case_ids),
+                "path": f"agent-bench/tasks/{bundle.spec.id}.json",
+            }
+            for bundle in REFERENCE_AGENT_TASKS
+        ],
+        "suites": [
+            {
+                "id": suite.id,
+                "version": suite.version,
+                "digest": suite.digest,
+                "claim_scope": suite.claim_scope,
+                "enabled_trial_count": suite.total_trials,
+                "path": path,
+            }
+            for suite, path in (
+                (reference_agent_suite, "agent-bench/suites/reference-smoke.json"),
+                (command_agent_suite, "agent-bench/suites/command-matrix-example.json"),
+            )
+        ],
+        "sealed_payloads_published": False,
+    }
     for node in REFERENCE_NODE_SPECS:
         documents[f"nodepacks/reference-core/nodes/{node.id}.json"] = node.to_dict()
     for descriptor in REFERENCE_DESCRIPTORS:
@@ -426,6 +469,13 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 len(bundle.definition.task_cases) for bundle in REFERENCE_BENCHMARKS
             ),
             "solution_pack_count": len(REFERENCE_BENCHMARKS),
+        },
+        "agent_bench": {
+            "path": "agent-bench/index.json",
+            "task_count": len(REFERENCE_AGENT_TASKS),
+            "suite_count": 2,
+            "reference_smoke_trials": reference_agent_suite.total_trials,
+            "sealed_payloads_published": False,
         },
     }
     return dict(sorted(documents.items()))

@@ -6,6 +6,25 @@ All notable changes to this proof of concept are documented here.
 
 ### Added
 
+- A harness-neutral coding-agent A/B arena with ten diverse dependency-free
+  tasks spanning data cleaning/validation/enrichment, ML, time series,
+  documents, backend idempotency, DueCare-style LLM evaluation, and compatible
+  graph experiments.
+- Frozen harness/model compatibility matrices and scalar settings, identical
+  control/treatment prompts, treatment-only digest-pinned context, deterministic
+  counterbalancing, explicit pilot truncation, no-shell OpenCode/Aider/private
+  command seams, and opt-in external execution.
+- Candidate workspace protection, public and sealed cases, deterministic replay,
+  static import/artifact/diagram checks, task-specific oracles, optional usage
+  evidence with budget rejection, and an explicit non-adversarial boundary.
+- The full trial and decision lifecycle, fsync-backed content-chained receipt
+  journal, paired bootstrap effects, practical-equivalence/superiority gates,
+  conservative winner/promotion authority, strict wire schemas, and
+  self-contained HTML/SVG/Mermaid reporting.
+- `solutiongraph agent-bench` task/config/plan/smoke/run/journal commands, a
+  five-minute Python example, editable matrix, sixth numbered notebook, catalog
+  projection, external benchmark bridge, and comprehensive operator runbook.
+
 - An extensible 95-category, multi-label DAG task registry spanning acquisition,
   preparation, verification, enrichment, generation, learning, LLM/RAG/agent
   evaluation, serving, operations, governance, and human workflows.
@@ -80,14 +99,15 @@ All notable changes to this proof of concept are documented here.
 
 ### Changed
 
-- The strict wire-schema set now contains 65 schemas.
+- The strict wire-schema set now contains 69 schemas.
 - Topology families now reject mismatched external port contracts, self-parent
   variants, and cyclic mutation ancestry before admission or search.
 - `UniversalSolver` and graph experiments share the same evidence-only hard
   gates, Pareto flags, and normalized weighted projection.
 - Release verification now covers 47 executable examples, 379 unique nodes, 120
   declared routes, 76 accepted observations, 44 intentional negative controls,
-  six node packs, and 568 generated catalogue documents.
+  six node packs, and 581 generated catalogue documents, including ten
+  digest-only agent-task contracts and two agent-benchmark suites.
 - `UniversalSolver.solve(profile=None, initialization=...)` derives its
   inspectable search/trial budget from the initialization effort policy,
   evaluates the proposed starting portfolio in round one, and records the

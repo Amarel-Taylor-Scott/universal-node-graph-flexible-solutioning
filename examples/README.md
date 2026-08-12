@@ -13,6 +13,7 @@ dependency-free and run without browser, model-provider, or network access.
 | Normalize an external benchmark | `python examples/external_benchmark_adapter.py` | Exact source/version/claim metadata without fetching, submitting, or overstating external evidence |
 | Discover nodes and templates | `python examples/discovery_and_templates.py` | Capability negotiation, discovery receipt, snapshot, and template inspection |
 | Run a portable benchmark pack | `python examples/solution_pack_benchmark_quickstart.py --output-dir .artifacts/quickstart` | Fixed/solver arms, holdout status, receipts, JSON, and HTML evidence |
+| Test the coding-agent arena | `python examples/agent_benchmark_quickstart.py --output-dir .artifacts/agent-smoke` | Ten tasks, paired context arms, sealed scoring, hash-chained receipts, Mermaid/SVG diagrams, and offline analysis; no model call |
 
 ## CLI-driven domain examples
 
@@ -25,6 +26,8 @@ solutiongraph benchmarks list
 solutiongraph benchmarks adapters
 solutiongraph solutioning inspect data-cleanup --effort 1
 solutiongraph solutioning run data-cleanup --effort 1
+solutiongraph agent-bench tasks
+solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
 ```
 
 The 47 bundled programs cover data quality, documents, images, GIS, APIs,
@@ -44,9 +47,9 @@ Open any HTML file directly. No web server or CDN is required.
 
 ## Notebooks
 
-The five numbered notebooks cover browsing/scraping, document extraction,
-image checks, data cleaning, and tabular ML. They call the same executable
-example API used by CI.
+The six numbered notebooks cover browsing/scraping, document extraction,
+image checks, data cleaning, tabular ML, and matched LLM coding-harness A/B
+experiments. They call the same executable APIs used by CI.
 
 ## Claim boundary
 

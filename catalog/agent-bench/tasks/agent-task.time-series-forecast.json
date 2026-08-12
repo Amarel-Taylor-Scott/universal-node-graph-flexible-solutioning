@@ -1,0 +1,80 @@
+{
+  "acceptance_threshold": 0.01,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "statistics",
+    "math",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:f90cfcb15abc79696e5332ebb26777f4a92e7184b40d83fcec9742c401d6d8d9",
+      "id": "agent-case.forecast.public",
+      "input_digest": "sha256:a77dd7105a36c7be68cda72ff1635fc6642f3ce9b2aed9875748a7ddc4620076",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:0ecd8d92c9a520175d03a72c2449f127ce8bfbd9cd5561640dbbde3f677d3c9d",
+      "id": "agent-case.forecast.holdout-a",
+      "input_digest": "sha256:e70ac3e700478d1dece3b48bb46913e7dbbee521e838873b13509efc362c40ac",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:aa4a30783d721e56d3c08c093059d373898bf6400f520ee08d9c5d1606066892",
+      "id": "agent-case.forecast.holdout-b",
+      "input_digest": "sha256:5c92acf1410884a6d3e44426f14a3db216e06c71e7e0203c780c5418c11d78f5",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "ml.forecasting",
+    "time.validation",
+    "ml.backtesting"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.time-series-forecasting.json",
+    "DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md"
+  ],
+  "id": "agent-task.time-series-forecast",
+  "input_contract": "Chronologically ordered time/value observations and a positive forecast horizon.",
+  "instructions": "Treat observations as chronological, estimate a robust recent trend using past values only, and forecast the requested horizon in order. Return the method label and exact forecast length.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:a854bb1b57455f3c98eee614226ff20b093c720adc020ab4d356f7294086621a",
+  "oracle_id": "oracle.time-series-forecast",
+  "output_contract": "An ordered numeric forecasts array and a method label.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "minimize",
+  "score_metric": "mae",
+  "stages": [
+    "Validate chronology",
+    "Measure trend",
+    "Select window",
+    "Forecast",
+    "Check horizon",
+    "Score MAE"
+  ],
+  "success_contract": "No future labels are exposed; shape is exact and sealed-case MAE meets the gate.",
+  "summary": "Forecast an ordered horizon without shuffle or future-label access.",
+  "template_id": "template.time-series-forecasting",
+  "title": "Leakage-safe time-series forecast",
+  "version": "1.0.0"
+}

@@ -11,6 +11,8 @@ Choose the shortest path for what you are doing.
 4. `INTELLIGENT_SOLUTIONING.md` — inspect and run the full learned-start,
    mutation, study, and benchmark-adapter lifecycle.
 5. `REAL_WORLD_EXAMPLES.md` — executable cross-domain mechanism fixtures.
+6. `LLM_AGENT_BENCHMARK_ARENA.md` — run ten matched coding-agent tasks with
+   and without repository context, then inspect receipts and diagrams.
 
 ## I want to understand the model
 
@@ -44,7 +46,9 @@ Choose the shortest path for what you are doing.
 2. `PROVENANCE_AND_RESUME.md` — lineage and exact local recovery.
 3. `STREAMING_PROTOCOL.md` — explicit event-time semantics.
 4. `LLM_HARNESS.md` — coding and evaluation harness integration.
-5. `READINESS.md` and `SECURITY.md` — support and trust boundaries.
+5. `LLM_AGENT_BENCHMARK_ARENA.md` — OpenCode/Aider/private command matrices,
+   sealed-case scoring, paired uncertainty, and external benchmark bridges.
+6. `READINESS.md` and `SECURITY.md` — support and trust boundaries.
 
 ## I want common engineering and AI/ML examples
 

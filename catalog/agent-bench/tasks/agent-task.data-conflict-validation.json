@@ -1,0 +1,78 @@
+{
+  "acceptance_threshold": 1.0,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "collections",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:3049991f6d06eae8f2ab64383e70b0cc96d1b03654e9b1ed19e844737dcb86ef",
+      "id": "agent-case.conflict-validation.public",
+      "input_digest": "sha256:ab9fd70718834a13d8a145106d2933d153d2230cdb2395e3749ebe3e4feb3772",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:e5614ab9b2ec6425e8dbb5a47e48ab7e123d0845ed7d21e51df4ed4aa493b441",
+      "id": "agent-case.conflict-validation.holdout-a",
+      "input_digest": "sha256:c80ffdee5b4d1a03a5a923e095187dda37b389741b15cf828258ae796a92d9fc",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:d4cd934ec20608194b39b1c8d4f54409b12b16bef46ebb45a2f8c1c2da7f3443",
+      "id": "agent-case.conflict-validation.holdout-b",
+      "input_digest": "sha256:2cec824ded01d11fe899ca258ef7f8555a07a2669758996a9451036644ab27b3",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "data.validation",
+    "data.reconciliation",
+    "data.quarantine"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.data-quality.json"
+  ],
+  "id": "agent-task.data-conflict-validation",
+  "input_contract": "Records contain entity IDs and field-level claims with source and observation time.",
+  "instructions": "For each field, select the highest-precedence source. If equally authoritative claims disagree, record the sorted values and quarantine the entity. Quarantine any entity missing required fields. Accepted records must retain field-to-source provenance.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:9849d13fa28299f439f119f4a851681d5d48356379fa5769ada1aef4d7c9ca1f",
+  "oracle_id": "oracle.data-conflict-validation",
+  "output_contract": "Canonical records, explicit conflict facts, and reason-coded quarantine entries.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "oracle_score",
+  "stages": [
+    "Ingest claims",
+    "Rank authority",
+    "Detect conflict",
+    "Validate",
+    "Quarantine",
+    "Publish provenance"
+  ],
+  "success_contract": "No authoritative disagreement is silently collapsed and every required field is present.",
+  "summary": "Build a field-level source-precedence validator with provenance and quarantine.",
+  "template_id": "template.data-quality",
+  "title": "Resolve source claims without hiding conflicts",
+  "version": "1.0.0"
+}

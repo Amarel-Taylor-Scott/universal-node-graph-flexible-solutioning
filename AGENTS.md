@@ -160,6 +160,8 @@ objects, not in `NodeSpec`.
 - `solutiongraph/authoring.py` — source-bound Python node authoring and exact candidate expansion.
 - `solutiongraph/benchmarking.py` — controlled benchmark arms and offline evidence reports.
 - `solutiongraph/benchmark_adapters.py` — side-effect-free external source-manifest normalization.
+- `solutiongraph/agent_bench/` — ten coding-agent tasks, paired workspaces,
+  compatible harness/model allocation, sealed scoring, journals, analysis, and reports.
 - `solutiongraph/graph_experiments.py` — exact controls, topology mutations, common trials, and cross-graph evidence.
 - `solutiongraph/mutations.py` — deterministic typed topology authoring with compiler gating.
 - `solutiongraph/studies.py` — paired uncertainty analysis over immutable receipts.
@@ -184,6 +186,7 @@ solutiongraph doctor
 solutiongraph conformance
 solutiongraph verify --catalog-root catalog
 solutiongraph verify --catalog-root catalog --runtime subprocess
+solutiongraph agent-bench smoke --output /tmp/solutiongraph-agent-smoke
 pytest tests/test_solutiongraph*.py tests/test_workbench.py -q
 ruff check solutiongraph browsergraph tests/test_solutiongraph*.py
 ```

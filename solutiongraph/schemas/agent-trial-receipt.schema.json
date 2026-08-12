@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-trial-receipt.schema.json",
+  "title": "SolutionGraph coding-agent trial receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "agent_bench_model_version", "id", "plan", "plan_digest", "prompt_digest",
+    "context_digest", "context_bytes", "workspace_manifest_digest", "lifecycle",
+    "started_at", "ended_at", "wall_seconds", "exit_code", "timed_out",
+    "command_digest", "stdout_digest", "stderr_digest", "artifacts", "metrics",
+    "accepted", "problems", "environment_variable_names", "budget_enforcement",
+    "isolation"
+  ],
+  "properties": {
+    "agent_bench_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "plan": {"$ref": "#/$defs/plan"},
+    "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "prompt_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "context_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "context_bytes": {"type": "integer", "minimum": 0},
+    "workspace_manifest_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "lifecycle": {
+      "type": "array", "minItems": 1, "maxItems": 5, "uniqueItems": true,
+      "items": {"enum": ["ATTEMPTED", "DELIVERED", "VALID", "SCORED", "ACCEPTED"]}
+    },
+    "started_at": {"type": "string", "minLength": 1},
+    "ended_at": {"type": "string", "minLength": 1},
+    "wall_seconds": {"type": "number", "minimum": 0},
+    "exit_code": {"oneOf": [{"type": "null"}, {"type": "integer"}]},
+    "timed_out": {"type": "boolean"},
+    "command_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "stdout_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "stderr_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "artifacts": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+    "metrics": {"type": "object", "additionalProperties": {"type": "number"}},
+    "accepted": {"type": "boolean"},
+    "problems": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "environment_variable_names": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "budget_enforcement": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "isolation": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "budget": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_wall_seconds", "max_output_bytes", "max_context_bytes", "max_input_tokens", "max_output_tokens", "max_cost_units"],
+      "properties": {
+        "max_wall_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "max_output_bytes": {"type": "integer", "minimum": 1},
+        "max_context_bytes": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+        "max_input_tokens": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+        "max_output_tokens": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+        "max_cost_units": {"oneOf": [{"type": "null"}, {"type": "number", "exclusiveMinimum": 0}]}
+      }
+    },
+    "plan": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "suite_digest", "task_id", "task_digest", "condition", "harness_id", "harness_version", "model_id", "model_revision", "seed", "repetition", "budget"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "suite_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "task_id": {"$ref": "common.schema.json#/$defs/id"},
+        "task_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "condition": {"enum": ["control", "solutiongraph"]},
+        "harness_id": {"$ref": "common.schema.json#/$defs/id"},
+        "harness_version": {"type": "string", "minLength": 1},
+        "model_id": {"$ref": "common.schema.json#/$defs/id"},
+        "model_revision": {"type": "string", "minLength": 1},
+        "seed": {"type": "integer"},
+        "repetition": {"type": "integer", "minimum": 0},
+        "budget": {"$ref": "#/$defs/budget"}
+      }
+    },
+    "artifact": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "digest", "size_bytes"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "size_bytes": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

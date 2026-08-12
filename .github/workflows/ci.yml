@@ -85,6 +85,9 @@ jobs:
           /tmp/solutiongraph-wheel-test/bin/solutiongraph conformance
           /tmp/solutiongraph-wheel-test/bin/solutiongraph verify --runtime in-process
           /tmp/solutiongraph-wheel-test/bin/solutiongraph verify --runtime subprocess
+          /tmp/solutiongraph-wheel-test/bin/solutiongraph agent-bench smoke \
+            --repo-root "$GITHUB_WORKSPACE" \
+            --output /tmp/solutiongraph-wheel-agent-smoke
       - uses: actions/upload-artifact@v4
         with:
           name: python-distributions

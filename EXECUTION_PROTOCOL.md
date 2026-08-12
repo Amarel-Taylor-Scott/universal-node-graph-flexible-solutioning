@@ -273,7 +273,7 @@ An LLM coding harness adding a domain should:
 9. compare baseline and alternatives under declared objectives;
 10. add holdouts before making optimization claims.
 
-The 47 bundled programs and five notebooks demonstrate this sequence with
+The 47 bundled programs and six numbered notebooks demonstrate this sequence with
 standard-library nodes. They are executable teaching fixtures, not production
 benchmark claims for web scraping, OCR, imaging, entity resolution, or machine
 learning.

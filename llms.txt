@@ -12,6 +12,7 @@
 - [Research foundations](RESEARCH_FOUNDATIONS.md): Primary-source design rationale
 - [AutoResearch and Cholesky review](AUTORESEARCH_REVIEW.md): Package identity, campaign isolation, lineage, promotion, and numerical nodes
 - [LLM harness integration](LLM_HARNESS.md): Repository instruction and skill map
+- [LLM coding-agent benchmark arena](LLM_AGENT_BENCHMARK_ARENA.md): Ten paired control/context tasks, harness/model matrices, sealed scoring, receipts, analysis, diagrams, and public benchmark bridges
 - [Node repository protocol](NODE_REPOSITORY_PROTOCOL.md): Reusable packs, descriptors, embeddings, handshake, snapshots
 - [Node authoring guide](NODE_AUTHORING_GUIDE.md): Source-bound Python nodes, exact candidate expansion, standard-library reference, and publication checks
 - [Solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md): Cross-domain stages, atomic slots, and bounded refinement
@@ -61,10 +62,11 @@
 - [Python node authoring](solutiongraph/authoring.py): Source-bound definitions, signature checks, stable bindings, and exact finite expansion
 - [Task/solution packs](solutiongraph/tasking.py): Portable task contracts, cases, oracle identity, and exact closure validation
 - [Benchmark runner](solutiongraph/benchmarking.py): Controlled fixed/solver arms and offline JSON/HTML evidence
+- [Coding-agent benchmark arena](solutiongraph/agent_bench/): Matched workspaces, no-shell harnesses, ten task bundles, sealed scoring, journals, paired effects, and offline diagrams/reports
 - [External benchmark adapters](solutiongraph/benchmark_adapters.py): Claim-safe source-manifest normalization for six external ecosystems
 - [Standard-library nodes](solutiongraph/stdlib_pack.py): 19 dependency-free nodes, 32 bindings, discovery sidecars, and a 1,728-route data-quality program
 - [Executable domain packs](solutiongraph/examples/): 47 trusted local programs and 379 nodes across data, streaming, GIS, APIs, frontend testing, rendering, web, documents, media, ML, identity, operations, security, science, synthetic data, reinforcement learning, MLOps, and LLM evaluation
-- [Example notebooks](notebooks/): Five end-to-end compile, execute, verify, and receipt notebooks
+- [Example notebooks](notebooks/): Six numbered compile, execute, verify, receipt, ML, and coding-agent A/B notebooks
 - [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
 - [Reference catalogue](catalog/): 31 semantic templates, six node packs, one linked-graph harness plus typed evidence closure, 52 Arena tasks, and six benchmark/solution packs
 - [Browser adapter](browsergraph/): Concrete runtime proof

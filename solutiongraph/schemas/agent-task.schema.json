@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-task.schema.json",
+  "title": "SolutionGraph coding-agent task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "agent_bench_model_version", "id", "version", "title", "summary",
+    "instructions", "input_contract", "output_contract", "success_contract",
+    "categories", "template_id", "stages", "cases", "oracle_id",
+    "oracle_digest", "score_metric", "score_direction", "acceptance_threshold",
+    "context_sources", "allowed_imports", "required_artifacts", "claim_scope",
+    "limitations"
+  ],
+  "properties": {
+    "agent_bench_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "summary": {"type": "string", "minLength": 1},
+    "instructions": {"type": "string", "minLength": 1},
+    "input_contract": {"type": "string", "minLength": 1},
+    "output_contract": {"type": "string", "minLength": 1},
+    "success_contract": {"type": "string", "minLength": 1},
+    "categories": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "template_id": {"$ref": "common.schema.json#/$defs/id"},
+    "stages": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "cases": {
+      "type": "array", "minItems": 2,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "split", "input_digest", "expected_digest", "candidate_readable", "tags"],
+        "properties": {
+          "id": {"$ref": "common.schema.json#/$defs/id"},
+          "split": {"enum": ["development", "validation", "holdout", "stress"]},
+          "input_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "expected_digest": {"$ref": "common.schema.json#/$defs/digest"},
+          "candidate_readable": {"type": "boolean"},
+          "tags": {
+            "type": "array", "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "oracle_id": {"$ref": "common.schema.json#/$defs/id"},
+    "oracle_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "score_metric": {"$ref": "common.schema.json#/$defs/id"},
+    "score_direction": {"enum": ["maximize", "minimize"]},
+    "acceptance_threshold": {"type": "number"},
+    "context_sources": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "allowed_imports": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "required_artifacts": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "claim_scope": {"enum": ["mechanism-fixture", "internal-dataset", "public-benchmark", "production-shadow"]},
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  }
+}

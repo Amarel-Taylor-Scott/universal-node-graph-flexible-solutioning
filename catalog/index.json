@@ -1,4 +1,11 @@
 {
+  "agent_bench": {
+    "path": "agent-bench/index.json",
+    "reference_smoke_trials": 20,
+    "sealed_payloads_published": false,
+    "suite_count": 2,
+    "task_count": 10
+  },
   "arena": {
     "executable_fixture_count": 36,
     "path": "arena/index.json",

@@ -22,6 +22,7 @@ solutiongraph/
 ├── benchmarking.py       controlled arms, runner, evidence model, offline report
 ├── benchmark_library.py  six bundled task/solution benchmark packs
 ├── benchmark_adapters.py strict external source-manifest normalization seams
+├── agent_bench/          coding-agent tasks, workspaces, adapters, scoring, receipts, analysis
 ├── search.py             prior, beam, sprout, exhaustive search + honest accounting
 ├── topology.py           explicit alternative DAG families + route search accounting
 ├── graph_experiments.py  fixed controls + comparable topology/route execution evidence
@@ -54,6 +55,7 @@ solutiongraph/
 └── schemas/              strict portable JSON Schema 2020-12 wire contracts
 
 catalog/
+├── agent-bench/          ten digest-only task contracts and two benchmark suites
 ├── index.json            content-addressed template/node-pack/benchmark index
 ├── templates/            544 atomic obligations across 31 varied templates
 ├── nodepacks/            six portable registries and discovery sidecars
@@ -150,6 +152,17 @@ reads immutable receipts and never edits experiment evidence. External
 benchmark adapters normalize exact source manifests but perform no network,
 credential, execution, submission, or certification action. See
 `INTELLIGENT_SOLUTIONING.md`.
+
+`solutiongraph.agent_bench` is a separate authorship-evaluation layer. It
+materializes paired workspaces with identical task prompts, adds digest-pinned
+repository context only to the treatment arm, invokes a no-shell harness
+adapter, evaluates generated artifacts behind a separate lifecycle boundary,
+and appends exact receipts before computing paired effects. Harness/model
+compatibility is explicit, pair order is counterbalanced, and context cannot
+bypass static, protected-file, deterministic replay, sealed-case, or oracle
+gates. The bundled fixture is intentionally model-free. External generated code
+still needs a microVM or remote adversarial boundary. See
+`LLM_AGENT_BENCHMARK_ARENA.md`.
 
 Discovery is deliberately asymmetric: registries may evolve continuously, but
 a compiler consumes an immutable receipt-backed snapshot. Optional descriptions

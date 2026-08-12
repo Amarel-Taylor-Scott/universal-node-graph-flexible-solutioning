@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "agent-benchmark-report.schema.json",
+  "title": "SolutionGraph coding-agent benchmark report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "analysis_model_version", "status", "suite", "suite_digest", "claim_scope",
+    "planned_trials", "executed_trials", "skipped_trials", "accepted_trials",
+    "unmatched_receipt_ids", "evidence_digest", "receipts", "effects",
+    "decisions", "limitations"
+  ],
+  "properties": {
+    "analysis_model_version": {"const": "0.1"},
+    "status": {"enum": ["benchmark.completed", "benchmark.completed-partial"]},
+    "suite": {"$ref": "agent-benchmark-suite.schema.json"},
+    "suite_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "claim_scope": {"enum": ["mechanism-fixture", "internal-dataset", "public-benchmark", "production-shadow"]},
+    "planned_trials": {"type": "integer", "minimum": 0},
+    "executed_trials": {"type": "integer", "minimum": 0},
+    "skipped_trials": {"type": "integer", "minimum": 0},
+    "accepted_trials": {"type": "integer", "minimum": 0},
+    "unmatched_receipt_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "evidence_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "receipts": {"type": "array", "items": {"$ref": "agent-trial-receipt.schema.json"}},
+    "effects": {"type": "array", "items": {"$ref": "#/$defs/effect"}},
+    "decisions": {"type": "array", "items": {"$ref": "#/$defs/decision"}},
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "effect": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scope", "task_id", "harness_id", "model_id", "metric", "direction", "pairs", "control_mean", "solutiongraph_mean", "raw_mean_delta", "oriented_mean_delta", "oriented_median_delta", "confidence_lower", "confidence_upper", "win_rate", "tie_rate", "practical_effect", "inference"],
+      "properties": {
+        "scope": {"enum": ["task", "overall"]},
+        "task_id": {"oneOf": [{"type": "null"}, {"$ref": "common.schema.json#/$defs/id"}]},
+        "harness_id": {"$ref": "common.schema.json#/$defs/id"},
+        "model_id": {"$ref": "common.schema.json#/$defs/id"},
+        "metric": {"$ref": "common.schema.json#/$defs/id"},
+        "direction": {"enum": ["maximize", "minimize"]},
+        "pairs": {"type": "integer", "minimum": 1},
+        "control_mean": {"type": "number"},
+        "solutiongraph_mean": {"type": "number"},
+        "raw_mean_delta": {"type": "number"},
+        "oriented_mean_delta": {"type": "number"},
+        "oriented_median_delta": {"type": "number"},
+        "confidence_lower": {"type": "number"},
+        "confidence_upper": {"type": "number"},
+        "win_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "tie_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "practical_effect": {"type": "number", "minimum": 0},
+        "inference": {"enum": ["solutiongraph-superior", "control-superior", "practically-equivalent", "inconclusive"]}
+      }
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "state", "trial_receipt_ids", "reason", "authorized"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "state": {"enum": ["SELECTED", "WINNER", "PROMOTED"]},
+        "trial_receipt_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+        "reason": {"type": "string", "minLength": 1},
+        "authorized": {"type": "boolean"}
+      }
+    }
+  }
+}

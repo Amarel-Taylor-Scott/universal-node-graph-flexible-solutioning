@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from solutiongraph.agent_bench import REFERENCE_AGENT_TASKS
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.catalog import catalog_documents, write_catalog
@@ -75,6 +76,8 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + (3 + len(DATA_SCIENCE_NODES))
         + 1
         + 1
+        + len(REFERENCE_AGENT_TASKS)
+        + 3
         + len(REFERENCE_TEMPLATES.templates)
         + len(UNIVERSAL_DAG_ARENA.tasks)
         + 1
@@ -107,6 +110,18 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         "task_case_count": 24,
         "solution_pack_count": 6,
     }
+    assert index["agent_bench"] == {
+        "path": "agent-bench/index.json",
+        "task_count": 10,
+        "suite_count": 2,
+        "reference_smoke_trials": 20,
+        "sealed_payloads_published": False,
+    }
+    assert first["agent-bench/index.json"]["sealed_payloads_published"] is False
+    assert all(
+        f"agent-bench/tasks/{bundle.spec.id}.json" in first
+        for bundle in REFERENCE_AGENT_TASKS
+    )
     assert index["node_packs"][0]["embedding_record_count"] == 0
     capabilities = first["nodepacks/reference-core/registry-capabilities.json"]
     assert [mode["id"] for mode in capabilities["query_modes"]] == [

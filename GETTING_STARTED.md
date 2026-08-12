@@ -231,7 +231,37 @@ node with a credentialed, policy-aware connector before making USPS validation
 claims. The Arena preserves this limitation in its task metadata and verifier
 details.
 
-## 10. Validate a contribution
+## 10. Compare coding agents with and without repository context
+
+Run the safe 10-task/20-trial transport and evaluator smoke:
+
+```bash
+solutiongraph agent-bench tasks
+solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
+solutiongraph agent-bench journal-verify \
+  .artifacts/agent-benchmark-smoke/trial-receipts.jsonl
+```
+
+The fixture uses the same prompt, task, public case, harness label, model label,
+budget, seed, and repetition across each pair. Only the treatment workspace
+receives the digest-pinned SolutionGraph context pack. It calls no model and
+should report practical equivalence; that proves transport, evaluator, receipt,
+analysis, diagram, and report behavior—not an efficacy uplift.
+
+Prepare a real matrix without executing it:
+
+```bash
+solutiongraph agent-bench example-config --output agent-benchmark.local.json
+solutiongraph agent-bench plan agent-benchmark.local.json
+```
+
+Pin and enable the intended OpenCode, Aider, or private command harnesses and
+small-to-frontier models, then use `agent-bench run ... --allow-external` only
+inside an appropriate isolation boundary. Follow
+`LLM_AGENT_BENCHMARK_ARENA.md` and notebook
+`notebooks/06_llm_harness_ab_arena.ipynb` for the full protocol and analysis.
+
+## 11. Validate a contribution
 
 ```bash
 solutiongraph catalog export --output catalog

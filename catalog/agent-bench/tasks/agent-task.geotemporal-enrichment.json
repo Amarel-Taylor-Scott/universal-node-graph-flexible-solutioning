@@ -1,0 +1,81 @@
+{
+  "acceptance_threshold": 1.0,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "datetime",
+    "re",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:782e71deb2f482d03a7ac334f4ff866295f62cc07f669111beae04b7c9da9a05",
+      "id": "agent-case.geotemporal.public",
+      "input_digest": "sha256:3e612762c983da5cda5676c944a539ea2cdda20d76e3b113ede23a044d0654e4",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:e46b9a2687ccbeb72474276cfe65c43f441999a93aac020718b440e1441c785e",
+      "id": "agent-case.geotemporal.holdout-a",
+      "input_digest": "sha256:13bf3f3e5b051d8cc0b601b94143460688d53e66a54c108af02673d44ea33971",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:06a713a33ba36b3cc6d5a38e00272629214df65a4a3d4d79b504656eb2d36ad5",
+      "id": "agent-case.geotemporal.holdout-b",
+      "input_digest": "sha256:89101d3c35bdcd77d264dc0d6155746a4dd120aab0b2ad8da0a198780515d369",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "data.enrichment",
+    "geospatial.enrichment",
+    "time.enrichment"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.geospatial-analytics.json",
+    "ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md"
+  ],
+  "id": "agent-task.geotemporal-enrichment",
+  "input_contract": "Rows plus explicit place and event reference tables; local_time is naive local ISO-8601.",
+  "instructions": "Normalize city/state/ZIP, require an exact reference-table match, preserve fixture authority, derive local date/day name and UTC from the supplied fixed offset, join a same-city/local-date event when present, and quarantine unknown places. Do not call a network service.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain.",
+    "Fixed UTC offsets are fixture data and do not replace a versioned timezone database."
+  ],
+  "oracle_digest": "sha256:9849d13fa28299f439f119f4a851681d5d48356379fa5769ada1aef4d7c9ca1f",
+  "oracle_id": "oracle.geotemporal-enrichment",
+  "output_contract": "Ordered enriched rows with geographic, UTC, calendar, event, and authority fields plus quarantine.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "oracle_score",
+  "stages": [
+    "Normalize place",
+    "Verify reference",
+    "Resolve offset",
+    "Derive calendar",
+    "Join event",
+    "Publish provenance"
+  ],
+  "success_contract": "Every accepted row matches the supplied authority and all derived times are exact.",
+  "summary": "Join an explicit offline place authority with local time and event context.",
+  "template_id": "template.geospatial-analytics",
+  "title": "Enrich place and local-time records",
+  "version": "1.0.0"
+}

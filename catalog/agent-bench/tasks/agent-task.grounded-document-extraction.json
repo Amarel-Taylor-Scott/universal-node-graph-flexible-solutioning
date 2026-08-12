@@ -1,0 +1,81 @@
+{
+  "acceptance_threshold": 1.0,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "re",
+    "typing",
+    "hashlib",
+    "json"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:9304ca17c799ecaed47a26ec8f05d03af17a280cec99519972383bf67d3840f1",
+      "id": "agent-case.document.public",
+      "input_digest": "sha256:924d3e29a691fe89b1bcd5c30e10e90f7a7a100830f652956aa9f8613bc71380",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:9e3e3703c1d6a7f3492befa8487279861a507af74fa902ee00bd375f5bd295b9",
+      "id": "agent-case.document.holdout-a",
+      "input_digest": "sha256:667ba3bda8e2c11716f7f67ace4fb0e04cd3938fa1e8fef309f666bcfd44a91a",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:64f062d545f3e9884ba3753487bc004c948544934c93ee86f99ed860a4712ccc",
+      "id": "agent-case.document.holdout-b",
+      "input_digest": "sha256:9db15edaf75aaa91647d8a7bfa0131e2b30c55796e3e2932cf7fff6abae11366",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "document.extraction",
+    "document.grounding",
+    "data.validation"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.document-intelligence.json",
+    "ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md"
+  ],
+  "id": "agent-task.grounded-document-extraction",
+  "input_contract": "Ordered source blocks with IDs and field names plus capture-group regular expressions.",
+  "instructions": "Apply each supplied regular expression to every block. A unique match yields its captured value and citation. Zero or multiple matches yield a null value, all matching citations, and a missing or ambiguous error. Bind the result to the digest of the original block array.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:9849d13fa28299f439f119f4a851681d5d48356379fa5769ada1aef4d7c9ca1f",
+  "oracle_id": "oracle.grounded-document-extraction",
+  "output_contract": "Field values/errors with exact block citations and one source digest.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "oracle_score",
+  "stages": [
+    "Identify blocks",
+    "Apply extractors",
+    "Detect ambiguity",
+    "Ground citations",
+    "Validate schema",
+    "Bind provenance"
+  ],
+  "success_contract": "No extracted value lacks evidence and ambiguous or absent values are never invented.",
+  "summary": "Extract requested fields while preserving exact block-level evidence.",
+  "template_id": "template.document-intelligence",
+  "title": "Grounded document extraction",
+  "version": "1.0.0"
+}

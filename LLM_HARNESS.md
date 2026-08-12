@@ -36,6 +36,7 @@ large prompt into every vendor-specific file.
 | `AGENT_PLAYBOOK.md` | Patterns, anti-patterns, and end-to-end delivery workflow | Read before implementing a new domain |
 | `RESEARCH_FOUNDATIONS.md` | Primary-source rationale | Read when evaluating or changing a tradeoff |
 | `AUTORESEARCH_REVIEW.md` | Verified AutoResearch/package lessons and numerical-node decomposition | Read for autonomous campaigns or solver packages |
+| `LLM_AGENT_BENCHMARK_ARENA.md` | Ten matched coding-agent tasks, command harness/model matrices, sealed scoring, uncertainty, diagrams, and public benchmark bridges | Read before testing whether repository context helps an agent |
 | `llms.txt` | Machine-friendly documentation map | Entry point for crawlers and unfamiliar harnesses |
 
 ## Why not duplicate the full prompt?
@@ -86,3 +87,14 @@ template digest. It never invents implementations, authority, or evidence.
 11. For generated-code campaigns, freeze the evaluation boundary before the
    first proposal, preserve a population DAG and negative evidence, and keep
    candidate code unable to redefine or inspect hidden evaluation assets.
+
+## Measure the harness itself
+
+Use `solutiongraph agent-bench` when the experimental question is whether this
+repository's context improves a coding agent, rather than which compiler-valid
+route wins inside one graph. The arena keeps an identical prompt and task in
+both arms and varies only the digest-pinned context pack. Run the model-free
+smoke first, plan the complete compatible matrix, and execute external commands
+only with explicit authorization and an appropriate isolation boundary. See
+`LLM_AGENT_BENCHMARK_ARENA.md` for the task set, lifecycle, analysis, and claim
+limits.

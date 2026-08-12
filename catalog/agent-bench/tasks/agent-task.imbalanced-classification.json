@@ -1,0 +1,80 @@
+{
+  "acceptance_threshold": 0.95,
+  "agent_bench_model_version": "0.1",
+  "allowed_imports": [
+    "math",
+    "statistics",
+    "typing"
+  ],
+  "cases": [
+    {
+      "candidate_readable": true,
+      "expected_digest": "sha256:3fc269cc4924bdeec1a0bf4952cdefdee7d61cfd55c8f1ea565e179836017f17",
+      "id": "agent-case.classification.public",
+      "input_digest": "sha256:385d34765e27a7693bf97338d87cb53b3b1f108c274de24b9f19fada1676e3d9",
+      "split": "development",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:1096ba16fbb3142ab2ade212557742930b71a8b879da04ca94c1d7047eb5f32c",
+      "id": "agent-case.classification.holdout-a",
+      "input_digest": "sha256:7b6ac326c19f979fd7c9e93ae269ee0d51015d198774b275bb11165f1185c95c",
+      "split": "holdout",
+      "tags": []
+    },
+    {
+      "candidate_readable": false,
+      "expected_digest": "sha256:8fff708205155940a526cbd8281873b151d2b4b5fd1dd38b6187a3b400c1d5ba",
+      "id": "agent-case.classification.holdout-b",
+      "input_digest": "sha256:cb3da3fe38b9a8151c8ed948f63cf2b88870be89a27ba43695e42473e3137aee",
+      "split": "stress",
+      "tags": []
+    }
+  ],
+  "categories": [
+    "ml.classification",
+    "ml.imbalanced",
+    "ml.calibration"
+  ],
+  "claim_scope": "mechanism-fixture",
+  "context_sources": [
+    "AGENT_PLAYBOOK.md",
+    "TASK_AND_SOLUTION_PACK_PROTOCOL.md",
+    "BENCHMARK_PROTOCOL.md",
+    "INTELLIGENT_SOLUTIONING.md",
+    ".agents/skills/solve-universal-dag/SKILL.md",
+    ".agents/skills/benchmark-solution-graph/SKILL.md",
+    "catalog/templates/template.kaggle-tabular.json",
+    "DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md"
+  ],
+  "id": "agent-task.imbalanced-classification",
+  "input_contract": "One named numeric feature, a binary target, labeled train rows, and test rows.",
+  "instructions": "Learn the direction and threshold from the labeled training rows; emit one binary label and probability per test row. The evaluator gates minority F1 and recall, so a majority-only model cannot pass. Preserve input order and use no third-party dependencies.",
+  "limitations": [
+    "Repository cases are transparent mechanism fixtures; sealed means absent from the candidate workspace, not protected by a separate host trust domain."
+  ],
+  "oracle_digest": "sha256:b87bc716df878ca5fb587360a807646a7a83e4cfae925af88084b42ba4da5955",
+  "oracle_id": "oracle.imbalanced-classification",
+  "output_contract": "Parallel labels and probabilities arrays in original test-row order.",
+  "required_artifacts": [
+    "solution.py",
+    "SOLUTION.md",
+    "solution.mmd"
+  ],
+  "score_direction": "maximize",
+  "score_metric": "minority_f1",
+  "stages": [
+    "Profile balance",
+    "Fit direction",
+    "Calibrate score",
+    "Choose threshold",
+    "Predict",
+    "Slice-evaluate"
+  ],
+  "success_contract": "Probability domains, output shape, minority F1, and minority recall all pass.",
+  "summary": "Produce probability-bearing predictions that protect the minority class.",
+  "template_id": "template.kaggle-tabular",
+  "title": "Imbalanced binary classification",
+  "version": "1.0.0"
+}
