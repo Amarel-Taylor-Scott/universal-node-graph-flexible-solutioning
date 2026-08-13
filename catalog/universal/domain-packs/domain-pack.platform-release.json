@@ -1,0 +1,77 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "frontend-release-journey",
+        "dependency-assurance"
+      ],
+      "id": "capability.platform.release-gate",
+      "intent": "Evaluate compatibility, security, quality, and policy evidence before promotion.",
+      "obligation_id": "obligation.validate",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.deployment-release"
+      ],
+      "title": "Release gate"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.airflow",
+        "adapter.orchestrator.kubernetes"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [
+        "An operator must provide an authenticated deployment runtime."
+      ],
+      "example_ids": [],
+      "id": "capability.platform.deployment",
+      "intent": "Export a frozen plan to an external scheduler without changing its identity.",
+      "obligation_id": "obligation.serve",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.deployment-release"
+      ],
+      "title": "Deployment projection"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "model-release-monitoring-and-rollback"
+      ],
+      "id": "capability.platform.rollback",
+      "intent": "Preserve promotion identity, health evidence, and a reversible rollback path.",
+      "obligation_id": "obligation.recover",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.deployment-release"
+      ],
+      "title": "Release rollback"
+    }
+  ],
+  "description": "Build, dependency, migration, release-gate, and rollback graphs.",
+  "id": "domain-pack.platform-release",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.validate",
+    "obligation.serve",
+    "obligation.recover"
+  ],
+  "standard_ids": [
+    "standard.in-toto-slsa",
+    "standard.opentelemetry"
+  ],
+  "title": "Platform and release engineering",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

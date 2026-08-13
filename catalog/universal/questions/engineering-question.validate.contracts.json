@@ -1,0 +1,23 @@
+{
+  "effort_cost": 1,
+  "evidence_requests": [
+    "task contract",
+    "policy version"
+  ],
+  "id": "engineering-question.validate.contracts",
+  "obligation_id": "obligation.validate",
+  "priority": 10,
+  "prompt": "Which structural, semantic, policy, and authority checks are hard gates?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "positive and negative fixtures",
+    "mutation tests"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Softening a hard gate lets optimization trade away correctness."
+}

@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "SLO definition",
+    "capacity model"
+  ],
+  "id": "engineering-question.serve.slo",
+  "obligation_id": "obligation.serve",
+  "priority": 8,
+  "prompt": "Which latency, availability, throughput, freshness, and degradation objectives apply?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "load fixture",
+    "degradation test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "A correct result can still fail its operational promise."
+}

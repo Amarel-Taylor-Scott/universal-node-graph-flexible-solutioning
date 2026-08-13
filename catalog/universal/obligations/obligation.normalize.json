@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "canonical names",
+    "unit conversion",
+    "date normalization",
+    "identifier cleanup"
+  ],
+  "category_ids": [
+    "dag.prepare.normalize"
+  ],
+  "description": "Convert equivalent representations to a declared canonical form.",
+  "design_prompt": "What canonical representation, locale, units, and loss policy are required?",
+  "id": "obligation.normalize",
+  "title": "Normalize"
+}

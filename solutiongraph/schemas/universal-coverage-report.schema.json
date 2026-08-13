@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universal-coverage-report.schema.json",
+  "title": "Evidence-derived universal capability coverage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "universal_engineering_model_version", "id", "generated_from", "domains",
+    "status_counts", "claim_boundary"
+  ],
+  "properties": {
+    "universal_engineering_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "generated_from": {"$ref": "common.schema.json#/$defs/digest"},
+    "domains": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/domain"}},
+    "status_counts": {"$ref": "#/$defs/statusCounts"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "statusCounts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["strong", "thin", "catalog-only", "blocked", "empty"],
+      "properties": {
+        "strong": {"type": "integer", "minimum": 0},
+        "thin": {"type": "integer", "minimum": 0},
+        "catalog-only": {"type": "integer", "minimum": 0},
+        "blocked": {"type": "integer", "minimum": 0},
+        "empty": {"type": "integer", "minimum": 0}
+      }
+    },
+    "domain": {
+      "type": "object", "additionalProperties": false,
+      "required": ["domain_pack_id", "domain_pack_digest", "capabilities", "status_counts", "lowest_maturity_level"],
+      "properties": {
+        "domain_pack_id": {"$ref": "common.schema.json#/$defs/id"},
+        "domain_pack_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "capabilities": {"type": "array", "items": {"$ref": "#/$defs/capability"}},
+        "status_counts": {"$ref": "#/$defs/statusCounts"},
+        "lowest_maturity_level": {"pattern": "^C[0-7]$"}
+      }
+    },
+    "capability": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "capability_id", "obligation_id", "status", "maturity_level",
+        "satisfied_gates", "next_gate", "resolved_assets", "missing_assets",
+        "route_count_upper_bound", "blockers", "evidence_digest"
+      ],
+      "properties": {
+        "capability_id": {"$ref": "common.schema.json#/$defs/id"},
+        "obligation_id": {"$ref": "common.schema.json#/$defs/id"},
+        "status": {"enum": ["strong", "thin", "catalog-only", "blocked", "empty"]},
+        "maturity_level": {"pattern": "^C[0-7]$"},
+        "satisfied_gates": {
+          "type": "array", "uniqueItems": true,
+          "items": {"pattern": "^C[1-7]$"}
+        },
+        "next_gate": {"oneOf": [{"const": "complete"}, {"pattern": "^C[1-7]$"}]},
+        "resolved_assets": {"$ref": "#/$defs/stringArray"},
+        "missing_assets": {"$ref": "#/$defs/stringArray"},
+        "route_count_upper_bound": {"type": "integer", "minimum": 0},
+        "blockers": {"$ref": "#/$defs/stringArray"},
+        "evidence_digest": {"$ref": "common.schema.json#/$defs/digest"}
+      }
+    },
+    "stringArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

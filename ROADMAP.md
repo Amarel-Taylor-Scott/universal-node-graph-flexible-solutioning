@@ -108,6 +108,16 @@ diagram or candidate count is not, by itself, progress.
   all-visible E1–E10 planning, explicit LLM/human/external authority, portable
   reports, C0–C7 maturity derived from contiguous evidence gates, and a
   five-node/34-binding graph-native planning and dossier pack.
+- A universal engineering decision layer with 14 obligation families, 13
+  domain packs, 42 all-visible questions, ten task-context channels, explicit
+  response authority, and capability coverage derived from exact repository
+  assets through contiguous C0–C7 gates.
+- Side-effect-free OpenAPI, CloudEvents, and structural BPMN authoring
+  projections plus portable frozen-plan exports for Airflow, Dagster, Temporal,
+  and Kubernetes adapter implementations.
+- Opt-in exact runtime payload validation at graph and node boundaries, plus
+  bounded local parallel experiment allocation with fresh execution state and
+  deterministic evidence order.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 
@@ -178,6 +188,10 @@ without weakening contracts or authority.
   tenancy, authorization, usage accounting, and operational budgets.
 - Benchmark across document extraction, web automation, image processing, data
   cleaning, ML pipelines, software engineering, and business workflows.
+- Promote thin domain-pack cells one evidence gate at a time; prioritize human
+  workflow recovery, enforcing security adapters, platform release examples,
+  native integration adapters, and real operational evidence without treating
+  catalog breadth as execution maturity.
 
 **Release gate:** improvements reproduce across multiple real domains, task
 classes, models, seeds, and environments.

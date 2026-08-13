@@ -1,0 +1,15 @@
+{
+  "description": "Project OpenAPI path operations into typed authoring evidence.",
+  "id": "adapter.openapi",
+  "integration_model_version": "0.1",
+  "limitations": [
+    "The projection does not resolve remote references, generate clients, send requests, or certify OpenAPI conformance."
+  ],
+  "output_kind": "projection.interface-operations",
+  "source_kind": "standard.openapi",
+  "supported_versions": [
+    "3.0",
+    "3.1",
+    "3.2"
+  ]
+}

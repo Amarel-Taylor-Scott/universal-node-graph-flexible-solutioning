@@ -1,0 +1,16 @@
+{
+  "capability_examples": [
+    "database write",
+    "artifact store",
+    "checkpoint",
+    "append-only ledger"
+  ],
+  "category_ids": [
+    "dag.operate.migrate",
+    "dag.govern.provenance"
+  ],
+  "description": "Store state or artifacts with identity, retention, and consistency semantics.",
+  "design_prompt": "Which consistency, idempotency, retention, encryption, and lineage rules apply?",
+  "id": "obligation.persist",
+  "title": "Persist"
+}

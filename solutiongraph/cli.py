@@ -47,6 +47,10 @@ def _doctor() -> int:
         DESIGN_ATLAS_NODE_SPECS,
     )
     from solutiongraph.examples.tasks import all_examples
+    from solutiongraph.integrations import (
+        REFERENCE_INTEGRATION_ADAPTERS,
+        validate_integration_profiles,
+    )
     from solutiongraph.interrogation.node_pack import (
         INTERROGATION_DESCRIPTORS,
         INTERROGATION_NODE_DEFINITIONS,
@@ -67,8 +71,18 @@ def _doctor() -> int:
         STANDARD_LIBRARY_NODE_SPECS,
     )
     from solutiongraph.template_library import REFERENCE_TEMPLATES
+    from solutiongraph.universal import (
+        REFERENCE_DOMAIN_PACKS,
+        REFERENCE_ENGINEERING_QUESTIONS,
+        REFERENCE_OBLIGATIONS,
+        reference_coverage_report,
+        validate_universal_catalog,
+    )
 
     problems: list[str] = []
+    problems.extend(validate_universal_catalog())
+    problems.extend(validate_integration_profiles())
+    problems.extend(reference_coverage_report().validate())
     problems.extend(validate_design_atlas())
     problems.extend(DESIGN_ATLAS_NODE_PACK.validate())
     problems.extend(
@@ -162,6 +176,10 @@ def _doctor() -> int:
         f"arena_tasks={len(UNIVERSAL_DAG_ARENA.tasks)} "
         f"benchmarks={len(REFERENCE_BENCHMARKS)} "
         f"agent_bench_tasks={len(REFERENCE_AGENT_TASKS)} "
+        f"universal_obligations={len(REFERENCE_OBLIGATIONS)} "
+        f"universal_domains={len(REFERENCE_DOMAIN_PACKS)} "
+        f"universal_questions={len(REFERENCE_ENGINEERING_QUESTIONS)} "
+        f"integration_adapters={len(REFERENCE_INTEGRATION_ADAPTERS)} "
         f"interrogation_concepts={len(REFERENCE_CONCEPTS)} "
         f"question_packs={len(REFERENCE_QUESTION_PACKS)} "
         f"questions={len(REFERENCE_QUESTIONS)} "
@@ -1167,6 +1185,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     add_design_atlas_parser(commands)
 
+    from solutiongraph.universal.cli import add_universal_parser
+
+    add_universal_parser(commands)
+
     concepts = commands.add_parser(
         "concepts", help="Inspect semantic concepts and map dataset fields"
     )
@@ -1521,6 +1543,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             from solutiongraph.design_atlas.cli import run_design_atlas_command
 
             return run_design_atlas_command(args)
+        if args.command == "universal":
+            from solutiongraph.universal.cli import run_universal_command
+
+            return run_universal_command(args)
         if args.command == "concepts":
             if args.concept_command == "list":
                 return _concepts_list(args.json)

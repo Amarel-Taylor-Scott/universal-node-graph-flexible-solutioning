@@ -1,0 +1,75 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "incident-triage",
+        "web-change-monitoring"
+      ],
+      "id": "capability.sre.signal-correlation",
+      "intent": "Correlate traces, metrics, logs, changes, and dependency evidence.",
+      "obligation_id": "obligation.observe",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.observability-sre"
+      ],
+      "title": "Signal correlation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "incident-triage"
+      ],
+      "id": "capability.sre.incident-triage",
+      "intent": "Rank hypotheses and mitigations while preserving abstention and evidence.",
+      "obligation_id": "obligation.decide",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.incident-response"
+      ],
+      "title": "Incident triage"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.temporal"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "model-release-monitoring-and-rollback"
+      ],
+      "id": "capability.sre.recovery",
+      "intent": "Apply bounded retry, compensation, restore, or rollback and verify health.",
+      "obligation_id": "obligation.recover",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.incident-response"
+      ],
+      "title": "Verified recovery"
+    }
+  ],
+  "description": "Signal correlation, triage, mitigation, recovery, and post-incident evidence.",
+  "id": "domain-pack.sre-incident",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.observe",
+    "obligation.decide",
+    "obligation.recover"
+  ],
+  "standard_ids": [
+    "standard.opentelemetry"
+  ],
+  "title": "SRE and incident response",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

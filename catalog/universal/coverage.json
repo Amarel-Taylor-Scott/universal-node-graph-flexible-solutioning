@@ -1,0 +1,1091 @@
+{
+  "claim_boundary": "Coverage is derived from exact checked-in templates, compiler-valid example route spaces, mechanism benchmarks, question packs, and adapter manifests. It is not a production-readiness or domain-superiority claim.",
+  "domains": [
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.data.reference-enrichment",
+          "evidence_digest": "sha256:457ec2cf5c8e7cc67e62509aca6fc56583199aea8d3bbf63fc262a941b78c779",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.enrich",
+          "resolved_assets": [
+            "template:template.geospatial-analytics",
+            "example:geotemporal-enrichment",
+            "example:address-reference-verification",
+            "question-pack:question-pack.geography",
+            "question-pack:question-pack.datetime"
+          ],
+          "route_count_upper_bound": 40,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.data.multi-source-reconciliation",
+          "evidence_digest": "sha256:1351a60968d510fcf8403ad91f7039ae5635ac5829a4b87291ff1f326b5fddb8",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.reconcile",
+          "resolved_assets": [
+            "template:template.batch-data-pipeline",
+            "example:multi-feed-analytical-dataset",
+            "example:transaction-reconciliation",
+            "question-pack:question-pack.transaction"
+          ],
+          "route_count_upper_bound": 24,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.data.quality-validation",
+          "evidence_digest": "sha256:0e683e5fb7182090023cbc9d570ffcc8745d54267252ce961c9790264c0f457c",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.validate",
+          "resolved_assets": [
+            "template:template.data-quality",
+            "example:data-cleanup",
+            "example:stdlib-data-quality",
+            "benchmark:benchmark.data-cleaning",
+            "benchmark:benchmark.stdlib-data-quality",
+            "question-pack:question-pack.generic-tabular"
+          ],
+          "route_count_upper_bound": 1732,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        }
+      ],
+      "domain_pack_digest": "sha256:274e702cd1de837b910719d8ef85f6bbc3bfa97be78362a8fc4ef50376085f69",
+      "domain_pack_id": "domain-pack.data-integration",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 1,
+        "thin": 2
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.backend.compensating-recovery",
+          "evidence_digest": "sha256:a44d322842fbbef6cbb85f511fc9d8e9c35035fbc58947861df9413d1cdfb7d0",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.recover",
+          "resolved_assets": [
+            "template:template.claims-processing",
+            "example:transaction-reconciliation",
+            "adapter:adapter.orchestrator.temporal"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.backend.service-delivery",
+          "evidence_digest": "sha256:a845d9083d42d6a7b58f21091e7bb2d26b7576b407a0b6128d7c92825f80e220",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.serve",
+          "resolved_assets": [
+            "template:template.api-service",
+            "example:idempotent-api-contract",
+            "adapter:adapter.orchestrator.kubernetes"
+          ],
+          "route_count_upper_bound": 64,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.backend.api-contract",
+          "evidence_digest": "sha256:e26292105d86c5f3b678025d462eebd4ce64f2e9d0329fe8e2b9deccdd075553",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.validate",
+          "resolved_assets": [
+            "template:template.api-service",
+            "example:idempotent-api-contract",
+            "adapter:adapter.openapi"
+          ],
+          "route_count_upper_bound": 64,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:1446663ed0b75d4c0c5e5e858911352429b0ba21b2419d57291cd316c6eb7e7f",
+      "domain_pack_id": "domain-pack.backend-api",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 0,
+        "thin": 3
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.event.cloudevents-ingest",
+          "evidence_digest": "sha256:e8e0e4bf05c44417fe5ce404a5a121ce11b85c7bf40d9d61bac3edff42ef68b9",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.acquire",
+          "resolved_assets": [
+            "template:template.event-driven-system",
+            "example:event-time-windowing",
+            "adapter:adapter.cloudevents"
+          ],
+          "route_count_upper_bound": 64,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.event.time-aware-routing",
+          "evidence_digest": "sha256:59c32397356f64cddf6fcdd3ea273176be8d3778e833e8d19ed5ba89b9d8e1ef",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.decide",
+          "resolved_assets": [
+            "template:template.event-driven-system",
+            "example:event-time-windowing",
+            "example:user-journey-modeling"
+          ],
+          "route_count_upper_bound": 96,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.event.telemetry",
+          "evidence_digest": "sha256:4f41c647f7185771ece897998a8f17ed9ab9c862f079aebb75bdbceb3984939a",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.observe",
+          "resolved_assets": [
+            "template:template.observability-sre",
+            "example:web-change-monitoring"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:905482250ce0bd05881405d8ae8858e6640b3d23c1d83138558bd7c38e6d2fb5",
+      "domain_pack_id": "domain-pack.event-stream",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 0,
+        "thin": 3
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.platform.rollback",
+          "evidence_digest": "sha256:3ea1f24096cfc903784ea53ef8469ca7d7d169ac9e4066692b33b5666683c8c4",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.recover",
+          "resolved_assets": [
+            "template:template.deployment-release",
+            "example:model-release-monitoring-and-rollback"
+          ],
+          "route_count_upper_bound": 729,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [
+            "An operator must provide an authenticated deployment runtime."
+          ],
+          "capability_id": "capability.platform.deployment",
+          "evidence_digest": "sha256:ac3dbfcb3af3e5d4f906b515d3f44e6c911e4adb7a7b74dbac6fde592f306873",
+          "maturity_level": "C2",
+          "missing_assets": [],
+          "next_gate": "C3",
+          "obligation_id": "obligation.serve",
+          "resolved_assets": [
+            "template:template.deployment-release",
+            "adapter:adapter.orchestrator.airflow",
+            "adapter:adapter.orchestrator.kubernetes"
+          ],
+          "route_count_upper_bound": 0,
+          "satisfied_gates": [
+            "C1",
+            "C2"
+          ],
+          "status": "blocked"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.platform.release-gate",
+          "evidence_digest": "sha256:94a7ff47cfebc755a81f8b4c0eca6cfa61093061650c8a40b9a0729f19cecf3f",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.validate",
+          "resolved_assets": [
+            "template:template.deployment-release",
+            "example:frontend-release-journey",
+            "example:dependency-assurance"
+          ],
+          "route_count_upper_bound": 72,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:57abca3ad19cd676bc9231c24f0299fd936ff79dfa124fc4e908c69ecd5f7104",
+      "domain_pack_id": "domain-pack.platform-release",
+      "lowest_maturity_level": "C2",
+      "status_counts": {
+        "blocked": 1,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 0,
+        "thin": 2
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.sre.incident-triage",
+          "evidence_digest": "sha256:bab1da161a85302eac074f7a42241cb6c85d2f7574214d7036d04b8b79d9a139",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.decide",
+          "resolved_assets": [
+            "template:template.incident-response",
+            "example:incident-triage"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.sre.signal-correlation",
+          "evidence_digest": "sha256:1ca32632381bbfb8351a5e2c4d89b806323d48303ee99ae2a4176a1a207f7e2f",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.observe",
+          "resolved_assets": [
+            "template:template.observability-sre",
+            "example:incident-triage",
+            "example:web-change-monitoring"
+          ],
+          "route_count_upper_bound": 16,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.sre.recovery",
+          "evidence_digest": "sha256:88bc0d000a15e5aa7628a8cb9f8d5537866949d512a98f33a6149f7d56493bee",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.recover",
+          "resolved_assets": [
+            "template:template.incident-response",
+            "example:model-release-monitoring-and-rollback",
+            "adapter:adapter.orchestrator.temporal"
+          ],
+          "route_count_upper_bound": 729,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:133a3694f14566d927858ee5988536e04f6472325d00df6e7f2e51fb7ece227a",
+      "domain_pack_id": "domain-pack.sre-incident",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 0,
+        "thin": 3
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [
+            "Production certification requires an authorized external assessor."
+          ],
+          "capability_id": "capability.security.compliance-evidence",
+          "evidence_digest": "sha256:48c0f94db238e4307cfd7eed0bc6bb97ddef02d8dcae1553505ef95a47bb765e",
+          "maturity_level": "C2",
+          "missing_assets": [],
+          "next_gate": "C3",
+          "obligation_id": "obligation.govern",
+          "resolved_assets": [
+            "template:template.compliance-evidence"
+          ],
+          "route_count_upper_bound": 0,
+          "satisfied_gates": [
+            "C1",
+            "C2"
+          ],
+          "status": "blocked"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.security.hostile-runtime-recovery",
+          "evidence_digest": "sha256:ec6df00cbd55dc4be9360a7fbb2d21b3a52546ef016592c9a625dbe8ba3e99d5",
+          "maturity_level": "C1",
+          "missing_assets": [],
+          "next_gate": "C2",
+          "obligation_id": "obligation.recover",
+          "resolved_assets": [],
+          "route_count_upper_bound": 0,
+          "satisfied_gates": [
+            "C1"
+          ],
+          "status": "catalog-only"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.security.defensive-assurance",
+          "evidence_digest": "sha256:78074f2304c00d9df4a9b47824f4b66c722559d7d5c0b9a35d9c2d957c5988a5",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.validate",
+          "resolved_assets": [
+            "template:template.cybersecurity-investigation",
+            "example:dependency-assurance",
+            "example:pii-redaction"
+          ],
+          "route_count_upper_bound": 16,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:dd67852dc6344beb858c90313ea62f759ecf6b5a4edb8472178de4ee30e533fe",
+      "domain_pack_id": "domain-pack.security-compliance",
+      "lowest_maturity_level": "C1",
+      "status_counts": {
+        "blocked": 1,
+        "catalog-only": 1,
+        "empty": 0,
+        "strong": 0,
+        "thin": 1
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.frontend.authorized-browser-acquire",
+          "evidence_digest": "sha256:5890752d3b0772326c3f49fac5b3787a6aa5783cd97f7a4687abefd903194475",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.acquire",
+          "resolved_assets": [
+            "template:template.web-automation",
+            "example:browse-and-scrape",
+            "example:verified-product-dataset"
+          ],
+          "route_count_upper_bound": 20,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.frontend.release-journey",
+          "evidence_digest": "sha256:d1ef4d465edddf844cfaf4c32e7a9ab5131beaa51fd8b799c5a736a251a1ad9c",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.serve",
+          "resolved_assets": [
+            "template:template.qa-engineering",
+            "example:frontend-release-journey"
+          ],
+          "route_count_upper_bound": 64,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.frontend.render-verification",
+          "evidence_digest": "sha256:389ebe27ec7c1948537588f7347fbe4632fa97ce69e66d6802f54033cd4e5cfb",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.verify",
+          "resolved_assets": [
+            "template:template.qa-engineering",
+            "example:document-render-and-verify",
+            "example:frontend-release-journey"
+          ],
+          "route_count_upper_bound": 128,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:f449cbcbce3da75d124fc6496448f068354bbddd44afa3c21a99d4f58cb721c8",
+      "domain_pack_id": "domain-pack.frontend-browser",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 0,
+        "thin": 3
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.database.evidence-persistence",
+          "evidence_digest": "sha256:5c942a17556b2995240b2bc46e8b095ee5281a1bbd500ad42fa296778115cc51",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.persist",
+          "resolved_assets": [
+            "template:template.database-migration",
+            "example:transaction-reconciliation"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.database.cutover-recovery",
+          "evidence_digest": "sha256:22a45998748e8845d4e1e375889f690d8af411d9b2ffafcb200345aa307b691d",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.recover",
+          "resolved_assets": [
+            "template:template.database-migration",
+            "example:schema-migration",
+            "adapter:adapter.orchestrator.temporal"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.database.schema-migration",
+          "evidence_digest": "sha256:de55816db8f504055d715f031e639947a3f20e6f84f6243973ee248c67fec97c",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.transform",
+          "resolved_assets": [
+            "template:template.database-migration",
+            "example:schema-migration"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:cb57e4bbee6f5ef65e8211e7eeab35d45c38b16737dfeabc32d016ae7d50ff19",
+      "domain_pack_id": "domain-pack.database-storage",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 0,
+        "thin": 3
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [
+            "Execution requires an authenticated human task and delegation service."
+          ],
+          "capability_id": "capability.business.authorized-approval",
+          "evidence_digest": "sha256:2093170766c39fa5eb5001fb0c0dba992f35469a4e4cc99b78ba5c8200bcdc3a",
+          "maturity_level": "C2",
+          "missing_assets": [],
+          "next_gate": "C3",
+          "obligation_id": "obligation.decide",
+          "resolved_assets": [
+            "template:template.claims-processing",
+            "adapter:adapter.bpmn"
+          ],
+          "route_count_upper_bound": 0,
+          "satisfied_gates": [
+            "C1",
+            "C2"
+          ],
+          "status": "blocked"
+        },
+        {
+          "blockers": [
+            "Production case authority and retention policy are deployment-specific."
+          ],
+          "capability_id": "capability.business.case-governance",
+          "evidence_digest": "sha256:f8282d7129dc981173a6f49cf574b6e0a00160800c1fddd53af218c72632204a",
+          "maturity_level": "C2",
+          "missing_assets": [],
+          "next_gate": "C3",
+          "obligation_id": "obligation.govern",
+          "resolved_assets": [
+            "template:template.claims-processing",
+            "template:template.compliance-evidence",
+            "adapter:adapter.bpmn"
+          ],
+          "route_count_upper_bound": 0,
+          "satisfied_gates": [
+            "C1",
+            "C2"
+          ],
+          "status": "blocked"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.gap.business-human-workflow.recover",
+          "evidence_digest": "sha256:58d3503080962fb4a9a2e89fef08ab14cb092bc656e6b928e8fab5c20d89b9df",
+          "maturity_level": "C0",
+          "missing_assets": [
+            "capability-declaration"
+          ],
+          "next_gate": "C1",
+          "obligation_id": "obligation.recover",
+          "resolved_assets": [],
+          "route_count_upper_bound": 0,
+          "satisfied_gates": [],
+          "status": "empty"
+        }
+      ],
+      "domain_pack_digest": "sha256:5b8c2af2e0598630939da8b18c0da610ca20665ea9611e1008bed76dfb637ab3",
+      "domain_pack_id": "domain-pack.business-human-workflow",
+      "lowest_maturity_level": "C0",
+      "status_counts": {
+        "blocked": 2,
+        "catalog-only": 0,
+        "empty": 1,
+        "strong": 0,
+        "thin": 0
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.media.document-decode",
+          "evidence_digest": "sha256:fef8a4047503f0de255a84be33b54439a0a68f720fd5237aa8ea2d7d707436fc",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.decode",
+          "resolved_assets": [
+            "template:template.document-intelligence",
+            "example:document-to-schema",
+            "example:grounded-document-extraction",
+            "benchmark:benchmark.document-extraction",
+            "question-pack:question-pack.document"
+          ],
+          "route_count_upper_bound": 68,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.media.image-transform",
+          "evidence_digest": "sha256:6854fb91091005d73a8010b4d53b6238b9b104a542fead6074df5226ffaa5a23",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.transform",
+          "resolved_assets": [
+            "template:template.image-processing",
+            "example:image-check-and-process",
+            "example:document-render-and-verify",
+            "benchmark:benchmark.image-assurance"
+          ],
+          "route_count_upper_bound": 72,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.media.grounded-verification",
+          "evidence_digest": "sha256:9e6ccbf1a613b94d14bc078cf9f80cc41a79a704e9cc59596282ac3b6c08a5ee",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.verify",
+          "resolved_assets": [
+            "template:template.document-intelligence",
+            "example:grounded-document-extraction",
+            "example:document-render-and-verify",
+            "benchmark:benchmark.document-extraction"
+          ],
+          "route_count_upper_bound": 128,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        }
+      ],
+      "domain_pack_digest": "sha256:38f1df9482eef5c74c411dab4e0c966a3ba675e67ef01f37466256adb64e7dbf",
+      "domain_pack_id": "domain-pack.documents-media",
+      "lowest_maturity_level": "C6",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 3,
+        "thin": 0
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.science.experimental-decision",
+          "evidence_digest": "sha256:1f030c2405b07c151ee1d46e5dd2c7488e2ddd9e5483ca503b6cfebf1401cc6b",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.decide",
+          "resolved_assets": [
+            "template:template.scientific-experiment",
+            "template:template.optimization-scheduling",
+            "example:scientific-experiment",
+            "example:reinforcement-learning-loop"
+          ],
+          "route_count_upper_bound": 40,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.science.numerical-transform",
+          "evidence_digest": "sha256:9ffbaa9f762bd889b5e1c1c2dc208eddef04066cc633d33a25d4d87b0be4c132",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.transform",
+          "resolved_assets": [
+            "template:template.numerical-linear-system",
+            "example:numerical-linear-system"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.science.residual-verification",
+          "evidence_digest": "sha256:33233a46fca25d0be253b68109c56b8bb12a17a4f0e1777e24a23a30b8df5fe7",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.verify",
+          "resolved_assets": [
+            "template:template.numerical-linear-system",
+            "example:numerical-linear-system",
+            "example:scientific-experiment"
+          ],
+          "route_count_upper_bound": 16,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        }
+      ],
+      "domain_pack_digest": "sha256:e22668d9a2f921ff74af5d802958bfe9a32b5fadd19d01d126c19e4bbe642ab6",
+      "domain_pack_id": "domain-pack.science-optimization",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 0,
+        "thin": 3
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [],
+          "capability_id": "capability.ml.leakage-safe-preparation",
+          "evidence_digest": "sha256:577b06228aa7e09c406a6774c4a1f8195b13d81accfdb92c1c277b3c3ed9a144",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.normalize",
+          "resolved_assets": [
+            "template:template.kaggle-tabular",
+            "example:tabular-regression",
+            "example:tabular-classification",
+            "benchmark:benchmark.tabular-regression",
+            "benchmark:benchmark.tabular-classification",
+            "question-pack:question-pack.ml-dataset"
+          ],
+          "route_count_upper_bound": 8,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.ml.model-and-feature-search",
+          "evidence_digest": "sha256:d48c18b4cc79bf734538180d4d9fddcc432d8036e0905147a77284e04fc986fe",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.transform",
+          "resolved_assets": [
+            "template:template.kaggle-tabular",
+            "template:template.time-series-forecasting",
+            "example:wide-table-feature-reduction",
+            "example:robust-regression-and-conformal",
+            "example:ensemble-selection-and-stacking",
+            "benchmark:benchmark.tabular-regression"
+          ],
+          "route_count_upper_bound": 2187,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.ml.holdout-verification",
+          "evidence_digest": "sha256:29bfa280908cb0ec73bef0e8a9c1d228094c17104ce115eb56e40215c379a793",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.verify",
+          "resolved_assets": [
+            "template:template.kaggle-tabular",
+            "example:imbalanced-classification-and-calibration",
+            "example:model-release-monitoring-and-rollback",
+            "benchmark:benchmark.tabular-classification"
+          ],
+          "route_count_upper_bound": 1458,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        }
+      ],
+      "domain_pack_digest": "sha256:e1a6f388cd2b33aa1e050fa2de1226f66810f2568977d47048d10aa9604f8fe0",
+      "domain_pack_id": "domain-pack.ai-ml",
+      "lowest_maturity_level": "C6",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 3,
+        "thin": 0
+      }
+    },
+    {
+      "capabilities": [
+        {
+          "blockers": [
+            "External model claims require pinned, authorized model harnesses."
+          ],
+          "capability_id": "capability.llm.panel-decision",
+          "evidence_digest": "sha256:68ba7f074086fa36b37dff33b9a116e690e1c9a0e730cb21e0f06f4f66b26ced",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.decide",
+          "resolved_assets": [
+            "example:duecare-llm-evaluation-harness",
+            "agent-benchmark:agent-benchmark.reference-smoke"
+          ],
+          "route_count_upper_bound": 128,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.llm.grounded-context",
+          "evidence_digest": "sha256:dce0a07bf38161a4457efc38d0d4b1e1d9bcd105ac3aa214ed747ffac4767abb",
+          "maturity_level": "C5",
+          "missing_assets": [],
+          "next_gate": "C6",
+          "obligation_id": "obligation.enrich",
+          "resolved_assets": [
+            "template:template.knowledge-retrieval",
+            "example:grounded-document-extraction",
+            "example:synthetic-llm-curriculum"
+          ],
+          "route_count_upper_bound": 192,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+          ],
+          "status": "thin"
+        },
+        {
+          "blockers": [],
+          "capability_id": "capability.llm.adversarial-verification",
+          "evidence_digest": "sha256:2fadd1e5732a141bd115f456720085a51b0dcad61810ae4579783c7406f5696a",
+          "maturity_level": "C6",
+          "missing_assets": [],
+          "next_gate": "C7",
+          "obligation_id": "obligation.verify",
+          "resolved_assets": [
+            "example:duecare-llm-evaluation-harness",
+            "agent-benchmark:agent-benchmark.reference-smoke"
+          ],
+          "route_count_upper_bound": 128,
+          "satisfied_gates": [
+            "C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5",
+            "C6"
+          ],
+          "status": "strong"
+        }
+      ],
+      "domain_pack_digest": "sha256:f3cf93e78c1ed7399431dd0101c3255cf35c35336171091e8ac8e3cd86979bac",
+      "domain_pack_id": "domain-pack.llm-agent",
+      "lowest_maturity_level": "C5",
+      "status_counts": {
+        "blocked": 0,
+        "catalog-only": 0,
+        "empty": 0,
+        "strong": 2,
+        "thin": 1
+      }
+    }
+  ],
+  "generated_from": "sha256:94ee4dfca31b9ebd6e1eb06a968701907da304db63d184d37e32d4ebfa0ea85d",
+  "id": "coverage.reference-universal-engineering",
+  "status_counts": {
+    "blocked": 4,
+    "catalog-only": 1,
+    "empty": 1,
+    "strong": 9,
+    "thin": 24
+  },
+  "universal_engineering_model_version": "0.1"
+}

@@ -1,0 +1,22 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "telemetry schema",
+    "trace topology"
+  ],
+  "id": "engineering-question.observe.signals",
+  "obligation_id": "obligation.observe",
+  "priority": 8,
+  "prompt": "Which traces, metrics, logs, events, profiles, and lineage reconstruct a run?",
+  "required_permissions": [],
+  "response_modes": [
+    "deterministic",
+    "human"
+  ],
+  "suggested_checks": [
+    "receipt-to-trace test",
+    "missing-span test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Missing signals make failures and regressions unactionable."
+}

@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "consistency contract",
+    "idempotency keys"
+  ],
+  "id": "engineering-question.persist.consistency",
+  "obligation_id": "obligation.persist",
+  "priority": 10,
+  "prompt": "Which atomicity, consistency, idempotency, ordering, and concurrency guarantees apply?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "concurrent-write test",
+    "retry test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Storage semantics determine whether retries duplicate or corrupt effects."
+}

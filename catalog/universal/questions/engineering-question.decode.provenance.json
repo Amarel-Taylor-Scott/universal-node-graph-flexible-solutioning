@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "source map",
+    "artifact digest"
+  ],
+  "id": "engineering-question.decode.provenance",
+  "obligation_id": "obligation.decode",
+  "priority": 7,
+  "prompt": "How are byte offsets, pages, fields, and source identity preserved through decoding?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "verify source locations",
+    "replay decoded artifact"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Grounding and audits require a path back to original evidence."
+}

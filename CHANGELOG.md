@@ -1,6 +1,30 @@
 # Changelog
 
-## Unreleased — data-science design atlas
+## Unreleased
+
+All notable changes to this proof of concept are documented here.
+
+### Universal engineering system
+
+- Added 14 domain-neutral obligation families, 13 domain packs, 42 all-visible
+  engineering questions, ten-channel task contexts, E1–E10 effort allocation,
+  and explicit human/model/network permission gates.
+- Added evidence-derived capability assessment over exact checked-in assets
+  with contiguous C0–C7 gates and visible strong, thin, catalog-only, blocked,
+  and empty states rather than self-reported maturity labels.
+- Added side-effect-free OpenAPI 3.0–3.2, CloudEvents 1.0, and structural BPMN
+  2.0/2.0.2 projections plus portable frozen-plan exports for Airflow, Dagster,
+  Temporal, and Kubernetes.
+- Added opt-in runtime payload validation by exact schema digest and media type,
+  including fail-closed registry mode and stable receiptable failure classes.
+- Added bounded local parallel experiment allocation with a fresh executor and
+  artifact store per cell, immediate receipt sinks, and deterministic ledger
+  order.
+- Added eight strict schemas, CLI and catalog projections, a focused regression
+  suite, package typing marker, universal-engineering guide, and current
+  readiness/claim boundaries.
+
+### Data-science design atlas
 
 - Added a normalized 618-entry owner-supplied technique catalog with an explicit
   C1-only claim boundary instead of copying unverified implementation labels.
@@ -15,10 +39,6 @@
   compiler-enforced human/model authority, digest-bound answer resolution,
   fail-closed evidence promotion, discovery descriptors, a portable node pack,
   and an independently verified runnable graph example.
-
-All notable changes to this proof of concept are documented here.
-
-## Unreleased
 
 ### Added
 
@@ -133,14 +153,14 @@ All notable changes to this proof of concept are documented here.
 
 ### Changed
 
-- The strict wire-schema set now contains 79 schemas.
+- The strict wire-schema set now contains 99 schemas.
 - Topology families now reject mismatched external port contracts, self-parent
   variants, and cyclic mutation ancestry before admission or search.
 - `UniversalSolver` and graph experiments share the same evidence-only hard
   gates, Pareto flags, and normalized weighted projection.
 - Release verification now covers 47 executable examples, 379 unique nodes, 120
   declared routes, 76 accepted observations, 44 intentional negative controls,
-  seven node packs, and 744 generated catalogue documents, including ten
+  seven node packs, and 1,658 generated catalogue documents, including ten
   digest-only agent-task contracts and two agent-benchmark suites.
 - `UniversalSolver.solve(profile=None, initialization=...)` derives its
   inspectable search/trial budget from the initialization effort policy,

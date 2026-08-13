@@ -1,0 +1,9 @@
+{
+  "claim_boundary": "Coverage is derived from exact checked-in templates, compiler-valid example route spaces, mechanism benchmarks, question packs, and adapter manifests. It is not a production-readiness or domain-superiority claim.",
+  "coverage_digest": "sha256:5acb7de8d5ac6915adb0f65db6cb9971d7f3bb672c79fb70de39009081fe45d6",
+  "coverage_path": "universal/coverage.json",
+  "domain_pack_count": 13,
+  "engineering_question_count": 42,
+  "obligation_count": 14,
+  "universal_engineering_model_version": "0.1"
+}

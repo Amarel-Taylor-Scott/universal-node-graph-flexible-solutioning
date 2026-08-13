@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "least privilege",
+    "privacy review",
+    "change approval",
+    "audit evidence"
+  ],
+  "category_ids": [
+    "dag.govern"
+  ],
+  "description": "Constrain authority, privacy, compliance, provenance, and human accountability.",
+  "design_prompt": "Which policy, owner, approval, evidence, and retention boundary governs the work?",
+  "id": "obligation.govern",
+  "title": "Govern"
+}

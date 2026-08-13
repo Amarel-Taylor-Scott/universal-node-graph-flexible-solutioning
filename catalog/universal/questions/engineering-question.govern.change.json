@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "change record",
+    "promotion receipt"
+  ],
+  "id": "engineering-question.govern.change",
+  "obligation_id": "obligation.govern",
+  "priority": 8,
+  "prompt": "How are versions reviewed, promoted, monitored, rolled back, deprecated, and audited?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "rollback authorization test",
+    "deprecation consumer scan"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Governance must cover the full lifecycle, not only initial approval."
+}

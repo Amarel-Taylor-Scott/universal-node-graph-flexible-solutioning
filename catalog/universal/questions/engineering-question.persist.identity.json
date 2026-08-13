@@ -1,0 +1,22 @@
+{
+  "effort_cost": 1,
+  "evidence_requests": [
+    "artifact manifest",
+    "schema version"
+  ],
+  "id": "engineering-question.persist.identity",
+  "obligation_id": "obligation.persist",
+  "priority": 9,
+  "prompt": "Which state, artifacts, versions, and lineage must be persisted by digest?",
+  "required_permissions": [],
+  "response_modes": [
+    "deterministic",
+    "human"
+  ],
+  "suggested_checks": [
+    "digest verification",
+    "round-trip load"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Mutable or ambiguous identity prevents exact replay."
+}

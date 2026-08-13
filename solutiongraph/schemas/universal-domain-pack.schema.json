@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universal-domain-pack.schema.json",
+  "title": "Universal engineering domain pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "universal_engineering_model_version", "id", "version", "title",
+    "description", "required_obligation_ids", "capabilities", "standard_ids",
+    "limitations"
+  ],
+  "properties": {
+    "universal_engineering_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "required_obligation_ids": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "capabilities": {
+      "type": "array", "items": {"$ref": "#/$defs/capability"}
+    },
+    "standard_ids": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "limitations": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "idArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "stringArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "obligation_id", "intent", "template_ids",
+        "example_ids", "benchmark_ids", "agent_benchmark_ids",
+        "question_pack_ids", "adapter_ids", "operational_evidence_refs",
+        "blockers"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "obligation_id": {"$ref": "common.schema.json#/$defs/id"},
+        "intent": {"type": "string", "minLength": 1},
+        "template_ids": {"$ref": "#/$defs/idArray"},
+        "example_ids": {"$ref": "#/$defs/idArray"},
+        "benchmark_ids": {"$ref": "#/$defs/idArray"},
+        "agent_benchmark_ids": {"$ref": "#/$defs/idArray"},
+        "question_pack_ids": {"$ref": "#/$defs/idArray"},
+        "adapter_ids": {"$ref": "#/$defs/idArray"},
+        "operational_evidence_refs": {"$ref": "#/$defs/stringArray"},
+        "blockers": {"$ref": "#/$defs/stringArray"}
+      }
+    }
+  }
+}

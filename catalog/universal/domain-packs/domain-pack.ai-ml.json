@@ -1,0 +1,86 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [
+        "benchmark.tabular-regression",
+        "benchmark.tabular-classification"
+      ],
+      "blockers": [],
+      "example_ids": [
+        "tabular-regression",
+        "tabular-classification"
+      ],
+      "id": "capability.ml.leakage-safe-preparation",
+      "intent": "Fit preprocessing only inside the declared evaluation boundary.",
+      "obligation_id": "obligation.normalize",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [
+        "question-pack.ml-dataset"
+      ],
+      "template_ids": [
+        "template.kaggle-tabular"
+      ],
+      "title": "Leakage-safe preparation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [
+        "benchmark.tabular-regression"
+      ],
+      "blockers": [],
+      "example_ids": [
+        "wide-table-feature-reduction",
+        "robust-regression-and-conformal",
+        "ensemble-selection-and-stacking"
+      ],
+      "id": "capability.ml.model-and-feature-search",
+      "intent": "Expose feature, model, calibration, and ensemble choices as visible candidates.",
+      "obligation_id": "obligation.transform",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.kaggle-tabular",
+        "template.time-series-forecasting"
+      ],
+      "title": "Model and feature search"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [
+        "benchmark.tabular-classification"
+      ],
+      "blockers": [],
+      "example_ids": [
+        "imbalanced-classification-and-calibration",
+        "model-release-monitoring-and-rollback"
+      ],
+      "id": "capability.ml.holdout-verification",
+      "intent": "Separate development, validation, holdout, and operational evidence.",
+      "obligation_id": "obligation.verify",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.kaggle-tabular"
+      ],
+      "title": "Holdout verification"
+    }
+  ],
+  "description": "Leakage-safe preparation, model/search alternatives, evaluation, release, and monitoring.",
+  "id": "domain-pack.ai-ml",
+  "limitations": [
+    "Mechanism fixtures do not reproduce Taedri's external campaign results."
+  ],
+  "required_obligation_ids": [
+    "obligation.normalize",
+    "obligation.transform",
+    "obligation.verify"
+  ],
+  "standard_ids": [],
+  "title": "AI and machine learning",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

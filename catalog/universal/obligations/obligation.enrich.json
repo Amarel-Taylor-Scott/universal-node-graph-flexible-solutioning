@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "geocode",
+    "calendar join",
+    "knowledge retrieval",
+    "identity lookup"
+  ],
+  "category_ids": [
+    "dag.integrate.enrich"
+  ],
+  "description": "Join governed context, reference data, or derived knowledge to an input.",
+  "design_prompt": "Which authority, vintage, match policy, and provenance accompany enrichment?",
+  "id": "obligation.enrich",
+  "title": "Enrich"
+}

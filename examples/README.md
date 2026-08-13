@@ -7,6 +7,7 @@ dependency-free and run without browser, model-provider, or network access.
 
 | Goal | Command | What it proves |
 |---|---|---|
+| Plan a cross-domain engineering task | `python examples/universal_engineering_quickstart.py` | Ten-channel task context, all-visible effort plan, evidence-derived coverage, OpenAPI projection, and frozen-plan orchestrator export without network or deployment |
 | Compile and search a two-slot graph | `python examples/solutiongraph_quickstart.py` | Full admission, exhaustive route ordering, and a frozen plan |
 | Compare control and mutated graphs | `python examples/control_vs_mutated_graph_experiment.py` | Six compatible routes, fixed control, topology mutation, execution, Pareto/champion evidence |
 | Learn starts and study a mutation | `python examples/intelligent_solutioning_study.py` | Cold solve, immutable history closure, warm starts, blind lanes, mutation experiment, and paired verdicts |
@@ -22,6 +23,10 @@ dependency-free and run without browser, model-provider, or network access.
 
 ```bash
 solutiongraph examples list
+solutiongraph universal domains
+solutiongraph universal coverage
+solutiongraph universal plan idempotent-api-contract \
+  --domain domain-pack.backend-api --effort E3
 solutiongraph examples run dataset-profiling-and-drift --route all --json
 solutiongraph solve golden-customer-table --profile balanced
 solutiongraph arena list

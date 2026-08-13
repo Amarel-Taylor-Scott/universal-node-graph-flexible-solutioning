@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "port contracts",
+    "compatibility catalog"
+  ],
+  "id": "engineering-question.validate.compatibility",
+  "obligation_id": "obligation.validate",
+  "priority": 9,
+  "prompt": "Which schema, unit, cardinality, state, and authority mismatches must fail before execution?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "compile invalid edges",
+    "test missing permission"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Compatibility failures should not be discovered after effects occur."
+}

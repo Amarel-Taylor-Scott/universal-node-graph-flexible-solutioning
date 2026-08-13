@@ -1,0 +1,16 @@
+{
+  "capability_examples": [
+    "schema check",
+    "contract test",
+    "authorization check",
+    "invariant check"
+  ],
+  "category_ids": [
+    "dag.prepare.verify",
+    "dag.evaluate"
+  ],
+  "description": "Check structural, semantic, policy, and authority preconditions.",
+  "design_prompt": "Which independent checks reject invalid inputs before consequential effects occur?",
+  "id": "obligation.validate",
+  "title": "Validate"
+}

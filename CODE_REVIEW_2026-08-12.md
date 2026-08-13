@@ -14,6 +14,34 @@ CI entry points, and onboarding documentation. Passing fixture tests establish
 mechanism conformance; they do not establish model efficacy or production
 fitness.
 
+## 2026-08-13 follow-up
+
+The universal-engineering pass implements the highest-value generalization
+without turning the core into a collection of domain-specific fields:
+
+- 14 obligation families and 13 domain packs now describe backend, event,
+  platform, SRE, security, frontend, storage, human workflow, media, science,
+  AI/ML, LLM/agent, and data-integration work over the same core model;
+- ten independent task-context channels extend historical retrieval beyond
+  task type while preserving missingness, provenance, and exact identity;
+- 42 all-visible questions and evidence-derived C0–C7 coverage replace an
+  implied “supported/not supported” binary with inspectable work and gaps;
+- OpenAPI, CloudEvents, BPMN, and orchestrator manifests are isolated in a new
+  integration package with explicit non-deployment limitations;
+- runtime payload validation and local parallel experiment allocation are
+  separate focused modules rather than more policy inside the executor or
+  experiment monolith; and
+- the new public guide and quickstart make the non-AI/ML path runnable before
+  reading the data-science atlas.
+
+Current strengths are typed composition, closed-world admission, controlled
+local experiments, exact evidence, data/document/ML mechanism fixtures, and
+LLM-harness protocol design. The weakest areas remain authenticated human
+workflow recovery, enforcing security isolation, native production connectors,
+distributed scheduling, and C7 operational evidence. See
+`UNIVERSAL_ENGINEERING_SYSTEM.md` for the generated domain matrix and expansion
+protocol.
+
 ## Findings and disposition
 
 | Priority | Finding | Disposition |

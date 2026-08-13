@@ -46,6 +46,10 @@ from solutiongraph.model import (
     Registry,
     sha256_digest,
 )
+from solutiongraph.runtime_validation import (
+    PayloadValidationError,
+    PayloadValidatorRegistry,
+)
 
 EXECUTOR_ID = "solutiongraph.reference-executor-v2"
 
@@ -446,9 +450,11 @@ class ReferenceExecutor:
         *,
         runtimes: RuntimeRegistry | None = None,
         circuit_breaker: CircuitBreaker | None = None,
+        payload_validators: PayloadValidatorRegistry | None = None,
     ) -> None:
         self.runtimes = runtimes or RuntimeRegistry()
         self.circuit_breaker = circuit_breaker or CircuitBreaker()
+        self.payload_validators = payload_validators or PayloadValidatorRegistry()
 
     def execute(
         self,
@@ -496,6 +502,7 @@ class ReferenceExecutor:
             "python": platform.python_version(),
             "platform": platform.platform(),
             "runtimes": self.runtimes.identity_records(),
+            "payload_validation": self.payload_validators.identity_record(),
         })
         if not checkpoint_id:
             key = sha256_digest({
@@ -952,8 +959,7 @@ class ReferenceExecutor:
                 "admitted space, bindings, or fallbacks"
             )
 
-    @staticmethod
-    def _validate_inputs(program: ProgramGraph, inputs: Mapping[str, Any]) -> None:
+    def _validate_inputs(self, program: ProgramGraph, inputs: Mapping[str, Any]) -> None:
         expected = {item.name for item in program.inputs}
         actual = set(inputs)
         if expected != actual:
@@ -966,6 +972,15 @@ class ReferenceExecutor:
                 details.append("unknown: " + ", ".join(extra))
             raise ExecutionError("graph input mismatch (" + "; ".join(details) + ")")
         digest_value(inputs)
+        for item in program.inputs:
+            try:
+                self.payload_validators.validate_value(
+                    item.value_type,
+                    inputs[item.name],
+                    path=f"graph_input.{item.name}",
+                )
+            except PayloadValidationError as exc:
+                raise ExecutionError(str(exc)) from exc
 
     def _validate_authority(
         self,
@@ -1041,6 +1056,16 @@ class ReferenceExecutor:
         policy: ExecutionPolicy,
     ) -> tuple[dict[str, Any], dict[str, StoredArtifact]]:
         adapter = self.runtimes.resolve(node.runtime)
+        try:
+            for port in node.inputs:
+                if port.name in inputs:
+                    self.payload_validators.validate_value(
+                        port.value_type,
+                        inputs[port.name],
+                        path=f"node_input.{node.id}.{port.name}",
+                    )
+        except PayloadValidationError as exc:
+            raise _RuntimeExecutionFailure(exc.failure_class, str(exc)) from exc
         if policy.verify_implementation_digests:
             actual_digest = adapter.implementation_digest(node)
             if actual_digest != binding.implementation_digest:
@@ -1051,6 +1076,15 @@ class ReferenceExecutor:
         result = adapter.invoke(node, inputs, dict(binding.parameters))
         outputs = _split_outputs(node, result)
         _validate_cardinality(node, outputs)
+        try:
+            for port in node.outputs:
+                self.payload_validators.validate_value(
+                    port.value_type,
+                    outputs[port.name],
+                    path=f"node_output.{node.id}.{port.name}",
+                )
+        except PayloadValidationError as exc:
+            raise _RuntimeExecutionFailure(exc.failure_class, str(exc)) from exc
         produced = {
             port.name: store_value(
                 store,

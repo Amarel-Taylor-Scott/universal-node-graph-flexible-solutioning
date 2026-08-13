@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "property oracle",
+    "holdout evaluator",
+    "render comparison",
+    "reconciliation check"
+  ],
+  "category_ids": [
+    "dag.evaluate"
+  ],
+  "description": "Apply an independently identified oracle to outputs and effects.",
+  "design_prompt": "What exact evaluator can reject a plausible but wrong result independently?",
+  "id": "obligation.verify",
+  "title": "Verify"
+}

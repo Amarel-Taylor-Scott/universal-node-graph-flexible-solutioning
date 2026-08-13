@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "integration-adapter.schema.json",
+  "title": "Integration adapter profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "integration_model_version", "id", "source_kind", "supported_versions",
+    "output_kind", "description", "limitations"
+  ],
+  "properties": {
+    "integration_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "source_kind": {"$ref": "common.schema.json#/$defs/id"},
+    "supported_versions": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "output_kind": {"$ref": "common.schema.json#/$defs/id"},
+    "description": {"type": "string", "minLength": 1},
+    "limitations": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "grounded-document-extraction",
+        "synthetic-llm-curriculum"
+      ],
+      "id": "capability.llm.grounded-context",
+      "intent": "Retrieve and cite context through an explicit authority and visibility boundary.",
+      "obligation_id": "obligation.enrich",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.knowledge-retrieval"
+      ],
+      "title": "Grounded context assembly"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [
+        "agent-benchmark.reference-smoke"
+      ],
+      "benchmark_ids": [],
+      "blockers": [
+        "External model claims require pinned, authorized model harnesses."
+      ],
+      "example_ids": [
+        "duecare-llm-evaluation-harness"
+      ],
+      "id": "capability.llm.panel-decision",
+      "intent": "Aggregate atomic judgments without leaking sealed case or evaluator material.",
+      "obligation_id": "obligation.decide",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [],
+      "title": "Blinded panel decision"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [
+        "agent-benchmark.reference-smoke"
+      ],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "duecare-llm-evaluation-harness"
+      ],
+      "id": "capability.llm.adversarial-verification",
+      "intent": "Run red-team, holdout, judge-calibration, and human-promotion checks separately.",
+      "obligation_id": "obligation.verify",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [],
+      "title": "Adversarial verification"
+    }
+  ],
+  "description": "Retrieval, tool use, synthetic curricula, multi-judge harnesses, red teams, and promotion.",
+  "id": "domain-pack.llm-agent",
+  "limitations": [
+    "The reference agent benchmark is a model-free transport mechanism test."
+  ],
+  "required_obligation_ids": [
+    "obligation.enrich",
+    "obligation.decide",
+    "obligation.verify"
+  ],
+  "standard_ids": [],
+  "title": "LLM and agent systems",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

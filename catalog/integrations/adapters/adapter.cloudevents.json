@@ -1,0 +1,13 @@
+{
+  "description": "Project CloudEvents envelopes into explicit event-type operations.",
+  "id": "adapter.cloudevents",
+  "integration_model_version": "0.1",
+  "limitations": [
+    "The projection does not verify transport delivery, signatures, data schemas, or producer authority."
+  ],
+  "output_kind": "projection.event-types",
+  "source_kind": "standard.cloudevents",
+  "supported_versions": [
+    "1.0"
+  ]
+}

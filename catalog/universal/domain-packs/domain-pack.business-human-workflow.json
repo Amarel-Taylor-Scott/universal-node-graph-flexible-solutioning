@@ -1,0 +1,59 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [
+        "adapter.bpmn"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [
+        "Execution requires an authenticated human task and delegation service."
+      ],
+      "example_ids": [],
+      "id": "capability.business.authorized-approval",
+      "intent": "Collect an attributable decision without exposing sealed evaluator material.",
+      "obligation_id": "obligation.decide",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.claims-processing"
+      ],
+      "title": "Authorized human approval"
+    },
+    {
+      "adapter_ids": [
+        "adapter.bpmn"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [
+        "Production case authority and retention policy are deployment-specific."
+      ],
+      "example_ids": [],
+      "id": "capability.business.case-governance",
+      "intent": "Preserve policy version, evidence, ownership, deadlines, and appeal state.",
+      "obligation_id": "obligation.govern",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.claims-processing",
+        "template.compliance-evidence"
+      ],
+      "title": "Case governance"
+    }
+  ],
+  "description": "Cases, claims, approvals, escalations, auditability, and compensation.",
+  "id": "domain-pack.business-human-workflow",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.decide",
+    "obligation.govern",
+    "obligation.recover"
+  ],
+  "standard_ids": [
+    "standard.bpmn-2"
+  ],
+  "title": "Business and human workflows",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

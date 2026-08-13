@@ -24,6 +24,11 @@ git clone https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-s
 cd universal-node-graph-flexible-solutioning
 python -m pip install -e .
 solutiongraph doctor
+solutiongraph universal domains
+solutiongraph universal coverage
+solutiongraph universal plan idempotent-api-contract \
+  --domain domain-pack.backend-api --effort E3
+python examples/universal_engineering_quickstart.py
 python examples/control_vs_mutated_graph_experiment.py
 solutiongraph solutioning inspect data-cleanup --effort 1
 solutiongraph solutioning run data-cleanup --effort 1
@@ -35,6 +40,14 @@ solutiongraph atlas plan --task-type regression \
   --output-dir .artifacts/data-science-design
 solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
 ```
+
+The universal commands expose 14 domain-neutral obligations, 13 domain packs,
+42 all-visible engineering questions, and evidence-derived capability gaps.
+They make AI/ML one supported domain—not the ontology of the core—and give an
+LLM or engineer a bounded, authority-aware checklist before graph authoring.
+Read [the universal-engineering guide](UNIVERSAL_ENGINEERING_SYSTEM.md) for
+fingerprints, coverage gates, standards projections, runtime payload
+validation, and horizontal/vertical extension rules.
 
 The graph experiment generates a compiler-validated two-node mutation from a
 fixed one-node control, admits two routes in the control topology and four in
@@ -55,6 +68,7 @@ does not call or rank a model.
 Choose a path:
 
 - **Try examples:** [examples/README.md](examples/README.md)
+- **Plan a universal engineering task:** [UNIVERSAL_ENGINEERING_SYSTEM.md](UNIVERSAL_ENGINEERING_SYSTEM.md)
 - **Build a task or node:** [GETTING_STARTED.md](GETTING_STARTED.md)
 - **Understand the architecture:** [UNIVERSAL_NODE_GRAPH_SPEC.md](UNIVERSAL_NODE_GRAPH_SPEC.md)
 - **Find the right guide:** [DOCUMENTATION.md](DOCUMENTATION.md)
@@ -77,6 +91,15 @@ benchmark suites, and offline evidence reports. These sit above the 0.5 control,
 topology, checkpoint, streaming, saga, multi-fidelity, compatibility, and
 provenance foundations.
 `browsergraph` is explicitly one concrete runtime adapter and stress test.
+
+The universal-engineering layer adds a domain-neutral obligation catalog,
+curated domain packs, ten-channel task contexts, all-visible effort planning,
+and coverage derived from exact repository assets. Side-effect-free OpenAPI,
+CloudEvents, and BPMN projections support graph authoring; frozen routes export
+to portable Airflow, Dagster, Temporal, and Kubernetes manifests without
+claiming native deployment. Opt-in runtime payload validators and isolated
+local parallel experiment allocation close two practical execution gaps while
+preserving the compiler/runtime boundary.
 
 `UniversalSolver` now joins those primitives into one guarded operation: full
 registry admission, explicit multi-round search, plan freezing, receipt-backed
@@ -199,6 +222,11 @@ is not mixed into the execution path as another step.
 | Portable task and solution packs | Stable task meaning, case/oracle identity, exact program/registry/node-pack closure, fixed baselines, and benchmark-suite digests |
 | Cross-domain templates | 31 checked-in templates containing 544 atomic obligations across data, ML, documents, web, media, services, operations, security, business, science, knowledge, claims, fraud, compliance, geospatial, audio, supply chain, scheduling, migration, SRE, and moderation |
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
+| Universal engineering model | 14 reusable obligations, 13 domain packs, 42 all-visible questions, E1–E10 authority-aware planning, ten fingerprint channels, and evidence-derived C0–C7 coverage |
+| Standards projections | Side-effect-free OpenAPI 3.0–3.2, CloudEvents 1.0, and structural BPMN 2.0/2.0.2 projections with explicit limitations |
+| Orchestrator export seam | Exact frozen-plan manifests for Airflow, Dagster, Temporal, and Kubernetes with dependencies, resources, fallbacks, effects, and permissions preserved |
+| Runtime payload validation | Exact schema-digest/media-type validator dispatch at graph and node boundaries, with optional fail-closed registration |
+| Parallel local experiments | Fresh executor and artifact store per run, bounded thread allocation, immediate receipt sinks, and deterministic final ledger order |
 | Structured control flow | One-arm conditional execution with skipped receipts; deterministic composite and explicit bounded-loop lowering into compiler-valid DAGs |
 | Alternative topology search | Versioned topology families search different compiler-validated graph shapes as well as node bindings, with complete accounting |
 | Control-versus-mutation experiments | Frozen dataclass configuration, exact fixed control, comparable topology/route grids, common cases/seeds, control deltas, Pareto ranking, and complete-grid evidence |

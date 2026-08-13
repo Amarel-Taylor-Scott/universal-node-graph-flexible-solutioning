@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universal-design-plan.schema.json",
+  "title": "Universal engineering design plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "universal_engineering_model_version", "context_digest", "domain_pack_id",
+    "effort", "random_seed", "items", "summary", "claim_boundary"
+  ],
+  "properties": {
+    "universal_engineering_model_version": {"const": "0.1"},
+    "context_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "domain_pack_id": {"$ref": "common.schema.json#/$defs/id"},
+    "effort": {"enum": ["E1", "E3", "E5", "E7", "E10"]},
+    "random_seed": {"type": "integer"},
+    "items": {"type": "array", "items": {"$ref": "#/$defs/item"}},
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["selected", "deferred", "blocked", "not-applicable"],
+      "properties": {
+        "selected": {"type": "integer", "minimum": 0},
+        "deferred": {"type": "integer", "minimum": 0},
+        "blocked": {"type": "integer", "minimum": 0},
+        "not-applicable": {"type": "integer", "minimum": 0}
+      }
+    },
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "item": {
+      "type": "object", "additionalProperties": false,
+      "required": ["question_id", "status", "response_mode", "reason", "priority", "effort_cost"],
+      "properties": {
+        "question_id": {"$ref": "common.schema.json#/$defs/id"},
+        "status": {"enum": ["selected", "deferred", "blocked", "not-applicable"]},
+        "response_mode": {"enum": ["", "deterministic", "human", "llm", "external"]},
+        "reason": {"type": "string", "minLength": 1},
+        "priority": {"type": "integer", "minimum": 1, "maximum": 10},
+        "effort_cost": {"type": "integer", "minimum": 1, "maximum": 10}
+      }
+    }
+  }
+}

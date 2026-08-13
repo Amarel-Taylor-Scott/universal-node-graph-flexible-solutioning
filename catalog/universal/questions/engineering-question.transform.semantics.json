@@ -1,0 +1,23 @@
+{
+  "effort_cost": 1,
+  "evidence_requests": [
+    "pre/postconditions",
+    "intermediate schemas"
+  ],
+  "id": "engineering-question.transform.semantics",
+  "obligation_id": "obligation.transform",
+  "priority": 9,
+  "prompt": "What invariant connects each transform input to its output?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "property tests",
+    "golden fixtures"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Opaque transformations make correctness and substitution untestable."
+}

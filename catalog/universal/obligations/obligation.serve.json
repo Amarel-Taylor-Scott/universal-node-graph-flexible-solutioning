@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "HTTP endpoint",
+    "event publish",
+    "report delivery",
+    "frontend response"
+  ],
+  "category_ids": [
+    "dag.serve"
+  ],
+  "description": "Expose a result through a stable interface or delivery contract.",
+  "design_prompt": "Which API, event, UI, file, latency, and backward-compatibility contracts apply?",
+  "id": "obligation.serve",
+  "title": "Serve"
+}

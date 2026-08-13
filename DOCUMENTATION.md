@@ -2,6 +2,18 @@
 
 Choose the shortest path for what you are doing.
 
+## I want to apply SolutionGraph beyond AI/ML
+
+1. `UNIVERSAL_ENGINEERING_SYSTEM.md` — 14 obligations, 13 domain packs,
+   ten-channel task contexts, 42 all-visible questions, evidence-derived
+   coverage, standards projections, and extension rules.
+2. `UNIVERSAL_DAG_ARENA.md` — finite cross-domain task-family catalog.
+3. `ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md` — executable data, GIS,
+   API, frontend, document, synthetic-data, RL, and LLM-harness fixtures.
+4. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative compiler ontology and invariants.
+5. `READINESS.md` — exact supported, experimental, projected, and unavailable
+   surfaces.
+
 ## I want to design a data-science, ML, or LLM system
 
 1. `DATA_SCIENCE_DESIGN_ATLAS.md` — 31 task archetypes, 28 decision packs,
@@ -32,9 +44,11 @@ Choose the shortest path for what you are doing.
 ## I want to understand the model
 
 1. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative ontology and invariants.
-2. `ARCHITECTURE.md` — module boundaries and extension seams.
-3. `UNIVERSAL_GRAPH_SYSTEM.md` — broader system blueprint.
-4. `CONTRACTS.md` — BrowserGraph contract concepts and checks.
+2. `UNIVERSAL_ENGINEERING_SYSTEM.md` — domain packs, obligations, coverage,
+   task contexts, and integration boundaries built over that ontology.
+3. `ARCHITECTURE.md` — module boundaries and extension seams.
+4. `UNIVERSAL_GRAPH_SYSTEM.md` — broader system blueprint.
+5. `CONTRACTS.md` — BrowserGraph contract concepts and checks.
 
 ## I want to build a task or node pack
 
@@ -66,6 +80,8 @@ Choose the shortest path for what you are doing.
 5. `LLM_AGENT_BENCHMARK_ARENA.md` — OpenCode/Aider/private command matrices,
    sealed-case scoring, paired uncertainty, and external benchmark bridges.
 6. `READINESS.md` and `SECURITY.md` — support and trust boundaries.
+7. `UNIVERSAL_ENGINEERING_SYSTEM.md` — OpenAPI, CloudEvents, BPMN, orchestrator
+   exports, runtime schema validation, and local parallel allocation.
 
 ## I want common engineering and AI/ML examples
 

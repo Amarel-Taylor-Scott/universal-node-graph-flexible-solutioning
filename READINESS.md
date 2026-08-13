@@ -11,7 +11,11 @@ yet a turnkey production scheduler or a hostile-code execution service.
 
 | Surface | Status | Supported use |
 |---|---|---|
-| Semantic model and 91 strict schemas | Alpha-supported | Typed semantic concepts, dataset profiles, field maps, question packs/plans/findings, design-atlas techniques/questions/packs/archetypes/contexts/plans/answers/answer sets/dossiers/reports/evidence, reversible repair and verification reports, task contracts/cases, coding-agent tasks/suites/trial receipts/reports, task fingerprints, historical memory and update receipts, search initialization, task-solution reports, mutation receipts, paired-study reports, external benchmark bundles, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
+| Semantic model and 99 strict schemas | Alpha-supported | Typed universal domain packs, design contexts/questions/plans, evidence-derived coverage, integration profiles/projections, semantic concepts, dataset profiles, field maps, question packs/plans/findings, design-atlas techniques/questions/packs/archetypes/contexts/plans/answers/answer sets/dossiers/reports/evidence, reversible repair and verification reports, task contracts/cases, coding-agent tasks/suites/trial receipts/reports, task fingerprints, historical memory and update receipts, search initialization, task-solution reports, mutation receipts, paired-study reports, external benchmark bundles, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
+| Universal engineering catalog and planner | Alpha-supported as a reference decision system | Fourteen domain-neutral obligations, 13 domain packs, 42 all-visible questions, ten task-context channels, E1–E10 allocation, and explicit human/model/network authority gates; selection is not an answer or execution grant |
+| Evidence-derived domain coverage | Alpha-supported for checked-in assets | Exact template, example, compiler-route, benchmark, agent-suite, question-pack, adapter, and operational-evidence resolution through contiguous C0–C7 gates; the result is not a production-readiness or domain-superiority score |
+| OpenAPI, CloudEvents, and BPMN projection | Experimental structural authoring seam | Side-effect-free OpenAPI 3.0–3.2 operations, CloudEvents 1.0 event types, and BPMN 2.0/2.0.2 flow dependencies; no remote reference resolution, transport execution, or native BPMN engine semantics |
+| Airflow, Dagster, Temporal, and Kubernetes export | Experimental manifest seam | Portable frozen-plan tasks preserve exact node, dependency, fallback, resource, effect, permission, program, registry, and admitted-space identity; manifests are not deployable native definitions |
 | Compiler and complete snapshot admission | Alpha-supported | Reject invalid types, authority, effects, topology, bindings, and constraints before execution |
 | Conditional branches | Alpha-supported locally | Data-dependent activation, exactly receipted skips, and compiler rejection of unsafe conditional outputs without an explicit merge |
 | Composite and bounded-loop lowering | Alpha-supported locally | Deterministic namespaced expansion into ordinary compiler-valid DAGs with a content-addressed lowering receipt |
@@ -36,6 +40,8 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Data-science lifecycle pack | Alpha-supported as mechanism fixtures | Ten six-stage programs, 60 source-bound nodes, three strategies per stage, and independent controls covering profiling, features, supervised/unsupervised learning, temporal/text modeling, explainability, ensembles, monitoring, and rollback |
 | Templates and offline viewers | Alpha-supported | Explore 31 templates, 544 atomic slots, every bundled slot/candidate projection, and a generated benchmark report |
 | Trusted in-process Python runtime | Development only | Fast fixtures, tests, and notebooks using trusted code |
+| Runtime payload validator registry | Alpha-supported locally | Optional exact schema-digest/media-type validation at graph and node boundaries, stable failure classes, and validator identity in environment receipts; callers supply trusted validator implementations |
+| Parallel local experiment allocation | Alpha-supported locally | Deterministic case/plan/seed/repetition schedules, fresh executor and artifact store per cell, bounded threads, immediate receipt append, and stable final ledger order; not a distributed scheduler |
 | Bounded subprocess Python runtime | Alpha-supported lifecycle isolation | Trusted code needing process separation, strict JSON/bytes ABI, timeout, and optional POSIX CPU/memory limits |
 | Content-addressed artifacts | Alpha-supported locally | Reproducible fixture outputs and local checkpoints |
 | Exact local checkpoint/resume | Alpha-supported locally | Completed-prefix rehydration only when plan/program/registry/admission/input/environment/case/seed identity matches exactly |
@@ -61,6 +67,8 @@ yet a turnkey production scheduler or a hostile-code execution service.
   coding harness together with the concrete task.
 - Define exact task contracts, templates, nodes, registries, and independent
   verifiers.
+- Inspect universal obligations, domain coverage, and an all-visible engineering
+  checklist before authoring a graph.
 - Compare trusted local routes and persist all positive and negative receipts.
 - Package exact task/program/registry/case/oracle closures and run fixed-route
   versus bounded-solver mechanism benchmarks with explicit claim scopes.
@@ -119,10 +127,10 @@ configured.
 
 Beta requires at least one enforcing isolated runtime adapter, distributed
 crash-resumable campaign execution, larger mature-library node packs, and
-held-out multi-seed benchmarks on real external tasks. Version 0.6 demonstrates the complete local
-task → graph → admission → search → execution → evidence → belief-update →
-champion/fallback loop plus structured control and recovery, but only on small
-trusted fixtures.
+held-out multi-seed benchmarks on real external tasks. Version 0.6 demonstrates
+the complete local task → graph → admission → search → execution → evidence →
+belief-update → champion/fallback loop plus structured control and recovery,
+but only on small trusted fixtures.
 
 Production language additionally requires authentication, authorization,
 tenancy, secret brokerage, encryption, retention, operational monitoring,

@@ -1,0 +1,16 @@
+{
+  "capability_examples": [
+    "ledger balance",
+    "entity merge",
+    "three-way merge",
+    "source adjudication"
+  ],
+  "category_ids": [
+    "dag.integrate.reconcile",
+    "dag.prepare.conflict"
+  ],
+  "description": "Resolve duplicates, conflicts, balances, or competing sources explicitly.",
+  "design_prompt": "Which precedence, tolerance, abstention, and escalation rules resolve conflict?",
+  "id": "obligation.reconcile",
+  "title": "Reconcile"
+}

@@ -2,7 +2,7 @@
 
 ## Supported version
 
-The current `main` branch is the supported 0.3 developer-preview line. It is
+The current `main` branch is the supported 0.6 developer-preview line. It is
 supported for trusted development, conformance, and local experiments. No
 claim is made that the project is ready for unsupervised high-risk,
 multi-tenant, adversarial, or production execution. See `READINESS.md`.

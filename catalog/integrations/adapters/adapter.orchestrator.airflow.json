@@ -1,0 +1,13 @@
+{
+  "description": "Preserve frozen route identity for an Airflow DAG/task adapter.",
+  "id": "adapter.orchestrator.airflow",
+  "integration_model_version": "0.1",
+  "limitations": [
+    "The export is a portable manifest, not deployable native code; an authorized adapter must enforce runtime, secret, retry, and isolation policy."
+  ],
+  "output_kind": "projection.frozen-plan",
+  "source_kind": "orchestrator.airflow",
+  "supported_versions": [
+    "3"
+  ]
+}

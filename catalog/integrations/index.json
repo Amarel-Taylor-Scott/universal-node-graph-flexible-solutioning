@@ -1,0 +1,55 @@
+{
+  "adapter_count": 7,
+  "adapters": [
+    {
+      "digest": "sha256:f6aa31648005c2df3ad803030e5a8629397915c06c1a4bd1d04065238110b9db",
+      "id": "adapter.openapi",
+      "output_kind": "projection.interface-operations",
+      "path": "integrations/adapters/adapter.openapi.json",
+      "source_kind": "standard.openapi"
+    },
+    {
+      "digest": "sha256:1e76cf1c417a5f3ed81f485cefbb774ab73263abeac8eca73fb4338d2999dd43",
+      "id": "adapter.cloudevents",
+      "output_kind": "projection.event-types",
+      "path": "integrations/adapters/adapter.cloudevents.json",
+      "source_kind": "standard.cloudevents"
+    },
+    {
+      "digest": "sha256:726525e481a17fadb0ea796fe8c0dce8e2fbad2c5170fac924415d871fc59691",
+      "id": "adapter.bpmn",
+      "output_kind": "projection.workflow-structure",
+      "path": "integrations/adapters/adapter.bpmn.json",
+      "source_kind": "standard.bpmn"
+    },
+    {
+      "digest": "sha256:9baff2a3db23ca4a7a55c5e5d7a45669e382cb183988a6f0fe5a38f86f3e1828",
+      "id": "adapter.orchestrator.airflow",
+      "output_kind": "projection.frozen-plan",
+      "path": "integrations/adapters/adapter.orchestrator.airflow.json",
+      "source_kind": "orchestrator.airflow"
+    },
+    {
+      "digest": "sha256:97e42c9c3b8efadfc2f69cb9eb78a35a1f2de72fd258920d506914ddd072739d",
+      "id": "adapter.orchestrator.dagster",
+      "output_kind": "projection.frozen-plan",
+      "path": "integrations/adapters/adapter.orchestrator.dagster.json",
+      "source_kind": "orchestrator.dagster"
+    },
+    {
+      "digest": "sha256:65ff31f1c323fa725fe174eb7371a411ac2f1753d20fbc7e7a64b913408937f4",
+      "id": "adapter.orchestrator.temporal",
+      "output_kind": "projection.frozen-plan",
+      "path": "integrations/adapters/adapter.orchestrator.temporal.json",
+      "source_kind": "orchestrator.temporal"
+    },
+    {
+      "digest": "sha256:d4a8ca5440e976dda8c482e0835510144af67d9572063b4ffd2437c793297cb2",
+      "id": "adapter.orchestrator.kubernetes",
+      "output_kind": "projection.frozen-plan",
+      "path": "integrations/adapters/adapter.orchestrator.kubernetes.json",
+      "source_kind": "orchestrator.kubernetes-job"
+    }
+  ],
+  "integration_model_version": "0.1"
+}

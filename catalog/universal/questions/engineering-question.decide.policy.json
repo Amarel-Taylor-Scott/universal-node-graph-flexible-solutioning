@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "policy digest",
+    "objective vector"
+  ],
+  "id": "engineering-question.decide.policy",
+  "obligation_id": "obligation.decide",
+  "priority": 10,
+  "prompt": "Which evidence, thresholds, objectives, and hard constraints govern the decision?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "threshold-boundary fixtures",
+    "Pareto comparison"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "A single score can hide hard failures and conflicting objectives."
+}

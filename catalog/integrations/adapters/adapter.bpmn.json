@@ -1,0 +1,14 @@
+{
+  "description": "Project BPMN flow nodes and sequence dependencies into authoring evidence.",
+  "id": "adapter.bpmn",
+  "integration_model_version": "0.1",
+  "limitations": [
+    "The projection is structural; it does not implement BPMN token, compensation, transaction, timer, or engine semantics."
+  ],
+  "output_kind": "projection.workflow-structure",
+  "source_kind": "standard.bpmn",
+  "supported_versions": [
+    "2.0",
+    "2.0.2"
+  ]
+}

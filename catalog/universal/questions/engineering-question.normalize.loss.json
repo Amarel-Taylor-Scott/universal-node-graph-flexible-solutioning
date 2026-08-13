@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "loss register",
+    "raw artifact reference"
+  ],
+  "id": "engineering-question.normalize.loss",
+  "obligation_id": "obligation.normalize",
+  "priority": 9,
+  "prompt": "Which distinctions may normalization discard, and how is original evidence retained?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "round-trip comparison",
+    "collision analysis"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Lossy cleanup can erase legally or analytically meaningful differences."
+}

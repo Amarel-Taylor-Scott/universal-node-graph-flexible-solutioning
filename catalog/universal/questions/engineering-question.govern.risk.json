@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "risk register",
+    "control mapping"
+  ],
+  "id": "engineering-question.govern.risk",
+  "obligation_id": "obligation.govern",
+  "priority": 10,
+  "prompt": "Which security, privacy, legal, fairness, safety, and compliance risks require gates?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "policy-negative fixtures",
+    "exception expiry test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Different risks need explicit evidence and accountable acceptance."
+}

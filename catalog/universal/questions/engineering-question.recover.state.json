@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "checkpoint identity",
+    "compensation manifest"
+  ],
+  "id": "engineering-question.recover.state",
+  "obligation_id": "obligation.recover",
+  "priority": 9,
+  "prompt": "Which exact checkpoint, history, lease, or compensation state is required?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "identity mismatch test",
+    "partial-prefix resume"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Recovery against stale or mismatched state can compound damage."
+}

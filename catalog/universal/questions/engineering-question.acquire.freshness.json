@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "freshness SLO",
+    "completeness baseline"
+  ],
+  "id": "engineering-question.acquire.freshness",
+  "obligation_id": "obligation.acquire",
+  "priority": 7,
+  "prompt": "What freshness, completeness, ordering, and backpressure guarantees are required?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "simulate stale input",
+    "test partial delivery"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Acquisition can silently succeed with stale or incomplete inputs."
+}

@@ -25,6 +25,7 @@ from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
+from solutiongraph.integrations import REFERENCE_INTEGRATION_ADAPTERS
 from solutiongraph.interrogation.node_pack import (
     INTERROGATION_DESCRIPTORS,
     INTERROGATION_NODE_SPECS,
@@ -48,6 +49,11 @@ from solutiongraph.stdlib_pack import (
     STANDARD_LIBRARY_NODE_SPECS,
 )
 from solutiongraph.template_library import REFERENCE_TEMPLATES
+from solutiongraph.universal import (
+    REFERENCE_DOMAIN_PACKS,
+    REFERENCE_ENGINEERING_QUESTIONS,
+    REFERENCE_OBLIGATIONS,
+)
 
 
 def test_reference_nodes_execute_and_all_contracts_and_descriptors_validate():
@@ -121,6 +127,11 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         )
         + 1
         + 1
+        + len(REFERENCE_OBLIGATIONS)
+        + len(REFERENCE_DOMAIN_PACKS)
+        + len(REFERENCE_ENGINEERING_QUESTIONS)
+        + len(REFERENCE_INTEGRATION_ADAPTERS)
+        + 3
     )
     assert len(first) == expected
     index = first["index.json"]

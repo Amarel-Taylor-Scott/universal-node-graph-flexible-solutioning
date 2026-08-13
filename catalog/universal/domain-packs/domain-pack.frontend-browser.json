@@ -1,0 +1,72 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "browse-and-scrape",
+        "verified-product-dataset"
+      ],
+      "id": "capability.frontend.authorized-browser-acquire",
+      "intent": "Acquire pages through an explicit browser adapter and policy boundary.",
+      "obligation_id": "obligation.acquire",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.web-automation"
+      ],
+      "title": "Authorized browser acquisition"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "frontend-release-journey"
+      ],
+      "id": "capability.frontend.release-journey",
+      "intent": "Exercise a stable user journey and delivery contract before release.",
+      "obligation_id": "obligation.serve",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.qa-engineering"
+      ],
+      "title": "Frontend release journey"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "document-render-and-verify",
+        "frontend-release-journey"
+      ],
+      "id": "capability.frontend.render-verification",
+      "intent": "Verify layout, accessibility, content, and behavior through separate checks.",
+      "obligation_id": "obligation.verify",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.qa-engineering"
+      ],
+      "title": "Render verification"
+    }
+  ],
+  "description": "Authorized acquisition, user-journey delivery, rendering, and independent checks.",
+  "id": "domain-pack.frontend-browser",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.acquire",
+    "obligation.serve",
+    "obligation.verify"
+  ],
+  "standard_ids": [],
+  "title": "Frontend and browser systems",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

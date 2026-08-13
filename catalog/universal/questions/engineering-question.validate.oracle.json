@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "oracle digest",
+    "trust-boundary diagram"
+  ],
+  "id": "engineering-question.validate.oracle",
+  "obligation_id": "obligation.validate",
+  "priority": 10,
+  "prompt": "Which independent oracle can reject plausible but wrong outputs?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "cross-implementation test",
+    "sealed-case test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Candidate self-reports are not independent acceptance evidence."
+}

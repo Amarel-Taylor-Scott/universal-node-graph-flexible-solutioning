@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "universal-design-context.schema.json",
+  "title": "Universal engineering design context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "universal_engineering_model_version", "id", "task_contract_digest",
+    "task_id", "domain_pack_ids", "obligation_ids", "channels", "warnings"
+  ],
+  "properties": {
+    "universal_engineering_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "task_contract_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "task_id": {"$ref": "common.schema.json#/$defs/id"},
+    "domain_pack_ids": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "obligation_ids": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "channels": {
+      "type": "array", "minItems": 10, "maxItems": 10,
+      "prefixItems": [
+        {"$ref": "#/$defs/outcome"}, {"$ref": "#/$defs/interface"},
+        {"$ref": "#/$defs/workload"}, {"$ref": "#/$defs/topology"},
+        {"$ref": "#/$defs/effects"}, {"$ref": "#/$defs/temporal"},
+        {"$ref": "#/$defs/risk"}, {"$ref": "#/$defs/environment"},
+        {"$ref": "#/$defs/evidence"}, {"$ref": "#/$defs/semantics"}
+      ],
+      "items": false
+    },
+    "warnings": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "channel": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "values", "evidence_kind", "confidence"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "values": {"type": "object"},
+        "evidence_kind": {"$ref": "common.schema.json#/$defs/id"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "outcome": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.outcome"}}}]},
+    "interface": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.interface"}}}]},
+    "workload": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.workload"}}}]},
+    "topology": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.topology"}}}]},
+    "effects": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.effects"}}}]},
+    "temporal": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.temporal"}}}]},
+    "risk": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.risk"}}}]},
+    "environment": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.environment"}}}]},
+    "evidence": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.evidence"}}}]},
+    "semantics": {"allOf": [{"$ref": "#/$defs/channel"}, {"properties": {"id": {"const": "fingerprint.semantics"}}}]}
+  }
+}

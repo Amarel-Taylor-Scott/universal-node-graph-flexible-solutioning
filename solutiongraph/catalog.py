@@ -49,6 +49,7 @@ from solutiongraph.examples.showcase_tasks import (
 )
 from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
+from solutiongraph.integrations import REFERENCE_INTEGRATION_ADAPTERS
 from solutiongraph.interrogation.node_pack import (
     INTERROGATION_DESCRIPTORS,
     INTERROGATION_NODE_PACK,
@@ -79,6 +80,12 @@ from solutiongraph.stdlib_pack import (
     STANDARD_LIBRARY_REGISTRY,
 )
 from solutiongraph.template_library import REFERENCE_TEMPLATES
+from solutiongraph.universal import (
+    REFERENCE_DOMAIN_PACKS,
+    REFERENCE_ENGINEERING_QUESTIONS,
+    REFERENCE_OBLIGATIONS,
+    reference_coverage_report,
+)
 
 
 def reference_registry_capabilities() -> RegistryCapabilities:
@@ -397,6 +404,39 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "harnesses/duecare-example.json": DUECARE_HARNESS_BUNDLE.to_dict(),
         "harnesses/duecare-evidence-example.json": DUECARE_HARNESS_EVIDENCE.to_dict(),
     }
+    coverage = reference_coverage_report()
+    for obligation in REFERENCE_OBLIGATIONS:
+        documents[f"universal/obligations/{obligation.id}.json"] = obligation.to_dict()
+    for pack in REFERENCE_DOMAIN_PACKS:
+        documents[f"universal/domain-packs/{pack.id}.json"] = pack.to_dict()
+    for question in REFERENCE_ENGINEERING_QUESTIONS:
+        documents[f"universal/questions/{question.id}.json"] = question.to_dict()
+    for adapter in REFERENCE_INTEGRATION_ADAPTERS:
+        documents[f"integrations/adapters/{adapter.id}.json"] = adapter.to_dict()
+    documents["universal/coverage.json"] = coverage.to_dict()
+    documents["universal/index.json"] = {
+        "universal_engineering_model_version": "0.1",
+        "obligation_count": len(REFERENCE_OBLIGATIONS),
+        "domain_pack_count": len(REFERENCE_DOMAIN_PACKS),
+        "engineering_question_count": len(REFERENCE_ENGINEERING_QUESTIONS),
+        "coverage_digest": coverage.digest,
+        "coverage_path": "universal/coverage.json",
+        "claim_boundary": coverage.claim_boundary,
+    }
+    documents["integrations/index.json"] = {
+        "integration_model_version": "0.1",
+        "adapter_count": len(REFERENCE_INTEGRATION_ADAPTERS),
+        "adapters": [
+            {
+                "id": adapter.id,
+                "digest": adapter.digest,
+                "source_kind": adapter.source_kind,
+                "output_kind": adapter.output_kind,
+                "path": f"integrations/adapters/{adapter.id}.json",
+            }
+            for adapter in REFERENCE_INTEGRATION_ADAPTERS
+        ],
+    }
     reference_agent_suite = reference_agent_benchmark_suite()
     command_agent_suite = command_matrix_example_suite()
     for bundle in REFERENCE_AGENT_TASKS:
@@ -693,6 +733,17 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
             "question_count": len(REFERENCE_DESIGN_QUESTIONS),
             "task_archetype_count": len(REFERENCE_TASK_ARCHETYPES),
             "machine_maturity_floor": "C1",
+        },
+        "universal_engineering": {
+            "path": "universal/index.json",
+            "obligation_count": len(REFERENCE_OBLIGATIONS),
+            "domain_pack_count": len(REFERENCE_DOMAIN_PACKS),
+            "engineering_question_count": len(REFERENCE_ENGINEERING_QUESTIONS),
+            "coverage_digest": coverage.digest,
+        },
+        "integrations": {
+            "path": "integrations/index.json",
+            "adapter_count": len(REFERENCE_INTEGRATION_ADAPTERS),
         },
     }
     return dict(sorted(documents.items()))

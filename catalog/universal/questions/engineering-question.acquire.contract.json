@@ -1,0 +1,22 @@
+{
+  "effort_cost": 1,
+  "evidence_requests": [
+    "source manifest",
+    "authorization record"
+  ],
+  "id": "engineering-question.acquire.contract",
+  "obligation_id": "obligation.acquire",
+  "priority": 10,
+  "prompt": "Which exact sources, snapshots, licenses, and owners are authorized?",
+  "required_permissions": [],
+  "response_modes": [
+    "deterministic",
+    "human"
+  ],
+  "suggested_checks": [
+    "digest every source",
+    "reject undeclared sources"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Unpinned or unauthorized inputs invalidate replay and governance."
+}

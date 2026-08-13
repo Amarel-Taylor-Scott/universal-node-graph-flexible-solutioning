@@ -1,0 +1,76 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [
+        "adapter.cloudevents"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "event-time-windowing"
+      ],
+      "id": "capability.event.cloudevents-ingest",
+      "intent": "Normalize event envelope identity without claiming transport delivery semantics.",
+      "obligation_id": "obligation.acquire",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.event-driven-system"
+      ],
+      "title": "CloudEvents ingestion"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "event-time-windowing",
+        "user-journey-modeling"
+      ],
+      "id": "capability.event.time-aware-routing",
+      "intent": "Apply explicit windows, watermarks, lateness, and routing policies.",
+      "obligation_id": "obligation.decide",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.event-driven-system"
+      ],
+      "title": "Event-time routing"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "web-change-monitoring"
+      ],
+      "id": "capability.event.telemetry",
+      "intent": "Project graph execution into producer, consumer, trace, and lineage evidence.",
+      "obligation_id": "obligation.observe",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.observability-sre"
+      ],
+      "title": "Producer/consumer telemetry"
+    }
+  ],
+  "description": "Typed event ingestion, event-time decisions, observability, and replay boundaries.",
+  "id": "domain-pack.event-stream",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.acquire",
+    "obligation.decide",
+    "obligation.observe"
+  ],
+  "standard_ids": [
+    "standard.cloudevents-1",
+    "standard.opentelemetry"
+  ],
+  "title": "Event and streaming systems",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

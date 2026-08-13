@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "candidate manifests",
+    "admission decisions"
+  ],
+  "id": "engineering-question.transform.alternatives",
+  "obligation_id": "obligation.transform",
+  "priority": 8,
+  "prompt": "Which genuinely interchangeable algorithms or implementations should remain visible?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "compile every candidate",
+    "compare fallback failures"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Hidden choices prevent controlled search and failure diversity."
+}

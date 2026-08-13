@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "conflict matrix",
+    "source priorities"
+  ],
+  "id": "engineering-question.reconcile.conflict",
+  "obligation_id": "obligation.reconcile",
+  "priority": 9,
+  "prompt": "Which precedence, tolerance, abstention, and escalation rules resolve conflict?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "tie fixture",
+    "tolerance-boundary test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Silent last-write-wins policies erase disagreements and evidence."
+}

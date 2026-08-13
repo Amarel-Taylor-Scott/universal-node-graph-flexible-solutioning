@@ -1,0 +1,78 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [
+        "adapter.openapi"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "idempotent-api-contract"
+      ],
+      "id": "capability.backend.api-contract",
+      "intent": "Validate request, response, compatibility, and authorization contracts.",
+      "obligation_id": "obligation.validate",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.api-service"
+      ],
+      "title": "API contract assurance"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.kubernetes"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "idempotent-api-contract"
+      ],
+      "id": "capability.backend.service-delivery",
+      "intent": "Expose typed, idempotent service behavior through a stable interface.",
+      "obligation_id": "obligation.serve",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.api-service"
+      ],
+      "title": "Service delivery"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.temporal"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "transaction-reconciliation"
+      ],
+      "id": "capability.backend.compensating-recovery",
+      "intent": "Retry or compensate partial service effects under explicit idempotency rules.",
+      "obligation_id": "obligation.recover",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.claims-processing"
+      ],
+      "title": "Compensating recovery"
+    }
+  ],
+  "description": "Contract-safe request handling, idempotent effects, delivery, and rollback.",
+  "id": "domain-pack.backend-api",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.validate",
+    "obligation.serve",
+    "obligation.recover"
+  ],
+  "standard_ids": [
+    "standard.openapi-3"
+  ],
+  "title": "Backend services and APIs",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

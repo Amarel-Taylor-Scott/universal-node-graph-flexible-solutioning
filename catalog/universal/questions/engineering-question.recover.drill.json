@@ -1,0 +1,23 @@
+{
+  "effort_cost": 4,
+  "evidence_requests": [
+    "recovery runbook",
+    "drill receipt"
+  ],
+  "id": "engineering-question.recover.drill",
+  "obligation_id": "obligation.recover",
+  "priority": 9,
+  "prompt": "How will rollback, restore, failover, reconciliation, and post-recovery verification be exercised?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "restore drill",
+    "independent health check"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Untested recovery instructions are not operational evidence."
+}

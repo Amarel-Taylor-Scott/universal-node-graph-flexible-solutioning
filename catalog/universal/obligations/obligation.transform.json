@@ -1,0 +1,16 @@
+{
+  "capability_examples": [
+    "feature construction",
+    "document rendering",
+    "code generation",
+    "aggregation"
+  ],
+  "category_ids": [
+    "dag.prepare",
+    "dag.generate"
+  ],
+  "description": "Derive a new typed value without hiding material intermediate semantics.",
+  "design_prompt": "Which transformations are reversible, lossy, stateful, or dependent on training data?",
+  "id": "obligation.transform",
+  "title": "Transform"
+}

@@ -1,0 +1,81 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [
+        "benchmark.document-extraction"
+      ],
+      "blockers": [],
+      "example_ids": [
+        "document-to-schema",
+        "grounded-document-extraction"
+      ],
+      "id": "capability.media.document-decode",
+      "intent": "Decode document bytes and preserve page/layout evidence.",
+      "obligation_id": "obligation.decode",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [
+        "question-pack.document"
+      ],
+      "template_ids": [
+        "template.document-intelligence"
+      ],
+      "title": "Document decoding"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [
+        "benchmark.image-assurance"
+      ],
+      "blockers": [],
+      "example_ids": [
+        "image-check-and-process",
+        "document-render-and-verify"
+      ],
+      "id": "capability.media.image-transform",
+      "intent": "Orient, enhance, OCR, classify, and render images as visible substeps.",
+      "obligation_id": "obligation.transform",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.image-processing"
+      ],
+      "title": "Image transformation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [
+        "benchmark.document-extraction"
+      ],
+      "blockers": [],
+      "example_ids": [
+        "grounded-document-extraction",
+        "document-render-and-verify"
+      ],
+      "id": "capability.media.grounded-verification",
+      "intent": "Check extracted claims and rendered artifacts against independent evidence.",
+      "obligation_id": "obligation.verify",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.document-intelligence"
+      ],
+      "title": "Grounded media verification"
+    }
+  ],
+  "description": "Decode, transform, ground, render, and independently verify rich artifacts.",
+  "id": "domain-pack.documents-media",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.decode",
+    "obligation.transform",
+    "obligation.verify"
+  ],
+  "standard_ids": [],
+  "title": "Documents, images, and media",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

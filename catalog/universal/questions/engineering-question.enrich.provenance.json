@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "field lineage",
+    "confidence calibration"
+  ],
+  "id": "engineering-question.enrich.provenance",
+  "obligation_id": "obligation.enrich",
+  "priority": 8,
+  "prompt": "Can every enriched field be traced to a source, match, time, and confidence?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "lineage completeness test",
+    "source withdrawal test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Field-level provenance is needed for correction and audit."
+}

@@ -72,6 +72,7 @@ packages = [
     "solutiongraph.design_atlas", "solutiongraph.design_atlas.packs",
     "solutiongraph.design_atlas.nodes", "solutiongraph.design_atlas.data",
     "solutiongraph.agent_bench", "solutiongraph.agent_bench.tasks",
+    "solutiongraph.universal", "solutiongraph.integrations",
     "browsergraph", "browsergraph.nodes", "browsergraph.drivers",
     "browsergraph.dimensions", "browsergraph.extract", "browsergraph.classify",
     "browsergraph.tasks", "browsergraph.assets", "browsergraph.schemas",
@@ -79,7 +80,7 @@ packages = [
 
 [tool.setuptools.package-data]
 browsergraph = ["schemas/*.json", "assets/*.html", "assets/*.json"]
-solutiongraph = ["schemas/*.json", "design_atlas/data/*.json"]
+solutiongraph = ["schemas/*.json", "design_atlas/data/*.json", "py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

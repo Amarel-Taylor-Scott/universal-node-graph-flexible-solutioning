@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "alert policy",
+    "owner schedule"
+  ],
+  "id": "engineering-question.observe.alerts",
+  "obligation_id": "obligation.observe",
+  "priority": 8,
+  "prompt": "Which SLO, drift, integrity, security, and business conditions should alert?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "synthetic alert",
+    "false-positive review"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Alerting needs actionable thresholds and ownership, not raw volume."
+}

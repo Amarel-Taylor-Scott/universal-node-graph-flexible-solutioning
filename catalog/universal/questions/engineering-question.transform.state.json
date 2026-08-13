@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "state digest",
+    "seed policy"
+  ],
+  "id": "engineering-question.transform.state",
+  "obligation_id": "obligation.transform",
+  "priority": 9,
+  "prompt": "Which transforms are fitted, stateful, stochastic, lossy, or externally dependent?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "replay test",
+    "train-boundary test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Undeclared state and randomness break replay and leakage boundaries."
+}

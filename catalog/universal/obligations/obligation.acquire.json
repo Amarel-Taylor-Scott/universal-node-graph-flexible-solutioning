@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "batch ingest",
+    "event consume",
+    "authorized API fetch",
+    "human submission"
+  ],
+  "category_ids": [
+    "dag.acquire"
+  ],
+  "description": "Obtain authorized inputs while preserving source identity and boundaries.",
+  "design_prompt": "Which sources, snapshots, permissions, and freshness guarantees define acquisition?",
+  "id": "obligation.acquire",
+  "title": "Acquire"
+}

@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "parse JSON",
+    "decode image",
+    "extract document text",
+    "deserialize event"
+  ],
+  "category_ids": [
+    "dag.prepare.parse"
+  ],
+  "description": "Turn transport or storage representations into explicit typed values.",
+  "design_prompt": "Which formats, versions, encodings, and malformed-input policies must be decoded?",
+  "id": "obligation.decode",
+  "title": "Decode"
+}

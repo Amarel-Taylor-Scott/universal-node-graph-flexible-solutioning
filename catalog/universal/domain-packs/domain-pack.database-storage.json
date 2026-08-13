@@ -1,0 +1,72 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "schema-migration"
+      ],
+      "id": "capability.database.schema-migration",
+      "intent": "Plan and verify compatible schema and data transformations.",
+      "obligation_id": "obligation.transform",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.database-migration"
+      ],
+      "title": "Schema migration"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "transaction-reconciliation"
+      ],
+      "id": "capability.database.evidence-persistence",
+      "intent": "Content-address artifacts, checkpoints, and append-only receipts.",
+      "obligation_id": "obligation.persist",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.database-migration"
+      ],
+      "title": "Evidence persistence"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.temporal"
+      ],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "schema-migration"
+      ],
+      "id": "capability.database.cutover-recovery",
+      "intent": "Resume or roll back migrations with explicit checkpoints and verification.",
+      "obligation_id": "obligation.recover",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.database-migration"
+      ],
+      "title": "Cutover recovery"
+    }
+  ],
+  "description": "Schema migration, state persistence, reconciliation, and reversible cutover.",
+  "id": "domain-pack.database-storage",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.transform",
+    "obligation.persist",
+    "obligation.recover"
+  ],
+  "standard_ids": [],
+  "title": "Database and storage systems",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

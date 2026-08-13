@@ -1,0 +1,21 @@
+{
+  "effort_cost": 1,
+  "evidence_requests": [
+    "canonicalization specification"
+  ],
+  "id": "engineering-question.normalize.canonical",
+  "obligation_id": "obligation.normalize",
+  "priority": 8,
+  "prompt": "What canonical form, units, locale, case, and identifier policy is required?",
+  "required_permissions": [],
+  "response_modes": [
+    "deterministic",
+    "human"
+  ],
+  "suggested_checks": [
+    "idempotence test",
+    "locale fixtures"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Multiple canonical forms create false duplicates and unstable joins."
+}

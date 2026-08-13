@@ -39,6 +39,10 @@
       "version": "0.1.0"
     }
   ],
+  "integrations": {
+    "adapter_count": 7,
+    "path": "integrations/index.json"
+  },
   "node_packs": [
     {
       "descriptor_count": 5,
@@ -613,5 +617,12 @@
       ],
       "version": "1.0.0"
     }
-  ]
+  ],
+  "universal_engineering": {
+    "coverage_digest": "sha256:5acb7de8d5ac6915adb0f65db6cb9971d7f3bb672c79fb70de39009081fe45d6",
+    "domain_pack_count": 13,
+    "engineering_question_count": 42,
+    "obligation_count": 14,
+    "path": "universal/index.json"
+  }
 }

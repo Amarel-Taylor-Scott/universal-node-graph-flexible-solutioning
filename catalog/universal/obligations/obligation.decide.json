@@ -1,0 +1,16 @@
+{
+  "capability_examples": [
+    "policy gate",
+    "route selection",
+    "human approval",
+    "resource allocation"
+  ],
+  "category_ids": [
+    "dag.learn.optimize",
+    "dag.human.review"
+  ],
+  "description": "Choose, rank, route, approve, or abstain under an explicit policy.",
+  "design_prompt": "Who or what may decide, on which evidence, with which abstention and appeal path?",
+  "id": "obligation.decide",
+  "title": "Decide"
+}

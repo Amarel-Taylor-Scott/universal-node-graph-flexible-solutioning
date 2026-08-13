@@ -1,0 +1,72 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "dependency-assurance",
+        "pii-redaction"
+      ],
+      "id": "capability.security.defensive-assurance",
+      "intent": "Inspect dependencies and artifacts using independently identified policies.",
+      "obligation_id": "obligation.validate",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.cybersecurity-investigation"
+      ],
+      "title": "Defensive assurance"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [
+        "Production certification requires an authorized external assessor."
+      ],
+      "example_ids": [],
+      "id": "capability.security.compliance-evidence",
+      "intent": "Bind controls, owners, evidence, exceptions, and review state.",
+      "obligation_id": "obligation.govern",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.compliance-evidence"
+      ],
+      "title": "Compliance evidence"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [],
+      "id": "capability.security.hostile-runtime-recovery",
+      "intent": "Contain, revoke, restore, and independently verify after adversarial execution.",
+      "obligation_id": "obligation.recover",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [],
+      "title": "Hostile-runtime containment and recovery"
+    }
+  ],
+  "description": "Defensive assurance, evidence collection, redaction, policy gates, and recovery.",
+  "id": "domain-pack.security-compliance",
+  "limitations": [
+    "The repository does not provide a hostile-code sandbox or certification."
+  ],
+  "required_obligation_ids": [
+    "obligation.validate",
+    "obligation.govern",
+    "obligation.recover"
+  ],
+  "standard_ids": [
+    "standard.in-toto-slsa",
+    "standard.opentelemetry"
+  ],
+  "title": "Security, privacy, and compliance",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

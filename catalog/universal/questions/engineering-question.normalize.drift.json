@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "unknown-value report",
+    "rule version"
+  ],
+  "id": "engineering-question.normalize.drift",
+  "obligation_id": "obligation.normalize",
+  "priority": 6,
+  "prompt": "How will new values, units, locales, or branding conventions be detected?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "novelty fixture",
+    "shadow comparison"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Canonicalization rules age and can silently damage new inputs."
+}

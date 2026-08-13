@@ -1,0 +1,22 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "authority manifest",
+    "vintage digest"
+  ],
+  "id": "engineering-question.enrich.authority",
+  "obligation_id": "obligation.enrich",
+  "priority": 10,
+  "prompt": "Which reference authority, license, version, and effective date governs enrichment?",
+  "required_permissions": [],
+  "response_modes": [
+    "deterministic",
+    "human"
+  ],
+  "suggested_checks": [
+    "as-of fixture",
+    "authority outage test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Current or untrusted reference data can create point-in-time errors."
+}

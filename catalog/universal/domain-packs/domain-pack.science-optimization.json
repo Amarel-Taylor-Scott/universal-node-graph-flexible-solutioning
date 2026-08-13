@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "numerical-linear-system"
+      ],
+      "id": "capability.science.numerical-transform",
+      "intent": "Qualify numerical preconditions before factorization or solving.",
+      "obligation_id": "obligation.transform",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.numerical-linear-system"
+      ],
+      "title": "Numerical transform"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "scientific-experiment",
+        "reinforcement-learning-loop"
+      ],
+      "id": "capability.science.experimental-decision",
+      "intent": "Compare controlled alternatives under a frozen protocol and uncertainty.",
+      "obligation_id": "obligation.decide",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.scientific-experiment",
+        "template.optimization-scheduling"
+      ],
+      "title": "Experimental decision"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "numerical-linear-system",
+        "scientific-experiment"
+      ],
+      "id": "capability.science.residual-verification",
+      "intent": "Reject outputs that fail numerical, physical, or experimental invariants.",
+      "obligation_id": "obligation.verify",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.numerical-linear-system"
+      ],
+      "title": "Residual and property verification"
+    }
+  ],
+  "description": "Numerical transforms, controlled comparisons, optimization, simulation, and verification.",
+  "id": "domain-pack.science-optimization",
+  "limitations": [],
+  "required_obligation_ids": [
+    "obligation.transform",
+    "obligation.decide",
+    "obligation.verify"
+  ],
+  "standard_ids": [],
+  "title": "Scientific computing and optimization",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}

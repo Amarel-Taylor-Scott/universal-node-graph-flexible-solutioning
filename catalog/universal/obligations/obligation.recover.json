@@ -1,0 +1,16 @@
+{
+  "capability_examples": [
+    "bounded retry",
+    "saga compensation",
+    "checkpoint resume",
+    "release rollback"
+  ],
+  "category_ids": [
+    "dag.operate.incident",
+    "dag.serve.deploy"
+  ],
+  "description": "Retry, compensate, resume, roll back, or fail safely after disruption.",
+  "design_prompt": "Which failure classes are retryable, compensatable, resumable, or terminal?",
+  "id": "obligation.recover",
+  "title": "Recover"
+}

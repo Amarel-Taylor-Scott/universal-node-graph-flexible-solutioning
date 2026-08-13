@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "reconciliation equation",
+    "exception ledger"
+  ],
+  "id": "engineering-question.reconcile.balance",
+  "obligation_id": "obligation.reconcile",
+  "priority": 9,
+  "prompt": "Which conservation, balance, completeness, or referential invariants must hold?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "conservation property",
+    "orphan detection"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "A merged result can look valid while losing or duplicating value."
+}

@@ -1,0 +1,23 @@
+{
+  "effort_cost": 3,
+  "evidence_requests": [
+    "retention schedule",
+    "access policy"
+  ],
+  "id": "engineering-question.persist.lifecycle",
+  "obligation_id": "obligation.persist",
+  "priority": 9,
+  "prompt": "Which retention, encryption, access, residency, backup, and deletion rules apply?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "restore drill",
+    "retention enforcement test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Content identity alone does not provide data governance."
+}

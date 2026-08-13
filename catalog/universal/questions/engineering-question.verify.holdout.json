@@ -1,0 +1,23 @@
+{
+  "effort_cost": 2,
+  "evidence_requests": [
+    "case split manifest",
+    "visibility matrix"
+  ],
+  "id": "engineering-question.verify.holdout",
+  "obligation_id": "obligation.verify",
+  "priority": 10,
+  "prompt": "Which development, validation, holdout, stress, and production-shadow boundaries apply?",
+  "required_permissions": [],
+  "response_modes": [
+    "human",
+    "llm",
+    "external"
+  ],
+  "suggested_checks": [
+    "digest split cases",
+    "candidate-readability test"
+  ],
+  "universal_engineering_model_version": "0.1",
+  "why_it_matters": "Repeated exposure turns a holdout into training data."
+}

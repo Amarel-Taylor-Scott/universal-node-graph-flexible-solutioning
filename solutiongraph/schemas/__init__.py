@@ -98,6 +98,14 @@ SCHEMA_NAMES = (
     "design-task-request.schema.json",
     "design-answer-set.schema.json",
     "design-report-bundle.schema.json",
+    "universal-domain-pack.schema.json",
+    "universal-design-context.schema.json",
+    "universal-design-question.schema.json",
+    "universal-design-plan.schema.json",
+    "universal-coverage-report.schema.json",
+    "integration-adapter.schema.json",
+    "integration-projection.schema.json",
+    "orchestrator-plan-projection.schema.json",
 )
 
 

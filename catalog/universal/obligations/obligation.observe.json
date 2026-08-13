@@ -1,0 +1,15 @@
+{
+  "capability_examples": [
+    "trace span",
+    "SLO metric",
+    "audit event",
+    "drift monitor"
+  ],
+  "category_ids": [
+    "dag.operate.observe"
+  ],
+  "description": "Emit enough telemetry and lineage to explain behavior and detect drift.",
+  "design_prompt": "Which traces, metrics, logs, lineage, alerts, and privacy filters are required?",
+  "id": "obligation.observe",
+  "title": "Observe"
+}

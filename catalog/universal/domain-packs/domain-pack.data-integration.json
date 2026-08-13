@@ -1,0 +1,88 @@
+{
+  "capabilities": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [
+        "benchmark.data-cleaning",
+        "benchmark.stdlib-data-quality"
+      ],
+      "blockers": [],
+      "example_ids": [
+        "data-cleanup",
+        "stdlib-data-quality"
+      ],
+      "id": "capability.data.quality-validation",
+      "intent": "Profile and reject structurally or semantically invalid records.",
+      "obligation_id": "obligation.validate",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [
+        "question-pack.generic-tabular"
+      ],
+      "template_ids": [
+        "template.data-quality"
+      ],
+      "title": "Data quality validation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "geotemporal-enrichment",
+        "address-reference-verification"
+      ],
+      "id": "capability.data.reference-enrichment",
+      "intent": "Attach versioned geographic, temporal, and identity context with provenance.",
+      "obligation_id": "obligation.enrich",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [
+        "question-pack.geography",
+        "question-pack.datetime"
+      ],
+      "template_ids": [
+        "template.geospatial-analytics"
+      ],
+      "title": "Reference and geotemporal enrichment"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "benchmark_ids": [],
+      "blockers": [],
+      "example_ids": [
+        "multi-feed-analytical-dataset",
+        "transaction-reconciliation"
+      ],
+      "id": "capability.data.multi-source-reconciliation",
+      "intent": "Resolve conflicting or duplicated records without erasing source evidence.",
+      "obligation_id": "obligation.reconcile",
+      "operational_evidence_refs": [],
+      "question_pack_ids": [
+        "question-pack.transaction"
+      ],
+      "template_ids": [
+        "template.batch-data-pipeline"
+      ],
+      "title": "Multi-source reconciliation"
+    }
+  ],
+  "description": "Cleaning, contracts, entity resolution, geotemporal enrichment, and reconciliation.",
+  "id": "domain-pack.data-integration",
+  "limitations": [
+    "Bundled authority data is synthetic and not a production reference service."
+  ],
+  "required_obligation_ids": [
+    "obligation.validate",
+    "obligation.enrich",
+    "obligation.reconcile"
+  ],
+  "standard_ids": [
+    "standard.cloudevents-1",
+    "standard.openlineage"
+  ],
+  "title": "Data integration and quality",
+  "universal_engineering_model_version": "0.1",
+  "version": "0.1"
+}
