@@ -1,0 +1,47 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.temporal-coverage-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.time.instant",
+    "concept.time.date",
+    "concept.time.start",
+    "concept.time.end",
+    "concept.time.timezone"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "datetime.coverage-drift",
+  "id": "question.datetime.drift",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are missing periods, duplicated intervals, irregular cadence, or source changes distorting trends?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.datetime"
+  ],
+  "title": "Temporal coverage and drift",
+  "version": "1.0.0"
+}

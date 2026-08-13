@@ -1,0 +1,43 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.identifier-uniqueness-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.product.identifier"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "product.identifier-conflict",
+  "id": "question.product.identifier-uniqueness",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Does one identifier map to one intended product level rather than conflicting variants?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.product"
+  ],
+  "title": "Product identifier uniqueness",
+  "version": "1.0.0"
+}

@@ -1,0 +1,43 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.identifier-uniqueness-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.transaction.id"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "transaction.identifier-conflict",
+  "id": "question.transaction.identifier",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are transaction, invoice, order, and payment identifiers unique at their declared grain?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "critical",
+  "tags": [
+    "domain.transaction"
+  ],
+  "title": "Transaction identity",
+  "version": "1.0.0"
+}

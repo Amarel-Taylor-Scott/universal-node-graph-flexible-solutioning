@@ -1,0 +1,332 @@
+{
+  "concept_ids": [
+    "concept.product.identifier",
+    "concept.product.name",
+    "concept.product.brand"
+  ],
+  "description": "Product identifiers, brands, variants, duplicates, and lifecycle questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.product",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.product-identifier-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "authority.product-identifier-lookup",
+          "cost_tier": 5,
+          "effect": "network.read",
+          "evidence_kinds": [
+            "evidence.authority-response",
+            "evidence.source-vintage"
+          ],
+          "mode": "external",
+          "optional": true,
+          "permission": "network.read"
+        }
+      ],
+      "concept_ids": [
+        "concept.product.identifier"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "product.identifier-invalid",
+      "id": "question.product.identifier-shape",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do SKU, UPC, EAN, GTIN, and internal identifiers follow their declared schemes?",
+      "references": [],
+      "repair_families": [],
+      "scope": "field",
+      "severity": "high",
+      "tags": [
+        "domain.product"
+      ],
+      "title": "Product identifier shape",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.identifier-uniqueness-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.product.identifier"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "product.identifier-conflict",
+      "id": "question.product.identifier-uniqueness",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Does one identifier map to one intended product level rather than conflicting variants?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "high",
+      "tags": [
+        "domain.product"
+      ],
+      "title": "Product identifier uniqueness",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.product-brand-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.adjudicate-product-brand",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.product.name",
+        "concept.product.brand"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "product.name-brand-conflict",
+      "id": "question.product.name-brand",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do product names, brands, and manufacturers agree without duplicating brand tokens incorrectly?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "medium",
+      "tags": [
+        "domain.product"
+      ],
+      "title": "Product name and brand consistency",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.product-variant-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-product-variant",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.product.name",
+        "concept.product.identifier",
+        "concept.product.brand"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "product.variant-granularity-conflict",
+      "id": "question.product.variant-level",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are size, color, package, and regional variants distinguished from parent products?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "high",
+      "tags": [
+        "domain.product"
+      ],
+      "title": "Product and variant granularity",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.product-duplicate-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.product.name",
+        "concept.product.identifier",
+        "concept.product.brand"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "product.possible-duplicate",
+      "id": "question.product.duplicates",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do normalized names and identifiers expose duplicate or conflicting product records?",
+      "references": [],
+      "repair_families": [
+        "repair.quarantine-duplicate"
+      ],
+      "scope": "dataset",
+      "severity": "medium",
+      "tags": [
+        "domain.product"
+      ],
+      "title": "Duplicate product entities",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "authority.product-history-lookup",
+          "cost_tier": 6,
+          "effect": "network.read",
+          "evidence_kinds": [
+            "evidence.authority-response",
+            "evidence.source-vintage"
+          ],
+          "mode": "external",
+          "optional": true,
+          "permission": "network.read"
+        },
+        {
+          "capability": "quality.review-product-history",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.product.name",
+        "concept.product.identifier",
+        "concept.product.brand"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "product.temporal-status-conflict",
+      "id": "question.product.temporal-validity",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are discontinued, renamed, recalled, or region-restricted products interpreted at the relevant date?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "high",
+      "tags": [
+        "domain.product"
+      ],
+      "title": "Product lifecycle validity",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Product interrogation",
+  "version": "1.0.0"
+}

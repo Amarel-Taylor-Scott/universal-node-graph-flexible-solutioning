@@ -1,0 +1,480 @@
+{
+  "concept_ids": [
+    "concept.ml.target",
+    "concept.dataset.recordset",
+    "concept.ml.split",
+    "concept.ml.prediction"
+  ],
+  "description": "Target, split, leakage, imputation, drift, contamination, and evaluation-slice questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.ml-dataset",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-target-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-ml-target",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.ml.target"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.target-invalid",
+      "id": "question.ml-dataset.target",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.target-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Is the target well-defined, measured consistently, and available for the intended prediction horizon?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "critical",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Target validity",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.target-balance-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.interpret-target-distribution",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.ml.target"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.target-distribution-risk",
+      "id": "question.ml-dataset.target-balance",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Is the target balanced or long-tailed, and does the evaluation metric reflect the consequential regions?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "high",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Target distribution and balance",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-split-integrity-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.dataset.recordset",
+        "concept.ml.target",
+        "concept.ml.split"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.split-contamination",
+      "id": "question.ml-dataset.split-integrity",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.split-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are train, validation, and holdout splits disjoint at row, entity, group, and time levels?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "critical",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Split integrity",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-leakage-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.audit-ml-leakage",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.dataset.recordset",
+        "concept.ml.target",
+        "concept.ml.split"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.feature-leakage",
+      "id": "question.ml-dataset.feature-leakage",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do features duplicate, encode, postdate, or otherwise reveal the target?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "critical",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Feature and target leakage",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-duplicate-split-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.dataset.recordset",
+        "concept.ml.target",
+        "concept.ml.split"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.duplicate-split-leakage",
+      "id": "question.ml-dataset.duplicate-leakage",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do exact or near-duplicate examples cross split boundaries and inflate evaluation?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "critical",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Duplicate examples across splits",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-imputation-boundary-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.dataset.recordset",
+        "concept.ml.target",
+        "concept.ml.split"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.imputation-leakage",
+      "id": "question.ml-dataset.missingness",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are imputation statistics learned only from training data and applied consistently to later splits?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "critical",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Missingness and imputation boundary",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-drift-check",
+          "cost_tier": 4,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.interpret-ml-drift",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.dataset.recordset",
+        "concept.ml.target",
+        "concept.ml.split"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.distribution-drift",
+      "id": "question.ml-dataset.drift",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Which feature, target, missingness, and category distributions differ across time, splits, or serving data?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "high",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Train-to-serving drift",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-prediction-contamination-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.ml.target",
+        "concept.ml.prediction"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.prediction-contamination",
+      "id": "question.ml-dataset.prediction-contamination",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are prior model scores, predictions, or post-outcome features unintentionally included as training inputs?",
+      "references": [],
+      "repair_families": [],
+      "scope": "cross-field",
+      "severity": "critical",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Prediction-column contamination",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.ml-slice-coverage-check",
+          "cost_tier": 4,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-ml-slices",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.dataset.recordset",
+        "concept.ml.target",
+        "concept.ml.split"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "ml.evaluation-slice-gap",
+      "id": "question.ml-dataset.evaluation-slices",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Does evaluation cover rare classes, tails, geographies, periods, source systems, and high-harm groups?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "high",
+      "tags": [
+        "domain.ml-dataset"
+      ],
+      "title": "Evaluation slice coverage",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Machine-learning dataset interrogation",
+  "version": "1.0.0"
+}

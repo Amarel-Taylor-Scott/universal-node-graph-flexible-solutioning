@@ -220,6 +220,23 @@ from solutiongraph.intelligence import (
     merge_belief_models,
     profile_tabular_records,
 )
+from solutiongraph.interrogation.engine import InterrogationEngine
+from solutiongraph.interrogation.model import (
+    INTERROGATION_MODEL_VERSION,
+    ConceptDefinition,
+    DatasetProfile,
+    Finding,
+    FindingSet,
+    QuestionDefinition,
+    QuestionPack,
+    QuestionPlan,
+    RepairProposal,
+    SemanticFieldMap,
+    VerificationReceipt,
+)
+from solutiongraph.interrogation.planning import QuestionPlanner, effort_budget
+from solutiongraph.interrogation.profiling import map_semantic_fields, profile_records
+from solutiongraph.interrogation.reporting import InterrogationRunReport
 from solutiongraph.ledger import (
     JOURNAL_SCHEMA_VERSION,
     JournalStatus,
@@ -406,6 +423,23 @@ from solutiongraph.verification import (
 __version__ = "0.6.0"
 
 __all__ = [
+    "INTERROGATION_MODEL_VERSION",
+    "ConceptDefinition",
+    "DatasetProfile",
+    "Finding",
+    "FindingSet",
+    "InterrogationEngine",
+    "InterrogationRunReport",
+    "QuestionDefinition",
+    "QuestionPack",
+    "QuestionPlan",
+    "QuestionPlanner",
+    "RepairProposal",
+    "SemanticFieldMap",
+    "VerificationReceipt",
+    "effort_budget",
+    "map_semantic_fields",
+    "profile_records",
     "SEMANTIC_MODEL_VERSION",
     "AUTHORING_MODEL_VERSION",
     "BENCHMARK_MODEL_VERSION",

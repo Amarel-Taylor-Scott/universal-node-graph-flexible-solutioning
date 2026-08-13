@@ -1,0 +1,30 @@
+{
+  "aliases": [
+    "last_name",
+    "family_name",
+    "surname"
+  ],
+  "canonical_uri": "https://schema.org/familyName",
+  "description": "",
+  "extensions": {},
+  "id": "concept.person.family-name",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Family name",
+  "parent_ids": [
+    "concept.person.name"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "text.family-name",
+  "version": "1.0.0"
+}

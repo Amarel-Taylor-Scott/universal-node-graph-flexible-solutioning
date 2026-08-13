@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "interrogation-report.schema.json",
+  "title": "Semantic interrogation, shadow repair, and verification report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interrogation_report_version", "id", "version", "digest", "claim_scope",
+    "configuration", "source_profile", "semantic_field_map", "question_plan",
+    "before_findings", "repair_proposal", "repair_application", "shadow_profile",
+    "shadow_field_map", "shadow_plan", "after_findings", "verification", "summary"
+  ],
+  "properties": {
+    "interrogation_report_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "claim_scope": {"enum": ["mechanism-fixture", "dataset-specific-evidence"]},
+    "configuration": {"$ref": "common.schema.json#/$defs/extensions"},
+    "source_profile": {"$ref": "dataset-profile.schema.json"},
+    "semantic_field_map": {"$ref": "semantic-field-map.schema.json"},
+    "question_plan": {"$ref": "question-plan.schema.json"},
+    "before_findings": {"$ref": "finding-set.schema.json"},
+    "repair_proposal": {"$ref": "repair-proposal.schema.json"},
+    "repair_application": {"$ref": "#/$defs/application"},
+    "shadow_profile": {"$ref": "dataset-profile.schema.json"},
+    "shadow_field_map": {"$ref": "semantic-field-map.schema.json"},
+    "shadow_plan": {"$ref": "question-plan.schema.json"},
+    "after_findings": {"$ref": "finding-set.schema.json"},
+    "verification": {"$ref": "verification-receipt.schema.json"},
+    "summary": {"type": "object", "additionalProperties": true}
+  },
+  "$defs": {
+    "application": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "proposal_digest", "input_dataset_digest", "output_dataset_digest",
+        "applied_operation_ids", "skipped_operation_ids", "status", "errors"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "proposal_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "input_dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "output_dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "applied_operation_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+        "skipped_operation_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+        "status": {"enum": ["applied", "partial", "no-change", "failed"]},
+        "errors": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

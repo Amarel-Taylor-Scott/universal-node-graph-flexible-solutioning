@@ -6,6 +6,22 @@ All notable changes to this proof of concept are documented here.
 
 ### Added
 
+- Semantic interrogation contracts and strict schemas for concepts, aggregate
+  profiles, semantic maps, question definitions/packs/plans, findings,
+  reversible repair proposals, independent verification receipts, and complete
+  redacted reports.
+- Forty-six concepts, 11 reusable question packs, and 86 declarative questions
+  spanning generic records, organizations, addresses, contacts, time,
+  geography, people, products, transactions, documents, and ML datasets.
+- Forty-three dependency-free check adapters plus eight individually importable
+  typed graph nodes, 43 finite parameter bindings, an 8,640-route reference
+  feedback-loop program, catalogue projection, CLI, example dataset,
+  quickstart, and self-contained JSON/Markdown/HTML reports.
+- Effort-aware planning with complete question visibility, explicit
+  external/model/human permission blocking, observational utility memory,
+  protected random exploration, reversible shadow-only repair, exact reversal,
+  and separately identified post-repair verification.
+
 - A harness-neutral coding-agent A/B arena with ten diverse dependency-free
   tasks spanning data cleaning/validation/enrichment, ML, time series,
   documents, backend idempotency, DueCare-style LLM evaluation, and compatible
@@ -101,14 +117,14 @@ All notable changes to this proof of concept are documented here.
 
 ### Changed
 
-- The strict wire-schema set now contains 69 schemas.
+- The strict wire-schema set now contains 79 schemas.
 - Topology families now reject mismatched external port contracts, self-parent
   variants, and cyclic mutation ancestry before admission or search.
 - `UniversalSolver` and graph experiments share the same evidence-only hard
   gates, Pareto flags, and normalized weighted projection.
 - Release verification now covers 47 executable examples, 379 unique nodes, 120
   declared routes, 76 accepted observations, 44 intentional negative controls,
-  six node packs, and 581 generated catalogue documents, including ten
+  seven node packs, and 744 generated catalogue documents, including ten
   digest-only agent-task contracts and two agent-benchmark suites.
 - `UniversalSolver.solve(profile=None, initialization=...)` derives its
   inspectable search/trial budget from the initialization effort policy,

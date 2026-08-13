@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "company_id",
+    "organization_id",
+    "lei",
+    "tax_id",
+    "registration_number"
+  ],
+  "canonical_uri": "https://schema.org/identifier",
+  "description": "",
+  "extensions": {},
+  "id": "concept.organization.identifier",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Organization identifier",
+  "parent_ids": [
+    "concept.organization.entity"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    },
+    {
+      "id": "reference.gleif-api",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "Authoritative for LEI-covered entities only.",
+      "revision": "",
+      "role": "reference.entity-authority",
+      "url": "https://www.gleif.org/en/lei-data/gleif-api"
+    }
+  ],
+  "value_type": "data.organization-identifier",
+  "version": "1.0.0"
+}

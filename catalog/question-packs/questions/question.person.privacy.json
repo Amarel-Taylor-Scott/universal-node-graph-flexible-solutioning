@@ -1,0 +1,44 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.review-person-privacy",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.person.name",
+    "concept.person.given-name",
+    "concept.person.family-name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "person.privacy-boundary",
+  "id": "question.person.privacy",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.personal",
+  "question": "Are personal names and contact details exposed only to nodes that require them?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "critical",
+  "tags": [
+    "domain.person"
+  ],
+  "title": "Person-data minimization",
+  "version": "1.0.0"
+}

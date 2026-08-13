@@ -11,7 +11,7 @@ yet a turnkey production scheduler or a hostile-code execution service.
 
 | Surface | Status | Supported use |
 |---|---|---|
-| Semantic model and 69 strict schemas | Alpha-supported | Typed task contracts/cases, coding-agent tasks/suites/trial receipts/reports, task fingerprints, historical memory and update receipts, search initialization, task-solution reports, mutation receipts, paired-study reports, external benchmark bundles, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
+| Semantic model and 79 strict schemas | Alpha-supported | Typed semantic concepts, dataset profiles, field maps, question packs/plans/findings, reversible repair and verification reports, task contracts/cases, coding-agent tasks/suites/trial receipts/reports, task fingerprints, historical memory and update receipts, search initialization, task-solution reports, mutation receipts, paired-study reports, external benchmark bundles, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
 | Compiler and complete snapshot admission | Alpha-supported | Reject invalid types, authority, effects, topology, bindings, and constraints before execution |
 | Conditional branches | Alpha-supported locally | Data-dependent activation, exactly receipted skips, and compiler rejection of unsafe conditional outputs without an explicit merge |
 | Composite and bounded-loop lowering | Alpha-supported locally | Deterministic namespaced expansion into ordinary compiler-valid DAGs with a content-addressed lowering receipt |
@@ -50,6 +50,7 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Hostile generated-code execution | Not provided | Requires an external microVM, Wasm, or remote trust boundary |
 | Multi-tenant secrets/auth/retention | Not provided | Must be supplied by a production platform |
 | Distributed crash replay, exactly-once semantics, and scheduling | Not provided | Local exact-prefix resume proves the protocol seam; a durable distributed scheduler remains external |
+| Semantic data interrogation | Reference implementation | Aggregate-only profiles, 46 concepts, 86 all-visible questions, 43 deterministic checks, shadow-only reversible repairs, and independent verification run locally; authority lookups and production identity/address validation require configured external nodes |
 | Universal real-world performance claims | Not claimed | Bundled programs are mechanism fixtures, not domain benchmark superiority evidence |
 
 ## Safe uses today

@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "contact_type",
+    "phone_type",
+    "email_type",
+    "department"
+  ],
+  "canonical_uri": "https://schema.org/contactType",
+  "description": "",
+  "extensions": {},
+  "id": "concept.contact.type",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Contact point type",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "contact.type",
+  "version": "1.0.0"
+}

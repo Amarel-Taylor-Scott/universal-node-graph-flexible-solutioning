@@ -67,6 +67,8 @@ Security = "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible
 [tool.setuptools]
 packages = [
     "solutiongraph", "solutiongraph.schemas", "solutiongraph.examples",
+    "solutiongraph.interrogation", "solutiongraph.interrogation.nodes",
+    "solutiongraph.question_packs",
     "solutiongraph.agent_bench", "solutiongraph.agent_bench.tasks",
     "browsergraph", "browsergraph.nodes", "browsergraph.drivers",
     "browsergraph.dimensions", "browsergraph.extract", "browsergraph.classify",

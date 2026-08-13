@@ -1,0 +1,30 @@
+{
+  "aliases": [
+    "target",
+    "label",
+    "y",
+    "outcome",
+    "response"
+  ],
+  "canonical_uri": "urn:solutiongraph:concept:ml-target",
+  "description": "",
+  "extensions": {},
+  "id": "concept.ml.target",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Machine-learning target",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.w3c-dqv",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.quality-vocabulary",
+      "url": "https://www.w3.org/TR/vocab-dqv/"
+    }
+  ],
+  "value_type": "ml.target",
+  "version": "1.0.0"
+}

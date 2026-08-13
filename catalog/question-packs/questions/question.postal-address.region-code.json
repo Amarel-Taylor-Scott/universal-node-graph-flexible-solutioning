@@ -1,0 +1,46 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.region-country-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.postal.region",
+    "concept.postal.country"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "postal.region-code-conflict",
+  "id": "question.postal-address.region-code",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are state, province, region, and country codes syntactically valid and mutually consistent?",
+  "references": [],
+  "repair_families": [
+    "repair.uppercase-region-code"
+  ],
+  "scope": "cross-field",
+  "severity": "high",
+  "tags": [
+    "domain.postal-address"
+  ],
+  "title": "Region and country code consistency",
+  "version": "1.0.0"
+}

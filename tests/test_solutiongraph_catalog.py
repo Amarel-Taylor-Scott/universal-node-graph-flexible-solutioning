@@ -13,6 +13,15 @@ from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
+from solutiongraph.interrogation.node_pack import (
+    INTERROGATION_DESCRIPTORS,
+    INTERROGATION_NODE_SPECS,
+)
+from solutiongraph.question_packs import (
+    REFERENCE_CONCEPTS,
+    REFERENCE_QUESTION_PACKS,
+    REFERENCE_QUESTIONS,
+)
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
     REFERENCE_NODE_SPECS,
@@ -74,6 +83,11 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + (3 + len(STANDARD_LIBRARY_NODE_SPECS) + len(STANDARD_LIBRARY_DESCRIPTORS))
         + (3 + len(SHOWCASE_NODES))
         + (3 + len(DATA_SCIENCE_NODES))
+        + (3 + len(INTERROGATION_NODE_SPECS) + len(INTERROGATION_DESCRIPTORS))
+        + 1
+        + len(REFERENCE_CONCEPTS)
+        + len(REFERENCE_QUESTION_PACKS)
+        + len(REFERENCE_QUESTIONS)
         + 1
         + 1
         + len(REFERENCE_AGENT_TASKS)
@@ -103,7 +117,14 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         len(EXTENDED_NODES),
         len(SHOWCASE_NODES),
         len(DATA_SCIENCE_NODES),
+        len(INTERROGATION_NODE_SPECS),
     ]
+    assert index["question_packs"] == {
+        "path": "question-packs/index.json",
+        "concept_count": len(REFERENCE_CONCEPTS),
+        "pack_count": len(REFERENCE_QUESTION_PACKS),
+        "question_count": len(REFERENCE_QUESTIONS),
+    }
     assert index["benchmarks"] == {
         "path": "benchmarks/index.json",
         "benchmark_count": 6,

@@ -1,0 +1,43 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.document-text-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.document.text"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "document.text-quality",
+  "id": "question.document.text-quality",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Does extracted or OCR text contain empty pages, mojibake, repeated headers, or suspicious character distributions?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.document"
+  ],
+  "title": "Extracted-text quality",
+  "version": "1.0.0"
+}

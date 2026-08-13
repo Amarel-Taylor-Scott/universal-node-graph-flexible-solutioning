@@ -1,0 +1,605 @@
+{
+  "concept_ids": [
+    "concept.postal.address",
+    "concept.postal.street",
+    "concept.postal.unit",
+    "concept.postal.city",
+    "concept.postal.region",
+    "concept.postal.code",
+    "concept.postal.country",
+    "concept.geography.latitude",
+    "concept.geography.longitude"
+  ],
+  "description": "Country-aware address structure, USPS-style normalization, GIS evidence, and shared-address questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.postal-address",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.address-role-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.adjudicate-address-role",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.address",
+        "concept.postal.street",
+        "concept.postal.unit",
+        "concept.postal.city",
+        "concept.postal.region",
+        "concept.postal.code",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.address-role-ambiguous",
+      "id": "question.postal-address.address-role",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Is each address explicitly identified as physical, mailing, legal, billing, registered-agent, or operating?",
+      "references": [
+        {
+          "id": "reference.schema-org",
+          "jurisdiction": "",
+          "license": "CC-BY-SA",
+          "notes": "",
+          "revision": "current-web",
+          "role": "reference.semantic-vocabulary",
+          "url": "https://schema.org/"
+        }
+      ],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "medium",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Address role and purpose",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.address-component-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.address",
+        "concept.postal.street",
+        "concept.postal.unit",
+        "concept.postal.city",
+        "concept.postal.region",
+        "concept.postal.code",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.required-component-missing",
+      "id": "question.postal-address.required-components",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.address-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are required address components present for the declared country and address role?",
+      "references": [],
+      "repair_families": [
+        "repair.quarantine-record"
+      ],
+      "scope": "row",
+      "severity": "high",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Country-aware address components",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.placeholder-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.address",
+        "concept.postal.street",
+        "concept.postal.unit",
+        "concept.postal.city",
+        "concept.postal.region",
+        "concept.postal.code",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.placeholder-value",
+      "id": "question.postal-address.placeholder-values",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do address components contain test, unknown, repeated, or otherwise non-address placeholder values?",
+      "references": [],
+      "repair_families": [
+        "repair.normalize-missing",
+        "repair.quarantine-record"
+      ],
+      "scope": "row",
+      "severity": "high",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Address placeholders",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.postal-format-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.code",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.postal-code-format",
+      "id": "question.postal-address.postal-format",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.postal-code-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Does each postal code have a plausible format for its declared country without claiming deliverability?",
+      "references": [],
+      "repair_families": [],
+      "scope": "row",
+      "severity": "high",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Country-aware postal-code format",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.region-country-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.region",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.region-code-conflict",
+      "id": "question.postal-address.region-code",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are state, province, region, and country codes syntactically valid and mutually consistent?",
+      "references": [],
+      "repair_families": [
+        "repair.uppercase-region-code"
+      ],
+      "scope": "cross-field",
+      "severity": "high",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Region and country code consistency",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.usps-delivery-line-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.street",
+        "concept.postal.unit"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.delivery-line-nonstandard",
+      "id": "question.postal-address.delivery-line",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [
+        "US"
+      ],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do US delivery lines use recognizable street suffixes and secondary-unit designators while preserving source values?",
+      "references": [
+        {
+          "id": "reference.usps-publication-28",
+          "jurisdiction": "US",
+          "license": "",
+          "notes": "",
+          "revision": "2024-10",
+          "role": "reference.address-normalization",
+          "url": "https://pe.usps.com/text/pub28/welcome.htm"
+        }
+      ],
+      "repair_families": [
+        "repair.address-comparison-key"
+      ],
+      "scope": "field",
+      "severity": "medium",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Delivery-line standardization",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.po-box-mix-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.street",
+        "concept.postal.unit"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.delivery-mode-conflict",
+      "id": "question.postal-address.po-box-mixing",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [
+        "US"
+      ],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are PO Box, rural route, highway contract route, and physical delivery lines represented without contradictory mixing?",
+      "references": [
+        {
+          "id": "reference.usps-publication-28",
+          "jurisdiction": "US",
+          "license": "",
+          "notes": "",
+          "revision": "2024-10",
+          "role": "reference.address-normalization",
+          "url": "https://pe.usps.com/text/pub28/welcome.htm"
+        }
+      ],
+      "repair_families": [],
+      "scope": "row",
+      "severity": "medium",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "PO Box and physical-line mixing",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [
+        "reference dataset or vintage is unavailable"
+      ],
+      "checks": [
+        {
+          "capability": "authority.postal-geography-lookup",
+          "cost_tier": 5,
+          "effect": "network.read",
+          "evidence_kinds": [
+            "evidence.authority-response",
+            "evidence.source-vintage"
+          ],
+          "mode": "external",
+          "optional": true,
+          "permission": "network.read"
+        },
+        {
+          "capability": "quality.review-postal-geography",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.city",
+        "concept.postal.region",
+        "concept.postal.code",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.locality-region-postal-conflict",
+      "id": "question.postal-address.city-region-postal",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do locality, region, postal code, and country agree according to a declared reference vintage?",
+      "references": [
+        {
+          "id": "reference.census-geocoder",
+          "jurisdiction": "US",
+          "license": "",
+          "notes": "Range and geography evidence; not proof of deliverability or structure existence.",
+          "revision": "",
+          "role": "reference.geographic-evidence",
+          "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html"
+        }
+      ],
+      "repair_families": [],
+      "scope": "cross-field",
+      "severity": "high",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "City, region, and postal relationship",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "authority.census-geocode",
+          "cost_tier": 5,
+          "effect": "network.read",
+          "evidence_kinds": [
+            "evidence.authority-response",
+            "evidence.source-vintage"
+          ],
+          "mode": "external",
+          "optional": true,
+          "permission": "network.read"
+        },
+        {
+          "capability": "quality.audit-geocode-claim",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.address",
+        "concept.geography.latitude",
+        "concept.geography.longitude"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.geocode-evidence-overclaim",
+      "id": "question.postal-address.geocode-evidence",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.address-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Is the geocode match type recorded, and is an interpolated range or centroid being mistaken for rooftop or deliverability proof?",
+      "references": [
+        {
+          "id": "reference.census-geocoder",
+          "jurisdiction": "US",
+          "license": "",
+          "notes": "Range and geography evidence; not proof of deliverability or structure existence.",
+          "revision": "",
+          "role": "reference.geographic-evidence",
+          "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html"
+        }
+      ],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "high",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Geocode match semantics",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.shared-address-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.interpret-shared-address-clusters",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.postal.address",
+        "concept.postal.street",
+        "concept.postal.unit",
+        "concept.postal.city",
+        "concept.postal.region",
+        "concept.postal.code",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "postal.suspicious-shared-address",
+      "id": "question.postal-address.shared-address",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are implausibly many unrelated entities sharing one normalized address or unit?",
+      "references": [],
+      "repair_families": [
+        "repair.quarantine-duplicate"
+      ],
+      "scope": "dataset",
+      "severity": "medium",
+      "tags": [
+        "domain.postal-address"
+      ],
+      "title": "Suspicious shared addresses",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Postal address interrogation",
+  "version": "1.0.0"
+}

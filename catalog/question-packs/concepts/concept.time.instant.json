@@ -1,0 +1,30 @@
+{
+  "aliases": [
+    "timestamp",
+    "datetime",
+    "created_at",
+    "updated_at",
+    "event_time"
+  ],
+  "canonical_uri": "https://schema.org/DateTime",
+  "description": "",
+  "extensions": {},
+  "id": "concept.time.instant",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Date-time instant",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "time.datetime",
+  "version": "1.0.0"
+}

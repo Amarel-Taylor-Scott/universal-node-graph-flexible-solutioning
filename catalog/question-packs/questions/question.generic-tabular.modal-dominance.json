@@ -1,0 +1,44 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.cardinality-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.cardinality",
+    "evidence.top-value-hashes"
+  ],
+  "extensions": {},
+  "finding_code": "data.suspicious-cardinality",
+  "id": "question.generic-tabular.modal-dominance",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do low entropy, impossible cardinality, or dominant values indicate defaults or broken ingestion?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.generic-tabular"
+  ],
+  "title": "Cardinality and modal dominance",
+  "version": "1.0.0"
+}

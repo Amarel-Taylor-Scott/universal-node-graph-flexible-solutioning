@@ -1,0 +1,44 @@
+{
+  "abstain_when": [
+    "active probing is not explicitly authorized"
+  ],
+  "checks": [
+    {
+      "capability": "quality.review-email-authority",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.contact.email"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "contact.email-evidence-overclaim",
+  "id": "question.contact-point.email-ownership",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.contact",
+  "question": "Is syntactic validity being distinguished from mailbox ownership, consent, and deliverability?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "high",
+  "tags": [
+    "domain.contact-point"
+  ],
+  "title": "Mailbox ownership and deliverability boundary",
+  "version": "1.0.0"
+}

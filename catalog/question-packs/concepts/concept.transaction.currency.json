@@ -1,0 +1,28 @@
+{
+  "aliases": [
+    "currency",
+    "currency_code",
+    "price_currency"
+  ],
+  "canonical_uri": "https://schema.org/priceCurrency",
+  "description": "",
+  "extensions": {},
+  "id": "concept.transaction.currency",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Currency code",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "money.currency",
+  "version": "1.0.0"
+}

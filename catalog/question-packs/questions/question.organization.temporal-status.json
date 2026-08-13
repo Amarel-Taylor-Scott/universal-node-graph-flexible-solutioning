@@ -1,0 +1,68 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.datetime-parse-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "authority.organization-history-lookup",
+      "cost_tier": 6,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    },
+    {
+      "capability": "quality.review-organization-history",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.organization.status-date",
+    "concept.organization.legal-name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "organization.temporal-status-conflict",
+  "id": "question.organization.temporal-status",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.event-time-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are renames, mergers, dissolutions, and address changes evaluated at the record's effective date?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.organization"
+  ],
+  "title": "Organization status over time",
+  "version": "1.0.0"
+}

@@ -1,0 +1,82 @@
+{
+  "capabilities": [
+    "interrogation.propose-repairs"
+  ],
+  "description": "Translate supported findings into conservative, reversible patches while retaining uncertain changes as review-only operations.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.interrogation.nodes.propose_repairs:propose_repairs_node",
+  "failure_modes": [
+    {
+      "code": "interrogation.invalid-input",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "interrogation.propose-repairs",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:3ac2228dc2e39164ceb2055ace7ca2f6a1e478d879384f6ed0d3ddee68fdb2f9",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "interrogation.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "finding_set",
+      "type": {
+        "id": "interrogation.finding-set",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "repair_proposal",
+      "type": {
+        "id": "interrogation.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "safe-only",
+        "safe-and-review"
+      ],
+      "default": "safe-only",
+      "description": "",
+      "name": "repair_strategy",
+      "required": false,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/interrogation/nodes/propose_repairs.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

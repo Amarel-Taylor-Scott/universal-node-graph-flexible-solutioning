@@ -1,0 +1,55 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.dst-transition-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.review-dst-ambiguity",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.time.instant",
+    "concept.time.timezone"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "datetime.dst-ambiguity",
+  "id": "question.datetime.daylight-saving",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do local timestamps contain nonexistent or duplicated wall-clock times during timezone transitions?",
+  "references": [],
+  "repair_families": [],
+  "scope": "row",
+  "severity": "medium",
+  "tags": [
+    "domain.datetime"
+  ],
+  "title": "Daylight-saving transitions",
+  "version": "1.0.0"
+}

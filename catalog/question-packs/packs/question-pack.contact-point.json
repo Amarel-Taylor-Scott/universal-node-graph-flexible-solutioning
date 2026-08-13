@@ -1,0 +1,454 @@
+{
+  "concept_ids": [
+    "concept.contact.email",
+    "concept.organization.domain",
+    "concept.contact.telephone",
+    "concept.postal.country",
+    "concept.contact.type",
+    "concept.contact.language"
+  ],
+  "description": "Email, telephone, contact-role, reuse, authority, and service-context questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.contact-point",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.email-syntax-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.email"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.email-syntax",
+      "id": "question.contact-point.email-syntax",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are email addresses syntactically plausible after trimming and Unicode-domain normalization?",
+      "references": [
+        {
+          "id": "reference.rfc-5322",
+          "jurisdiction": "",
+          "license": "",
+          "notes": "",
+          "revision": "",
+          "role": "reference.email-syntax",
+          "url": "https://datatracker.ietf.org/doc/html/rfc5322"
+        }
+      ],
+      "repair_families": [
+        "repair.normalize-email-domain"
+      ],
+      "scope": "field",
+      "severity": "high",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "Email syntax",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.email-domain-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "authority.dns-domain-lookup",
+          "cost_tier": 5,
+          "effect": "network.read",
+          "evidence_kinds": [
+            "evidence.authority-response",
+            "evidence.source-vintage"
+          ],
+          "mode": "external",
+          "optional": true,
+          "permission": "network.read"
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.email",
+        "concept.organization.domain"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.email-domain-conflict",
+      "id": "question.contact-point.email-domain",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Does the email domain have a plausible relationship to the organization domain without treating it as ownership proof?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "medium",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "Email-domain plausibility",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [
+        "active probing is not explicitly authorized"
+      ],
+      "checks": [
+        {
+          "capability": "quality.review-email-authority",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.email"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.email-evidence-overclaim",
+      "id": "question.contact-point.email-ownership",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.contact",
+      "question": "Is syntactic validity being distinguished from mailbox ownership, consent, and deliverability?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "high",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "Mailbox ownership and deliverability boundary",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.phone-format-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.telephone",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.phone-format",
+      "id": "question.contact-point.phone-format",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Can each phone number be parsed with explicit country context and represented without losing its extension?",
+      "references": [
+        {
+          "id": "reference.itu-e164",
+          "jurisdiction": "",
+          "license": "",
+          "notes": "",
+          "revision": "",
+          "role": "reference.telephone-numbering",
+          "url": "https://www.itu.int/rec/T-REC-E.164/"
+        }
+      ],
+      "repair_families": [
+        "repair.normalize-e164-when-explicit"
+      ],
+      "scope": "field",
+      "severity": "high",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "International phone format",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.phone-country-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.telephone",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.phone-country-conflict",
+      "id": "question.contact-point.phone-country",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Does the international calling code agree with the address country, and are exceptions explicitly recorded?",
+      "references": [],
+      "repair_families": [],
+      "scope": "cross-field",
+      "severity": "medium",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "Phone and country consistency",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.placeholder-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.contact-reuse-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.telephone",
+        "concept.contact.email"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.placeholder-or-reuse",
+      "id": "question.contact-point.contact-placeholders",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are phone numbers and emails free of placeholder values or suspicious reuse across unrelated entities?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "high",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "Contact placeholders and repetition",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.role-account-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.adjudicate-contact-role",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.email",
+        "concept.contact.type"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.role-account-mismatch",
+      "id": "question.contact-point.role-account",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Is a role mailbox distinguished from a person-specific mailbox when workflow semantics require it?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "low",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "Role versus personal mailbox",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.contact-context-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-contact-context",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.contact.type",
+        "concept.contact.language"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "contact.service-context-conflict",
+      "id": "question.contact-point.service-context",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are contact type, supported language, service area, and business-hour attributes mutually consistent?",
+      "references": [
+        {
+          "id": "reference.schema-org",
+          "jurisdiction": "",
+          "license": "CC-BY-SA",
+          "notes": "",
+          "revision": "current-web",
+          "role": "reference.semantic-vocabulary",
+          "url": "https://schema.org/"
+        }
+      ],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "medium",
+      "tags": [
+        "domain.contact-point"
+      ],
+      "title": "Contact type, language, and service area",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Contact-point interrogation",
+  "version": "1.0.0"
+}

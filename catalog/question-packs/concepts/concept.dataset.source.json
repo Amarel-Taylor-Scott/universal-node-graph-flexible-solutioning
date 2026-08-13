@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "source",
+    "source_system",
+    "system_of_record",
+    "origin"
+  ],
+  "canonical_uri": "urn:solutiongraph:concept:data-source",
+  "description": "",
+  "extensions": {},
+  "id": "concept.dataset.source",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Data source",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.w3c-dqv",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.quality-vocabulary",
+      "url": "https://www.w3.org/TR/vocab-dqv/"
+    }
+  ],
+  "value_type": "data.source-id",
+  "version": "1.0.0"
+}

@@ -1,0 +1,65 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.contact-context-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.review-contact-context",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.contact.type",
+    "concept.contact.language"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "contact.service-context-conflict",
+  "id": "question.contact-point.service-context",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are contact type, supported language, service area, and business-hour attributes mutually consistent?",
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "medium",
+  "tags": [
+    "domain.contact-point"
+  ],
+  "title": "Contact type, language, and service area",
+  "version": "1.0.0"
+}

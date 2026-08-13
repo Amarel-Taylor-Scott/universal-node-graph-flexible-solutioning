@@ -1,0 +1,283 @@
+{
+  "concept_ids": [
+    "concept.person.name",
+    "concept.person.given-name",
+    "concept.person.family-name"
+  ],
+  "description": "Name components, scripts, placeholders, entity resolution, and privacy questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.person",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.person-name-component-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.adjudicate-person-name-components",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.person.name",
+        "concept.person.given-name",
+        "concept.person.family-name"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "person.name-component-conflict",
+      "id": "question.person.name-components",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do full, given, and family name fields agree without assuming one global name order?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "medium",
+      "tags": [
+        "domain.person"
+      ],
+      "title": "Name-component consistency",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.placeholder-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.person.name",
+        "concept.person.given-name",
+        "concept.person.family-name"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "person.name-placeholder",
+      "id": "question.person.placeholder",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are names free of titles-only, initials-only, test, anonymous, or contact-role placeholders?",
+      "references": [],
+      "repair_families": [
+        "repair.normalize-missing",
+        "repair.quarantine-record"
+      ],
+      "scope": "field",
+      "severity": "high",
+      "tags": [
+        "domain.person"
+      ],
+      "title": "Person-name placeholders",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.unicode-control-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.person-name-script-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.person.name",
+        "concept.person.given-name",
+        "concept.person.family-name"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "person.name-script-anomaly",
+      "id": "question.person.punctuation-script",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are apostrophes, hyphens, diacritics, and non-Latin scripts preserved while control or spoofing characters are flagged?",
+      "references": [],
+      "repair_families": [
+        "repair.normalize-unicode"
+      ],
+      "scope": "field",
+      "severity": "medium",
+      "tags": [
+        "domain.person"
+      ],
+      "title": "Punctuation, script, and diacritics",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.person-duplicate-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-person-duplicate",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.person.name",
+        "concept.person.given-name",
+        "concept.person.family-name"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "person.possible-duplicate",
+      "id": "question.person.duplicate-identity",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do similar names plus shared contacts or addresses indicate duplicates without collapsing distinct people?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "high",
+      "tags": [
+        "domain.person"
+      ],
+      "title": "Possible duplicate people",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.review-person-privacy",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.person.name",
+        "concept.person.given-name",
+        "concept.person.family-name"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "person.privacy-boundary",
+      "id": "question.person.privacy",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.personal",
+      "question": "Are personal names and contact details exposed only to nodes that require them?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "critical",
+      "tags": [
+        "domain.person"
+      ],
+      "title": "Person-data minimization",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Person identity interrogation",
+  "version": "1.0.0"
+}

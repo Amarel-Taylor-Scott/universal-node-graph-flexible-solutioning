@@ -1,0 +1,32 @@
+{
+  "aliases": [
+    "zip",
+    "zipcode",
+    "zip_code",
+    "postal_code",
+    "postcode"
+  ],
+  "canonical_uri": "https://schema.org/postalCode",
+  "description": "",
+  "extensions": {},
+  "id": "concept.postal.code",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Postal code",
+  "parent_ids": [
+    "concept.postal.address"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "geo.postal-code",
+  "version": "1.0.0"
+}

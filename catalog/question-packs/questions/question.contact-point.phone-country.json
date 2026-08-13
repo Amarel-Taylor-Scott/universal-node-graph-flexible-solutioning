@@ -1,0 +1,44 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.phone-country-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.contact.telephone",
+    "concept.postal.country"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "contact.phone-country-conflict",
+  "id": "question.contact-point.phone-country",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Does the international calling code agree with the address country, and are exceptions explicitly recorded?",
+  "references": [],
+  "repair_families": [],
+  "scope": "cross-field",
+  "severity": "medium",
+  "tags": [
+    "domain.contact-point"
+  ],
+  "title": "Phone and country consistency",
+  "version": "1.0.0"
+}

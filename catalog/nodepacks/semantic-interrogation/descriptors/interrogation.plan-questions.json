@@ -1,0 +1,69 @@
+{
+  "actions": [
+    "interrogation.plan-questions"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.plan-questions",
+      "language": "und",
+      "source_digest": "sha256:7f902d401c1965534594068a8deeda062f6d39163750e572df3d979c51ae983c",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Compile a complete visible plan, selecting eligible questions under an explicit effort, exploration, and cost budget."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.plan-questions",
+  "node_spec_digest": "sha256:7f902d401c1965534594068a8deeda062f6d39163750e572df3d979c51ae983c",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed profile input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "profile"
+    },
+    {
+      "concepts": [],
+      "description": "Typed semantic_field_map input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "semantic_field_map"
+    },
+    {
+      "concepts": [],
+      "description": "Typed question_plan output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "question_plan"
+    }
+  ],
+  "purposes": [
+    "Compile a complete visible plan, selecting eligible questions under an explicit effort, exploration, and cost budget."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Compile a complete visible plan, selecting eligible questions under an explicit effort, exploration, and cost budget.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Plan Questions"
+}

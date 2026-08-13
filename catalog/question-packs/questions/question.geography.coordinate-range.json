@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.coordinate-range-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.geography.latitude",
+    "concept.geography.longitude"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "geography.invalid-coordinate",
+  "id": "question.geography.coordinate-range",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.coordinates-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are latitude and longitude finite, in range, and not accidentally swapped?",
+  "references": [],
+  "repair_families": [],
+  "scope": "row",
+  "severity": "high",
+  "tags": [
+    "domain.geography"
+  ],
+  "title": "Coordinate range and axis order",
+  "version": "1.0.0"
+}

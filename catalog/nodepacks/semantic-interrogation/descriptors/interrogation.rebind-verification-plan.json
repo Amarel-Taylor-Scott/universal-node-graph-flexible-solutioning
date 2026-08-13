@@ -1,0 +1,76 @@
+{
+  "actions": [
+    "interrogation.rebind-verification-plan"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.rebind-verification-plan",
+      "language": "und",
+      "source_digest": "sha256:8c478e49ff42d5d31e4919fd1eb56ce3d9ae0b91a6a30584a4a7187d3e1528cb",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Bind the same selected checks to the shadow profile so verification cannot silently choose an easier post-repair suite."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.rebind-verification-plan",
+  "node_spec_digest": "sha256:8c478e49ff42d5d31e4919fd1eb56ce3d9ae0b91a6a30584a4a7187d3e1528cb",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed question_plan input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "question_plan"
+    },
+    {
+      "concepts": [],
+      "description": "Typed shadow_profile input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "shadow_profile"
+    },
+    {
+      "concepts": [],
+      "description": "Typed shadow_field_map input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "shadow_field_map"
+    },
+    {
+      "concepts": [],
+      "description": "Typed verification_plan output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "verification_plan"
+    }
+  ],
+  "purposes": [
+    "Bind the same selected checks to the shadow profile so verification cannot silently choose an easier post-repair suite."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Bind the same selected checks to the shadow profile so verification cannot silently choose an easier post-repair suite.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Rebind Verification Plan"
+}

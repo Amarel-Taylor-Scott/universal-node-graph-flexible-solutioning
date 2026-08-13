@@ -1,0 +1,67 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.cross-field-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.adjudicate-cross-field-conflict",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    },
+    {
+      "capability": "quality.review-cross-field-conflict",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.invariant",
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "data.cross-field-conflict",
+  "id": "question.generic-tabular.cross-field-conflicts",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Which combinations of fields contradict declared or learned invariants?",
+  "references": [],
+  "repair_families": [],
+  "scope": "cross-field",
+  "severity": "high",
+  "tags": [
+    "domain.generic-tabular"
+  ],
+  "title": "Cross-field contradictions",
+  "version": "1.0.0"
+}

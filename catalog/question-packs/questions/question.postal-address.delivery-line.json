@@ -1,0 +1,58 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.usps-delivery-line-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.postal.street",
+    "concept.postal.unit"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "postal.delivery-line-nonstandard",
+  "id": "question.postal-address.delivery-line",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [
+    "US"
+  ],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do US delivery lines use recognizable street suffixes and secondary-unit designators while preserving source values?",
+  "references": [
+    {
+      "id": "reference.usps-publication-28",
+      "jurisdiction": "US",
+      "license": "",
+      "notes": "",
+      "revision": "2024-10",
+      "role": "reference.address-normalization",
+      "url": "https://pe.usps.com/text/pub28/welcome.htm"
+    }
+  ],
+  "repair_families": [
+    "repair.address-comparison-key"
+  ],
+  "scope": "field",
+  "severity": "medium",
+  "tags": [
+    "domain.postal-address"
+  ],
+  "title": "Delivery-line standardization",
+  "version": "1.0.0"
+}

@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "start",
+    "start_date",
+    "start_time",
+    "valid_from"
+  ],
+  "canonical_uri": "https://schema.org/startDate",
+  "description": "",
+  "extensions": {},
+  "id": "concept.time.start",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Start date-time",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "time.datetime",
+  "version": "1.0.0"
+}

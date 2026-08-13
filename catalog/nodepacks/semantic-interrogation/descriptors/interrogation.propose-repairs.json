@@ -1,0 +1,69 @@
+{
+  "actions": [
+    "interrogation.propose-repairs"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.propose-repairs",
+      "language": "und",
+      "source_digest": "sha256:f1d842a0efa538e65440ad40639147f8d94558f78c22cfa0e743cc7ae350b550",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Translate supported findings into conservative, reversible patches while retaining uncertain changes as review-only operations."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.propose-repairs",
+  "node_spec_digest": "sha256:f1d842a0efa538e65440ad40639147f8d94558f78c22cfa0e743cc7ae350b550",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed finding_set input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "finding_set"
+    },
+    {
+      "concepts": [],
+      "description": "Typed repair_proposal output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "repair_proposal"
+    }
+  ],
+  "purposes": [
+    "Translate supported findings into conservative, reversible patches while retaining uncertain changes as review-only operations."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Translate supported findings into conservative, reversible patches while retaining uncertain changes as review-only operations.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Propose Repairs"
+}

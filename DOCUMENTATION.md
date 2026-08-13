@@ -13,6 +13,8 @@ Choose the shortest path for what you are doing.
 5. `REAL_WORLD_EXAMPLES.md` — executable cross-domain mechanism fixtures.
 6. `LLM_AGENT_BENCHMARK_ARENA.md` — run ten matched coding-agent tasks with
    and without repository context, then inspect receipts and diagrams.
+7. `SEMANTIC_INTERROGATION_PROTOCOL.md` — map a dataset, plan all-visible
+   validation questions, run checks, and inspect reversible repair evidence.
 
 ## I want to understand the model
 
@@ -28,6 +30,8 @@ Choose the shortest path for what you are doing.
 3. `NODE_AUTHORING_GUIDE.md` — importable Python function to strict node.
 4. `NODE_REPOSITORY_PROTOCOL.md` — discovery, snapshots, and node packs.
 5. `TASK_AND_SOLUTION_PACK_PROTOCOL.md` — portable exact closure.
+6. `SEMANTIC_INTERROGATION_PROTOCOL.md` — author concepts, question packs,
+   check capabilities, repair policies, and verification fixtures.
 
 ## I want to search or benchmark solutions
 
@@ -58,6 +62,8 @@ Choose the shortest path for what you are doing.
 - `DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md` — ten executable lifecycle graphs.
 - `TAEDRI_DATA_SCIENCE_TECHNIQUE_TAXONOMY.md` — owner-supplied technique
   inventory, kept separate from SolutionGraph implementation claims.
+- `SEMANTIC_INTERROGATION_PROTOCOL.md` — generic and domain question banks for
+  data quality, organizations, addresses, contacts, time, GIS, documents, and ML.
 
 ## I want repository status or contribution rules
 

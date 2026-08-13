@@ -1,0 +1,99 @@
+{
+  "capabilities": [
+    "interrogation.execute-questions"
+  ],
+  "description": "Execute only selected deterministic checks and emit implementation-bound receipts plus privacy-minimized findings.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.interrogation.nodes.execute_questions:execute_questions_node",
+  "failure_modes": [
+    {
+      "code": "interrogation.invalid-input",
+      "description": "",
+      "retryable": false
+    },
+    {
+      "code": "interrogation.check-adapter-error",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "interrogation.execute-questions",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:97c233b036342de27d253e0f800538ab52effd0a74665c7b559fa71c989a9395",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "interrogation.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "profile",
+      "type": {
+        "id": "interrogation.dataset-profile",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "semantic_field_map",
+      "type": {
+        "id": "interrogation.semantic-field-map",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "question_plan",
+      "type": {
+        "id": "interrogation.question-plan",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "finding_set",
+      "type": {
+        "id": "interrogation.finding-set",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/interrogation/nodes/execute_questions.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

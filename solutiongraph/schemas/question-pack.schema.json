@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "question-pack.schema.json",
+  "title": "Semantic interrogation question pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interrogation_model_version", "id", "version", "title", "description",
+    "concept_ids", "questions", "source", "license", "extensions"
+  ],
+  "properties": {
+    "interrogation_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "concept_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "questions": {"type": "array", "minItems": 1, "items": {"$ref": "question-definition.schema.json"}},
+    "source": {"type": "string", "minLength": 1},
+    "license": {"type": "string", "minLength": 1},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  }
+}

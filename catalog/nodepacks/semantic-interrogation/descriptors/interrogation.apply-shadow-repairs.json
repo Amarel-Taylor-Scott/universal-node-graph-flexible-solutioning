@@ -1,0 +1,76 @@
+{
+  "actions": [
+    "interrogation.apply-shadow-repairs"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.apply-shadow-repairs",
+      "language": "und",
+      "source_digest": "sha256:4b90098e1d8fd66ecd186d96b12e12261542dc366f9134c08a9db95c74732540",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Apply digest-checked operations to a deep shadow copy and emit an exact reversible receipt."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.apply-shadow-repairs",
+  "node_spec_digest": "sha256:4b90098e1d8fd66ecd186d96b12e12261542dc366f9134c08a9db95c74732540",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed repair_proposal input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "repair_proposal"
+    },
+    {
+      "concepts": [],
+      "description": "Typed shadow_records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "shadow_records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed application_receipt output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "application_receipt"
+    }
+  ],
+  "purposes": [
+    "Apply digest-checked operations to a deep shadow copy and emit an exact reversible receipt."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Apply digest-checked operations to a deep shadow copy and emit an exact reversible receipt.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Apply Shadow Repairs"
+}

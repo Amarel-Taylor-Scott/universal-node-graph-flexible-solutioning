@@ -34,6 +34,18 @@ def _doctor() -> int:
     from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
     from solutiongraph.catalog import catalog_documents
     from solutiongraph.examples.tasks import all_examples
+    from solutiongraph.interrogation.node_pack import (
+        INTERROGATION_DESCRIPTORS,
+        INTERROGATION_NODE_DEFINITIONS,
+        INTERROGATION_NODE_PACK,
+        INTERROGATION_NODE_SPECS,
+    )
+    from solutiongraph.question_packs import (
+        REFERENCE_CONCEPTS,
+        REFERENCE_QUESTION_PACKS,
+        REFERENCE_QUESTIONS,
+        validate_reference_question_packs,
+    )
     from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
     from solutiongraph.schemas import load_all_schemas
     from solutiongraph.stdlib_pack import (
@@ -44,6 +56,13 @@ def _doctor() -> int:
     from solutiongraph.template_library import REFERENCE_TEMPLATES
 
     problems: list[str] = []
+    problems.extend(validate_reference_question_packs())
+    problems.extend(INTERROGATION_NODE_PACK.validate())
+    problems.extend(
+        problem
+        for definition in INTERROGATION_NODE_DEFINITIONS
+        for problem in definition.validate()
+    )
     problems.extend(validate_reference_agent_tasks())
     problems.extend(
         reference_agent_benchmark_suite().validate(
@@ -89,6 +108,14 @@ def _doctor() -> int:
                 f"stdlib_descriptors.{descriptor.node_id}",
             )
         )
+    interrogation_by_id = {node.id: node for node in INTERROGATION_NODE_SPECS}
+    for descriptor in INTERROGATION_DESCRIPTORS:
+        problems.extend(
+            descriptor.validate(
+                interrogation_by_id.get(descriptor.node_id),
+                f"interrogation_descriptors.{descriptor.node_id}",
+            )
+        )
     schemas = load_all_schemas()
     documents = catalog_documents()
     if problems:
@@ -107,10 +134,204 @@ def _doctor() -> int:
         f"arena_tasks={len(UNIVERSAL_DAG_ARENA.tasks)} "
         f"benchmarks={len(REFERENCE_BENCHMARKS)} "
         f"agent_bench_tasks={len(REFERENCE_AGENT_TASKS)} "
+        f"interrogation_concepts={len(REFERENCE_CONCEPTS)} "
+        f"question_packs={len(REFERENCE_QUESTION_PACKS)} "
+        f"questions={len(REFERENCE_QUESTIONS)} "
+        f"interrogation_nodes={len(INTERROGATION_NODE_SPECS)} "
         f"schemas={len(schemas)} "
         f"catalog_documents={len(documents)}"
     )
     return 0
+
+
+def _concepts_list(as_json: bool) -> int:
+    from solutiongraph.question_packs import REFERENCE_CONCEPTS
+
+    rows = [
+        {
+            "id": concept.id,
+            "label": concept.label,
+            "value_type": concept.value_type,
+            "canonical_uri": concept.canonical_uri,
+            "aliases": list(concept.aliases),
+            "digest": concept.digest,
+        }
+        for concept in REFERENCE_CONCEPTS
+    ]
+    if as_json:
+        print(json.dumps(rows, indent=2, sort_keys=True))
+        return 0
+    print("ID\tTYPE\tLABEL\tALIASES")
+    for row in rows:
+        print(f"{row['id']}\t{row['value_type']}\t{row['label']}\t{','.join(row['aliases'])}")
+    return 0
+
+
+def _concepts_map(dataset: Path, strategy: str, as_json: bool) -> int:
+    from solutiongraph.interrogation.io import load_records
+    from solutiongraph.interrogation.profiling import map_semantic_fields, profile_records
+    from solutiongraph.question_packs import REFERENCE_CONCEPTS
+
+    profile = profile_records(load_records(dataset), source_id="source.cli-dataset")
+    field_map = map_semantic_fields(profile, REFERENCE_CONCEPTS, strategy=strategy)
+    if as_json:
+        print(json.dumps(field_map.to_dict(), indent=2, sort_keys=True))
+        return 0
+    print("FIELD\tCONCEPT\tCONFIDENCE\tALTERNATIVES")
+    for item in field_map.matches:
+        print(
+            f"{item.field_name}\t{item.concept_id}\t{item.confidence:.3f}\t"
+            f"{','.join(item.alternatives) or '-'}"
+        )
+    for field in field_map.unmapped_fields:
+        print(f"{field}\t-\t0.000\t-")
+    return 0
+
+
+def _questions_list(
+    pack_id: str | None,
+    concept_id: str | None,
+    mode: str | None,
+    as_json: bool,
+) -> int:
+    from solutiongraph.question_packs import REFERENCE_QUESTION_PACKS
+
+    rows = []
+    for pack in REFERENCE_QUESTION_PACKS:
+        if pack_id and pack.id != pack_id:
+            continue
+        for question in pack.questions:
+            modes = tuple(check.mode for check in question.checks)
+            if concept_id and concept_id not in question.concept_ids:
+                continue
+            if mode and mode not in modes:
+                continue
+            rows.append(
+                {
+                    "id": question.id,
+                    "pack_id": pack.id,
+                    "severity": question.severity,
+                    "scope": question.scope,
+                    "modes": list(modes),
+                    "concept_ids": list(question.concept_ids),
+                    "title": question.title,
+                    "digest": question.digest,
+                }
+            )
+    if as_json:
+        print(json.dumps(rows, indent=2, sort_keys=True))
+        return 0
+    print("ID\tSEVERITY\tSCOPE\tMODES\tTITLE")
+    for row in rows:
+        print(
+            f"{row['id']}\t{row['severity']}\t{row['scope']}\t"
+            f"{','.join(row['modes'])}\t{row['title']}"
+        )
+    return 0
+
+
+def _questions_show(question_id: str, as_json: bool) -> int:
+    from solutiongraph.question_packs import get_question
+
+    question = get_question(question_id)
+    if as_json:
+        print(json.dumps(question.to_dict(), indent=2, sort_keys=True))
+        return 0
+    print(f"{question.id}@{question.version} — {question.title}")
+    print(question.question)
+    print(f"severity: {question.severity}; scope: {question.scope}")
+    print("concepts: " + ", ".join(question.concept_ids))
+    for check in question.checks:
+        permission = f" permission={check.permission}" if check.permission else ""
+        print(f"- {check.mode}: {check.capability} tier={check.cost_tier}{permission}")
+    if question.repair_families:
+        print("repair families: " + ", ".join(question.repair_families))
+    return 0
+
+
+def _questions_plan(
+    dataset: Path,
+    effort: str,
+    mapping_strategy: str,
+    planning_strategy: str,
+    random_seed: int,
+    as_json: bool,
+) -> int:
+    from solutiongraph.interrogation.execution import STANDARD_CHECK_REGISTRY
+    from solutiongraph.interrogation.io import load_records
+    from solutiongraph.interrogation.planning import QuestionPlanner, effort_budget
+    from solutiongraph.interrogation.profiling import map_semantic_fields, profile_records
+    from solutiongraph.question_packs import REFERENCE_CONCEPTS, REFERENCE_QUESTION_PACKS
+
+    profile = profile_records(load_records(dataset), source_id="source.cli-dataset")
+    field_map = map_semantic_fields(profile, REFERENCE_CONCEPTS, strategy=mapping_strategy)
+    plan = QuestionPlanner().plan(
+        profile,
+        field_map,
+        REFERENCE_QUESTION_PACKS,
+        budget=effort_budget(effort, random_seed=random_seed),
+        available_capabilities=STANDARD_CHECK_REGISTRY.capabilities,
+        strategy=planning_strategy,
+    )
+    if as_json:
+        print(json.dumps(plan.to_dict(), indent=2, sort_keys=True))
+        return 0
+    counts: dict[str, int] = {}
+    for item in plan.items:
+        counts[item.status] = counts.get(item.status, 0) + 1
+    print(
+        f"{plan.id}: visible={len(plan.items)} "
+        + " ".join(f"{key}={value}" for key, value in sorted(counts.items()))
+    )
+    print("STATUS\tPRIORITY\tQUESTION\tFIELDS\tREASON")
+    for item in plan.items:
+        print(
+            f"{item.status}\t{item.priority:.3f}\t{item.question_id}\t"
+            f"{','.join(item.fields) or '-'}\t{'; '.join(item.reasons)}"
+        )
+    return 0
+
+
+def _questions_run(
+    dataset: Path,
+    effort: str,
+    mapping_strategy: str,
+    planning_strategy: str,
+    repair_strategy: str,
+    random_seed: int,
+    include_review: bool,
+    balanced_verification: bool,
+    output_dir: Path,
+    as_json: bool,
+) -> int:
+    from solutiongraph.interrogation.engine import InterrogationEngine
+    from solutiongraph.interrogation.io import load_records
+    from solutiongraph.interrogation.reporting import write_report_bundle
+
+    report = InterrogationEngine().run(
+        load_records(dataset),
+        effort=effort,
+        mapping_strategy=mapping_strategy,
+        planning_strategy=planning_strategy,
+        repair_strategy=repair_strategy,
+        random_seed=random_seed,
+        include_review_operations=include_review,
+        strict_verification=not balanced_verification,
+        source_id="source.cli-dataset",
+    )
+    paths = write_report_bundle(report, output_dir)
+    if as_json:
+        print(json.dumps(report.wire_dict(), indent=2, sort_keys=True))
+    else:
+        summary = report.summary()
+        print(
+            f"{report.id}: decision={report.verification.decision} "
+            f"questions={summary['question_count']} "
+            f"findings={summary['finding_count_before']}->{summary['finding_count_after']} "
+            f"repairs={summary['applied_operation_count']}"
+        )
+        print("reports: " + ", ".join(str(path) for path in paths))
+    return 0 if report.verification.decision not in ("reject",) else 1
 
 
 def _templates_list(
@@ -909,6 +1130,94 @@ def build_parser() -> argparse.ArgumentParser:
 
     add_agent_bench_parser(commands)
 
+    concepts = commands.add_parser(
+        "concepts", help="Inspect semantic concepts and map dataset fields"
+    )
+    concept_commands = concepts.add_subparsers(dest="concept_command", required=True)
+    concept_list = concept_commands.add_parser("list", help="List reference concepts")
+    concept_list.add_argument("--json", action="store_true", help="Emit JSON")
+    concept_map = concept_commands.add_parser(
+        "map", help="Profile a dataset and map its fields to concepts"
+    )
+    concept_map.add_argument("dataset", type=Path)
+    concept_map.add_argument(
+        "--strategy",
+        choices=("exact", "conservative", "broad"),
+        default="conservative",
+    )
+    concept_map.add_argument("--json", action="store_true", help="Emit JSON")
+
+    questions = commands.add_parser(
+        "questions", help="Inspect, plan, and run semantic question banks"
+    )
+    question_commands = questions.add_subparsers(dest="question_command", required=True)
+    question_list = question_commands.add_parser("list", help="List reference questions")
+    question_list.add_argument("--pack")
+    question_list.add_argument("--concept")
+    question_list.add_argument(
+        "--mode", choices=("deterministic", "external", "llm", "human")
+    )
+    question_list.add_argument("--json", action="store_true", help="Emit JSON")
+    question_show = question_commands.add_parser("show", help="Show one question definition")
+    question_show.add_argument("question_id")
+    question_show.add_argument("--json", action="store_true", help="Emit JSON")
+    question_plan = question_commands.add_parser(
+        "plan", help="Compile a complete visible effort-aware plan for a dataset"
+    )
+    question_plan.add_argument("dataset", type=Path)
+    question_plan.add_argument(
+        "--effort", choices=("E1", "E3", "E5", "E7", "E10"), default="E3"
+    )
+    question_plan.add_argument(
+        "--mapping-strategy",
+        choices=("exact", "conservative", "broad"),
+        default="conservative",
+    )
+    question_plan.add_argument(
+        "--planning-strategy",
+        choices=("risk-first", "coverage-first"),
+        default="risk-first",
+    )
+    question_plan.add_argument("--random-seed", type=int, default=0)
+    question_plan.add_argument("--json", action="store_true", help="Emit JSON")
+    question_run = question_commands.add_parser(
+        "run", help="Run checks, shadow repairs, verification, and portable reports"
+    )
+    question_run.add_argument("dataset", type=Path)
+    question_run.add_argument(
+        "--effort", choices=("E1", "E3", "E5", "E7", "E10"), default="E3"
+    )
+    question_run.add_argument(
+        "--mapping-strategy",
+        choices=("exact", "conservative", "broad"),
+        default="conservative",
+    )
+    question_run.add_argument(
+        "--planning-strategy",
+        choices=("risk-first", "coverage-first"),
+        default="risk-first",
+    )
+    question_run.add_argument(
+        "--repair-strategy",
+        choices=("safe-only", "safe-and-review"),
+        default="safe-only",
+    )
+    question_run.add_argument("--random-seed", type=int, default=0)
+    question_run.add_argument(
+        "--include-review",
+        action="store_true",
+        help="Apply review-only quarantine annotations to the shadow copy",
+    )
+    question_run.add_argument(
+        "--balanced-verification",
+        action="store_true",
+        help="Allow low/medium new findings to quarantine by policy instead of strict handling",
+    )
+    question_run.add_argument(
+        "--output-dir", type=Path, default=Path("interrogation-report")
+    )
+    question_run.add_argument("--json", action="store_true", help="Emit JSON")
+
     templates = commands.add_parser("templates", help="Inspect and author templates")
     template_commands = templates.add_subparsers(dest="template_command", required=True)
     list_parser = template_commands.add_parser("list", help="List reference templates")
@@ -1171,6 +1480,38 @@ def main(argv: Sequence[str] | None = None) -> int:
             from solutiongraph.agent_bench.cli import run_agent_bench_command
 
             return run_agent_bench_command(args)
+        if args.command == "concepts":
+            if args.concept_command == "list":
+                return _concepts_list(args.json)
+            if args.concept_command == "map":
+                return _concepts_map(args.dataset, args.strategy, args.json)
+        if args.command == "questions":
+            if args.question_command == "list":
+                return _questions_list(args.pack, args.concept, args.mode, args.json)
+            if args.question_command == "show":
+                return _questions_show(args.question_id, args.json)
+            if args.question_command == "plan":
+                return _questions_plan(
+                    args.dataset,
+                    args.effort,
+                    args.mapping_strategy,
+                    args.planning_strategy,
+                    args.random_seed,
+                    args.json,
+                )
+            if args.question_command == "run":
+                return _questions_run(
+                    args.dataset,
+                    args.effort,
+                    args.mapping_strategy,
+                    args.planning_strategy,
+                    args.repair_strategy,
+                    args.random_seed,
+                    args.include_review,
+                    args.balanced_verification,
+                    args.output_dir,
+                    args.json,
+                )
         if args.command == "templates":
             if args.template_command == "list":
                 return _templates_list(args.json, tuple(args.domain), tuple(args.tag))

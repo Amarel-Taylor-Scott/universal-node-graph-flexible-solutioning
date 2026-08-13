@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.person-duplicate-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.review-person-duplicate",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.person.name",
+    "concept.person.given-name",
+    "concept.person.family-name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "person.possible-duplicate",
+  "id": "question.person.duplicate-identity",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do similar names plus shared contacts or addresses indicate duplicates without collapsing distinct people?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.person"
+  ],
+  "title": "Possible duplicate people",
+  "version": "1.0.0"
+}

@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.source-conflict-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.review-source-conflict",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset",
+    "concept.dataset.source"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "data.source-conflict",
+  "id": "question.generic-tabular.source-conflicts",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.source-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "When sources disagree, is the selected value supported by an explicit survivorship rule?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.generic-tabular"
+  ],
+  "title": "Source and survivorship conflicts",
+  "version": "1.0.0"
+}

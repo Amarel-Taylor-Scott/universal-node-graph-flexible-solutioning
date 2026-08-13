@@ -1,0 +1,94 @@
+{
+  "capabilities": [
+    "interrogation.apply-shadow-repairs"
+  ],
+  "description": "Apply digest-checked operations to a deep shadow copy and emit an exact reversible receipt.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.interrogation.nodes.apply_shadow:apply_shadow_node",
+  "failure_modes": [
+    {
+      "code": "interrogation.invalid-input",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "interrogation.apply-shadow-repairs",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:afa07918f5638b6e48cfc33ed957699f5b123c026da20c906fe65702e3152b64",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "records",
+      "type": {
+        "id": "interrogation.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "repair_proposal",
+      "type": {
+        "id": "interrogation.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "shadow_records",
+      "type": {
+        "id": "interrogation.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "application_receipt",
+      "type": {
+        "id": "interrogation.repair-application",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        false,
+        true
+      ],
+      "default": false,
+      "description": "",
+      "name": "include_review_operations",
+      "required": false,
+      "value_type": "boolean"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/interrogation/nodes/apply_shadow.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

@@ -1,0 +1,55 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.email-syntax-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.contact.email"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "contact.email-syntax",
+  "id": "question.contact-point.email-syntax",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are email addresses syntactically plausible after trimming and Unicode-domain normalization?",
+  "references": [
+    {
+      "id": "reference.rfc-5322",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.email-syntax",
+      "url": "https://datatracker.ietf.org/doc/html/rfc5322"
+    }
+  ],
+  "repair_families": [
+    "repair.normalize-email-domain"
+  ],
+  "scope": "field",
+  "severity": "high",
+  "tags": [
+    "domain.contact-point"
+  ],
+  "title": "Email syntax",
+  "version": "1.0.0"
+}

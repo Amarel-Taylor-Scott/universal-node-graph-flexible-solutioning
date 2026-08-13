@@ -1,0 +1,32 @@
+{
+  "aliases": [
+    "domain",
+    "website",
+    "company_url",
+    "organization_url",
+    "homepage"
+  ],
+  "canonical_uri": "https://schema.org/url",
+  "description": "",
+  "extensions": {},
+  "id": "concept.organization.domain",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Organization web domain",
+  "parent_ids": [
+    "concept.organization.entity"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "text.domain",
+  "version": "1.0.0"
+}

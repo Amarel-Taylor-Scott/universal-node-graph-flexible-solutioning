@@ -1,0 +1,69 @@
+{
+  "actions": [
+    "interrogation.profile-records"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.profile-records",
+      "language": "und",
+      "source_digest": "sha256:3ceef4ff7c19ff379cdc2dec5c5da416ee4862b79e4495604aca1e7b8c329c61",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Create an aggregate-only, content-addressed profile and pass records through without retaining raw sample values in the profile."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.profile-records",
+  "node_spec_digest": "sha256:3ceef4ff7c19ff379cdc2dec5c5da416ee4862b79e4495604aca1e7b8c329c61",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed records output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed profile output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "profile"
+    }
+  ],
+  "purposes": [
+    "Create an aggregate-only, content-addressed profile and pass records through without retaining raw sample values in the profile."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Create an aggregate-only, content-addressed profile and pass records through without retaining raw sample values in the profile.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Profile Records"
+}

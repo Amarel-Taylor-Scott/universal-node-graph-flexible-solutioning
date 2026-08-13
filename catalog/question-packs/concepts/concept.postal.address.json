@@ -1,0 +1,30 @@
+{
+  "aliases": [
+    "address",
+    "postal_address",
+    "mailing_address",
+    "legal_address",
+    "registered_address"
+  ],
+  "canonical_uri": "https://schema.org/PostalAddress",
+  "description": "",
+  "extensions": {},
+  "id": "concept.postal.address",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Postal address",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "geo.postal-address",
+  "version": "1.0.0"
+}

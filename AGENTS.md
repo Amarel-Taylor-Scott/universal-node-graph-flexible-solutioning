@@ -138,6 +138,10 @@ objects, not in `NodeSpec`.
 ## Repository map
 
 - `solutiongraph/` — domain-neutral semantic model, compiler, search, solver, evidence.
+- `solutiongraph/interrogation/` — aggregate profiling, all-visible question
+  planning, deterministic check adapters, reversible shadow repair, and
+  independent verification. Keep question definitions in `question_packs/`
+  separate from executable node definitions in `interrogation/nodes/`.
 - `solutiongraph/solver.py` — guarded multi-round search, experiment, ranking, champion, and route-fallback orchestration.
 - `solutiongraph/structured.py` — deterministic composite and bounded-loop lowering.
 - `solutiongraph/topology.py` — alternative graph families and route accounting.

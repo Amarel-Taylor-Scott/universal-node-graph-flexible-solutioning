@@ -1,0 +1,32 @@
+{
+  "aliases": [
+    "state",
+    "region",
+    "province",
+    "state_code",
+    "address_state"
+  ],
+  "canonical_uri": "https://schema.org/addressRegion",
+  "description": "",
+  "extensions": {},
+  "id": "concept.postal.region",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Address region or state",
+  "parent_ids": [
+    "concept.postal.address"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "geo.region",
+  "version": "1.0.0"
+}

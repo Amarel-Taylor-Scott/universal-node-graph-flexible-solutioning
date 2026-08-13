@@ -76,6 +76,16 @@ SCHEMA_NAMES = (
     "agent-benchmark-suite.schema.json",
     "agent-trial-receipt.schema.json",
     "agent-benchmark-report.schema.json",
+    "concept-definition.schema.json",
+    "dataset-profile.schema.json",
+    "semantic-field-map.schema.json",
+    "question-definition.schema.json",
+    "question-pack.schema.json",
+    "question-plan.schema.json",
+    "finding-set.schema.json",
+    "repair-proposal.schema.json",
+    "verification-receipt.schema.json",
+    "interrogation-report.schema.json",
 )
 
 

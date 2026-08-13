@@ -1,0 +1,31 @@
+{
+  "aliases": [
+    "dissolution_date",
+    "incorporation_date",
+    "registration_date",
+    "effective_date"
+  ],
+  "canonical_uri": "https://schema.org/dissolutionDate",
+  "description": "",
+  "extensions": {},
+  "id": "concept.organization.status-date",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Organization status date",
+  "parent_ids": [
+    "concept.organization.entity"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "time.date",
+  "version": "1.0.0"
+}

@@ -1,0 +1,44 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.timezone-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.time.instant",
+    "concept.time.timezone"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "datetime.timezone-ambiguous",
+  "id": "question.datetime.timezone",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Is each timestamp's timezone explicit, or is the source's timezone contract documented?",
+  "references": [],
+  "repair_families": [],
+  "scope": "cross-field",
+  "severity": "high",
+  "tags": [
+    "domain.datetime"
+  ],
+  "title": "Timezone and UTC semantics",
+  "version": "1.0.0"
+}

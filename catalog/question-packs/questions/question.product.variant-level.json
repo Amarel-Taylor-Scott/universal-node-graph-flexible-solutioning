@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.product-variant-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.review-product-variant",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.product.name",
+    "concept.product.identifier",
+    "concept.product.brand"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "product.variant-granularity-conflict",
+  "id": "question.product.variant-level",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are size, color, package, and regional variants distinguished from parent products?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.product"
+  ],
+  "title": "Product and variant granularity",
+  "version": "1.0.0"
+}

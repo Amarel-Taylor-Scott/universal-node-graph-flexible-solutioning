@@ -1,0 +1,107 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.profile_records:profile_records_node"
+      },
+      "digest": "sha256:108c5ac2732383595fad1221aa7bac787d5af2a38e0a6a43efe8388884490b68",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.profile-records",
+      "uri": "python://solutiongraph.interrogation.nodes.profile_records:profile_records_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.map_fields:map_fields_node"
+      },
+      "digest": "sha256:13527cf38891ab3b616a762dc3df24dc5878a919296627c17456e14dc332ea10",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.map-semantic-fields",
+      "uri": "python://solutiongraph.interrogation.nodes.map_fields:map_fields_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.plan_questions:plan_questions_node"
+      },
+      "digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.plan-questions",
+      "uri": "python://solutiongraph.interrogation.nodes.plan_questions:plan_questions_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.execute_questions:execute_questions_node"
+      },
+      "digest": "sha256:97c233b036342de27d253e0f800538ab52effd0a74665c7b559fa71c989a9395",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.execute-questions",
+      "uri": "python://solutiongraph.interrogation.nodes.execute_questions:execute_questions_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.propose_repairs:propose_repairs_node"
+      },
+      "digest": "sha256:3ac2228dc2e39164ceb2055ace7ca2f6a1e478d879384f6ed0d3ddee68fdb2f9",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.propose-repairs",
+      "uri": "python://solutiongraph.interrogation.nodes.propose_repairs:propose_repairs_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.apply_shadow:apply_shadow_node"
+      },
+      "digest": "sha256:afa07918f5638b6e48cfc33ed957699f5b123c026da20c906fe65702e3152b64",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.apply-shadow-repairs",
+      "uri": "python://solutiongraph.interrogation.nodes.apply_shadow:apply_shadow_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.rebind_plan:rebind_plan_node"
+      },
+      "digest": "sha256:80128894ba6ee8480ce976ca1183771e254847fdcc565021992aa67ce5e9268a",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.rebind-verification-plan",
+      "uri": "python://solutiongraph.interrogation.nodes.rebind_plan:rebind_plan_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.interrogation.nodes.verify_repairs:verify_repairs_node"
+      },
+      "digest": "sha256:1e161609f82d6ab647e77b5a7b42248edbf0cc2df84f36387f09d89717a982b8",
+      "media_type": "text/x-python",
+      "name": "artifact.interrogation.verify-repairs",
+      "uri": "python://solutiongraph.interrogation.nodes.verify_repairs:verify_repairs_node"
+    }
+  ],
+  "dependencies": [],
+  "description": "Eight individually importable typed nodes for aggregate profiling, semantic mapping, effort-aware question planning, deterministic checks, conservative proposals, reversible shadow application, fixed-suite reruns, and independent verification.",
+  "descriptor_digests": [
+    "sha256:736588d0996486d08d822bbb831d1a4b7c35012d40d0bb1d2511926671b11e75",
+    "sha256:83e730cda9b8adf229e4bc9c8f188585b69d40700496f10d41879d952b0d624b",
+    "sha256:ef81f704ab854c2f0c3f2961ec2902f285cdcd112ce953dbaf702c4f7751ab72",
+    "sha256:af721ed3534dddef93c5704dcaee4144bf0eaa8a6784d1871de445e96b196336",
+    "sha256:4c10b977c165032e7ab67d29c41ff24d7d48322b76e640368ffbb9f19cc52946",
+    "sha256:f7574eced4c43da2367f693b11c98058cbcc04b7c58f2c83de177cea941ffccc",
+    "sha256:65c34011ebf058356d151ecfaed64c3a2866989d82e21b32cff3e86de9c6f897",
+    "sha256:9a525a029fcfe352c8d2c6ce9f84a4c27d4fef3c2af7f0dde7efa7dc509e148d"
+  ],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "id": "interrogation.semantic-data-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:3ceef4ff7c19ff379cdc2dec5c5da416ee4862b79e4495604aca1e7b8c329c61",
+    "sha256:05400232e9a5b471107d90b1d37db8b86b62088898d8f265d149bc079076f334",
+    "sha256:7f902d401c1965534594068a8deeda062f6d39163750e572df3d979c51ae983c",
+    "sha256:28af2d3697b857312a1f295a7d56d848854b60f78416f457194972d57a098e2a",
+    "sha256:f1d842a0efa538e65440ad40639147f8d94558f78c22cfa0e743cc7ae350b550",
+    "sha256:4b90098e1d8fd66ecd186d96b12e12261542dc366f9134c08a9db95c74732540",
+    "sha256:8c478e49ff42d5d31e4919fd1eb56ce3d9ae0b91a6a30584a4a7187d3e1528cb",
+    "sha256:245a1421a4d612170da0fed4dc5a796c0f0f1d5e8ec994a55c246a23f3cd4ed8"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

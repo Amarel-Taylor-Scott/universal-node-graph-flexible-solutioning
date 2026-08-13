@@ -1,0 +1,39 @@
+{
+  "aliases": [
+    "phone",
+    "telephone",
+    "phone_number",
+    "mobile",
+    "contact_phone"
+  ],
+  "canonical_uri": "https://schema.org/telephone",
+  "description": "",
+  "extensions": {},
+  "id": "concept.contact.telephone",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Telephone number",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    },
+    {
+      "id": "reference.itu-e164",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.telephone-numbering",
+      "url": "https://www.itu.int/rec/T-REC-E.164/"
+    }
+  ],
+  "value_type": "contact.telephone",
+  "version": "1.0.0"
+}

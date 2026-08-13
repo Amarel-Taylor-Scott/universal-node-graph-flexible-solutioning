@@ -1,0 +1,32 @@
+{
+  "aliases": [
+    "city",
+    "locality",
+    "town",
+    "municipality",
+    "address_city"
+  ],
+  "canonical_uri": "https://schema.org/addressLocality",
+  "description": "",
+  "extensions": {},
+  "id": "concept.postal.city",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Address locality or city",
+  "parent_ids": [
+    "concept.postal.address"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "geo.locality",
+  "version": "1.0.0"
+}

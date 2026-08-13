@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.phone-format-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.contact.telephone",
+    "concept.postal.country"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "contact.phone-format",
+  "id": "question.contact-point.phone-format",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Can each phone number be parsed with explicit country context and represented without losing its extension?",
+  "references": [
+    {
+      "id": "reference.itu-e164",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.telephone-numbering",
+      "url": "https://www.itu.int/rec/T-REC-E.164/"
+    }
+  ],
+  "repair_families": [
+    "repair.normalize-e164-when-explicit"
+  ],
+  "scope": "field",
+  "severity": "high",
+  "tags": [
+    "domain.contact-point"
+  ],
+  "title": "International phone format",
+  "version": "1.0.0"
+}

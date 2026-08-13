@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.document-identity-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.document.identifier",
+    "concept.document.text",
+    "concept.document.url"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "document.identity-conflict",
+  "id": "question.document.identity",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are document identities content-addressed, stable across filenames, and free of accidental duplicates?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "high",
+  "tags": [
+    "domain.document"
+  ],
+  "title": "Document identity and deduplication",
+  "version": "1.0.0"
+}

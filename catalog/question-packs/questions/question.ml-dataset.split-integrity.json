@@ -1,0 +1,46 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.ml-split-integrity-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset",
+    "concept.ml.target",
+    "concept.ml.split"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "ml.split-contamination",
+  "id": "question.ml-dataset.split-integrity",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.split-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are train, validation, and holdout splits disjoint at row, entity, group, and time levels?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "critical",
+  "tags": [
+    "domain.ml-dataset"
+  ],
+  "title": "Split integrity",
+  "version": "1.0.0"
+}

@@ -1,0 +1,59 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.geotemporal-lineage-check",
+      "cost_tier": 4,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.audit-geotemporal-enrichment",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.geography.latitude",
+    "concept.geography.longitude",
+    "concept.time.instant"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "geography.temporal-enrichment-conflict",
+  "id": "question.geography.geotemporal-enrichment",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.coordinates-available",
+    "precondition.event-time-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Were events, weather, demographics, regulations, and boundaries joined using both location and event time?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "high",
+  "tags": [
+    "domain.geography"
+  ],
+  "title": "Time-aware geographic enrichment",
+  "version": "1.0.0"
+}

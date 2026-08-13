@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dataset-profile.schema.json",
+  "title": "Aggregate-only interrogation dataset profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interrogation_model_version", "dataset_digest", "source_id", "row_count",
+    "column_names", "fields", "duplicate_row_count", "profile_policy_id",
+    "sampled_row_count", "warnings", "extensions"
+  ],
+  "properties": {
+    "interrogation_model_version": {"const": "0.1"},
+    "dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "source_id": {"$ref": "common.schema.json#/$defs/id"},
+    "row_count": {"type": "integer", "minimum": 0},
+    "column_names": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "fields": {"type": "array", "items": {"$ref": "#/$defs/fieldProfile"}},
+    "duplicate_row_count": {"type": "integer", "minimum": 0},
+    "profile_policy_id": {"$ref": "common.schema.json#/$defs/id"},
+    "sampled_row_count": {"type": "integer", "minimum": 0},
+    "warnings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "$defs": {
+    "nullableNonNegativeInteger": {
+      "oneOf": [{"type": "null"}, {"type": "integer", "minimum": 0}]
+    },
+    "fieldProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field_name", "inferred_type", "row_count", "non_missing_count",
+        "distinct_count", "missing_fraction", "placeholder_count",
+        "control_character_count", "non_nfc_count", "leading_or_trailing_space_count",
+        "min_length", "max_length", "numeric_fraction", "top_value_hashes", "extensions"
+      ],
+      "properties": {
+        "field_name": {"type": "string", "minLength": 1},
+        "inferred_type": {"$ref": "common.schema.json#/$defs/id"},
+        "row_count": {"type": "integer", "minimum": 0},
+        "non_missing_count": {"type": "integer", "minimum": 0},
+        "distinct_count": {"type": "integer", "minimum": 0},
+        "missing_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "placeholder_count": {"type": "integer", "minimum": 0},
+        "control_character_count": {"type": "integer", "minimum": 0},
+        "non_nfc_count": {"type": "integer", "minimum": 0},
+        "leading_or_trailing_space_count": {"type": "integer", "minimum": 0},
+        "min_length": {"$ref": "#/$defs/nullableNonNegativeInteger"},
+        "max_length": {"$ref": "#/$defs/nullableNonNegativeInteger"},
+        "numeric_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "top_value_hashes": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["digest", "count"],
+            "properties": {
+              "digest": {"$ref": "common.schema.json#/$defs/digest"},
+              "count": {"type": "integer", "minimum": 1}
+            }
+          }
+        },
+        "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+      }
+    }
+  }
+}

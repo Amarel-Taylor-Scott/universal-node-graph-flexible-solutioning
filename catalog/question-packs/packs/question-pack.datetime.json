@@ -1,0 +1,415 @@
+{
+  "concept_ids": [
+    "concept.time.instant",
+    "concept.time.date",
+    "concept.time.start",
+    "concept.time.end",
+    "concept.time.timezone"
+  ],
+  "description": "Date parsing, timezone, ordering, precision, leakage, transition, and coverage questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.datetime",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.datetime-parse-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.time.instant",
+        "concept.time.date",
+        "concept.time.start",
+        "concept.time.end",
+        "concept.time.timezone"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.unparseable-or-ambiguous",
+      "id": "question.datetime.parseability",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are date and time values unambiguous, parseable, and free of mixed implicit formats?",
+      "references": [],
+      "repair_families": [
+        "repair.iso-date-when-unambiguous"
+      ],
+      "scope": "dataset",
+      "severity": "high",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Date-time parseability",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.timezone-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.time.instant",
+        "concept.time.timezone"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.timezone-ambiguous",
+      "id": "question.datetime.timezone",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Is each timestamp's timezone explicit, or is the source's timezone contract documented?",
+      "references": [],
+      "repair_families": [],
+      "scope": "cross-field",
+      "severity": "high",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Timezone and UTC semantics",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.datetime-order-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.time.start",
+        "concept.time.end"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.invalid-order",
+      "id": "question.datetime.ordering",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.start-end-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are start, end, effective-from, and effective-to values ordered consistently?",
+      "references": [],
+      "repair_families": [],
+      "scope": "row",
+      "severity": "high",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Start and end ordering",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.future-time-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.time.instant",
+        "concept.time.date",
+        "concept.time.start",
+        "concept.time.end",
+        "concept.time.timezone"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.unexpected-future",
+      "id": "question.datetime.future-values",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.reference-clock-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do event, creation, or effective timestamps occur implausibly in the future relative to the declared reference clock?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "medium",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Unexpected future values",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.dst-transition-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-dst-ambiguity",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.time.instant",
+        "concept.time.timezone"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.dst-ambiguity",
+      "id": "question.datetime.daylight-saving",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do local timestamps contain nonexistent or duplicated wall-clock times during timezone transitions?",
+      "references": [],
+      "repair_families": [],
+      "scope": "row",
+      "severity": "medium",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Daylight-saving transitions",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.datetime-precision-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.time.instant",
+        "concept.time.date",
+        "concept.time.start",
+        "concept.time.end",
+        "concept.time.timezone"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.precision-conflict",
+      "id": "question.datetime.granularity",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are date-only, second, millisecond, and rounded timestamps being compared under compatible precision?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "medium",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Granularity and precision",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.point-in-time-leakage-check",
+          "cost_tier": 4,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.audit-point-in-time-lineage",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.time.instant",
+        "concept.time.date",
+        "concept.time.start",
+        "concept.time.end",
+        "concept.time.timezone"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.future-leakage",
+      "id": "question.datetime.point-in-time",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Were features and enrichments available at the prediction or decision time rather than only afterward?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "critical",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Point-in-time correctness",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.temporal-coverage-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.time.instant",
+        "concept.time.date",
+        "concept.time.start",
+        "concept.time.end",
+        "concept.time.timezone"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "datetime.coverage-drift",
+      "id": "question.datetime.drift",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are missing periods, duplicated intervals, irregular cadence, or source changes distorting trends?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "medium",
+      "tags": [
+        "domain.datetime"
+      ],
+      "title": "Temporal coverage and drift",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Date and time interrogation",
+  "version": "1.0.0"
+}

@@ -1,0 +1,44 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.currency-code-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.transaction.amount",
+    "concept.transaction.currency"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "transaction.currency-missing-or-invalid",
+  "id": "question.transaction.currency",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Is every monetary amount paired with an explicit, plausible currency code?",
+  "references": [],
+  "repair_families": [],
+  "scope": "cross-field",
+  "severity": "critical",
+  "tags": [
+    "domain.transaction"
+  ],
+  "title": "Currency presence and code",
+  "version": "1.0.0"
+}

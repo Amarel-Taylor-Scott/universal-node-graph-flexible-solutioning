@@ -27,6 +27,8 @@ solutiongraph doctor
 python examples/control_vs_mutated_graph_experiment.py
 solutiongraph solutioning inspect data-cleanup --effort 1
 solutiongraph solutioning run data-cleanup --effort 1
+solutiongraph questions run examples/data/dirty_organizations.json \
+  --effort E3 --output-dir .artifacts/semantic-interrogation
 solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
 ```
 
@@ -103,6 +105,18 @@ boundaries. Atomic judgments, blinded panels, failure clusters, aggregate-only
 outer summaries, and human promotion decisions are strict evidence objects. See
 [ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md](ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md).
 
+The semantic-interrogation layer adds a reusable, machine-readable question
+bank and conservative feedback loop for generic tables, organizations,
+addresses, contact points, time, geography, people, products, transactions,
+documents, and ML datasets. Forty-six concepts and 86 declarative questions
+remain separate from 43 executable check capabilities. Effort policies keep
+every question visible, block external/model/human work without explicit
+capabilities and permissions, learn observational utility without eliminating
+random exploration, and route supported findings through reversible shadow
+repairs and an independently identified verifier. Eight typed implementations
+and 43 exact bindings form an 8,640-route compiler-valid reference graph. See
+[SEMANTIC_INTERROGATION_PROTOCOL.md](SEMANTIC_INTERROGATION_PROTOCOL.md).
+
 The data-science lifecycle pack adds ten six-stage executable graphs for
 profiling/drift, feature reduction, imbalanced classification, robust
 regression, temporal backtesting, text modeling, clustering/anomalies,
@@ -178,6 +192,7 @@ is not mixed into the execution path as another step.
 | End-to-end task solutioning | Frozen request/binding/result dataclasses and inspectable validate, recognize, retrieve, bind, route, execute, evidence, and learn operations plus one-call solving |
 | Paired experiment studies | Immutable-receipt pairing, deterministic bootstrap intervals, practical-effect and acceptance gates, unmatched-evidence accounting, and promote/reject/continue recommendations |
 | Linked evaluation harnesses | Exact scenario, solution, development-evaluation, improvement, promotion, and sealed outer-evaluation graph identities plus typed judgments, panels, failure clusters, sanitized outer summaries, human approvals, and feedback firewalls |
+| Semantic data interrogation | 46 versioned concepts, 11 question packs, 86 visible questions, 43 deterministic checks, effort/permission planning, reversible shadow repair, independent verification, observational utility memory, and redacted JSON/Markdown/HTML reports |
 | Universal DAG Arena | 52 task families, 36 executable fixture families, 12 additional template families, four credentialed-connector families, and 40 runnable programs |
 | Engineering showcase pack | Thirteen additional executable fixtures and 154 source-bound nodes covering data contracts, event-time windows, GIS boundaries, APIs, frontend release gates, document rendering, geotemporal enrichment, user journeys, synthetic data, grounded documents, reinforcement learning, and DueCare-style evaluation/red teaming |
 | Data-science lifecycle pack | Ten executable six-stage fixtures, 60 source-bound nodes, 180 exact candidates, 729 admitted routes per graph, and accepted robust, alternate, and hybrid paths across profiling, feature engineering, modeling, evaluation, explainability, ensembling, and MLOps |
@@ -905,6 +920,7 @@ video included. There is a [runnable tour notebook](notebooks/browsergraph-tour.
 | [LLM_AGENT_BENCHMARK_ARENA.md](LLM_AGENT_BENCHMARK_ARENA.md) | matched coding-agent control/treatment experiments, ten sealed-evaluator task families, harness/model configuration, notebook, evidence, and public benchmark bridges |
 | [TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md](TAEDRI_TASK_FINGERPRINT_HISTORY_INFORMED_SEARCH.md) | task attributes, common DAG taxonomy, historical retrieval, intelligent sprouts, optimizer/effort portfolios, schemas, and rollout plan |
 | [WORKBENCH.md](WORKBENCH.md) | hierarchical macro-stage/substep model, schemas, viewer, and extension examples |
+| [SEMANTIC_INTERROGATION_PROTOCOL.md](SEMANTIC_INTERROGATION_PROTOCOL.md) | reusable question banks, semantic mapping, effort policies, check adapters, reversible repair, independent verification, history learning, CLI, and extension guide |
 | [ROADMAP.md](ROADMAP.md) | evidence-driven implementation phases and release gates |
 | [READINESS.md](READINESS.md) | exact supported, experimental, unsafe, and future release surfaces |
 | [STRUCTURED_CONTROL_PROTOCOL.md](STRUCTURED_CONTROL_PROTOCOL.md) | branches, composites, bounded loops, maps, reductions, barriers, and lowering |

@@ -1,0 +1,47 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.datetime-precision-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.time.instant",
+    "concept.time.date",
+    "concept.time.start",
+    "concept.time.end",
+    "concept.time.timezone"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "datetime.precision-conflict",
+  "id": "question.datetime.granularity",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are date-only, second, millisecond, and rounded timestamps being compared under compatible precision?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.datetime"
+  ],
+  "title": "Granularity and precision",
+  "version": "1.0.0"
+}

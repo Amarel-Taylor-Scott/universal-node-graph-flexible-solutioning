@@ -1,0 +1,47 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.product-duplicate-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.product.name",
+    "concept.product.identifier",
+    "concept.product.brand"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "product.possible-duplicate",
+  "id": "question.product.duplicates",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do normalized names and identifiers expose duplicate or conflicting product records?",
+  "references": [],
+  "repair_families": [
+    "repair.quarantine-duplicate"
+  ],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.product"
+  ],
+  "title": "Duplicate product entities",
+  "version": "1.0.0"
+}

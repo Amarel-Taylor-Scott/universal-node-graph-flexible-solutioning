@@ -85,8 +85,23 @@
       "node_count": 60,
       "path": "nodepacks/data-science-lifecycle/manifest.json",
       "version": "1.0.0"
+    },
+    {
+      "descriptor_count": 8,
+      "digest": "sha256:de3b6e2d94d9026a787e7af86c8f03c8a9c412314f77986b338523bc3784be8d",
+      "embedding_record_count": 0,
+      "id": "interrogation.semantic-data-node-pack",
+      "node_count": 8,
+      "path": "nodepacks/semantic-interrogation/manifest.json",
+      "version": "1.0.0"
     }
   ],
+  "question_packs": {
+    "concept_count": 46,
+    "pack_count": 11,
+    "path": "question-packs/index.json",
+    "question_count": 86
+  },
   "templates": [
     {
       "atomic_slot_count": 18,

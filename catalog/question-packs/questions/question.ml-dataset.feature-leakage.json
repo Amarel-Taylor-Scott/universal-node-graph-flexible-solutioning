@@ -1,0 +1,57 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.ml-leakage-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.audit-ml-leakage",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset",
+    "concept.ml.target",
+    "concept.ml.split"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "ml.feature-leakage",
+  "id": "question.ml-dataset.feature-leakage",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do features duplicate, encode, postdate, or otherwise reveal the target?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "critical",
+  "tags": [
+    "domain.ml-dataset"
+  ],
+  "title": "Feature and target leakage",
+  "version": "1.0.0"
+}

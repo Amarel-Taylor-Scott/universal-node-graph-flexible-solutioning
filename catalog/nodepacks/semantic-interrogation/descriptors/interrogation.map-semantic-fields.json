@@ -1,0 +1,62 @@
+{
+  "actions": [
+    "interrogation.map-semantic-fields"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.map-semantic-fields",
+      "language": "und",
+      "source_digest": "sha256:05400232e9a5b471107d90b1d37db8b86b62088898d8f265d149bc079076f334",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Map field names to versioned concepts using an explicit exact, conservative, or broad policy; a match never implies validity."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.map-semantic-fields",
+  "node_spec_digest": "sha256:05400232e9a5b471107d90b1d37db8b86b62088898d8f265d149bc079076f334",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed profile input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "profile"
+    },
+    {
+      "concepts": [],
+      "description": "Typed semantic_field_map output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "semantic_field_map"
+    }
+  ],
+  "purposes": [
+    "Map field names to versioned concepts using an explicit exact, conservative, or broad policy; a match never implies validity."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Map field names to versioned concepts using an explicit exact, conservative, or broad policy; a match never implies validity.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Map Semantic Fields"
+}

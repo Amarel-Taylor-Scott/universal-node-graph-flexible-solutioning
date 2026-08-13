@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.whitespace-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "data.whitespace-anomaly",
+  "id": "question.generic-tabular.whitespace",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do text values contain leading, trailing, or repeated whitespace that changes matching?",
+  "references": [],
+  "repair_families": [
+    "repair.trim-whitespace"
+  ],
+  "scope": "dataset",
+  "severity": "low",
+  "tags": [
+    "domain.generic-tabular"
+  ],
+  "title": "Whitespace anomalies",
+  "version": "1.0.0"
+}

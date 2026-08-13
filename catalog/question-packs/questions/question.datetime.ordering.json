@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.datetime-order-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.time.start",
+    "concept.time.end"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "datetime.invalid-order",
+  "id": "question.datetime.ordering",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.start-end-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are start, end, effective-from, and effective-to values ordered consistently?",
+  "references": [],
+  "repair_families": [],
+  "scope": "row",
+  "severity": "high",
+  "tags": [
+    "domain.datetime"
+  ],
+  "title": "Start and end ordering",
+  "version": "1.0.0"
+}

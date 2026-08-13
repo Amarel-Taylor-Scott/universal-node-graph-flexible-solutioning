@@ -1,0 +1,83 @@
+{
+  "actions": [
+    "interrogation.execute-questions"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.execute-questions",
+      "language": "und",
+      "source_digest": "sha256:28af2d3697b857312a1f295a7d56d848854b60f78416f457194972d57a098e2a",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Execute only selected deterministic checks and emit implementation-bound receipts plus privacy-minimized findings."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.execute-questions",
+  "node_spec_digest": "sha256:28af2d3697b857312a1f295a7d56d848854b60f78416f457194972d57a098e2a",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed profile input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "profile"
+    },
+    {
+      "concepts": [],
+      "description": "Typed semantic_field_map input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "semantic_field_map"
+    },
+    {
+      "concepts": [],
+      "description": "Typed question_plan input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "question_plan"
+    },
+    {
+      "concepts": [],
+      "description": "Typed finding_set output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "finding_set"
+    }
+  ],
+  "purposes": [
+    "Execute only selected deterministic checks and emit implementation-bound receipts plus privacy-minimized findings."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Execute only selected deterministic checks and emit implementation-bound receipts plus privacy-minimized findings.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Execute Questions"
+}

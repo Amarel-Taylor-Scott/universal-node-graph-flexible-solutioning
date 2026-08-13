@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "verification-receipt.schema.json",
+  "title": "Independent shadow repair verification receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interrogation_model_version", "id", "proposal_digest", "application_receipt_digest",
+    "before_finding_set_digest", "after_finding_set_digest", "verifier_id", "verifier_version",
+    "verifier_digest", "independence", "resolved_finding_ids", "remaining_finding_ids",
+    "introduced_finding_ids", "unchanged_field_count", "decision", "reasons"
+  ],
+  "properties": {
+    "interrogation_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "proposal_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "application_receipt_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "before_finding_set_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "after_finding_set_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "verifier_id": {"$ref": "common.schema.json#/$defs/id"},
+    "verifier_version": {"type": "string", "minLength": 1},
+    "verifier_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "independence": {"$ref": "common.schema.json#/$defs/id"},
+    "resolved_finding_ids": {"$ref": "#/$defs/idArray"},
+    "remaining_finding_ids": {"$ref": "#/$defs/idArray"},
+    "introduced_finding_ids": {"$ref": "#/$defs/idArray"},
+    "unchanged_field_count": {"type": "integer", "minimum": 0},
+    "decision": {"enum": ["promote", "quarantine", "reject", "abstain", "no-change"]},
+    "reasons": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "idArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}}
+  }
+}

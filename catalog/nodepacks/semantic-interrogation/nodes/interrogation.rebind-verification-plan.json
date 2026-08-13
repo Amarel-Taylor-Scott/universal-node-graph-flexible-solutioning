@@ -1,0 +1,82 @@
+{
+  "capabilities": [
+    "interrogation.rebind-verification-plan"
+  ],
+  "description": "Bind the same selected checks to the shadow profile so verification cannot silently choose an easier post-repair suite.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.interrogation.nodes.rebind_plan:rebind_plan_node",
+  "failure_modes": [
+    {
+      "code": "interrogation.invalid-input",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "interrogation.rebind-verification-plan",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:80128894ba6ee8480ce976ca1183771e254847fdcc565021992aa67ce5e9268a",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "question_plan",
+      "type": {
+        "id": "interrogation.question-plan",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "shadow_profile",
+      "type": {
+        "id": "interrogation.dataset-profile",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "shadow_field_map",
+      "type": {
+        "id": "interrogation.semantic-field-map",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "verification_plan",
+      "type": {
+        "id": "interrogation.question-plan",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/interrogation/nodes/rebind_plan.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

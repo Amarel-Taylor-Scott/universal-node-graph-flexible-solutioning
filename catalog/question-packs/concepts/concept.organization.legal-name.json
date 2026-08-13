@@ -1,0 +1,31 @@
+{
+  "aliases": [
+    "legal_name",
+    "registered_name",
+    "official_company_name",
+    "entity_legal_name"
+  ],
+  "canonical_uri": "https://schema.org/legalName",
+  "description": "",
+  "extensions": {},
+  "id": "concept.organization.legal-name",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Organization legal name",
+  "parent_ids": [
+    "concept.organization.name"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "text.organization-legal-name",
+  "version": "1.0.0"
+}

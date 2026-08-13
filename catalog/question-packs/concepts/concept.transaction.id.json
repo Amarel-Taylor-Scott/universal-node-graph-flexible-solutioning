@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "transaction_id",
+    "invoice_id",
+    "order_id",
+    "payment_id"
+  ],
+  "canonical_uri": "https://schema.org/identifier",
+  "description": "",
+  "extensions": {},
+  "id": "concept.transaction.id",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Transaction identifier",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "data.transaction-identifier",
+  "version": "1.0.0"
+}

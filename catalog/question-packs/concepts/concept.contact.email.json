@@ -1,0 +1,38 @@
+{
+  "aliases": [
+    "email",
+    "email_address",
+    "contact_email",
+    "work_email"
+  ],
+  "canonical_uri": "https://schema.org/email",
+  "description": "",
+  "extensions": {},
+  "id": "concept.contact.email",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Email address",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    },
+    {
+      "id": "reference.rfc-5322",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.email-syntax",
+      "url": "https://datatracker.ietf.org/doc/html/rfc5322"
+    }
+  ],
+  "value_type": "contact.email",
+  "version": "1.0.0"
+}

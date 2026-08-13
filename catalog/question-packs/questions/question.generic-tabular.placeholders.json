@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.placeholder-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "data.placeholder-values",
+  "id": "question.generic-tabular.placeholders",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Which fields contain blanks, sentinels, test values, or placeholder tokens?",
+  "references": [
+    {
+      "id": "reference.w3c-dqv",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.quality-vocabulary",
+      "url": "https://www.w3.org/TR/vocab-dqv/"
+    }
+  ],
+  "repair_families": [
+    "repair.normalize-missing",
+    "repair.quarantine-record"
+  ],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.generic-tabular"
+  ],
+  "title": "Missing and placeholder values",
+  "version": "1.0.0"
+}

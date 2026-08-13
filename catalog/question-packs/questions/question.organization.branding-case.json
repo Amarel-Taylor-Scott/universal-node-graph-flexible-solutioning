@@ -1,0 +1,81 @@
+{
+  "abstain_when": [
+    "no authoritative branding evidence is available"
+  ],
+  "checks": [
+    {
+      "capability": "quality.case-pattern-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "authority.organization-name-lookup",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    },
+    {
+      "capability": "quality.adjudicate-brand-casing",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.organization.name",
+    "concept.organization.legal-name",
+    "concept.organization.alternate-name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "organization.branding-case",
+  "id": "question.organization.branding-case",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Does capitalization preserve known branding instead of applying naive title casing?",
+  "references": [
+    {
+      "id": "reference.gleif-api",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "Authoritative for LEI-covered entities only.",
+      "revision": "",
+      "role": "reference.entity-authority",
+      "url": "https://www.gleif.org/en/lei-data/gleif-api"
+    }
+  ],
+  "repair_families": [],
+  "scope": "field",
+  "severity": "low",
+  "tags": [
+    "domain.organization"
+  ],
+  "title": "Official branding and capitalization",
+  "version": "1.0.0"
+}

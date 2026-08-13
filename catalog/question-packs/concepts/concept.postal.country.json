@@ -1,0 +1,31 @@
+{
+  "aliases": [
+    "country",
+    "country_code",
+    "address_country",
+    "iso_country"
+  ],
+  "canonical_uri": "https://schema.org/addressCountry",
+  "description": "",
+  "extensions": {},
+  "id": "concept.postal.country",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Address country",
+  "parent_ids": [
+    "concept.postal.address"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "geo.country",
+  "version": "1.0.0"
+}

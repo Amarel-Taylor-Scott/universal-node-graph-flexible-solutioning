@@ -1,0 +1,130 @@
+{
+  "capabilities": [
+    "interrogation.verify-repairs"
+  ],
+  "description": "Independently diff source and shadow data, compare finding signatures, and fail closed on undeclared or harmful changes.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.interrogation.nodes.verify_repairs:verify_repairs_node",
+  "failure_modes": [
+    {
+      "code": "interrogation.invalid-input",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "interrogation.verify-repairs",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:1e161609f82d6ab647e77b5a7b42248edbf0cc2df84f36387f09d89717a982b8",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "source_records",
+      "type": {
+        "id": "interrogation.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "shadow_records",
+      "type": {
+        "id": "interrogation.records",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "repair_proposal",
+      "type": {
+        "id": "interrogation.repair-proposal",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "application_receipt",
+      "type": {
+        "id": "interrogation.repair-application",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "before_findings",
+      "type": {
+        "id": "interrogation.finding-set",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "after_findings",
+      "type": {
+        "id": "interrogation.finding-set",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "verification",
+      "type": {
+        "id": "interrogation.verification-receipt",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        true,
+        false
+      ],
+      "default": true,
+      "description": "",
+      "name": "strict",
+      "required": false,
+      "value_type": "boolean"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/interrogation/nodes/verify_repairs.py",
+  "verifier": "verifier.independent-shadow-diff",
+  "version": "1.0.0"
+}

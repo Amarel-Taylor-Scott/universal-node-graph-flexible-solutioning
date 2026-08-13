@@ -1,0 +1,44 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.default-coordinate-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.geography.latitude",
+    "concept.geography.longitude"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "geography.default-coordinate",
+  "id": "question.geography.zero-island",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do zero, repeated centroid, or other default coordinates appear more often than plausibly expected?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "high",
+  "tags": [
+    "domain.geography"
+  ],
+  "title": "Null-island and default coordinates",
+  "version": "1.0.0"
+}

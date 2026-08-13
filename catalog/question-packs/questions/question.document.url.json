@@ -1,0 +1,43 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.url-syntax-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.document.url"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "document.url-invalid",
+  "id": "question.document.url",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are source URLs syntactically valid, permitted, and associated with a capture timestamp and content digest?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "high",
+  "tags": [
+    "domain.document"
+  ],
+  "title": "Document URL validity",
+  "version": "1.0.0"
+}

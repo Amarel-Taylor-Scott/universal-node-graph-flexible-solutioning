@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "semantic-field-map.schema.json",
+  "title": "Semantic interrogation field map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interrogation_model_version", "dataset_digest", "mapping_policy_id",
+    "matches", "unmapped_fields", "warnings", "extensions"
+  ],
+  "properties": {
+    "interrogation_model_version": {"const": "0.1"},
+    "dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "mapping_policy_id": {"$ref": "common.schema.json#/$defs/id"},
+    "matches": {"type": "array", "items": {"$ref": "#/$defs/match"}},
+    "unmapped_fields": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "warnings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "$defs": {
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_name", "concept_id", "confidence", "method", "alternatives", "evidence"],
+      "properties": {
+        "field_name": {"type": "string", "minLength": 1},
+        "concept_id": {"$ref": "common.schema.json#/$defs/id"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "method": {"$ref": "common.schema.json#/$defs/id"},
+        "alternatives": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+        "evidence": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

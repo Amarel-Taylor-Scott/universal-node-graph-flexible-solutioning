@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.duplicate-record-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "data.duplicate-record",
+  "id": "question.generic-tabular.duplicate-rows",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are exact duplicate records present, and are they expected repetitions or ingestion errors?",
+  "references": [],
+  "repair_families": [
+    "repair.quarantine-duplicate"
+  ],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.generic-tabular"
+  ],
+  "title": "Duplicate records",
+  "version": "1.0.0"
+}

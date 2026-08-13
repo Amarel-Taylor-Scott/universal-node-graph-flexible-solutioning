@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "authority.product-history-lookup",
+      "cost_tier": 6,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    },
+    {
+      "capability": "quality.review-product-history",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.product.name",
+    "concept.product.identifier",
+    "concept.product.brand"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "product.temporal-status-conflict",
+  "id": "question.product.temporal-validity",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are discontinued, renamed, recalled, or region-restricted products interpreted at the relevant date?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.product"
+  ],
+  "title": "Product lifecycle validity",
+  "version": "1.0.0"
+}

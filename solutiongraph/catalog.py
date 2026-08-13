@@ -34,12 +34,23 @@ from solutiongraph.examples.showcase_tasks import (
 )
 from solutiongraph.examples.tasks import EXAMPLE_REGISTRY
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
+from solutiongraph.interrogation.node_pack import (
+    INTERROGATION_DESCRIPTORS,
+    INTERROGATION_NODE_PACK,
+    INTERROGATION_NODE_SPECS,
+    INTERROGATION_REGISTRY,
+)
 from solutiongraph.pack_library import (
     DATA_SCIENCE_LIFECYCLE_NODE_PACK,
     ENGINEERING_SHOWCASE_NODE_PACK,
     EXTENDED_ARENA_NODE_PACK,
     REAL_WORLD_EXAMPLE_NODE_PACK,
     REFERENCE_CORE_NODE_PACK,
+)
+from solutiongraph.question_packs import (
+    REFERENCE_CONCEPTS,
+    REFERENCE_QUESTION_PACKS,
+    REFERENCE_QUESTIONS,
 )
 from solutiongraph.reference_nodes import (
     REFERENCE_DESCRIPTORS,
@@ -234,6 +245,43 @@ def data_science_registry_capabilities() -> RegistryCapabilities:
     )
 
 
+def interrogation_registry_capabilities() -> RegistryCapabilities:
+    """Advertise strict and lexical discovery for interrogation stages."""
+    return RegistryCapabilities(
+        registry_id=INTERROGATION_REGISTRY.id,
+        registry_version=INTERROGATION_REGISTRY.version,
+        registry_digest=INTERROGATION_REGISTRY.digest,
+        protocol_versions=("0.1",),
+        schemas=(
+            SchemaSupport("node-spec", ("0.2",)),
+            SchemaSupport("node-descriptor", ("0.1",)),
+            SchemaSupport("node-pack", ("0.1",)),
+            SchemaSupport("question-pack", ("0.1",)),
+        ),
+        query_modes=(
+            QueryMode("exact", fields=("node_id", "node_spec_digest")),
+            QueryMode(
+                "lexical",
+                fields=("title", "summary", "purposes", "actions", "documents"),
+                supports_filters=True,
+                supports_scores=True,
+                supports_explanations=True,
+            ),
+            QueryMode("enumeration", supports_cursor=True),
+        ),
+        descriptor_fields=(
+            "title", "summary", "purposes", "solutions", "actions", "domains",
+            "tags", "ports", "documents",
+        ),
+        supports_enumeration=True,
+        supports_snapshots=True,
+        supports_continuation=True,
+        supports_explanations=True,
+        max_page_size=1000,
+        extensions=(("interrogation.maturity", "reference"),),
+    )
+
+
 def catalog_documents() -> dict[str, dict[str, Any]]:
     """Return every generated catalogue document keyed by portable relative path."""
     node_pack = REFERENCE_CORE_NODE_PACK
@@ -245,6 +293,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
     stdlib_capabilities = standard_library_registry_capabilities()
     showcase_capabilities = showcase_registry_capabilities()
     data_science_capabilities = data_science_registry_capabilities()
+    interrogation_capabilities = interrogation_registry_capabilities()
     documents: dict[str, dict[str, Any]] = {
         "nodepacks/reference-core/manifest.json": node_pack.to_dict(),
         "nodepacks/reference-core/registry.json": REFERENCE_REGISTRY.to_dict(),
@@ -273,6 +322,11 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "nodepacks/data-science-lifecycle/registry.json": DATA_SCIENCE_REGISTRY.to_dict(),
         "nodepacks/data-science-lifecycle/registry-capabilities.json": (
             data_science_capabilities.to_dict()
+        ),
+        "nodepacks/semantic-interrogation/manifest.json": INTERROGATION_NODE_PACK.to_dict(),
+        "nodepacks/semantic-interrogation/registry.json": INTERROGATION_REGISTRY.to_dict(),
+        "nodepacks/semantic-interrogation/registry-capabilities.json": (
+            interrogation_capabilities.to_dict()
         ),
         "harnesses/duecare-example.json": DUECARE_HARNESS_BUNDLE.to_dict(),
         "harnesses/duecare-evidence-example.json": DUECARE_HARNESS_EVIDENCE.to_dict(),
@@ -331,10 +385,41 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         documents[f"nodepacks/engineering-showcases/nodes/{node.id}.json"] = node.to_dict()
     for node in DATA_SCIENCE_NODES:
         documents[f"nodepacks/data-science-lifecycle/nodes/{node.id}.json"] = node.to_dict()
+    for node in INTERROGATION_NODE_SPECS:
+        documents[f"nodepacks/semantic-interrogation/nodes/{node.id}.json"] = node.to_dict()
+    for descriptor in INTERROGATION_DESCRIPTORS:
+        documents[
+            f"nodepacks/semantic-interrogation/descriptors/{descriptor.node_id}.json"
+        ] = descriptor.to_dict()
     for descriptor in STANDARD_LIBRARY_DESCRIPTORS:
         documents[f"nodepacks/stdlib-data-foundation/descriptors/{descriptor.node_id}.json"] = (
             descriptor.to_dict()
         )
+    for concept in REFERENCE_CONCEPTS:
+        documents[f"question-packs/concepts/{concept.id}.json"] = concept.to_dict()
+    for pack in REFERENCE_QUESTION_PACKS:
+        documents[f"question-packs/packs/{pack.id}.json"] = pack.to_dict()
+    for question in REFERENCE_QUESTIONS:
+        documents[f"question-packs/questions/{question.id}.json"] = question.to_dict()
+    documents["question-packs/index.json"] = {
+        "interrogation_model_version": "0.1",
+        "concept_count": len(REFERENCE_CONCEPTS),
+        "pack_count": len(REFERENCE_QUESTION_PACKS),
+        "question_count": len(REFERENCE_QUESTIONS),
+        "concepts": [
+            {"id": item.id, "digest": item.digest, "path": f"question-packs/concepts/{item.id}.json"}
+            for item in REFERENCE_CONCEPTS
+        ],
+        "packs": [
+            {
+                "id": item.id,
+                "digest": item.digest,
+                "question_count": len(item.questions),
+                "path": f"question-packs/packs/{item.id}.json",
+            }
+            for item in REFERENCE_QUESTION_PACKS
+        ],
+    }
     for template in REFERENCE_TEMPLATES.templates:
         documents[f"templates/{template.id}.json"] = template.to_dict()
     for task in UNIVERSAL_DAG_ARENA.tasks:
@@ -441,6 +526,15 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "descriptor_count": 0,
                 "embedding_record_count": 0,
             },
+            {
+                "id": INTERROGATION_NODE_PACK.id,
+                "version": INTERROGATION_NODE_PACK.version,
+                "digest": INTERROGATION_NODE_PACK.digest,
+                "path": "nodepacks/semantic-interrogation/manifest.json",
+                "node_count": len(INTERROGATION_NODE_SPECS),
+                "descriptor_count": len(INTERROGATION_DESCRIPTORS),
+                "embedding_record_count": 0,
+            },
         ],
         "harnesses": [
             {
@@ -477,6 +571,12 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
             "reference_smoke_trials": reference_agent_suite.total_trials,
             "sealed_payloads_published": False,
         },
+        "question_packs": {
+            "path": "question-packs/index.json",
+            "concept_count": len(REFERENCE_CONCEPTS),
+            "pack_count": len(REFERENCE_QUESTION_PACKS),
+            "question_count": len(REFERENCE_QUESTIONS),
+        },
     }
     return dict(sorted(documents.items()))
 
@@ -502,6 +602,7 @@ __all__ = [
     "example_registry_capabilities",
     "extended_registry_capabilities",
     "reference_registry_capabilities",
+    "interrogation_registry_capabilities",
     "showcase_registry_capabilities",
     "standard_library_registry_capabilities",
     "write_catalog",

@@ -1,0 +1,57 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.document-grounding-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.audit-document-grounding",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.document.identifier",
+    "concept.document.text",
+    "concept.document.url"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "document.ungrounded-extraction",
+  "id": "question.document.grounding",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Can every extracted field or assertion be traced to page, region, span, and source digest evidence?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "critical",
+  "tags": [
+    "domain.document"
+  ],
+  "title": "Extraction grounding",
+  "version": "1.0.0"
+}

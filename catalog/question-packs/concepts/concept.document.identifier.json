@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "document_id",
+    "file_id",
+    "doc_id",
+    "case_id"
+  ],
+  "canonical_uri": "https://schema.org/identifier",
+  "description": "",
+  "extensions": {},
+  "id": "concept.document.identifier",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Document identifier",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "data.document-identifier",
+  "version": "1.0.0"
+}

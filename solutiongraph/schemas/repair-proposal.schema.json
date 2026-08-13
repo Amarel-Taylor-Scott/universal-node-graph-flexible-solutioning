@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "repair-proposal.schema.json",
+  "title": "Reversible semantic interrogation repair proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "interrogation_model_version", "dataset_digest", "finding_set_digest",
+    "repair_family", "strategy", "operations", "proposer_id", "proposer_version",
+    "requires_approval", "notes"
+  ],
+  "properties": {
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "interrogation_model_version": {"const": "0.1"},
+    "dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "finding_set_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "repair_family": {"$ref": "common.schema.json#/$defs/id"},
+    "strategy": {"$ref": "common.schema.json#/$defs/id"},
+    "operations": {"type": "array", "items": {"$ref": "#/$defs/operation"}},
+    "proposer_id": {"$ref": "common.schema.json#/$defs/id"},
+    "proposer_version": {"type": "string", "minLength": 1},
+    "requires_approval": {"type": "boolean"},
+    "notes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "finding_id", "row_id", "row_index", "field_name", "action",
+        "before_digest", "before_value", "after_value", "reversible", "safe_to_auto_apply", "reason"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "finding_id": {"$ref": "common.schema.json#/$defs/id"},
+        "row_id": {"type": "string", "minLength": 1},
+        "row_index": {"type": "integer", "minimum": 0},
+        "field_name": {"type": "string", "minLength": 1},
+        "action": {"enum": ["add", "replace", "remove", "quarantine"]},
+        "before_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "before_value": true,
+        "after_value": true,
+        "reversible": {"type": "boolean"},
+        "safe_to_auto_apply": {"type": "boolean"},
+        "reason": {"type": "string"}
+      }
+    }
+  }
+}

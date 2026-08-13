@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "question-definition.schema.json",
+  "title": "Declarative semantic interrogation question",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interrogation_model_version", "id", "version", "title", "question",
+    "concept_ids", "scope", "finding_code", "severity", "checks", "preconditions",
+    "dependencies", "evidence_required", "repair_families", "abstain_when",
+    "jurisdictions", "tags", "references", "privacy_class", "extensions"
+  ],
+  "properties": {
+    "interrogation_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "question": {"type": "string", "minLength": 1},
+    "concept_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "scope": {"enum": ["field", "row", "entity", "dataset", "cross-field", "pipeline"]},
+    "finding_code": {"$ref": "common.schema.json#/$defs/id"},
+    "severity": {"enum": ["info", "low", "medium", "high", "critical"]},
+    "checks": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/check"}},
+    "preconditions": {"$ref": "#/$defs/idArray"},
+    "dependencies": {"$ref": "#/$defs/idArray"},
+    "evidence_required": {"$ref": "#/$defs/idArray"},
+    "repair_families": {"$ref": "#/$defs/idArray"},
+    "abstain_when": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "jurisdictions": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "tags": {"$ref": "#/$defs/idArray"},
+    "references": {"type": "array", "items": {"$ref": "concept-definition.schema.json#/$defs/reference"}},
+    "privacy_class": {"$ref": "common.schema.json#/$defs/id"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "$defs": {
+    "idArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability", "mode", "optional", "effect", "permission", "cost_tier", "evidence_kinds"],
+      "properties": {
+        "capability": {"$ref": "common.schema.json#/$defs/id"},
+        "mode": {"enum": ["deterministic", "external", "llm", "human"]},
+        "optional": {"type": "boolean"},
+        "effect": {"$ref": "#/$defs/optionalId"},
+        "permission": {"$ref": "#/$defs/optionalId"},
+        "cost_tier": {"type": "integer", "minimum": 1, "maximum": 10},
+        "evidence_kinds": {"$ref": "#/$defs/idArray"}
+      }
+    },
+    "optionalId": {
+      "oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]
+    }
+  }
+}

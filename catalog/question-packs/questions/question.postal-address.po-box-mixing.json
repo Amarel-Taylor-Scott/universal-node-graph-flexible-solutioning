@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.po-box-mix-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.postal.street",
+    "concept.postal.unit"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "postal.delivery-mode-conflict",
+  "id": "question.postal-address.po-box-mixing",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [
+    "US"
+  ],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are PO Box, rural route, highway contract route, and physical delivery lines represented without contradictory mixing?",
+  "references": [
+    {
+      "id": "reference.usps-publication-28",
+      "jurisdiction": "US",
+      "license": "",
+      "notes": "",
+      "revision": "2024-10",
+      "role": "reference.address-normalization",
+      "url": "https://pe.usps.com/text/pub28/welcome.htm"
+    }
+  ],
+  "repair_families": [],
+  "scope": "row",
+  "severity": "medium",
+  "tags": [
+    "domain.postal-address"
+  ],
+  "title": "PO Box and physical-line mixing",
+  "version": "1.0.0"
+}

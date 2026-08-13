@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.ml-imputation-boundary-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset",
+    "concept.ml.target",
+    "concept.ml.split"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "ml.imputation-leakage",
+  "id": "question.ml-dataset.missingness",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are imputation statistics learned only from training data and applied consistently to later splits?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "critical",
+  "tags": [
+    "domain.ml-dataset"
+  ],
+  "title": "Missingness and imputation boundary",
+  "version": "1.0.0"
+}

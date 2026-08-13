@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "geography_vintage",
+    "boundary_year",
+    "fips_vintage",
+    "tiger_year"
+  ],
+  "canonical_uri": "urn:solutiongraph:concept:geography-vintage",
+  "description": "",
+  "extensions": {},
+  "id": "concept.geography.vintage",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Geographic reference vintage",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.census-geocoder",
+      "jurisdiction": "US",
+      "license": "",
+      "notes": "Range and geography evidence; not proof of deliverability or structure existence.",
+      "revision": "",
+      "role": "reference.geographic-evidence",
+      "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html"
+    }
+  ],
+  "value_type": "time.reference-vintage",
+  "version": "1.0.0"
+}

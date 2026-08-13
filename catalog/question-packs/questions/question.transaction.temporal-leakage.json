@@ -1,0 +1,46 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.point-in-time-leakage-check",
+      "cost_tier": 4,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.transaction.id",
+    "concept.transaction.amount",
+    "concept.transaction.currency",
+    "concept.transaction.status"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "transaction.future-leakage",
+  "id": "question.transaction.temporal-leakage",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do features or decisions use settlement, chargeback, or future status information unavailable at decision time?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "critical",
+  "tags": [
+    "domain.transaction"
+  ],
+  "title": "Transaction point-in-time correctness",
+  "version": "1.0.0"
+}

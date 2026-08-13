@@ -1,0 +1,317 @@
+{
+  "concept_ids": [
+    "concept.document.identifier",
+    "concept.document.text",
+    "concept.document.url"
+  ],
+  "description": "Document identity, source, OCR quality, grounding, conflicts, and untrusted-content questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.document",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.document-identity-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.document.identifier",
+        "concept.document.text",
+        "concept.document.url"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "document.identity-conflict",
+      "id": "question.document.identity",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are document identities content-addressed, stable across filenames, and free of accidental duplicates?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "high",
+      "tags": [
+        "domain.document"
+      ],
+      "title": "Document identity and deduplication",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.url-syntax-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.document.url"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "document.url-invalid",
+      "id": "question.document.url",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are source URLs syntactically valid, permitted, and associated with a capture timestamp and content digest?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "high",
+      "tags": [
+        "domain.document"
+      ],
+      "title": "Document URL validity",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.document-text-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.document.text"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "document.text-quality",
+      "id": "question.document.text-quality",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Does extracted or OCR text contain empty pages, mojibake, repeated headers, or suspicious character distributions?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "medium",
+      "tags": [
+        "domain.document"
+      ],
+      "title": "Extracted-text quality",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.document-grounding-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.audit-document-grounding",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.document.identifier",
+        "concept.document.text",
+        "concept.document.url"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "document.ungrounded-extraction",
+      "id": "question.document.grounding",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Can every extracted field or assertion be traced to page, region, span, and source digest evidence?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "critical",
+      "tags": [
+        "domain.document"
+      ],
+      "title": "Extraction grounding",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.document-conflict-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-document-conflict",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.document.identifier",
+        "concept.document.text",
+        "concept.document.url"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "document.evidence-conflict",
+      "id": "question.document.conflicts",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "When multiple document sections or versions disagree, is the conflict preserved and adjudicated explicitly?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "high",
+      "tags": [
+        "domain.document"
+      ],
+      "title": "Conflicting document evidence",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.document-injection-pattern-check",
+          "cost_tier": 3,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.review-document-injection",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.document.text"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "document.prompt-injection-risk",
+      "id": "question.document.prompt-injection",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.untrusted-content",
+      "question": "Is document content treated as data rather than trusted instructions to an LLM or tool-using agent?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "critical",
+      "tags": [
+        "domain.document"
+      ],
+      "title": "Untrusted document instructions",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Document interrogation",
+  "version": "1.0.0"
+}

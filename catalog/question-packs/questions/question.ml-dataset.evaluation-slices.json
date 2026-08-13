@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.ml-slice-coverage-check",
+      "cost_tier": 4,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.review-ml-slices",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset",
+    "concept.ml.target",
+    "concept.ml.split"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "ml.evaluation-slice-gap",
+  "id": "question.ml-dataset.evaluation-slices",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Does evaluation cover rare classes, tails, geographies, periods, source systems, and high-harm groups?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "high",
+  "tags": [
+    "domain.ml-dataset"
+  ],
+  "title": "Evaluation slice coverage",
+  "version": "1.0.0"
+}

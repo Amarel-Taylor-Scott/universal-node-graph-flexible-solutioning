@@ -1,0 +1,58 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.organization-domain-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.adjudicate-domain-name",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.organization.name",
+    "concept.organization.domain",
+    "concept.contact.email"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "organization.domain-name-conflict",
+  "id": "question.organization.domain-consistency",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.domain-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are organization names, websites, and contact-email domains mutually plausible without treating similarity as proof?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "medium",
+  "tags": [
+    "domain.organization"
+  ],
+  "title": "Name and web-domain consistency",
+  "version": "1.0.0"
+}

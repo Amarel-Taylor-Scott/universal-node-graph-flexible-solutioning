@@ -1,0 +1,55 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.product-identifier-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "authority.product-identifier-lookup",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    }
+  ],
+  "concept_ids": [
+    "concept.product.identifier"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "product.identifier-invalid",
+  "id": "question.product.identifier-shape",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do SKU, UPC, EAN, GTIN, and internal identifiers follow their declared schemes?",
+  "references": [],
+  "repair_families": [],
+  "scope": "field",
+  "severity": "high",
+  "tags": [
+    "domain.product"
+  ],
+  "title": "Product identifier shape",
+  "version": "1.0.0"
+}

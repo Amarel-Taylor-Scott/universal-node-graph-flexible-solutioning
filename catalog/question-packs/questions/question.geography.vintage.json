@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.geography-vintage-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "authority.geography-vintage-lookup",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    }
+  ],
+  "concept_ids": [
+    "concept.geography.county",
+    "concept.geography.vintage"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "geography.vintage-ambiguous",
+  "id": "question.geography.vintage",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are FIPS codes, county relationships, and geometries interpreted using an explicit reference vintage?",
+  "references": [],
+  "repair_families": [],
+  "scope": "pipeline",
+  "severity": "high",
+  "tags": [
+    "domain.geography"
+  ],
+  "title": "Boundary and code vintage",
+  "version": "1.0.0"
+}

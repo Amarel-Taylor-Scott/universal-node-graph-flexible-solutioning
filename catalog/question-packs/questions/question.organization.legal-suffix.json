@@ -1,0 +1,82 @@
+{
+  "abstain_when": [
+    "jurisdiction is ambiguous",
+    "registry coverage is unavailable"
+  ],
+  "checks": [
+    {
+      "capability": "quality.organization-suffix-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "authority.organization-registration-lookup",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    },
+    {
+      "capability": "quality.review-legal-form",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.organization.legal-name",
+    "concept.organization.name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "organization.legal-form-mismatch",
+  "id": "question.organization.legal-suffix",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Is the corporate suffix recognizable and consistent with the stated jurisdiction and legal-name role?",
+  "references": [
+    {
+      "id": "reference.gleif-api",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "Authoritative for LEI-covered entities only.",
+      "revision": "",
+      "role": "reference.entity-authority",
+      "url": "https://www.gleif.org/en/lei-data/gleif-api"
+    }
+  ],
+  "repair_families": [
+    "repair.organization-comparison-key"
+  ],
+  "scope": "entity",
+  "severity": "medium",
+  "tags": [
+    "domain.organization"
+  ],
+  "title": "Corporate suffix and jurisdiction",
+  "version": "1.0.0"
+}

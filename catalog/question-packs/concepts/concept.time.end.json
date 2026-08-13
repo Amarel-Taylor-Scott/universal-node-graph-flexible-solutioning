@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "end",
+    "end_date",
+    "end_time",
+    "valid_to"
+  ],
+  "canonical_uri": "https://schema.org/endDate",
+  "description": "",
+  "extensions": {},
+  "id": "concept.time.end",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "End date-time",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "time.datetime",
+  "version": "1.0.0"
+}

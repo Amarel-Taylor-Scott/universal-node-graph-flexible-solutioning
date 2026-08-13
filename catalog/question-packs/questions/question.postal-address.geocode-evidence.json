@@ -1,0 +1,68 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "authority.census-geocode",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    },
+    {
+      "capability": "quality.audit-geocode-claim",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.postal.address",
+    "concept.geography.latitude",
+    "concept.geography.longitude"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "postal.geocode-evidence-overclaim",
+  "id": "question.postal-address.geocode-evidence",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.address-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Is the geocode match type recorded, and is an interpolated range or centroid being mistaken for rooftop or deliverability proof?",
+  "references": [
+    {
+      "id": "reference.census-geocoder",
+      "jurisdiction": "US",
+      "license": "",
+      "notes": "Range and geography evidence; not proof of deliverability or structure existence.",
+      "revision": "",
+      "role": "reference.geographic-evidence",
+      "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html"
+    }
+  ],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.postal-address"
+  ],
+  "title": "Geocode match semantics",
+  "version": "1.0.0"
+}

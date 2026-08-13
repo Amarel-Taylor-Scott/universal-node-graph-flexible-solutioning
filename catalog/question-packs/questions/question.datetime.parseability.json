@@ -1,0 +1,49 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.datetime-parse-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.time.instant",
+    "concept.time.date",
+    "concept.time.start",
+    "concept.time.end",
+    "concept.time.timezone"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "datetime.unparseable-or-ambiguous",
+  "id": "question.datetime.parseability",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are date and time values unambiguous, parseable, and free of mixed implicit formats?",
+  "references": [],
+  "repair_families": [
+    "repair.iso-date-when-unambiguous"
+  ],
+  "scope": "dataset",
+  "severity": "high",
+  "tags": [
+    "domain.datetime"
+  ],
+  "title": "Date-time parseability",
+  "version": "1.0.0"
+}

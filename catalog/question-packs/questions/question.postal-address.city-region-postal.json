@@ -1,0 +1,69 @@
+{
+  "abstain_when": [
+    "reference dataset or vintage is unavailable"
+  ],
+  "checks": [
+    {
+      "capability": "authority.postal-geography-lookup",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    },
+    {
+      "capability": "quality.review-postal-geography",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.postal.city",
+    "concept.postal.region",
+    "concept.postal.code",
+    "concept.postal.country"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "postal.locality-region-postal-conflict",
+  "id": "question.postal-address.city-region-postal",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do locality, region, postal code, and country agree according to a declared reference vintage?",
+  "references": [
+    {
+      "id": "reference.census-geocoder",
+      "jurisdiction": "US",
+      "license": "",
+      "notes": "Range and geography evidence; not proof of deliverability or structure existence.",
+      "revision": "",
+      "role": "reference.geographic-evidence",
+      "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html"
+    }
+  ],
+  "repair_families": [],
+  "scope": "cross-field",
+  "severity": "high",
+  "tags": [
+    "domain.postal-address"
+  ],
+  "title": "City, region, and postal relationship",
+  "version": "1.0.0"
+}

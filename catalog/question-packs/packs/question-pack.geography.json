@@ -1,0 +1,355 @@
+{
+  "concept_ids": [
+    "concept.geography.latitude",
+    "concept.geography.longitude",
+    "concept.geography.county",
+    "concept.geography.vintage",
+    "concept.postal.city",
+    "concept.postal.region",
+    "concept.postal.country",
+    "concept.time.instant"
+  ],
+  "description": "Coordinate, boundary, derivation-method, vintage, and time-aware enrichment questions.",
+  "extensions": {
+    "question-pack.maturity": "reference"
+  },
+  "id": "question-pack.geography",
+  "interrogation_model_version": "0.1",
+  "license": "MIT",
+  "questions": [
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.coordinate-range-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.geography.latitude",
+        "concept.geography.longitude"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "geography.invalid-coordinate",
+      "id": "question.geography.coordinate-range",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.coordinates-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are latitude and longitude finite, in range, and not accidentally swapped?",
+      "references": [],
+      "repair_families": [],
+      "scope": "row",
+      "severity": "high",
+      "tags": [
+        "domain.geography"
+      ],
+      "title": "Coordinate range and axis order",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.default-coordinate-check",
+          "cost_tier": 2,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        }
+      ],
+      "concept_ids": [
+        "concept.geography.latitude",
+        "concept.geography.longitude"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "geography.default-coordinate",
+      "id": "question.geography.zero-island",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Do zero, repeated centroid, or other default coordinates appear more often than plausibly expected?",
+      "references": [],
+      "repair_families": [],
+      "scope": "dataset",
+      "severity": "high",
+      "tags": [
+        "domain.geography"
+      ],
+      "title": "Null-island and default coordinates",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "authority.point-in-polygon",
+          "cost_tier": 5,
+          "effect": "network.read",
+          "evidence_kinds": [
+            "evidence.authority-response",
+            "evidence.source-vintage"
+          ],
+          "mode": "external",
+          "optional": true,
+          "permission": "network.read"
+        },
+        {
+          "capability": "quality.review-boundary-conflict",
+          "cost_tier": 9,
+          "effect": "human.review",
+          "evidence_kinds": [
+            "evidence.reviewer-decision"
+          ],
+          "mode": "human",
+          "optional": true,
+          "permission": "human.review"
+        }
+      ],
+      "concept_ids": [
+        "concept.geography.latitude",
+        "concept.geography.longitude",
+        "concept.geography.county",
+        "concept.geography.vintage",
+        "concept.postal.city",
+        "concept.postal.region",
+        "concept.postal.country"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "geography.boundary-conflict",
+      "id": "question.geography.point-in-polygon",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.coordinates-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Does the point fall within the stated city, county, region, and country for the declared boundary vintage?",
+      "references": [
+        {
+          "id": "reference.census-geocoder",
+          "jurisdiction": "US",
+          "license": "",
+          "notes": "Range and geography evidence; not proof of deliverability or structure existence.",
+          "revision": "",
+          "role": "reference.geographic-evidence",
+          "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/census-geocoder.html"
+        }
+      ],
+      "repair_families": [],
+      "scope": "cross-field",
+      "severity": "high",
+      "tags": [
+        "domain.geography"
+      ],
+      "title": "Coordinate and administrative boundary",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.geography-vintage-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "authority.geography-vintage-lookup",
+          "cost_tier": 5,
+          "effect": "network.read",
+          "evidence_kinds": [
+            "evidence.authority-response",
+            "evidence.source-vintage"
+          ],
+          "mode": "external",
+          "optional": true,
+          "permission": "network.read"
+        }
+      ],
+      "concept_ids": [
+        "concept.geography.county",
+        "concept.geography.vintage"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "geography.vintage-ambiguous",
+      "id": "question.geography.vintage",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Are FIPS codes, county relationships, and geometries interpreted using an explicit reference vintage?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "high",
+      "tags": [
+        "domain.geography"
+      ],
+      "title": "Boundary and code vintage",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.geocode-method-check",
+          "cost_tier": 1,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.audit-geocode-method",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.geography.latitude",
+        "concept.geography.longitude"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "geography.method-missing",
+      "id": "question.geography.geocode-method",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Is each coordinate identified as rooftop, parcel, interpolated range, centroid, or unknown?",
+      "references": [],
+      "repair_families": [],
+      "scope": "entity",
+      "severity": "medium",
+      "tags": [
+        "domain.geography"
+      ],
+      "title": "Coordinate derivation method",
+      "version": "1.0.0"
+    },
+    {
+      "abstain_when": [],
+      "checks": [
+        {
+          "capability": "quality.geotemporal-lineage-check",
+          "cost_tier": 4,
+          "effect": "",
+          "evidence_kinds": [
+            "evidence.aggregate",
+            "evidence.row-identities"
+          ],
+          "mode": "deterministic",
+          "optional": false,
+          "permission": ""
+        },
+        {
+          "capability": "quality.audit-geotemporal-enrichment",
+          "cost_tier": 7,
+          "effect": "model.invoke",
+          "evidence_kinds": [
+            "evidence.structured-model-output",
+            "evidence.prompt-digest"
+          ],
+          "mode": "llm",
+          "optional": true,
+          "permission": "model.invoke"
+        }
+      ],
+      "concept_ids": [
+        "concept.geography.latitude",
+        "concept.geography.longitude",
+        "concept.time.instant"
+      ],
+      "dependencies": [],
+      "evidence_required": [
+        "evidence.affected-count"
+      ],
+      "extensions": {},
+      "finding_code": "geography.temporal-enrichment-conflict",
+      "id": "question.geography.geotemporal-enrichment",
+      "interrogation_model_version": "0.1",
+      "jurisdictions": [],
+      "preconditions": [
+        "precondition.records-available",
+        "precondition.coordinates-available",
+        "precondition.event-time-available"
+      ],
+      "privacy_class": "privacy.aggregate",
+      "question": "Were events, weather, demographics, regulations, and boundaries joined using both location and event time?",
+      "references": [],
+      "repair_families": [],
+      "scope": "pipeline",
+      "severity": "high",
+      "tags": [
+        "domain.geography"
+      ],
+      "title": "Time-aware geographic enrichment",
+      "version": "1.0.0"
+    }
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/question_packs",
+  "title": "Geography and GIS interrogation",
+  "version": "1.0.0"
+}

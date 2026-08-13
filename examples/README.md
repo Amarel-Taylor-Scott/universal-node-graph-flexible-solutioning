@@ -14,6 +14,7 @@ dependency-free and run without browser, model-provider, or network access.
 | Discover nodes and templates | `python examples/discovery_and_templates.py` | Capability negotiation, discovery receipt, snapshot, and template inspection |
 | Run a portable benchmark pack | `python examples/solution_pack_benchmark_quickstart.py --output-dir .artifacts/quickstart` | Fixed/solver arms, holdout status, receipts, JSON, and HTML evidence |
 | Test the coding-agent arena | `python examples/agent_benchmark_quickstart.py --output-dir .artifacts/agent-smoke` | Ten tasks, paired context arms, sealed scoring, hash-chained receipts, Mermaid/SVG diagrams, and offline analysis; no model call |
+| Interrogate and repair dirty records | `python examples/semantic_interrogation_quickstart.py` | 86 visible questions, deterministic receipts, reversible shadow patches, an independent decision, and redacted reports |
 
 ## CLI-driven domain examples
 
@@ -34,6 +35,15 @@ The 47 bundled programs cover data quality, documents, images, GIS, APIs,
 frontend release checks, synthetic data, reinforcement learning, LLM evaluation,
 and ten data-science/ML lifecycle families. They are transparent mechanism
 fixtures, not production performance evidence.
+
+The semantic interrogation example uses one intentionally dirty organization,
+address, contact, time, and ML-target dataset. The equivalent CLI workflow is:
+
+```bash
+solutiongraph questions plan examples/data/dirty_organizations.json --effort E1
+solutiongraph questions run examples/data/dirty_organizations.json \
+  --effort E3 --output-dir .artifacts/interrogation
+```
 
 ## Offline visual explorers
 

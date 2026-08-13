@@ -1,0 +1,30 @@
+{
+  "aliases": [
+    "split",
+    "fold",
+    "partition",
+    "train_test",
+    "cv_fold"
+  ],
+  "canonical_uri": "urn:solutiongraph:concept:ml-split",
+  "description": "",
+  "extensions": {},
+  "id": "concept.ml.split",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Dataset split",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.w3c-dqv",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.quality-vocabulary",
+      "url": "https://www.w3.org/TR/vocab-dqv/"
+    }
+  ],
+  "value_type": "ml.split",
+  "version": "1.0.0"
+}

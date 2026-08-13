@@ -1,0 +1,55 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.target-balance-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.interpret-target-distribution",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.ml.target"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "ml.target-distribution-risk",
+  "id": "question.ml-dataset.target-balance",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Is the target balanced or long-tailed, and does the evaluation metric reflect the consequential regions?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "high",
+  "tags": [
+    "domain.ml-dataset"
+  ],
+  "title": "Target distribution and balance",
+  "version": "1.0.0"
+}

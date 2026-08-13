@@ -1,0 +1,58 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.transaction-duplicate-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.adjudicate-transaction-duplicate",
+      "cost_tier": 7,
+      "effect": "model.invoke",
+      "evidence_kinds": [
+        "evidence.structured-model-output",
+        "evidence.prompt-digest"
+      ],
+      "mode": "llm",
+      "optional": true,
+      "permission": "model.invoke"
+    }
+  ],
+  "concept_ids": [
+    "concept.transaction.id",
+    "concept.transaction.amount",
+    "concept.transaction.currency",
+    "concept.transaction.status"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "transaction.possible-duplicate",
+  "id": "question.transaction.duplicates",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do repeated identifiers, amounts, timestamps, and actors indicate duplicate ingestion or legitimate retries?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "critical",
+  "tags": [
+    "domain.transaction"
+  ],
+  "title": "Duplicate or replayed transactions",
+  "version": "1.0.0"
+}

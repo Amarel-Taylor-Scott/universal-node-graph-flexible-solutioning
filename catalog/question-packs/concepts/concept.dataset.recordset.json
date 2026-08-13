@@ -1,0 +1,38 @@
+{
+  "aliases": [
+    "dataset",
+    "records",
+    "rows",
+    "table"
+  ],
+  "canonical_uri": "urn:solutiongraph:concept:dataset-recordset",
+  "description": "",
+  "extensions": {},
+  "id": "concept.dataset.recordset",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Tabular record set",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.w3c-dqv",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.quality-vocabulary",
+      "url": "https://www.w3.org/TR/vocab-dqv/"
+    },
+    {
+      "id": "reference.w3c-shacl",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "",
+      "revision": "",
+      "role": "reference.constraint-language",
+      "url": "https://www.w3.org/TR/shacl/"
+    }
+  ],
+  "value_type": "data.recordset",
+  "version": "1.0.0"
+}

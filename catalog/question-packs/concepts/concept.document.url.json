@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "url",
+    "document_url",
+    "file_url",
+    "source_url"
+  ],
+  "canonical_uri": "https://schema.org/contentUrl",
+  "description": "",
+  "extensions": {},
+  "id": "concept.document.url",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Document URL",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "text.url",
+  "version": "1.0.0"
+}

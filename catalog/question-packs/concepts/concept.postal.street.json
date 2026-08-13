@@ -1,0 +1,41 @@
+{
+  "aliases": [
+    "street",
+    "street_address",
+    "address_line_1",
+    "address1",
+    "address_line1"
+  ],
+  "canonical_uri": "https://schema.org/streetAddress",
+  "description": "",
+  "extensions": {},
+  "id": "concept.postal.street",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Street address",
+  "parent_ids": [
+    "concept.postal.address"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    },
+    {
+      "id": "reference.usps-publication-28",
+      "jurisdiction": "US",
+      "license": "",
+      "notes": "",
+      "revision": "2024-10",
+      "role": "reference.address-normalization",
+      "url": "https://pe.usps.com/text/pub28/welcome.htm"
+    }
+  ],
+  "value_type": "text.street-address",
+  "version": "1.0.0"
+}

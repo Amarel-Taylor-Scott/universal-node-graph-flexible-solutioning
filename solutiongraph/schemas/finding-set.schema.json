@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "finding-set.schema.json",
+  "title": "Semantic interrogation findings and execution receipts",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "interrogation_model_version", "dataset_digest", "plan_digest", "receipts",
+    "findings", "executor_id", "executor_version"
+  ],
+  "properties": {
+    "interrogation_model_version": {"const": "0.1"},
+    "dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "receipts": {"type": "array", "items": {"$ref": "#/$defs/receipt"}},
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+    "executor_id": {"$ref": "common.schema.json#/$defs/id"},
+    "executor_version": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "stringArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "idArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "digestArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/digest"}},
+    "optionalId": {"oneOf": [{"const": ""}, {"$ref": "common.schema.json#/$defs/id"}]},
+    "receipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "interrogation_model_version", "id", "plan_digest", "dataset_digest", "question_id",
+        "question_digest", "check_capability", "check_implementation_id",
+        "check_implementation_version", "check_implementation_digest", "mode", "outcome",
+        "fields", "rows_examined", "coverage", "finding_ids", "evidence", "error_code", "latency_ms"
+      ],
+      "properties": {
+        "interrogation_model_version": {"const": "0.1"},
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "dataset_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "question_id": {"$ref": "common.schema.json#/$defs/id"},
+        "question_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "check_capability": {"$ref": "common.schema.json#/$defs/id"},
+        "check_implementation_id": {"$ref": "common.schema.json#/$defs/id"},
+        "check_implementation_version": {"type": "string", "minLength": 1},
+        "check_implementation_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "mode": {"enum": ["deterministic", "external", "llm", "human"]},
+        "outcome": {"enum": ["pass", "fail", "abstain", "error", "not-run"]},
+        "fields": {"$ref": "#/$defs/stringArray"},
+        "rows_examined": {"type": "integer", "minimum": 0},
+        "coverage": {"type": "number", "minimum": 0, "maximum": 1},
+        "finding_ids": {"$ref": "#/$defs/idArray"},
+        "evidence": {"$ref": "common.schema.json#/$defs/extensions"},
+        "error_code": {"$ref": "#/$defs/optionalId"},
+        "latency_ms": {"type": "number", "minimum": 0}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "question_id", "question_digest", "code", "severity", "confidence",
+        "fields", "row_ids", "affected_count", "evidence", "sample_value_digests",
+        "remediation_families", "summary"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "question_id": {"$ref": "common.schema.json#/$defs/id"},
+        "question_digest": {"$ref": "common.schema.json#/$defs/digest"},
+        "code": {"$ref": "common.schema.json#/$defs/id"},
+        "severity": {"enum": ["info", "low", "medium", "high", "critical"]},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "fields": {"$ref": "#/$defs/stringArray"},
+        "row_ids": {"$ref": "#/$defs/stringArray"},
+        "affected_count": {"type": "integer", "minimum": 0},
+        "evidence": {"$ref": "common.schema.json#/$defs/extensions"},
+        "sample_value_digests": {"$ref": "#/$defs/digestArray"},
+        "remediation_families": {"$ref": "#/$defs/idArray"},
+        "summary": {"type": "string"}
+      }
+    }
+  }
+}

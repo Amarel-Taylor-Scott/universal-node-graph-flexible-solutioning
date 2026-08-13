@@ -1,0 +1,78 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.identifier-uniqueness-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "authority.organization-identifier-lookup",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    },
+    {
+      "capability": "quality.review-identifier-conflict",
+      "cost_tier": 9,
+      "effect": "human.review",
+      "evidence_kinds": [
+        "evidence.reviewer-decision"
+      ],
+      "mode": "human",
+      "optional": true,
+      "permission": "human.review"
+    }
+  ],
+  "concept_ids": [
+    "concept.organization.identifier",
+    "concept.organization.legal-name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "organization.identifier-conflict",
+  "id": "question.organization.identifier-consistency",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.identifier-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do legal names and addresses agree with LEI, registration, tax, or other authoritative identifiers?",
+  "references": [
+    {
+      "id": "reference.gleif-api",
+      "jurisdiction": "",
+      "license": "",
+      "notes": "Authoritative for LEI-covered entities only.",
+      "revision": "",
+      "role": "reference.entity-authority",
+      "url": "https://www.gleif.org/en/lei-data/gleif-api"
+    }
+  ],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "high",
+  "tags": [
+    "domain.organization"
+  ],
+  "title": "Organization identifier consistency",
+  "version": "1.0.0"
+}

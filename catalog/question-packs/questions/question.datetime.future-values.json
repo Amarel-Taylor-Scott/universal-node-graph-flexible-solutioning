@@ -1,0 +1,48 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.future-time-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.time.instant",
+    "concept.time.date",
+    "concept.time.start",
+    "concept.time.end",
+    "concept.time.timezone"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "datetime.unexpected-future",
+  "id": "question.datetime.future-values",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.reference-clock-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do event, creation, or effective timestamps occur implausibly in the future relative to the declared reference clock?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "medium",
+  "tags": [
+    "domain.datetime"
+  ],
+  "title": "Unexpected future values",
+  "version": "1.0.0"
+}

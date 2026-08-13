@@ -98,6 +98,11 @@ diagram or candidate count is not, by itself, progress.
   matrices, sealed lifecycle evaluators, counterbalanced pairs, strict budgets,
   hash-chained receipts, uncertainty analysis, diagrams, a notebook, and a
   deterministic model-free transport smoke.
+- A semantic interrogation and reversible-repair reference layer with 46
+  concepts, 11 question packs, 86 all-visible questions, aggregate profiling,
+  conservative field mapping, effort/capability/permission planning, 43
+  deterministic checks, redacted reports, append-only utility memory, eight
+  typed nodes, and an independently verified shadow feedback loop.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 

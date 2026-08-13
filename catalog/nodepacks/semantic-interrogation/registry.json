@@ -1,0 +1,1243 @@
+{
+  "candidates": [
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.profile-records.sample_limit-0-0b84f0769323",
+      "implementation_digest": "sha256:108c5ac2732383595fad1221aa7bac787d5af2a38e0a6a43efe8388884490b68",
+      "node_id": "interrogation.profile-records",
+      "node_version": "1.0.0",
+      "parameters": {
+        "sample_limit": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.profile-records.sample_limit-1000-10fa35069496",
+      "implementation_digest": "sha256:108c5ac2732383595fad1221aa7bac787d5af2a38e0a6a43efe8388884490b68",
+      "node_id": "interrogation.profile-records",
+      "node_version": "1.0.0",
+      "parameters": {
+        "sample_limit": 1000
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.map-semantic-fields.mapping_strategy-exact-9729d0398bc6",
+      "implementation_digest": "sha256:13527cf38891ab3b616a762dc3df24dc5878a919296627c17456e14dc332ea10",
+      "node_id": "interrogation.map-semantic-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mapping_strategy": "exact"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.map-semantic-fields.mapping_strategy-conservative-7b50c16a568f",
+      "implementation_digest": "sha256:13527cf38891ab3b616a762dc3df24dc5878a919296627c17456e14dc332ea10",
+      "node_id": "interrogation.map-semantic-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mapping_strategy": "conservative"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.map-semantic-fields.mapping_strategy-broad-094abd6a3482",
+      "implementation_digest": "sha256:13527cf38891ab3b616a762dc3df24dc5878a919296627c17456e14dc332ea10",
+      "node_id": "interrogation.map-semantic-fields",
+      "node_version": "1.0.0",
+      "parameters": {
+        "mapping_strategy": "broad"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e1-planning_strategy-risk-first-random_seed-0-dc975b8a2d6a",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "planning_strategy": "risk-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e1-planning_strategy-risk-first-random_seed-17-5667b04a7aab",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "planning_strategy": "risk-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e1-planning_strategy-risk-first-random_seed-41-943c52e1fa57",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "planning_strategy": "risk-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e1-planning_strategy-coverage-first-random_seed-0-76a150022016",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "planning_strategy": "coverage-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e1-planning_strategy-coverage-first-random_seed-17-4c8083bb856b",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "planning_strategy": "coverage-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e1-planning_strategy-coverage-first-random_seed-41-c651c879ede9",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "planning_strategy": "coverage-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e3-planning_strategy-risk-first-random_seed-0-eccda878a548",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "planning_strategy": "risk-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e3-planning_strategy-risk-first-random_seed-17-2d6e9612f726",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "planning_strategy": "risk-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e3-planning_strategy-risk-first-random_seed-41-119d56738181",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "planning_strategy": "risk-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e3-planning_strategy-coverage-first-random_seed-0-ae0718fe279c",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "planning_strategy": "coverage-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e3-planning_strategy-coverage-first-random_seed-17-6a148d782a41",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "planning_strategy": "coverage-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e3-planning_strategy-coverage-first-random_seed-41-95ac15972dd7",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "planning_strategy": "coverage-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e5-planning_strategy-risk-first-random_seed-0-6e3a35e0611b",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "planning_strategy": "risk-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e5-planning_strategy-risk-first-random_seed-17-8744f27a1797",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "planning_strategy": "risk-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e5-planning_strategy-risk-first-random_seed-41-25e1bd834d11",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "planning_strategy": "risk-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e5-planning_strategy-coverage-first-random_seed-0-4542541ad976",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "planning_strategy": "coverage-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e5-planning_strategy-coverage-first-random_seed-17-f1a4b07fc4c4",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "planning_strategy": "coverage-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e5-planning_strategy-coverage-first-random_seed-41-e7de18677fda",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "planning_strategy": "coverage-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e7-planning_strategy-risk-first-random_seed-0-59ad1dc4a301",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "planning_strategy": "risk-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e7-planning_strategy-risk-first-random_seed-17-f6d7e4028987",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "planning_strategy": "risk-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e7-planning_strategy-risk-first-random_seed-41-95fd1ff58f31",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "planning_strategy": "risk-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e7-planning_strategy-coverage-first-random_seed-0-9ad7382cadfc",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "planning_strategy": "coverage-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e7-planning_strategy-coverage-first-random_seed-17-a8519e8e723b",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "planning_strategy": "coverage-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e7-planning_strategy-coverage-first-random_seed-41-4db6adb02571",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "planning_strategy": "coverage-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e10-planning_strategy-risk-first-random_seed-0-084a237bd54a",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "planning_strategy": "risk-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e10-planning_strategy-risk-first-random_seed-17-7a5ff60f83a1",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "planning_strategy": "risk-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e10-planning_strategy-risk-first-random_seed-41-80bc23bb3461",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "planning_strategy": "risk-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e10-planning_strategy-coverage-first-random_seed-0-2f1169fecce3",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "planning_strategy": "coverage-first",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e10-planning_strategy-coverage-first-random_seed-17-496b3fd34c10",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "planning_strategy": "coverage-first",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.plan-questions.effort_level-e10-planning_strategy-coverage-first-random_seed-41-b0b08177a012",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "node_id": "interrogation.plan-questions",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "planning_strategy": "coverage-first",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.execute-questions.default",
+      "implementation_digest": "sha256:97c233b036342de27d253e0f800538ab52effd0a74665c7b559fa71c989a9395",
+      "node_id": "interrogation.execute-questions",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.propose-repairs.repair_strategy-safe-only-400c75dab76b",
+      "implementation_digest": "sha256:3ac2228dc2e39164ceb2055ace7ca2f6a1e478d879384f6ed0d3ddee68fdb2f9",
+      "node_id": "interrogation.propose-repairs",
+      "node_version": "1.0.0",
+      "parameters": {
+        "repair_strategy": "safe-only"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.propose-repairs.repair_strategy-safe-and-review-9fc9d052895c",
+      "implementation_digest": "sha256:3ac2228dc2e39164ceb2055ace7ca2f6a1e478d879384f6ed0d3ddee68fdb2f9",
+      "node_id": "interrogation.propose-repairs",
+      "node_version": "1.0.0",
+      "parameters": {
+        "repair_strategy": "safe-and-review"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.apply-shadow-repairs.include_review_operations-false-7b26d1bf6b9e",
+      "implementation_digest": "sha256:afa07918f5638b6e48cfc33ed957699f5b123c026da20c906fe65702e3152b64",
+      "node_id": "interrogation.apply-shadow-repairs",
+      "node_version": "1.0.0",
+      "parameters": {
+        "include_review_operations": false
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.apply-shadow-repairs.include_review_operations-true-6e19da3fe4ff",
+      "implementation_digest": "sha256:afa07918f5638b6e48cfc33ed957699f5b123c026da20c906fe65702e3152b64",
+      "node_id": "interrogation.apply-shadow-repairs",
+      "node_version": "1.0.0",
+      "parameters": {
+        "include_review_operations": true
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.rebind-verification-plan.default",
+      "implementation_digest": "sha256:80128894ba6ee8480ce976ca1183771e254847fdcc565021992aa67ce5e9268a",
+      "node_id": "interrogation.rebind-verification-plan",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.verify-repairs.strict-true-f73b69e6270c",
+      "implementation_digest": "sha256:1e161609f82d6ab647e77b5a7b42248edbf0cc2df84f36387f09d89717a982b8",
+      "node_id": "interrogation.verify-repairs",
+      "node_version": "1.0.0",
+      "parameters": {
+        "strict": true
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.interrogation.verify-repairs.strict-false-94bc78c86370",
+      "implementation_digest": "sha256:1e161609f82d6ab647e77b5a7b42248edbf0cc2df84f36387f09d89717a982b8",
+      "node_id": "interrogation.verify-repairs",
+      "node_version": "1.0.0",
+      "parameters": {
+        "strict": false
+      }
+    }
+  ],
+  "id": "registry.semantic-interrogation",
+  "model_version": "0.2",
+  "nodes": [
+    {
+      "capabilities": [
+        "interrogation.profile-records"
+      ],
+      "description": "Create an aggregate-only, content-addressed profile and pass records through without retaining raw sample values in the profile.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.profile_records:profile_records_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.profile-records",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:108c5ac2732383595fad1221aa7bac787d5af2a38e0a6a43efe8388884490b68",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "profile",
+          "type": {
+            "id": "interrogation.dataset-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            0,
+            1000
+          ],
+          "default": 0,
+          "description": "Zero profiles every row; 1000 is an explicit bounded alternative.",
+          "name": "sample_limit",
+          "required": false,
+          "value_type": "integer"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/profile_records.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "interrogation.map-semantic-fields"
+      ],
+      "description": "Map field names to versioned concepts using an explicit exact, conservative, or broad policy; a match never implies validity.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.map_fields:map_fields_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.map-semantic-fields",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:13527cf38891ab3b616a762dc3df24dc5878a919296627c17456e14dc332ea10",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "profile",
+          "type": {
+            "id": "interrogation.dataset-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "semantic_field_map",
+          "type": {
+            "id": "interrogation.semantic-field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "exact",
+            "conservative",
+            "broad"
+          ],
+          "default": "conservative",
+          "description": "",
+          "name": "mapping_strategy",
+          "required": false,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/map_fields.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "interrogation.plan-questions"
+      ],
+      "description": "Compile a complete visible plan, selecting eligible questions under an explicit effort, exploration, and cost budget.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.plan_questions:plan_questions_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.plan-questions",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:1b8ef2aadf3fbad2f6151b3d3b2eb60eb8a98512438639ca8dd3e86d207e252c",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "profile",
+          "type": {
+            "id": "interrogation.dataset-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "semantic_field_map",
+          "type": {
+            "id": "interrogation.semantic-field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "question_plan",
+          "type": {
+            "id": "interrogation.question-plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "E1",
+            "E3",
+            "E5",
+            "E7",
+            "E10"
+          ],
+          "default": "E3",
+          "description": "",
+          "name": "effort_level",
+          "required": false,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "risk-first",
+            "coverage-first"
+          ],
+          "default": "risk-first",
+          "description": "",
+          "name": "planning_strategy",
+          "required": false,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            0,
+            17,
+            41
+          ],
+          "default": 0,
+          "description": "Explicit exploration seeds prevent a single historical route from dominating.",
+          "name": "random_seed",
+          "required": false,
+          "value_type": "integer"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/plan_questions.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "interrogation.execute-questions"
+      ],
+      "description": "Execute only selected deterministic checks and emit implementation-bound receipts plus privacy-minimized findings.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.execute_questions:execute_questions_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        },
+        {
+          "code": "interrogation.check-adapter-error",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.execute-questions",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:97c233b036342de27d253e0f800538ab52effd0a74665c7b559fa71c989a9395",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "profile",
+          "type": {
+            "id": "interrogation.dataset-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "semantic_field_map",
+          "type": {
+            "id": "interrogation.semantic-field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "question_plan",
+          "type": {
+            "id": "interrogation.question-plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "finding_set",
+          "type": {
+            "id": "interrogation.finding-set",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/execute_questions.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "interrogation.propose-repairs"
+      ],
+      "description": "Translate supported findings into conservative, reversible patches while retaining uncertain changes as review-only operations.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.propose_repairs:propose_repairs_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.propose-repairs",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3ac2228dc2e39164ceb2055ace7ca2f6a1e478d879384f6ed0d3ddee68fdb2f9",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "finding_set",
+          "type": {
+            "id": "interrogation.finding-set",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "repair_proposal",
+          "type": {
+            "id": "interrogation.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "safe-only",
+            "safe-and-review"
+          ],
+          "default": "safe-only",
+          "description": "",
+          "name": "repair_strategy",
+          "required": false,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/propose_repairs.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "interrogation.apply-shadow-repairs"
+      ],
+      "description": "Apply digest-checked operations to a deep shadow copy and emit an exact reversible receipt.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.apply_shadow:apply_shadow_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.apply-shadow-repairs",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:afa07918f5638b6e48cfc33ed957699f5b123c026da20c906fe65702e3152b64",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "repair_proposal",
+          "type": {
+            "id": "interrogation.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "shadow_records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "application_receipt",
+          "type": {
+            "id": "interrogation.repair-application",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            false,
+            true
+          ],
+          "default": false,
+          "description": "",
+          "name": "include_review_operations",
+          "required": false,
+          "value_type": "boolean"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/apply_shadow.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "interrogation.rebind-verification-plan"
+      ],
+      "description": "Bind the same selected checks to the shadow profile so verification cannot silently choose an easier post-repair suite.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.rebind_plan:rebind_plan_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.rebind-verification-plan",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:80128894ba6ee8480ce976ca1183771e254847fdcc565021992aa67ce5e9268a",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "question_plan",
+          "type": {
+            "id": "interrogation.question-plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "shadow_profile",
+          "type": {
+            "id": "interrogation.dataset-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "shadow_field_map",
+          "type": {
+            "id": "interrogation.semantic-field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "verification_plan",
+          "type": {
+            "id": "interrogation.question-plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/rebind_plan.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "interrogation.verify-repairs"
+      ],
+      "description": "Independently diff source and shadow data, compare finding signatures, and fail closed on undeclared or harmful changes.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.interrogation.nodes.verify_repairs:verify_repairs_node",
+      "failure_modes": [
+        {
+          "code": "interrogation.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "interrogation.verify-repairs",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:1e161609f82d6ab647e77b5a7b42248edbf0cc2df84f36387f09d89717a982b8",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "source_records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "shadow_records",
+          "type": {
+            "id": "interrogation.records",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "repair_proposal",
+          "type": {
+            "id": "interrogation.repair-proposal",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "application_receipt",
+          "type": {
+            "id": "interrogation.repair-application",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "before_findings",
+          "type": {
+            "id": "interrogation.finding-set",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "after_findings",
+          "type": {
+            "id": "interrogation.finding-set",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "verification",
+          "type": {
+            "id": "interrogation.verification-receipt",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            true,
+            false
+          ],
+          "default": true,
+          "description": "",
+          "name": "strict",
+          "required": false,
+          "value_type": "boolean"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/interrogation/nodes/verify_repairs.py",
+      "verifier": "verifier.independent-shadow-diff",
+      "version": "1.0.0"
+    }
+  ],
+  "version": "1.0.0"
+}

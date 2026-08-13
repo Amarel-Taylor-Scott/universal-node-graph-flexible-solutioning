@@ -7,6 +7,7 @@ from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
+from solutiongraph.interrogation.node_pack import INTERROGATION_NODE_PACK
 from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
 
 REPOSITORY_SOURCE = (
@@ -111,12 +112,14 @@ REFERENCE_NODE_PACKS = (
     EXTENDED_ARENA_NODE_PACK,
     ENGINEERING_SHOWCASE_NODE_PACK,
     DATA_SCIENCE_LIFECYCLE_NODE_PACK,
+    INTERROGATION_NODE_PACK,
 )
 
 
 __all__ = [
     "EXTENDED_ARENA_NODE_PACK",
     "ENGINEERING_SHOWCASE_NODE_PACK",
+    "INTERROGATION_NODE_PACK",
     "DATA_SCIENCE_LIFECYCLE_NODE_PACK",
     "REAL_WORLD_EXAMPLE_NODE_PACK",
     "REFERENCE_CORE_NODE_PACK",

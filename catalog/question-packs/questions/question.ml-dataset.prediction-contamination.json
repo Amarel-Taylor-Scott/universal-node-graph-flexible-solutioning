@@ -1,0 +1,44 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.ml-prediction-contamination-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.ml.target",
+    "concept.ml.prediction"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "ml.prediction-contamination",
+  "id": "question.ml-dataset.prediction-contamination",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are prior model scores, predictions, or post-outcome features unintentionally included as training inputs?",
+  "references": [],
+  "repair_families": [],
+  "scope": "cross-field",
+  "severity": "critical",
+  "tags": [
+    "domain.ml-dataset"
+  ],
+  "title": "Prediction-column contamination",
+  "version": "1.0.0"
+}

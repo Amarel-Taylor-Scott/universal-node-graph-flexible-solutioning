@@ -1,0 +1,30 @@
+{
+  "aliases": [
+    "amount",
+    "price",
+    "total",
+    "subtotal",
+    "invoice_amount"
+  ],
+  "canonical_uri": "https://schema.org/price",
+  "description": "",
+  "extensions": {},
+  "id": "concept.transaction.amount",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Monetary amount",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "money.amount",
+  "version": "1.0.0"
+}

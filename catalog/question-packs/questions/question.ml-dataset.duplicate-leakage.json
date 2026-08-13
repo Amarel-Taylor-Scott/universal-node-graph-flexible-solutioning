@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.ml-duplicate-split-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.dataset.recordset",
+    "concept.ml.target",
+    "concept.ml.split"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "ml.duplicate-split-leakage",
+  "id": "question.ml-dataset.duplicate-leakage",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do exact or near-duplicate examples cross split boundaries and inflate evaluation?",
+  "references": [],
+  "repair_families": [],
+  "scope": "dataset",
+  "severity": "critical",
+  "tags": [
+    "domain.ml-dataset"
+  ],
+  "title": "Duplicate examples across splits",
+  "version": "1.0.0"
+}

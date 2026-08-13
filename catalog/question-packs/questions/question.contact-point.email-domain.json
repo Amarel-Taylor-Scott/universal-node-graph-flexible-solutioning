@@ -1,0 +1,56 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.email-domain-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "authority.dns-domain-lookup",
+      "cost_tier": 5,
+      "effect": "network.read",
+      "evidence_kinds": [
+        "evidence.authority-response",
+        "evidence.source-vintage"
+      ],
+      "mode": "external",
+      "optional": true,
+      "permission": "network.read"
+    }
+  ],
+  "concept_ids": [
+    "concept.contact.email",
+    "concept.organization.domain"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "contact.email-domain-conflict",
+  "id": "question.contact-point.email-domain",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Does the email domain have a plausible relationship to the organization domain without treating it as ownership proof?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "medium",
+  "tags": [
+    "domain.contact-point"
+  ],
+  "title": "Email-domain plausibility",
+  "version": "1.0.0"
+}

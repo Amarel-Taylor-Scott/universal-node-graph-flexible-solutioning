@@ -1,0 +1,28 @@
+{
+  "aliases": [
+    "brand",
+    "brand_name",
+    "manufacturer"
+  ],
+  "canonical_uri": "https://schema.org/brand",
+  "description": "",
+  "extensions": {},
+  "id": "concept.product.brand",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Product brand",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "text.brand",
+  "version": "1.0.0"
+}

@@ -1,0 +1,29 @@
+{
+  "aliases": [
+    "date",
+    "event_date",
+    "effective_date",
+    "as_of_date"
+  ],
+  "canonical_uri": "https://schema.org/Date",
+  "description": "",
+  "extensions": {},
+  "id": "concept.time.date",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Calendar date",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "time.date",
+  "version": "1.0.0"
+}

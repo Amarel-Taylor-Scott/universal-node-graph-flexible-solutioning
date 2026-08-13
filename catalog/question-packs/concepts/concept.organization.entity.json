@@ -1,0 +1,30 @@
+{
+  "aliases": [
+    "organization",
+    "company",
+    "business",
+    "employer",
+    "vendor"
+  ],
+  "canonical_uri": "https://schema.org/Organization",
+  "description": "",
+  "extensions": {},
+  "id": "concept.organization.entity",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Organization",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "entity.organization",
+  "version": "1.0.0"
+}

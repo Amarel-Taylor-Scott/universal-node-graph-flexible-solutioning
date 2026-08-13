@@ -1,0 +1,52 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.placeholder-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.postal.address",
+    "concept.postal.street",
+    "concept.postal.unit",
+    "concept.postal.city",
+    "concept.postal.region",
+    "concept.postal.code",
+    "concept.postal.country"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "postal.placeholder-value",
+  "id": "question.postal-address.placeholder-values",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do address components contain test, unknown, repeated, or otherwise non-address placeholder values?",
+  "references": [],
+  "repair_families": [
+    "repair.normalize-missing",
+    "repair.quarantine-record"
+  ],
+  "scope": "row",
+  "severity": "high",
+  "tags": [
+    "domain.postal-address"
+  ],
+  "title": "Address placeholders",
+  "version": "1.0.0"
+}

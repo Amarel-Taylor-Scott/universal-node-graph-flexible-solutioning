@@ -1,0 +1,31 @@
+{
+  "aliases": [
+    "product_id",
+    "sku",
+    "gtin",
+    "upc",
+    "ean",
+    "item_id"
+  ],
+  "canonical_uri": "https://schema.org/productID",
+  "description": "",
+  "extensions": {},
+  "id": "concept.product.identifier",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Product identifier",
+  "parent_ids": [],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "data.product-identifier",
+  "version": "1.0.0"
+}

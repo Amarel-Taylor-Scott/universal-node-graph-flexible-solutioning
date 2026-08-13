@@ -1,0 +1,59 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.unicode-control-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.person-name-script-check",
+      "cost_tier": 2,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.person.name",
+    "concept.person.given-name",
+    "concept.person.family-name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "person.name-script-anomaly",
+  "id": "question.person.punctuation-script",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Are apostrophes, hyphens, diacritics, and non-Latin scripts preserved while control or spoofing characters are flagged?",
+  "references": [],
+  "repair_families": [
+    "repair.normalize-unicode"
+  ],
+  "scope": "field",
+  "severity": "medium",
+  "tags": [
+    "domain.person"
+  ],
+  "title": "Punctuation, script, and diacritics",
+  "version": "1.0.0"
+}

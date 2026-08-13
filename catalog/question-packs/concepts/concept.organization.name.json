@@ -1,0 +1,32 @@
+{
+  "aliases": [
+    "company_name",
+    "organization_name",
+    "business_name",
+    "vendor_name",
+    "employer_name"
+  ],
+  "canonical_uri": "https://schema.org/name",
+  "description": "",
+  "extensions": {},
+  "id": "concept.organization.name",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Organization display name",
+  "parent_ids": [
+    "concept.organization.entity"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "text.organization-name",
+  "version": "1.0.0"
+}

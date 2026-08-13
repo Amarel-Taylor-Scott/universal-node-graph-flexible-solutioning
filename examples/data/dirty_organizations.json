@@ -1,0 +1,35 @@
+[
+  {
+    "record_id": "org-1",
+    "company_name": " Acme Inc.  ",
+    "street": "1 Main St",
+    "city": "Boston",
+    "state": "ma",
+    "zip": "02108",
+    "email": "OPS@EXAMPLE.COM.",
+    "event_date": "2025/01/03",
+    "target": 0
+  },
+  {
+    "record_id": "org-2",
+    "company_name": "Acme Incorporated",
+    "street": "",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "bad",
+    "email": "not-an-email",
+    "event_date": "01/02/03",
+    "target": 0
+  },
+  {
+    "record_id": "org-3",
+    "company_name": "N/A",
+    "street": "1 Main St",
+    "city": "Boston",
+    "state": "MA",
+    "zip": "02108",
+    "email": "x@example.com",
+    "event_date": "2025-01-02",
+    "target": 1
+  }
+]

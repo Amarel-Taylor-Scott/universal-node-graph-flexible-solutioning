@@ -1,0 +1,45 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.postal-format-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.postal.code",
+    "concept.postal.country"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "postal.postal-code-format",
+  "id": "question.postal-address.postal-format",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available",
+    "precondition.postal-code-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Does each postal code have a plausible format for its declared country without claiming deliverability?",
+  "references": [],
+  "repair_families": [],
+  "scope": "row",
+  "severity": "high",
+  "tags": [
+    "domain.postal-address"
+  ],
+  "title": "Country-aware postal-code format",
+  "version": "1.0.0"
+}

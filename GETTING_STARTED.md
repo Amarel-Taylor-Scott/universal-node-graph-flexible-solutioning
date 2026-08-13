@@ -5,6 +5,24 @@ database, or network service. The domain-neutral core uses only the Python
 standard library. Version 0.6 is a developer preview; read `READINESS.md`
 before production integration.
 
+## Interrogate a dataset before building a pipeline
+
+For CSV, TSV, JSON, or JSONL records, the shortest evidence-producing path is:
+
+```bash
+solutiongraph concepts map examples/data/dirty_organizations.json
+solutiongraph questions plan examples/data/dirty_organizations.json --effort E3
+solutiongraph questions run examples/data/dirty_organizations.json \
+  --effort E3 --output-dir .artifacts/interrogation
+```
+
+The planner displays selected, deferred, blocked, and inapplicable questions;
+it never silently hides the remainder of the bank. The run operates on a deep
+shadow copy, emits implementation-bound check receipts, redacts patch values in
+portable reports, and records an independent promote/quarantine/reject decision.
+See [the semantic interrogation protocol](SEMANTIC_INTERROGATION_PROTOCOL.md)
+before adding authority lookups, LLM adjudication, or automatic corrections.
+
 ## 1. Install and verify
 
 ```bash

@@ -1,0 +1,60 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.punctuation-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    },
+    {
+      "capability": "quality.unicode-control-check",
+      "cost_tier": 1,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.organization.name",
+    "concept.organization.legal-name",
+    "concept.organization.alternate-name"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "organization.name-punctuation",
+  "id": "question.organization.name-punctuation",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do names begin or end with unexpected symbols, contain repeated punctuation, or embed control characters?",
+  "references": [],
+  "repair_families": [
+    "repair.normalize-unicode",
+    "repair.strip-controls"
+  ],
+  "scope": "field",
+  "severity": "medium",
+  "tags": [
+    "domain.organization"
+  ],
+  "title": "Organization-name punctuation",
+  "version": "1.0.0"
+}

@@ -1,0 +1,97 @@
+{
+  "actions": [
+    "interrogation.verify-repairs"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.interrogation.verify-repairs",
+      "language": "und",
+      "source_digest": "sha256:245a1421a4d612170da0fed4dc5a796c0f0f1d5e8ec994a55c246a23f3cd4ed8",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Independently diff source and shadow data, compare finding signatures, and fail closed on undeclared or harmful changes."
+    }
+  ],
+  "domains": [
+    "data.quality",
+    "data.engineering",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "interrogation.maturity": "reference"
+  },
+  "node_id": "interrogation.verify-repairs",
+  "node_spec_digest": "sha256:245a1421a4d612170da0fed4dc5a796c0f0f1d5e8ec994a55c246a23f3cd4ed8",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed source_records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "source_records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed shadow_records input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "shadow_records"
+    },
+    {
+      "concepts": [],
+      "description": "Typed repair_proposal input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "repair_proposal"
+    },
+    {
+      "concepts": [],
+      "description": "Typed application_receipt input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "application_receipt"
+    },
+    {
+      "concepts": [],
+      "description": "Typed before_findings input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "before_findings"
+    },
+    {
+      "concepts": [],
+      "description": "Typed after_findings input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "after_findings"
+    },
+    {
+      "concepts": [],
+      "description": "Typed verification output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "verification"
+    }
+  ],
+  "purposes": [
+    "Independently diff source and shadow data, compare finding signatures, and fail closed on undeclared or harmful changes."
+  ],
+  "solutions": [
+    "Compose this stage into an auditable data interrogation feedback loop."
+  ],
+  "summary": "Independently diff source and shadow data, compare finding signatures, and fail closed on undeclared or harmful changes.",
+  "tags": [
+    "question-bank",
+    "shadow-repair",
+    "typed-node",
+    "runtime.python"
+  ],
+  "title": "Verify Repairs"
+}

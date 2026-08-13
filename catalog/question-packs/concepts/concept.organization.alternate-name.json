@@ -1,0 +1,32 @@
+{
+  "aliases": [
+    "brand_name",
+    "dba",
+    "trade_name",
+    "alternate_name",
+    "former_name"
+  ],
+  "canonical_uri": "https://schema.org/alternateName",
+  "description": "",
+  "extensions": {},
+  "id": "concept.organization.alternate-name",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Organization alternate or brand name",
+  "parent_ids": [
+    "concept.organization.name"
+  ],
+  "references": [
+    {
+      "id": "reference.schema-org",
+      "jurisdiction": "",
+      "license": "CC-BY-SA",
+      "notes": "",
+      "revision": "current-web",
+      "role": "reference.semantic-vocabulary",
+      "url": "https://schema.org/"
+    }
+  ],
+  "value_type": "text.organization-alternate-name",
+  "version": "1.0.0"
+}

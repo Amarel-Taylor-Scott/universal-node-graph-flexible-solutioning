@@ -1,0 +1,46 @@
+{
+  "abstain_when": [],
+  "checks": [
+    {
+      "capability": "quality.transaction-reconcile-check",
+      "cost_tier": 3,
+      "effect": "",
+      "evidence_kinds": [
+        "evidence.aggregate",
+        "evidence.row-identities"
+      ],
+      "mode": "deterministic",
+      "optional": false,
+      "permission": ""
+    }
+  ],
+  "concept_ids": [
+    "concept.transaction.id",
+    "concept.transaction.amount",
+    "concept.transaction.currency",
+    "concept.transaction.status"
+  ],
+  "dependencies": [],
+  "evidence_required": [
+    "evidence.affected-count"
+  ],
+  "extensions": {},
+  "finding_code": "transaction.reconciliation-failure",
+  "id": "question.transaction.reconciliation",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "preconditions": [
+    "precondition.records-available"
+  ],
+  "privacy_class": "privacy.aggregate",
+  "question": "Do line amounts, discounts, tax, fees, payments, and totals reconcile within declared rounding rules?",
+  "references": [],
+  "repair_families": [],
+  "scope": "entity",
+  "severity": "critical",
+  "tags": [
+    "domain.transaction"
+  ],
+  "title": "Line, subtotal, tax, and total reconciliation",
+  "version": "1.0.0"
+}

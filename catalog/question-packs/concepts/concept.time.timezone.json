@@ -1,0 +1,19 @@
+{
+  "aliases": [
+    "timezone",
+    "time_zone",
+    "tz",
+    "utc_offset"
+  ],
+  "canonical_uri": "urn:solutiongraph:concept:timezone",
+  "description": "",
+  "extensions": {},
+  "id": "concept.time.timezone",
+  "interrogation_model_version": "0.1",
+  "jurisdictions": [],
+  "label": "Timezone",
+  "parent_ids": [],
+  "references": [],
+  "value_type": "time.timezone",
+  "version": "1.0.0"
+}
