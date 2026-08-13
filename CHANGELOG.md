@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased — data-science design atlas
+
+- Added a normalized 618-entry owner-supplied technique catalog with an explicit
+  C1-only claim boundary instead of copying unverified implementation labels.
+- Added 31 task archetypes, 28 modular decision packs, 112 structured questions,
+  E1–E10 all-visible planning, response-mode/permission gates, evidence-aware
+  decision dossiers, and contiguous C0–C7 maturity derivation.
+- Added twelve strict wire schemas, portable catalog projection, `solutiongraph
+  atlas` list/search/plan/coverage/maturity commands, JSON/Markdown/HTML report
+  bundles, a geotemporal context fixture, a notebook, and primary-source-backed
+  documentation.
+- Added five individually importable atlas graph nodes, 34 exact bindings,
+  compiler-enforced human/model authority, digest-bound answer resolution,
+  fail-closed evidence promotion, discovery descriptors, a portable node pack,
+  and an independently verified runnable graph example.
+
 All notable changes to this proof of concept are documented here.
 
 ## Unreleased

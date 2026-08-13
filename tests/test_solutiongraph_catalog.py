@@ -9,6 +9,18 @@ from solutiongraph.agent_bench import REFERENCE_AGENT_TASKS
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
 from solutiongraph.catalog import catalog_documents, write_catalog
+from solutiongraph.design_atlas import (
+    REFERENCE_DESIGN_PACKS,
+    REFERENCE_DESIGN_QUESTIONS,
+    REFERENCE_SOURCES,
+    REFERENCE_TASK_ARCHETYPES,
+    REFERENCE_TECHNIQUES,
+    TECHNIQUES_BY_PHASE,
+)
+from solutiongraph.design_atlas.node_pack import (
+    DESIGN_ATLAS_DESCRIPTORS,
+    DESIGN_ATLAS_NODE_SPECS,
+)
 from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
@@ -84,10 +96,18 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + (3 + len(SHOWCASE_NODES))
         + (3 + len(DATA_SCIENCE_NODES))
         + (3 + len(INTERROGATION_NODE_SPECS) + len(INTERROGATION_DESCRIPTORS))
+        + (3 + len(DESIGN_ATLAS_NODE_SPECS) + len(DESIGN_ATLAS_DESCRIPTORS))
         + 1
         + len(REFERENCE_CONCEPTS)
         + len(REFERENCE_QUESTION_PACKS)
         + len(REFERENCE_QUESTIONS)
+        + 1
+        + len(REFERENCE_SOURCES)
+        + len(REFERENCE_TECHNIQUES)
+        + len(REFERENCE_DESIGN_PACKS)
+        + len(REFERENCE_DESIGN_QUESTIONS)
+        + len(REFERENCE_TASK_ARCHETYPES)
+        + len(TECHNIQUES_BY_PHASE)
         + 1
         + 1
         + len(REFERENCE_AGENT_TASKS)
@@ -118,12 +138,21 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         len(SHOWCASE_NODES),
         len(DATA_SCIENCE_NODES),
         len(INTERROGATION_NODE_SPECS),
+        len(DESIGN_ATLAS_NODE_SPECS),
     ]
     assert index["question_packs"] == {
         "path": "question-packs/index.json",
         "concept_count": len(REFERENCE_CONCEPTS),
         "pack_count": len(REFERENCE_QUESTION_PACKS),
         "question_count": len(REFERENCE_QUESTIONS),
+    }
+    assert index["design_atlas"] == {
+        "path": "design-atlas/index.json",
+        "technique_count": 618,
+        "pack_count": 28,
+        "question_count": 112,
+        "task_archetype_count": 31,
+        "machine_maturity_floor": "C1",
     }
     assert index["benchmarks"] == {
         "path": "benchmarks/index.json",

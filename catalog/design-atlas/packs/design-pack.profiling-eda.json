@@ -1,0 +1,255 @@
+{
+  "description": "Measure distributions, dependencies, missingness, anomalies, slices, and conflicts without converting exploration into proof.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.profiling-eda",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-profiling-eda-distribution-shape"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.profiling-eda.distribution-shape.evaluate",
+          "label": "Profile full and important sliced distributions",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-profiling-eda-distribution-shape-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.profiling-eda.distribution-shape.baseline",
+          "label": "Retain robust summary statistics",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-profiling-eda-distribution-shape"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.profiling-eda.distribution-shape.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 2,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.profiling-eda.distribution-shape",
+      "pack_id": "design-pack.profiling-eda",
+      "prompt": "What are each field's support, quantiles, tails, modes, zero inflation, truncation, and unexpected values?",
+      "rationale": "Shape affects transformations, metrics, estimators, and stress cases.",
+      "reference_ids": [
+        "source.tensorflow.data-validation"
+      ],
+      "required_evidence": [
+        "evidence.distribution-profile"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.65,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.profiling-eda"
+      ],
+      "title": "Distribution and support",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-profiling-eda-missingness"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.profiling-eda.missingness.evaluate",
+          "label": "Analyze missingness patterns and causes",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-profiling-eda-missingness-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.profiling-eda.missingness.baseline",
+          "label": "Use typed missingness indicators",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-profiling-eda-missingness"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.profiling-eda.missingness.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.profiling-eda.missingness",
+      "pack_id": "design-pack.profiling-eda",
+      "prompt": "Which values are missing, structurally absent, censored, late, or encoded as placeholders, and how do patterns co-occur?",
+      "rationale": "Treating every null alike can fabricate data and erase informative process failures.",
+      "reference_ids": [
+        "source.gebru.datasheets"
+      ],
+      "required_evidence": [
+        "evidence.missingness-profile",
+        "evidence.collection-context"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.8,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.profiling-eda"
+      ],
+      "title": "Missingness structure",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-profiling-eda-dependencies"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.profiling-eda.dependencies.evaluate",
+          "label": "Compare complementary dependency screens",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-profiling-eda-dependencies-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.profiling-eda.dependencies.baseline",
+          "label": "Use robust pairwise screens",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-profiling-eda-dependencies"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.profiling-eda.dependencies.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.profiling-eda.dependencies",
+      "pack_id": "design-pack.profiling-eda",
+      "prompt": "Which linear, monotonic, nonlinear, conditional, temporal, spatial, and entity-level dependencies merit follow-up?",
+      "rationale": "A single correlation matrix misses important dependence and does not establish causality.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.dependency-analysis"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.65,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.profiling-eda"
+      ],
+      "title": "Dependencies and redundancy",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-profiling-eda-conflicts-slices"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.profiling-eda.conflicts-slices.evaluate",
+          "label": "Interrogate conflict and slice hypotheses",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-profiling-eda-conflicts-slices-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.profiling-eda.conflicts-slices.baseline",
+          "label": "Review top anomalies and declared slices",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-profiling-eda-conflicts-slices"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.profiling-eda.conflicts-slices.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.profiling-eda.conflicts-slices",
+      "pack_id": "design-pack.profiling-eda",
+      "prompt": "Which rare clusters, contradictory records, source disagreements, or stakeholder-relevant slices need separate investigation?",
+      "rationale": "Aggregate summaries can hide systematic failure and valid minority modes.",
+      "reference_ids": [
+        "source.nist.ai-rmf-1"
+      ],
+      "required_evidence": [
+        "evidence.anomaly-identities",
+        "evidence.slice-definitions"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.85,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.profiling-eda"
+      ],
+      "title": "Conflicts, anomalies, and slices",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.data",
+  "title": "Profiling and exploratory analysis",
+  "version": "1.0.0"
+}

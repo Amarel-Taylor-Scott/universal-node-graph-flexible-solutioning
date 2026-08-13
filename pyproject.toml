@@ -69,6 +69,8 @@ packages = [
     "solutiongraph", "solutiongraph.schemas", "solutiongraph.examples",
     "solutiongraph.interrogation", "solutiongraph.interrogation.nodes",
     "solutiongraph.question_packs",
+    "solutiongraph.design_atlas", "solutiongraph.design_atlas.packs",
+    "solutiongraph.design_atlas.nodes", "solutiongraph.design_atlas.data",
     "solutiongraph.agent_bench", "solutiongraph.agent_bench.tasks",
     "browsergraph", "browsergraph.nodes", "browsergraph.drivers",
     "browsergraph.dimensions", "browsergraph.extract", "browsergraph.classify",
@@ -77,7 +79,7 @@ packages = [
 
 [tool.setuptools.package-data]
 browsergraph = ["schemas/*.json", "assets/*.html", "assets/*.json"]
-solutiongraph = ["schemas/*.json"]
+solutiongraph = ["schemas/*.json", "design_atlas/data/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

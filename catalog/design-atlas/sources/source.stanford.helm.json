@@ -1,0 +1,8 @@
+{
+  "claim": "Language-model evaluation should make scenarios, metrics, coverage, and raw observations explicit.",
+  "id": "source.stanford.helm",
+  "kind": "source.primary-research",
+  "revision": "Liang et al. (2022)",
+  "title": "Holistic Evaluation of Language Models",
+  "url": "https://arxiv.org/abs/2211.09110"
+}

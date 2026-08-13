@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-pack.schema.json",
+  "title": "Data-science design-question pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["design_atlas_model_version", "id", "version", "title", "description", "stage", "questions", "reference_ids"],
+  "properties": {
+    "design_atlas_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "stage": {"$ref": "common.schema.json#/$defs/id"},
+    "questions": {"type": "array", "minItems": 1, "items": {"$ref": "design-question.schema.json"}},
+    "reference_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}}
+  }
+}

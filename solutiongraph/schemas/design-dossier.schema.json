@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-dossier.schema.json",
+  "title": "Evidence-aware data-science decision dossier",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["design_atlas_model_version", "id", "plan_digest", "decisions", "unanswered_question_ids", "blocked_question_ids", "claim_boundary"],
+  "properties": {
+    "design_atlas_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "decisions": {"type": "array", "items": {"$ref": "#/$defs/decision"}},
+    "unanswered_question_ids": {"$ref": "#/$defs/idArray"},
+    "blocked_question_ids": {"$ref": "#/$defs/idArray"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "idArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "strings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question_id", "choice_id", "status", "evidence_refs", "rationale", "assumptions", "action_ids", "experiment", "stop_conditions"],
+      "properties": {
+        "question_id": {"$ref": "common.schema.json#/$defs/id"},
+        "choice_id": {"$ref": "common.schema.json#/$defs/id"},
+        "status": {"enum": ["accepted", "provisional", "abstained", "unanswered"]},
+        "evidence_refs": {"$ref": "#/$defs/strings"},
+        "rationale": {"type": "string"},
+        "assumptions": {"$ref": "#/$defs/strings"},
+        "action_ids": {"$ref": "#/$defs/idArray"},
+        "experiment": {"type": "string"},
+        "stop_conditions": {"$ref": "#/$defs/strings"}
+      }
+    }
+  }
+}

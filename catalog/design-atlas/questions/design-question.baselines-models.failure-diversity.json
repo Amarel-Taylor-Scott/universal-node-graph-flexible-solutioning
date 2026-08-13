@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-baselines-models-failure-diversity"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.baselines-models.failure-diversity.evaluate",
+      "label": "Score fallback portfolios for failure diversity",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-baselines-models-failure-diversity-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.baselines-models.failure-diversity.baseline",
+      "label": "Keep a simple independent fallback",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-baselines-models-failure-diversity"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.baselines-models.failure-diversity.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.baselines-models.failure-diversity",
+  "pack_id": "design-pack.baselines-models",
+  "prompt": "Do champion and fallback candidates depend on different libraries, providers, features, assumptions, and failure classes?",
+  "rationale": "Second-best average score is not a robust fallback when failures are correlated.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.failure-taxonomy",
+    "evidence.dependency-map"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.8,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.baselines-models"
+  ],
+  "title": "Failure and dependency diversity",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

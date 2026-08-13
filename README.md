@@ -29,6 +29,10 @@ solutiongraph solutioning inspect data-cleanup --effort 1
 solutiongraph solutioning run data-cleanup --effort 1
 solutiongraph questions run examples/data/dirty_organizations.json \
   --effort E3 --output-dir .artifacts/semantic-interrogation
+solutiongraph atlas plan --task-type regression \
+  --objective "Predict renewal value at renewal time" \
+  --target-name renewal_value --effort E3 \
+  --output-dir .artifacts/data-science-design
 solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
 ```
 
@@ -125,8 +129,23 @@ expose three candidates per stage, so each example admits 729 composable routes
 while the release gate runs a rejected control and three accepted evidence
 routes. See
 [DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md](DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md)
-and the preserved
-[560-technique Taedri inventory](TAEDRI_DATA_SCIENCE_TECHNIQUE_TAXONOMY.md).
+and the preserved owner-supplied
+[technique inventory](TAEDRI_DATA_SCIENCE_TECHNIQUE_TAXONOMY.md).
+
+The data-science design atlas adds a separate decision layer: 618 normalized
+technique entries, 31 task archetypes, 28 modular packs, and 112 structured
+questions covering problem framing, data, splits, features, models, search,
+evaluation, risk, causality, GIS/time, documents/images, synthetic data, RL,
+LLM harnesses, deployment, monitoring, and governance. E1–E10 policies keep
+every question visible and block model/external work without explicit
+authority. All supplied technique status labels remain unverified provenance;
+the machine-derived maturity floor is C1 (cataloged). Five separately importable
+typed nodes turn aggregate context → human/LLM review plan → evidence-bound
+dossier → portable report into a compiler-valid graph. Its 34 exact bindings
+admit 30 routes under one reviewer authority, or 60 only when both authorities
+are explicitly granted. See
+[DATA_SCIENCE_DESIGN_ATLAS.md](DATA_SCIENCE_DESIGN_ATLAS.md) and the
+[quickstart notebook](notebooks/data_science_design_atlas.ipynb).
 
 For LLM-generated improvement campaigns, the core also provides immutable
 candidate ancestry, hard campaign budgets, append-only promotion decisions,

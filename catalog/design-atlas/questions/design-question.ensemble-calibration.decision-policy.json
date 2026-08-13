@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-ensemble-calibration-decision-policy"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.ensemble-calibration.decision-policy.evaluate",
+      "label": "Optimize policy on validation utility and stress cases",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-ensemble-calibration-decision-policy-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.ensemble-calibration.decision-policy.baseline",
+      "label": "Use a predeclared conservative threshold",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-ensemble-calibration-decision-policy"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.ensemble-calibration.decision-policy.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.ensemble-calibration.decision-policy",
+  "pack_id": "design-pack.ensemble-calibration",
+  "prompt": "How do costs, capacity, abstention, deferral, ranking depth, constraints, and human review turn scores into actions?",
+  "rationale": "A default threshold rarely represents operational utility or capacity.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.utility-function",
+    "evidence.capacity-constraint"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.ensemble-calibration"
+  ],
+  "title": "Threshold and action policy",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

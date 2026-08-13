@@ -1,0 +1,24 @@
+{
+  "description": "Allocate treatments, measure exposure and outcomes, and analyze effects under interference and operational constraints.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.experiment-design",
+  "optional_pack_ids": [
+    "design-pack.fairness-risk",
+    "design-pack.monitoring-feedback"
+  ],
+  "outcome_artifact": "artifact.experiment-report",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.causality-experiments",
+    "design-pack.evaluation-error",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.experiment-design",
+    "domain.causal"
+  ],
+  "title": "Experiment design and analysis"
+}

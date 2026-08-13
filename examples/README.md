@@ -15,6 +15,8 @@ dependency-free and run without browser, model-provider, or network access.
 | Run a portable benchmark pack | `python examples/solution_pack_benchmark_quickstart.py --output-dir .artifacts/quickstart` | Fixed/solver arms, holdout status, receipts, JSON, and HTML evidence |
 | Test the coding-agent arena | `python examples/agent_benchmark_quickstart.py --output-dir .artifacts/agent-smoke` | Ten tasks, paired context arms, sealed scoring, hash-chained receipts, Mermaid/SVG diagrams, and offline analysis; no model call |
 | Interrogate and repair dirty records | `python examples/semantic_interrogation_quickstart.py` | 86 visible questions, deterministic receipts, reversible shadow patches, an independent decision, and redacted reports |
+| Design a data/ML system | `solutiongraph atlas plan --context examples/data-science-design-context.json --effort E3 --output-dir .artifacts/design` | 112 visible design questions, explicit branches/evidence/authority, and portable reports; no technique implementation claim |
+| Execute the design graph | `python examples/data_science_design_atlas_graph.py --runtime subprocess` | Aggregate-only typed inputs, compiler-enforced reviewer authority, a frozen E1 route, digest-bound evidence, four isolated node receipts, and an independently verified report |
 
 ## CLI-driven domain examples
 
@@ -59,7 +61,9 @@ Open any HTML file directly. No web server or CDN is required.
 
 The six numbered notebooks cover browsing/scraping, document extraction,
 image checks, data cleaning, tabular ML, and matched LLM coding-harness A/B
-experiments. They call the same executable APIs used by CI.
+experiments. `data_science_design_atlas.ipynb` adds a dependency-free planning
+workbook for the 31 task archetypes and E1–E10 decision policies. They call the
+same APIs used by CI.
 
 ## Claim boundary
 

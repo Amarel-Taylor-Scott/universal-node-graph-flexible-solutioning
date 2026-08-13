@@ -1,0 +1,78 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.2.data-understanding-profiling",
+  "technique_count": 14,
+  "techniques": [
+    {
+      "digest": "sha256:76832fdc542345e4e8d3d6e2b6f58061e2c08dbcdfede353141345efeb1516be",
+      "id": "technique.2.1",
+      "path": "design-atlas/techniques/technique.2.1.json"
+    },
+    {
+      "digest": "sha256:c5f909e223bc411096933d1fc12c771af7dae82f37cd5c2adc1de22c221c81d5",
+      "id": "technique.2.2",
+      "path": "design-atlas/techniques/technique.2.2.json"
+    },
+    {
+      "digest": "sha256:711299f63bca2435f070fbe94b6a20597ea0a06104d5c44db0b8c398ff1dc2fa",
+      "id": "technique.2.3",
+      "path": "design-atlas/techniques/technique.2.3.json"
+    },
+    {
+      "digest": "sha256:68d8d7451e9118dcf1e99c52784dcacc6b63d7befd4d77c8ae8ce0fc62671ad0",
+      "id": "technique.2.4",
+      "path": "design-atlas/techniques/technique.2.4.json"
+    },
+    {
+      "digest": "sha256:76928321ad0bd07316f6fb0f35af417a8e52a4822834e3b08b1b7d8f09545043",
+      "id": "technique.2.5",
+      "path": "design-atlas/techniques/technique.2.5.json"
+    },
+    {
+      "digest": "sha256:52d5f16df3fe2c146fc4cb11891193488572684aa1fc7dc2980b3bf6b4d4915a",
+      "id": "technique.2.6",
+      "path": "design-atlas/techniques/technique.2.6.json"
+    },
+    {
+      "digest": "sha256:410d6803ca71fe1a0fd63762c8a31c536f3353bd462755fe339d49d552f1c274",
+      "id": "technique.2.7",
+      "path": "design-atlas/techniques/technique.2.7.json"
+    },
+    {
+      "digest": "sha256:63cf0e40327378c241bb28a1077b10337ce757bfdb915176396deb2212766309",
+      "id": "technique.2.8",
+      "path": "design-atlas/techniques/technique.2.8.json"
+    },
+    {
+      "digest": "sha256:d3ad1d3389ed1e0d05b402525e945d7a7ef8a338e6491c5decb11571d8603250",
+      "id": "technique.2.9",
+      "path": "design-atlas/techniques/technique.2.9.json"
+    },
+    {
+      "digest": "sha256:2a0433d74ad45ae8503c9942fa57e10e347597d000f6c6a074629adca416dd6b",
+      "id": "technique.2.10",
+      "path": "design-atlas/techniques/technique.2.10.json"
+    },
+    {
+      "digest": "sha256:41d1777ff9832c325ceffdbd465ac2cafc7ed7687bbb66bfec41e928da302cda",
+      "id": "technique.2.11",
+      "path": "design-atlas/techniques/technique.2.11.json"
+    },
+    {
+      "digest": "sha256:3d0acd7bf0a041f5dc92ce94f5b2d083001b6bf28556522b9f1977e7adb6231f",
+      "id": "technique.2.12",
+      "path": "design-atlas/techniques/technique.2.12.json"
+    },
+    {
+      "digest": "sha256:7dcc6395a8a1ba25411efec4527ceba7ece8cdaf78061e6756b94f3f6869e9af",
+      "id": "technique.2.13",
+      "path": "design-atlas/techniques/technique.2.13.json"
+    },
+    {
+      "digest": "sha256:6a6a5eeabc2c500cc71380f39f4f68f7020c728e7d2a9f9a56cc4076fc5f3f71",
+      "id": "technique.2.14",
+      "path": "design-atlas/techniques/technique.2.14.json"
+    }
+  ],
+  "title": "Data Understanding & Profiling"
+}

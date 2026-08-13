@@ -1,0 +1,23 @@
+{
+  "description": "Compile schema, semantic, cross-field, source, drift, and policy checks into an auditable gate.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.data-validation",
+  "optional_pack_ids": [
+    "design-pack.monitoring-feedback"
+  ],
+  "outcome_artifact": "artifact.validation-report",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.data-validation",
+    "domain.data-engineering"
+  ],
+  "title": "Data validation"
+}

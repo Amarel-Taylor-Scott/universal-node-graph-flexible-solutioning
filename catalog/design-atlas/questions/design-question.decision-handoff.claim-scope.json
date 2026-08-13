@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-decision-handoff-claim-scope"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.decision-handoff.claim-scope.evaluate",
+      "label": "Challenge claim language against evidence",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-decision-handoff-claim-scope-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.decision-handoff.claim-scope.baseline",
+      "label": "Use the narrowest evidence-supported claim",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-decision-handoff-claim-scope"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.decision-handoff.claim-scope.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.decision-handoff.claim-scope",
+  "pack_id": "design-pack.decision-handoff",
+  "prompt": "What may be claimed from this dataset, protocol, environment, coverage, and uncertainty, and what evidence ends or reopens the work?",
+  "rationale": "Mechanism fixtures, internal datasets, public benchmarks, and production shadows support different claims.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1"
+  ],
+  "required_evidence": [
+    "evidence.claim-scope",
+    "evidence.exit-criteria"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.decision-handoff"
+  ],
+  "title": "Claim scope and exit criteria",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

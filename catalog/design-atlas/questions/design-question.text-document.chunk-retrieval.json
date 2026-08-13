@@ -1,0 +1,64 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-text-document-chunk-retrieval"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.text-document.chunk-retrieval.evaluate",
+      "label": "Factorially test chunk and retrieval families",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-text-document-chunk-retrieval-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.text-document.chunk-retrieval.baseline",
+      "label": "Use structure-aware chunks plus lexical baseline",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-text-document-chunk-retrieval"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.text-document.chunk-retrieval.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.text-document.chunk-retrieval",
+  "pack_id": "design-pack.text-document",
+  "prompt": "Which structural, semantic, sliding, or parent-child chunks preserve context, and how will retrieval misses be measured?",
+  "rationale": "End-answer metrics alone cannot distinguish retrieval failure from generation failure.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.retrieval-cases",
+    "evidence.chunk-lineage"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.7,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.text-document"
+  ],
+  "title": "Chunking and retrieval",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.retrieval",
+    "task.llm-evaluation",
+    "modality.document"
+  ],
+  "version": "1.0.0"
+}

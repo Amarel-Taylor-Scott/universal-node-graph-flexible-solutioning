@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-ensemble-calibration-oof-lineage"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.ensemble-calibration.oof-lineage.evaluate",
+      "label": "Verify every base-prediction lineage",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-ensemble-calibration-oof-lineage-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.ensemble-calibration.oof-lineage.baseline",
+      "label": "Use only cross-fitted base predictions",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-ensemble-calibration-oof-lineage"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.ensemble-calibration.oof-lineage.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.ensemble-calibration.oof-lineage",
+  "pack_id": "design-pack.ensemble-calibration",
+  "prompt": "Were ensemble and calibration inputs generated strictly out of fold with immutable model, split, and prediction identities?",
+  "rationale": "Training a meta-model on in-sample predictions creates direct target leakage.",
+  "reference_ids": [
+    "source.sklearn.common-pitfalls"
+  ],
+  "required_evidence": [
+    "evidence.oof-lineage",
+    "evidence.split-manifest"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.ensemble-calibration"
+  ],
+  "title": "Out-of-fold prediction lineage",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

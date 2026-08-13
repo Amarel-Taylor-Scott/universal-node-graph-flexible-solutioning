@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Count, mean, std, min, max, quartiles, median",
+  "family": "DATA UNDERSTANDING & PROFILING",
+  "id": "technique.2.1",
+  "maturity_floor": "C1",
+  "ordinal": "2.1",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.2.data-understanding-profiling",
+  "phase_title": "Data Understanding & Profiling",
+  "references": [],
+  "source_claim": "reported-implemented",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "`task_profile_prior.py` computes these",
+  "tags": [
+    "phase.2",
+    "family.data-understanding-profiling"
+  ],
+  "title": "Basic statistics"
+}

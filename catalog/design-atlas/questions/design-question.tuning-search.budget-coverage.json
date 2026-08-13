@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-tuning-search-budget-coverage"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.tuning-search.budget-coverage.evaluate",
+      "label": "Trace best-so-far versus budget",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-tuning-search-budget-coverage-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.tuning-search.budget-coverage.baseline",
+      "label": "Use a fixed bounded-search budget",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-tuning-search-budget-coverage"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.tuning-search.budget-coverage.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.tuning-search.budget-coverage",
+  "pack_id": "design-pack.tuning-search",
+  "prompt": "What trial, time, cost, failure, fidelity, seed, and concurrency limits apply, and how will skipped and unvisited routes be reported?",
+  "rationale": "A hidden cap can be mistaken for exhaustive search or global optimality.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.search-budget",
+    "evidence.search-report"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.tuning-search"
+  ],
+  "title": "Budget, coverage, and stopping",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

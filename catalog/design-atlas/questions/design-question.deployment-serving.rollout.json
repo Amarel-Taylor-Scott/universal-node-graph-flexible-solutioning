@@ -1,0 +1,65 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-deployment-serving-rollout"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.deployment-serving.rollout.evaluate",
+      "label": "Compare release strategies with fixed gates",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-deployment-serving-rollout-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.deployment-serving.rollout.baseline",
+      "label": "Use shadow then guarded canary",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-deployment-serving-rollout"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.deployment-serving.rollout.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.deployment-serving.rollout",
+  "pack_id": "design-pack.deployment-serving",
+  "prompt": "Which offline, replay, shadow, canary, A/B, phased, or manual gates promote a release, under what sample and time thresholds?",
+  "rationale": "A release needs predeclared evidence gates and cannot promote itself on one favorable metric.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1"
+  ],
+  "required_evidence": [
+    "evidence.release-policy",
+    "evidence.shadow-receipts"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.deployment-serving"
+  ],
+  "title": "Shadow, canary, and promotion",
+  "trigger_all": [],
+  "trigger_any": [
+    "lifecycle.release",
+    "lifecycle.production"
+  ],
+  "version": "1.0.0"
+}

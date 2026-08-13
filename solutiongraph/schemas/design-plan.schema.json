@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-plan.schema.json",
+  "title": "All-visible effort-aware design plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["design_atlas_model_version", "id", "context_digest", "archetype_id", "effort", "items", "random_seed", "planner_revision", "summary"],
+  "properties": {
+    "design_atlas_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "context_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "archetype_id": {"$ref": "common.schema.json#/$defs/id"},
+    "effort": {"$ref": "#/$defs/effort"},
+    "items": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/item"}},
+    "random_seed": {"type": "integer"},
+    "planner_revision": {"$ref": "common.schema.json#/$defs/id"},
+    "summary": {"$ref": "#/$defs/summary"}
+  },
+  "$defs": {
+    "effort": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "max_questions", "max_cost_tier", "exploration_fraction", "description"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "max_questions": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 1}]},
+        "max_cost_tier": {"type": "integer", "minimum": 1, "maximum": 10},
+        "exploration_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "item": {
+      "type": "object", "additionalProperties": false,
+      "required": ["question_id", "pack_id", "status", "priority", "response_mode", "reasons"],
+      "properties": {
+        "question_id": {"$ref": "common.schema.json#/$defs/id"},
+        "pack_id": {"$ref": "common.schema.json#/$defs/id"},
+        "status": {"enum": ["selected", "deferred", "blocked", "not-applicable"]},
+        "priority": {"type": "number", "minimum": 0, "maximum": 1},
+        "response_mode": {"type": "string"},
+        "reasons": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["selected", "deferred", "blocked", "not-applicable"],
+      "properties": {
+        "selected": {"type": "integer", "minimum": 0}, "deferred": {"type": "integer", "minimum": 0},
+        "blocked": {"type": "integer", "minimum": 0}, "not-applicable": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

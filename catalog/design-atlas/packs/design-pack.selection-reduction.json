@@ -1,0 +1,252 @@
+{
+  "description": "Bound high-dimensional search while testing stability, leakage, compatibility, and interpretability.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.selection-reduction",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-selection-reduction-need"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.selection-reduction.need.evaluate",
+          "label": "Benchmark no-reduction against bounded reducers",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-selection-reduction-need-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.selection-reduction.need.baseline",
+          "label": "Use the full compatible feature set",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-selection-reduction-need"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.selection-reduction.need.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.selection-reduction.need",
+      "pack_id": "design-pack.selection-reduction",
+      "prompt": "Do width, sparsity, collinearity, sample ratio, noise, latency, or interpretability create a measured need for selection or reduction?",
+      "rationale": "Reduction can discard useful signal and should solve an observed constraint.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.shape-profile",
+        "evidence.resource-baseline"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.55,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.selection-reduction"
+      ],
+      "title": "Need for reduction",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-selection-reduction-method-family"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.selection-reduction.method-family.evaluate",
+          "label": "Compare materially different reduction families",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-selection-reduction-method-family-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.selection-reduction.method-family.baseline",
+          "label": "Use a fold-local filter baseline",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-selection-reduction-method-family"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.selection-reduction.method-family.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.selection-reduction.method-family",
+      "pack_id": "design-pack.selection-reduction",
+      "prompt": "Should filter, wrapper, embedded, sparse, supervised, unsupervised, nonlinear, or random projection families be compared?",
+      "rationale": "Families produce different semantics, costs, and compatibility with inference and explanation.",
+      "reference_ids": [
+        "source.sklearn.common-pitfalls"
+      ],
+      "required_evidence": [
+        "evidence.reduction-hypothesis",
+        "evidence.fold-local-scope"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.65,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.selection-reduction"
+      ],
+      "title": "Selection versus projection",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-selection-reduction-stability"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.selection-reduction.stability.evaluate",
+          "label": "Bootstrap and compare selection stability",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-selection-reduction-stability-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.selection-reduction.stability.baseline",
+          "label": "Report fold-level selection frequency",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-selection-reduction-stability"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.selection-reduction.stability.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.selection-reduction.stability",
+      "pack_id": "design-pack.selection-reduction",
+      "prompt": "Do selected features or components remain stable across folds, seeds, resamples, time, and relevant slices?",
+      "rationale": "A high-scoring unstable subset may not support durable inference or explanation.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.selection-stability"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.75,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.selection-reduction"
+      ],
+      "title": "Selection stability",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-selection-reduction-dimension-choice"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.selection-reduction.dimension-choice.evaluate",
+          "label": "Trace validation utility versus dimension",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-selection-reduction-dimension-choice-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.selection-reduction.dimension-choice.baseline",
+          "label": "Use a predeclared compact dimension",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-selection-reduction-dimension-choice"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.selection-reduction.dimension-choice.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.selection-reduction.dimension-choice",
+      "pack_id": "design-pack.selection-reduction",
+      "prompt": "What variance, reconstruction, predictive, stability, latency, or diminishing-return rule chooses the retained dimension?",
+      "rationale": "Choosing dimension on final test performance leaks and encourages arbitrary complexity.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.dimension-curve",
+        "evidence.stop-rule"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.8,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.selection-reduction"
+      ],
+      "title": "Dimension and stopping rule",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.modeling",
+  "title": "Feature selection and dimensionality reduction",
+  "version": "1.0.0"
+}

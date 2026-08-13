@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Histograms, KDE, box plots, violin plots, bar charts",
+  "family": "EXPLORATORY DATA ANALYSIS (EDA)",
+  "id": "technique.3.1",
+  "maturity_floor": "C1",
+  "ordinal": "3.1",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.3.exploratory-data-analysis-eda",
+  "phase_title": "Exploratory Data Analysis (Eda)",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Visualization not in scope",
+  "tags": [
+    "phase.3",
+    "family.exploratory-data-analysis-eda"
+  ],
+  "title": "Univariate visualization"
+}

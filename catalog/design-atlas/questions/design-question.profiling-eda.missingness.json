@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-profiling-eda-missingness"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.profiling-eda.missingness.evaluate",
+      "label": "Analyze missingness patterns and causes",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-profiling-eda-missingness-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.profiling-eda.missingness.baseline",
+      "label": "Use typed missingness indicators",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-profiling-eda-missingness"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.profiling-eda.missingness.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.profiling-eda.missingness",
+  "pack_id": "design-pack.profiling-eda",
+  "prompt": "Which values are missing, structurally absent, censored, late, or encoded as placeholders, and how do patterns co-occur?",
+  "rationale": "Treating every null alike can fabricate data and erase informative process failures.",
+  "reference_ids": [
+    "source.gebru.datasheets"
+  ],
+  "required_evidence": [
+    "evidence.missingness-profile",
+    "evidence.collection-context"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.8,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.profiling-eda"
+  ],
+  "title": "Missingness structure",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

@@ -1,0 +1,59 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-interpretability-method"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.interpretability.method.evaluate",
+      "label": "Compare complementary compatible explainers",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-interpretability-method-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.interpretability.method.baseline",
+      "label": "Use intrinsic facts and permutation tests",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-interpretability-method"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.interpretability.method.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.interpretability.method",
+  "pack_id": "design-pack.interpretability",
+  "prompt": "Which intrinsic, permutation, attribution, partial-dependence, surrogate, example, or counterfactual methods match model and feature assumptions?",
+  "rationale": "Explanation methods have compatibility conditions and failure modes of their own.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.explainer-compatibility"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.7,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.interpretability"
+  ],
+  "title": "Global and local explanation methods",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

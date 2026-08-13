@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Unique count per column, cardinality ratio",
+  "family": "DATA UNDERSTANDING & PROFILING",
+  "id": "technique.2.3",
+  "maturity_floor": "C1",
+  "ordinal": "2.3",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.2.data-understanding-profiling",
+  "phase_title": "Data Understanding & Profiling",
+  "references": [],
+  "source_claim": "reported-implemented",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Used for encoding strategy selection",
+  "tags": [
+    "phase.2",
+    "family.data-understanding-profiling"
+  ],
+  "title": "Cardinality analysis"
+}

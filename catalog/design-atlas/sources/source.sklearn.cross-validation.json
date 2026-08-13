@@ -1,0 +1,8 @@
+{
+  "claim": "Evaluation splits and randomness must match the data-generating and deployment structure.",
+  "id": "source.sklearn.cross-validation",
+  "kind": "source.official-documentation",
+  "revision": "scikit-learn stable documentation",
+  "title": "scikit-learn cross-validation guide",
+  "url": "https://scikit-learn.org/stable/modules/cross_validation.html"
+}

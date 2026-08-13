@@ -23,6 +23,37 @@ portable reports, and records an independent promote/quarantine/reject decision.
 See [the semantic interrogation protocol](SEMANTIC_INTERROGATION_PROTOCOL.md)
 before adding authority lookups, LLM adjudication, or automatic corrections.
 
+## Design a data-science or AI system before compiling it
+
+The design atlas turns a task archetype into an all-visible worklist with
+branches, required evidence, experiment templates, stop conditions, research
+sources, and explicit capability/permission blocking:
+
+```bash
+solutiongraph atlas archetypes
+solutiongraph atlas coverage
+solutiongraph atlas plan \
+  --context examples/data-science-design-context.json \
+  --effort E3 \
+  --output-dir .artifacts/data-science-design
+```
+
+Open the self-contained HTML report or pass the JSON to a human/LLM harness.
+The 618 technique entries are catalog records, not executable node claims. Read
+[the design-atlas guide](DATA_SCIENCE_DESIGN_ATLAS.md) before translating a
+decision dossier into nodes, graph mutations, or benchmark arms.
+
+To exercise the same lifecycle through typed ports, compiler admission, a
+frozen plan, an independent verifier, and runtime receipts:
+
+```bash
+python examples/data_science_design_atlas_graph.py --runtime subprocess
+```
+
+The fixture grants `human.review`; switch to the model planning implementation
+only by building the program with `model.invoke` and supplying a compatible
+answer-set producer.
+
 ## 1. Install and verify
 
 ```bash

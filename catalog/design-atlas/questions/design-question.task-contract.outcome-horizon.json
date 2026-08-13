@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-task-contract-outcome-horizon"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.task-contract.outcome-horizon.evaluate",
+      "label": "Validate outcome and horizon alternatives",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-task-contract-outcome-horizon-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.task-contract.outcome-horizon.baseline",
+      "label": "Use the declared outcome and horizon",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-task-contract-outcome-horizon"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.task-contract.outcome-horizon.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 2,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.task-contract.outcome-horizon",
+  "pack_id": "design-pack.task-contract",
+  "prompt": "Which observable outcome is required, at what horizon, and when does it become available?",
+  "rationale": "Undefined horizons create label leakage and a mismatch between offline and production questions.",
+  "reference_ids": [
+    "source.nist.ai-rmf-playbook"
+  ],
+  "required_evidence": [
+    "evidence.outcome-definition",
+    "evidence.availability-timeline"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.task-contract"
+  ],
+  "title": "Outcome and horizon",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

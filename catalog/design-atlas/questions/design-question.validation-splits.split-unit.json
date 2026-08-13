@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-validation-splits-split-unit"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.validation-splits.split-unit.evaluate",
+      "label": "Compare plausible split-unit leakage",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-validation-splits-split-unit-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.validation-splits.split-unit.baseline",
+      "label": "Use group-preserving splits",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-validation-splits-split-unit"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.validation-splits.split-unit.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.validation-splits.split-unit",
+  "pack_id": "design-pack.validation-splits",
+  "prompt": "Must entities, households, devices, sources, locations, or sessions remain wholly inside one split?",
+  "rationale": "Row-level random splitting often leaks correlated units and overstates generalization.",
+  "reference_ids": [
+    "source.sklearn.cross-validation"
+  ],
+  "required_evidence": [
+    "evidence.group-map",
+    "evidence.split-manifest"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.validation-splits"
+  ],
+  "title": "Split unit and independence",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

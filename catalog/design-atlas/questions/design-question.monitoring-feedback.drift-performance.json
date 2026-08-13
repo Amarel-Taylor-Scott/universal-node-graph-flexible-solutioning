@@ -1,0 +1,64 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-monitoring-feedback-drift-performance"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.monitoring-feedback.drift-performance.evaluate",
+      "label": "Backtest drift and performance alerts",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-monitoring-feedback-drift-performance-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.monitoring-feedback.drift-performance.baseline",
+      "label": "Monitor schema plus delayed outcome quality",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-monitoring-feedback-drift-performance"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.monitoring-feedback.drift-performance.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.monitoring-feedback.drift-performance",
+  "pack_id": "design-pack.monitoring-feedback",
+  "prompt": "Which reference windows, thresholds, slices, tests, and label-delayed performance signals distinguish harmless change from degraded utility?",
+  "rationale": "Input drift is neither necessary nor sufficient evidence of model failure.",
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "required_evidence": [
+    "evidence.drift-policy",
+    "evidence.alert-backtest"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.monitoring-feedback"
+  ],
+  "title": "Drift versus performance",
+  "trigger_all": [],
+  "trigger_any": [
+    "lifecycle.production"
+  ],
+  "version": "1.0.0"
+}

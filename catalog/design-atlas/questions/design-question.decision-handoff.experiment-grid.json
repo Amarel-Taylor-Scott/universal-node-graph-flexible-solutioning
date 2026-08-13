@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-decision-handoff-experiment-grid"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.decision-handoff.experiment-grid.evaluate",
+      "label": "Compile and account for the full declared grid",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-decision-handoff-experiment-grid-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.decision-handoff.experiment-grid.baseline",
+      "label": "Compare one control with bounded diverse mutations",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-decision-handoff-experiment-grid"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.decision-handoff.experiment-grid.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.decision-handoff.experiment-grid",
+  "pack_id": "design-pack.decision-handoff",
+  "prompt": "Which fixed control graph, explicit topology variants, compatible node routes, cases, seeds, budgets, objectives, and holdouts will be compared?",
+  "rationale": "A valid experiment holds task and evaluation meaning constant while varying declared solution choices.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.experiment-spec",
+    "evidence.route-accounting"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.decision-handoff"
+  ],
+  "title": "Control, mutations, and experiment grid",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

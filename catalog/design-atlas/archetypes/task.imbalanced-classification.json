@@ -1,0 +1,33 @@
+{
+  "description": "Optimize rare-event discovery under explicit costs, capacity, calibration, and prevalence shift.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.imbalanced-classification",
+  "optional_pack_ids": [
+    "design-pack.synthetic-data",
+    "design-pack.fairness-risk"
+  ],
+  "outcome_artifact": "artifact.rare-event-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.ensemble-calibration",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.imbalanced-classification",
+    "domain.machine-learning",
+    "signal.supervised",
+    "signal.imbalanced"
+  ],
+  "title": "Imbalanced or rare-event classification"
+}

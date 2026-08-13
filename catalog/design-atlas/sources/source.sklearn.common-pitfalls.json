@@ -1,0 +1,8 @@
+{
+  "claim": "Preprocessing, selection, and other learned transforms must be fitted without test leakage.",
+  "id": "source.sklearn.common-pitfalls",
+  "kind": "source.official-documentation",
+  "revision": "scikit-learn stable documentation",
+  "title": "scikit-learn common pitfalls and recommended practices",
+  "url": "https://scikit-learn.org/stable/common_pitfalls.html"
+}

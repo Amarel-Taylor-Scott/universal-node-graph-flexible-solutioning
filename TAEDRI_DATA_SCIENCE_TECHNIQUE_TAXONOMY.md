@@ -1,5 +1,12 @@
 # Taedri data-science and AI/ML technique inventory
 
+> Historical snapshot: this 2026-08-12 Markdown is retained as supplied source
+> context. The current 2026-08-13 inventory is normalized into 618 strict C1
+> catalog entries under `solutiongraph/design_atlas/data/techniques.json` and
+> projected into `catalog/design-atlas/`. Source status labels are unverified
+> provenance, not SolutionGraph maturity. See
+> [DATA_SCIENCE_DESIGN_ATLAS.md](DATA_SCIENCE_DESIGN_ATLAS.md).
+
 > Provenance and claim boundary: this catalogue was supplied by the project owner on
 > 2026-08-12. Its Taedri status column describes that separate source implementation
 > as reported in the supplied inventory; it is not a SolutionGraph implementation or
@@ -1005,4 +1012,3 @@
 8. **Post-processing** — 19 techniques not implemented; conformal prediction, threshold optimization
 9. **AutoML integration** — 14 techniques not implemented; FLAML as a node would bring automatic model selection
 10. **Meta-learning** — 7 techniques not implemented; the memory system exists but is switched off
-

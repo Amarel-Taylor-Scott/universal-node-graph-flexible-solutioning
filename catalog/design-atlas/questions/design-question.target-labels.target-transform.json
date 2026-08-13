@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-target-labels-target-transform"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.target-labels.target-transform.evaluate",
+      "label": "Evaluate target representations with inverse checks",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-target-labels-target-transform-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.target-labels.target-transform.baseline",
+      "label": "Preserve the original target scale",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-target-labels-target-transform"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.target-labels.target-transform.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.target-labels.target-transform",
+  "pack_id": "design-pack.target-labels",
+  "prompt": "Would transformation, binning, ordinal framing, multi-task labels, or uncertainty targets improve fit without changing the required output?",
+  "rationale": "Target transforms require reversible output semantics and metrics on the decision scale.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.target-profile",
+    "evidence.inverse-transform-test"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.65,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.target-labels"
+  ],
+  "title": "Target representation and inverse semantics",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

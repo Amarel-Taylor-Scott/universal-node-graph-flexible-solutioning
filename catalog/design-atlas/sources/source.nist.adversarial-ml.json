@@ -1,0 +1,8 @@
+{
+  "claim": "Threat modeling should distinguish lifecycle stage, attacker goals, capability, and knowledge.",
+  "id": "source.nist.adversarial-ml",
+  "kind": "source.official-standard",
+  "revision": "NIST AI 100-2 E2025",
+  "title": "NIST Adversarial Machine Learning Taxonomy",
+  "url": "https://csrc.nist.gov/pubs/ai/100/2/e2025/final"
+}

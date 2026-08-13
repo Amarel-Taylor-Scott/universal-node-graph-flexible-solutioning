@@ -1,0 +1,25 @@
+{
+  "description": "Learn or compare sequential policies with explicit support, safety, and offline/online evaluation boundaries.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.reinforcement-learning",
+  "optional_pack_ids": [
+    "design-pack.causality-experiments",
+    "design-pack.fairness-risk"
+  ],
+  "outcome_artifact": "artifact.policy",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.reinforcement-learning",
+    "design-pack.evaluation-error",
+    "design-pack.robustness-stability",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.reinforcement-learning",
+    "domain.reinforcement-learning"
+  ],
+  "title": "Reinforcement learning"
+}

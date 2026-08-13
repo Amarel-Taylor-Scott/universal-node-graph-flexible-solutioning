@@ -1,0 +1,8 @@
+{
+  "claim": "Production readiness includes data, model, infrastructure, and monitoring tests beyond offline quality.",
+  "id": "source.breck.ml-test-score",
+  "kind": "source.primary-research",
+  "revision": "Breck et al. (2017)",
+  "title": "The ML Test Score",
+  "url": "https://research.google/pubs/the-ml-test-score-a-rubric-for-ml-production-readiness-and-technical-debt-reduction/"
+}

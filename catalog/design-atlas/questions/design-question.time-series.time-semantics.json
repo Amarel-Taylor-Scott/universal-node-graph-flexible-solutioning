@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-time-series-time-semantics"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.time-series.time-semantics.evaluate",
+      "label": "Validate time-axis and timezone semantics",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-time-series-time-semantics-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.time-series.time-semantics.baseline",
+      "label": "Use event and availability time explicitly",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-time-series-time-semantics"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.time-series.time-semantics.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.time-series.time-semantics",
+  "pack_id": "design-pack.time-series",
+  "prompt": "Which timestamps mean event, ingestion, revision, availability, local calendar, or forecast origin?",
+  "rationale": "Conflating time axes creates leakage and incorrect seasonality.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.time-semantics"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.time-series"
+  ],
+  "title": "Time axes and calendars",
+  "trigger_all": [],
+  "trigger_any": [
+    "signal.time-aware",
+    "modality.time-series"
+  ],
+  "version": "1.0.0"
+}

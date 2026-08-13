@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-fairness-risk-human-authority"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.fairness-risk.human-authority.evaluate",
+      "label": "Test review and appeal workflows",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-fairness-risk-human-authority-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.fairness-risk.human-authority.baseline",
+      "label": "Require human confirmation for consequential actions",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-fairness-risk-human-authority"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.fairness-risk.human-authority.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.fairness-risk.human-authority",
+  "pack_id": "design-pack.fairness-risk",
+  "prompt": "Which decisions require review, override, appeal, abstention, explanation, or prohibition of automated action?",
+  "rationale": "A human in the loop is ineffective without time, information, authority, and a defined responsibility.",
+  "reference_ids": [
+    "source.nist.ai-rmf-playbook"
+  ],
+  "required_evidence": [
+    "evidence.authority-matrix",
+    "evidence.recourse-test"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.fairness-risk"
+  ],
+  "title": "Human oversight, recourse, and automation",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

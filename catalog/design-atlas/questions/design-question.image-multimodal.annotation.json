@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-image-multimodal-annotation"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.image-multimodal.annotation.evaluate",
+      "label": "Audit annotations against prediction units",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-image-multimodal-annotation-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.image-multimodal.annotation.baseline",
+      "label": "Use the signed annotation schema",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-image-multimodal-annotation"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.image-multimodal.annotation.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.image-multimodal.annotation",
+  "pack_id": "design-pack.image-multimodal",
+  "prompt": "Are labels image-, region-, pixel-, frame-, sequence-, or pair-level, and how are ambiguous cases retained?",
+  "rationale": "A mismatch between annotation and prediction unit invalidates training and metrics.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.annotation-schema",
+    "evidence.annotation-audit"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.image-multimodal"
+  ],
+  "title": "Annotation geometry and ambiguity",
+  "trigger_all": [],
+  "trigger_any": [
+    "modality.image",
+    "modality.multimodal"
+  ],
+  "version": "1.0.0"
+}

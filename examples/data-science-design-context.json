@@ -1,0 +1,31 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "context.example.geotemporal-regression",
+  "task_type": "task.tabular-regression",
+  "objective": "Predict store demand seven days ahead using only information available at forecast origin.",
+  "modalities": [
+    "modality.tabular",
+    "modality.time-series",
+    "modality.geospatial"
+  ],
+  "lifecycle_stage": "lifecycle.prototype",
+  "risk_tier": "risk.medium",
+  "signals": [
+    "signal.time-aware",
+    "signal.geospatial",
+    "signal.grouped"
+  ],
+  "constraints": [
+    "constraint.no-protected-test-access",
+    "constraint.point-in-time-features"
+  ],
+  "row_count": 250000,
+  "column_count": 84,
+  "target_name": "units_sold_next_7d",
+  "time_field": "forecast_origin",
+  "group_field": "store_id",
+  "entity_field": "store_id",
+  "protected_test": true,
+  "dataset_profile_digest": "",
+  "semantic_map_digest": ""
+}

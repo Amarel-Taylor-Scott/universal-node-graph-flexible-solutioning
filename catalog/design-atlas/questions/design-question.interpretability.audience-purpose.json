@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-interpretability-audience-purpose"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.interpretability.audience-purpose.evaluate",
+      "label": "Test explanation utility with target audiences",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-interpretability-audience-purpose-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.interpretability.audience-purpose.baseline",
+      "label": "Provide model and data facts plus limitations",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-interpretability-audience-purpose"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.interpretability.audience-purpose.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.interpretability.audience-purpose",
+  "pack_id": "design-pack.interpretability",
+  "prompt": "Is the explanation for debugging, validation, affected-person notice, decision support, recourse, audit, or scientific inference?",
+  "rationale": "One explanation form cannot serve every audience or claim.",
+  "reference_ids": [
+    "source.mitchell.model-cards"
+  ],
+  "required_evidence": [
+    "evidence.explanation-purpose",
+    "evidence.audience-review"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.85,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.interpretability"
+  ],
+  "title": "Explanation audience and purpose",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

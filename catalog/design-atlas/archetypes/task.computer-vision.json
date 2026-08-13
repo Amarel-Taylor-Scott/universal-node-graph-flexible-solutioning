@@ -1,0 +1,31 @@
+{
+  "description": "Classify, detect, segment, retrieve, or generate images under capture and robustness constraints.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.computer-vision",
+  "optional_pack_ids": [
+    "design-pack.synthetic-data",
+    "design-pack.fairness-risk"
+  ],
+  "outcome_artifact": "artifact.vision-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.image-multimodal",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.computer-vision",
+    "domain.computer-vision"
+  ],
+  "title": "Image and computer-vision modeling"
+}

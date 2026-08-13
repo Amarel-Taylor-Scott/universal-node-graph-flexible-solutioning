@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-feature-engineering-interactions"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.feature-engineering.interactions.evaluate",
+      "label": "Ablate bounded feature-family candidates",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-feature-engineering-interactions-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.feature-engineering.interactions.baseline",
+      "label": "Use raw features plus declared domain invariants",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-feature-engineering-interactions"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.feature-engineering.interactions.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.feature-engineering.interactions",
+  "pack_id": "design-pack.feature-engineering",
+  "prompt": "Which interactions, aggregates, lags, ratios, embeddings, or domain formulas are causal-time-safe and worth testing?",
+  "rationale": "Unbounded feature generation expands search, instability, and leakage risk.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.feature-hypothesis",
+    "evidence.ablation-plan"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.65,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.feature-engineering"
+  ],
+  "title": "Interactions and domain features",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

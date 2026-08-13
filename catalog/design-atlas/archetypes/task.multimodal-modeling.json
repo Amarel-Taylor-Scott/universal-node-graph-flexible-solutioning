@@ -1,0 +1,32 @@
+{
+  "description": "Combine text, image, audio, video, document, sensor, or tabular inputs with explicit alignment and ablations.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.multimodal-modeling",
+  "optional_pack_ids": [
+    "design-pack.llm-harness",
+    "design-pack.synthetic-data"
+  ],
+  "outcome_artifact": "artifact.multimodal-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.text-document",
+    "design-pack.image-multimodal",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.multimodal-modeling",
+    "domain.multimodal"
+  ],
+  "title": "Multimodal modeling"
+}

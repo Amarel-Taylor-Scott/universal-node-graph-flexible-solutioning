@@ -1,0 +1,31 @@
+{
+  "description": "Classify, score, retrieve, summarize, or extract from text with document and language-aware evaluation.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.text-classification",
+  "optional_pack_ids": [
+    "design-pack.llm-harness",
+    "design-pack.fairness-risk"
+  ],
+  "outcome_artifact": "artifact.text-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.text-document",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.text-classification",
+    "domain.nlp"
+  ],
+  "title": "Text and NLP modeling"
+}

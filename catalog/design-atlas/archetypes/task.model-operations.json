@@ -1,0 +1,27 @@
+{
+  "description": "Package, release, observe, compare, retrain, roll back, and retire an existing model or graph.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.model-operations",
+  "optional_pack_ids": [
+    "design-pack.fairness-risk",
+    "design-pack.interpretability"
+  ],
+  "outcome_artifact": "artifact.operational-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.evaluation-error",
+    "design-pack.robustness-stability",
+    "design-pack.deployment-serving",
+    "design-pack.monitoring-feedback",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.model-operations",
+    "domain.mlops",
+    "lifecycle.production"
+  ],
+  "title": "Model release and operations"
+}

@@ -1,0 +1,87 @@
+{
+  "capabilities": [
+    "design-atlas.plan-review"
+  ],
+  "description": "Compile the complete visibility ledger and allocate the effort-bounded selection to a human reviewer under explicit authority.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.design_atlas.nodes.plan_review:plan_human_review_node",
+  "failure_modes": [
+    {
+      "code": "design-atlas.invalid-input",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "design-atlas.plan-human-review",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "context",
+      "type": {
+        "id": "design-atlas.context",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "design_plan",
+      "type": {
+        "id": "design-atlas.plan",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "E1",
+        "E3",
+        "E5",
+        "E7",
+        "E10"
+      ],
+      "default": "E3",
+      "description": "",
+      "name": "effort_level",
+      "required": false,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        0,
+        17,
+        41
+      ],
+      "default": 0,
+      "description": "Explicit exploration seeds keep one deterministic route from dominating.",
+      "name": "random_seed",
+      "required": false,
+      "value_type": "integer"
+    }
+  ],
+  "permissions": [
+    "human.review"
+  ],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/design_atlas/nodes/plan_review.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

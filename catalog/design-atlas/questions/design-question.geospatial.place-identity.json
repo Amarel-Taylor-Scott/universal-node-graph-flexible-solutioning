@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-geospatial-place-identity"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.geospatial.place-identity.evaluate",
+      "label": "Verify against versioned authority sources",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-geospatial-place-identity-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.geospatial.place-identity.baseline",
+      "label": "Normalize without asserting unverified identity",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-geospatial-place-identity"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.geospatial.place-identity.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.geospatial.place-identity",
+  "pack_id": "design-pack.geospatial",
+  "prompt": "Are names, addresses, ZIP codes, counties, regions, coordinates, and jurisdiction codes mutually consistent for the intended vintage?",
+  "rationale": "Strings that look like places may be ambiguous, invalid, historical, or outside the authority source.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.geographic-authority",
+    "evidence.source-vintage"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.geospatial"
+  ],
+  "title": "Place and address identity",
+  "trigger_all": [],
+  "trigger_any": [
+    "signal.geospatial",
+    "modality.geospatial"
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,272 @@
+{
+  "description": "Define immutable artifacts, environment parity, release gates, rollout, fallbacks, and recovery before promotion.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.deployment-serving",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-deployment-serving-artifact-closure"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.deployment-serving.artifact-closure.evaluate",
+          "label": "Rebuild and verify the artifact closure",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-deployment-serving-artifact-closure-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.deployment-serving.artifact-closure.baseline",
+          "label": "Package one immutable closed release",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-deployment-serving-artifact-closure"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.deployment-serving.artifact-closure.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.deployment-serving.artifact-closure",
+      "pack_id": "design-pack.deployment-serving",
+      "prompt": "Are model, code, graph, schema, features, environment, dependencies, licenses, configuration, and data references content-addressed and complete?",
+      "rationale": "A serialized model alone is not a reproducible deployable system.",
+      "reference_ids": [
+        "source.breck.ml-test-score"
+      ],
+      "required_evidence": [
+        "evidence.release-manifest",
+        "evidence.clean-rebuild"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.deployment-serving"
+      ],
+      "title": "Artifact and dependency closure",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.release",
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-deployment-serving-serving-contract"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.deployment-serving.serving-contract.evaluate",
+          "label": "Replay production-shaped serving cases",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-deployment-serving-serving-contract-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.deployment-serving.serving-contract.baseline",
+          "label": "Use a versioned batch interface",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-deployment-serving-serving-contract"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.deployment-serving.serving-contract.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.deployment-serving.serving-contract",
+      "pack_id": "design-pack.deployment-serving",
+      "prompt": "What batch, online, streaming, asynchronous, edge, or embedded interface guarantees schema, latency, throughput, freshness, ordering, and idempotency?",
+      "rationale": "Serving behavior and preprocessing must match the evaluated contract.",
+      "reference_ids": [
+        "source.tensorflow.data-validation",
+        "source.breck.ml-test-score"
+      ],
+      "required_evidence": [
+        "evidence.serving-contract",
+        "evidence.training-serving-parity"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.deployment-serving"
+      ],
+      "title": "Serving interface and parity",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.release",
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-deployment-serving-rollout"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.deployment-serving.rollout.evaluate",
+          "label": "Compare release strategies with fixed gates",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-deployment-serving-rollout-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.deployment-serving.rollout.baseline",
+          "label": "Use shadow then guarded canary",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-deployment-serving-rollout"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.deployment-serving.rollout.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.deployment-serving.rollout",
+      "pack_id": "design-pack.deployment-serving",
+      "prompt": "Which offline, replay, shadow, canary, A/B, phased, or manual gates promote a release, under what sample and time thresholds?",
+      "rationale": "A release needs predeclared evidence gates and cannot promote itself on one favorable metric.",
+      "reference_ids": [
+        "source.nist.ai-rmf-1"
+      ],
+      "required_evidence": [
+        "evidence.release-policy",
+        "evidence.shadow-receipts"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.deployment-serving"
+      ],
+      "title": "Shadow, canary, and promotion",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.release",
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-deployment-serving-rollback"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.deployment-serving.rollback.evaluate",
+          "label": "Exercise rollback and dependency-failure drills",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-deployment-serving-rollback-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.deployment-serving.rollback.baseline",
+          "label": "Retain last-known-good plus fail-closed path",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-deployment-serving-rollback"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.deployment-serving.rollback.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.deployment-serving.rollback",
+      "pack_id": "design-pack.deployment-serving",
+      "prompt": "Can the system detect failure, stop effects, restore prior artifacts, reconcile state, replay work, and verify recovery within the required objective?",
+      "rationale": "A rollback plan is unproven until its state and recovery path have been tested.",
+      "reference_ids": [
+        "source.breck.ml-test-score"
+      ],
+      "required_evidence": [
+        "evidence.rollback-receipt",
+        "evidence.recovery-objective"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.deployment-serving"
+      ],
+      "title": "Rollback, degradation, and recovery",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.release",
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.operations",
+  "title": "Packaging, serving, release, and rollback",
+  "version": "1.0.0"
+}

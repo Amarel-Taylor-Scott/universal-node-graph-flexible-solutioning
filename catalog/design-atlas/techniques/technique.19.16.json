@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Distilled rules from winning model programs",
+  "family": "FEEDBACK LOOPS & ITERATIVE IMPROVEMENT",
+  "id": "technique.19.16",
+  "maturity_floor": "C1",
+  "ordinal": "19.16",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.19.feedback-loops-iterative-improvement",
+  "phase_title": "Feedback Loops & Iterative Improvement",
+  "references": [],
+  "source_claim": "reported-partial",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "`taedri-medium-distilled` profile",
+  "tags": [
+    "phase.19",
+    "family.feedback-loops-iterative-improvement"
+  ],
+  "title": "Meta-learning"
+}

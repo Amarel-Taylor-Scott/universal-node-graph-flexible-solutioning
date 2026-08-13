@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "",
+  "family": "Tree-Based Models",
+  "id": "technique.10.2.2",
+  "maturity_floor": "C1",
+  "ordinal": "10.2.2",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.10.model-selection",
+  "phase_title": "Model Selection",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not a separate filling",
+  "tags": [
+    "phase.10",
+    "family.tree-based-models"
+  ],
+  "title": "Decision tree (classification)"
+}

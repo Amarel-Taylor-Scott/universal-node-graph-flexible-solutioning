@@ -1,0 +1,260 @@
+{
+  "description": "Design immutable development, validation, holdout, stress, temporal, and group boundaries before learned transforms.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.validation-splits",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-validation-splits-split-unit"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.validation-splits.split-unit.evaluate",
+          "label": "Compare plausible split-unit leakage",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-validation-splits-split-unit-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.validation-splits.split-unit.baseline",
+          "label": "Use group-preserving splits",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-validation-splits-split-unit"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.validation-splits.split-unit.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.validation-splits.split-unit",
+      "pack_id": "design-pack.validation-splits",
+      "prompt": "Must entities, households, devices, sources, locations, or sessions remain wholly inside one split?",
+      "rationale": "Row-level random splitting often leaks correlated units and overstates generalization.",
+      "reference_ids": [
+        "source.sklearn.cross-validation"
+      ],
+      "required_evidence": [
+        "evidence.group-map",
+        "evidence.split-manifest"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.validation-splits"
+      ],
+      "title": "Split unit and independence",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-validation-splits-temporal-causality"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.validation-splits.temporal-causality.evaluate",
+          "label": "Replay point-in-time feature availability",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-validation-splits-temporal-causality-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.validation-splits.temporal-causality.baseline",
+          "label": "Enforce time-ordered as-of joins",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-validation-splits-temporal-causality"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.validation-splits.temporal-causality.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.validation-splits.temporal-causality",
+      "pack_id": "design-pack.validation-splits",
+      "prompt": "For each feature and label, was the value actually available at the prediction timestamp?",
+      "rationale": "Event timestamps alone do not prevent future information, revisions, or late joins from leaking.",
+      "reference_ids": [
+        "source.sklearn.common-pitfalls"
+      ],
+      "required_evidence": [
+        "evidence.availability-timeline",
+        "evidence.as-of-join-test"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.validation-splits"
+      ],
+      "title": "Temporal and availability boundary",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-validation-splits-fit-scope"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.validation-splits.fit-scope.evaluate",
+          "label": "Run explicit leakage negative tests",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-validation-splits-fit-scope-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.validation-splits.fit-scope.baseline",
+          "label": "Fit all learned transforms fold-locally",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-validation-splits-fit-scope"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.validation-splits.fit-scope.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.validation-splits.fit-scope",
+      "pack_id": "design-pack.validation-splits",
+      "prompt": "Which imputers, encoders, selectors, reducers, samplers, calibrators, and generators learn state and where may they fit?",
+      "rationale": "Nearly every learned preprocessing operation can leak when fitted before the split or outside a fold.",
+      "reference_ids": [
+        "source.sklearn.common-pitfalls"
+      ],
+      "required_evidence": [
+        "evidence.leakage-tests",
+        "evidence.pipeline-scope"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.validation-splits"
+      ],
+      "title": "Fold-local fit scope",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-validation-splits-holdout-protection"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.validation-splits.holdout-protection.evaluate",
+          "label": "Audit evaluator visibility and feedback paths",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-validation-splits-holdout-protection-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.validation-splits.holdout-protection.baseline",
+          "label": "Seal holdout until final confirmation",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-validation-splits-holdout-protection"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.validation-splits.holdout-protection.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.validation-splits.holdout-protection",
+      "pack_id": "design-pack.validation-splits",
+      "prompt": "Who may inspect holdout inputs, labels, oracle code, and results, and when may feedback update the proposal policy?",
+      "rationale": "Repeated tuning on protected results turns the holdout into training data.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.holdout-policy",
+        "evidence.evaluator-boundary"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.validation-splits"
+      ],
+      "title": "Holdout and benchmark protection",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [
+    "source.sklearn.common-pitfalls",
+    "source.sklearn.cross-validation"
+  ],
+  "stage": "stage.evaluation",
+  "title": "Validation, leakage, and split design",
+  "version": "1.0.0"
+}

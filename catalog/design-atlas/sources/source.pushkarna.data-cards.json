@@ -1,0 +1,8 @@
+{
+  "claim": "Dataset documentation should be structured for stakeholder decisions across the lifecycle.",
+  "id": "source.pushkarna.data-cards",
+  "kind": "source.primary-research",
+  "revision": "Pushkarna et al. (2022)",
+  "title": "Data Cards: Purposeful and Transparent Dataset Documentation",
+  "url": "https://arxiv.org/abs/2204.01075"
+}

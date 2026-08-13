@@ -1,0 +1,25 @@
+{
+  "description": "Convert PDFs, forms, tables, images, and mixed documents into grounded structured outputs.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.document-extraction",
+  "optional_pack_ids": [
+    "design-pack.llm-harness"
+  ],
+  "outcome_artifact": "artifact.structured-document",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.quality-cleaning",
+    "design-pack.text-document",
+    "design-pack.image-multimodal",
+    "design-pack.evaluation-error",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.document-extraction",
+    "domain.document-intelligence"
+  ],
+  "title": "Document extraction"
+}

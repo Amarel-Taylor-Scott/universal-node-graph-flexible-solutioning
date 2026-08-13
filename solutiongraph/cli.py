@@ -33,6 +33,19 @@ def _doctor() -> int:
     from solutiongraph.arena import UNIVERSAL_DAG_ARENA
     from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
     from solutiongraph.catalog import catalog_documents
+    from solutiongraph.design_atlas import (
+        REFERENCE_DESIGN_PACKS,
+        REFERENCE_DESIGN_QUESTIONS,
+        REFERENCE_TASK_ARCHETYPES,
+        REFERENCE_TECHNIQUES,
+        validate_design_atlas,
+    )
+    from solutiongraph.design_atlas.node_pack import (
+        DESIGN_ATLAS_DESCRIPTORS,
+        DESIGN_ATLAS_NODE_DEFINITIONS,
+        DESIGN_ATLAS_NODE_PACK,
+        DESIGN_ATLAS_NODE_SPECS,
+    )
     from solutiongraph.examples.tasks import all_examples
     from solutiongraph.interrogation.node_pack import (
         INTERROGATION_DESCRIPTORS,
@@ -56,6 +69,13 @@ def _doctor() -> int:
     from solutiongraph.template_library import REFERENCE_TEMPLATES
 
     problems: list[str] = []
+    problems.extend(validate_design_atlas())
+    problems.extend(DESIGN_ATLAS_NODE_PACK.validate())
+    problems.extend(
+        problem
+        for definition in DESIGN_ATLAS_NODE_DEFINITIONS
+        for problem in definition.validate()
+    )
     problems.extend(validate_reference_question_packs())
     problems.extend(INTERROGATION_NODE_PACK.validate())
     problems.extend(
@@ -116,6 +136,14 @@ def _doctor() -> int:
                 f"interrogation_descriptors.{descriptor.node_id}",
             )
         )
+    atlas_by_id = {node.id: node for node in DESIGN_ATLAS_NODE_SPECS}
+    for descriptor in DESIGN_ATLAS_DESCRIPTORS:
+        problems.extend(
+            descriptor.validate(
+                atlas_by_id.get(descriptor.node_id),
+                f"design_atlas_descriptors.{descriptor.node_id}",
+            )
+        )
     schemas = load_all_schemas()
     documents = catalog_documents()
     if problems:
@@ -137,6 +165,11 @@ def _doctor() -> int:
         f"interrogation_concepts={len(REFERENCE_CONCEPTS)} "
         f"question_packs={len(REFERENCE_QUESTION_PACKS)} "
         f"questions={len(REFERENCE_QUESTIONS)} "
+        f"atlas_techniques={len(REFERENCE_TECHNIQUES)} "
+        f"atlas_packs={len(REFERENCE_DESIGN_PACKS)} "
+        f"atlas_questions={len(REFERENCE_DESIGN_QUESTIONS)} "
+        f"atlas_archetypes={len(REFERENCE_TASK_ARCHETYPES)} "
+        f"atlas_nodes={len(DESIGN_ATLAS_NODE_SPECS)} "
         f"interrogation_nodes={len(INTERROGATION_NODE_SPECS)} "
         f"schemas={len(schemas)} "
         f"catalog_documents={len(documents)}"
@@ -1130,6 +1163,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     add_agent_bench_parser(commands)
 
+    from solutiongraph.design_atlas.cli import add_design_atlas_parser
+
+    add_design_atlas_parser(commands)
+
     concepts = commands.add_parser(
         "concepts", help="Inspect semantic concepts and map dataset fields"
     )
@@ -1480,6 +1517,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             from solutiongraph.agent_bench.cli import run_agent_bench_command
 
             return run_agent_bench_command(args)
+        if args.command == "atlas":
+            from solutiongraph.design_atlas.cli import run_design_atlas_command
+
+            return run_design_atlas_command(args)
         if args.command == "concepts":
             if args.concept_command == "list":
                 return _concepts_list(args.json)

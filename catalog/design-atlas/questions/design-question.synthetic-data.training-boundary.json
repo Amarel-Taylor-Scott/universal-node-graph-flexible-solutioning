@@ -1,0 +1,64 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-synthetic-data-training-boundary"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.synthetic-data.training-boundary.evaluate",
+      "label": "Audit generator inputs and nearest-neighbor overlap",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-synthetic-data-training-boundary-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.synthetic-data.training-boundary.baseline",
+      "label": "Train only on the development partition",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-synthetic-data-training-boundary"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.synthetic-data.training-boundary.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.synthetic-data.training-boundary",
+  "pack_id": "design-pack.synthetic-data",
+  "prompt": "Which real records, protected labels, holdouts, prompts, models, or external corpora may the generator inspect?",
+  "rationale": "A generator trained on holdout information can contaminate every downstream experiment.",
+  "reference_ids": [
+    "source.sklearn.common-pitfalls"
+  ],
+  "required_evidence": [
+    "evidence.generator-lineage",
+    "evidence.contamination-test"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.synthetic-data"
+  ],
+  "title": "Generator training and contamination boundary",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.synthetic-data"
+  ],
+  "version": "1.0.0"
+}

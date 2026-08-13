@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-target-labels-imbalance-cost"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.target-labels.imbalance-cost.evaluate",
+      "label": "Compare cost-aware imbalance strategies",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-target-labels-imbalance-cost-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.target-labels.imbalance-cost.baseline",
+      "label": "Use stratification plus explicit class costs",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-target-labels-imbalance-cost"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.target-labels.imbalance-cost.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.target-labels.imbalance-cost",
+  "pack_id": "design-pack.target-labels",
+  "prompt": "Is rarity meaningful, which errors cost more, and should weighting, sampling, thresholds, ranking, or anomaly framing change?",
+  "rationale": "Class balance alone does not define utility or the correct intervention.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.class-prevalence",
+    "evidence.error-costs"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.8,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.target-labels"
+  ],
+  "title": "Imbalance and decision cost",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

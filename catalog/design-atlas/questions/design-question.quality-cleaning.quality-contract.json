@@ -1,0 +1,61 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-quality-cleaning-quality-contract"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.quality-cleaning.quality-contract.evaluate",
+      "label": "Calibrate field- and slice-specific gates",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-quality-cleaning-quality-contract-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.quality-cleaning.quality-contract.baseline",
+      "label": "Apply the declared quality contract",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-quality-cleaning-quality-contract"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.quality-cleaning.quality-contract.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.quality-cleaning.quality-contract",
+  "pack_id": "design-pack.quality-cleaning",
+  "prompt": "Which completeness, validity, uniqueness, consistency, timeliness, and reconciliation gates are required per field and slice?",
+  "rationale": "A generic cleanliness score hides which defects are unacceptable.",
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "required_evidence": [
+    "evidence.quality-contract"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.quality-cleaning"
+  ],
+  "title": "Quality acceptance contract",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

@@ -1,0 +1,24 @@
+{
+  "description": "Produce reproducible aggregate, slice, conflict, anomaly, and hypothesis summaries.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.dataset-profiling",
+  "optional_pack_ids": [
+    "design-pack.quality-cleaning",
+    "design-pack.geospatial",
+    "design-pack.time-series"
+  ],
+  "outcome_artifact": "artifact.data-profile",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.dataset-profiling",
+    "domain.data-science"
+  ],
+  "title": "Dataset profiling and EDA"
+}

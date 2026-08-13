@@ -1,0 +1,252 @@
+{
+  "description": "Choose detection, repair, quarantine, and verification policies without overwriting raw evidence.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.quality-cleaning",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-quality-cleaning-quality-contract"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.quality-cleaning.quality-contract.evaluate",
+          "label": "Calibrate field- and slice-specific gates",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-quality-cleaning-quality-contract-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.quality-cleaning.quality-contract.baseline",
+          "label": "Apply the declared quality contract",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-quality-cleaning-quality-contract"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.quality-cleaning.quality-contract.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.quality-cleaning.quality-contract",
+      "pack_id": "design-pack.quality-cleaning",
+      "prompt": "Which completeness, validity, uniqueness, consistency, timeliness, and reconciliation gates are required per field and slice?",
+      "rationale": "A generic cleanliness score hides which defects are unacceptable.",
+      "reference_ids": [
+        "source.tensorflow.data-validation"
+      ],
+      "required_evidence": [
+        "evidence.quality-contract"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.quality-cleaning"
+      ],
+      "title": "Quality acceptance contract",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-quality-cleaning-repair-policy"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.quality-cleaning.repair-policy.evaluate",
+          "label": "Shadow-test repair and quarantine policies",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-quality-cleaning-repair-policy-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.quality-cleaning.repair-policy.baseline",
+          "label": "Permit only proven reversible repairs",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-quality-cleaning-repair-policy"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.quality-cleaning.repair-policy.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.quality-cleaning.repair-policy",
+      "pack_id": "design-pack.quality-cleaning",
+      "prompt": "Which defects have deterministic reversible repairs, which need review, and which must be quarantined?",
+      "rationale": "Silent correction can destroy provenance and introduce confident false data.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.repair-receipt",
+        "evidence.reversal-test"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.quality-cleaning"
+      ],
+      "title": "Repair versus quarantine",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-quality-cleaning-duplicates-entities"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.quality-cleaning.duplicates-entities.evaluate",
+          "label": "Benchmark exact, fuzzy, and abstaining match policies",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-quality-cleaning-duplicates-entities-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.quality-cleaning.duplicates-entities.baseline",
+          "label": "Use exact duplicate quarantine",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-quality-cleaning-duplicates-entities"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.quality-cleaning.duplicates-entities.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.quality-cleaning.duplicates-entities",
+      "pack_id": "design-pack.quality-cleaning",
+      "prompt": "Are repeated rows, near duplicates, household members, versions, and cross-source entity matches distinct cases?",
+      "rationale": "Deduplication without identity semantics can merge different entities or leak groups across splits.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.identity-contract",
+        "evidence.match-labeled-set"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.quality-cleaning"
+      ],
+      "title": "Duplicate and entity resolution policy",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-quality-cleaning-independent-verification"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.quality-cleaning.independent-verification.evaluate",
+          "label": "Run independent before/after verification",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-quality-cleaning-independent-verification-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.quality-cleaning.independent-verification.baseline",
+          "label": "Verify critical invariants separately",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-quality-cleaning-independent-verification"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.quality-cleaning.independent-verification.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.quality-cleaning.independent-verification",
+      "pack_id": "design-pack.quality-cleaning",
+      "prompt": "Will a separate verifier rerun critical invariants on the shadow output and compare new versus removed findings?",
+      "rationale": "A repair function should not be the only judge of its own consequence.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.verification-receipt",
+        "evidence.verifier-identity"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.quality-cleaning"
+      ],
+      "title": "Independent post-clean verification",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.data",
+  "title": "Data quality and reversible cleaning",
+  "version": "1.0.0"
+}

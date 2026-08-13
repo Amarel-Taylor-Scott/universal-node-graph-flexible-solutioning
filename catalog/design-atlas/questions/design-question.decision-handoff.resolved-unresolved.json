@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-decision-handoff-resolved-unresolved"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.decision-handoff.resolved-unresolved.evaluate",
+      "label": "Review the evidence state of every selected question",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-decision-handoff-resolved-unresolved-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.decision-handoff.resolved-unresolved.baseline",
+      "label": "Block compilation on critical unknowns",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-decision-handoff-resolved-unresolved"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.decision-handoff.resolved-unresolved.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.decision-handoff.resolved-unresolved",
+  "pack_id": "design-pack.decision-handoff",
+  "prompt": "Which decisions are evidence-backed, provisional, abstained, blocked, or still unanswered, and who owns each next action?",
+  "rationale": "A polished plan should not conceal materially unresolved assumptions.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.decision-records",
+    "evidence.blocker-owners"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.decision-handoff"
+  ],
+  "title": "Resolved and unresolved decisions",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

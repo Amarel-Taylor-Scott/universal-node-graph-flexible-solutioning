@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-report-bundle.schema.json",
+  "title": "Portable data-science design report bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["payload", "markdown", "html"],
+  "properties": {
+    "payload": {"$ref": "#/$defs/payload"},
+    "markdown": {"type": "string", "minLength": 1},
+    "html": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["context", "plan", "question_details", "dossier", "claim_boundary"],
+      "properties": {
+        "context": {"$ref": "design-context.schema.json"},
+        "plan": {"$ref": "design-plan.schema.json"},
+        "question_details": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/detail"}
+        },
+        "dossier": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "design-dossier.schema.json"}
+          ]
+        },
+        "claim_boundary": {"type": "string", "minLength": 1}
+      }
+    },
+    "detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question_id", "pack_id", "status", "priority", "response_mode", "reasons", "title", "prompt", "rationale", "required_evidence", "choices", "experiment_template", "stop_conditions", "references"],
+      "properties": {
+        "question_id": {"$ref": "common.schema.json#/$defs/id"},
+        "pack_id": {"$ref": "common.schema.json#/$defs/id"},
+        "status": {"enum": ["selected", "deferred", "blocked", "not-applicable"]},
+        "priority": {"type": "number", "minimum": 0, "maximum": 1},
+        "response_mode": {"type": "string"},
+        "reasons": {"$ref": "#/$defs/strings"},
+        "title": {"type": "string", "minLength": 1},
+        "prompt": {"type": "string", "minLength": 1},
+        "rationale": {"type": "string", "minLength": 1},
+        "required_evidence": {"$ref": "#/$defs/ids"},
+        "choices": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/choice"}},
+        "experiment_template": {"type": "string"},
+        "stop_conditions": {"$ref": "#/$defs/strings"},
+        "references": {"type": "array", "items": {"$ref": "#/$defs/reference"}}
+      }
+    },
+    "choice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "consequence", "action_ids", "technique_tags"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "label": {"type": "string", "minLength": 1},
+        "consequence": {"type": "string", "minLength": 1},
+        "action_ids": {"$ref": "#/$defs/ids"},
+        "technique_tags": {"$ref": "#/$defs/ids"}
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "url", "kind", "claim", "revision"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "url": {"type": "string", "format": "uri"},
+        "kind": {"$ref": "common.schema.json#/$defs/id"},
+        "claim": {"type": "string", "minLength": 1},
+        "revision": {"type": "string"}
+      }
+    },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    }
+  }
+}

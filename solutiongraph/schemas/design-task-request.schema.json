@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-task-request.schema.json",
+  "title": "Declared task intent for aggregate design-context derivation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_type", "objective"],
+  "properties": {
+    "task_type": {"type": "string", "minLength": 1},
+    "objective": {"type": "string", "minLength": 1},
+    "target_name": {"type": "string"},
+    "group_field": {"type": "string"},
+    "entity_field": {"type": "string"},
+    "lifecycle_stage": {"$ref": "common.schema.json#/$defs/id"},
+    "risk_tier": {"$ref": "common.schema.json#/$defs/id"},
+    "modalities": {"$ref": "#/$defs/ids"},
+    "signals": {"$ref": "#/$defs/ids"},
+    "constraints": {"$ref": "#/$defs/ids"}
+  },
+  "$defs": {
+    "ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-deployment-serving-artifact-closure"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.deployment-serving.artifact-closure.evaluate",
+      "label": "Rebuild and verify the artifact closure",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-deployment-serving-artifact-closure-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.deployment-serving.artifact-closure.baseline",
+      "label": "Package one immutable closed release",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-deployment-serving-artifact-closure"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.deployment-serving.artifact-closure.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.deployment-serving.artifact-closure",
+  "pack_id": "design-pack.deployment-serving",
+  "prompt": "Are model, code, graph, schema, features, environment, dependencies, licenses, configuration, and data references content-addressed and complete?",
+  "rationale": "A serialized model alone is not a reproducible deployable system.",
+  "reference_ids": [
+    "source.breck.ml-test-score"
+  ],
+  "required_evidence": [
+    "evidence.release-manifest",
+    "evidence.clean-rebuild"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.deployment-serving"
+  ],
+  "title": "Artifact and dependency closure",
+  "trigger_all": [],
+  "trigger_any": [
+    "lifecycle.release",
+    "lifecycle.production"
+  ],
+  "version": "1.0.0"
+}

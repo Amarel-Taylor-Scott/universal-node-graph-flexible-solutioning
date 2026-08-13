@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "",
+  "family": "Classification Metrics",
+  "id": "technique.16.2.11",
+  "maturity_floor": "C1",
+  "ordinal": "16.2.11",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.16.evaluation-metrics",
+  "phase_title": "Evaluation & Metrics",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not a metric",
+  "tags": [
+    "phase.16",
+    "family.classification-metrics"
+  ],
+  "title": "Matthews correlation coefficient (MCC)"
+}

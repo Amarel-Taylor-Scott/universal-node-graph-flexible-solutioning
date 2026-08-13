@@ -1,0 +1,59 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-target-labels-delay-censoring"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.target-labels.delay-censoring.evaluate",
+      "label": "Model label maturity and censoring alternatives",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-target-labels-delay-censoring-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.target-labels.delay-censoring.baseline",
+      "label": "Train only on mature labels",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-target-labels-delay-censoring"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.target-labels.delay-censoring.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.target-labels.delay-censoring",
+  "pack_id": "design-pack.target-labels",
+  "prompt": "Which outcomes are not yet observed, censored, selectively observed, or revised after the training cutoff?",
+  "rationale": "Treating unknown outcomes as negatives systematically biases many real-world tasks.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.label-maturity-analysis"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.target-labels"
+  ],
+  "title": "Delay, censoring, and observation windows",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

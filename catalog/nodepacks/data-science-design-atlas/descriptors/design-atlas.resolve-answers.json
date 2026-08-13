@@ -1,0 +1,69 @@
+{
+  "actions": [
+    "design-atlas.resolve-answers"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.design-atlas.resolve-answers",
+      "language": "und",
+      "source_digest": "sha256:40cd24fab2b84bbbac25eacf0fe8846b5eb694a7fee73878def475451a7129fb",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Validate plan-bound branches and evidence references, with an optional fail-closed policy that rejects unanswered, blocked, abstained, or provisional work."
+    }
+  ],
+  "domains": [
+    "data.science",
+    "machine.learning",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "design-atlas.maturity": "reference"
+  },
+  "node_id": "design-atlas.resolve-answers",
+  "node_spec_digest": "sha256:40cd24fab2b84bbbac25eacf0fe8846b5eb694a7fee73878def475451a7129fb",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed design_plan input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "design_plan"
+    },
+    {
+      "concepts": [],
+      "description": "Typed answer_set input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "answer_set"
+    },
+    {
+      "concepts": [],
+      "description": "Typed design_dossier output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "design_dossier"
+    }
+  ],
+  "purposes": [
+    "Validate plan-bound branches and evidence references, with an optional fail-closed policy that rejects unanswered, blocked, abstained, or provisional work."
+  ],
+  "solutions": [
+    "Compose this stage into an evidence-driven design feedback loop."
+  ],
+  "summary": "Validate plan-bound branches and evidence references, with an optional fail-closed policy that rejects unanswered, blocked, abstained, or provisional work.",
+  "tags": [
+    "design-atlas",
+    "typed-node",
+    "runtime.python",
+    "evidence-aware"
+  ],
+  "title": "Resolve Answers"
+}

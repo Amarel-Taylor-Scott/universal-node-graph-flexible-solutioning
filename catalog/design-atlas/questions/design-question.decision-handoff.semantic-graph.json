@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-decision-handoff-semantic-graph"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.decision-handoff.semantic-graph.evaluate",
+      "label": "Review alternative semantic decompositions",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-decision-handoff-semantic-graph-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.decision-handoff.semantic-graph.baseline",
+      "label": "Compile the smallest complete semantic graph",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-decision-handoff-semantic-graph"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.decision-handoff.semantic-graph.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.decision-handoff.semantic-graph",
+  "pack_id": "design-pack.decision-handoff",
+  "prompt": "Which obligations, typed inputs/outputs, branches, loops, maps, reductions, barriers, and adapters express the solution without naming implementations?",
+  "rationale": "Task meaning must remain stable while candidate implementations and search policies vary.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.program-graph",
+    "evidence.task-contract"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.decision-handoff"
+  ],
+  "title": "Semantic graph decomposition",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

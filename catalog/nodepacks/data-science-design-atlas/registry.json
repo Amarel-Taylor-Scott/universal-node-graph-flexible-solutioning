@@ -1,0 +1,795 @@
+{
+  "candidates": [
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.derive-context.default",
+      "implementation_digest": "sha256:c1a714cc1ceb599b28caf121d6ddc26a365156995e1b9d6aa03f301da13cdae0",
+      "node_id": "design-atlas.derive-context",
+      "node_version": "1.0.0",
+      "parameters": {}
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e1-random_seed-0-0cdd6d6bc1f0",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e1-random_seed-17-1554ad475be4",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e1-random_seed-41-2fa02f53da25",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e3-random_seed-0-6f0fd7d93755",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e3-random_seed-17-871036661c21",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e3-random_seed-41-bc4e57b8dc09",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e5-random_seed-0-aaae756287f1",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e5-random_seed-17-b2e9a91cf2cd",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e5-random_seed-41-758f81a2549a",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e7-random_seed-0-4d13f7d2c24b",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e7-random_seed-17-a804d9cd67d7",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e7-random_seed-41-bb69a80fb6a6",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e10-random_seed-0-f968e0f98be3",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e10-random_seed-17-5d6ac4175478",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-human-review.effort_level-e10-random_seed-41-6034051401d6",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "node_id": "design-atlas.plan-human-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e1-random_seed-0-0cdd6d6bc1f0",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e1-random_seed-17-1554ad475be4",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e1-random_seed-41-2fa02f53da25",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E1",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e3-random_seed-0-6f0fd7d93755",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e3-random_seed-17-871036661c21",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e3-random_seed-41-bc4e57b8dc09",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E3",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e5-random_seed-0-aaae756287f1",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e5-random_seed-17-b2e9a91cf2cd",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e5-random_seed-41-758f81a2549a",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E5",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e7-random_seed-0-4d13f7d2c24b",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e7-random_seed-17-a804d9cd67d7",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e7-random_seed-41-bb69a80fb6a6",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E7",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e10-random_seed-0-f968e0f98be3",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "random_seed": 0
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e10-random_seed-17-5d6ac4175478",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "random_seed": 17
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.plan-llm-review.effort_level-e10-random_seed-41-6034051401d6",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "node_id": "design-atlas.plan-llm-review",
+      "node_version": "1.0.0",
+      "parameters": {
+        "effort_level": "E10",
+        "random_seed": 41
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.resolve-answers.resolution_policy-allow-provisional-51cce67b4d5d",
+      "implementation_digest": "sha256:0aca30f09307955dd262b4907da415297a26d6440af0c30cd2f0ddfe3bfda7bc",
+      "node_id": "design-atlas.resolve-answers",
+      "node_version": "1.0.0",
+      "parameters": {
+        "resolution_policy": "allow-provisional"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.resolve-answers.resolution_policy-evidence-required-20e5e7f4f71d",
+      "implementation_digest": "sha256:0aca30f09307955dd262b4907da415297a26d6440af0c30cd2f0ddfe3bfda7bc",
+      "node_id": "design-atlas.resolve-answers",
+      "node_version": "1.0.0",
+      "parameters": {
+        "resolution_policy": "evidence-required"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.design-atlas.render-report.default",
+      "implementation_digest": "sha256:c694e7b4293c233870e0f13a4f500ed5a2ca945bc8a396797a022fa710a134b9",
+      "node_id": "design-atlas.render-report",
+      "node_version": "1.0.0",
+      "parameters": {}
+    }
+  ],
+  "id": "registry.data-science-design-atlas",
+  "model_version": "0.2",
+  "nodes": [
+    {
+      "capabilities": [
+        "design-atlas.derive-context"
+      ],
+      "description": "Join declared task intent to aggregate-only profile evidence and preserve exact profile and semantic-map digests.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.design_atlas.nodes.derive_context:derive_context_node",
+      "failure_modes": [
+        {
+          "code": "design-atlas.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "design-atlas.derive-context",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c1a714cc1ceb599b28caf121d6ddc26a365156995e1b9d6aa03f301da13cdae0",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "dataset_profile",
+          "type": {
+            "id": "interrogation.dataset-profile",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "semantic_field_map",
+          "type": {
+            "id": "interrogation.semantic-field-map",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "task_request",
+          "type": {
+            "id": "design-atlas.task-request",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "context",
+          "type": {
+            "id": "design-atlas.context",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/design_atlas/nodes/derive_context.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "design-atlas.plan-review"
+      ],
+      "description": "Compile the complete visibility ledger and allocate the effort-bounded selection to a human reviewer under explicit authority.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.design_atlas.nodes.plan_review:plan_human_review_node",
+      "failure_modes": [
+        {
+          "code": "design-atlas.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "design-atlas.plan-human-review",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "context",
+          "type": {
+            "id": "design-atlas.context",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "design_plan",
+          "type": {
+            "id": "design-atlas.plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "E1",
+            "E3",
+            "E5",
+            "E7",
+            "E10"
+          ],
+          "default": "E3",
+          "description": "",
+          "name": "effort_level",
+          "required": false,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            0,
+            17,
+            41
+          ],
+          "default": 0,
+          "description": "Explicit exploration seeds keep one deterministic route from dominating.",
+          "name": "random_seed",
+          "required": false,
+          "value_type": "integer"
+        }
+      ],
+      "permissions": [
+        "human.review"
+      ],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/design_atlas/nodes/plan_review.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "design-atlas.plan-review"
+      ],
+      "description": "Compile the same review contract for a provider-neutral model responder; model.invoke must be granted before compiler admission.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.design_atlas.nodes.plan_review:plan_llm_review_node",
+      "failure_modes": [
+        {
+          "code": "design-atlas.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "design-atlas.plan-llm-review",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "context",
+          "type": {
+            "id": "design-atlas.context",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "design_plan",
+          "type": {
+            "id": "design-atlas.plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "E1",
+            "E3",
+            "E5",
+            "E7",
+            "E10"
+          ],
+          "default": "E3",
+          "description": "",
+          "name": "effort_level",
+          "required": false,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            0,
+            17,
+            41
+          ],
+          "default": 0,
+          "description": "Explicit exploration seeds keep one deterministic route from dominating.",
+          "name": "random_seed",
+          "required": false,
+          "value_type": "integer"
+        }
+      ],
+      "permissions": [
+        "model.invoke"
+      ],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/design_atlas/nodes/plan_review.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "design-atlas.resolve-answers"
+      ],
+      "description": "Validate plan-bound branches and evidence references, with an optional fail-closed policy that rejects unanswered, blocked, abstained, or provisional work.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.design_atlas.nodes.resolve_answers:resolve_answers_node",
+      "failure_modes": [
+        {
+          "code": "design-atlas.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "design-atlas.resolve-answers",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0aca30f09307955dd262b4907da415297a26d6440af0c30cd2f0ddfe3bfda7bc",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "design_plan",
+          "type": {
+            "id": "design-atlas.plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "answer_set",
+          "type": {
+            "id": "design-atlas.answer-set",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "design_dossier",
+          "type": {
+            "id": "design-atlas.dossier",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "allow-provisional",
+            "evidence-required"
+          ],
+          "default": "allow-provisional",
+          "description": "",
+          "name": "resolution_policy",
+          "required": false,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/design_atlas/nodes/resolve_answers.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "design-atlas.render-report"
+      ],
+      "description": "Render content-addressed JSON payload, Markdown, and self-contained HTML without filesystem, model, or network effects.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.design_atlas.nodes.render_report:render_report_node",
+      "failure_modes": [
+        {
+          "code": "design-atlas.invalid-input",
+          "description": "",
+          "retryable": false
+        }
+      ],
+      "id": "design-atlas.render-report",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:c694e7b4293c233870e0f13a4f500ed5a2ca945bc8a396797a022fa710a134b9",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "context",
+          "type": {
+            "id": "design-atlas.context",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "design_plan",
+          "type": {
+            "id": "design-atlas.plan",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        },
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "design_dossier",
+          "type": {
+            "id": "design-atlas.dossier",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "report_bundle",
+          "type": {
+            "id": "design-atlas.report-bundle",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/design_atlas/nodes/render_report.py",
+      "verifier": "",
+      "version": "1.0.0"
+    }
+  ],
+  "version": "1.0.0"
+}

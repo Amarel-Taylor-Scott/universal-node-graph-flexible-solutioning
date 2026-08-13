@@ -1,0 +1,66 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-deployment-serving-serving-contract"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.deployment-serving.serving-contract.evaluate",
+      "label": "Replay production-shaped serving cases",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-deployment-serving-serving-contract-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.deployment-serving.serving-contract.baseline",
+      "label": "Use a versioned batch interface",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-deployment-serving-serving-contract"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.deployment-serving.serving-contract.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.deployment-serving.serving-contract",
+  "pack_id": "design-pack.deployment-serving",
+  "prompt": "What batch, online, streaming, asynchronous, edge, or embedded interface guarantees schema, latency, throughput, freshness, ordering, and idempotency?",
+  "rationale": "Serving behavior and preprocessing must match the evaluated contract.",
+  "reference_ids": [
+    "source.tensorflow.data-validation",
+    "source.breck.ml-test-score"
+  ],
+  "required_evidence": [
+    "evidence.serving-contract",
+    "evidence.training-serving-parity"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.deployment-serving"
+  ],
+  "title": "Serving interface and parity",
+  "trigger_all": [],
+  "trigger_any": [
+    "lifecycle.release",
+    "lifecycle.production"
+  ],
+  "version": "1.0.0"
+}

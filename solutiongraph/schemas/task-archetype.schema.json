@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task-archetype.schema.json",
+  "title": "Data-science task archetype",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["design_atlas_model_version", "id", "title", "description", "outcome_artifact", "required_pack_ids", "optional_pack_ids", "tags"],
+  "properties": {
+    "design_atlas_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "outcome_artifact": {"$ref": "common.schema.json#/$defs/id"},
+    "required_pack_ids": {"$ref": "#/$defs/idArray"},
+    "optional_pack_ids": {"$ref": "#/$defs/idArray"},
+    "tags": {"$ref": "#/$defs/idArray"}
+  },
+  "$defs": {"idArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}}}
+}

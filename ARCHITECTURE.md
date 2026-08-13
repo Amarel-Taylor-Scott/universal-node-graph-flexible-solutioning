@@ -10,6 +10,8 @@ solutiongraph/
 ├── interrogation/        concepts, profiles, planning, checks, repair, verification
 │   └── nodes/            one importable implementation module per graph node
 ├── question_packs/       declarative questions; never executable NodeSpecs
+├── design_atlas/         task archetypes, 618 C1 techniques, plans, maturity, typed node pack
+│   └── nodes/            aggregate context, authority-specific plans, resolution, reports
 ├── compiler.py           graph validation, full admission, route compilation
 ├── discovery.py          descriptors, embedding spaces, handshake, snapshots, node packs
 ├── templates.py          semantic stages, reusable templates, refinement policies
@@ -58,10 +60,11 @@ solutiongraph/
 └── schemas/              strict portable JSON Schema 2020-12 wire contracts
 
 catalog/
+├── design-atlas/         sources, phases, techniques, packs, questions, archetypes
 ├── agent-bench/          ten digest-only task contracts and two benchmark suites
 ├── index.json            content-addressed template/node-pack/benchmark index
 ├── templates/            544 atomic obligations across 31 varied templates
-├── nodepacks/            six portable registries and discovery sidecars
+├── nodepacks/            eight portable registries and discovery sidecars
 ├── harnesses/            strict linked-graph evaluation-harness artifact
 ├── arena/                52 cross-domain task-family contracts
 └── benchmarks/           six task/solution packs and 24 immutable cases
@@ -102,6 +105,7 @@ browsergraph/
 
 ```text
 task contract
+  → optional typed design-atlas context/plan/dossier/report graph
   → task recognition + progressive fingerprint
   → historical retrieval + diverse effort portfolio + protected blind lanes
   → semantic template + task-specific ProgramGraph or TopologyFamily

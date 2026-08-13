@@ -1,0 +1,25 @@
+{
+  "description": "Discover, reproduce, classify, mitigate, and regression-test model and tool-enabled failure modes.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.llm-red-teaming",
+  "optional_pack_ids": [
+    "design-pack.monitoring-feedback"
+  ],
+  "outcome_artifact": "artifact.red-team-report",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.llm-harness",
+    "design-pack.robustness-stability",
+    "design-pack.fairness-risk",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.llm-red-teaming",
+    "domain.llm",
+    "risk.high"
+  ],
+  "title": "LLM and agent red teaming"
+}

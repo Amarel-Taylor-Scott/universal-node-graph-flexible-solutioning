@@ -1,0 +1,64 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-text-document-document-contract"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.text-document.document-contract.evaluate",
+      "label": "Profile document structure and variants",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-text-document-document-contract-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.text-document.document-contract.baseline",
+      "label": "Use immutable document/page identities",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-text-document-document-contract"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.text-document.document-contract.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.text-document.document-contract",
+  "pack_id": "design-pack.text-document",
+  "prompt": "Which pages, sections, tables, versions, languages, encodings, and attachments constitute one document input?",
+  "rationale": "Document boundaries and version identity determine extraction and evaluation truth.",
+  "reference_ids": [
+    "source.gebru.datasheets"
+  ],
+  "required_evidence": [
+    "evidence.document-manifest"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.8,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.text-document"
+  ],
+  "title": "Document identity and structure",
+  "trigger_all": [],
+  "trigger_any": [
+    "modality.text",
+    "modality.document"
+  ],
+  "version": "1.0.0"
+}

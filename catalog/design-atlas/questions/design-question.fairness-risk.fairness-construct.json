@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-fairness-risk-fairness-construct"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.fairness-risk.fairness-construct.evaluate",
+      "label": "Evaluate stakeholder-approved fairness constructs",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-fairness-risk-fairness-construct-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.fairness-risk.fairness-construct.baseline",
+      "label": "Report group quality without optimizing a proxy",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-fairness-risk-fairness-construct"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.fairness-risk.fairness-construct.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.fairness-risk.fairness-construct",
+  "pack_id": "design-pack.fairness-risk",
+  "prompt": "Which allocation or quality notion is appropriate, which groups and intersections matter, and what tradeoffs are impossible to satisfy together?",
+  "rationale": "A fairness metric has meaning only relative to the decision, population, and harm model.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1",
+    "source.mitchell.model-cards"
+  ],
+  "required_evidence": [
+    "evidence.fairness-rationale",
+    "evidence.group-definition"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.fairness-risk"
+  ],
+  "title": "Fairness construct and groups",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

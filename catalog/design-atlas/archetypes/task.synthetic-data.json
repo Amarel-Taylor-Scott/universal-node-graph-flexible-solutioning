@@ -1,0 +1,28 @@
+{
+  "description": "Generate or augment tabular, text, image, document, sequence, or multimodal data under utility and privacy gates.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.synthetic-data",
+  "optional_pack_ids": [
+    "design-pack.text-document",
+    "design-pack.image-multimodal",
+    "design-pack.fairness-risk"
+  ],
+  "outcome_artifact": "artifact.synthetic-dataset",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.validation-splits",
+    "design-pack.synthetic-data",
+    "design-pack.evaluation-error",
+    "design-pack.robustness-stability",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.synthetic-data",
+    "domain.synthetic-data"
+  ],
+  "title": "Synthetic-data generation"
+}

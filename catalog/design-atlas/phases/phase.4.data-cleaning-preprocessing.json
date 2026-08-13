@@ -1,0 +1,383 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.4.data-cleaning-preprocessing",
+  "technique_count": 75,
+  "techniques": [
+    {
+      "digest": "sha256:7f2687c8e2f2e407a9f718f5de04f0df05d1c3a722abb28126ce3cf0ed12399f",
+      "id": "technique.4.1.1",
+      "path": "design-atlas/techniques/technique.4.1.1.json"
+    },
+    {
+      "digest": "sha256:aff85a614735c24a6a38ff5bf85a63584aa10fcd3544d5f5878563bcbd8c7ec0",
+      "id": "technique.4.1.2",
+      "path": "design-atlas/techniques/technique.4.1.2.json"
+    },
+    {
+      "digest": "sha256:68b2be6060b8d3071de291dd69a496416abf57ca698e905035dbfac4275f7d62",
+      "id": "technique.4.1.3",
+      "path": "design-atlas/techniques/technique.4.1.3.json"
+    },
+    {
+      "digest": "sha256:d4244e69bb3778e61de1f26dbee0562c480922df5f0804fa0ebb63e95140e29b",
+      "id": "technique.4.1.4",
+      "path": "design-atlas/techniques/technique.4.1.4.json"
+    },
+    {
+      "digest": "sha256:6d5cab51d5cf4cb5dd33ef87215420099fb577499afc5abadc9232c6fcfc4a92",
+      "id": "technique.4.1.5",
+      "path": "design-atlas/techniques/technique.4.1.5.json"
+    },
+    {
+      "digest": "sha256:852cc0680b757fb03ed7ed048bd42d1d03fea842467b5daa2e337abb11642529",
+      "id": "technique.4.1.6",
+      "path": "design-atlas/techniques/technique.4.1.6.json"
+    },
+    {
+      "digest": "sha256:4790c5246fa6e48bf4b221664b3de7a13c8ea75c5b547476aabbf686271b8fdf",
+      "id": "technique.4.1.7",
+      "path": "design-atlas/techniques/technique.4.1.7.json"
+    },
+    {
+      "digest": "sha256:1fe855b92c274eb44d151e280d1161ac039b3c26e78c6e8c2ff9ab448935a88a",
+      "id": "technique.4.1.8",
+      "path": "design-atlas/techniques/technique.4.1.8.json"
+    },
+    {
+      "digest": "sha256:5c1245c7d6f12fb424b184ce19ee067959d7c43cf8608517af3ec0c1adb0b147",
+      "id": "technique.4.1.9",
+      "path": "design-atlas/techniques/technique.4.1.9.json"
+    },
+    {
+      "digest": "sha256:4de189b3f4b38fc74d7903f22c953b60057db2facaaea9a6ae24c9ac6834bd8d",
+      "id": "technique.4.1.10",
+      "path": "design-atlas/techniques/technique.4.1.10.json"
+    },
+    {
+      "digest": "sha256:39b8882593f4df9d666b2eccad7f3328707797bb4e8f8f783fd4fa0373634e89",
+      "id": "technique.4.1.11",
+      "path": "design-atlas/techniques/technique.4.1.11.json"
+    },
+    {
+      "digest": "sha256:9bd3f0cf533a211d3f9100237d3331f1627ffdb5e646e5b3b21a6989e1acf83a",
+      "id": "technique.4.1.12",
+      "path": "design-atlas/techniques/technique.4.1.12.json"
+    },
+    {
+      "digest": "sha256:626bd5d790344918edc5a32c490bc422b19619742fc6c2dd2c89abd3f2b19bb7",
+      "id": "technique.4.1.13",
+      "path": "design-atlas/techniques/technique.4.1.13.json"
+    },
+    {
+      "digest": "sha256:b155c801b675681020b54191c3987bb9d55161d1768be04e9e6a244a30819c07",
+      "id": "technique.4.1.14",
+      "path": "design-atlas/techniques/technique.4.1.14.json"
+    },
+    {
+      "digest": "sha256:d36e88e57842ff640c561bed52ad952efcc22b18c28c780e4bcacbd0565f7a4f",
+      "id": "technique.4.1.15",
+      "path": "design-atlas/techniques/technique.4.1.15.json"
+    },
+    {
+      "digest": "sha256:f9ecb89cf1e1d4e893ce624b8710870add0e580a723b01040fb7294d41839902",
+      "id": "technique.4.1.16",
+      "path": "design-atlas/techniques/technique.4.1.16.json"
+    },
+    {
+      "digest": "sha256:e2c9a1058f9cbc25593dfd0f2b8070f4644a27aa7d6a4d6de578f1ec8bc7d2bd",
+      "id": "technique.4.1.17",
+      "path": "design-atlas/techniques/technique.4.1.17.json"
+    },
+    {
+      "digest": "sha256:a31b0189bfe2327902085854af6416d26c2f49d3280a28fe0b3b27b89c801891",
+      "id": "technique.4.1.18",
+      "path": "design-atlas/techniques/technique.4.1.18.json"
+    },
+    {
+      "digest": "sha256:ded9639f7d2e1ba3a2a9d9670170482d121dd81bfed8d1cd8f7af662cd08b7db",
+      "id": "technique.4.2.1",
+      "path": "design-atlas/techniques/technique.4.2.1.json"
+    },
+    {
+      "digest": "sha256:dc2c7aad9191c421853e6cd6247cc65b5b5d61907f0f199a638c31c9e650cd94",
+      "id": "technique.4.2.2",
+      "path": "design-atlas/techniques/technique.4.2.2.json"
+    },
+    {
+      "digest": "sha256:c0c1c27c3aad52460a1354867dd9c321c4aa7273fda5fd0a532e779f4e4a10ac",
+      "id": "technique.4.2.3",
+      "path": "design-atlas/techniques/technique.4.2.3.json"
+    },
+    {
+      "digest": "sha256:71b531b4b0d266d818ced810db540a63c511bdfd499a617983dedb75b6df483e",
+      "id": "technique.4.2.4",
+      "path": "design-atlas/techniques/technique.4.2.4.json"
+    },
+    {
+      "digest": "sha256:6b2f58f682b8dab3e592930a8a72bfacd59429901963b84086ea0ae9903d2f50",
+      "id": "technique.4.2.5",
+      "path": "design-atlas/techniques/technique.4.2.5.json"
+    },
+    {
+      "digest": "sha256:4e6907d4fdc428ad08d2b29968ccfdff4c04d2ee888b75f136cc31899c30da14",
+      "id": "technique.4.2.6",
+      "path": "design-atlas/techniques/technique.4.2.6.json"
+    },
+    {
+      "digest": "sha256:678e48fbc87cf044abd5fe689b4bccc6e469304fa2561b2fbf6e4ce0a458be3c",
+      "id": "technique.4.2.7",
+      "path": "design-atlas/techniques/technique.4.2.7.json"
+    },
+    {
+      "digest": "sha256:d1a7e791c2edb7bf609f84738c99665fafd0274980f357a57667c7868a0c2179",
+      "id": "technique.4.2.8",
+      "path": "design-atlas/techniques/technique.4.2.8.json"
+    },
+    {
+      "digest": "sha256:abdc140aaf278834bda3168e97d1cebcd47482ad12c783d9a6d22c38f39ef593",
+      "id": "technique.4.2.9",
+      "path": "design-atlas/techniques/technique.4.2.9.json"
+    },
+    {
+      "digest": "sha256:9195850f17b0e0cbac1fb0b683bc74ea017f3279e8bbd539afada2a24b6c84a8",
+      "id": "technique.4.2.10",
+      "path": "design-atlas/techniques/technique.4.2.10.json"
+    },
+    {
+      "digest": "sha256:f9c60c5966a02fee8f0cf3073657fe93c83617680b80dc6f76b8fca27b1bb5a2",
+      "id": "technique.4.2.11",
+      "path": "design-atlas/techniques/technique.4.2.11.json"
+    },
+    {
+      "digest": "sha256:16fd9fdc23b3a75cd1d81719b8a3c7747de56240c1a3f6d901a8ef22ab70b230",
+      "id": "technique.4.2.12",
+      "path": "design-atlas/techniques/technique.4.2.12.json"
+    },
+    {
+      "digest": "sha256:2b168291a1db267f84cdaccd6db7b4f52a24b5172d2929d7628449422a0c664f",
+      "id": "technique.4.2.13",
+      "path": "design-atlas/techniques/technique.4.2.13.json"
+    },
+    {
+      "digest": "sha256:546ba45d4c043d3bd7db11fe420dd83ad1f4374b1a4dc01a5a5363f39cc6d6d7",
+      "id": "technique.4.2.14",
+      "path": "design-atlas/techniques/technique.4.2.14.json"
+    },
+    {
+      "digest": "sha256:601da1d7f4dcc4b75f76918b0d65482c0fe76ffb70689cc9ab7a4182431acafc",
+      "id": "technique.4.2.15",
+      "path": "design-atlas/techniques/technique.4.2.15.json"
+    },
+    {
+      "digest": "sha256:190de5570a9fe7756c3be9b91682b85cc8afcbaabadf12b7889d018139001263",
+      "id": "technique.4.2.16",
+      "path": "design-atlas/techniques/technique.4.2.16.json"
+    },
+    {
+      "digest": "sha256:d88b47b6d3edeb176938e07acd39969d886779bf3e9e0cd15ce1f3919833bc30",
+      "id": "technique.4.2.17",
+      "path": "design-atlas/techniques/technique.4.2.17.json"
+    },
+    {
+      "digest": "sha256:db80131d6205ea6c32776b6ed67d024971ac5debc5a1c8d5c862c0be44ccf923",
+      "id": "technique.4.2.18",
+      "path": "design-atlas/techniques/technique.4.2.18.json"
+    },
+    {
+      "digest": "sha256:218fd1b35b1176bf92fb6dc209a26f8ecca709e1c19c2229f42b841718595679",
+      "id": "technique.4.3.1",
+      "path": "design-atlas/techniques/technique.4.3.1.json"
+    },
+    {
+      "digest": "sha256:adcd5e28599433d223e110106111715b6f29ede65fa9520f785c4b70b03af2d5",
+      "id": "technique.4.3.2",
+      "path": "design-atlas/techniques/technique.4.3.2.json"
+    },
+    {
+      "digest": "sha256:b32868e9f2712e36c447356394884c1c95caf50709cc01ff825e8686bf1f97f2",
+      "id": "technique.4.3.3",
+      "path": "design-atlas/techniques/technique.4.3.3.json"
+    },
+    {
+      "digest": "sha256:a1baea479c042cd19381b8a2e201a4f2f218b7673db922bfcea6cc48bc0a9b12",
+      "id": "technique.4.3.4",
+      "path": "design-atlas/techniques/technique.4.3.4.json"
+    },
+    {
+      "digest": "sha256:154c858d901bbf5a6d023e3c6218dbe628ac0ea81c257dd94444e97a73bd74cb",
+      "id": "technique.4.3.5",
+      "path": "design-atlas/techniques/technique.4.3.5.json"
+    },
+    {
+      "digest": "sha256:713ae1326cce3ef4fd0be8f523667d096918bcd9f4efe60b79972fa9f3635ec4",
+      "id": "technique.4.3.6",
+      "path": "design-atlas/techniques/technique.4.3.6.json"
+    },
+    {
+      "digest": "sha256:4021c201616e4308d438d67310575defc7727f521e990be0fb93981df2e96509",
+      "id": "technique.4.3.7",
+      "path": "design-atlas/techniques/technique.4.3.7.json"
+    },
+    {
+      "digest": "sha256:fb23f8273cbe38ba32bdec6c05f5b7d3ab681169aaf75f3622ffe34c87cf7565",
+      "id": "technique.4.3.8",
+      "path": "design-atlas/techniques/technique.4.3.8.json"
+    },
+    {
+      "digest": "sha256:4a99551d5b12e30efc92d1a2d3302961179c9aeab0ecf8be767ccb0531d8f240",
+      "id": "technique.4.3.9",
+      "path": "design-atlas/techniques/technique.4.3.9.json"
+    },
+    {
+      "digest": "sha256:0d6a576fe56b4e10221fb1991223c2bf0a9e2a4c799d089e1174ccb2e1f9e06d",
+      "id": "technique.4.3.10",
+      "path": "design-atlas/techniques/technique.4.3.10.json"
+    },
+    {
+      "digest": "sha256:053493b12ea9a0139aeeb27984abf6d4ad8839b55ac43d3e56b2a32bb0459df3",
+      "id": "technique.4.3.11",
+      "path": "design-atlas/techniques/technique.4.3.11.json"
+    },
+    {
+      "digest": "sha256:35acf191952051bf3b9b4ecdf5f0df9080d168a43f146f28182f66591f4bb951",
+      "id": "technique.4.3.12",
+      "path": "design-atlas/techniques/technique.4.3.12.json"
+    },
+    {
+      "digest": "sha256:09322170eadf58f74b7361c4f39f9d209fef60d9dc1484ef47a68a75032e25aa",
+      "id": "technique.4.3.13",
+      "path": "design-atlas/techniques/technique.4.3.13.json"
+    },
+    {
+      "digest": "sha256:bdb2d5daba5741357a11610ab82290544d897805d61c2f24700761b455afdd8e",
+      "id": "technique.4.3.14",
+      "path": "design-atlas/techniques/technique.4.3.14.json"
+    },
+    {
+      "digest": "sha256:59210804825fb6f01c309bb062a445ad9507608143de757a7aeeb9df9d036478",
+      "id": "technique.4.3.15",
+      "path": "design-atlas/techniques/technique.4.3.15.json"
+    },
+    {
+      "digest": "sha256:8ce6071544e1075f5360bb9a9fbce7c6fafe7fdf5467c07368107d38192459f9",
+      "id": "technique.4.4.1",
+      "path": "design-atlas/techniques/technique.4.4.1.json"
+    },
+    {
+      "digest": "sha256:25453d051a96fb97cc3fc712202882b31820ca2bcb5d613cd31da3fa2e37ed4b",
+      "id": "technique.4.4.2",
+      "path": "design-atlas/techniques/technique.4.4.2.json"
+    },
+    {
+      "digest": "sha256:844d91f1f7d063d657e36f5ed8b36b860fcdde5d99cfe149d44da49e54b0e56a",
+      "id": "technique.4.4.3",
+      "path": "design-atlas/techniques/technique.4.4.3.json"
+    },
+    {
+      "digest": "sha256:66e74cd89fbe1cb8a343eeefbea025b4fe0fb7757344aabe234dd3be9ac6073d",
+      "id": "technique.4.4.4",
+      "path": "design-atlas/techniques/technique.4.4.4.json"
+    },
+    {
+      "digest": "sha256:f22007c86ca8534d3513f1d5e6f3e634e5c07bd3dd84a465e70fb9130fb1859f",
+      "id": "technique.4.4.5",
+      "path": "design-atlas/techniques/technique.4.4.5.json"
+    },
+    {
+      "digest": "sha256:c259da10befed73edc3c0188ae5d8bd4d860ffc24d10ec549d785234b6ba39e5",
+      "id": "technique.4.4.6",
+      "path": "design-atlas/techniques/technique.4.4.6.json"
+    },
+    {
+      "digest": "sha256:739e612e6fa9bca6c81ea48bd68da7cadd1f3f3fd384d02c2a7793544c12a514",
+      "id": "technique.4.4.7",
+      "path": "design-atlas/techniques/technique.4.4.7.json"
+    },
+    {
+      "digest": "sha256:8d5d2582e11ff028860f73d71f021496712f669ea5136daf5e0623a4a24457b1",
+      "id": "technique.4.4.8",
+      "path": "design-atlas/techniques/technique.4.4.8.json"
+    },
+    {
+      "digest": "sha256:e9446ad97d61cf6477bbdb82cc780683f713a5784dfb0fc51425d41551839ba7",
+      "id": "technique.4.4.9",
+      "path": "design-atlas/techniques/technique.4.4.9.json"
+    },
+    {
+      "digest": "sha256:3f3eb8c2841298884b94c1668074e2ef4cce1153a406b46d51427af77261a355",
+      "id": "technique.4.4.10",
+      "path": "design-atlas/techniques/technique.4.4.10.json"
+    },
+    {
+      "digest": "sha256:c7d398cdb3250a4089401dddfb494dc639218e579eff5b9d2fe73f364adc3ab2",
+      "id": "technique.4.5.1",
+      "path": "design-atlas/techniques/technique.4.5.1.json"
+    },
+    {
+      "digest": "sha256:0808317aaf6c31d2ff69b8556cb1160494cea8a3449816449216c080cea54179",
+      "id": "technique.4.5.2",
+      "path": "design-atlas/techniques/technique.4.5.2.json"
+    },
+    {
+      "digest": "sha256:fa32201583f7c5412cfd92a4dab60e9c70cf195536ee55e67b6b21c44b4bade7",
+      "id": "technique.4.5.3",
+      "path": "design-atlas/techniques/technique.4.5.3.json"
+    },
+    {
+      "digest": "sha256:a6f8af2bad16a0d49fbe96f35c83a8712d6fb638e08f83fd29b0d339d967f5e2",
+      "id": "technique.4.5.4",
+      "path": "design-atlas/techniques/technique.4.5.4.json"
+    },
+    {
+      "digest": "sha256:80beb52c4471876fa1dd46e0c28092a450eff0628ae36c1850a5c94c05f3df98",
+      "id": "technique.4.5.5",
+      "path": "design-atlas/techniques/technique.4.5.5.json"
+    },
+    {
+      "digest": "sha256:ed49278623e4c4e7185b5c84e08fc0f039d60543db3d389fe51bb22193ff3886",
+      "id": "technique.4.5.6",
+      "path": "design-atlas/techniques/technique.4.5.6.json"
+    },
+    {
+      "digest": "sha256:39b720e0770f841deed089adee54aaf4a517b22312b8577abf080191b46cde87",
+      "id": "technique.4.5.7",
+      "path": "design-atlas/techniques/technique.4.5.7.json"
+    },
+    {
+      "digest": "sha256:e0c31027fde08f2515fb512392437ca1df454d25e1d146cbfe4bf704e23c4810",
+      "id": "technique.4.5.8",
+      "path": "design-atlas/techniques/technique.4.5.8.json"
+    },
+    {
+      "digest": "sha256:d69945c9632d3a99f027033fb3ab71ddc6e3097ffd40f85d6ae0742ce0ce267a",
+      "id": "technique.4.5.9",
+      "path": "design-atlas/techniques/technique.4.5.9.json"
+    },
+    {
+      "digest": "sha256:d62496274e447eea3716042bc5ed6934853d85d2c35d95e7d6528907bc4c33d3",
+      "id": "technique.4.5.10",
+      "path": "design-atlas/techniques/technique.4.5.10.json"
+    },
+    {
+      "digest": "sha256:e89b501f57fb2bc632a3b50916a798b08d01046a2bde19505aaebc80bd657f31",
+      "id": "technique.4.5.11",
+      "path": "design-atlas/techniques/technique.4.5.11.json"
+    },
+    {
+      "digest": "sha256:91ded146d2e525d38c2a694799961a0c3632cce1d1a96aa7ceea1ce31e34e10a",
+      "id": "technique.4.5.12",
+      "path": "design-atlas/techniques/technique.4.5.12.json"
+    },
+    {
+      "digest": "sha256:17478da4a4afd70d6bf0901d94217b875b68055d00a414dc99b1066af783c52d",
+      "id": "technique.4.5.13",
+      "path": "design-atlas/techniques/technique.4.5.13.json"
+    },
+    {
+      "digest": "sha256:86116a0c533cac711f03ea2b9ceb210ede26229d5d69abb3db811437e8fb8542",
+      "id": "technique.4.5.14",
+      "path": "design-atlas/techniques/technique.4.5.14.json"
+    }
+  ],
+  "title": "Data Cleaning & Preprocessing"
+}

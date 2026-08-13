@@ -1,0 +1,62 @@
+{
+  "actions": [
+    "design-atlas.plan-review"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.design-atlas.plan-human-review",
+      "language": "und",
+      "source_digest": "sha256:fac883a152b375ecf5124fff993cd865749df944bd380e0c7c6d37292e2793fa",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Compile the complete visibility ledger and allocate the effort-bounded selection to a human reviewer under explicit authority."
+    }
+  ],
+  "domains": [
+    "data.science",
+    "machine.learning",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "design-atlas.maturity": "reference"
+  },
+  "node_id": "design-atlas.plan-human-review",
+  "node_spec_digest": "sha256:fac883a152b375ecf5124fff993cd865749df944bd380e0c7c6d37292e2793fa",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed context input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "context"
+    },
+    {
+      "concepts": [],
+      "description": "Typed design_plan output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "design_plan"
+    }
+  ],
+  "purposes": [
+    "Compile the complete visibility ledger and allocate the effort-bounded selection to a human reviewer under explicit authority."
+  ],
+  "solutions": [
+    "Compose this stage into an evidence-driven design feedback loop."
+  ],
+  "summary": "Compile the complete visibility ledger and allocate the effort-bounded selection to a human reviewer under explicit authority.",
+  "tags": [
+    "design-atlas",
+    "typed-node",
+    "runtime.python",
+    "evidence-aware"
+  ],
+  "title": "Plan Human Review"
+}

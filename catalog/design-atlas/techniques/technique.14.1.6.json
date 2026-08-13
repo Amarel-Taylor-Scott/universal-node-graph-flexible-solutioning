@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "",
+  "family": "Basic Ensembling",
+  "id": "technique.14.1.6",
+  "maturity_floor": "C1",
+  "ordinal": "14.1.6",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.14.ensemble-methods",
+  "phase_title": "Ensemble Methods",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not a filling",
+  "tags": [
+    "phase.14",
+    "family.basic-ensembling"
+  ],
+  "title": "Geometric mean"
+}

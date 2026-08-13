@@ -1,0 +1,61 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-interpretability-documentation"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.interpretability.documentation.evaluate",
+      "label": "Audit the model/system card with stakeholders",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-interpretability-documentation-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.interpretability.documentation.baseline",
+      "label": "Emit a complete model card",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-interpretability-documentation"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.interpretability.documentation.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.interpretability.documentation",
+  "pack_id": "design-pack.interpretability",
+  "prompt": "Will intended use, training/evaluation data, metrics, slices, ethical considerations, caveats, and operational limits be recorded?",
+  "rationale": "A chart or feature list does not communicate system scope and limitations.",
+  "reference_ids": [
+    "source.mitchell.model-cards"
+  ],
+  "required_evidence": [
+    "evidence.model-card"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.85,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.interpretability"
+  ],
+  "title": "Model and system documentation",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

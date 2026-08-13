@@ -1,0 +1,59 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-selection-reduction-stability"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.selection-reduction.stability.evaluate",
+      "label": "Bootstrap and compare selection stability",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-selection-reduction-stability-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.selection-reduction.stability.baseline",
+      "label": "Report fold-level selection frequency",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-selection-reduction-stability"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.selection-reduction.stability.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.selection-reduction.stability",
+  "pack_id": "design-pack.selection-reduction",
+  "prompt": "Do selected features or components remain stable across folds, seeds, resamples, time, and relevant slices?",
+  "rationale": "A high-scoring unstable subset may not support durable inference or explanation.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.selection-stability"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.75,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.selection-reduction"
+  ],
+  "title": "Selection stability",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

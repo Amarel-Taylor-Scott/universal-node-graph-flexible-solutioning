@@ -1,0 +1,61 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-schema-semantics-unknown-schema"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.schema-semantics.unknown-schema.evaluate",
+      "label": "Replay schema evolution cases",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-schema-semantics-unknown-schema-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.schema-semantics.unknown-schema.baseline",
+      "label": "Reject incompatible schema changes",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-schema-semantics-unknown-schema"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.schema-semantics.unknown-schema.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.schema-semantics.unknown-schema",
+  "pack_id": "design-pack.schema-semantics",
+  "prompt": "Should added, removed, reordered, type-changed, and unknown fields fail, warn, quarantine, or adapt?",
+  "rationale": "A schema policy needs explicit forward-compatibility behavior instead of silent coercion.",
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "required_evidence": [
+    "evidence.schema-evolution-cases"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.8,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.schema-semantics"
+  ],
+  "title": "Schema evolution and unknown fields",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

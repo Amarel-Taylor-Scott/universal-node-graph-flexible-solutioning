@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-tuning-search-search-space"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.tuning-search.search-space.evaluate",
+      "label": "Compile the full declared space",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-tuning-search-search-space-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.tuning-search.search-space.baseline",
+      "label": "Search a small explicit compatible grid",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-tuning-search-search-space"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.tuning-search.search-space.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.tuning-search.search-space",
+  "pack_id": "design-pack.tuning-search",
+  "prompt": "Are parameter domains, conditional activation, forbidden combinations, adapters, and topology alternatives explicit and type-compatible?",
+  "rationale": "Invalid or hidden combinations make search accounting and reproducibility unreliable.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.admitted-space",
+    "evidence.constraint-tests"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.tuning-search"
+  ],
+  "title": "Conditional search space",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

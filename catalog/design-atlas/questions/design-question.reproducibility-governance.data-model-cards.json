@@ -1,0 +1,64 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-reproducibility-governance-data-model-cards"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.reproducibility-governance.data-model-cards.evaluate",
+      "label": "Audit data and model cards with intended readers",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-reproducibility-governance-data-model-cards-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.reproducibility-governance.data-model-cards.baseline",
+      "label": "Require versioned data and model cards",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-reproducibility-governance-data-model-cards"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.reproducibility-governance.data-model-cards.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.reproducibility-governance.data-model-cards",
+  "pack_id": "design-pack.reproducibility-governance",
+  "prompt": "Are motivation, composition, collection, processing, intended use, evaluation, limitations, maintenance, and owners documented for each release?",
+  "rationale": "Structured documentation makes hidden assumptions reviewable across teams and time.",
+  "reference_ids": [
+    "source.gebru.datasheets",
+    "source.pushkarna.data-cards",
+    "source.mitchell.model-cards"
+  ],
+  "required_evidence": [
+    "evidence.data-card",
+    "evidence.model-card"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.reproducibility-governance"
+  ],
+  "title": "Dataset and model documentation",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

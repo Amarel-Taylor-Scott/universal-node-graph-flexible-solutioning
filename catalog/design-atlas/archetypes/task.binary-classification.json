@@ -1,0 +1,32 @@
+{
+  "description": "Predict or rank binary outcomes with cost-aware evaluation, calibration, and threshold policy.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.binary-classification",
+  "optional_pack_ids": [
+    "design-pack.ensemble-calibration",
+    "design-pack.fairness-risk",
+    "design-pack.interpretability"
+  ],
+  "outcome_artifact": "artifact.classification-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.binary-classification",
+    "domain.machine-learning",
+    "signal.supervised"
+  ],
+  "title": "Binary classification"
+}

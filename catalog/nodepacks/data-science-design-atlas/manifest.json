@@ -1,0 +1,74 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.design_atlas.nodes.derive_context:derive_context_node"
+      },
+      "digest": "sha256:c1a714cc1ceb599b28caf121d6ddc26a365156995e1b9d6aa03f301da13cdae0",
+      "media_type": "text/x-python",
+      "name": "artifact.design-atlas.derive-context",
+      "uri": "python://solutiongraph.design_atlas.nodes.derive_context:derive_context_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.design_atlas.nodes.plan_review:plan_human_review_node"
+      },
+      "digest": "sha256:e00c5eb52979d3b41d4f0be78ab517dccaff2f952d58ea423d985aabf7379d9f",
+      "media_type": "text/x-python",
+      "name": "artifact.design-atlas.plan-human-review",
+      "uri": "python://solutiongraph.design_atlas.nodes.plan_review:plan_human_review_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.design_atlas.nodes.plan_review:plan_llm_review_node"
+      },
+      "digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+      "media_type": "text/x-python",
+      "name": "artifact.design-atlas.plan-llm-review",
+      "uri": "python://solutiongraph.design_atlas.nodes.plan_review:plan_llm_review_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.design_atlas.nodes.resolve_answers:resolve_answers_node"
+      },
+      "digest": "sha256:0aca30f09307955dd262b4907da415297a26d6440af0c30cd2f0ddfe3bfda7bc",
+      "media_type": "text/x-python",
+      "name": "artifact.design-atlas.resolve-answers",
+      "uri": "python://solutiongraph.design_atlas.nodes.resolve_answers:resolve_answers_node"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.design_atlas.nodes.render_report:render_report_node"
+      },
+      "digest": "sha256:c694e7b4293c233870e0f13a4f500ed5a2ca945bc8a396797a022fa710a134b9",
+      "media_type": "text/x-python",
+      "name": "artifact.design-atlas.render-report",
+      "uri": "python://solutiongraph.design_atlas.nodes.render_report:render_report_node"
+    }
+  ],
+  "dependencies": [],
+  "description": "Five individually importable typed nodes for aggregate context derivation, authority-separated human or LLM planning, evidence-aware resolution, and portable reports.",
+  "descriptor_digests": [
+    "sha256:f8ec50a5ed5f82ed411525fccf78c93e3fa00055f9a3395d924f136281a5fd24",
+    "sha256:8c8116e6f4e06fb731789bd1809e81857dde511384a1b54cc693985bc1533926",
+    "sha256:425f47f5a978d18ff992903c510010a3e3ba6257f0d24370f18392323698bd17",
+    "sha256:eb71dd5983654d9a48d9a1f1f01880b86e9208e55524e7c60bcb421e91bf2aec",
+    "sha256:dfec29811e7d76e6a1876eb24f06e4b271de4bf836c680fd6f568f0055a085b0"
+  ],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "design-atlas.maturity": "reference"
+  },
+  "id": "design-atlas.data-science-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:61eefb0b10cbedf7770368d120887a8d05220b6b7fc0417fb109533dc634a641",
+    "sha256:fac883a152b375ecf5124fff993cd865749df944bd380e0c7c6d37292e2793fa",
+    "sha256:8b6872281f3a609abf7f1bbf15e13b019ae5b0646c2264d3e8dccbb515070a9c",
+    "sha256:40cd24fab2b84bbbac25eacf0fe8846b5eb694a7fee73878def475451a7129fb",
+    "sha256:30731963ea97f4e74d6db2b461d3e5a168e0059427ba4883c6bd58155b6832ff"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

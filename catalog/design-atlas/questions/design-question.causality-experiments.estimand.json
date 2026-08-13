@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-causality-experiments-estimand"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.causality-experiments.estimand.evaluate",
+      "label": "Review candidate estimands with domain owners",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-causality-experiments-estimand-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.causality-experiments.estimand.baseline",
+      "label": "Keep the task predictive until an estimand exists",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-causality-experiments-estimand"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.causality-experiments.estimand.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.causality-experiments.estimand",
+  "pack_id": "design-pack.causality-experiments",
+  "prompt": "What intervention, population, outcome, horizon, contrast, and aggregation define the estimand?",
+  "rationale": "Causal inference cannot begin with an estimator name; it begins with a precise question.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.estimand",
+    "evidence.intervention-definition"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.causality-experiments"
+  ],
+  "title": "Causal estimand and intervention",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.causal-inference"
+  ],
+  "version": "1.0.0"
+}

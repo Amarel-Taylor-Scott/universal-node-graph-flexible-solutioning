@@ -1,0 +1,252 @@
+{
+  "description": "Validate how outcomes are generated, transformed, delayed, censored, adjudicated, and represented.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.target-labels",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-target-labels-label-definition"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.target-labels.label-definition.evaluate",
+          "label": "Audit and sample-adjudicate label generation",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-target-labels-label-definition-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.target-labels.label-definition.baseline",
+          "label": "Use the signed label specification",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-target-labels-label-definition"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.target-labels.label-definition.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.target-labels.label-definition",
+      "pack_id": "design-pack.target-labels",
+      "prompt": "What event creates a label, whose judgment is encoded, and how are disagreement, noise, and ambiguity retained?",
+      "rationale": "Labels are measurements with provenance, not automatically ground truth.",
+      "reference_ids": [
+        "source.gebru.datasheets"
+      ],
+      "required_evidence": [
+        "evidence.label-specification",
+        "evidence.adjudication-sample"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.target-labels"
+      ],
+      "title": "Label construction and adjudication",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-target-labels-delay-censoring"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.target-labels.delay-censoring.evaluate",
+          "label": "Model label maturity and censoring alternatives",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-target-labels-delay-censoring-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.target-labels.delay-censoring.baseline",
+          "label": "Train only on mature labels",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-target-labels-delay-censoring"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.target-labels.delay-censoring.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.target-labels.delay-censoring",
+      "pack_id": "design-pack.target-labels",
+      "prompt": "Which outcomes are not yet observed, censored, selectively observed, or revised after the training cutoff?",
+      "rationale": "Treating unknown outcomes as negatives systematically biases many real-world tasks.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.label-maturity-analysis"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.target-labels"
+      ],
+      "title": "Delay, censoring, and observation windows",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-target-labels-imbalance-cost"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.target-labels.imbalance-cost.evaluate",
+          "label": "Compare cost-aware imbalance strategies",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-target-labels-imbalance-cost-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.target-labels.imbalance-cost.baseline",
+          "label": "Use stratification plus explicit class costs",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-target-labels-imbalance-cost"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.target-labels.imbalance-cost.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.target-labels.imbalance-cost",
+      "pack_id": "design-pack.target-labels",
+      "prompt": "Is rarity meaningful, which errors cost more, and should weighting, sampling, thresholds, ranking, or anomaly framing change?",
+      "rationale": "Class balance alone does not define utility or the correct intervention.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.class-prevalence",
+        "evidence.error-costs"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.8,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.target-labels"
+      ],
+      "title": "Imbalance and decision cost",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-target-labels-target-transform"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.target-labels.target-transform.evaluate",
+          "label": "Evaluate target representations with inverse checks",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-target-labels-target-transform-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.target-labels.target-transform.baseline",
+          "label": "Preserve the original target scale",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-target-labels-target-transform"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.target-labels.target-transform.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.target-labels.target-transform",
+      "pack_id": "design-pack.target-labels",
+      "prompt": "Would transformation, binning, ordinal framing, multi-task labels, or uncertainty targets improve fit without changing the required output?",
+      "rationale": "Target transforms require reversible output semantics and metrics on the decision scale.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.target-profile",
+        "evidence.inverse-transform-test"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.65,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.target-labels"
+      ],
+      "title": "Target representation and inverse semantics",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.modeling",
+  "title": "Targets, labels, censoring, and imbalance",
+  "version": "1.0.0"
+}

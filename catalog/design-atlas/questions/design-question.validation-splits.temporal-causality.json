@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-validation-splits-temporal-causality"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.validation-splits.temporal-causality.evaluate",
+      "label": "Replay point-in-time feature availability",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-validation-splits-temporal-causality-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.validation-splits.temporal-causality.baseline",
+      "label": "Enforce time-ordered as-of joins",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-validation-splits-temporal-causality"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.validation-splits.temporal-causality.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.validation-splits.temporal-causality",
+  "pack_id": "design-pack.validation-splits",
+  "prompt": "For each feature and label, was the value actually available at the prediction timestamp?",
+  "rationale": "Event timestamps alone do not prevent future information, revisions, or late joins from leaking.",
+  "reference_ids": [
+    "source.sklearn.common-pitfalls"
+  ],
+  "required_evidence": [
+    "evidence.availability-timeline",
+    "evidence.as-of-join-test"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.validation-splits"
+  ],
+  "title": "Temporal and availability boundary",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

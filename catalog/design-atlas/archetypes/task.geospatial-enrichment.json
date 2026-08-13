@@ -1,0 +1,24 @@
+{
+  "description": "Validate and enrich addresses, coordinates, boundaries, places, proximity, and geographic attributes.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.geospatial-enrichment",
+  "optional_pack_ids": [
+    "design-pack.monitoring-feedback"
+  ],
+  "outcome_artifact": "artifact.geospatial-dataset",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.quality-cleaning",
+    "design-pack.geospatial",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.geospatial-enrichment",
+    "domain.geospatial",
+    "signal.geospatial"
+  ],
+  "title": "Geospatial enrichment"
+}

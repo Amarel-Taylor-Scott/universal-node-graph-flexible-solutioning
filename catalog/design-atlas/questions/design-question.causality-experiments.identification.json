@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-causality-experiments-identification"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.causality-experiments.identification.evaluate",
+      "label": "Challenge assumptions with falsification tests",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-causality-experiments-identification-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.causality-experiments.identification.baseline",
+      "label": "Report associations only",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-causality-experiments-identification"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.causality-experiments.identification.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.causality-experiments.identification",
+  "pack_id": "design-pack.causality-experiments",
+  "prompt": "What exchangeability, positivity, consistency, interference, timing, instrument, discontinuity, or parallel-trend assumptions are required?",
+  "rationale": "No algorithm can recover an unidentified causal effect from the available data.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.causal-diagram",
+    "evidence.identification-argument"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.causality-experiments"
+  ],
+  "title": "Identification assumptions",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.causal-inference"
+  ],
+  "version": "1.0.0"
+}

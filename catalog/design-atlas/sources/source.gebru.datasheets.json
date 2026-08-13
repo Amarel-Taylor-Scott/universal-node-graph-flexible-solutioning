@@ -1,0 +1,8 @@
+{
+  "claim": "Dataset motivation, composition, collection, use, distribution, and maintenance need documentation.",
+  "id": "source.gebru.datasheets",
+  "kind": "source.primary-research",
+  "revision": "Gebru et al. (2021)",
+  "title": "Datasheets for Datasets",
+  "url": "https://arxiv.org/abs/1803.09010"
+}

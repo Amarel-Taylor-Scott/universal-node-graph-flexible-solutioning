@@ -1,0 +1,88 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.13.automl",
+  "technique_count": 16,
+  "techniques": [
+    {
+      "digest": "sha256:90ca934cfabe1543a6861db67d20f7a9f527ef0b8af0b0603bf4cef18dae9a08",
+      "id": "technique.13.1",
+      "path": "design-atlas/techniques/technique.13.1.json"
+    },
+    {
+      "digest": "sha256:fd17513b7f00b1df2f955caeea4e072dbb1205ad4fbfae597e0beab5c4db7e0b",
+      "id": "technique.13.2",
+      "path": "design-atlas/techniques/technique.13.2.json"
+    },
+    {
+      "digest": "sha256:5fc99628823cad65d702eb8be49dafc43f2fd318197e899238dcafbb6efc20b9",
+      "id": "technique.13.3",
+      "path": "design-atlas/techniques/technique.13.3.json"
+    },
+    {
+      "digest": "sha256:5acc29888c900a0a692094b604b071c2ff1601b64bdac38b1eacfaa74d355102",
+      "id": "technique.13.4",
+      "path": "design-atlas/techniques/technique.13.4.json"
+    },
+    {
+      "digest": "sha256:9c50a3cff94757c0ef58816c84bf49908413b4527aebc9da86fcabf5d25bc814",
+      "id": "technique.13.5",
+      "path": "design-atlas/techniques/technique.13.5.json"
+    },
+    {
+      "digest": "sha256:05972ba55286f10d3c1740ade4f9dac75624115ab2a59d2e540fb8592f27816e",
+      "id": "technique.13.6",
+      "path": "design-atlas/techniques/technique.13.6.json"
+    },
+    {
+      "digest": "sha256:4aa41298335522564d7116d8259d7424268724f9744e27b17708f2f717377de1",
+      "id": "technique.13.7",
+      "path": "design-atlas/techniques/technique.13.7.json"
+    },
+    {
+      "digest": "sha256:be2b2c9b9aa89fc6503ed6e08b508ea8b1392da89271df1639a9e8f6165edec9",
+      "id": "technique.13.8",
+      "path": "design-atlas/techniques/technique.13.8.json"
+    },
+    {
+      "digest": "sha256:08b2581376969e66cdea071ba13482c5a1224386ea9f9ee0b8280b19e0d9f182",
+      "id": "technique.13.9",
+      "path": "design-atlas/techniques/technique.13.9.json"
+    },
+    {
+      "digest": "sha256:c7ecf57920f7141cf3b276c592762bf5638f2f8034a984eb14d58a50aadea25b",
+      "id": "technique.13.10",
+      "path": "design-atlas/techniques/technique.13.10.json"
+    },
+    {
+      "digest": "sha256:81b5d936119c99de7e325761a74c79efd97d7aeb1dfcaaf99201069907b127ec",
+      "id": "technique.13.11",
+      "path": "design-atlas/techniques/technique.13.11.json"
+    },
+    {
+      "digest": "sha256:c24359a132ad9a9b02882b51e44912a08419716634688eb30b1e784cb4132509",
+      "id": "technique.13.12",
+      "path": "design-atlas/techniques/technique.13.12.json"
+    },
+    {
+      "digest": "sha256:6e90302890f05157221a2aa6a5e783b3aa3942af9308f85e931e144f8b234ca6",
+      "id": "technique.13.13",
+      "path": "design-atlas/techniques/technique.13.13.json"
+    },
+    {
+      "digest": "sha256:ca02b3f81569cb3ae2a7bd55ee7317c0b4501a3dc4254b4e74eb150040a20d79",
+      "id": "technique.13.14",
+      "path": "design-atlas/techniques/technique.13.14.json"
+    },
+    {
+      "digest": "sha256:136dc3b5445baa26cb170521bd1ff9d7de34f94bdd162545810b9159222f1f1e",
+      "id": "technique.13.15",
+      "path": "design-atlas/techniques/technique.13.15.json"
+    },
+    {
+      "digest": "sha256:6bf42d5497a610c4b0c0e2220c8f3742ba11bb37df685a4cd735694e772db0e8",
+      "id": "technique.13.16",
+      "path": "design-atlas/techniques/technique.13.16.json"
+    }
+  ],
+  "title": "Automl"
+}

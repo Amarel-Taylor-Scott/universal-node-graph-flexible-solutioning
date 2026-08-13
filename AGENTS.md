@@ -142,6 +142,13 @@ objects, not in `NodeSpec`.
   planning, deterministic check adapters, reversible shadow repair, and
   independent verification. Keep question definitions in `question_packs/`
   separate from executable node definitions in `interrogation/nodes/`.
+- `solutiongraph/design_atlas/` — 618 C1-only technique records, task
+  archetypes, modular evidence-seeking design packs, all-visible E1–E10
+  planning, decision dossiers, reports, and evidence-derived C0–C7 maturity.
+  Executable atlas stages live one-per-file in `design_atlas/nodes/`; human and
+  model planners share typed ports but retain distinct permission contracts.
+  Keep technique/catalog truth, design decisions, executable nodes, and
+  benchmark evidence separate.
 - `solutiongraph/solver.py` — guarded multi-round search, experiment, ranking, champion, and route-fallback orchestration.
 - `solutiongraph/structured.py` — deterministic composite and bounded-loop lowering.
 - `solutiongraph/topology.py` — alternative graph families and route accounting.

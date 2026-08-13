@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-synthetic-data-mixture-ablation"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.synthetic-data.mixture-ablation.evaluate",
+      "label": "Run real-only, synthetic-only, and mixture arms",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-synthetic-data-mixture-ablation-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.synthetic-data.mixture-ablation.baseline",
+      "label": "Use real-only as the control",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-synthetic-data-mixture-ablation"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.synthetic-data.mixture-ablation.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.synthetic-data.mixture-ablation",
+  "pack_id": "design-pack.synthetic-data",
+  "prompt": "At which ratios, stages, curricula, slices, and model families does synthetic supplementation help, hurt, or merely duplicate?",
+  "rationale": "Synthetic data earns value only through clean downstream comparisons and failure analysis.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.mixture-experiment",
+    "evidence.holdout-results"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.85,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.synthetic-data"
+  ],
+  "title": "Real/synthetic mixture and ablation",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.synthetic-data"
+  ],
+  "version": "1.0.0"
+}

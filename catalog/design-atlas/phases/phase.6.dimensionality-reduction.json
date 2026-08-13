@@ -1,0 +1,128 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.6.dimensionality-reduction",
+  "technique_count": 24,
+  "techniques": [
+    {
+      "digest": "sha256:fb0b4c785a7969fb2036fe476739ba55a622c6fc98bc1143fde7c6af1bbab5c4",
+      "id": "technique.6.1",
+      "path": "design-atlas/techniques/technique.6.1.json"
+    },
+    {
+      "digest": "sha256:41ce515aa858235c3bc23ed330afed49bdd63477ae0c0395636ebcecac67c574",
+      "id": "technique.6.2",
+      "path": "design-atlas/techniques/technique.6.2.json"
+    },
+    {
+      "digest": "sha256:4e4e4c78cd90ca66ea1bb50272f1a3884d671792514c979ac30bc94f34940e14",
+      "id": "technique.6.3",
+      "path": "design-atlas/techniques/technique.6.3.json"
+    },
+    {
+      "digest": "sha256:275e46a4421188fc5b95bb44a11b6be0e42f962d5f711d3aaab7536d644d0387",
+      "id": "technique.6.4",
+      "path": "design-atlas/techniques/technique.6.4.json"
+    },
+    {
+      "digest": "sha256:9b87e1f008fce31df6741616f0f717db91553421676674753cb0e6d0dfc53f30",
+      "id": "technique.6.5",
+      "path": "design-atlas/techniques/technique.6.5.json"
+    },
+    {
+      "digest": "sha256:901dba08a773fb53becd05b21ae51806acb89ab5aa60d631794630eda7d0eef6",
+      "id": "technique.6.6",
+      "path": "design-atlas/techniques/technique.6.6.json"
+    },
+    {
+      "digest": "sha256:fa8d75dae90404eb9b69806b2986346894e0f614086bdd693d9344e9280d7e3f",
+      "id": "technique.6.7",
+      "path": "design-atlas/techniques/technique.6.7.json"
+    },
+    {
+      "digest": "sha256:babef697e921ba67e08649f4d946491c0d42aedc4d73d4d7367592bb50445e2c",
+      "id": "technique.6.8",
+      "path": "design-atlas/techniques/technique.6.8.json"
+    },
+    {
+      "digest": "sha256:8178a30a04f2b955ba541747ec8898f8c43623311355dd92477a53d3cff685c2",
+      "id": "technique.6.9",
+      "path": "design-atlas/techniques/technique.6.9.json"
+    },
+    {
+      "digest": "sha256:e0ba1d05b7d4e5aabefe25e58e8a3f570caee8396dfd2b934aac97e43edf8da7",
+      "id": "technique.6.10",
+      "path": "design-atlas/techniques/technique.6.10.json"
+    },
+    {
+      "digest": "sha256:c1f10411011f26e44718ec8e5698cff95ae03cf1f3788bd84d1cc96efc037f57",
+      "id": "technique.6.11",
+      "path": "design-atlas/techniques/technique.6.11.json"
+    },
+    {
+      "digest": "sha256:b7f6b197eb7a424064c67fc8503e45048d7bce0f434ed13d389cfc807c9c19dd",
+      "id": "technique.6.12",
+      "path": "design-atlas/techniques/technique.6.12.json"
+    },
+    {
+      "digest": "sha256:473d28373398c0a1deb4ab0035d0e27a9bc7d83beeca26a663b09b257a8224d0",
+      "id": "technique.6.13",
+      "path": "design-atlas/techniques/technique.6.13.json"
+    },
+    {
+      "digest": "sha256:38fd5a71a300ce45c0fef3421876fab8761327693f489e5e9940b026a6659732",
+      "id": "technique.6.14",
+      "path": "design-atlas/techniques/technique.6.14.json"
+    },
+    {
+      "digest": "sha256:d57cde83dfa346a7b1658f0841f4dd8bc5e6fed23b6276fc1bbf6c0d19ee08f4",
+      "id": "technique.6.15",
+      "path": "design-atlas/techniques/technique.6.15.json"
+    },
+    {
+      "digest": "sha256:b013cc439ede1b9f91ec7c0fff506f23c6cb23d16ab2854ace402f2ac8b2c384",
+      "id": "technique.6.16",
+      "path": "design-atlas/techniques/technique.6.16.json"
+    },
+    {
+      "digest": "sha256:94a033ba67021d8453efc5c02f7254c3d9ab8887e60884b97fe7321b25f9ebfc",
+      "id": "technique.6.17",
+      "path": "design-atlas/techniques/technique.6.17.json"
+    },
+    {
+      "digest": "sha256:65cf40d5f6ea7043b4aa7b13612ccf3426694288f4cc6e4c9e1b198160289522",
+      "id": "technique.6.18",
+      "path": "design-atlas/techniques/technique.6.18.json"
+    },
+    {
+      "digest": "sha256:96ca65327fe9fff1867a495fefc1710d6d1eeafdea2dda44648ba5a9acb74cbc",
+      "id": "technique.6.19",
+      "path": "design-atlas/techniques/technique.6.19.json"
+    },
+    {
+      "digest": "sha256:c5c6a4f30b80517e17863278c0b9adaf9f59e0123d6f2e55d2407f2f2b03ad46",
+      "id": "technique.6.20",
+      "path": "design-atlas/techniques/technique.6.20.json"
+    },
+    {
+      "digest": "sha256:c34de8bbffe84a09ac2e0f8561a71349c1297467ecf01edc646238beccd75105",
+      "id": "technique.6.21",
+      "path": "design-atlas/techniques/technique.6.21.json"
+    },
+    {
+      "digest": "sha256:f3a5393943c48d58635ccaec33da396274627cd77bfd8a26b4e83c20ea5f2c3b",
+      "id": "technique.6.22",
+      "path": "design-atlas/techniques/technique.6.22.json"
+    },
+    {
+      "digest": "sha256:4899152e15d5c2df424f8d71e24f291d70d9866af8d6db58924bcf4795b83a06",
+      "id": "technique.6.23",
+      "path": "design-atlas/techniques/technique.6.23.json"
+    },
+    {
+      "digest": "sha256:1b79a58acd5e9c780637921748190d7dd86b5d3fc80cd682caf17dad63d3dce5",
+      "id": "technique.6.24",
+      "path": "design-atlas/techniques/technique.6.24.json"
+    }
+  ],
+  "title": "Dimensionality Reduction"
+}

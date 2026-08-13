@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-fairness-risk-affected-parties"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.fairness-risk.affected-parties.evaluate",
+      "label": "Map stakeholder-specific harms and benefits",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-fairness-risk-affected-parties-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.fairness-risk.affected-parties.baseline",
+      "label": "Apply the declared impact assessment",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-fairness-risk-affected-parties"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.fairness-risk.affected-parties.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.fairness-risk.affected-parties",
+  "pack_id": "design-pack.fairness-risk",
+  "prompt": "Who benefits, who can be burdened, what harms are plausible, and who can contest or correct an output?",
+  "rationale": "Technical users are not the only people affected by a system.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1"
+  ],
+  "required_evidence": [
+    "evidence.impact-assessment",
+    "evidence.stakeholder-review"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.fairness-risk"
+  ],
+  "title": "Affected parties and harms",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

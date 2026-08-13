@@ -1,0 +1,64 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-synthetic-data-purpose"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.synthetic-data.purpose.evaluate",
+      "label": "Define and compare purpose-specific generators",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-synthetic-data-purpose-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.synthetic-data.purpose.baseline",
+      "label": "Use synthetic data only for test fixtures",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-synthetic-data-purpose"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.synthetic-data.purpose.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.synthetic-data.purpose",
+  "pack_id": "design-pack.synthetic-data",
+  "prompt": "Is synthetic data for privacy, coverage, rare cases, simulation, augmentation, balancing, testing, red teaming, or pretraining?",
+  "rationale": "A generator cannot be evaluated without a purpose-specific utility and risk contract.",
+  "reference_ids": [
+    "source.gebru.datasheets"
+  ],
+  "required_evidence": [
+    "evidence.synthetic-purpose",
+    "evidence.acceptance-oracle"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.synthetic-data"
+  ],
+  "title": "Synthetic-data purpose",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.synthetic-data"
+  ],
+  "version": "1.0.0"
+}

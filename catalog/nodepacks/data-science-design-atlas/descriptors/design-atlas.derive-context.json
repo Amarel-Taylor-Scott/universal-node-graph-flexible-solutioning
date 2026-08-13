@@ -1,0 +1,76 @@
+{
+  "actions": [
+    "design-atlas.derive-context"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.design-atlas.derive-context",
+      "language": "und",
+      "source_digest": "sha256:61eefb0b10cbedf7770368d120887a8d05220b6b7fc0417fb109533dc634a641",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Join declared task intent to aggregate-only profile evidence and preserve exact profile and semantic-map digests."
+    }
+  ],
+  "domains": [
+    "data.science",
+    "machine.learning",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "design-atlas.maturity": "reference"
+  },
+  "node_id": "design-atlas.derive-context",
+  "node_spec_digest": "sha256:61eefb0b10cbedf7770368d120887a8d05220b6b7fc0417fb109533dc634a641",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed dataset_profile input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "dataset_profile"
+    },
+    {
+      "concepts": [],
+      "description": "Typed semantic_field_map input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "semantic_field_map"
+    },
+    {
+      "concepts": [],
+      "description": "Typed task_request input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "task_request"
+    },
+    {
+      "concepts": [],
+      "description": "Typed context output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "context"
+    }
+  ],
+  "purposes": [
+    "Join declared task intent to aggregate-only profile evidence and preserve exact profile and semantic-map digests."
+  ],
+  "solutions": [
+    "Compose this stage into an evidence-driven design feedback loop."
+  ],
+  "summary": "Join declared task intent to aggregate-only profile evidence and preserve exact profile and semantic-map digests.",
+  "tags": [
+    "design-atlas",
+    "typed-node",
+    "runtime.python",
+    "evidence-aware"
+  ],
+  "title": "Derive Context"
+}

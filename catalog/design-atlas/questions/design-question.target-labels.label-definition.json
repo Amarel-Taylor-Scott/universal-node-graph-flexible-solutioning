@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-target-labels-label-definition"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.target-labels.label-definition.evaluate",
+      "label": "Audit and sample-adjudicate label generation",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-target-labels-label-definition-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.target-labels.label-definition.baseline",
+      "label": "Use the signed label specification",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-target-labels-label-definition"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.target-labels.label-definition.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.target-labels.label-definition",
+  "pack_id": "design-pack.target-labels",
+  "prompt": "What event creates a label, whose judgment is encoded, and how are disagreement, noise, and ambiguity retained?",
+  "rationale": "Labels are measurements with provenance, not automatically ground truth.",
+  "reference_ids": [
+    "source.gebru.datasheets"
+  ],
+  "required_evidence": [
+    "evidence.label-specification",
+    "evidence.adjudication-sample"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.target-labels"
+  ],
+  "title": "Label construction and adjudication",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

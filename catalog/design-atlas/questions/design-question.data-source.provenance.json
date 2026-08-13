@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-data-source-provenance"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.data-source.provenance.evaluate",
+      "label": "Audit every source and upstream transform",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-data-source-provenance-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.data-source.provenance.baseline",
+      "label": "Accept the signed source manifest",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-data-source-provenance"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.data-source.provenance.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.data-source.provenance",
+  "pack_id": "design-pack.data-source",
+  "prompt": "Who created each source, for what purpose, under which authority, and what transformations occurred upstream?",
+  "rationale": "Unknown provenance prevents defensible use, debugging, and transfer claims.",
+  "reference_ids": [
+    "source.gebru.datasheets",
+    "source.pushkarna.data-cards"
+  ],
+  "required_evidence": [
+    "evidence.source-manifest",
+    "evidence.upstream-lineage"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.data-source"
+  ],
+  "title": "Source provenance and authority",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

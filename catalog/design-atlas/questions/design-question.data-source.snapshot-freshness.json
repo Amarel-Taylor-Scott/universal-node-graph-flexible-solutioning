@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-data-source-snapshot-freshness"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.data-source.snapshot-freshness.evaluate",
+      "label": "Verify snapshot and freshness behavior",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-data-source-snapshot-freshness-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.data-source.snapshot-freshness.baseline",
+      "label": "Freeze one content-addressed snapshot",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-data-source-snapshot-freshness"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.data-source.snapshot-freshness.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.data-source.snapshot-freshness",
+  "pack_id": "design-pack.data-source",
+  "prompt": "Can every input be content-addressed, replayed, and compared with expected freshness and late-arrival rules?",
+  "rationale": "Mutable inputs and silent late data make runs irreproducible and invalidate temporal evaluation.",
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "required_evidence": [
+    "evidence.dataset-digest",
+    "evidence.freshness-policy"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.8,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.data-source"
+  ],
+  "title": "Snapshot identity and freshness",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

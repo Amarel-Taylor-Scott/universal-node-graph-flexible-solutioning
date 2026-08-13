@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-baselines-models-family-diversity"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.baselines-models.family-diversity.evaluate",
+      "label": "Screen compatible model families",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-baselines-models-family-diversity-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.baselines-models.family-diversity.baseline",
+      "label": "Use linear and tree baselines",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-baselines-models-family-diversity"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.baselines-models.family-diversity.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.baselines-models.family-diversity",
+  "pack_id": "design-pack.baselines-models",
+  "prompt": "Which linear, tree, boosted, kernel, nearest-neighbor, probabilistic, neural, retrieval, or hybrid families fit the task and constraints?",
+  "rationale": "Materially different inductive biases improve search coverage and fallback diversity.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.compatibility-admission",
+    "evidence.family-rationale"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.65,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.baselines-models"
+  ],
+  "title": "Model-family diversity",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

@@ -1,0 +1,260 @@
+{
+  "description": "Specify state, action, reward, horizon, behavior policy, simulator validity, constraints, and offline evaluation.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.reinforcement-learning",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-reinforcement-learning-mdp-contract"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.reinforcement-learning.mdp-contract.evaluate",
+          "label": "Validate alternative process formulations",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-reinforcement-learning-mdp-contract-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.reinforcement-learning.mdp-contract.baseline",
+          "label": "Freeze the declared finite-horizon process",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-reinforcement-learning-mdp-contract"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.reinforcement-learning.mdp-contract.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.reinforcement-learning.mdp-contract",
+      "pack_id": "design-pack.reinforcement-learning",
+      "prompt": "What information is observable at each decision, which actions are allowed, how is reward delayed, and when does an episode end?",
+      "rationale": "An underspecified sequential decision process cannot support a valid policy comparison.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.sequential-task-contract"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.reinforcement-learning"
+      ],
+      "title": "State, action, reward, and horizon",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.reinforcement-learning"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-reinforcement-learning-logging-policy"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.reinforcement-learning.logging-policy.evaluate",
+          "label": "Measure action support and overlap",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-reinforcement-learning-logging-policy-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.reinforcement-learning.logging-policy.baseline",
+          "label": "Constrain policy to supported actions",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-reinforcement-learning-logging-policy"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.reinforcement-learning.logging-policy.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.reinforcement-learning.logging-policy",
+      "pack_id": "design-pack.reinforcement-learning",
+      "prompt": "What policy collected offline trajectories, are propensities known, and does it cover candidate actions in relevant states?",
+      "rationale": "Offline policy evaluation fails where the logging data lacks support.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.logging-policy",
+        "evidence.support-analysis"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.reinforcement-learning"
+      ],
+      "title": "Behavior policy and support",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.reinforcement-learning"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-reinforcement-learning-evaluation"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.reinforcement-learning.evaluation.evaluate",
+          "label": "Compare independent policy estimators",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-reinforcement-learning-evaluation-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.reinforcement-learning.evaluation.baseline",
+          "label": "Require conservative off-policy bounds",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-reinforcement-learning-evaluation"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.reinforcement-learning.evaluation.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 7,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.reinforcement-learning.evaluation",
+      "pack_id": "design-pack.reinforcement-learning",
+      "prompt": "Which direct, importance-weighted, doubly robust, simulator, shadow, interleaving, or randomized evaluations are defensible?",
+      "rationale": "Reward estimates from one learned simulator or estimator can be systematically biased.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.policy-evaluation",
+        "evidence.evaluator-independence"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.reinforcement-learning"
+      ],
+      "title": "Offline and online policy evaluation",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.reinforcement-learning"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-reinforcement-learning-safety"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.reinforcement-learning.safety.evaluate",
+          "label": "Stress constrained policies before shadow deployment",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-reinforcement-learning-safety-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.reinforcement-learning.safety.baseline",
+          "label": "Disallow online exploration",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-reinforcement-learning-safety"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.reinforcement-learning.safety.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 7,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.reinforcement-learning.safety",
+      "pack_id": "design-pack.reinforcement-learning",
+      "prompt": "Which actions, states, cumulative costs, populations, or failure probabilities are prohibited, and who can halt or roll back?",
+      "rationale": "Exploration can cause real harm even when expected reward improves.",
+      "reference_ids": [
+        "source.nist.ai-rmf-1"
+      ],
+      "required_evidence": [
+        "evidence.safety-constraints",
+        "evidence.rollback-test"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.reinforcement-learning"
+      ],
+      "title": "Constraints and safe exploration",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.reinforcement-learning"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.specialized",
+  "title": "Reinforcement learning and sequential decisions",
+  "version": "1.0.0"
+}

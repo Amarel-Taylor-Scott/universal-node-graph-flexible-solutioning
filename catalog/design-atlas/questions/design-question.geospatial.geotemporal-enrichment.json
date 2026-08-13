@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-geospatial-geotemporal-enrichment"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.geospatial.geotemporal-enrichment.evaluate",
+      "label": "Replay point-in-time geotemporal joins",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-geospatial-geotemporal-enrichment-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.geospatial.geotemporal-enrichment.baseline",
+      "label": "Use only versioned as-of enrichment",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-geospatial-geotemporal-enrichment"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.geospatial.geotemporal-enrichment.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.geospatial.geotemporal-enrichment",
+  "pack_id": "design-pack.geospatial",
+  "prompt": "For a place and time, which census, event, weather, policy, mobility, or business context was valid and available then?",
+  "rationale": "Joining current geography or future event knowledge to historical rows creates temporal and vintage leakage.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.as-of-join-test",
+    "evidence.enrichment-lineage"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.geospatial"
+  ],
+  "title": "Time-aware geographic enrichment",
+  "trigger_all": [],
+  "trigger_any": [
+    "signal.geospatial",
+    "signal.time-aware"
+  ],
+  "version": "1.0.0"
+}

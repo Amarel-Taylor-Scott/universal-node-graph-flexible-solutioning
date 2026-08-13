@@ -1,0 +1,24 @@
+{
+  "description": "Join versioned place and event context at the correct location, time, and availability boundary.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.geotemporal-enrichment",
+  "optional_pack_ids": [],
+  "outcome_artifact": "artifact.geotemporal-dataset",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.quality-cleaning",
+    "design-pack.time-series",
+    "design-pack.geospatial",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.geotemporal-enrichment",
+    "domain.geospatial",
+    "signal.geospatial",
+    "signal.time-aware"
+  ],
+  "title": "Geotemporal enrichment"
+}

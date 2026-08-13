@@ -1,0 +1,108 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.20.deployment-serving",
+  "technique_count": 20,
+  "techniques": [
+    {
+      "digest": "sha256:a3608200c909309a61ef132241e6854696acceb7d7dd79eff0d080f4f910dcaa",
+      "id": "technique.20.1",
+      "path": "design-atlas/techniques/technique.20.1.json"
+    },
+    {
+      "digest": "sha256:e6ef4ab1da06bb921b2fa958dc9fd753603b3b79a41dff3edc8e9466111fc034",
+      "id": "technique.20.2",
+      "path": "design-atlas/techniques/technique.20.2.json"
+    },
+    {
+      "digest": "sha256:d7d4421ba507eae8557d16d127615499deb811271030c1c19c6a4b0ee6caace7",
+      "id": "technique.20.3",
+      "path": "design-atlas/techniques/technique.20.3.json"
+    },
+    {
+      "digest": "sha256:6e5622d12063eb603adeada75e55ee890ac649f6473995e71f9d44fc967d59a0",
+      "id": "technique.20.4",
+      "path": "design-atlas/techniques/technique.20.4.json"
+    },
+    {
+      "digest": "sha256:b715a382ba7f79f6b8323f24f61baebac5167c68b74a4292c2f28d2062b039be",
+      "id": "technique.20.5",
+      "path": "design-atlas/techniques/technique.20.5.json"
+    },
+    {
+      "digest": "sha256:c7c593aecaf4c15e3548333ea87b5a059fc74a7a23764c91e1e39d05e959cf9b",
+      "id": "technique.20.6",
+      "path": "design-atlas/techniques/technique.20.6.json"
+    },
+    {
+      "digest": "sha256:3e9057e226664027ff80a68d48ecfdf22185fa0391105d6a40750d564803873d",
+      "id": "technique.20.7",
+      "path": "design-atlas/techniques/technique.20.7.json"
+    },
+    {
+      "digest": "sha256:0b6dd801d373d1a3ccca3eaf4628b9842cded62a627fffdd99203394e54a6574",
+      "id": "technique.20.8",
+      "path": "design-atlas/techniques/technique.20.8.json"
+    },
+    {
+      "digest": "sha256:33abd68dbf727b0b5b286e0137313f4bd2a421b891dcebff54a949b185c2ecc9",
+      "id": "technique.20.9",
+      "path": "design-atlas/techniques/technique.20.9.json"
+    },
+    {
+      "digest": "sha256:d2198d144fc9cd8ad97ab3143dac102a0a37cb5814dffd337e1d434e3a5b2662",
+      "id": "technique.20.10",
+      "path": "design-atlas/techniques/technique.20.10.json"
+    },
+    {
+      "digest": "sha256:489475e9cd2f4fca0a7f5e80084a7699e22d733011297fb8dba725c89b7db7f9",
+      "id": "technique.20.11",
+      "path": "design-atlas/techniques/technique.20.11.json"
+    },
+    {
+      "digest": "sha256:7bd63069403302a2cbe4e255c57c67dc527b6659379b42c3fc950d81ab43f950",
+      "id": "technique.20.12",
+      "path": "design-atlas/techniques/technique.20.12.json"
+    },
+    {
+      "digest": "sha256:0cb196417a0f233663014263ed1dff950b848fd2fc21222eacfb57515647ac66",
+      "id": "technique.20.13",
+      "path": "design-atlas/techniques/technique.20.13.json"
+    },
+    {
+      "digest": "sha256:81b97919a759f2b0bba03dfcf89e3694a2c91b0840c5d71cdfd98d9089ef1140",
+      "id": "technique.20.14",
+      "path": "design-atlas/techniques/technique.20.14.json"
+    },
+    {
+      "digest": "sha256:aac2d0702de612ae53b9774a5afd4fabd102c1b06b713c59aebb2eb3424021da",
+      "id": "technique.20.15",
+      "path": "design-atlas/techniques/technique.20.15.json"
+    },
+    {
+      "digest": "sha256:4ab31dd1037194a321b89dc34de6bf261dcd44f603c6f4ce78f661b3563f49ba",
+      "id": "technique.20.16",
+      "path": "design-atlas/techniques/technique.20.16.json"
+    },
+    {
+      "digest": "sha256:c067cf3992fdd2885f52d46170710300de5e54ed65488d12ab226ec1499b7784",
+      "id": "technique.20.17",
+      "path": "design-atlas/techniques/technique.20.17.json"
+    },
+    {
+      "digest": "sha256:39721e8c719a4f8709c1931d531a6f27b6981ef6ba5e047d6c740447a7a7c5da",
+      "id": "technique.20.18",
+      "path": "design-atlas/techniques/technique.20.18.json"
+    },
+    {
+      "digest": "sha256:786bde60ed7de148c1b8ed4ab1a2f9befa032dc2f70076c7a532d7bb8ce2572d",
+      "id": "technique.20.19",
+      "path": "design-atlas/techniques/technique.20.19.json"
+    },
+    {
+      "digest": "sha256:57b8db9f79c176241a2d8fcf7acb7b5ecff301e7f239a31839592b4e5dd5765c",
+      "id": "technique.20.20",
+      "path": "design-atlas/techniques/technique.20.20.json"
+    }
+  ],
+  "title": "Deployment & Serving"
+}

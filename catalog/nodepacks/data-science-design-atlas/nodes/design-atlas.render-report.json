@@ -1,0 +1,82 @@
+{
+  "capabilities": [
+    "design-atlas.render-report"
+  ],
+  "description": "Render content-addressed JSON payload, Markdown, and self-contained HTML without filesystem, model, or network effects.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.design_atlas.nodes.render_report:render_report_node",
+  "failure_modes": [
+    {
+      "code": "design-atlas.invalid-input",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "design-atlas.render-report",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:c694e7b4293c233870e0f13a4f500ed5a2ca945bc8a396797a022fa710a134b9",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "context",
+      "type": {
+        "id": "design-atlas.context",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "design_plan",
+      "type": {
+        "id": "design-atlas.plan",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    },
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "design_dossier",
+      "type": {
+        "id": "design-atlas.dossier",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "report_bundle",
+      "type": {
+        "id": "design-atlas.report-bundle",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/design_atlas/nodes/render_report.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

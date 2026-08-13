@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "PSI, KS test, Jensen-Shannon divergence, MMD",
+  "family": "DATA UNDERSTANDING & PROFILING",
+  "id": "technique.2.12",
+  "maturity_floor": "C1",
+  "ordinal": "2.12",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.2.data-understanding-profiling",
+  "phase_title": "Data Understanding & Profiling",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not implemented",
+  "tags": [
+    "phase.2",
+    "family.data-understanding-profiling"
+  ],
+  "title": "Drift detection"
+}

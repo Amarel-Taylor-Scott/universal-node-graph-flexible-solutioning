@@ -1,0 +1,65 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-deployment-serving-rollback"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.deployment-serving.rollback.evaluate",
+      "label": "Exercise rollback and dependency-failure drills",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-deployment-serving-rollback-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.deployment-serving.rollback.baseline",
+      "label": "Retain last-known-good plus fail-closed path",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-deployment-serving-rollback"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.deployment-serving.rollback.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.deployment-serving.rollback",
+  "pack_id": "design-pack.deployment-serving",
+  "prompt": "Can the system detect failure, stop effects, restore prior artifacts, reconcile state, replay work, and verify recovery within the required objective?",
+  "rationale": "A rollback plan is unproven until its state and recovery path have been tested.",
+  "reference_ids": [
+    "source.breck.ml-test-score"
+  ],
+  "required_evidence": [
+    "evidence.rollback-receipt",
+    "evidence.recovery-objective"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.deployment-serving"
+  ],
+  "title": "Rollback, degradation, and recovery",
+  "trigger_all": [],
+  "trigger_any": [
+    "lifecycle.release",
+    "lifecycle.production"
+  ],
+  "version": "1.0.0"
+}

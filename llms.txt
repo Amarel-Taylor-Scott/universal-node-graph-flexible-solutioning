@@ -26,8 +26,9 @@
 - [Streaming](STREAMING_PROTOCOL.md): Event-time windows, watermarks, lateness, retractions, and production boundaries
 - [Provenance and resume](PROVENANCE_AND_RESUME.md): Exact local checkpoints and W3C PROV/OpenLineage/SLSA projections
 - [Executable examples](REAL_WORLD_EXAMPLES.md): 47 runnable programs, 120 declared routes, controls, solver commands, and extension gates
-- [Data-science pipeline examples](DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md): ten executable six-stage graphs, 60 nodes, 180 candidates, task fingerprints, and a 560-technique extension map
-- [Taedri data-science technique inventory](TAEDRI_DATA_SCIENCE_TECHNIQUE_TAXONOMY.md): owner-supplied 560-technique catalogue with an explicit cross-project claim boundary
+- [Data-science design atlas](DATA_SCIENCE_DESIGN_ATLAS.md): 31 task archetypes, 28 modular packs, 112 structured questions, 618 C1-only technique records, five typed graph nodes, authority-aware effort planning, and evidence-derived maturity
+- [Data-science pipeline examples](DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md): ten executable six-stage graphs, 60 nodes, 180 candidates, and task fingerprints
+- [Taedri data-science technique inventory](TAEDRI_DATA_SCIENCE_TECHNIQUE_TAXONOMY.md): historical owner-supplied inventory with an explicit cross-project claim boundary
 - [Engineering DAG and DueCare harness showcase](ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md): common engineering taxonomy, thirteen executable showcases, typed harness evidence, linked roles, feedback firewall, research anchors, and roadmap
 - [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md): 52 task families, 40 Arena-linked executable programs, solver profiles, and honest external boundaries
 - [Extending the Arena](EXTENDING_ARENA.md): Required fixture, connector, catalog, conformance, and confirmation gates
@@ -48,6 +49,7 @@
 - [Typed graph mutations](solutiongraph/mutations.py): Deterministic topology operators, ancestry, hypotheses, and compiler validation
 - [Experiment studies](solutiongraph/studies.py): Paired receipt analysis, uncertainty, and promote/reject/continue recommendations
 - [Task solutioning](solutiongraph/solutioning.py): Staged recognition, historical starts, binding, execution, evidence, and immutable learning
+- [Data-science design atlas](solutiongraph/design_atlas/): Task archetypes, question packs, technique records, evidence-aware planning, typed context/plan/resolution/report nodes, dossiers, reports, and C0-C7 assessment
 - [Evidence ranking](solutiongraph/ranking.py): Shared hard gates, Pareto flags, and transparent weighted projection
 - [Streaming reference](solutiongraph/streaming.py): Finite event-time windows, watermarks, late data, and retractions
 - [Saga runner](solutiongraph/saga.py): Reverse-order compensation over effectful node contracts
@@ -66,9 +68,9 @@
 - [External benchmark adapters](solutiongraph/benchmark_adapters.py): Claim-safe source-manifest normalization for six external ecosystems
 - [Standard-library nodes](solutiongraph/stdlib_pack.py): 19 dependency-free nodes, 32 bindings, discovery sidecars, and a 1,728-route data-quality program
 - [Executable domain packs](solutiongraph/examples/): 47 trusted local programs and 379 nodes across data, streaming, GIS, APIs, frontend testing, rendering, web, documents, media, ML, identity, operations, security, science, synthetic data, reinforcement learning, MLOps, and LLM evaluation
-- [Example notebooks](notebooks/): Six numbered compile, execute, verify, receipt, ML, and coding-agent A/B notebooks
+- [Example notebooks](notebooks/): Six numbered execution/A-B notebooks plus a data-science design-atlas workbook
 - [Wire schemas](solutiongraph/schemas/): JSON Schema 2020-12 contracts
-- [Reference catalogue](catalog/): 31 semantic templates, six node packs, one linked-graph harness plus typed evidence closure, 52 Arena tasks, and six benchmark/solution packs
+- [Reference catalogue](catalog/): 31 semantic templates, eight node packs, one linked-graph harness plus typed evidence closure, 52 Arena tasks, and six benchmark/solution packs
 - [Browser adapter](browsergraph/): Concrete runtime proof
 - [Universal conformance tests](tests/test_solutiongraph.py): Executable architecture requirements
 - [Create-template skill](.agents/skills/create-solution-template/SKILL.md): Strict template authoring workflow

@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-tuning-search-policy"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.tuning-search.policy.evaluate",
+      "label": "Compare search policies under equal budgets",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-tuning-search-policy-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.tuning-search.policy.baseline",
+      "label": "Use prior plus seeded random sprouts",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-tuning-search-policy"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.tuning-search.policy.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.tuning-search.policy",
+  "pack_id": "design-pack.tuning-search",
+  "prompt": "Should prior, grid, random, beam, Bayesian, evolutionary, seeded-sprout, successive-halving, or exhaustive policies be allocated?",
+  "rationale": "Policies change proposal order and budget use, not semantic validity or acceptance.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.search-policy",
+    "evidence.random-seeds"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.65,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.tuning-search"
+  ],
+  "title": "Search policy and warm starts",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

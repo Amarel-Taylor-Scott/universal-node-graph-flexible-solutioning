@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-context.schema.json",
+  "title": "Data-science design context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["design_atlas_model_version", "id", "task_type", "objective", "modalities", "lifecycle_stage", "risk_tier", "signals", "constraints", "row_count", "column_count", "target_name", "time_field", "group_field", "entity_field", "protected_test", "dataset_profile_digest", "semantic_map_digest"],
+  "properties": {
+    "design_atlas_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "task_type": {"$ref": "common.schema.json#/$defs/id"},
+    "objective": {"type": "string", "minLength": 1},
+    "modalities": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}},
+    "lifecycle_stage": {"$ref": "common.schema.json#/$defs/id"},
+    "risk_tier": {"$ref": "common.schema.json#/$defs/id"},
+    "signals": {"$ref": "#/$defs/idArray"},
+    "constraints": {"$ref": "#/$defs/idArray"},
+    "row_count": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 0}]},
+    "column_count": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 0}]},
+    "target_name": {"type": "string"},
+    "time_field": {"type": "string"},
+    "group_field": {"type": "string"},
+    "entity_field": {"type": "string"},
+    "protected_test": {"type": "boolean"},
+    "dataset_profile_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+    "semantic_map_digest": {"$ref": "common.schema.json#/$defs/optional_digest"}
+  },
+  "$defs": {"idArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}}}
+}

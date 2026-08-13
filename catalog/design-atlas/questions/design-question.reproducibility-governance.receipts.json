@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-reproducibility-governance-receipts"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.reproducibility-governance.receipts.evaluate",
+      "label": "Perform clean-environment replay",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-reproducibility-governance-receipts-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.reproducibility-governance.receipts.baseline",
+      "label": "Retain complete content-addressed receipts",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-reproducibility-governance-receipts"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.reproducibility-governance.receipts.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.reproducibility-governance.receipts",
+  "pack_id": "design-pack.reproducibility-governance",
+  "prompt": "Can another authorized environment reproduce the graph, code, inputs, splits, seeds, dependencies, artifacts, metrics, and acceptance result?",
+  "rationale": "A notebook output or final score is not an executable evidence trail.",
+  "reference_ids": [
+    "source.breck.ml-test-score"
+  ],
+  "required_evidence": [
+    "evidence.run-receipts",
+    "evidence.clean-replay"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.reproducibility-governance"
+  ],
+  "title": "Run receipts and clean replay",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

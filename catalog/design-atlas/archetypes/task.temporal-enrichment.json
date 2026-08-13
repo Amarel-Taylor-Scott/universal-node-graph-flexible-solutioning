@@ -1,0 +1,24 @@
+{
+  "description": "Enrich records with calendars, events, rolling context, and point-in-time-safe external facts.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.temporal-enrichment",
+  "optional_pack_ids": [
+    "design-pack.geospatial"
+  ],
+  "outcome_artifact": "artifact.temporal-dataset",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.quality-cleaning",
+    "design-pack.time-series",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.temporal-enrichment",
+    "domain.temporal",
+    "signal.time-aware"
+  ],
+  "title": "Temporal enrichment"
+}

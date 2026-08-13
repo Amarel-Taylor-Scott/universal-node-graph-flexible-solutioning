@@ -1,0 +1,108 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.19.feedback-loops-iterative-improvement",
+  "technique_count": 20,
+  "techniques": [
+    {
+      "digest": "sha256:f9ed43cf992cebec37c55e429a51a1e877a094f8cbe60bfb6c8e7adb7578a364",
+      "id": "technique.19.1",
+      "path": "design-atlas/techniques/technique.19.1.json"
+    },
+    {
+      "digest": "sha256:1b0e37f174f9420b62e4ec251f16ad29762b8094bfa3b27851b56f64ce0eeb37",
+      "id": "technique.19.2",
+      "path": "design-atlas/techniques/technique.19.2.json"
+    },
+    {
+      "digest": "sha256:25ce2cfa16c4ac4c20d519e30d53c3a51b84d9e885ba3cbaef106010d3ec937a",
+      "id": "technique.19.3",
+      "path": "design-atlas/techniques/technique.19.3.json"
+    },
+    {
+      "digest": "sha256:3113e0241ed3c9f5943283b22c538daf258f3fd69f4dd6c82d01bd3d3663daa4",
+      "id": "technique.19.4",
+      "path": "design-atlas/techniques/technique.19.4.json"
+    },
+    {
+      "digest": "sha256:b17a6dbc2626043fcc82716564627e9ab99a3337f1a761799a721183a3e294ea",
+      "id": "technique.19.5",
+      "path": "design-atlas/techniques/technique.19.5.json"
+    },
+    {
+      "digest": "sha256:89093f054d77c9c37e89fa675a2275394c6b3429aad7cd967eff65328918d097",
+      "id": "technique.19.6",
+      "path": "design-atlas/techniques/technique.19.6.json"
+    },
+    {
+      "digest": "sha256:016bd67371f59f8d94195ef3a72a3584893fcda26f47ad5bcb8d25a0a08ec7d7",
+      "id": "technique.19.7",
+      "path": "design-atlas/techniques/technique.19.7.json"
+    },
+    {
+      "digest": "sha256:aaca137c09122011f28a7c075cfa87229271f30763e6ae61fb108a61b27969b0",
+      "id": "technique.19.8",
+      "path": "design-atlas/techniques/technique.19.8.json"
+    },
+    {
+      "digest": "sha256:9be608e4982c439b2eb89aa0e7229b0f247a3deeb7fb3a0771a44030954f55d1",
+      "id": "technique.19.9",
+      "path": "design-atlas/techniques/technique.19.9.json"
+    },
+    {
+      "digest": "sha256:db130dca0b3abdad2bb3ca0c5f67da3fbe9364328c08f3c8dddb33ca889e637c",
+      "id": "technique.19.10",
+      "path": "design-atlas/techniques/technique.19.10.json"
+    },
+    {
+      "digest": "sha256:50cdb2eedb534de983a1f6f970afa2118e3aed7a12f33807037f5d6f58f915fc",
+      "id": "technique.19.11",
+      "path": "design-atlas/techniques/technique.19.11.json"
+    },
+    {
+      "digest": "sha256:39946096be7e3e698ae5d842bd4f6dd973d2189e94b54c95280992ee63671448",
+      "id": "technique.19.12",
+      "path": "design-atlas/techniques/technique.19.12.json"
+    },
+    {
+      "digest": "sha256:a2df749dc25926bf889b542d3a7bf302816456bc82708b833811e9f20619e320",
+      "id": "technique.19.13",
+      "path": "design-atlas/techniques/technique.19.13.json"
+    },
+    {
+      "digest": "sha256:149a86fd84e4c9f68ce076531a216de1b68529967c95a91536ab8e40692c6c8c",
+      "id": "technique.19.14",
+      "path": "design-atlas/techniques/technique.19.14.json"
+    },
+    {
+      "digest": "sha256:0abfe0673dec57f021a7dda34dff474ac518e9282a87a32c793b5ab4a78090b3",
+      "id": "technique.19.15",
+      "path": "design-atlas/techniques/technique.19.15.json"
+    },
+    {
+      "digest": "sha256:d8fda00ec7ef80ce22059fb0edfef9bda5172f094f83c030b75f3aac88369cd3",
+      "id": "technique.19.16",
+      "path": "design-atlas/techniques/technique.19.16.json"
+    },
+    {
+      "digest": "sha256:5c8bd3e74b3a39b053c08d929e603bdd74bc80efffc9b1dbe944981e57346ba5",
+      "id": "technique.19.17",
+      "path": "design-atlas/techniques/technique.19.17.json"
+    },
+    {
+      "digest": "sha256:8e6c0c994fc6ed2ed01e3f2b30f540d6376812f890b035b543f5057641c635eb",
+      "id": "technique.19.18",
+      "path": "design-atlas/techniques/technique.19.18.json"
+    },
+    {
+      "digest": "sha256:8699ba465ec2e0ae1a289126c8380b38b036a635d084d48d382c8ddac18c1f13",
+      "id": "technique.19.19",
+      "path": "design-atlas/techniques/technique.19.19.json"
+    },
+    {
+      "digest": "sha256:ff85bde73cbb898e7c50cb4752883186fe5a5e7c52e03998d80db8bcb3d70b5b",
+      "id": "technique.19.20",
+      "path": "design-atlas/techniques/technique.19.20.json"
+    }
+  ],
+  "title": "Feedback Loops & Iterative Improvement"
+}

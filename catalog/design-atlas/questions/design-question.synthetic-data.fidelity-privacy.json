@@ -1,0 +1,64 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-synthetic-data-fidelity-privacy"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.synthetic-data.fidelity-privacy.evaluate",
+      "label": "Evaluate utility, coverage, and privacy jointly",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-synthetic-data-fidelity-privacy-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.synthetic-data.fidelity-privacy.baseline",
+      "label": "Reject near-duplicate or unsupported generations",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-synthetic-data-fidelity-privacy"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.synthetic-data.fidelity-privacy.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.synthetic-data.fidelity-privacy",
+  "pack_id": "design-pack.synthetic-data",
+  "prompt": "Which marginal, dependency, temporal, spatial, semantic, rare-slice, privacy, and memorization measures define acceptable generation?",
+  "rationale": "High aggregate similarity can coexist with mode loss or disclosure of source records.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1"
+  ],
+  "required_evidence": [
+    "evidence.fidelity-report",
+    "evidence.privacy-tests"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.synthetic-data"
+  ],
+  "title": "Fidelity, diversity, and privacy",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.synthetic-data"
+  ],
+  "version": "1.0.0"
+}

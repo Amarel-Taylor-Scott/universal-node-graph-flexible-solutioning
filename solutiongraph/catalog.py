@@ -13,6 +13,21 @@ from solutiongraph.agent_bench.config import (
 from solutiongraph.agent_bench.tasks import REFERENCE_AGENT_TASKS
 from solutiongraph.arena import UNIVERSAL_DAG_ARENA
 from solutiongraph.benchmark_library import REFERENCE_BENCHMARKS
+from solutiongraph.design_atlas import (
+    REFERENCE_DESIGN_PACKS,
+    REFERENCE_DESIGN_QUESTIONS,
+    REFERENCE_SOURCES,
+    REFERENCE_TASK_ARCHETYPES,
+    REFERENCE_TECHNIQUES,
+    TECHNIQUES_BY_PHASE,
+    atlas_index,
+)
+from solutiongraph.design_atlas.node_pack import (
+    DESIGN_ATLAS_DESCRIPTORS,
+    DESIGN_ATLAS_NODE_PACK,
+    DESIGN_ATLAS_NODE_SPECS,
+    DESIGN_ATLAS_REGISTRY,
+)
 from solutiongraph.discovery import (
     QueryMode,
     RegistryCapabilities,
@@ -282,6 +297,47 @@ def interrogation_registry_capabilities() -> RegistryCapabilities:
     )
 
 
+def design_atlas_registry_capabilities() -> RegistryCapabilities:
+    """Advertise strict and lexical discovery for executable atlas stages."""
+    return RegistryCapabilities(
+        registry_id=DESIGN_ATLAS_REGISTRY.id,
+        registry_version=DESIGN_ATLAS_REGISTRY.version,
+        registry_digest=DESIGN_ATLAS_REGISTRY.digest,
+        protocol_versions=("0.1",),
+        schemas=(
+            SchemaSupport("node-spec", ("0.2",)),
+            SchemaSupport("node-descriptor", ("0.1",)),
+            SchemaSupport("node-pack", ("0.1",)),
+            SchemaSupport("design-task-request", ("0.1",)),
+            SchemaSupport("design-plan", ("0.1",)),
+            SchemaSupport("design-answer-set", ("0.1",)),
+            SchemaSupport("design-dossier", ("0.1",)),
+            SchemaSupport("design-report-bundle", ("0.1",)),
+        ),
+        query_modes=(
+            QueryMode("exact", fields=("node_id", "node_spec_digest")),
+            QueryMode(
+                "lexical",
+                fields=("title", "summary", "purposes", "actions", "documents"),
+                supports_filters=True,
+                supports_scores=True,
+                supports_explanations=True,
+            ),
+            QueryMode("enumeration", supports_cursor=True),
+        ),
+        descriptor_fields=(
+            "title", "summary", "purposes", "solutions", "actions", "domains",
+            "tags", "ports", "documents",
+        ),
+        supports_enumeration=True,
+        supports_snapshots=True,
+        supports_continuation=True,
+        supports_explanations=True,
+        max_page_size=1000,
+        extensions=(("design-atlas.maturity", "reference"),),
+    )
+
+
 def catalog_documents() -> dict[str, dict[str, Any]]:
     """Return every generated catalogue document keyed by portable relative path."""
     node_pack = REFERENCE_CORE_NODE_PACK
@@ -294,6 +350,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
     showcase_capabilities = showcase_registry_capabilities()
     data_science_capabilities = data_science_registry_capabilities()
     interrogation_capabilities = interrogation_registry_capabilities()
+    design_atlas_capabilities = design_atlas_registry_capabilities()
     documents: dict[str, dict[str, Any]] = {
         "nodepacks/reference-core/manifest.json": node_pack.to_dict(),
         "nodepacks/reference-core/registry.json": REFERENCE_REGISTRY.to_dict(),
@@ -327,6 +384,15 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "nodepacks/semantic-interrogation/registry.json": INTERROGATION_REGISTRY.to_dict(),
         "nodepacks/semantic-interrogation/registry-capabilities.json": (
             interrogation_capabilities.to_dict()
+        ),
+        "nodepacks/data-science-design-atlas/manifest.json": (
+            DESIGN_ATLAS_NODE_PACK.to_dict()
+        ),
+        "nodepacks/data-science-design-atlas/registry.json": (
+            DESIGN_ATLAS_REGISTRY.to_dict()
+        ),
+        "nodepacks/data-science-design-atlas/registry-capabilities.json": (
+            design_atlas_capabilities.to_dict()
         ),
         "harnesses/duecare-example.json": DUECARE_HARNESS_BUNDLE.to_dict(),
         "harnesses/duecare-evidence-example.json": DUECARE_HARNESS_EVIDENCE.to_dict(),
@@ -391,6 +457,14 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         documents[
             f"nodepacks/semantic-interrogation/descriptors/{descriptor.node_id}.json"
         ] = descriptor.to_dict()
+    for node in DESIGN_ATLAS_NODE_SPECS:
+        documents[f"nodepacks/data-science-design-atlas/nodes/{node.id}.json"] = (
+            node.to_dict()
+        )
+    for descriptor in DESIGN_ATLAS_DESCRIPTORS:
+        documents[
+            f"nodepacks/data-science-design-atlas/descriptors/{descriptor.node_id}.json"
+        ] = descriptor.to_dict()
     for descriptor in STANDARD_LIBRARY_DESCRIPTORS:
         documents[f"nodepacks/stdlib-data-foundation/descriptors/{descriptor.node_id}.json"] = (
             descriptor.to_dict()
@@ -420,6 +494,32 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
             for item in REFERENCE_QUESTION_PACKS
         ],
     }
+    for source in REFERENCE_SOURCES:
+        documents[f"design-atlas/sources/{source.id}.json"] = source.to_dict()
+    for technique in REFERENCE_TECHNIQUES:
+        documents[f"design-atlas/techniques/{technique.id}.json"] = technique.to_dict()
+    for pack in REFERENCE_DESIGN_PACKS:
+        documents[f"design-atlas/packs/{pack.id}.json"] = pack.to_dict()
+    for question in REFERENCE_DESIGN_QUESTIONS:
+        documents[f"design-atlas/questions/{question.id}.json"] = question.to_dict()
+    for archetype in REFERENCE_TASK_ARCHETYPES:
+        documents[f"design-atlas/archetypes/{archetype.id}.json"] = archetype.to_dict()
+    for phase_id, techniques in TECHNIQUES_BY_PHASE.items():
+        documents[f"design-atlas/phases/{phase_id}.json"] = {
+            "design_atlas_model_version": "0.1",
+            "id": phase_id,
+            "title": techniques[0].phase_title,
+            "technique_count": len(techniques),
+            "techniques": [
+                {
+                    "id": technique.id,
+                    "digest": technique.digest,
+                    "path": f"design-atlas/techniques/{technique.id}.json",
+                }
+                for technique in techniques
+            ],
+        }
+    documents["design-atlas/index.json"] = atlas_index()
     for template in REFERENCE_TEMPLATES.templates:
         documents[f"templates/{template.id}.json"] = template.to_dict()
     for task in UNIVERSAL_DAG_ARENA.tasks:
@@ -535,6 +635,15 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "descriptor_count": len(INTERROGATION_DESCRIPTORS),
                 "embedding_record_count": 0,
             },
+            {
+                "id": DESIGN_ATLAS_NODE_PACK.id,
+                "version": DESIGN_ATLAS_NODE_PACK.version,
+                "digest": DESIGN_ATLAS_NODE_PACK.digest,
+                "path": "nodepacks/data-science-design-atlas/manifest.json",
+                "node_count": len(DESIGN_ATLAS_NODE_SPECS),
+                "descriptor_count": len(DESIGN_ATLAS_DESCRIPTORS),
+                "embedding_record_count": 0,
+            },
         ],
         "harnesses": [
             {
@@ -576,6 +685,14 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
             "concept_count": len(REFERENCE_CONCEPTS),
             "pack_count": len(REFERENCE_QUESTION_PACKS),
             "question_count": len(REFERENCE_QUESTIONS),
+        },
+        "design_atlas": {
+            "path": "design-atlas/index.json",
+            "technique_count": len(REFERENCE_TECHNIQUES),
+            "pack_count": len(REFERENCE_DESIGN_PACKS),
+            "question_count": len(REFERENCE_DESIGN_QUESTIONS),
+            "task_archetype_count": len(REFERENCE_TASK_ARCHETYPES),
+            "machine_maturity_floor": "C1",
         },
     }
     return dict(sorted(documents.items()))

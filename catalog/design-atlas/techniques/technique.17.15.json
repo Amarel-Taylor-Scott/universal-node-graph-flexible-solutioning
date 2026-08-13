@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Partial dependence plots (PDP)",
+  "family": "STABILITY & ROBUSTNESS",
+  "id": "technique.17.15",
+  "maturity_floor": "C1",
+  "ordinal": "17.15",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.17.stability-robustness",
+  "phase_title": "Stability & Robustness",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not implemented",
+  "tags": [
+    "phase.17",
+    "family.stability-robustness"
+  ],
+  "title": "Sensitivity analysis"
+}

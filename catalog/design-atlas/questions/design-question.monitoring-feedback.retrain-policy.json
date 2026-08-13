@@ -1,0 +1,65 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-monitoring-feedback-retrain-policy"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.monitoring-feedback.retrain-policy.evaluate",
+      "label": "Simulate trigger and promotion policies",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-monitoring-feedback-retrain-policy-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.monitoring-feedback.retrain-policy.baseline",
+      "label": "Require a fresh evaluation closure for every challenger",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-monitoring-feedback-retrain-policy"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.monitoring-feedback.retrain-policy.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.monitoring-feedback.retrain-policy",
+  "pack_id": "design-pack.monitoring-feedback",
+  "prompt": "What trigger, data window, exclusion, validation, holdout, approval, and rollback policy governs retraining or graph mutation?",
+  "rationale": "Automatic retraining without fixed gates can amplify corruption or repeatedly tune on the same protected evidence.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1",
+    "source.breck.ml-test-score"
+  ],
+  "required_evidence": [
+    "evidence.retraining-policy",
+    "evidence.champion-challenger-receipts"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.monitoring-feedback"
+  ],
+  "title": "Retraining and champion/challenger policy",
+  "trigger_all": [],
+  "trigger_any": [
+    "lifecycle.production"
+  ],
+  "version": "1.0.0"
+}

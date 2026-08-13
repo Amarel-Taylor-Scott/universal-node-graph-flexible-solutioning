@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-reinforcement-learning-evaluation"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.reinforcement-learning.evaluation.evaluate",
+      "label": "Compare independent policy estimators",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-reinforcement-learning-evaluation-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.reinforcement-learning.evaluation.baseline",
+      "label": "Require conservative off-policy bounds",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-reinforcement-learning-evaluation"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.reinforcement-learning.evaluation.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 7,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.reinforcement-learning.evaluation",
+  "pack_id": "design-pack.reinforcement-learning",
+  "prompt": "Which direct, importance-weighted, doubly robust, simulator, shadow, interleaving, or randomized evaluations are defensible?",
+  "rationale": "Reward estimates from one learned simulator or estimator can be systematically biased.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.policy-evaluation",
+    "evidence.evaluator-independence"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.reinforcement-learning"
+  ],
+  "title": "Offline and online policy evaluation",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.reinforcement-learning"
+  ],
+  "version": "1.0.0"
+}

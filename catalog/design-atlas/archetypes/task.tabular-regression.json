@@ -1,0 +1,32 @@
+{
+  "description": "Predict a continuous outcome with leakage-safe preprocessing, uncertainty, and controlled model search.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.tabular-regression",
+  "optional_pack_ids": [
+    "design-pack.selection-reduction",
+    "design-pack.ensemble-calibration",
+    "design-pack.interpretability"
+  ],
+  "outcome_artifact": "artifact.regression-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.tabular-regression",
+    "domain.machine-learning",
+    "signal.supervised"
+  ],
+  "title": "Tabular regression"
+}

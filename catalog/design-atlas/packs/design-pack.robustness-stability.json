@@ -1,0 +1,260 @@
+{
+  "description": "Test plausible distribution shifts, corruptions, adversaries, perturbations, and dependency failures.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.robustness-stability",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-robustness-stability-shift-model"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.robustness-stability.shift-model.evaluate",
+          "label": "Construct shift-specific stress suites",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-robustness-stability-shift-model-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.robustness-stability.shift-model.baseline",
+          "label": "Use temporal/source holdouts",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-robustness-stability-shift-model"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.robustness-stability.shift-model.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.robustness-stability.shift-model",
+      "pack_id": "design-pack.robustness-stability",
+      "prompt": "Which population, prevalence, covariate, concept, label, temporal, geographic, source, or policy shifts are credible?",
+      "rationale": "Generic noise tests do not substitute for a deployment-grounded shift model.",
+      "reference_ids": [
+        "source.tensorflow.data-validation"
+      ],
+      "required_evidence": [
+        "evidence.shift-hypotheses",
+        "evidence.stress-cases"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.robustness-stability"
+      ],
+      "title": "Plausible shift model",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-robustness-stability-perturbation"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.robustness-stability.perturbation.evaluate",
+          "label": "Execute typed metamorphic relations",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-robustness-stability-perturbation-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.robustness-stability.perturbation.baseline",
+          "label": "Test declared invariances",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-robustness-stability-perturbation"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.robustness-stability.perturbation.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.robustness-stability.perturbation",
+      "pack_id": "design-pack.robustness-stability",
+      "prompt": "Which format, spelling, unit, image, wording, missingness, or measurement perturbations should preserve or predictably change output?",
+      "rationale": "Metamorphic checks can test behavior when exact ground truth is expensive.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.metamorphic-cases"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.8,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.robustness-stability"
+      ],
+      "title": "Semantic perturbation invariance",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-robustness-stability-adversary"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.robustness-stability.adversary.evaluate",
+          "label": "Build threat-model-specific adversarial cases",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-robustness-stability-adversary-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.robustness-stability.adversary.baseline",
+          "label": "Apply the declared abuse-case baseline",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-robustness-stability-adversary"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.robustness-stability.adversary.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.robustness-stability.adversary",
+      "pack_id": "design-pack.robustness-stability",
+      "prompt": "At which lifecycle stage can an attacker poison, evade, extract, infer, inject, exfiltrate, or misuse, with what knowledge and authority?",
+      "rationale": "Attack names without capability and lifecycle context do not define a testable threat.",
+      "reference_ids": [
+        "source.nist.adversarial-ml"
+      ],
+      "required_evidence": [
+        "evidence.threat-model",
+        "evidence.adversarial-cases"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.robustness-stability"
+      ],
+      "title": "Adversary and misuse model",
+      "trigger_all": [],
+      "trigger_any": [
+        "risk.high",
+        "risk.critical",
+        "task.llm-red-teaming"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-robustness-stability-dependency-failure"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.robustness-stability.dependency-failure.evaluate",
+          "label": "Inject dependency and data failures",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-robustness-stability-dependency-failure-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.robustness-stability.dependency-failure.baseline",
+          "label": "Fail closed or use a simple independent fallback",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-robustness-stability-dependency-failure"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.robustness-stability.dependency-failure.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.robustness-stability.dependency-failure",
+      "pack_id": "design-pack.robustness-stability",
+      "prompt": "What happens under missing features, provider outage, stale data, model timeout, schema change, or partial downstream failure?",
+      "rationale": "Reliability requires tested degradation and fallback behavior, not only clean offline cases.",
+      "reference_ids": [
+        "source.breck.ml-test-score"
+      ],
+      "required_evidence": [
+        "evidence.failure-injection",
+        "evidence.fallback-receipts"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.robustness-stability"
+      ],
+      "title": "Dependency and degradation failures",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.evaluation",
+  "title": "Robustness, stability, and stress testing",
+  "version": "1.0.0"
+}

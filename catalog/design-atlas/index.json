@@ -1,0 +1,528 @@
+{
+  "archetypes": [
+    {
+      "digest": "sha256:28755f4fc310b0ab68fbd5560aad300aad3a27f748a014b1fdb4255b76e85197",
+      "id": "task.data-cleaning",
+      "path": "design-atlas/archetypes/task.data-cleaning.json",
+      "title": "Data cleaning"
+    },
+    {
+      "digest": "sha256:95d533588934a0fa351c55e72e2ee50c9a5e2ff5362e06ab8f827afe703a9f07",
+      "id": "task.data-validation",
+      "path": "design-atlas/archetypes/task.data-validation.json",
+      "title": "Data validation"
+    },
+    {
+      "digest": "sha256:2bed3164c5e4e9df6bbb6a2a0a5d4ba018594b790dfc418432ed72721698c586",
+      "id": "task.data-enrichment",
+      "path": "design-atlas/archetypes/task.data-enrichment.json",
+      "title": "Data enrichment"
+    },
+    {
+      "digest": "sha256:b83249d547b99f454f4c4c1527bb6f5ee5cb9d1251d0179c5a334a460613debe",
+      "id": "task.geospatial-enrichment",
+      "path": "design-atlas/archetypes/task.geospatial-enrichment.json",
+      "title": "Geospatial enrichment"
+    },
+    {
+      "digest": "sha256:344cb3c22486dbf906e59ff9af9eabc0e63f816652bae1794ae2491c230bf434",
+      "id": "task.temporal-enrichment",
+      "path": "design-atlas/archetypes/task.temporal-enrichment.json",
+      "title": "Temporal enrichment"
+    },
+    {
+      "digest": "sha256:1cd3e959e4ad98fde273f6cb5c4797a3b1c8acf74d87ef9b108f2af511cbdcf9",
+      "id": "task.geotemporal-enrichment",
+      "path": "design-atlas/archetypes/task.geotemporal-enrichment.json",
+      "title": "Geotemporal enrichment"
+    },
+    {
+      "digest": "sha256:85c4a69c996afab48f82c3290fc85edda09eecf4caa210e94e88f4d3ba9e6d35",
+      "id": "task.entity-resolution",
+      "path": "design-atlas/archetypes/task.entity-resolution.json",
+      "title": "Entity resolution"
+    },
+    {
+      "digest": "sha256:2b5c18ae037f350c2e35d32db609e9adfb4d6ae164e2681cdf0a13307bc121fb",
+      "id": "task.dataset-profiling",
+      "path": "design-atlas/archetypes/task.dataset-profiling.json",
+      "title": "Dataset profiling and EDA"
+    },
+    {
+      "digest": "sha256:4d47362fbffb848644f4ce65a36cf0b9b655c3b5627ffe7eb01fefef41b59018",
+      "id": "task.tabular-regression",
+      "path": "design-atlas/archetypes/task.tabular-regression.json",
+      "title": "Tabular regression"
+    },
+    {
+      "digest": "sha256:eba7a657213b8f753d89ba686316d1e1bcd417ee3880fd704f622ff59f53b987",
+      "id": "task.binary-classification",
+      "path": "design-atlas/archetypes/task.binary-classification.json",
+      "title": "Binary classification"
+    },
+    {
+      "digest": "sha256:9f81933e97236b0c8fc5fd03af156d543f6c0f510d6be5c31d51ee562b71f7a2",
+      "id": "task.multiclass-classification",
+      "path": "design-atlas/archetypes/task.multiclass-classification.json",
+      "title": "Multiclass or multilabel classification"
+    },
+    {
+      "digest": "sha256:680a6d4810bff10b67ef258e4d72ec4c6d543c3dc3a9a7170b721c8eaec9ec91",
+      "id": "task.imbalanced-classification",
+      "path": "design-atlas/archetypes/task.imbalanced-classification.json",
+      "title": "Imbalanced or rare-event classification"
+    },
+    {
+      "digest": "sha256:760ec9dde954fceaa15b86d7ddb957385e7b0a4544b8bc4fdc3a5b980d552d3b",
+      "id": "task.ranking-recommendation",
+      "path": "design-atlas/archetypes/task.ranking-recommendation.json",
+      "title": "Ranking and recommendation"
+    },
+    {
+      "digest": "sha256:8792cc51f00dacd76e1a24c448d924632fee680a2a4d439a9844cedd6e09ffe0",
+      "id": "task.forecasting",
+      "path": "design-atlas/archetypes/task.forecasting.json",
+      "title": "Forecasting"
+    },
+    {
+      "digest": "sha256:f0e103650919d5230fe36855fb53039c7a8976f5978e27c8ab7905835477e5e1",
+      "id": "task.survival-analysis",
+      "path": "design-atlas/archetypes/task.survival-analysis.json",
+      "title": "Survival and time-to-event modeling"
+    },
+    {
+      "digest": "sha256:942688f105162b6126a5b4db2536245f094edce10686b679b2d6025ba2f1bdcf",
+      "id": "task.anomaly-detection",
+      "path": "design-atlas/archetypes/task.anomaly-detection.json",
+      "title": "Anomaly and novelty detection"
+    },
+    {
+      "digest": "sha256:b989bc4c0753540c4432cb424c32ec3c6865e985166039a456126dede4a5fb73",
+      "id": "task.clustering-segmentation",
+      "path": "design-atlas/archetypes/task.clustering-segmentation.json",
+      "title": "Clustering and segmentation"
+    },
+    {
+      "digest": "sha256:988e213040d90d72e127eaedc15f8007b2ff74e1a8cf4576aea97faa2a3ff1d8",
+      "id": "task.causal-inference",
+      "path": "design-atlas/archetypes/task.causal-inference.json",
+      "title": "Causal inference"
+    },
+    {
+      "digest": "sha256:ed43ca57e4f6a22fc91ebfffc25fb132b8f42e9300ad44476f3aadc59bdb840e",
+      "id": "task.experiment-design",
+      "path": "design-atlas/archetypes/task.experiment-design.json",
+      "title": "Experiment design and analysis"
+    },
+    {
+      "digest": "sha256:deb683d22b9c1e40eb6d9ce66a214795e310d01745ee040024f23a290ced0c07",
+      "id": "task.synthetic-data",
+      "path": "design-atlas/archetypes/task.synthetic-data.json",
+      "title": "Synthetic-data generation"
+    },
+    {
+      "digest": "sha256:1d3c1b882877ce41c3c5b591239231092390627d2d358fe3af54b11b1aeb53c1",
+      "id": "task.text-classification",
+      "path": "design-atlas/archetypes/task.text-classification.json",
+      "title": "Text and NLP modeling"
+    },
+    {
+      "digest": "sha256:28efb3cbd4ee56175df82564bb1002612b7c0beaeaef3b0ebb74e2bdbde5083b",
+      "id": "task.document-extraction",
+      "path": "design-atlas/archetypes/task.document-extraction.json",
+      "title": "Document extraction"
+    },
+    {
+      "digest": "sha256:d339d4cd860bfac076c89d0c03c44226ae7aaeed0945125a28f0000cf4b980fc",
+      "id": "task.computer-vision",
+      "path": "design-atlas/archetypes/task.computer-vision.json",
+      "title": "Image and computer-vision modeling"
+    },
+    {
+      "digest": "sha256:4cb0bef6bc2ae8f67397d5fcc9e567c47179921c8133e77b00b142cd7e0e777b",
+      "id": "task.multimodal-modeling",
+      "path": "design-atlas/archetypes/task.multimodal-modeling.json",
+      "title": "Multimodal modeling"
+    },
+    {
+      "digest": "sha256:1d47e9c5c7028ab7b51eb97ebf2e53a851b6d7141dec3ceee3f39a48c66797d8",
+      "id": "task.retrieval",
+      "path": "design-atlas/archetypes/task.retrieval.json",
+      "title": "Retrieval and RAG"
+    },
+    {
+      "digest": "sha256:0f073ecb27ae5e6378bb5ec34a8a94b7ec8205c0242bcdc4adf33fa20ee89109",
+      "id": "task.reinforcement-learning",
+      "path": "design-atlas/archetypes/task.reinforcement-learning.json",
+      "title": "Reinforcement learning"
+    },
+    {
+      "digest": "sha256:264514600498602ba75d9cf27f8fab9325ec001037c1ce8c0ae8caa18fbcde63",
+      "id": "task.llm-evaluation",
+      "path": "design-atlas/archetypes/task.llm-evaluation.json",
+      "title": "LLM and agent evaluation harness"
+    },
+    {
+      "digest": "sha256:f54730d2250144dc3f1716429d0040d617ae02c64b5941169879373bfc2a1425",
+      "id": "task.llm-red-teaming",
+      "path": "design-atlas/archetypes/task.llm-red-teaming.json",
+      "title": "LLM and agent red teaming"
+    },
+    {
+      "digest": "sha256:1528b69b93f8130ae6d300c075a5e1f350e17b1070ad23f49f7dc929ab2dbc8b",
+      "id": "task.user-action-modeling",
+      "path": "design-atlas/archetypes/task.user-action-modeling.json",
+      "title": "User action, journey, and flow modeling"
+    },
+    {
+      "digest": "sha256:612bb8a781eea5168182d317d3b3613ce33b33b871740c908f918b6678ee76af",
+      "id": "task.streaming-ml",
+      "path": "design-atlas/archetypes/task.streaming-ml.json",
+      "title": "Streaming and online ML"
+    },
+    {
+      "digest": "sha256:a0c6165489eb3a204f60e0d40abdf73680a70b3aee3c16c59c607295f9e6b55e",
+      "id": "task.model-operations",
+      "path": "design-atlas/archetypes/task.model-operations.json",
+      "title": "Model release and operations"
+    }
+  ],
+  "claim_boundary": "All 618 owner-supplied techniques are cataloged at C1 only. Source labels are retained for provenance and are not SolutionGraph maturity evidence.",
+  "design_atlas_model_version": "0.1",
+  "digest": "sha256:478394f5812449e4e1cd09f18b4f5e9a1b6889432625916e09a629295d684bf5",
+  "machine_maturity": {
+    "C1": 618
+  },
+  "pack_count": 28,
+  "packs": [
+    {
+      "digest": "sha256:c022276b06ea56090c61e8161d0dc3219b0d4e6825c711a530a0dff543764c62",
+      "id": "design-pack.task-contract",
+      "path": "design-atlas/packs/design-pack.task-contract.json",
+      "question_count": 4,
+      "title": "Task contract and decision value"
+    },
+    {
+      "digest": "sha256:da37d27e9ce8a6ec93bc980f0b0f523fc0a69b199311f64d40a4b72b75876b7e",
+      "id": "design-pack.data-source",
+      "path": "design-atlas/packs/design-pack.data-source.json",
+      "question_count": 4,
+      "title": "Data source, collection, and lineage"
+    },
+    {
+      "digest": "sha256:656f254b9354f66281ef457ae45ea5630cfe9d70dd8929bc10f53e8063864f3b",
+      "id": "design-pack.schema-semantics",
+      "path": "design-atlas/packs/design-pack.schema-semantics.json",
+      "question_count": 4,
+      "title": "Schema and semantic roles"
+    },
+    {
+      "digest": "sha256:7b74d829c638b977b2826a6390dcb6ce302a07739d2c4bf44d159296288b4122",
+      "id": "design-pack.profiling-eda",
+      "path": "design-atlas/packs/design-pack.profiling-eda.json",
+      "question_count": 4,
+      "title": "Profiling and exploratory analysis"
+    },
+    {
+      "digest": "sha256:3b63feba719de9e0d878a6fdcdfc5f7f018a13fe5605d6f0196e73f90244b58e",
+      "id": "design-pack.quality-cleaning",
+      "path": "design-atlas/packs/design-pack.quality-cleaning.json",
+      "question_count": 4,
+      "title": "Data quality and reversible cleaning"
+    },
+    {
+      "digest": "sha256:abd2a2dd690e4ecb997a04e0bf68dbc6dc4771476b2841bd998c1cb5ccd1057a",
+      "id": "design-pack.validation-splits",
+      "path": "design-atlas/packs/design-pack.validation-splits.json",
+      "question_count": 4,
+      "title": "Validation, leakage, and split design"
+    },
+    {
+      "digest": "sha256:0784178e5aadd701645db353492d4ebfe46d7a9955b3b952a4b249d35deb55b3",
+      "id": "design-pack.feature-engineering",
+      "path": "design-atlas/packs/design-pack.feature-engineering.json",
+      "question_count": 4,
+      "title": "Feature engineering and preprocessing"
+    },
+    {
+      "digest": "sha256:9060c8a5c332c8b16c983182596ecf8eb0d6c02a02ca11b6fb53df98e486b244",
+      "id": "design-pack.target-labels",
+      "path": "design-atlas/packs/design-pack.target-labels.json",
+      "question_count": 4,
+      "title": "Targets, labels, censoring, and imbalance"
+    },
+    {
+      "digest": "sha256:327cc14425787b3b3f3714a75422784c813d235a31911d6560c8d17c9e95f74e",
+      "id": "design-pack.time-series",
+      "path": "design-atlas/packs/design-pack.time-series.json",
+      "question_count": 4,
+      "title": "Temporal and forecasting design"
+    },
+    {
+      "digest": "sha256:a2eafa163595f71b6c2b6ad3a298433f7009594f1de7c5d8e34c4d139c2bb7c7",
+      "id": "design-pack.geospatial",
+      "path": "design-atlas/packs/design-pack.geospatial.json",
+      "question_count": 4,
+      "title": "Geospatial and geotemporal enrichment"
+    },
+    {
+      "digest": "sha256:7821ded2b6def085fadc297475ca307137168b7a716e973f8ddd01e1e8799286",
+      "id": "design-pack.text-document",
+      "path": "design-atlas/packs/design-pack.text-document.json",
+      "question_count": 4,
+      "title": "Text and document systems"
+    },
+    {
+      "digest": "sha256:3b6709d69390c0763a75793c5efa0eb3d137e711abde08e64dcf982153d05010",
+      "id": "design-pack.image-multimodal",
+      "path": "design-atlas/packs/design-pack.image-multimodal.json",
+      "question_count": 4,
+      "title": "Image and multimodal systems"
+    },
+    {
+      "digest": "sha256:0b77b86832f0b618c55b88de8e51ed6928c98772236a17ce18a536eeef0c3333",
+      "id": "design-pack.selection-reduction",
+      "path": "design-atlas/packs/design-pack.selection-reduction.json",
+      "question_count": 4,
+      "title": "Feature selection and dimensionality reduction"
+    },
+    {
+      "digest": "sha256:dacfc8d68e71986f224a4759db948fffe1ecc8cf43bd0035b0407037fa586578",
+      "id": "design-pack.baselines-models",
+      "path": "design-atlas/packs/design-pack.baselines-models.json",
+      "question_count": 4,
+      "title": "Baselines and model-family selection"
+    },
+    {
+      "digest": "sha256:ecff24fffdba4d0412014b08395952a8a6a375d53d6dd35cdfd1c68844b167b5",
+      "id": "design-pack.tuning-search",
+      "path": "design-atlas/packs/design-pack.tuning-search.json",
+      "question_count": 4,
+      "title": "Hyperparameter, route, and topology search"
+    },
+    {
+      "digest": "sha256:c97f790b6be05ebb90a669f11212365b20d550ef85bb28928eff268f457d3d4e",
+      "id": "design-pack.ensemble-calibration",
+      "path": "design-atlas/packs/design-pack.ensemble-calibration.json",
+      "question_count": 4,
+      "title": "Ensembling, calibration, and decision thresholds"
+    },
+    {
+      "digest": "sha256:1b005eb10365e87ec3468099bfe032a74a45cb3f4db2facb28e524ccbe92738f",
+      "id": "design-pack.evaluation-error",
+      "path": "design-atlas/packs/design-pack.evaluation-error.json",
+      "question_count": 4,
+      "title": "Metrics, uncertainty, and error analysis"
+    },
+    {
+      "digest": "sha256:2e37b694d56f4320112606de5beba6abb4a9b6f10fbc17b56fdcc98f6bffa458",
+      "id": "design-pack.robustness-stability",
+      "path": "design-atlas/packs/design-pack.robustness-stability.json",
+      "question_count": 4,
+      "title": "Robustness, stability, and stress testing"
+    },
+    {
+      "digest": "sha256:25312403023e78d8f5fdefcbbf6b7fb2638f5bc588bb892b7cbce00cf9159bb0",
+      "id": "design-pack.fairness-risk",
+      "path": "design-atlas/packs/design-pack.fairness-risk.json",
+      "question_count": 4,
+      "title": "Fairness, privacy, and consequential-risk design"
+    },
+    {
+      "digest": "sha256:a5c1f5be6a71721d574e8aa641a92a94e39e1f818c9a2430a9e5353808a39346",
+      "id": "design-pack.interpretability",
+      "path": "design-atlas/packs/design-pack.interpretability.json",
+      "question_count": 4,
+      "title": "Interpretability and explanation"
+    },
+    {
+      "digest": "sha256:ad7848f157eb823a03478ff362b78d6d9e678fcf9e214783dc3fa7f7f84f8b9a",
+      "id": "design-pack.causality-experiments",
+      "path": "design-atlas/packs/design-pack.causality-experiments.json",
+      "question_count": 4,
+      "title": "Causal questions and experiments"
+    },
+    {
+      "digest": "sha256:6c4e039fce66a8f24881a110c76a82985c8a6fa26ed958627fa66f092231b068",
+      "id": "design-pack.synthetic-data",
+      "path": "design-atlas/packs/design-pack.synthetic-data.json",
+      "question_count": 4,
+      "title": "Synthetic and augmented data"
+    },
+    {
+      "digest": "sha256:ba3eace1ae4467964a30289b8b6d10d8e1190141220a84f0580ccfcd2fe8025f",
+      "id": "design-pack.reinforcement-learning",
+      "path": "design-atlas/packs/design-pack.reinforcement-learning.json",
+      "question_count": 4,
+      "title": "Reinforcement learning and sequential decisions"
+    },
+    {
+      "digest": "sha256:e96f5482560419ed4267709b6c999cb60d3884183c96d9bbf10a96e518967b95",
+      "id": "design-pack.llm-harness",
+      "path": "design-atlas/packs/design-pack.llm-harness.json",
+      "question_count": 4,
+      "title": "LLM, agent, evaluation, and red-team harnesses"
+    },
+    {
+      "digest": "sha256:d38afdf32ae6f853688b74b0300a94efe77f91d764a189cfec1809f1eeded05b",
+      "id": "design-pack.deployment-serving",
+      "path": "design-atlas/packs/design-pack.deployment-serving.json",
+      "question_count": 4,
+      "title": "Packaging, serving, release, and rollback"
+    },
+    {
+      "digest": "sha256:97358a36951e0947db707b8e2e870ff62bab56496cbe2a2cd508d28d10698bfb",
+      "id": "design-pack.monitoring-feedback",
+      "path": "design-atlas/packs/design-pack.monitoring-feedback.json",
+      "question_count": 4,
+      "title": "Monitoring, delayed feedback, and controlled improvement"
+    },
+    {
+      "digest": "sha256:de7baf984494b223806e247c06c4a20732f27834849e04ac99d2c8d64dc75002",
+      "id": "design-pack.reproducibility-governance",
+      "path": "design-atlas/packs/design-pack.reproducibility-governance.json",
+      "question_count": 4,
+      "title": "Reproducibility, documentation, ownership, and governance"
+    },
+    {
+      "digest": "sha256:74a3618cae98413025da4af9a37d2e0ac6df37f35230d0abc590f7d385c28f2f",
+      "id": "design-pack.decision-handoff",
+      "path": "design-atlas/packs/design-pack.decision-handoff.json",
+      "question_count": 4,
+      "title": "Decision dossier and graph handoff"
+    }
+  ],
+  "phase_count": 20,
+  "phases": [
+    {
+      "id": "phase.1.data-loading-ingestion",
+      "path": "design-atlas/phases/phase.1.data-loading-ingestion.json",
+      "technique_count": 8,
+      "title": "Data Loading & Ingestion"
+    },
+    {
+      "id": "phase.2.data-understanding-profiling",
+      "path": "design-atlas/phases/phase.2.data-understanding-profiling.json",
+      "technique_count": 14,
+      "title": "Data Understanding & Profiling"
+    },
+    {
+      "id": "phase.3.exploratory-data-analysis-eda",
+      "path": "design-atlas/phases/phase.3.exploratory-data-analysis-eda.json",
+      "technique_count": 9,
+      "title": "Exploratory Data Analysis (Eda)"
+    },
+    {
+      "id": "phase.4.data-cleaning-preprocessing",
+      "path": "design-atlas/phases/phase.4.data-cleaning-preprocessing.json",
+      "technique_count": 75,
+      "title": "Data Cleaning & Preprocessing"
+    },
+    {
+      "id": "phase.5.feature-engineering",
+      "path": "design-atlas/phases/phase.5.feature-engineering.json",
+      "technique_count": 46,
+      "title": "Feature Engineering"
+    },
+    {
+      "id": "phase.6.dimensionality-reduction",
+      "path": "design-atlas/phases/phase.6.dimensionality-reduction.json",
+      "technique_count": 24,
+      "title": "Dimensionality Reduction"
+    },
+    {
+      "id": "phase.7.feature-selection",
+      "path": "design-atlas/phases/phase.7.feature-selection.json",
+      "technique_count": 40,
+      "title": "Feature Selection"
+    },
+    {
+      "id": "phase.8.target-engineering",
+      "path": "design-atlas/phases/phase.8.target-engineering.json",
+      "technique_count": 26,
+      "title": "Target Engineering"
+    },
+    {
+      "id": "phase.9.data-splitting-validation",
+      "path": "design-atlas/phases/phase.9.data-splitting-validation.json",
+      "technique_count": 20,
+      "title": "Data Splitting & Validation"
+    },
+    {
+      "id": "phase.10.model-selection",
+      "path": "design-atlas/phases/phase.10.model-selection.json",
+      "technique_count": 76,
+      "title": "Model Selection"
+    },
+    {
+      "id": "phase.11.model-training-fitting",
+      "path": "design-atlas/phases/phase.11.model-training-fitting.json",
+      "technique_count": 32,
+      "title": "Model Training & Fitting"
+    },
+    {
+      "id": "phase.12.hyperparameter-tuning",
+      "path": "design-atlas/phases/phase.12.hyperparameter-tuning.json",
+      "technique_count": 26,
+      "title": "Hyperparameter Tuning"
+    },
+    {
+      "id": "phase.13.automl",
+      "path": "design-atlas/phases/phase.13.automl.json",
+      "technique_count": 16,
+      "title": "Automl"
+    },
+    {
+      "id": "phase.14.ensemble-methods",
+      "path": "design-atlas/phases/phase.14.ensemble-methods.json",
+      "technique_count": 43,
+      "title": "Ensemble Methods"
+    },
+    {
+      "id": "phase.15.post-processing-calibration",
+      "path": "design-atlas/phases/phase.15.post-processing-calibration.json",
+      "technique_count": 24,
+      "title": "Post-Processing & Calibration"
+    },
+    {
+      "id": "phase.16.evaluation-metrics",
+      "path": "design-atlas/phases/phase.16.evaluation-metrics.json",
+      "technique_count": 61,
+      "title": "Evaluation & Metrics"
+    },
+    {
+      "id": "phase.17.stability-robustness",
+      "path": "design-atlas/phases/phase.17.stability-robustness.json",
+      "technique_count": 20,
+      "title": "Stability & Robustness"
+    },
+    {
+      "id": "phase.18.interpretability-explainability",
+      "path": "design-atlas/phases/phase.18.interpretability-explainability.json",
+      "technique_count": 18,
+      "title": "Interpretability & Explainability"
+    },
+    {
+      "id": "phase.19.feedback-loops-iterative-improvement",
+      "path": "design-atlas/phases/phase.19.feedback-loops-iterative-improvement.json",
+      "technique_count": 20,
+      "title": "Feedback Loops & Iterative Improvement"
+    },
+    {
+      "id": "phase.20.deployment-serving",
+      "path": "design-atlas/phases/phase.20.deployment-serving.json",
+      "technique_count": 20,
+      "title": "Deployment & Serving"
+    }
+  ],
+  "question_count": 112,
+  "source_claim_counts": {
+    "reported-absent": 426,
+    "reported-designed": 37,
+    "reported-implemented": 134,
+    "reported-partial": 21
+  },
+  "source_count": 12,
+  "task_archetype_count": 31,
+  "technique_count": 618
+}

@@ -1,0 +1,263 @@
+{
+  "description": "Resolve place identity, coordinate systems, boundary vintages, proximity, spatial leakage, and time-aware enrichment.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.geospatial",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-geospatial-place-identity"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.geospatial.place-identity.evaluate",
+          "label": "Verify against versioned authority sources",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-geospatial-place-identity-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.geospatial.place-identity.baseline",
+          "label": "Normalize without asserting unverified identity",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-geospatial-place-identity"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.geospatial.place-identity.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.geospatial.place-identity",
+      "pack_id": "design-pack.geospatial",
+      "prompt": "Are names, addresses, ZIP codes, counties, regions, coordinates, and jurisdiction codes mutually consistent for the intended vintage?",
+      "rationale": "Strings that look like places may be ambiguous, invalid, historical, or outside the authority source.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.geographic-authority",
+        "evidence.source-vintage"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.geospatial"
+      ],
+      "title": "Place and address identity",
+      "trigger_all": [],
+      "trigger_any": [
+        "signal.geospatial",
+        "modality.geospatial"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-geospatial-coordinate-boundary"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.geospatial.coordinate-boundary.evaluate",
+          "label": "Cross-check CRS and boundary candidates",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-geospatial-coordinate-boundary-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.geospatial.coordinate-boundary.baseline",
+          "label": "Require declared CRS and boundary vintage",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-geospatial-coordinate-boundary"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.geospatial.coordinate-boundary.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.geospatial.coordinate-boundary",
+      "pack_id": "design-pack.geospatial",
+      "prompt": "What coordinate reference system, precision, boundary rule, and boundary vintage apply to point and polygon operations?",
+      "rationale": "CRS or vintage mismatch can produce plausible but wrong joins and distances.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.crs",
+        "evidence.boundary-vintage"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.geospatial"
+      ],
+      "title": "Coordinates, CRS, and boundaries",
+      "trigger_all": [],
+      "trigger_any": [
+        "signal.geospatial",
+        "modality.geospatial"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-geospatial-spatial-split"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.geospatial.spatial-split.evaluate",
+          "label": "Compare random, grouped, and spatial-block splits",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-geospatial-spatial-split-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.geospatial.spatial-split.baseline",
+          "label": "Use region-grouped holdouts",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-geospatial-spatial-split"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.geospatial.spatial-split.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.geospatial.spatial-split",
+      "pack_id": "design-pack.geospatial",
+      "prompt": "Should nearby locations, routes, regions, or spatial clusters be grouped or blocked across evaluation splits?",
+      "rationale": "Random splits can overstate performance when spatial autocorrelation is strong.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.spatial-dependence",
+        "evidence.split-manifest"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.geospatial"
+      ],
+      "title": "Spatial dependence and holdouts",
+      "trigger_all": [],
+      "trigger_any": [
+        "signal.geospatial",
+        "modality.geospatial"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-geospatial-geotemporal-enrichment"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.geospatial.geotemporal-enrichment.evaluate",
+          "label": "Replay point-in-time geotemporal joins",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-geospatial-geotemporal-enrichment-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.geospatial.geotemporal-enrichment.baseline",
+          "label": "Use only versioned as-of enrichment",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-geospatial-geotemporal-enrichment"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.geospatial.geotemporal-enrichment.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.geospatial.geotemporal-enrichment",
+      "pack_id": "design-pack.geospatial",
+      "prompt": "For a place and time, which census, event, weather, policy, mobility, or business context was valid and available then?",
+      "rationale": "Joining current geography or future event knowledge to historical rows creates temporal and vintage leakage.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.as-of-join-test",
+        "evidence.enrichment-lineage"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.geospatial"
+      ],
+      "title": "Time-aware geographic enrichment",
+      "trigger_all": [],
+      "trigger_any": [
+        "signal.geospatial",
+        "signal.time-aware"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.specialized",
+  "title": "Geospatial and geotemporal enrichment",
+  "version": "1.0.0"
+}

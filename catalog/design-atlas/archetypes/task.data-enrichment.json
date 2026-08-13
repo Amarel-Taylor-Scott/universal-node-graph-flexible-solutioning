@@ -1,0 +1,24 @@
+{
+  "description": "Join internal or external facts with explicit identity, authority, vintage, confidence, and lineage.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.data-enrichment",
+  "optional_pack_ids": [
+    "design-pack.geospatial",
+    "design-pack.time-series",
+    "design-pack.text-document"
+  ],
+  "outcome_artifact": "artifact.enriched-dataset",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.quality-cleaning",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.data-enrichment",
+    "domain.data-engineering"
+  ],
+  "title": "Data enrichment"
+}

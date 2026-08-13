@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Log transform (log1p)",
+  "family": "TARGET ENGINEERING",
+  "id": "technique.8.1",
+  "maturity_floor": "C1",
+  "ordinal": "8.1",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.8.target-engineering",
+  "phase_title": "Target Engineering",
+  "references": [],
+  "source_claim": "reported-implemented",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "`log1p` in target_transform slot",
+  "tags": [
+    "phase.8",
+    "family.target-engineering"
+  ],
+  "title": "Target transformation"
+}

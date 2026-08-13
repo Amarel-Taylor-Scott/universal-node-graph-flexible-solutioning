@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-task-contract-objectives-constraints"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.task-contract.objectives-constraints.evaluate",
+      "label": "Elicit and stress-test the objective set",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-task-contract-objectives-constraints-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.task-contract.objectives-constraints.baseline",
+      "label": "Use acceptance plus quality/cost/latency",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-task-contract-objectives-constraints"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.task-contract.objectives-constraints.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.task-contract.objectives-constraints",
+  "pack_id": "design-pack.task-contract",
+  "prompt": "Which quality, cost, latency, reliability, fairness, privacy, and policy measures are objectives versus hard gates?",
+  "rationale": "Turning hard constraints into soft score penalties can select an unacceptable solution.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1"
+  ],
+  "required_evidence": [
+    "evidence.objective-definition",
+    "evidence.policy-owner"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.task-contract"
+  ],
+  "title": "Objectives and hard constraints",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

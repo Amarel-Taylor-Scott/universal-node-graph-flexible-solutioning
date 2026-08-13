@@ -1,0 +1,26 @@
+{
+  "description": "Process event-time data with windows, late arrivals, checkpoints, online state, drift, and safe updates.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.streaming-ml",
+  "optional_pack_ids": [
+    "design-pack.reinforcement-learning"
+  ],
+  "outcome_artifact": "artifact.streaming-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.time-series",
+    "design-pack.validation-splits",
+    "design-pack.deployment-serving",
+    "design-pack.monitoring-feedback",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.streaming-ml",
+    "domain.streaming",
+    "signal.time-aware"
+  ],
+  "title": "Streaming and online ML"
+}

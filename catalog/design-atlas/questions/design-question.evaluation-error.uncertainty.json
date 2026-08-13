@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-evaluation-error-uncertainty"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.evaluation-error.uncertainty.evaluate",
+      "label": "Estimate paired uncertainty and minimum effect",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-evaluation-error-uncertainty-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.evaluation-error.uncertainty.baseline",
+      "label": "Report repeated-seed mean and spread",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-evaluation-error-uncertainty"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.evaluation-error.uncertainty.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.evaluation-error.uncertainty",
+  "pack_id": "design-pack.evaluation-error",
+  "prompt": "What repeated seeds, resamples, paired tests, intervals, practical-effect thresholds, and multiple-comparison controls are warranted?",
+  "rationale": "A single best score cannot distinguish improvement from noise.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.repeated-receipts",
+    "evidence.uncertainty-analysis"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.85,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.evaluation-error"
+  ],
+  "title": "Statistical and run uncertainty",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

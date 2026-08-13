@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "",
+  "family": "Neural Networks & Deep Learning",
+  "id": "technique.10.5.8",
+  "maturity_floor": "C1",
+  "ordinal": "10.5.8",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.10.model-selection",
+  "phase_title": "Model Selection",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not a filling",
+  "tags": [
+    "phase.10",
+    "family.neural-networks-deep-learning"
+  ],
+  "title": "TabNet (attentive tabular learning)"
+}

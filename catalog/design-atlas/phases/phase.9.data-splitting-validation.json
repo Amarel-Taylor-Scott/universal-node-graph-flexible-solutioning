@@ -1,0 +1,108 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.9.data-splitting-validation",
+  "technique_count": 20,
+  "techniques": [
+    {
+      "digest": "sha256:8fa0bea2a058bad06d65908ff9dabc3b5b827e99f84f3a9ccca02689daaa23db",
+      "id": "technique.9.1",
+      "path": "design-atlas/techniques/technique.9.1.json"
+    },
+    {
+      "digest": "sha256:72ca72c03ebb93e6d7e0b031060ff86489ca5ca8aeb8ddb375b32614f1fdd117",
+      "id": "technique.9.2",
+      "path": "design-atlas/techniques/technique.9.2.json"
+    },
+    {
+      "digest": "sha256:c960429f6f9bd40f62c1dc7b98533e2f3da0f701ab2543759eb2ffc308dd7e72",
+      "id": "technique.9.3",
+      "path": "design-atlas/techniques/technique.9.3.json"
+    },
+    {
+      "digest": "sha256:ca84b0d54f4164a8aee04a81e5fa8f8f0b26bd83afe0803b0c187d44e18c279d",
+      "id": "technique.9.4",
+      "path": "design-atlas/techniques/technique.9.4.json"
+    },
+    {
+      "digest": "sha256:b5e2a02cc0548d5281f80d1117c3cb62581882329005da6bfd68cb349a400760",
+      "id": "technique.9.5",
+      "path": "design-atlas/techniques/technique.9.5.json"
+    },
+    {
+      "digest": "sha256:507d23d8e30d1e6ed9a21890a5b8229a00c120290b9e5f1ed10eb0ed51742dc8",
+      "id": "technique.9.6",
+      "path": "design-atlas/techniques/technique.9.6.json"
+    },
+    {
+      "digest": "sha256:3f6278bbdc930a689247b1a76bfb7c7fde9f2a8570e0ea667ace547963c6ba5d",
+      "id": "technique.9.7",
+      "path": "design-atlas/techniques/technique.9.7.json"
+    },
+    {
+      "digest": "sha256:20df53a3759fd97f3f87927bba3e2157aa4be3bc807db87dfab250fcfde6c441",
+      "id": "technique.9.8",
+      "path": "design-atlas/techniques/technique.9.8.json"
+    },
+    {
+      "digest": "sha256:b948cf62142c6b6efe364cbb55e3fdabd4f0fbfb5e2ad1143325c3f280c734f4",
+      "id": "technique.9.9",
+      "path": "design-atlas/techniques/technique.9.9.json"
+    },
+    {
+      "digest": "sha256:f39687f57326a113a338316151666e855efe0606e0e50a3a7b3f6e7d8223acaf",
+      "id": "technique.9.10",
+      "path": "design-atlas/techniques/technique.9.10.json"
+    },
+    {
+      "digest": "sha256:cd48cdafb3a2505289f86f491738de3d326b3f14c783cb8c640a143413961e1b",
+      "id": "technique.9.11",
+      "path": "design-atlas/techniques/technique.9.11.json"
+    },
+    {
+      "digest": "sha256:b6dd8da4eeb897ca9315c51e88dcefc5afb0cf0d5097c685ad4001aa87893740",
+      "id": "technique.9.12",
+      "path": "design-atlas/techniques/technique.9.12.json"
+    },
+    {
+      "digest": "sha256:1fbbb98a8b869ce770527daad81d814fd7198b4572981dc3aa0d0acf7ca2ec29",
+      "id": "technique.9.13",
+      "path": "design-atlas/techniques/technique.9.13.json"
+    },
+    {
+      "digest": "sha256:174641f0f6822f5e84b83475adf812f3ce8caeb3e56f0c708c7e31fa1ce188df",
+      "id": "technique.9.14",
+      "path": "design-atlas/techniques/technique.9.14.json"
+    },
+    {
+      "digest": "sha256:18efc2711a4599345c9430ec6e0c4a937e0ede26a9a0bc4ea00e34e598fe3c3a",
+      "id": "technique.9.15",
+      "path": "design-atlas/techniques/technique.9.15.json"
+    },
+    {
+      "digest": "sha256:214e658b81c93a4b55a772356cd2505decf75e8226163448b8a5bc85179938df",
+      "id": "technique.9.16",
+      "path": "design-atlas/techniques/technique.9.16.json"
+    },
+    {
+      "digest": "sha256:01aa4ea1ebe56e8c5739d0bcec2827734acc1d3365b93fe6a0d15b1ea212a974",
+      "id": "technique.9.17",
+      "path": "design-atlas/techniques/technique.9.17.json"
+    },
+    {
+      "digest": "sha256:c15fd5e639bb3e9ee7c58e6c607e2b3dffe0216204e4cb69a667bcf41bea6a7b",
+      "id": "technique.9.18",
+      "path": "design-atlas/techniques/technique.9.18.json"
+    },
+    {
+      "digest": "sha256:cf4b9eeee2ba03a6763d89fbb1d8b12db889c3016c83a6bcd110a9b129acf93c",
+      "id": "technique.9.19",
+      "path": "design-atlas/techniques/technique.9.19.json"
+    },
+    {
+      "digest": "sha256:5b7d144e51d731319915833ba4bc676b2a41031c895fe981831bd8e17ecb7da4",
+      "id": "technique.9.20",
+      "path": "design-atlas/techniques/technique.9.20.json"
+    }
+  ],
+  "title": "Data Splitting & Validation"
+}

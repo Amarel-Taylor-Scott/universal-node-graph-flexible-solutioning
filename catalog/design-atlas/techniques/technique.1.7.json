@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "DVC, Pachyderm, Delta Lake, Iceberg",
+  "family": "DATA LOADING & INGESTION",
+  "id": "technique.1.7",
+  "maturity_floor": "C1",
+  "ordinal": "1.7",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.1.data-loading-ingestion",
+  "phase_title": "Data Loading & Ingestion",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Task capsules provide content addressing",
+  "tags": [
+    "phase.1",
+    "family.data-loading-ingestion"
+  ],
+  "title": "Data versioning"
+}

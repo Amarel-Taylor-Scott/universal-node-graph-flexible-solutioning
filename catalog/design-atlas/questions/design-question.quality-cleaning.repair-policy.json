@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-quality-cleaning-repair-policy"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.quality-cleaning.repair-policy.evaluate",
+      "label": "Shadow-test repair and quarantine policies",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-quality-cleaning-repair-policy-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.quality-cleaning.repair-policy.baseline",
+      "label": "Permit only proven reversible repairs",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-quality-cleaning-repair-policy"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.quality-cleaning.repair-policy.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.quality-cleaning.repair-policy",
+  "pack_id": "design-pack.quality-cleaning",
+  "prompt": "Which defects have deterministic reversible repairs, which need review, and which must be quarantined?",
+  "rationale": "Silent correction can destroy provenance and introduce confident false data.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.repair-receipt",
+    "evidence.reversal-test"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.quality-cleaning"
+  ],
+  "title": "Repair versus quarantine",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

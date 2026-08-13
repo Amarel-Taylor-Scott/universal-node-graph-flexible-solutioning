@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "capability-evidence.schema.json",
+  "title": "Evidence inputs for C0-C7 capability maturity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["design_atlas_model_version", "capability_id", "cataloged", "declaration_digest", "valid_smoke_tests", "invalid_smoke_tests", "compatibility_tests", "leakage_tests", "search_registered", "search_tests", "benchmark_receipts", "benchmark_seeds", "monitoring_evidence", "security_evidence", "privacy_evidence", "rollback_evidence", "slo_evidence", "artifact_refs"],
+  "properties": {
+    "design_atlas_model_version": {"const": "0.1"},
+    "capability_id": {"$ref": "common.schema.json#/$defs/id"},
+    "cataloged": {"type": "boolean"},
+    "declaration_digest": {"$ref": "common.schema.json#/$defs/optional_digest"},
+    "valid_smoke_tests": {"$ref": "#/$defs/count"}, "invalid_smoke_tests": {"$ref": "#/$defs/count"},
+    "compatibility_tests": {"$ref": "#/$defs/count"}, "leakage_tests": {"$ref": "#/$defs/count"},
+    "search_registered": {"type": "boolean"}, "search_tests": {"$ref": "#/$defs/count"},
+    "benchmark_receipts": {"$ref": "#/$defs/count"}, "benchmark_seeds": {"$ref": "#/$defs/count"},
+    "monitoring_evidence": {"$ref": "#/$defs/strings"}, "security_evidence": {"$ref": "#/$defs/strings"},
+    "privacy_evidence": {"$ref": "#/$defs/strings"}, "rollback_evidence": {"$ref": "#/$defs/strings"},
+    "slo_evidence": {"$ref": "#/$defs/strings"}, "artifact_refs": {"$ref": "#/$defs/strings"}
+  },
+  "$defs": {
+    "count": {"type": "integer", "minimum": 0},
+    "strings": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+  }
+}

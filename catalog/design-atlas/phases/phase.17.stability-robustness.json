@@ -1,0 +1,108 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.17.stability-robustness",
+  "technique_count": 20,
+  "techniques": [
+    {
+      "digest": "sha256:ba848b31a8d88e5303d40a6638cc07f833dd2166b82261912153c9e01df55713",
+      "id": "technique.17.1",
+      "path": "design-atlas/techniques/technique.17.1.json"
+    },
+    {
+      "digest": "sha256:0b2429f44c7f5b5ca266105256fce61f910629d9e360f1e09d49046edd254297",
+      "id": "technique.17.2",
+      "path": "design-atlas/techniques/technique.17.2.json"
+    },
+    {
+      "digest": "sha256:425a41d22375cd417b40d6ca6d5c552b816faef029f0c7595e22a833f48f8194",
+      "id": "technique.17.3",
+      "path": "design-atlas/techniques/technique.17.3.json"
+    },
+    {
+      "digest": "sha256:390e2a18713763d0559cc0fcdc384648b677d528af997c43e6a2a959f55b83fb",
+      "id": "technique.17.4",
+      "path": "design-atlas/techniques/technique.17.4.json"
+    },
+    {
+      "digest": "sha256:7c93792a441505534dd405c3b3ee18e1ea1b811d670afefb83b5e8bad85e5b36",
+      "id": "technique.17.5",
+      "path": "design-atlas/techniques/technique.17.5.json"
+    },
+    {
+      "digest": "sha256:823ba473b227bad3dd903f56391b61a12caf6be3e8b663af9001b722c92f6d1b",
+      "id": "technique.17.6",
+      "path": "design-atlas/techniques/technique.17.6.json"
+    },
+    {
+      "digest": "sha256:7486daffacb36de9293b6e0a087f197fb08fa1ee6b5295f53dfe1280aba69fc4",
+      "id": "technique.17.7",
+      "path": "design-atlas/techniques/technique.17.7.json"
+    },
+    {
+      "digest": "sha256:3fb6325b12fdf08552bb9f53bbf2b3bcc70c1a6da7266166dc14a624560460d9",
+      "id": "technique.17.8",
+      "path": "design-atlas/techniques/technique.17.8.json"
+    },
+    {
+      "digest": "sha256:0905f4e2ba29e4c15143094788c2c532a6361be536f71f20322c27d8781416e0",
+      "id": "technique.17.9",
+      "path": "design-atlas/techniques/technique.17.9.json"
+    },
+    {
+      "digest": "sha256:40e7f798375d75ca6e64d27aa3f56c5f459f14d22a7e8863c2d1763da31d56a2",
+      "id": "technique.17.10",
+      "path": "design-atlas/techniques/technique.17.10.json"
+    },
+    {
+      "digest": "sha256:de2141c3d5c68cb3ac68919d7cda690c38f51068bfa76ac81c794557b087b2cd",
+      "id": "technique.17.11",
+      "path": "design-atlas/techniques/technique.17.11.json"
+    },
+    {
+      "digest": "sha256:4cbeaac22a7b02682918cbd5a50e686b4c10b7154b19b896b6314b19d7a0708a",
+      "id": "technique.17.12",
+      "path": "design-atlas/techniques/technique.17.12.json"
+    },
+    {
+      "digest": "sha256:f9f9cb0641005b2b12d74887e6e44c4ad80e8f99a1a77eae398710f9e44b3e0d",
+      "id": "technique.17.13",
+      "path": "design-atlas/techniques/technique.17.13.json"
+    },
+    {
+      "digest": "sha256:ae3b91073ccab2d93f01addef90e687201a4e28f8b6a6dc2be4500ba277655a3",
+      "id": "technique.17.14",
+      "path": "design-atlas/techniques/technique.17.14.json"
+    },
+    {
+      "digest": "sha256:7e1ec8e855bd1b16362a59b33290f59d27750b1f2fbc7262ad6021ed988b5982",
+      "id": "technique.17.15",
+      "path": "design-atlas/techniques/technique.17.15.json"
+    },
+    {
+      "digest": "sha256:b7608022e11fbdd6a13f453835235075e50b559abe778b3df32b790b0ba739de",
+      "id": "technique.17.16",
+      "path": "design-atlas/techniques/technique.17.16.json"
+    },
+    {
+      "digest": "sha256:f106c5f48f25ec7bea0e478928f9d78efb94b27b21cb4561d81cc07deaf71708",
+      "id": "technique.17.17",
+      "path": "design-atlas/techniques/technique.17.17.json"
+    },
+    {
+      "digest": "sha256:8ad00f81bdb7c6aad86de25bcc9565eee9fb8998bb8403d33127a0531365a8aa",
+      "id": "technique.17.18",
+      "path": "design-atlas/techniques/technique.17.18.json"
+    },
+    {
+      "digest": "sha256:b248cef7cd29d127348227c35c9e8e11b76b239016ec4d9eb08101dd2d1a9b9d",
+      "id": "technique.17.19",
+      "path": "design-atlas/techniques/technique.17.19.json"
+    },
+    {
+      "digest": "sha256:c748d8bd2fd4047a9ab368cc373478aecc7314742d2c29801e2103ee39a500d9",
+      "id": "technique.17.20",
+      "path": "design-atlas/techniques/technique.17.20.json"
+    }
+  ],
+  "title": "Stability & Robustness"
+}

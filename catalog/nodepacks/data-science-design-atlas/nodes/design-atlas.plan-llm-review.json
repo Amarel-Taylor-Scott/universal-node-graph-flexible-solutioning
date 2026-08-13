@@ -1,0 +1,87 @@
+{
+  "capabilities": [
+    "design-atlas.plan-review"
+  ],
+  "description": "Compile the same review contract for a provider-neutral model responder; model.invoke must be granted before compiler admission.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.design_atlas.nodes.plan_review:plan_llm_review_node",
+  "failure_modes": [
+    {
+      "code": "design-atlas.invalid-input",
+      "description": "",
+      "retryable": false
+    }
+  ],
+  "id": "design-atlas.plan-llm-review",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:5f041f57b24b19714bb8e4a0e5dfac89a76e757cdee6828b16db2ea24af4e1f0",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "context",
+      "type": {
+        "id": "design-atlas.context",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "design_plan",
+      "type": {
+        "id": "design-atlas.plan",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "E1",
+        "E3",
+        "E5",
+        "E7",
+        "E10"
+      ],
+      "default": "E3",
+      "description": "",
+      "name": "effort_level",
+      "required": false,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        0,
+        17,
+        41
+      ],
+      "default": 0,
+      "description": "Explicit exploration seeds keep one deterministic route from dominating.",
+      "name": "random_seed",
+      "required": false,
+      "value_type": "integer"
+    }
+  ],
+  "permissions": [
+    "model.invoke"
+  ],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/design_atlas/nodes/plan_review.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

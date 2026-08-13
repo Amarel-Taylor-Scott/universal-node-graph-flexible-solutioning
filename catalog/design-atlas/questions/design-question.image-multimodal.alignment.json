@@ -1,0 +1,61 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-image-multimodal-alignment"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.image-multimodal.alignment.evaluate",
+      "label": "Measure alignment confidence and negatives",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-image-multimodal-alignment-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.image-multimodal.alignment.baseline",
+      "label": "Require exact entity/time pairing",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-image-multimodal-alignment"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.image-multimodal.alignment.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.image-multimodal.alignment",
+  "pack_id": "design-pack.image-multimodal",
+  "prompt": "Are text, image, audio, video, sensor, and document elements paired at the correct entity and time?",
+  "rationale": "Weak or wrong alignment creates fabricated cross-modal relationships.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.alignment-manifest"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.image-multimodal"
+  ],
+  "title": "Cross-modal alignment",
+  "trigger_all": [],
+  "trigger_any": [
+    "modality.multimodal"
+  ],
+  "version": "1.0.0"
+}

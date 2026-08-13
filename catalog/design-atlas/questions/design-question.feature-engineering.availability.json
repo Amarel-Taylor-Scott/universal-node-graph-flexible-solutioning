@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-feature-engineering-availability"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.feature-engineering.availability.evaluate",
+      "label": "Replay training-serving feature parity",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-feature-engineering-availability-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.feature-engineering.availability.baseline",
+      "label": "Use only contractually available features",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-feature-engineering-availability"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.feature-engineering.availability.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.feature-engineering.availability",
+  "pack_id": "design-pack.feature-engineering",
+  "prompt": "Will each candidate feature exist with the same meaning, latency, and reliability at inference time?",
+  "rationale": "Predictive offline fields can be unavailable, delayed, or semantically different in serving.",
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "required_evidence": [
+    "evidence.feature-availability",
+    "evidence.training-serving-parity"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.feature-engineering"
+  ],
+  "title": "Feature availability and stability",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

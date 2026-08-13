@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-schema-semantics-identity-keys"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.schema-semantics.identity-keys.evaluate",
+      "label": "Test candidate identity and join keys",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-schema-semantics-identity-keys-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.schema-semantics.identity-keys.baseline",
+      "label": "Use the declared primary/entity keys",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-schema-semantics-identity-keys"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.schema-semantics.identity-keys.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.schema-semantics.identity-keys",
+  "pack_id": "design-pack.schema-semantics",
+  "prompt": "Which keys are stable, what is their cardinality, and can one entity legitimately appear in multiple rows or sources?",
+  "rationale": "Unclear identity creates duplicate leakage, incorrect joins, and accidental label replication.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.identity-contract",
+    "evidence.cardinality-profile"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.schema-semantics"
+  ],
+  "title": "Identity, keys, and multiplicity",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

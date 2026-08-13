@@ -1,0 +1,8 @@
+{
+  "claim": "Safety benchmark scope, personas, evaluator uncertainty, and coverage limitations must be disclosed.",
+  "id": "source.mlcommons.safety-methodology",
+  "kind": "source.official-benchmark-methodology",
+  "revision": "accessed 2026-08-13",
+  "title": "MLCommons AILuminate safety methodology",
+  "url": "https://mlcommons.org/ailuminate/safety-methodology/"
+}

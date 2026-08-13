@@ -1,0 +1,8 @@
+{
+  "claim": "Models should disclose intended use, evaluation context, limitations, and relevant subgroup results.",
+  "id": "source.mitchell.model-cards",
+  "kind": "source.primary-research",
+  "revision": "Mitchell et al. (2019)",
+  "title": "Model Cards for Model Reporting",
+  "url": "https://arxiv.org/abs/1810.03993"
+}

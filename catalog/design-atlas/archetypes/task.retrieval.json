@@ -1,0 +1,27 @@
+{
+  "description": "Index, retrieve, rerank, ground, answer, cite, abstain, and refresh knowledge under separate component evaluation.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.retrieval",
+  "optional_pack_ids": [
+    "design-pack.robustness-stability",
+    "design-pack.monitoring-feedback"
+  ],
+  "outcome_artifact": "artifact.retrieval-system",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.text-document",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.llm-harness",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.retrieval",
+    "domain.retrieval"
+  ],
+  "title": "Retrieval and RAG"
+}

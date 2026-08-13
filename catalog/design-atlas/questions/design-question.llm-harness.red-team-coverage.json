@@ -1,0 +1,68 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-llm-harness-red-team-coverage"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.llm-harness.red-team-coverage.evaluate",
+      "label": "Generate and retain taxonomy-linked adversarial cases",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-llm-harness-red-team-coverage-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.llm-harness.red-team-coverage.baseline",
+      "label": "Run the declared high-risk abuse suite",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-llm-harness-red-team-coverage"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.llm-harness.red-team-coverage.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 7,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.llm-harness.red-team-coverage",
+  "pack_id": "design-pack.llm-harness",
+  "prompt": "Which misuse, evasion, injection, poisoning, privacy, extraction, reliability, bias, overreliance, and multi-step attacks match the use case and attacker model?",
+  "rationale": "A bag of prompts does not disclose threat coverage, personas, evaluator uncertainty, or missed space.",
+  "reference_ids": [
+    "source.nist.adversarial-ml",
+    "source.mlcommons.safety-methodology"
+  ],
+  "required_evidence": [
+    "evidence.threat-model",
+    "evidence.red-team-case-manifest",
+    "evidence.coverage-report"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 1.0,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.llm-harness"
+  ],
+  "title": "Red-team taxonomy and coverage",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.llm-red-teaming",
+    "risk.high",
+    "risk.critical"
+  ],
+  "version": "1.0.0"
+}

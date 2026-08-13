@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-selection-reduction-dimension-choice"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.selection-reduction.dimension-choice.evaluate",
+      "label": "Trace validation utility versus dimension",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-selection-reduction-dimension-choice-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.selection-reduction.dimension-choice.baseline",
+      "label": "Use a predeclared compact dimension",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-selection-reduction-dimension-choice"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.selection-reduction.dimension-choice.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.selection-reduction.dimension-choice",
+  "pack_id": "design-pack.selection-reduction",
+  "prompt": "What variance, reconstruction, predictive, stability, latency, or diminishing-return rule chooses the retained dimension?",
+  "rationale": "Choosing dimension on final test performance leaks and encourages arbitrary complexity.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.dimension-curve",
+    "evidence.stop-rule"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.8,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.selection-reduction"
+  ],
+  "title": "Dimension and stopping rule",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

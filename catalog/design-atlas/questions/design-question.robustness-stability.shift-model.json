@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-robustness-stability-shift-model"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.robustness-stability.shift-model.evaluate",
+      "label": "Construct shift-specific stress suites",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-robustness-stability-shift-model-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.robustness-stability.shift-model.baseline",
+      "label": "Use temporal/source holdouts",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-robustness-stability-shift-model"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.robustness-stability.shift-model.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.robustness-stability.shift-model",
+  "pack_id": "design-pack.robustness-stability",
+  "prompt": "Which population, prevalence, covariate, concept, label, temporal, geographic, source, or policy shifts are credible?",
+  "rationale": "Generic noise tests do not substitute for a deployment-grounded shift model.",
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "required_evidence": [
+    "evidence.shift-hypotheses",
+    "evidence.stress-cases"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.robustness-stability"
+  ],
+  "title": "Plausible shift model",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

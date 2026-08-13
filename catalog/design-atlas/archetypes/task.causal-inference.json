@@ -1,0 +1,25 @@
+{
+  "description": "Estimate effects of interventions from experimental or observational evidence with explicit identification.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.causal-inference",
+  "optional_pack_ids": [
+    "design-pack.fairness-risk"
+  ],
+  "outcome_artifact": "artifact.causal-estimate",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.validation-splits",
+    "design-pack.causality-experiments",
+    "design-pack.evaluation-error",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.causal-inference",
+    "domain.causal"
+  ],
+  "title": "Causal inference"
+}

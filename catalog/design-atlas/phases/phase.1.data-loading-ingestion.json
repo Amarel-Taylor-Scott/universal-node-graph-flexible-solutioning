@@ -1,0 +1,48 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.1.data-loading-ingestion",
+  "technique_count": 8,
+  "techniques": [
+    {
+      "digest": "sha256:7d5b2b632b8088d88243c85f7b43dca3aeac4b0e3f86421f72c811b51a0a2ebc",
+      "id": "technique.1.1",
+      "path": "design-atlas/techniques/technique.1.1.json"
+    },
+    {
+      "digest": "sha256:89f76f9d01f4f1d8ae6f04f9dd91a4c6106556b288071f8e864ff1973d23dbea",
+      "id": "technique.1.2",
+      "path": "design-atlas/techniques/technique.1.2.json"
+    },
+    {
+      "digest": "sha256:8d5df62ff33c874127643d56a56aea3372cc32793000afc08eba803567c0cde8",
+      "id": "technique.1.3",
+      "path": "design-atlas/techniques/technique.1.3.json"
+    },
+    {
+      "digest": "sha256:2fb6e6c1f3873389a300785e36614477a1d138a77e93d0102a9103152a0a959e",
+      "id": "technique.1.4",
+      "path": "design-atlas/techniques/technique.1.4.json"
+    },
+    {
+      "digest": "sha256:295e14be8340e0d15fbb035fc9dd8b56f38195d6c2f929e816e0fc72d869048e",
+      "id": "technique.1.5",
+      "path": "design-atlas/techniques/technique.1.5.json"
+    },
+    {
+      "digest": "sha256:1ddd62f675d6e351207b9203e75fc7ae3f23d722a1e6e4111b4e9d26671d418d",
+      "id": "technique.1.6",
+      "path": "design-atlas/techniques/technique.1.6.json"
+    },
+    {
+      "digest": "sha256:61944fbd0d63cfa91bc87d724161126640433396f7129dbe36392d7aff7f3b48",
+      "id": "technique.1.7",
+      "path": "design-atlas/techniques/technique.1.7.json"
+    },
+    {
+      "digest": "sha256:ada6659ddbc18186d4f9c86048394b16d3b0cf5410d36fac18e33bb665bae9fc",
+      "id": "technique.1.8",
+      "path": "design-atlas/techniques/technique.1.8.json"
+    }
+  ],
+  "title": "Data Loading & Ingestion"
+}

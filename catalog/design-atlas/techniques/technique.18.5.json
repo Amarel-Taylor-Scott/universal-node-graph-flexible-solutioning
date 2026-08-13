@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Friedman's H-statistic (interaction strength)",
+  "family": "INTERPRETABILITY & EXPLAINABILITY",
+  "id": "technique.18.5",
+  "maturity_floor": "C1",
+  "ordinal": "18.5",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.18.interpretability-explainability",
+  "phase_title": "Interpretability & Explainability",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not a filling",
+  "tags": [
+    "phase.18",
+    "family.interpretability-explainability"
+  ],
+  "title": "Global interpretability"
+}

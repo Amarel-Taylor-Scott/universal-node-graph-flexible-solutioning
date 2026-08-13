@@ -1,0 +1,62 @@
+{
+  "actions": [
+    "design-atlas.plan-review"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.design-atlas.plan-llm-review",
+      "language": "und",
+      "source_digest": "sha256:8b6872281f3a609abf7f1bbf15e13b019ae5b0646c2264d3e8dccbb515070a9c",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Compile the same review contract for a provider-neutral model responder; model.invoke must be granted before compiler admission."
+    }
+  ],
+  "domains": [
+    "data.science",
+    "machine.learning",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "design-atlas.maturity": "reference"
+  },
+  "node_id": "design-atlas.plan-llm-review",
+  "node_spec_digest": "sha256:8b6872281f3a609abf7f1bbf15e13b019ae5b0646c2264d3e8dccbb515070a9c",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed context input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "context"
+    },
+    {
+      "concepts": [],
+      "description": "Typed design_plan output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "design_plan"
+    }
+  ],
+  "purposes": [
+    "Compile the same review contract for a provider-neutral model responder; model.invoke must be granted before compiler admission."
+  ],
+  "solutions": [
+    "Compose this stage into an evidence-driven design feedback loop."
+  ],
+  "summary": "Compile the same review contract for a provider-neutral model responder; model.invoke must be granted before compiler admission.",
+  "tags": [
+    "design-atlas",
+    "typed-node",
+    "runtime.python",
+    "evidence-aware"
+  ],
+  "title": "Plan Llm Review"
+}

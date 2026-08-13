@@ -1,0 +1,33 @@
+{
+  "description": "Predict future quantities or events with point-in-time features, realistic backtests, and uncertainty.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.forecasting",
+  "optional_pack_ids": [
+    "design-pack.geospatial",
+    "design-pack.ensemble-calibration"
+  ],
+  "outcome_artifact": "artifact.forecast-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.time-series",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.forecasting",
+    "domain.machine-learning",
+    "signal.time-aware",
+    "signal.supervised"
+  ],
+  "title": "Forecasting"
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-answer-set.schema.json",
+  "title": "Exact-plan-bound design answer set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["plan_digest", "answers"],
+  "properties": {
+    "plan_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "answers": {
+      "type": "array",
+      "items": {"$ref": "design-answer.schema.json"}
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-selection-reduction-method-family"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.selection-reduction.method-family.evaluate",
+      "label": "Compare materially different reduction families",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-selection-reduction-method-family-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.selection-reduction.method-family.baseline",
+      "label": "Use a fold-local filter baseline",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-selection-reduction-method-family"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.selection-reduction.method-family.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.selection-reduction.method-family",
+  "pack_id": "design-pack.selection-reduction",
+  "prompt": "Should filter, wrapper, embedded, sparse, supervised, unsupervised, nonlinear, or random projection families be compared?",
+  "rationale": "Families produce different semantics, costs, and compatibility with inference and explanation.",
+  "reference_ids": [
+    "source.sklearn.common-pitfalls"
+  ],
+  "required_evidence": [
+    "evidence.reduction-hypothesis",
+    "evidence.fold-local-scope"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.65,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.selection-reduction"
+  ],
+  "title": "Selection versus projection",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

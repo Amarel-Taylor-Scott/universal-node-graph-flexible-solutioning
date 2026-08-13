@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "",
+  "family": "Outlier Handling",
+  "id": "technique.4.2.5",
+  "maturity_floor": "C1",
+  "ordinal": "4.2.5",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.4.data-cleaning-preprocessing",
+  "phase_title": "Data Cleaning & Preprocessing",
+  "references": [],
+  "source_claim": "reported-implemented",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "`standardize` in feature_taming",
+  "tags": [
+    "phase.4",
+    "family.outlier-handling"
+  ],
+  "title": "Standardization (z-score, mean=0, std=1)"
+}

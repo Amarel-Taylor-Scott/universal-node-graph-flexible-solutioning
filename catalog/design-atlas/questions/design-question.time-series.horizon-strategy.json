@@ -1,0 +1,61 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-time-series-horizon-strategy"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.time-series.horizon-strategy.evaluate",
+      "label": "Backtest multiple horizon strategies",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-time-series-horizon-strategy-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.time-series.horizon-strategy.baseline",
+      "label": "Use direct horizon-specific baselines",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-time-series-horizon-strategy"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.time-series.horizon-strategy.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.time-series.horizon-strategy",
+  "pack_id": "design-pack.time-series",
+  "prompt": "Are horizons direct, recursive, multi-output, probabilistic, intermittent, or constrained by downstream decisions?",
+  "rationale": "Different horizons create different error propagation and evaluation requirements.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.horizon-contract"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.75,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.time-series"
+  ],
+  "title": "Forecast horizon strategy",
+  "trigger_all": [],
+  "trigger_any": [
+    "task.forecasting"
+  ],
+  "version": "1.0.0"
+}

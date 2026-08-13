@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-robustness-stability-dependency-failure"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.robustness-stability.dependency-failure.evaluate",
+      "label": "Inject dependency and data failures",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-robustness-stability-dependency-failure-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.robustness-stability.dependency-failure.baseline",
+      "label": "Fail closed or use a simple independent fallback",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-robustness-stability-dependency-failure"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.robustness-stability.dependency-failure.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.robustness-stability.dependency-failure",
+  "pack_id": "design-pack.robustness-stability",
+  "prompt": "What happens under missing features, provider outage, stale data, model timeout, schema change, or partial downstream failure?",
+  "rationale": "Reliability requires tested degradation and fallback behavior, not only clean offline cases.",
+  "reference_ids": [
+    "source.breck.ml-test-score"
+  ],
+  "required_evidence": [
+    "evidence.failure-injection",
+    "evidence.fallback-receipts"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.robustness-stability"
+  ],
+  "title": "Dependency and degradation failures",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

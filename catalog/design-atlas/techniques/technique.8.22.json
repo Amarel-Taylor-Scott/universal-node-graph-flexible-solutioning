@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Threshold moving (adjust decision threshold)",
+  "family": "TARGET ENGINEERING",
+  "id": "technique.8.22",
+  "maturity_floor": "C1",
+  "ordinal": "8.22",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.8.target-engineering",
+  "phase_title": "Target Engineering",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not a filling",
+  "tags": [
+    "phase.8",
+    "family.target-engineering"
+  ],
+  "title": "Target balancing"
+}

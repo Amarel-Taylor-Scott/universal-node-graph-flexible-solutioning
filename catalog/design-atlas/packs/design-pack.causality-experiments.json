@@ -1,0 +1,259 @@
+{
+  "description": "Separate prediction from intervention, define estimands and assumptions, and preserve experiment assignment evidence.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.causality-experiments",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-causality-experiments-estimand"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.causality-experiments.estimand.evaluate",
+          "label": "Review candidate estimands with domain owners",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-causality-experiments-estimand-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.causality-experiments.estimand.baseline",
+          "label": "Keep the task predictive until an estimand exists",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-causality-experiments-estimand"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.causality-experiments.estimand.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.causality-experiments.estimand",
+      "pack_id": "design-pack.causality-experiments",
+      "prompt": "What intervention, population, outcome, horizon, contrast, and aggregation define the estimand?",
+      "rationale": "Causal inference cannot begin with an estimator name; it begins with a precise question.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.estimand",
+        "evidence.intervention-definition"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.causality-experiments"
+      ],
+      "title": "Causal estimand and intervention",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.causal-inference"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-causality-experiments-identification"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.causality-experiments.identification.evaluate",
+          "label": "Challenge assumptions with falsification tests",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-causality-experiments-identification-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.causality-experiments.identification.baseline",
+          "label": "Report associations only",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-causality-experiments-identification"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.causality-experiments.identification.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.causality-experiments.identification",
+      "pack_id": "design-pack.causality-experiments",
+      "prompt": "What exchangeability, positivity, consistency, interference, timing, instrument, discontinuity, or parallel-trend assumptions are required?",
+      "rationale": "No algorithm can recover an unidentified causal effect from the available data.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.causal-diagram",
+        "evidence.identification-argument"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.causality-experiments"
+      ],
+      "title": "Identification assumptions",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.causal-inference"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-causality-experiments-experiment-design"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.causality-experiments.experiment-design.evaluate",
+          "label": "Simulate and review experiment designs",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-causality-experiments-experiment-design-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.causality-experiments.experiment-design.baseline",
+          "label": "Use a pre-registered fixed design",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-causality-experiments-experiment-design"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.causality-experiments.experiment-design.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 7,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.causality-experiments.experiment-design",
+      "pack_id": "design-pack.causality-experiments",
+      "prompt": "Can unit, cluster, switchback, stepped-wedge, factorial, or adaptive assignment answer the question without unacceptable interference or risk?",
+      "rationale": "Assignment, power, exposure, and analysis plans must be fixed before outcomes are observed.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.assignment-plan",
+        "evidence.power-analysis"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.causality-experiments"
+      ],
+      "title": "Randomized experiment design",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.experiment-design",
+        "task.causal-inference"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-causality-experiments-sensitivity"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.causality-experiments.sensitivity.evaluate",
+          "label": "Run predeclared sensitivity analyses",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-causality-experiments-sensitivity-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.causality-experiments.sensitivity.baseline",
+          "label": "Report bounds and uncertainty",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-causality-experiments-sensitivity"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.causality-experiments.sensitivity.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 7,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.causality-experiments.sensitivity",
+      "pack_id": "design-pack.causality-experiments",
+      "prompt": "How sensitive are conclusions to unmeasured confounding, attrition, noncompliance, model choice, interference, and subgroup multiplicity?",
+      "rationale": "Point estimates without robustness and uncertainty hide identification fragility.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.sensitivity-analysis"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.causality-experiments"
+      ],
+      "title": "Sensitivity and heterogeneous effects",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.causal-inference"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.specialized",
+  "title": "Causal questions and experiments",
+  "version": "1.0.0"
+}

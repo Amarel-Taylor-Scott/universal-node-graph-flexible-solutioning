@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-time-series-hierarchy-events"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.time-series.hierarchy-events.evaluate",
+      "label": "Ablate hierarchical and event enrichments",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-time-series-hierarchy-events-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.time-series.hierarchy-events.baseline",
+      "label": "Use calendar-only known-ahead features",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-time-series-hierarchy-events"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.time-series.hierarchy-events.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 6,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.time-series.hierarchy-events",
+  "pack_id": "design-pack.time-series",
+  "prompt": "Must forecasts reconcile across entities or geographies, and which holidays, events, weather, or interventions are knowable in advance?",
+  "rationale": "Context enrichments require time-appropriate versions and coherent aggregation.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.hierarchy",
+    "evidence.event-source-vintage"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.7,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.time-series"
+  ],
+  "title": "Hierarchy, events, and geotemporal effects",
+  "trigger_all": [],
+  "trigger_any": [
+    "signal.time-aware",
+    "signal.geospatial"
+  ],
+  "version": "1.0.0"
+}

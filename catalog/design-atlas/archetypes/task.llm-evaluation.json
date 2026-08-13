@@ -1,0 +1,25 @@
+{
+  "description": "Compare models, prompts, tools, agents, supervisors, and contexts across fixed scenarios and multiple evaluators.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.llm-evaluation",
+  "optional_pack_ids": [
+    "design-pack.fairness-risk",
+    "design-pack.deployment-serving"
+  ],
+  "outcome_artifact": "artifact.llm-evaluation-report",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.llm-harness",
+    "design-pack.evaluation-error",
+    "design-pack.robustness-stability",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.llm-evaluation",
+    "domain.llm"
+  ],
+  "title": "LLM and agent evaluation harness"
+}

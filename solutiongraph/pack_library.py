@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from solutiongraph.design_atlas.node_pack import DESIGN_ATLAS_NODE_PACK
 from solutiongraph.discovery import ArtifactReference, NodePackManifest
 from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
@@ -113,6 +114,7 @@ REFERENCE_NODE_PACKS = (
     ENGINEERING_SHOWCASE_NODE_PACK,
     DATA_SCIENCE_LIFECYCLE_NODE_PACK,
     INTERROGATION_NODE_PACK,
+    DESIGN_ATLAS_NODE_PACK,
 )
 
 
@@ -121,6 +123,7 @@ __all__ = [
     "ENGINEERING_SHOWCASE_NODE_PACK",
     "INTERROGATION_NODE_PACK",
     "DATA_SCIENCE_LIFECYCLE_NODE_PACK",
+    "DESIGN_ATLAS_NODE_PACK",
     "REAL_WORLD_EXAMPLE_NODE_PACK",
     "REFERENCE_CORE_NODE_PACK",
     "REFERENCE_NODE_PACKS",

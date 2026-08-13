@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-technique.schema.json",
+  "title": "Cataloged data-science technique",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["design_atlas_model_version", "id", "ordinal", "phase_id", "phase_title", "family", "title", "examples", "source_claim", "source_note", "source_id", "owner", "references", "tags", "maturity_floor", "claim_boundary"],
+  "properties": {
+    "design_atlas_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "ordinal": {"type": "string", "pattern": "^[0-9]+(?:\\.[0-9]+)*$"},
+    "phase_id": {"$ref": "common.schema.json#/$defs/id"},
+    "phase_title": {"type": "string", "minLength": 1},
+    "family": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "examples": {"type": "string"},
+    "source_claim": {"enum": ["reported-implemented", "reported-partial", "reported-designed", "reported-absent"]},
+    "source_note": {"type": "string"},
+    "source_id": {"$ref": "common.schema.json#/$defs/id"},
+    "owner": {"$ref": "common.schema.json#/$defs/id"},
+    "references": {"$ref": "#/$defs/idArray"},
+    "tags": {"$ref": "#/$defs/idArray"},
+    "maturity_floor": {"const": "C1"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {"idArray": {"type": "array", "uniqueItems": true, "items": {"$ref": "common.schema.json#/$defs/id"}}}
+}

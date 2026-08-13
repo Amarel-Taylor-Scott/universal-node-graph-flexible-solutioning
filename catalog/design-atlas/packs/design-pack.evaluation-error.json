@@ -1,0 +1,254 @@
+{
+  "description": "Evaluate acceptance, utility, slices, uncertainty, learning curves, and concrete failure clusters.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.evaluation-error",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-evaluation-error-metric-fit"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.evaluation-error.metric-fit.evaluate",
+          "label": "Compare metric sensitivity to stakeholder utility",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-evaluation-error-metric-fit-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.evaluation-error.metric-fit.baseline",
+          "label": "Use one primary metric plus hard acceptance",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-evaluation-error-metric-fit"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.evaluation-error.metric-fit.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.evaluation-error.metric-fit",
+      "pack_id": "design-pack.evaluation-error",
+      "prompt": "Does each metric represent the decision unit, error cost, ranking depth, horizon, calibration, coverage, or resource tradeoff that matters?",
+      "rationale": "Optimizing a convenient metric can worsen the actual decision.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.metric-definition",
+        "evidence.utility-link"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.evaluation-error"
+      ],
+      "title": "Metric-to-decision alignment",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-evaluation-error-uncertainty"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.evaluation-error.uncertainty.evaluate",
+          "label": "Estimate paired uncertainty and minimum effect",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-evaluation-error-uncertainty-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.evaluation-error.uncertainty.baseline",
+          "label": "Report repeated-seed mean and spread",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-evaluation-error-uncertainty"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.evaluation-error.uncertainty.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.evaluation-error.uncertainty",
+      "pack_id": "design-pack.evaluation-error",
+      "prompt": "What repeated seeds, resamples, paired tests, intervals, practical-effect thresholds, and multiple-comparison controls are warranted?",
+      "rationale": "A single best score cannot distinguish improvement from noise.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.repeated-receipts",
+        "evidence.uncertainty-analysis"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.85,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.evaluation-error"
+      ],
+      "title": "Statistical and run uncertainty",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-evaluation-error-slices"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.evaluation-error.slices.evaluate",
+          "label": "Evaluate predeclared and discovered slices",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-evaluation-error-slices-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.evaluation-error.slices.baseline",
+          "label": "Report all predeclared risk slices",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-evaluation-error-slices"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.evaluation-error.slices.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.evaluation-error.slices",
+      "pack_id": "design-pack.evaluation-error",
+      "prompt": "Which operational, temporal, geographic, demographic, source, difficulty, and low-support intersections need separate results?",
+      "rationale": "Aggregate metrics can conceal severe localized failure.",
+      "reference_ids": [
+        "source.mitchell.model-cards",
+        "source.nist.ai-rmf-1"
+      ],
+      "required_evidence": [
+        "evidence.slice-definitions",
+        "evidence.slice-support"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.evaluation-error"
+      ],
+      "title": "Slice and intersection evaluation",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-evaluation-error-failure-clusters"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.evaluation-error.failure-clusters.evaluate",
+          "label": "Cluster errors and promote diagnostic cases",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-evaluation-error-failure-clusters-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.evaluation-error.failure-clusters.baseline",
+          "label": "Review worst and confident-error cases",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-evaluation-error-failure-clusters"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.evaluation-error.failure-clusters.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.evaluation-error.failure-clusters",
+      "pack_id": "design-pack.evaluation-error",
+      "prompt": "What do worst cases, confident errors, abstentions, residual patterns, disagreements, and newly discovered clusters reveal?",
+      "rationale": "Concrete failure modes guide graph mutations more effectively than one aggregate score.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.error-identities",
+        "evidence.failure-taxonomy"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.75,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.evaluation-error"
+      ],
+      "title": "Error clusters and counterexamples",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.evaluation",
+  "title": "Metrics, uncertainty, and error analysis",
+  "version": "1.0.0"
+}

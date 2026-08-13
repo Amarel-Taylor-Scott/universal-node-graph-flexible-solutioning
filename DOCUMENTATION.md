@@ -2,6 +2,19 @@
 
 Choose the shortest path for what you are doing.
 
+## I want to design a data-science, ML, or LLM system
+
+1. `DATA_SCIENCE_DESIGN_ATLAS.md` — 31 task archetypes, 28 decision packs,
+   112 structured questions, 618 cataloged techniques, E1–E10 planning, and
+   evidence-derived C0–C7 maturity.
+2. `notebooks/data_science_design_atlas.ipynb` — dependency-free worklist
+   planning quickstart.
+3. `examples/data_science_design_atlas_graph.py` — compiler-valid, authority-
+   gated context/plan/dossier/report execution with independent verification.
+4. `DATA_SCIENCE_AI_ML_PIPELINE_EXAMPLES.md` — ten executable lifecycle graphs.
+5. `BENCHMARK_PROTOCOL.md` and `GRAPH_EXPERIMENTS.md` — controlled comparisons
+   after the task, graph, cases, and oracle are fixed.
+
 ## I want to try it
 
 1. `GETTING_STARTED.md` — install, doctor, execute, and create a workspace.

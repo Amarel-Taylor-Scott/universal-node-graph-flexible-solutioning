@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-feature-engineering-encoding"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.feature-engineering.encoding.evaluate",
+      "label": "Compare fold-safe encoders including unknowns",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-feature-engineering-encoding-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.feature-engineering.encoding.baseline",
+      "label": "Use ordinal or one-hot baseline with unknown bucket",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-feature-engineering-encoding"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.feature-engineering.encoding.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.feature-engineering.encoding",
+  "pack_id": "design-pack.feature-engineering",
+  "prompt": "How should ordinal meaning, rare values, high cardinality, unseen categories, and target-based encoding be handled?",
+  "rationale": "Encoding choices impose compatibility, leakage, memory, and extrapolation behavior.",
+  "reference_ids": [
+    "source.sklearn.common-pitfalls"
+  ],
+  "required_evidence": [
+    "evidence.cardinality-profile",
+    "evidence.unknown-category-test"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.75,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.feature-engineering"
+  ],
+  "title": "Encoding and unknown categories",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

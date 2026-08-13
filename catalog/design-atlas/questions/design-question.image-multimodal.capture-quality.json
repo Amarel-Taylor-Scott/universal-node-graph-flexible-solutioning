@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-image-multimodal-capture-quality"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.image-multimodal.capture-quality.evaluate",
+      "label": "Profile and stress capture conditions",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-image-multimodal-capture-quality-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.image-multimodal.capture-quality.baseline",
+      "label": "Normalize only declared representation fields",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-image-multimodal-capture-quality"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.image-multimodal.capture-quality.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.image-multimodal.capture-quality",
+  "pack_id": "design-pack.image-multimodal",
+  "prompt": "Which resolution, color, compression, orientation, metadata, device, and acquisition conditions are valid?",
+  "rationale": "Acquisition artifacts can be shortcuts and can shift sharply in deployment.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.capture-metadata",
+    "evidence.quality-profile"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.75,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.image-multimodal"
+  ],
+  "title": "Capture and representation quality",
+  "trigger_all": [],
+  "trigger_any": [
+    "modality.image",
+    "modality.multimodal"
+  ],
+  "version": "1.0.0"
+}

@@ -18,6 +18,14 @@
     "task_case_count": 24
   },
   "catalog_model_version": "0.1",
+  "design_atlas": {
+    "machine_maturity_floor": "C1",
+    "pack_count": 28,
+    "path": "design-atlas/index.json",
+    "question_count": 112,
+    "task_archetype_count": 31,
+    "technique_count": 618
+  },
   "harnesses": [
     {
       "atomic_judgment_count": 7,
@@ -93,6 +101,15 @@
       "id": "interrogation.semantic-data-node-pack",
       "node_count": 8,
       "path": "nodepacks/semantic-interrogation/manifest.json",
+      "version": "1.0.0"
+    },
+    {
+      "descriptor_count": 5,
+      "digest": "sha256:4304490052ce73a0fa0ff4358d56ce4c5a866ae3ebbeff3dc463b57096a3ed9e",
+      "embedding_record_count": 0,
+      "id": "design-atlas.data-science-node-pack",
+      "node_count": 5,
+      "path": "nodepacks/data-science-design-atlas/manifest.json",
       "version": "1.0.0"
     }
   ],

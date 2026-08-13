@@ -1,0 +1,260 @@
+{
+  "description": "Fix the unit of action, outcome, horizon, acceptance, constraints, and ownership before solution search.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.task-contract",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-task-contract-decision-unit"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.task-contract.decision-unit.evaluate",
+          "label": "Test candidate decision-unit definitions",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-task-contract-decision-unit-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.task-contract.decision-unit.baseline",
+          "label": "Freeze the explicitly supplied unit",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-task-contract-decision-unit"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.task-contract.decision-unit.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 2,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.task-contract.decision-unit",
+      "pack_id": "design-pack.task-contract",
+      "prompt": "What real-world entity, event, or request receives one output, and when is that output actionable?",
+      "rationale": "A row is not necessarily the prediction unit; a wrong unit invalidates labels, splits, and metrics.",
+      "reference_ids": [
+        "source.nist.ai-rmf-1"
+      ],
+      "required_evidence": [
+        "evidence.stakeholder-acceptance",
+        "evidence.entity-definition"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.task-contract"
+      ],
+      "title": "Decision and prediction unit",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-task-contract-outcome-horizon"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.task-contract.outcome-horizon.evaluate",
+          "label": "Validate outcome and horizon alternatives",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-task-contract-outcome-horizon-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.task-contract.outcome-horizon.baseline",
+          "label": "Use the declared outcome and horizon",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-task-contract-outcome-horizon"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.task-contract.outcome-horizon.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 2,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.task-contract.outcome-horizon",
+      "pack_id": "design-pack.task-contract",
+      "prompt": "Which observable outcome is required, at what horizon, and when does it become available?",
+      "rationale": "Undefined horizons create label leakage and a mismatch between offline and production questions.",
+      "reference_ids": [
+        "source.nist.ai-rmf-playbook"
+      ],
+      "required_evidence": [
+        "evidence.outcome-definition",
+        "evidence.availability-timeline"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.task-contract"
+      ],
+      "title": "Outcome and horizon",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-task-contract-acceptance-oracle"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.task-contract.acceptance-oracle.evaluate",
+          "label": "Prototype independent oracle candidates",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-task-contract-acceptance-oracle-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.task-contract.acceptance-oracle.baseline",
+          "label": "Use a fixed property-based oracle",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-task-contract-acceptance-oracle"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.task-contract.acceptance-oracle.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.task-contract.acceptance-oracle",
+      "pack_id": "design-pack.task-contract",
+      "prompt": "What implementation-independent check decides success, and can candidate code read or modify it?",
+      "rationale": "Natural-language goals and self-grading candidates cannot support reliable experiment claims.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.oracle-identity",
+        "evidence.oracle-independence"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.task-contract"
+      ],
+      "title": "Independent acceptance oracle",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-task-contract-objectives-constraints"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.task-contract.objectives-constraints.evaluate",
+          "label": "Elicit and stress-test the objective set",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-task-contract-objectives-constraints-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.task-contract.objectives-constraints.baseline",
+          "label": "Use acceptance plus quality/cost/latency",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-task-contract-objectives-constraints"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.task-contract.objectives-constraints.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.task-contract.objectives-constraints",
+      "pack_id": "design-pack.task-contract",
+      "prompt": "Which quality, cost, latency, reliability, fairness, privacy, and policy measures are objectives versus hard gates?",
+      "rationale": "Turning hard constraints into soft score penalties can select an unacceptable solution.",
+      "reference_ids": [
+        "source.nist.ai-rmf-1"
+      ],
+      "required_evidence": [
+        "evidence.objective-definition",
+        "evidence.policy-owner"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.task-contract"
+      ],
+      "title": "Objectives and hard constraints",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [
+    "source.nist.ai-rmf-1",
+    "source.nist.ai-rmf-playbook"
+  ],
+  "stage": "stage.intent",
+  "title": "Task contract and decision value",
+  "version": "1.0.0"
+}

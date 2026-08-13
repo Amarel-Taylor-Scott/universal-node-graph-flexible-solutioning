@@ -1,0 +1,76 @@
+{
+  "actions": [
+    "design-atlas.render-report"
+  ],
+  "aliases": [],
+  "discovery_version": "0.1",
+  "documents": [
+    {
+      "extensions": {},
+      "id": "document.design-atlas.render-report",
+      "language": "und",
+      "source_digest": "sha256:30731963ea97f4e74d6db2b461d3e5a168e0059427ba4883c6bd58155b6832ff",
+      "targets": [
+        "node",
+        "inputs",
+        "outputs"
+      ],
+      "text": "Render content-addressed JSON payload, Markdown, and self-contained HTML without filesystem, model, or network effects."
+    }
+  ],
+  "domains": [
+    "data.science",
+    "machine.learning",
+    "ai.assurance"
+  ],
+  "extensions": {
+    "design-atlas.maturity": "reference"
+  },
+  "node_id": "design-atlas.render-report",
+  "node_spec_digest": "sha256:30731963ea97f4e74d6db2b461d3e5a168e0059427ba4883c6bd58155b6832ff",
+  "node_version": "1.0.0",
+  "ports": [
+    {
+      "concepts": [],
+      "description": "Typed context input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "context"
+    },
+    {
+      "concepts": [],
+      "description": "Typed design_plan input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "design_plan"
+    },
+    {
+      "concepts": [],
+      "description": "Typed design_dossier input.",
+      "direction": "input",
+      "examples": [],
+      "port_name": "design_dossier"
+    },
+    {
+      "concepts": [],
+      "description": "Typed report_bundle output.",
+      "direction": "output",
+      "examples": [],
+      "port_name": "report_bundle"
+    }
+  ],
+  "purposes": [
+    "Render content-addressed JSON payload, Markdown, and self-contained HTML without filesystem, model, or network effects."
+  ],
+  "solutions": [
+    "Compose this stage into an evidence-driven design feedback loop."
+  ],
+  "summary": "Render content-addressed JSON payload, Markdown, and self-contained HTML without filesystem, model, or network effects.",
+  "tags": [
+    "design-atlas",
+    "typed-node",
+    "runtime.python",
+    "evidence-aware"
+  ],
+  "title": "Render Report"
+}

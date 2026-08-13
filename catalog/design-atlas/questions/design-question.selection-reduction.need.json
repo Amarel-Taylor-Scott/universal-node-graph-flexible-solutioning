@@ -1,0 +1,60 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-selection-reduction-need"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.selection-reduction.need.evaluate",
+      "label": "Benchmark no-reduction against bounded reducers",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-selection-reduction-need-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.selection-reduction.need.baseline",
+      "label": "Use the full compatible feature set",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-selection-reduction-need"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.selection-reduction.need.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.selection-reduction.need",
+  "pack_id": "design-pack.selection-reduction",
+  "prompt": "Do width, sparsity, collinearity, sample ratio, noise, latency, or interpretability create a measured need for selection or reduction?",
+  "rationale": "Reduction can discard useful signal and should solve an observed constraint.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.shape-profile",
+    "evidence.resource-baseline"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.55,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.selection-reduction"
+  ],
+  "title": "Need for reduction",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

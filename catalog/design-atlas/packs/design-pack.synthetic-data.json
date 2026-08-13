@@ -1,0 +1,265 @@
+{
+  "description": "Define purpose, generator boundary, fidelity, privacy, utility, contamination, and mixture experiments.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.synthetic-data",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-synthetic-data-purpose"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.synthetic-data.purpose.evaluate",
+          "label": "Define and compare purpose-specific generators",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-synthetic-data-purpose-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.synthetic-data.purpose.baseline",
+          "label": "Use synthetic data only for test fixtures",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-synthetic-data-purpose"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.synthetic-data.purpose.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.synthetic-data.purpose",
+      "pack_id": "design-pack.synthetic-data",
+      "prompt": "Is synthetic data for privacy, coverage, rare cases, simulation, augmentation, balancing, testing, red teaming, or pretraining?",
+      "rationale": "A generator cannot be evaluated without a purpose-specific utility and risk contract.",
+      "reference_ids": [
+        "source.gebru.datasheets"
+      ],
+      "required_evidence": [
+        "evidence.synthetic-purpose",
+        "evidence.acceptance-oracle"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.synthetic-data"
+      ],
+      "title": "Synthetic-data purpose",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.synthetic-data"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-synthetic-data-training-boundary"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.synthetic-data.training-boundary.evaluate",
+          "label": "Audit generator inputs and nearest-neighbor overlap",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-synthetic-data-training-boundary-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.synthetic-data.training-boundary.baseline",
+          "label": "Train only on the development partition",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-synthetic-data-training-boundary"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.synthetic-data.training-boundary.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.synthetic-data.training-boundary",
+      "pack_id": "design-pack.synthetic-data",
+      "prompt": "Which real records, protected labels, holdouts, prompts, models, or external corpora may the generator inspect?",
+      "rationale": "A generator trained on holdout information can contaminate every downstream experiment.",
+      "reference_ids": [
+        "source.sklearn.common-pitfalls"
+      ],
+      "required_evidence": [
+        "evidence.generator-lineage",
+        "evidence.contamination-test"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.synthetic-data"
+      ],
+      "title": "Generator training and contamination boundary",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.synthetic-data"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-synthetic-data-fidelity-privacy"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.synthetic-data.fidelity-privacy.evaluate",
+          "label": "Evaluate utility, coverage, and privacy jointly",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-synthetic-data-fidelity-privacy-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.synthetic-data.fidelity-privacy.baseline",
+          "label": "Reject near-duplicate or unsupported generations",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-synthetic-data-fidelity-privacy"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.synthetic-data.fidelity-privacy.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.synthetic-data.fidelity-privacy",
+      "pack_id": "design-pack.synthetic-data",
+      "prompt": "Which marginal, dependency, temporal, spatial, semantic, rare-slice, privacy, and memorization measures define acceptable generation?",
+      "rationale": "High aggregate similarity can coexist with mode loss or disclosure of source records.",
+      "reference_ids": [
+        "source.nist.ai-rmf-1"
+      ],
+      "required_evidence": [
+        "evidence.fidelity-report",
+        "evidence.privacy-tests"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.synthetic-data"
+      ],
+      "title": "Fidelity, diversity, and privacy",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.synthetic-data"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-synthetic-data-mixture-ablation"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.synthetic-data.mixture-ablation.evaluate",
+          "label": "Run real-only, synthetic-only, and mixture arms",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-synthetic-data-mixture-ablation-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.synthetic-data.mixture-ablation.baseline",
+          "label": "Use real-only as the control",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-synthetic-data-mixture-ablation"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.synthetic-data.mixture-ablation.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.synthetic-data.mixture-ablation",
+      "pack_id": "design-pack.synthetic-data",
+      "prompt": "At which ratios, stages, curricula, slices, and model families does synthetic supplementation help, hurt, or merely duplicate?",
+      "rationale": "Synthetic data earns value only through clean downstream comparisons and failure analysis.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.mixture-experiment",
+        "evidence.holdout-results"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.85,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.synthetic-data"
+      ],
+      "title": "Real/synthetic mixture and ablation",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.synthetic-data"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.specialized",
+  "title": "Synthetic and augmented data",
+  "version": "1.0.0"
+}

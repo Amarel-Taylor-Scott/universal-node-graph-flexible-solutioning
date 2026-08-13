@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "Learning curve prediction",
+  "family": "HYPERPARAMETER TUNING",
+  "id": "technique.12.22",
+  "maturity_floor": "C1",
+  "ordinal": "12.22",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.12.hyperparameter-tuning",
+  "phase_title": "Hyperparameter Tuning",
+  "references": [],
+  "source_claim": "reported-absent",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "Not implemented",
+  "tags": [
+    "phase.12",
+    "family.hyperparameter-tuning"
+  ],
+  "title": "Meta-learning"
+}

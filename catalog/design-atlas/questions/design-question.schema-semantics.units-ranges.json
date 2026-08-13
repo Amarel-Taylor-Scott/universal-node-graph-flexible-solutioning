@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-schema-semantics-units-ranges"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.schema-semantics.units-ranges.evaluate",
+      "label": "Infer then verify candidate constraints",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-schema-semantics-units-ranges-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.schema-semantics.units-ranges.baseline",
+      "label": "Apply declared schema constraints",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-schema-semantics-units-ranges"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.schema-semantics.units-ranges.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 3,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.schema-semantics.units-ranges",
+  "pack_id": "design-pack.schema-semantics",
+  "prompt": "What units, precision, valid ranges, cross-field equations, and state transitions constrain each field?",
+  "rationale": "Unit and invariant violations can remain syntactically valid while being operationally wrong.",
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "required_evidence": [
+    "evidence.schema",
+    "evidence.domain-constraints"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.85,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.schema-semantics"
+  ],
+  "title": "Units, ranges, and invariants",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

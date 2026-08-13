@@ -1,0 +1,28 @@
+{
+  "description": "Identify unusual points, sequences, entities, or clusters with scarce labels and review capacity.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.anomaly-detection",
+  "optional_pack_ids": [
+    "design-pack.time-series",
+    "design-pack.interpretability"
+  ],
+  "outcome_artifact": "artifact.anomaly-detector",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.feature-engineering",
+    "design-pack.baselines-models",
+    "design-pack.evaluation-error",
+    "design-pack.robustness-stability",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.anomaly-detection",
+    "domain.machine-learning",
+    "signal.unsupervised"
+  ],
+  "title": "Anomaly and novelty detection"
+}

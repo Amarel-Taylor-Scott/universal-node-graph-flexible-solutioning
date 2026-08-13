@@ -86,6 +86,18 @@ SCHEMA_NAMES = (
     "repair-proposal.schema.json",
     "verification-receipt.schema.json",
     "interrogation-report.schema.json",
+    "design-technique.schema.json",
+    "design-question.schema.json",
+    "design-pack.schema.json",
+    "task-archetype.schema.json",
+    "design-context.schema.json",
+    "design-plan.schema.json",
+    "design-answer.schema.json",
+    "design-dossier.schema.json",
+    "capability-evidence.schema.json",
+    "design-task-request.schema.json",
+    "design-answer-set.schema.json",
+    "design-report-bundle.schema.json",
 )
 
 

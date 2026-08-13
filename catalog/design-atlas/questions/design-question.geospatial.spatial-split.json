@@ -1,0 +1,63 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-geospatial-spatial-split"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.geospatial.spatial-split.evaluate",
+      "label": "Compare random, grouped, and spatial-block splits",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-geospatial-spatial-split-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.geospatial.spatial-split.baseline",
+      "label": "Use region-grouped holdouts",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-geospatial-spatial-split"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.geospatial.spatial-split.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.geospatial.spatial-split",
+  "pack_id": "design-pack.geospatial",
+  "prompt": "Should nearby locations, routes, regions, or spatial clusters be grouped or blocked across evaluation splits?",
+  "rationale": "Random splits can overstate performance when spatial autocorrelation is strong.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.spatial-dependence",
+    "evidence.split-manifest"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.geospatial"
+  ],
+  "title": "Spatial dependence and holdouts",
+  "trigger_all": [],
+  "trigger_any": [
+    "signal.geospatial",
+    "modality.geospatial"
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-data-source-sampling"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.data-source.sampling.evaluate",
+      "label": "Compare sample to the target population",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-data-source-sampling-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.data-source.sampling.baseline",
+      "label": "Document the known sample boundary",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-data-source-sampling"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.data-source.sampling.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.data-source.sampling",
+  "pack_id": "design-pack.data-source",
+  "prompt": "Which population is represented, who is excluded, and which selection process generated the records?",
+  "rationale": "Selection bias can dominate model choice and is not repaired by a larger model.",
+  "reference_ids": [
+    "source.gebru.datasheets"
+  ],
+  "required_evidence": [
+    "evidence.population-definition",
+    "evidence.sampling-analysis"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.9,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.data-source"
+  ],
+  "title": "Population and sampling mechanism",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

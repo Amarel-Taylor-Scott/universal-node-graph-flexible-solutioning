@@ -1,0 +1,32 @@
+{
+  "description": "Model event timing under censoring, competing risks, delayed entry, and calibration over horizons.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.survival-analysis",
+  "optional_pack_ids": [
+    "design-pack.ensemble-calibration"
+  ],
+  "outcome_artifact": "artifact.survival-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.validation-splits",
+    "design-pack.feature-engineering",
+    "design-pack.target-labels",
+    "design-pack.baselines-models",
+    "design-pack.tuning-search",
+    "design-pack.evaluation-error",
+    "design-pack.time-series",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.survival-analysis",
+    "domain.machine-learning",
+    "signal.time-aware",
+    "signal.censored"
+  ],
+  "title": "Survival and time-to-event modeling"
+}

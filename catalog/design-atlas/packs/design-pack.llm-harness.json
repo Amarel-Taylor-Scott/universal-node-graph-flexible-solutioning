@@ -1,0 +1,282 @@
+{
+  "description": "Freeze scenarios, prompts, tools, authority, judges, attacks, transcripts, costs, and promotion boundaries.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.llm-harness",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-llm-harness-scenario-matrix"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.llm-harness.scenario-matrix.evaluate",
+          "label": "Build a representative factorial scenario matrix",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-llm-harness-scenario-matrix-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.llm-harness.scenario-matrix.baseline",
+          "label": "Run one fixed scenario suite across models",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-llm-harness-scenario-matrix"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.llm-harness.scenario-matrix.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.llm-harness.scenario-matrix",
+      "pack_id": "design-pack.llm-harness",
+      "prompt": "Which tasks, personas, languages, turns, contexts, modalities, models, sizes, settings, and tool configurations form the declared evaluation matrix?",
+      "rationale": "A model leaderboard without a shared scenario contract does not isolate model or infrastructure effects.",
+      "reference_ids": [
+        "source.stanford.helm"
+      ],
+      "required_evidence": [
+        "evidence.scenario-manifest",
+        "evidence.model-configurations"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.llm-harness"
+      ],
+      "title": "Scenario and model matrix",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.llm-evaluation",
+        "task.llm-red-teaming",
+        "task.agent-harness"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-llm-harness-tools-authority"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.llm-harness.tools-authority.evaluate",
+          "label": "Exercise least-authority and injection cases",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-llm-harness-tools-authority-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.llm-harness.tools-authority.baseline",
+          "label": "Use a read-only no-secret tool baseline",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-llm-harness-tools-authority"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.llm-harness.tools-authority.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.llm-harness.tools-authority",
+      "pack_id": "design-pack.llm-harness",
+      "prompt": "Which tools, data, memory, network, files, secrets, users, and side effects may each model or agent access, and how are calls intercepted?",
+      "rationale": "Prompt instructions and retrieved content cannot grant runtime authority.",
+      "reference_ids": [
+        "source.nist.adversarial-ml"
+      ],
+      "required_evidence": [
+        "evidence.authority-manifest",
+        "evidence.tool-call-transcripts"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.llm-harness"
+      ],
+      "title": "Tools, context, and authority",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.llm-evaluation",
+        "task.llm-red-teaming",
+        "task.agent-harness"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-llm-harness-judges"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.llm-harness.judges.evaluate",
+          "label": "Calibrate judges against independent labels",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-llm-harness-judges-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.llm-harness.judges.baseline",
+          "label": "Combine deterministic gates with blinded review",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-llm-harness-judges"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.llm-harness.judges.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.llm-harness.judges",
+      "pack_id": "design-pack.llm-harness",
+      "prompt": "Which deterministic checks, reference answers, humans, model judges, panels, rubrics, calibrations, blindings, and appeals determine acceptance?",
+      "rationale": "An LLM judge is a fallible measured component and should not be the sole self-grader of consequential output.",
+      "reference_ids": [
+        "source.stanford.helm",
+        "source.mlcommons.safety-methodology"
+      ],
+      "required_evidence": [
+        "evidence.judge-calibration",
+        "evidence.oracle-independence"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.llm-harness"
+      ],
+      "title": "Oracle, judges, and disagreement",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.llm-evaluation",
+        "task.llm-red-teaming",
+        "task.agent-harness"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-llm-harness-red-team-coverage"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.llm-harness.red-team-coverage.evaluate",
+          "label": "Generate and retain taxonomy-linked adversarial cases",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-llm-harness-red-team-coverage-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.llm-harness.red-team-coverage.baseline",
+          "label": "Run the declared high-risk abuse suite",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-llm-harness-red-team-coverage"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.llm-harness.red-team-coverage.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 7,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.llm-harness.red-team-coverage",
+      "pack_id": "design-pack.llm-harness",
+      "prompt": "Which misuse, evasion, injection, poisoning, privacy, extraction, reliability, bias, overreliance, and multi-step attacks match the use case and attacker model?",
+      "rationale": "A bag of prompts does not disclose threat coverage, personas, evaluator uncertainty, or missed space.",
+      "reference_ids": [
+        "source.nist.adversarial-ml",
+        "source.mlcommons.safety-methodology"
+      ],
+      "required_evidence": [
+        "evidence.threat-model",
+        "evidence.red-team-case-manifest",
+        "evidence.coverage-report"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.llm-harness"
+      ],
+      "title": "Red-team taxonomy and coverage",
+      "trigger_all": [],
+      "trigger_any": [
+        "task.llm-red-teaming",
+        "risk.high",
+        "risk.critical"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [
+    "source.stanford.helm",
+    "source.nist.adversarial-ml",
+    "source.mlcommons.safety-methodology"
+  ],
+  "stage": "stage.specialized",
+  "title": "LLM, agent, evaluation, and red-team harnesses",
+  "version": "1.0.0"
+}

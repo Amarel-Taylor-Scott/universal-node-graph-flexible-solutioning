@@ -103,6 +103,11 @@ diagram or candidate count is not, by itself, progress.
   conservative field mapping, effort/capability/permission planning, 43
   deterministic checks, redacted reports, append-only utility memory, eight
   typed nodes, and an independently verified shadow feedback loop.
+- A data-science design atlas with 618 provenance-preserving technique entries,
+  31 common task archetypes, 28 modular packs, 112 evidence-seeking questions,
+  all-visible E1–E10 planning, explicit LLM/human/external authority, portable
+  reports, C0–C7 maturity derived from contiguous evidence gates, and a
+  five-node/34-binding graph-native planning and dossier pack.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 

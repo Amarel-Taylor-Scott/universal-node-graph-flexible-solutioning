@@ -1,0 +1,61 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-monitoring-feedback-feedback-lineage"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.monitoring-feedback.feedback-lineage.evaluate",
+      "label": "Trace representative outcomes end to end",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-monitoring-feedback-feedback-lineage-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.monitoring-feedback.feedback-lineage.baseline",
+      "label": "Use immutable prediction-to-outcome identifiers",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-monitoring-feedback-feedback-lineage"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.monitoring-feedback.feedback-lineage.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 5,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.monitoring-feedback.feedback-lineage",
+  "pack_id": "design-pack.monitoring-feedback",
+  "prompt": "How do delayed outcomes, appeals, human corrections, incidents, and edits link to the exact prediction, model, input, policy, and exposure?",
+  "rationale": "Unlinked feedback cannot support reliable learning or root-cause analysis.",
+  "reference_ids": [],
+  "required_evidence": [
+    "evidence.feedback-lineage"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.95,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.monitoring-feedback"
+  ],
+  "title": "Feedback and correction lineage",
+  "trigger_all": [],
+  "trigger_any": [
+    "lifecycle.production"
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,8 @@
+{
+  "claim": "Schemas, anomalies, training-serving skew, and longitudinal drift are distinct checks.",
+  "id": "source.tensorflow.data-validation",
+  "kind": "source.official-documentation",
+  "revision": "TensorFlow TFX documentation",
+  "title": "TensorFlow Data Validation guide",
+  "url": "https://www.tensorflow.org/tfx/guide/tfdv"
+}

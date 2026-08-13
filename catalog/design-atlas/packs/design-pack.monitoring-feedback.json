@@ -1,0 +1,265 @@
+{
+  "description": "Observe input, output, performance, drift, cost, incidents, labels, and retraining without contaminating protected evaluation.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.monitoring-feedback",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-monitoring-feedback-telemetry"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.monitoring-feedback.telemetry.evaluate",
+          "label": "Verify telemetry completeness and privacy",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-monitoring-feedback-telemetry-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.monitoring-feedback.telemetry.baseline",
+          "label": "Emit minimum typed health and quality telemetry",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-monitoring-feedback-telemetry"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.monitoring-feedback.telemetry.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 4,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.monitoring-feedback.telemetry",
+      "pack_id": "design-pack.monitoring-feedback",
+      "prompt": "Which schemas, distributions, missingness, freshness, predictions, confidence, abstentions, latency, cost, failures, and policy events are observable?",
+      "rationale": "A system cannot govern failures or drift it does not measure.",
+      "reference_ids": [
+        "source.breck.ml-test-score"
+      ],
+      "required_evidence": [
+        "evidence.telemetry-schema",
+        "evidence.telemetry-test"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.monitoring-feedback"
+      ],
+      "title": "Operational and quality telemetry",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-monitoring-feedback-drift-performance"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.monitoring-feedback.drift-performance.evaluate",
+          "label": "Backtest drift and performance alerts",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-monitoring-feedback-drift-performance-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.monitoring-feedback.drift-performance.baseline",
+          "label": "Monitor schema plus delayed outcome quality",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-monitoring-feedback-drift-performance"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.monitoring-feedback.drift-performance.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.monitoring-feedback.drift-performance",
+      "pack_id": "design-pack.monitoring-feedback",
+      "prompt": "Which reference windows, thresholds, slices, tests, and label-delayed performance signals distinguish harmless change from degraded utility?",
+      "rationale": "Input drift is neither necessary nor sufficient evidence of model failure.",
+      "reference_ids": [
+        "source.tensorflow.data-validation"
+      ],
+      "required_evidence": [
+        "evidence.drift-policy",
+        "evidence.alert-backtest"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.monitoring-feedback"
+      ],
+      "title": "Drift versus performance",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-monitoring-feedback-feedback-lineage"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.monitoring-feedback.feedback-lineage.evaluate",
+          "label": "Trace representative outcomes end to end",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-monitoring-feedback-feedback-lineage-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.monitoring-feedback.feedback-lineage.baseline",
+          "label": "Use immutable prediction-to-outcome identifiers",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-monitoring-feedback-feedback-lineage"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.monitoring-feedback.feedback-lineage.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 5,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.monitoring-feedback.feedback-lineage",
+      "pack_id": "design-pack.monitoring-feedback",
+      "prompt": "How do delayed outcomes, appeals, human corrections, incidents, and edits link to the exact prediction, model, input, policy, and exposure?",
+      "rationale": "Unlinked feedback cannot support reliable learning or root-cause analysis.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.feedback-lineage"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.95,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.monitoring-feedback"
+      ],
+      "title": "Feedback and correction lineage",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-monitoring-feedback-retrain-policy"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.monitoring-feedback.retrain-policy.evaluate",
+          "label": "Simulate trigger and promotion policies",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-monitoring-feedback-retrain-policy-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.monitoring-feedback.retrain-policy.baseline",
+          "label": "Require a fresh evaluation closure for every challenger",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-monitoring-feedback-retrain-policy"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.monitoring-feedback.retrain-policy.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 6,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.monitoring-feedback.retrain-policy",
+      "pack_id": "design-pack.monitoring-feedback",
+      "prompt": "What trigger, data window, exclusion, validation, holdout, approval, and rollback policy governs retraining or graph mutation?",
+      "rationale": "Automatic retraining without fixed gates can amplify corruption or repeatedly tune on the same protected evidence.",
+      "reference_ids": [
+        "source.nist.ai-rmf-1",
+        "source.breck.ml-test-score"
+      ],
+      "required_evidence": [
+        "evidence.retraining-policy",
+        "evidence.champion-challenger-receipts"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 1.0,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.monitoring-feedback"
+      ],
+      "title": "Retraining and champion/challenger policy",
+      "trigger_all": [],
+      "trigger_any": [
+        "lifecycle.production"
+      ],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [],
+  "stage": "stage.operations",
+  "title": "Monitoring, delayed feedback, and controlled improvement",
+  "version": "1.0.0"
+}

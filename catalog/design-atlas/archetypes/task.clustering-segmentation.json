@@ -1,0 +1,28 @@
+{
+  "description": "Discover stable, useful groups with distance, dimension, uncertainty, and external utility checks.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.clustering-segmentation",
+  "optional_pack_ids": [
+    "design-pack.interpretability",
+    "design-pack.robustness-stability"
+  ],
+  "outcome_artifact": "artifact.segment-model",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.feature-engineering",
+    "design-pack.selection-reduction",
+    "design-pack.baselines-models",
+    "design-pack.evaluation-error",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.clustering-segmentation",
+    "domain.machine-learning",
+    "signal.unsupervised"
+  ],
+  "title": "Clustering and segmentation"
+}

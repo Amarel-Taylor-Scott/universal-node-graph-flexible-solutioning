@@ -1,0 +1,53 @@
+{
+  "design_atlas_model_version": "0.1",
+  "id": "phase.3.exploratory-data-analysis-eda",
+  "technique_count": 9,
+  "techniques": [
+    {
+      "digest": "sha256:515ecad6b8bb5269a36e4313debebf06c1058001193cc5e116024cc2572b8f26",
+      "id": "technique.3.1",
+      "path": "design-atlas/techniques/technique.3.1.json"
+    },
+    {
+      "digest": "sha256:cf069d23cbc833c0791212250fb186e7ae95490e357241e5bafe5fa63f5a7bb6",
+      "id": "technique.3.2",
+      "path": "design-atlas/techniques/technique.3.2.json"
+    },
+    {
+      "digest": "sha256:c142f1428f98310dc4c0607420aba209a92692347454e8068134b61732566d18",
+      "id": "technique.3.3",
+      "path": "design-atlas/techniques/technique.3.3.json"
+    },
+    {
+      "digest": "sha256:76b60fc26ed62e01caa5e6fab2d668d70e43d4ba861f86fbeb5630a83513aa49",
+      "id": "technique.3.4",
+      "path": "design-atlas/techniques/technique.3.4.json"
+    },
+    {
+      "digest": "sha256:35e15fcf09bc30a020e4d87a849b18fc1a2125c9d093ab50043c1a90987b7c7e",
+      "id": "technique.3.5",
+      "path": "design-atlas/techniques/technique.3.5.json"
+    },
+    {
+      "digest": "sha256:f3948c869c044a9ef9be98ed9813cf05bcc7c4388a32c811163c119afa5814fc",
+      "id": "technique.3.6",
+      "path": "design-atlas/techniques/technique.3.6.json"
+    },
+    {
+      "digest": "sha256:2c42ecbee3bb91d1f3f2bd510449d15506f6087ca3372abbdd05bb765b903437",
+      "id": "technique.3.7",
+      "path": "design-atlas/techniques/technique.3.7.json"
+    },
+    {
+      "digest": "sha256:31eb8153336a878438e8efa0172ab9637598dce38365bd64516951e88aaf3623",
+      "id": "technique.3.8",
+      "path": "design-atlas/techniques/technique.3.8.json"
+    },
+    {
+      "digest": "sha256:0d60febaa824fb3967f8cb099fd675ed4e1d0bc9aaa411ea14434da6cb920ece",
+      "id": "technique.3.9",
+      "path": "design-atlas/techniques/technique.3.9.json"
+    }
+  ],
+  "title": "Exploratory Data Analysis (Eda)"
+}

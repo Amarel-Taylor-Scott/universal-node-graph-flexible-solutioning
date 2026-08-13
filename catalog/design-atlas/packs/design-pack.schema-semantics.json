@@ -1,0 +1,257 @@
+{
+  "description": "Separate physical types from entity roles, identifiers, units, time semantics, and prohibited fields.",
+  "design_atlas_model_version": "0.1",
+  "id": "design-pack.schema-semantics",
+  "questions": [
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-schema-semantics-field-roles"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.schema-semantics.field-roles.evaluate",
+          "label": "Map and review semantic roles",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-schema-semantics-field-roles-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.schema-semantics.field-roles.baseline",
+          "label": "Use the signed field-role map",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-schema-semantics-field-roles"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.schema-semantics.field-roles.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 2,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.schema-semantics.field-roles",
+      "pack_id": "design-pack.schema-semantics",
+      "prompt": "Which fields are identifiers, measurements, categories, free text, targets, groups, timestamps, geography, or metadata?",
+      "rationale": "Dtype inference cannot establish business meaning or whether a field is safe as a feature.",
+      "reference_ids": [
+        "source.pushkarna.data-cards"
+      ],
+      "required_evidence": [
+        "evidence.semantic-field-map"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.schema-semantics"
+      ],
+      "title": "Semantic field roles",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-schema-semantics-units-ranges"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.schema-semantics.units-ranges.evaluate",
+          "label": "Infer then verify candidate constraints",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-schema-semantics-units-ranges-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.schema-semantics.units-ranges.baseline",
+          "label": "Apply declared schema constraints",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-schema-semantics-units-ranges"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.schema-semantics.units-ranges.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.schema-semantics.units-ranges",
+      "pack_id": "design-pack.schema-semantics",
+      "prompt": "What units, precision, valid ranges, cross-field equations, and state transitions constrain each field?",
+      "rationale": "Unit and invariant violations can remain syntactically valid while being operationally wrong.",
+      "reference_ids": [
+        "source.tensorflow.data-validation"
+      ],
+      "required_evidence": [
+        "evidence.schema",
+        "evidence.domain-constraints"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.85,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.schema-semantics"
+      ],
+      "title": "Units, ranges, and invariants",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-schema-semantics-identity-keys"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.schema-semantics.identity-keys.evaluate",
+          "label": "Test candidate identity and join keys",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-schema-semantics-identity-keys-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.schema-semantics.identity-keys.baseline",
+          "label": "Use the declared primary/entity keys",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-schema-semantics-identity-keys"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.schema-semantics.identity-keys.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.schema-semantics.identity-keys",
+      "pack_id": "design-pack.schema-semantics",
+      "prompt": "Which keys are stable, what is their cardinality, and can one entity legitimately appear in multiple rows or sources?",
+      "rationale": "Unclear identity creates duplicate leakage, incorrect joins, and accidental label replication.",
+      "reference_ids": [],
+      "required_evidence": [
+        "evidence.identity-contract",
+        "evidence.cardinality-profile"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.9,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.schema-semantics"
+      ],
+      "title": "Identity, keys, and multiplicity",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    },
+    {
+      "choices": [
+        {
+          "action_ids": [
+            "action.evaluate-schema-semantics-unknown-schema"
+          ],
+          "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+          "id": "decision.schema-semantics.unknown-schema.evaluate",
+          "label": "Replay schema evolution cases",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.freeze-schema-semantics-unknown-schema-baseline"
+          ],
+          "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+          "id": "decision.schema-semantics.unknown-schema.baseline",
+          "label": "Reject incompatible schema changes",
+          "technique_tags": []
+        },
+        {
+          "action_ids": [
+            "action.block-schema-semantics-unknown-schema"
+          ],
+          "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+          "id": "decision.schema-semantics.unknown-schema.defer",
+          "label": "Defer with an explicit blocker",
+          "technique_tags": []
+        }
+      ],
+      "cost_tier": 3,
+      "design_atlas_model_version": "0.1",
+      "exclude_when": [],
+      "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+      "id": "design-question.schema-semantics.unknown-schema",
+      "pack_id": "design-pack.schema-semantics",
+      "prompt": "Should added, removed, reordered, type-changed, and unknown fields fail, warn, quarantine, or adapt?",
+      "rationale": "A schema policy needs explicit forward-compatibility behavior instead of silent coercion.",
+      "reference_ids": [
+        "source.tensorflow.data-validation"
+      ],
+      "required_evidence": [
+        "evidence.schema-evolution-cases"
+      ],
+      "response_modes": [
+        "llm",
+        "human"
+      ],
+      "risk_weight": 0.8,
+      "stop_conditions": [
+        "Stop when the acceptance gate fails.",
+        "Stop when the declared evidence or resource budget is exhausted."
+      ],
+      "tags": [
+        "design-domain.schema-semantics"
+      ],
+      "title": "Schema evolution and unknown fields",
+      "trigger_all": [],
+      "trigger_any": [],
+      "version": "1.0.0"
+    }
+  ],
+  "reference_ids": [
+    "source.tensorflow.data-validation"
+  ],
+  "stage": "stage.data",
+  "title": "Schema and semantic roles",
+  "version": "1.0.0"
+}

@@ -1,0 +1,8 @@
+{
+  "claim": "AI risk work should connect governance, context mapping, measurement, and management.",
+  "id": "source.nist.ai-rmf-1",
+  "kind": "source.official-standard",
+  "revision": "NIST AI 100-1 (2023)",
+  "title": "NIST AI Risk Management Framework 1.0",
+  "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"
+}

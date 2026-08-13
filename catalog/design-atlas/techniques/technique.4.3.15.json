@@ -1,0 +1,21 @@
+{
+  "claim_boundary": "The source claim describes an unverified supplied inventory. This entry proves catalog coverage only; executable maturity is separate.",
+  "design_atlas_model_version": "0.1",
+  "examples": "",
+  "family": "Categorical Encoding",
+  "id": "technique.4.3.15",
+  "maturity_floor": "C1",
+  "ordinal": "4.3.15",
+  "owner": "owner.solutiongraph-project",
+  "phase_id": "phase.4.data-cleaning-preprocessing",
+  "phase_title": "Data Cleaning & Preprocessing",
+  "references": [],
+  "source_claim": "reported-partial",
+  "source_id": "source.owner-technique-inventory.2026-08-13",
+  "source_note": "No dedicated strategy; count_encode is the fallback",
+  "tags": [
+    "phase.4",
+    "family.categorical-encoding"
+  ],
+  "title": "High-cardinality handling (>1000 categories)"
+}

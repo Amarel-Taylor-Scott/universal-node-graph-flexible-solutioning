@@ -1,0 +1,62 @@
+{
+  "choices": [
+    {
+      "action_ids": [
+        "action.evaluate-profiling-eda-conflicts-slices"
+      ],
+      "consequence": "Evaluate the alternatives and retain the comparative evidence.",
+      "id": "decision.profiling-eda.conflicts-slices.evaluate",
+      "label": "Interrogate conflict and slice hypotheses",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.freeze-profiling-eda-conflicts-slices-baseline"
+      ],
+      "consequence": "Freeze the simple baseline and record why it is sufficient for this scope.",
+      "id": "decision.profiling-eda.conflicts-slices.baseline",
+      "label": "Review top anomalies and declared slices",
+      "technique_tags": []
+    },
+    {
+      "action_ids": [
+        "action.block-profiling-eda-conflicts-slices"
+      ],
+      "consequence": "Do not guess; record the missing owner, evidence, or authority as a blocker.",
+      "id": "decision.profiling-eda.conflicts-slices.defer",
+      "label": "Defer with an explicit blocker",
+      "technique_tags": []
+    }
+  ],
+  "cost_tier": 4,
+  "design_atlas_model_version": "0.1",
+  "exclude_when": [],
+  "experiment_template": "Compare feasible branches against the declared control on identical cases, seeds, resource accounting, and an independent acceptance oracle.",
+  "id": "design-question.profiling-eda.conflicts-slices",
+  "pack_id": "design-pack.profiling-eda",
+  "prompt": "Which rare clusters, contradictory records, source disagreements, or stakeholder-relevant slices need separate investigation?",
+  "rationale": "Aggregate summaries can hide systematic failure and valid minority modes.",
+  "reference_ids": [
+    "source.nist.ai-rmf-1"
+  ],
+  "required_evidence": [
+    "evidence.anomaly-identities",
+    "evidence.slice-definitions"
+  ],
+  "response_modes": [
+    "llm",
+    "human"
+  ],
+  "risk_weight": 0.85,
+  "stop_conditions": [
+    "Stop when the acceptance gate fails.",
+    "Stop when the declared evidence or resource budget is exhausted."
+  ],
+  "tags": [
+    "design-domain.profiling-eda"
+  ],
+  "title": "Conflicts, anomalies, and slices",
+  "trigger_all": [],
+  "trigger_any": [],
+  "version": "1.0.0"
+}

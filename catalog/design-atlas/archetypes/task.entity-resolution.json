@@ -1,0 +1,25 @@
+{
+  "description": "Link or deduplicate people, organizations, products, places, and records with calibrated abstention.",
+  "design_atlas_model_version": "0.1",
+  "id": "task.entity-resolution",
+  "optional_pack_ids": [
+    "design-pack.fairness-risk"
+  ],
+  "outcome_artifact": "artifact.entity-map",
+  "required_pack_ids": [
+    "design-pack.task-contract",
+    "design-pack.data-source",
+    "design-pack.schema-semantics",
+    "design-pack.profiling-eda",
+    "design-pack.quality-cleaning",
+    "design-pack.evaluation-error",
+    "design-pack.reproducibility-governance",
+    "design-pack.decision-handoff"
+  ],
+  "tags": [
+    "task.entity-resolution",
+    "domain.identity",
+    "signal.entity-aware"
+  ],
+  "title": "Entity resolution"
+}
