@@ -5,7 +5,11 @@ from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10 compatibility
+    import tomli as tomllib
+
 from jsonschema import Draft202012Validator
 from referencing import Registry as SchemaRegistry
 from referencing import Resource
