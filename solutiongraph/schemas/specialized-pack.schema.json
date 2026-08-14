@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specialized-pack.schema.json",
+  "title": "Specialized capability pack definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specialized_pack_model_version", "id", "version", "title", "description",
+    "readiness", "delivery", "domain_pack_ids", "task_category_ids",
+    "signal_terms", "recipes", "profiler_features", "metrics", "gates",
+    "source", "license", "limitations", "extensions"
+  ],
+  "properties": {
+    "specialized_pack_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "version": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "readiness": {"enum": ["catalog", "executable-fixture", "credentialed-connector", "production-adapter"]},
+    "delivery": {"$ref": "#/$defs/delivery"},
+    "domain_pack_ids": {"$ref": "#/$defs/idArrayRequired"},
+    "task_category_ids": {"$ref": "#/$defs/idArrayRequired"},
+    "signal_terms": {"$ref": "#/$defs/stringArrayRequired"},
+    "recipes": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/recipe"}
+    },
+    "profiler_features": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/profilerFeature"}
+    },
+    "metrics": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/metric"}
+    },
+    "gates": {
+      "type": "array", "minItems": 1,
+      "items": {"$ref": "#/$defs/gate"}
+    },
+    "source": {"type": "string", "minLength": 1},
+    "license": {"type": "string", "minLength": 1},
+    "limitations": {"$ref": "#/$defs/stringArrayRequired"},
+    "extensions": {"$ref": "common.schema.json#/$defs/extensions"}
+  },
+  "$defs": {
+    "idArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "idArrayRequired": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "stringArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "stringArrayRequired": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_distribution", "python_module", "entry_point_group", "entry_point_name", "extraction_target"],
+      "properties": {
+        "current_distribution": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+        "python_module": {"type": "string", "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*(\\.[a-zA-Z_][a-zA-Z0-9_]*)*$"},
+        "entry_point_group": {"const": "solutiongraph.specialized_packs"},
+        "entry_point_name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+        "extraction_target": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+      }
+    },
+    "profilerFeature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "description", "value_kind", "mode", "evidence_kind", "cost_tier", "effects", "permissions", "requirements", "easy_to_compute"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "value_kind": {"enum": ["boolean", "integer", "number", "string", "category", "distribution", "vector", "mapping"]},
+        "mode": {"enum": ["declared", "deterministic", "external", "model"]},
+        "evidence_kind": {"$ref": "common.schema.json#/$defs/id"},
+        "cost_tier": {"type": "integer", "minimum": 1, "maximum": 10},
+        "effects": {"$ref": "#/$defs/idArray"},
+        "permissions": {"$ref": "#/$defs/idArray"},
+        "requirements": {"$ref": "#/$defs/idArray"},
+        "easy_to_compute": {"type": "boolean"}
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "description", "direction", "unit", "scope", "required_evidence"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["maximize", "minimize", "target", "none"]},
+        "unit": {"type": "string", "minLength": 1},
+        "scope": {"$ref": "common.schema.json#/$defs/id"},
+        "required_evidence": {"$ref": "#/$defs/idArrayRequired"}
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "description", "metric_ids", "oracle_kind", "decision", "independent"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "metric_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "oracle_kind": {"enum": ["exact", "property", "cross-implementation", "statistical", "human", "external-authority"]},
+        "decision": {"enum": ["reject", "escalate", "warn"]},
+        "independent": {"type": "boolean"}
+      }
+    },
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "title", "description", "input_kind_ids", "output_kind_ids",
+        "capability_ids", "category_ids", "template_ids", "node_pack_ids",
+        "question_pack_ids", "design_pack_ids", "example_ids", "benchmark_ids",
+        "agent_benchmark_ids", "arena_task_ids", "adapter_ids", "effects",
+        "permissions", "limitations"
+      ],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "title": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1},
+        "input_kind_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "output_kind_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "capability_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "category_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "template_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "node_pack_ids": {"$ref": "#/$defs/idArray"},
+        "question_pack_ids": {"$ref": "#/$defs/idArray"},
+        "design_pack_ids": {"$ref": "#/$defs/idArray"},
+        "example_ids": {"$ref": "#/$defs/idArray"},
+        "benchmark_ids": {"$ref": "#/$defs/idArray"},
+        "agent_benchmark_ids": {"$ref": "#/$defs/idArray"},
+        "arena_task_ids": {"$ref": "#/$defs/idArray"},
+        "adapter_ids": {"$ref": "#/$defs/idArray"},
+        "effects": {"$ref": "#/$defs/idArray"},
+        "permissions": {"$ref": "#/$defs/idArray"},
+        "limitations": {"$ref": "#/$defs/stringArray"}
+      }
+    }
+  }
+}

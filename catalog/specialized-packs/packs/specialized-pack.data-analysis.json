@@ -1,0 +1,432 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "data-analysis",
+    "extraction_target": "solutiongraph-pack-data-analysis",
+    "python_module": "solutiongraph.specialized.data_analysis"
+  },
+  "description": "Exploratory, cohort, funnel, geotemporal, experiment, and decision-evidence workflows with explicit uncertainty and traceability.",
+  "domain_pack_ids": [
+    "domain-pack.data-integration",
+    "domain-pack.science-optimization"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject a report when material claims cannot be reproduced or traced to sufficient evidence.",
+      "id": "gate.data-analysis.evidence-traceability",
+      "independent": true,
+      "metric_ids": [
+        "metric.data-analysis.reproducibility",
+        "metric.data-analysis.finding-support"
+      ],
+      "oracle_kind": "property",
+      "title": "Evidence traceability"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate claims whose slice support or fixed multiplicity protocol is insufficient.",
+      "id": "gate.data-analysis.statistical-claims",
+      "independent": true,
+      "metric_ids": [
+        "metric.data-analysis.slice-coverage",
+        "metric.data-analysis.false-discovery-risk"
+      ],
+      "oracle_kind": "statistical",
+      "title": "Statistical claims"
+    }
+  ],
+  "id": "specialized-pack.data-analysis",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Share of reported findings reproducible from content-addressed inputs and declared transformations.",
+      "direction": "maximize",
+      "id": "metric.data-analysis.reproducibility",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.analysis-report",
+      "title": "Reproducibility",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of findings linked to sufficient observations, uncertainty, and source evidence.",
+      "direction": "maximize",
+      "id": "metric.data-analysis.finding-support",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.analysis-report",
+      "title": "Finding support",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of decision-relevant cohorts receiving minimum-sample diagnostics.",
+      "direction": "maximize",
+      "id": "metric.data-analysis.slice-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.analysis-report",
+      "title": "Slice coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Multiplicity-adjusted risk assigned by the fixed statistical evaluation plan.",
+      "direction": "minimize",
+      "id": "metric.data-analysis.false-discovery-risk",
+      "required_evidence": [
+        "evidence.statistical-protocol",
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.analysis-report",
+      "title": "False-discovery risk",
+      "unit": "probability"
+    },
+    {
+      "description": "Observed utility of the analysis for the declared downstream decision under its evaluation protocol.",
+      "direction": "maximize",
+      "id": "metric.data-analysis.decision-utility",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.decision",
+      "title": "Decision utility",
+      "unit": "domain-unit"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Classify skew, tails, multimodality, discreteness, and zero inflation for candidate measures.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-analysis.distribution-shapes",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Distribution shapes",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure sample size, missingness, and support across declared cohorts and slices.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-analysis.segment-coverage",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Segment coverage",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure observation range, cadence, gaps, seasonality candidates, and censoring boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-analysis.temporal-span",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Temporal span",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize geographic coverage, resolution, CRS, and boundary uncertainty.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-analysis.spatial-support",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Spatial support",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize pairwise dependence, nonlinearity, collinearity, and sparse interactions without causal claims.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-analysis.association-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Association profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record whether population, unit, measure, time, comparison, and decision are explicit.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-analysis.question-completeness",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Question completeness",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional embedding of the analysis question and evidence contract for historical retrieval in an exact declared space.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.data-analysis.analysis-intent-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Analysis-intent embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.dataset-profiling-and-drift",
+        "arena.scientific-experiment"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "analysis.profile",
+        "analysis.explore",
+        "analysis.visualize",
+        "analysis.report"
+      ],
+      "category_ids": [
+        "dag.prepare.profile",
+        "dag.integrate.aggregate",
+        "dag.generate.report"
+      ],
+      "description": "Profile distributions, missingness, associations, anomalies, slices, and conflicting findings before producing a reproducible report.",
+      "design_pack_ids": [
+        "design-pack.profiling-eda",
+        "design-pack.evaluation-error",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [
+        "dataset-profiling-and-drift",
+        "scientific-experiment"
+      ],
+      "id": "recipe.data-analysis.exploratory-analysis",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "interrogation.semantic-data-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.analysis-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.generic-tabular",
+        "question-pack.ml-dataset"
+      ],
+      "template_ids": [
+        "template.scientific-experiment"
+      ],
+      "title": "Exploratory analysis and evidence report"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.scientific-experiment"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "analysis.cohort",
+        "analysis.sequence",
+        "analysis.funnel",
+        "analysis.retention"
+      ],
+      "category_ids": [
+        "dag.integrate.aggregate",
+        "dag.learn.causal",
+        "dag.evaluate.online"
+      ],
+      "description": "Construct identity- and event-time-aware cohorts, paths, funnels, retention measures, and counter-slices with explicit denominators.",
+      "design_pack_ids": [
+        "design-pack.time-series",
+        "design-pack.causality-experiments"
+      ],
+      "effects": [],
+      "example_ids": [
+        "user-journey-modeling"
+      ],
+      "id": "recipe.data-analysis.cohort-flow-analysis",
+      "input_kind_ids": [
+        "artifact.enriched-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.analysis-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.event-driven-system",
+        "template.scientific-experiment"
+      ],
+      "title": "Cohort, funnel, and user-flow analysis"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.geospatial-data-product",
+        "arena.exact-gis-boundary-resolution"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "analysis.spatial",
+        "analysis.temporal",
+        "analysis.geotemporal",
+        "analysis.verify"
+      ],
+      "category_ids": [
+        "dag.integrate.enrich.geotemporal",
+        "dag.integrate.aggregate",
+        "dag.evaluate.data"
+      ],
+      "description": "Validate spatial and temporal support, construct explicit joins, quantify boundary uncertainty, and report map-ready evidence.",
+      "design_pack_ids": [
+        "design-pack.geospatial",
+        "design-pack.time-series"
+      ],
+      "effects": [],
+      "example_ids": [
+        "geotemporal-enrichment",
+        "exact-gis-boundary-resolution"
+      ],
+      "id": "recipe.data-analysis.geotemporal-analysis",
+      "input_kind_ids": [
+        "artifact.enriched-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.decision-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.geography",
+        "question-pack.datetime"
+      ],
+      "template_ids": [
+        "template.geospatial-analytics",
+        "template.time-series-forecasting"
+      ],
+      "title": "Geospatial and temporal analysis"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.scientific-experiment"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "analysis.experiment-design",
+        "analysis.estimate",
+        "analysis.sensitivity",
+        "analysis.decide"
+      ],
+      "category_ids": [
+        "dag.learn.causal",
+        "dag.evaluate.model",
+        "dag.evaluate.online"
+      ],
+      "description": "Freeze estimand, assignment, exclusions, power, diagnostics, sensitivity, and decision thresholds before interpreting outcomes.",
+      "design_pack_ids": [
+        "design-pack.causality-experiments",
+        "design-pack.robustness-stability",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [
+        "scientific-experiment"
+      ],
+      "id": "recipe.data-analysis.experiment-analysis",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.decision-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.scientific-experiment"
+      ],
+      "title": "Experiment and causal analysis"
+    }
+  ],
+  "signal_terms": [
+    "exploratory data analysis",
+    "eda",
+    "analysis",
+    "cohort",
+    "funnel",
+    "retention",
+    "user flow",
+    "dashboard",
+    "finding",
+    "geotemporal analysis",
+    "experiment analysis",
+    "causal analysis"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.prepare.profile",
+    "dag.integrate.aggregate",
+    "dag.generate.report",
+    "dag.learn.causal",
+    "dag.evaluate.online",
+    "dag.integrate.enrich.geotemporal",
+    "dag.evaluate.data",
+    "dag.evaluate.model"
+  ],
+  "title": "Data analysis",
+  "version": "0.1.0"
+}

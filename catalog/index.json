@@ -123,6 +123,15 @@
     "path": "question-packs/index.json",
     "question_count": 86
   },
+  "specialized_packages": {
+    "gate_count": 17,
+    "metric_count": 42,
+    "pack_count": 7,
+    "path": "specialized-packs/index.json",
+    "profiler_feature_count": 51,
+    "recipe_count": 32,
+    "registry_digest": "sha256:9ecdb49c44ec0ba3dda4642a7ca1d1d4b796a21a93cb74f58e3c1495daae56ee"
+  },
   "templates": [
     {
       "atomic_slot_count": 18,

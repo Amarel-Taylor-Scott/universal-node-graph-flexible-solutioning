@@ -2,7 +2,7 @@
 
 Universal Node Graph can be explored without a browser, model provider, vector
 database, or network service. The domain-neutral core uses only the Python
-standard library. Version 0.6 is a developer preview; read `READINESS.md`
+standard library. Version 0.7 is a developer preview; read `READINESS.md`
 before production integration.
 
 ## Interrogate a dataset before building a pipeline

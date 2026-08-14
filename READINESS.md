@@ -1,6 +1,6 @@
 # Readiness and support levels
 
-Current release line: **0.6 Developer Preview / external alpha**.
+Current release line: **0.7 Developer Preview / external alpha**.
 
 SolutionGraph is ready for developers and researchers to model typed solution
 spaces, author reusable node contracts, compile frozen routes, execute trusted
@@ -11,7 +11,8 @@ yet a turnkey production scheduler or a hostile-code execution service.
 
 | Surface | Status | Supported use |
 |---|---|---|
-| Semantic model and 99 strict schemas | Alpha-supported | Typed universal domain packs, design contexts/questions/plans, evidence-derived coverage, integration profiles/projections, semantic concepts, dataset profiles, field maps, question packs/plans/findings, design-atlas techniques/questions/packs/archetypes/contexts/plans/answers/answer sets/dossiers/reports/evidence, reversible repair and verification reports, task contracts/cases, coding-agent tasks/suites/trial receipts/reports, task fingerprints, historical memory and update receipts, search initialization, task-solution reports, mutation receipts, paired-study reports, external benchmark bundles, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
+| Semantic model and 105 strict schemas | Alpha-supported | Typed specialized and universal domain packs, package recommendation/composition reports, design contexts/questions/plans, evidence-derived coverage, integration profiles/projections, semantic concepts, dataset profiles, field maps, question packs/plans/findings, design-atlas techniques/questions/packs/archetypes/contexts/plans/answers/answer sets/dossiers/reports/evidence, reversible repair and verification reports, task contracts/cases, coding-agent tasks/suites/trial receipts/reports, task fingerprints, historical memory and update receipts, search initialization, task-solution reports, mutation receipts, paired-study reports, external benchmark bundles, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
+| Specialized capability packages | Alpha-supported as an authoring/discovery layer | Seven extraction-ready vertical packages, 32 typed recipes, 51 profiler features, 42 evaluation metrics, 17 gates, all-visible recommendation, bounded artifact-kind composition, and declare-before-load third-party providers; packages do not grant node compatibility or replace executable solution-pack closure |
 | Universal engineering catalog and planner | Alpha-supported as a reference decision system | Fourteen domain-neutral obligations, 13 domain packs, 42 all-visible questions, ten task-context channels, E1–E10 allocation, and explicit human/model/network authority gates; selection is not an answer or execution grant |
 | Evidence-derived domain coverage | Alpha-supported for checked-in assets | Exact template, example, compiler-route, benchmark, agent-suite, question-pack, adapter, and operational-evidence resolution through contiguous C0–C7 gates; the result is not a production-readiness or domain-superiority score |
 | OpenAPI, CloudEvents, and BPMN projection | Experimental structural authoring seam | Side-effect-free OpenAPI 3.0–3.2 operations, CloudEvents 1.0 event types, and BPMN 2.0/2.0.2 flow dependencies; no remote reference resolution, transport execution, or native BPMN engine semantics |
@@ -127,7 +128,7 @@ configured.
 
 Beta requires at least one enforcing isolated runtime adapter, distributed
 crash-resumable campaign execution, larger mature-library node packs, and
-held-out multi-seed benchmarks on real external tasks. Version 0.6 demonstrates
+held-out multi-seed benchmarks on real external tasks. Version 0.7 demonstrates
 the complete local task → graph → admission → search → execution → evidence →
 belief-update → champion/fallback loop plus structured control and recovery,
 but only on small trusted fixtures.

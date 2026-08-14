@@ -73,6 +73,11 @@ from solutiongraph.reference_nodes import (
     REFERENCE_NODE_SPECS,
     REFERENCE_REGISTRY,
 )
+from solutiongraph.specialized import (
+    REFERENCE_SPECIALIZED_PACK_REGISTRY,
+    REFERENCE_SPECIALIZED_PACKS,
+    reference_specialized_asset_inventory,
+)
 from solutiongraph.stdlib_pack import (
     STANDARD_LIBRARY_DESCRIPTORS,
     STANDARD_LIBRARY_NODE_PACK,
@@ -405,6 +410,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "harnesses/duecare-evidence-example.json": DUECARE_HARNESS_EVIDENCE.to_dict(),
     }
     coverage = reference_coverage_report()
+    specialized_inventory = reference_specialized_asset_inventory()
     for obligation in REFERENCE_OBLIGATIONS:
         documents[f"universal/obligations/{obligation.id}.json"] = obligation.to_dict()
     for pack in REFERENCE_DOMAIN_PACKS:
@@ -436,6 +442,41 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
             }
             for adapter in REFERENCE_INTEGRATION_ADAPTERS
         ],
+    }
+    documents["specialized-packs/registry.json"] = (
+        REFERENCE_SPECIALIZED_PACK_REGISTRY.to_dict()
+    )
+    documents["specialized-packs/asset-inventory.json"] = specialized_inventory.to_dict()
+    for pack in REFERENCE_SPECIALIZED_PACKS:
+        documents[f"specialized-packs/packs/{pack.id}.json"] = pack.to_dict()
+    documents["specialized-packs/index.json"] = {
+        "specialized_pack_model_version": "0.1",
+        "registry_id": REFERENCE_SPECIALIZED_PACK_REGISTRY.id,
+        "registry_digest": REFERENCE_SPECIALIZED_PACK_REGISTRY.digest,
+        "asset_inventory_digest": specialized_inventory.digest,
+        "pack_count": len(REFERENCE_SPECIALIZED_PACKS),
+        "recipe_count": sum(len(pack.recipes) for pack in REFERENCE_SPECIALIZED_PACKS),
+        "profiler_feature_count": sum(
+            len(pack.profiler_features) for pack in REFERENCE_SPECIALIZED_PACKS
+        ),
+        "metric_count": sum(len(pack.metrics) for pack in REFERENCE_SPECIALIZED_PACKS),
+        "gate_count": sum(len(pack.gates) for pack in REFERENCE_SPECIALIZED_PACKS),
+        "packs": [
+            {
+                "id": pack.id,
+                "version": pack.version,
+                "digest": pack.digest,
+                "path": f"specialized-packs/packs/{pack.id}.json",
+                "entry_point_name": pack.entry_point_name,
+                "extraction_target": pack.extraction_target,
+                "recipe_count": len(pack.recipes),
+            }
+            for pack in REFERENCE_SPECIALIZED_PACKS
+        ],
+        "claim_boundary": (
+            "Specialized packs nominate reusable authoring assets and typed recipe "
+            "interfaces; they are not executable or reproducible solution-pack closures."
+        ),
     }
     reference_agent_suite = reference_agent_benchmark_suite()
     command_agent_suite = command_matrix_example_suite()
@@ -744,6 +785,19 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "integrations": {
             "path": "integrations/index.json",
             "adapter_count": len(REFERENCE_INTEGRATION_ADAPTERS),
+        },
+        "specialized_packages": {
+            "path": "specialized-packs/index.json",
+            "registry_digest": REFERENCE_SPECIALIZED_PACK_REGISTRY.digest,
+            "pack_count": len(REFERENCE_SPECIALIZED_PACKS),
+            "recipe_count": sum(len(pack.recipes) for pack in REFERENCE_SPECIALIZED_PACKS),
+            "profiler_feature_count": sum(
+                len(pack.profiler_features) for pack in REFERENCE_SPECIALIZED_PACKS
+            ),
+            "metric_count": sum(
+                len(pack.metrics) for pack in REFERENCE_SPECIALIZED_PACKS
+            ),
+            "gate_count": sum(len(pack.gates) for pack in REFERENCE_SPECIALIZED_PACKS),
         },
     }
     return dict(sorted(documents.items()))

@@ -1,8 +1,31 @@
 # Changelog
 
-## Unreleased
+## 0.7.0 — 2026-08-13
 
 All notable changes to this proof of concept are documented here.
+
+### Specialized capability packages
+
+- Added seven extraction-ready packages for data engineering, data analysis,
+  data science, ML engineering, LLM engineering, software engineering, and
+  operations/reliability. Their individualized modules expose 32 typed recipes,
+  51 task/data profiler features, 42 evaluation metrics, and 17 quality gates.
+- Added all-visible package recommendation with transparent category, lexical,
+  capability, artifact-kind, permission, and explicit-preference components.
+  Recommendations remain advisory priors and never grant graph compatibility.
+- Added bounded breadth-first recipe composition over exact artifact kinds with
+  no implicit conversions and explicit visited, expanded, queued, truncation,
+  unresolved-goal, and declared-budget accounting.
+- Added declare-before-load third-party provider discovery through the
+  `solutiongraph.specialized_packs` entry-point group, explicit load reports,
+  exact-definition deduplication, and conflicting-identity rejection.
+- Added six strict wire schemas, catalog and release-verification integration,
+  `solutiongraph packages` list/show/recommend/compose/providers commands,
+  a dependency-free three-task workflow example, focused regression tests, and
+  a package authoring/extraction guide.
+- Kept specialized authoring packages, executable `NodePackManifest`
+  distributions, and reproducible `SolutionPackManifest` closures as separate
+  contracts.
 
 ### Universal engineering system
 
@@ -153,14 +176,15 @@ All notable changes to this proof of concept are documented here.
 
 ### Changed
 
-- The strict wire-schema set now contains 99 schemas.
+- The strict wire-schema set now contains 105 schemas.
 - Topology families now reject mismatched external port contracts, self-parent
   variants, and cyclic mutation ancestry before admission or search.
 - `UniversalSolver` and graph experiments share the same evidence-only hard
   gates, Pareto flags, and normalized weighted projection.
 - Release verification now covers 47 executable examples, 379 unique nodes, 120
   declared routes, 76 accepted observations, 44 intentional negative controls,
-  seven node packs, and 1,658 generated catalogue documents, including ten
+  eight node packs, seven specialized capability packages, and 1,668 generated
+  catalogue documents, including ten
   digest-only agent-task contracts and two agent-benchmark suites.
 - `UniversalSolver.solve(profile=None, initialization=...)` derives its
   inspectable search/trial budget from the initialization effort policy,

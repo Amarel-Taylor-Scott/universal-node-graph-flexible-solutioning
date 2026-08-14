@@ -1,0 +1,487 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "software-engineering",
+    "extraction_target": "solutiongraph-pack-software-engineering",
+    "python_module": "solutiongraph.specialized.software_engineering"
+  },
+  "description": "Repository repair, testing, API/backend systems, frontend journeys, database migrations, supply-chain assurance, and staged releases.",
+  "domain_pack_ids": [
+    "domain-pack.backend-api",
+    "domain-pack.frontend-browser",
+    "domain-pack.platform-release",
+    "domain-pack.database-storage"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject a change that fails fixed acceptance, regression, compatibility, or scope constraints.",
+      "id": "gate.software-engineering.change-acceptance",
+      "independent": true,
+      "metric_ids": [
+        "metric.software-engineering.acceptance-pass-rate",
+        "metric.software-engineering.regression-rate",
+        "metric.software-engineering.compatibility-violations"
+      ],
+      "oracle_kind": "property",
+      "title": "Change acceptance gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject release when rollback evidence or supply-chain identity is incomplete.",
+      "id": "gate.software-engineering.release-assurance",
+      "independent": true,
+      "metric_ids": [
+        "metric.software-engineering.release-recovery",
+        "metric.software-engineering.supply-chain-coverage"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Release assurance gate"
+    }
+  ],
+  "id": "specialized-pack.software-engineering",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Share of fixed functional, property, integration, and sealed acceptance cases passing.",
+      "direction": "maximize",
+      "id": "metric.software-engineering.acceptance-pass-rate",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.change",
+      "title": "Acceptance pass rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of protected baseline behavior changed outside the task contract.",
+      "direction": "minimize",
+      "id": "metric.software-engineering.regression-rate",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.change",
+      "title": "Regression rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Count of independently detected interface or migration compatibility violations.",
+      "direction": "minimize",
+      "id": "metric.software-engineering.compatibility-violations",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.release",
+      "title": "Compatibility violations",
+      "unit": "count"
+    },
+    {
+      "description": "Reviewable size and structural complexity retained as a separate objective.",
+      "direction": "minimize",
+      "id": "metric.software-engineering.change-complexity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.change",
+      "title": "Change complexity",
+      "unit": "complexity-unit"
+    },
+    {
+      "description": "Observed time and success rate for rollback or compensation under injected failure.",
+      "direction": "minimize",
+      "id": "metric.software-engineering.release-recovery",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.recovery",
+      "title": "Release recovery",
+      "unit": "seconds"
+    },
+    {
+      "description": "Share of shipped artifacts bound to exact source, dependency, build, and attestation identities.",
+      "direction": "maximize",
+      "id": "metric.software-engineering.supply-chain-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.release",
+      "title": "Supply-chain coverage",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Count languages, modules, dependency boundaries, generated assets, tests, and build surfaces.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.software-engineering.repository-shape",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Repository shape",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize affected interfaces, callers, migrations, tests, documentation, and operational dependencies.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.software-engineering.change-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Change surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure unit, property, integration, end-to-end, regression, mutation, and sealed-case coverage.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.software-engineering.test-topology",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Test topology",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize version constraints, provenance, licenses, vulnerabilities, native builds, and update depth.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.software-engineering.dependency-risk",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Dependency risk",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Compare request, response, event, schema, persistence, and client contracts with the baseline.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.software-engineering.api-compatibility",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "API compatibility",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Estimate users, services, data, regions, and irreversible effects touched by a release.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.software-engineering.release-blast-radius",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Release blast radius",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional embedding of the ticket, interfaces, and redacted repository profile for retrieving similar verified changes.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.software-engineering.ticket-repository-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Ticket and repository embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [
+        "agent-benchmark.reference-smoke"
+      ],
+      "arena_task_ids": [
+        "arena.repository-repair"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "software.diagnose",
+        "software.change",
+        "software.test",
+        "software.review"
+      ],
+      "category_ids": [
+        "dag.evaluate.regression",
+        "dag.evaluate.metamorphic",
+        "dag.serve.backend"
+      ],
+      "description": "Localize the failure, define protected behavior, implement a bounded change, run layered checks, and emit reviewable evidence.",
+      "design_pack_ids": [
+        "design-pack.task-contract",
+        "design-pack.evaluation-error",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [
+        "tested-code-repair"
+      ],
+      "id": "recipe.software-engineering.repository-repair",
+      "input_kind_ids": [
+        "artifact.repository"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.real-world-node-pack",
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.verified-change"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.qa-engineering"
+      ],
+      "title": "Repository diagnosis and repair"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.kubernetes"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.dependency-assurance",
+        "arena.deployment-release"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "software.build",
+        "software.assure",
+        "software.release",
+        "software.rollback"
+      ],
+      "category_ids": [
+        "dag.serve.deploy",
+        "dag.govern.security",
+        "dag.govern.provenance"
+      ],
+      "description": "Produce a reproducible artifact, bind provenance, execute compatibility and security gates, stage rollout, and retain rollback.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "dependency-assurance",
+        "frontend-release-journey"
+      ],
+      "id": "recipe.software-engineering.release-pipeline",
+      "input_kind_ids": [
+        "artifact.verified-change"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack",
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.release-candidate"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.deployment-release"
+      ],
+      "title": "Build, verify, and stage a release"
+    },
+    {
+      "adapter_ids": [
+        "adapter.openapi",
+        "adapter.orchestrator.temporal"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.idempotent-api-contract"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "service.contract",
+        "service.execute",
+        "service.persist",
+        "service.observe",
+        "service.recover"
+      ],
+      "category_ids": [
+        "dag.serve.api",
+        "dag.serve.backend",
+        "dag.operate.observe"
+      ],
+      "description": "Model request validation, domain behavior, idempotent effects, persistence, observability, and compensation behind a stable API.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "idempotent-api-contract"
+      ],
+      "id": "recipe.software-engineering.backend-service",
+      "input_kind_ids": [
+        "artifact.release-candidate"
+      ],
+      "limitations": [
+        "Reference adapters project contracts and plans but do not host an authenticated production service."
+      ],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.deployed-service"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.api-service"
+      ],
+      "title": "Contract-safe backend service"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.frontend-release-journey"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "frontend.journey",
+        "frontend.render",
+        "frontend.accessibility",
+        "frontend.verify",
+        "frontend.release"
+      ],
+      "category_ids": [
+        "dag.serve.frontend",
+        "dag.serve.automation",
+        "dag.evaluate.regression"
+      ],
+      "description": "Compile critical journeys, render and interaction checks, accessibility evidence, staged release, and independent effect verification.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "frontend-release-journey"
+      ],
+      "id": "recipe.software-engineering.frontend-journey",
+      "input_kind_ids": [
+        "artifact.release-candidate"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.deployed-service"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.qa-engineering",
+        "template.web-automation"
+      ],
+      "title": "Frontend journey and release assurance"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.temporal"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.database-migration",
+        "arena.schema-migration"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "database.inventory",
+        "database.convert",
+        "database.backfill",
+        "database.reconcile",
+        "database.cutover"
+      ],
+      "category_ids": [
+        "dag.operate.migrate",
+        "dag.integrate.reconcile",
+        "dag.evaluate.data"
+      ],
+      "description": "Inventory schema and dependencies, convert and backfill, run CDC, reconcile, cut over, verify, and preserve rollback.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "schema-migration"
+      ],
+      "id": "recipe.software-engineering.database-migration",
+      "input_kind_ids": [
+        "artifact.database-state"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.migrated-database"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.database-migration"
+      ],
+      "title": "Database migration and cutover"
+    }
+  ],
+  "signal_terms": [
+    "software engineering",
+    "repository repair",
+    "bug fix",
+    "regression test",
+    "backend",
+    "api",
+    "frontend",
+    "database migration",
+    "release pipeline",
+    "deployment",
+    "dependency assurance"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.evaluate.regression",
+    "dag.evaluate.metamorphic",
+    "dag.serve.backend",
+    "dag.serve.deploy",
+    "dag.govern.security",
+    "dag.govern.provenance",
+    "dag.serve.api",
+    "dag.operate.observe",
+    "dag.serve.frontend",
+    "dag.serve.automation",
+    "dag.operate.migrate",
+    "dag.integrate.reconcile",
+    "dag.evaluate.data"
+  ],
+  "title": "Software engineering",
+  "version": "0.1.0"
+}

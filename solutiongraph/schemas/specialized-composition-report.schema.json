@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "specialized-composition-report.schema.json",
+  "title": "Specialized capability-pack composition report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specialized_pack_model_version", "id", "request", "request_digest",
+    "registry_digest", "searched_pack_ids", "total_recipe_count", "candidates",
+    "search_accounting", "observed_kind_ids", "observed_capability_ids",
+    "unresolved_goal_kind_ids", "unresolved_capability_ids", "claim_boundary"
+  ],
+  "properties": {
+    "specialized_pack_model_version": {"const": "0.1"},
+    "id": {"$ref": "common.schema.json#/$defs/id"},
+    "request": {"$ref": "specialized-composition-request.schema.json"},
+    "request_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "registry_digest": {"$ref": "common.schema.json#/$defs/digest"},
+    "searched_pack_ids": {"$ref": "#/$defs/idArrayRequired"},
+    "total_recipe_count": {"type": "integer", "minimum": 1},
+    "candidates": {
+      "type": "array", "items": {"$ref": "#/$defs/candidate"}
+    },
+    "search_accounting": {"$ref": "#/$defs/accounting"},
+    "observed_kind_ids": {"$ref": "#/$defs/idArray"},
+    "observed_capability_ids": {"$ref": "#/$defs/idArray"},
+    "unresolved_goal_kind_ids": {"$ref": "#/$defs/idArray"},
+    "unresolved_capability_ids": {"$ref": "#/$defs/idArray"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "idArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "idArrayRequired": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "common.schema.json#/$defs/id"}
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["order", "pack_id", "recipe_id", "input_kind_ids", "output_kind_ids", "capability_ids", "template_ids", "node_pack_ids"],
+      "properties": {
+        "order": {"type": "integer", "minimum": 1},
+        "pack_id": {"$ref": "common.schema.json#/$defs/id"},
+        "recipe_id": {"$ref": "common.schema.json#/$defs/id"},
+        "input_kind_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "output_kind_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "capability_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "template_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "node_pack_ids": {"$ref": "#/$defs/idArray"}
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "steps", "available_kind_ids", "capability_ids", "goal_kind_ids", "required_capability_ids"],
+      "properties": {
+        "id": {"$ref": "common.schema.json#/$defs/id"},
+        "steps": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/step"}},
+        "available_kind_ids": {"$ref": "#/$defs/idArray"},
+        "capability_ids": {"$ref": "#/$defs/idArray"},
+        "goal_kind_ids": {"$ref": "#/$defs/idArrayRequired"},
+        "required_capability_ids": {"$ref": "#/$defs/idArray"}
+      }
+    },
+    "accounting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visited_state_count", "expanded_transition_count",
+        "incompatible_transition_count", "repeated_recipe_count",
+        "depth_limited_state_count", "queued_unexpanded_state_count",
+        "state_budget_exhausted", "candidate_limit_exhausted",
+        "complete_for_declared_budget"
+      ],
+      "properties": {
+        "visited_state_count": {"type": "integer", "minimum": 0},
+        "expanded_transition_count": {"type": "integer", "minimum": 0},
+        "incompatible_transition_count": {"type": "integer", "minimum": 0},
+        "repeated_recipe_count": {"type": "integer", "minimum": 0},
+        "depth_limited_state_count": {"type": "integer", "minimum": 0},
+        "queued_unexpanded_state_count": {"type": "integer", "minimum": 0},
+        "state_budget_exhausted": {"type": "boolean"},
+        "candidate_limit_exhausted": {"type": "boolean"},
+        "complete_for_declared_budget": {"type": "boolean"}
+      }
+    }
+  }
+}

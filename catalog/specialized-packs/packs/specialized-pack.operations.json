@@ -1,0 +1,490 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "operations",
+    "extraction_target": "solutiongraph-pack-operations",
+    "python_module": "solutiongraph.specialized.operations"
+  },
+  "description": "Observability, SLOs, incident response, recovery, compliance evidence, governed workflows, and constrained operational planning.",
+  "domain_pack_ids": [
+    "domain-pack.sre-incident",
+    "domain-pack.security-compliance",
+    "domain-pack.business-human-workflow"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject a recovery or rollout state that fails the declared SLO or independent health oracle.",
+      "id": "gate.operations.service-health",
+      "independent": true,
+      "metric_ids": [
+        "metric.operations.slo-attainment",
+        "metric.operations.recovery-success"
+      ],
+      "oracle_kind": "property",
+      "title": "Service health gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate when detection or recovery exceeds policy, evidence is incomplete, or authority is unavailable.",
+      "id": "gate.operations.incident-response",
+      "independent": true,
+      "metric_ids": [
+        "metric.operations.detection-time",
+        "metric.operations.recovery-time"
+      ],
+      "oracle_kind": "human",
+      "title": "Incident response gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject operational plans that violate hard feasibility or required control-evidence boundaries.",
+      "id": "gate.operations.governed-plan",
+      "independent": true,
+      "metric_ids": [
+        "metric.operations.control-coverage",
+        "metric.operations.plan-feasibility"
+      ],
+      "oracle_kind": "external-authority",
+      "title": "Governed plan gate"
+    }
+  ],
+  "id": "specialized-pack.operations",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Observed attainment of the declared service-level objective over its fixed window.",
+      "direction": "maximize",
+      "id": "metric.operations.slo-attainment",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.service",
+      "title": "SLO attainment",
+      "unit": "ratio"
+    },
+    {
+      "description": "Time from fixed incident onset to an actionable independently recorded alert.",
+      "direction": "minimize",
+      "id": "metric.operations.detection-time",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.incident",
+      "title": "Detection time",
+      "unit": "seconds"
+    },
+    {
+      "description": "Time from incident declaration to independently verified service recovery.",
+      "direction": "minimize",
+      "id": "metric.operations.recovery-time",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.incident",
+      "title": "Recovery time",
+      "unit": "seconds"
+    },
+    {
+      "description": "Share of injected or observed incidents recovered within policy without undeclared effects.",
+      "direction": "maximize",
+      "id": "metric.operations.recovery-success",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.incident",
+      "title": "Recovery success",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of required controls bound to current source, test, exception, owner, and review evidence.",
+      "direction": "maximize",
+      "id": "metric.operations.control-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.governance",
+      "title": "Control coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of proposed operational decisions satisfying all hard resource and policy constraints.",
+      "direction": "maximize",
+      "id": "metric.operations.plan-feasibility",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.plan",
+      "title": "Plan feasibility",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Summarize upstream, downstream, regional, queue, database, and external-provider dependencies.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.operations.service-dependency-graph",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Service dependency graph",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record service-level indicators, objectives, windows, burn policies, and missing telemetry.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.operations.slo-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "SLO profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize failure classes, recurrence, correlated dependencies, mitigations, and recovery evidence.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.operations.failure-history",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Failure history",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record owners, responders, approvers, credentials, effects, and separation-of-duty boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.operations.authority-map",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Authority map",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure runbook, backup, checkpoint, rollback, compensation, and verification coverage.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.operations.recovery-readiness",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Recovery readiness",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure evidence age, source identity, exceptions, owners, and renewal requirements.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.operations.control-evidence-freshness",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Control-evidence freshness",
+      "value_kind": "distribution"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional embedding of sanitized symptoms, topology, and failure history for retrieving comparable incidents in an exact space.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.operations.incident-profile-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Incident profile embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.dagster"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.sre-observability-response"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "operations.instrument",
+        "operations.correlate",
+        "operations.slo",
+        "operations.alert"
+      ],
+      "category_ids": [
+        "dag.operate.observe",
+        "dag.govern.provenance"
+      ],
+      "description": "Define signals and SLOs, collect and correlate telemetry, detect symptoms, and preserve trace and lineage context.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "web-change-monitoring"
+      ],
+      "id": "recipe.operations.observability",
+      "input_kind_ids": [
+        "artifact.deployed-service"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.telemetry"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.observability-sre"
+      ],
+      "title": "Observability and SLO pipeline"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.temporal"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.incident-triage"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "incident.correlate",
+        "incident.triage",
+        "incident.contain",
+        "incident.recover",
+        "incident.verify"
+      ],
+      "category_ids": [
+        "dag.operate.incident",
+        "dag.human.review",
+        "dag.evaluate.outer"
+      ],
+      "description": "Gather scoped evidence, rank hypotheses, contain effects, recover through bounded actions, verify health, and retain learning evidence.",
+      "design_pack_ids": [
+        "design-pack.monitoring-feedback",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [
+        "incident-triage"
+      ],
+      "id": "recipe.operations.incident-response",
+      "input_kind_ids": [
+        "artifact.telemetry"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.recovery-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.incident-response"
+      ],
+      "title": "Incident triage and verified recovery"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.compliance-evidence-pack"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "governance.map-control",
+        "governance.collect-evidence",
+        "governance.test",
+        "governance.review"
+      ],
+      "category_ids": [
+        "dag.govern.compliance",
+        "dag.govern.provenance",
+        "dag.human.review"
+      ],
+      "description": "Bind controls to owners and source evidence, execute independent tests, preserve exceptions, and route attestation to authorized reviewers.",
+      "design_pack_ids": [
+        "design-pack.fairness-risk",
+        "design-pack.reproducibility-governance",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.operations.compliance-evidence",
+      "input_kind_ids": [
+        "artifact.deployed-service"
+      ],
+      "limitations": [
+        "A reference evidence graph is not a regulatory certification or external attestation."
+      ],
+      "node_pack_ids": [
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.control-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.compliance-evidence"
+      ],
+      "title": "Compliance and control evidence"
+    },
+    {
+      "adapter_ids": [
+        "adapter.bpmn",
+        "adapter.orchestrator.temporal"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.claims-adjudication",
+        "arena.api-business-workflow"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "workflow.policy",
+        "workflow.decide",
+        "workflow.approve",
+        "workflow.execute",
+        "workflow.audit"
+      ],
+      "category_ids": [
+        "dag.human.review",
+        "dag.serve.backend",
+        "dag.govern.provenance"
+      ],
+      "description": "Establish identity and policy, gather records, calculate a decision, obtain required approval, perform effects, verify, notify, and archive.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.operations.business-workflow",
+      "input_kind_ids": [
+        "artifact.decision-evidence"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "reference.core-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.operational-plan"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.claims-processing",
+        "template.customer-support"
+      ],
+      "title": "Governed human and service workflow"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.supply-chain-plan",
+        "arena.constraint-scheduling"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "planning.formulate",
+        "planning.optimize",
+        "planning.simulate",
+        "planning.verify",
+        "planning.release"
+      ],
+      "category_ids": [
+        "dag.learn.optimize",
+        "dag.evaluate.model",
+        "dag.human.review"
+      ],
+      "description": "Define variables, objectives, hard constraints, uncertainty scenarios, solver candidates, feasibility checks, and authorized release.",
+      "design_pack_ids": [
+        "design-pack.causality-experiments",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.operations.planning-scheduling",
+      "input_kind_ids": [
+        "artifact.planning-inputs"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.operational-plan"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.supply-chain-planning",
+        "template.optimization-scheduling"
+      ],
+      "title": "Supply-chain, planning, and scheduling"
+    }
+  ],
+  "signal_terms": [
+    "operations",
+    "sre",
+    "observability",
+    "slo",
+    "incident",
+    "on call",
+    "recovery",
+    "runbook",
+    "compliance",
+    "audit",
+    "business workflow",
+    "supply chain",
+    "scheduling"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.operate.observe",
+    "dag.govern.provenance",
+    "dag.operate.incident",
+    "dag.human.review",
+    "dag.evaluate.outer",
+    "dag.govern.compliance",
+    "dag.serve.backend",
+    "dag.learn.optimize",
+    "dag.evaluate.model"
+  ],
+  "title": "Operations and reliability",
+  "version": "0.1.0"
+}

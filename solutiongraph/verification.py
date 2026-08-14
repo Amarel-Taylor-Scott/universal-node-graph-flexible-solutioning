@@ -22,6 +22,11 @@ from solutiongraph.reference_nodes import (
     REFERENCE_NODE_SPECS,
 )
 from solutiongraph.schemas import load_all_schemas
+from solutiongraph.specialized import (
+    REFERENCE_SPECIALIZED_PACK_REGISTRY,
+    REFERENCE_SPECIALIZED_PACKS,
+    validate_specialized_pack_catalog,
+)
 from solutiongraph.stdlib_pack import (
     STANDARD_LIBRARY_DESCRIPTORS,
     STANDARD_LIBRARY_NODE_SPECS,
@@ -81,6 +86,7 @@ class ReleaseVerification:
     conformance: ConformanceResult
     benchmark_count: int
     solution_pack_count: int
+    specialized_pack_count: int
 
     @property
     def ok(self) -> bool:
@@ -110,6 +116,7 @@ class ReleaseVerification:
             "catalog_checked": self.catalog_checked,
             "benchmark_count": self.benchmark_count,
             "solution_pack_count": self.solution_pack_count,
+            "specialized_pack_count": self.specialized_pack_count,
             "conformance": self.conformance.to_dict(),
             "example_count": len(all_examples()),
             "route_count": len(self.route_results),
@@ -150,6 +157,7 @@ def verify_reference_release(
 ) -> ReleaseVerification:
     """Compile and execute every bundled route and return all gate failures."""
     problems = list(REFERENCE_TEMPLATES.validate())
+    problems.extend(validate_specialized_pack_catalog(REFERENCE_SPECIALIZED_PACK_REGISTRY))
     conformance = run_conformance_suite()
     problems.extend(
         f"advanced conformance failed: {check.id}: {check.details}"
@@ -259,6 +267,7 @@ def verify_reference_release(
         conformance=conformance,
         benchmark_count=len(REFERENCE_BENCHMARKS),
         solution_pack_count=len(REFERENCE_BENCHMARKS),
+        specialized_pack_count=len(REFERENCE_SPECIALIZED_PACKS),
     )
 
 

@@ -340,6 +340,29 @@ from solutiongraph.solver import (
     UniversalSolver,
     get_solver_profile,
 )
+from solutiongraph.specialized import (
+    REFERENCE_SPECIALIZED_PACK_REGISTRY,
+    REFERENCE_SPECIALIZED_PACKS,
+    SPECIALIZED_PACK_ENTRY_POINT_GROUP,
+    SPECIALIZED_PACK_MODEL_VERSION,
+    CompositionCandidate,
+    CompositionStep,
+    EvaluationMetric,
+    PackageCompositionReport,
+    PackageCompositionRequest,
+    PackageRecommendationReport,
+    PackRecipe,
+    PackRecommendation,
+    ProfilerFeature,
+    QualityGate,
+    SpecializedPackDefinition,
+    SpecializedPackRegistry,
+    TaskPackageRequest,
+    compose_specialized_packs,
+    discover_installed_pack_providers,
+    recommend_specialized_packs,
+    validate_specialized_pack_catalog,
+)
 from solutiongraph.streaming import (
     STREAM_MODEL_VERSION,
     ReferenceStreamEngine,
@@ -420,7 +443,7 @@ from solutiongraph.verification import (
     verify_reference_release,
 )
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 
 __all__ = [
     "INTERROGATION_MODEL_VERSION",
@@ -445,6 +468,8 @@ __all__ = [
     "BENCHMARK_MODEL_VERSION",
     "TASK_MODEL_VERSION",
     "SOLUTION_PACK_MODEL_VERSION",
+    "SPECIALIZED_PACK_MODEL_VERSION",
+    "SPECIALIZED_PACK_ENTRY_POINT_GROUP",
     "DISCOVERY_PROTOCOL_VERSION",
     "TEMPLATE_MODEL_VERSION",
     "BLUEPRINT_MODEL_VERSION",
@@ -765,6 +790,25 @@ __all__ = [
     "TaskSolutionEngine",
     "TaskSolutionRequest",
     "TaskSolutionResult",
+    "CompositionCandidate",
+    "CompositionStep",
+    "EvaluationMetric",
+    "PackRecipe",
+    "PackRecommendation",
+    "PackageCompositionReport",
+    "PackageCompositionRequest",
+    "PackageRecommendationReport",
+    "ProfilerFeature",
+    "QualityGate",
+    "REFERENCE_SPECIALIZED_PACK_REGISTRY",
+    "REFERENCE_SPECIALIZED_PACKS",
+    "SpecializedPackDefinition",
+    "SpecializedPackRegistry",
+    "TaskPackageRequest",
+    "compose_specialized_packs",
+    "discover_installed_pack_providers",
+    "recommend_specialized_packs",
+    "validate_specialized_pack_catalog",
     "get_benchmark_adapter",
     "solve_task",
 ]

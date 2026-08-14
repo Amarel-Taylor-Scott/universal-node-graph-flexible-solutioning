@@ -4,14 +4,17 @@ Choose the shortest path for what you are doing.
 
 ## I want to apply SolutionGraph beyond AI/ML
 
-1. `UNIVERSAL_ENGINEERING_SYSTEM.md` — 14 obligations, 13 domain packs,
+1. `SPECIALIZED_PACKAGES.md` — seven focused engineering packages, typed
+   recipes, transparent recommendation, cross-package composition, and the
+   third-party extension contract.
+2. `UNIVERSAL_ENGINEERING_SYSTEM.md` — 14 obligations, 13 domain packs,
    ten-channel task contexts, 42 all-visible questions, evidence-derived
    coverage, standards projections, and extension rules.
-2. `UNIVERSAL_DAG_ARENA.md` — finite cross-domain task-family catalog.
-3. `ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md` — executable data, GIS,
+3. `UNIVERSAL_DAG_ARENA.md` — finite cross-domain task-family catalog.
+4. `ENGINEERING_DAG_AND_DUECARE_HARNESS_SHOWCASE.md` — executable data, GIS,
    API, frontend, document, synthetic-data, RL, and LLM-harness fixtures.
-4. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative compiler ontology and invariants.
-5. `READINESS.md` — exact supported, experimental, projected, and unavailable
+5. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative compiler ontology and invariants.
+6. `READINESS.md` — exact supported, experimental, projected, and unavailable
    surfaces.
 
 ## I want to design a data-science, ML, or LLM system
@@ -52,12 +55,14 @@ Choose the shortest path for what you are doing.
 
 ## I want to build a task or node pack
 
-1. `AGENT_PLAYBOOK.md` — required end-to-end workflow.
-2. `SOLUTION_TEMPLATE_PROTOCOL.md` — semantic decomposition and refinement.
-3. `NODE_AUTHORING_GUIDE.md` — importable Python function to strict node.
-4. `NODE_REPOSITORY_PROTOCOL.md` — discovery, snapshots, and node packs.
-5. `TASK_AND_SOLUTION_PACK_PROTOCOL.md` — portable exact closure.
-6. `SEMANTIC_INTERROGATION_PROTOCOL.md` — author concepts, question packs,
+1. `SPECIALIZED_PACKAGES.md` — vertical authoring bundles and third-party
+   `solutiongraph.specialized_packs` entry points.
+2. `AGENT_PLAYBOOK.md` — required end-to-end workflow.
+3. `SOLUTION_TEMPLATE_PROTOCOL.md` — semantic decomposition and refinement.
+4. `NODE_AUTHORING_GUIDE.md` — importable Python function to strict node.
+5. `NODE_REPOSITORY_PROTOCOL.md` — discovery, snapshots, and node packs.
+6. `TASK_AND_SOLUTION_PACK_PROTOCOL.md` — portable exact closure.
+7. `SEMANTIC_INTERROGATION_PROTOCOL.md` — author concepts, question packs,
    check capabilities, repair policies, and verification fixtures.
 
 ## I want to search or benchmark solutions

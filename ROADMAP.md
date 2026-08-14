@@ -118,6 +118,11 @@ diagram or candidate count is not, by itself, progress.
 - Opt-in exact runtime payload validation at graph and node boundaries, plus
   bounded local parallel experiment allocation with fresh execution state and
   deterministic evidence order.
+- Seven extraction-ready specialized capability packages for data engineering,
+  analysis, data science, ML engineering, LLM engineering, software
+  engineering, and operations, with typed recipes, task/data profiler features,
+  metrics, quality gates, transparent nomination, bounded artifact-kind
+  composition, exact catalog references, and declare-before-load discovery.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 
@@ -188,6 +193,11 @@ without weakening contracts or authority.
   tenancy, authorization, usage accounting, and operational budgets.
 - Benchmark across document extraction, web automation, image processing, data
   cleaning, ML pipelines, software engineering, and business workflows.
+- Extract the bundled specialized package modules into independently versioned
+  `solutiongraph-pack-*` distributions only after shared schema compatibility,
+  fixture portability, and cross-distribution conformance are proven.
+- Add evidence-calibrated package priors and contextual recipe utility without
+  allowing learned scores to grant node or graph compatibility.
 - Promote thin domain-pack cells one evidence gate at a time; prioritize human
   workflow recovery, enforcing security adapters, platform release examples,
   native integration adapters, and real operational evidence without treating

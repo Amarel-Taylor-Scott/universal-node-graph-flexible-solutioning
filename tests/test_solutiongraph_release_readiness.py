@@ -201,5 +201,5 @@ def test_distribution_and_import_versions_match_and_release_is_alpha():
     from solutiongraph import __version__
 
     assert version is not None
-    assert version.group(1) == __version__ == "0.6.0"
+    assert version.group(1) == __version__ == "0.7.0"
     assert '"Development Status :: 3 - Alpha"' in (project.group(1) if project else "")

@@ -138,6 +138,11 @@ objects, not in `NodeSpec`.
 ## Repository map
 
 - `solutiongraph/` — domain-neutral semantic model, compiler, search, solver, evidence.
+- `solutiongraph/specialized/` — extraction-ready vertical authoring packages,
+  typed recipes, profiler features, metrics, gates, transparent recommendation,
+  artifact-kind composition, exact asset validation, and declare-before-load
+  entry-point discovery. A specialized package is not a node pack or executable
+  solution-pack closure.
 - `solutiongraph/interrogation/` — aggregate profiling, all-visible question
   planning, deterministic check adapters, reversible shadow repair, and
   independent verification. Keep question definitions in `question_packs/`

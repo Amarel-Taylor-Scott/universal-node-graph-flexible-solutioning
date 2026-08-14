@@ -1,0 +1,77 @@
+{
+  "asset_inventory_digest": "sha256:8390a8b71ce6978fde18d04ab503824ff0438addb13152d55eb12d1132a671f6",
+  "claim_boundary": "Specialized packs nominate reusable authoring assets and typed recipe interfaces; they are not executable or reproducible solution-pack closures.",
+  "gate_count": 17,
+  "metric_count": 42,
+  "pack_count": 7,
+  "packs": [
+    {
+      "digest": "sha256:d75cfc0d6d684200c0645873d3754d7fbdf32927fc88e5c8114db5e19478709e",
+      "entry_point_name": "data-engineering",
+      "extraction_target": "solutiongraph-pack-data-engineering",
+      "id": "specialized-pack.data-engineering",
+      "path": "specialized-packs/packs/specialized-pack.data-engineering.json",
+      "recipe_count": 4,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:66884546ff32378904851f2445d0af1f645251571d56bf3a5663fc7a32265746",
+      "entry_point_name": "data-analysis",
+      "extraction_target": "solutiongraph-pack-data-analysis",
+      "id": "specialized-pack.data-analysis",
+      "path": "specialized-packs/packs/specialized-pack.data-analysis.json",
+      "recipe_count": 4,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:191a4bebd43fe64b4a68b86bb1092791cb96cd163151536fbc685de36ee9d4d5",
+      "entry_point_name": "data-science",
+      "extraction_target": "solutiongraph-pack-data-science",
+      "id": "specialized-pack.data-science",
+      "path": "specialized-packs/packs/specialized-pack.data-science.json",
+      "recipe_count": 5,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:359292658f896d0be052517ea05fbfb9bee5fd5ae4bc2f7ceb6907874d1c3efe",
+      "entry_point_name": "ml-engineering",
+      "extraction_target": "solutiongraph-pack-ml-engineering",
+      "id": "specialized-pack.ml-engineering",
+      "path": "specialized-packs/packs/specialized-pack.ml-engineering.json",
+      "recipe_count": 5,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:fded0a9bfc1603b8192cb59cccaa5eafb92d854705a2cbed2167d4405e18e9e9",
+      "entry_point_name": "llm-engineering",
+      "extraction_target": "solutiongraph-pack-llm-engineering",
+      "id": "specialized-pack.llm-engineering",
+      "path": "specialized-packs/packs/specialized-pack.llm-engineering.json",
+      "recipe_count": 4,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:11f68ad0dd2e190d9091949ed093c71e4d18bdff247252acecffb9374e3ba465",
+      "entry_point_name": "software-engineering",
+      "extraction_target": "solutiongraph-pack-software-engineering",
+      "id": "specialized-pack.software-engineering",
+      "path": "specialized-packs/packs/specialized-pack.software-engineering.json",
+      "recipe_count": 5,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:800058b5087cb1a018555d1dbae7362437bef5e5fa91e9c0f146008cd6dd02b8",
+      "entry_point_name": "operations",
+      "extraction_target": "solutiongraph-pack-operations",
+      "id": "specialized-pack.operations",
+      "path": "specialized-packs/packs/specialized-pack.operations.json",
+      "recipe_count": 5,
+      "version": "0.1.0"
+    }
+  ],
+  "profiler_feature_count": 51,
+  "recipe_count": 32,
+  "registry_digest": "sha256:9ecdb49c44ec0ba3dda4642a7ca1d1d4b796a21a93cb74f58e3c1495daae56ee",
+  "registry_id": "registry.reference-specialized-packs",
+  "specialized_pack_model_version": "0.1"
+}

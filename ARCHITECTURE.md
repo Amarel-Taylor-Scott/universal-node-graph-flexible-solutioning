@@ -7,6 +7,8 @@ longer defines the universal ontology.
 ```
 solutiongraph/
 ├── model.py              semantic graph, strict node ABI, registry, frozen plan
+├── specialized/          vertical recipes, profiler features, metrics, gates,
+│                         recommendation, typed composition, provider discovery
 ├── interrogation/        concepts, profiles, planning, checks, repair, verification
 │   └── nodes/            one importable implementation module per graph node
 ├── question_packs/       declarative questions; never executable NodeSpecs

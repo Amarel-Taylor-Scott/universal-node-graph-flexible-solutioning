@@ -1,5 +1,29 @@
 # Open Plugin Format v1.0
 
+This document describes the original BrowserGraph runtime plugin format. For
+domain-neutral SolutionGraph extensions, use the strict node-pack discovery
+protocol in `NODE_REPOSITORY_PROTOCOL.md` and the specialized capability-package
+entry points in `SPECIALIZED_PACKAGES.md`. Browser plugins may still provide a
+concrete browser runtime adapter, but they do not define the universal graph
+ontology.
+
+## SolutionGraph specialized package providers
+
+Installed distributions can advertise extraction-ready vertical authoring
+surfaces without importing provider code during discovery:
+
+```toml
+[project.entry-points."solutiongraph.specialized_packs"]
+data-governance = "acme_solutiongraph_governance.pack:PACK"
+```
+
+`solutiongraph packages providers` reads entry-point metadata only.
+`solutiongraph packages providers --load` explicitly imports, validates, and
+reports providers. A provider exposes a `SpecializedPackDefinition` or
+`SpecializedPackRegistry`; conflicting identities are rejected. These packages
+nominate recipes and assets but cannot grant executable compatibility. See
+`SPECIALIZED_PACKAGES.md` for the complete contract and boundaries.
+
 A plugin adds nodes, tasks, drivers, classifiers, extractors or dimensions to
 browsergraph — or to any harness that reads this format. The manifest is plain
 JSON with a versioned schema, so a consumer in another language can enumerate

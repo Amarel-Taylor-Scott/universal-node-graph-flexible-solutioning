@@ -1,0 +1,3409 @@
+{
+  "description": "Bundled extraction-ready capability packs for common engineering task families. Definitions nominate assets and starting recipes; they do not replace compiler admission or exact solution-pack closure.",
+  "id": "registry.reference-specialized-packs",
+  "packs": [
+    {
+      "delivery": {
+        "current_distribution": "browsergraph",
+        "entry_point_group": "solutiongraph.specialized_packs",
+        "entry_point_name": "data-engineering",
+        "extraction_target": "solutiongraph-pack-data-engineering",
+        "python_module": "solutiongraph.specialized.data_engineering"
+      },
+      "description": "Composable quality, cleaning, contracts, enrichment, entity resolution, reconciliation, batch, and event-time data pipelines.",
+      "domain_pack_ids": [
+        "domain-pack.data-integration",
+        "domain-pack.event-stream",
+        "domain-pack.database-storage"
+      ],
+      "extensions": {
+        "solutiongraph.delivery": "bundled-extraction-ready"
+      },
+      "gates": [
+        {
+          "decision": "reject",
+          "description": "Reject publication when required schema, semantic, reconciliation, or lineage checks fail.",
+          "id": "gate.data-engineering.publish-contract",
+          "independent": true,
+          "metric_ids": [
+            "metric.data-engineering.contract-pass-rate",
+            "metric.data-engineering.invalid-record-rate",
+            "metric.data-engineering.unresolved-duplicate-rate",
+            "metric.data-engineering.reconciliation-error",
+            "metric.data-engineering.lineage-coverage"
+          ],
+          "oracle_kind": "property",
+          "title": "Publication contract"
+        },
+        {
+          "decision": "reject",
+          "description": "Reject a stream materialization when the fixed event-time oracle detects silent admissible-event loss.",
+          "id": "gate.data-engineering.event-time-integrity",
+          "independent": true,
+          "metric_ids": [
+            "metric.data-engineering.late-event-loss"
+          ],
+          "oracle_kind": "cross-implementation",
+          "title": "Event-time integrity"
+        }
+      ],
+      "id": "specialized-pack.data-engineering",
+      "license": "MIT",
+      "limitations": [
+        "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+      ],
+      "metrics": [
+        {
+          "description": "Share of records accepted by the independently identified data contract.",
+          "direction": "maximize",
+          "id": "metric.data-engineering.contract-pass-rate",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.record-set",
+          "title": "Contract pass rate",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of records rejected for structural or semantic violations.",
+          "direction": "minimize",
+          "id": "metric.data-engineering.invalid-record-rate",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.record-set",
+          "title": "Invalid record rate",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of records remaining in unresolved duplicate clusters.",
+          "direction": "minimize",
+          "id": "metric.data-engineering.unresolved-duplicate-rate",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.record-set",
+          "title": "Unresolved duplicate rate",
+          "unit": "ratio"
+        },
+        {
+          "description": "Absolute discrepancy remaining across declared sources or balances.",
+          "direction": "minimize",
+          "id": "metric.data-engineering.reconciliation-error",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.dataset",
+          "title": "Reconciliation error",
+          "unit": "domain-unit"
+        },
+        {
+          "description": "Share of published fields bound to source and transformation evidence.",
+          "direction": "maximize",
+          "id": "metric.data-engineering.lineage-coverage",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.dataset",
+          "title": "Lineage coverage",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of admissible late events missing from final materialized results.",
+          "direction": "minimize",
+          "id": "metric.data-engineering.late-event-loss",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.stream",
+          "title": "Late-event loss",
+          "unit": "ratio"
+        }
+      ],
+      "profiler_features": [
+        {
+          "cost_tier": 1,
+          "description": "Count rows, columns, and sparse structural regions.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-engineering.row-column-shape",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Row and column shape",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure missingness overall, by field, and by co-missingness pattern.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-engineering.null-density",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Null density",
+          "value_kind": "distribution"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure exact and candidate-key duplicate rates without merging records.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-engineering.duplicate-density",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Duplicate density",
+          "value_kind": "number"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Compare names, types, cardinalities, and constraints with a declared baseline.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-engineering.schema-drift",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Schema drift",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize event-time range, gaps, ordering, and timezone evidence.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-engineering.temporal-coverage",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Temporal coverage",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize address, postal, coordinate, CRS, and jurisdiction coverage.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-engineering.geographic-coverage",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Geographic coverage",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 7,
+          "description": "Optional embedding of a redacted deterministic data profile; the exact vector space must be declared before comparison.",
+          "easy_to_compute": false,
+          "effects": [
+            "model.invoke"
+          ],
+          "evidence_kind": "evidence.embedding-sidecar",
+          "id": "feature.data-engineering.data-profile-embedding",
+          "mode": "model",
+          "permissions": [
+            "model.invoke"
+          ],
+          "requirements": [
+            "requirement.exact-embedding-space-identity"
+          ],
+          "title": "Data-profile embedding",
+          "value_kind": "vector"
+        }
+      ],
+      "readiness": "executable-fixture",
+      "recipes": [
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.validated-analytical-dataset",
+            "arena.conflict-aware-data-contract"
+          ],
+          "benchmark_ids": [
+            "benchmark.stdlib-data-quality",
+            "benchmark.data-cleaning"
+          ],
+          "capability_ids": [
+            "records.profile",
+            "records.normalize",
+            "records.validate",
+            "records.verify"
+          ],
+          "category_ids": [
+            "dag.acquire.batch",
+            "dag.prepare.profile",
+            "dag.prepare.clean",
+            "dag.prepare.verify"
+          ],
+          "description": "Profile, normalize, validate, repair in shadow, independently verify, and publish records.",
+          "design_pack_ids": [
+            "design-pack.schema-semantics",
+            "design-pack.quality-cleaning"
+          ],
+          "effects": [],
+          "example_ids": [
+            "stdlib-data-quality",
+            "data-cleanup",
+            "conflict-aware-data-contract"
+          ],
+          "id": "recipe.data-engineering.batch-quality",
+          "input_kind_ids": [
+            "artifact.raw-records"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "stdlib.data-foundation-node-pack",
+            "interrogation.semantic-data-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.generic-tabular",
+            "question-pack.organization",
+            "question-pack.postal-address"
+          ],
+          "template_ids": [
+            "template.data-quality",
+            "template.batch-data-pipeline"
+          ],
+          "title": "Batch quality and contract pipeline"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.golden-customer-table",
+            "arena.geospatial-enrichment",
+            "arena.usps-address-verification"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "records.entity-resolve",
+            "records.reference-enrich",
+            "records.geotemporal-enrich"
+          ],
+          "category_ids": [
+            "dag.integrate.enrich",
+            "dag.integrate.enrich.identity",
+            "dag.integrate.enrich.geotemporal"
+          ],
+          "description": "Resolve entities and join versioned postal, geographic, temporal, and reference evidence with abstention.",
+          "design_pack_ids": [
+            "design-pack.geospatial",
+            "design-pack.time-series"
+          ],
+          "effects": [],
+          "example_ids": [
+            "golden-customer-table",
+            "address-reference-verification",
+            "geotemporal-enrichment"
+          ],
+          "id": "recipe.data-engineering.reference-enrichment",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [
+            "Bundled reference tables are teaching fixtures, not authoritative postal, census, or geocoding services."
+          ],
+          "node_pack_ids": [
+            "example.real-world-node-pack",
+            "example.engineering-showcase-node-pack",
+            "interrogation.semantic-data-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.enriched-dataset"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.organization",
+            "question-pack.postal-address",
+            "question-pack.datetime",
+            "question-pack.geography"
+          ],
+          "template_ids": [
+            "template.data-quality",
+            "template.geospatial-analytics"
+          ],
+          "title": "Identity, geographic, and temporal enrichment"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.transaction-reconciliation",
+            "arena.validated-analytical-dataset"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "records.merge",
+            "records.reconcile",
+            "records.provenance"
+          ],
+          "category_ids": [
+            "dag.integrate.join",
+            "dag.integrate.reconcile",
+            "dag.prepare.conflict"
+          ],
+          "description": "Preserve source identities, resolve conflicts, balance facts, and emit an auditable analytical dataset.",
+          "design_pack_ids": [
+            "design-pack.data-source",
+            "design-pack.reproducibility-governance"
+          ],
+          "effects": [],
+          "example_ids": [
+            "multi-feed-analytical-dataset",
+            "transaction-reconciliation"
+          ],
+          "id": "recipe.data-engineering.multi-source-reconciliation",
+          "input_kind_ids": [
+            "artifact.enriched-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.real-world-node-pack",
+            "example.extended-arena-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.reconciled-dataset"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.transaction",
+            "question-pack.generic-tabular"
+          ],
+          "template_ids": [
+            "template.batch-data-pipeline"
+          ],
+          "title": "Multi-source merge and reconciliation"
+        },
+        {
+          "adapter_ids": [
+            "adapter.cloudevents",
+            "adapter.orchestrator.dagster"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.event-time-windowing"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "events.decode",
+            "events.window",
+            "events.reconcile",
+            "events.observe"
+          ],
+          "category_ids": [
+            "dag.acquire.stream",
+            "dag.prepare.parse",
+            "dag.integrate.aggregate"
+          ],
+          "description": "Decode events, apply explicit windows and lateness policy, reconcile revisions, and publish lineage-aware state.",
+          "design_pack_ids": [],
+          "effects": [],
+          "example_ids": [
+            "event-time-windowing"
+          ],
+          "id": "recipe.data-engineering.event-time-materialization",
+          "input_kind_ids": [
+            "artifact.raw-events"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.event-driven-system"
+          ],
+          "title": "Event-time stream materialization"
+        }
+      ],
+      "signal_terms": [
+        "data cleaning",
+        "data validation",
+        "data quality",
+        "etl",
+        "elt",
+        "schema drift",
+        "entity resolution",
+        "address",
+        "geospatial",
+        "gis",
+        "event time",
+        "reconciliation"
+      ],
+      "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+      "specialized_pack_model_version": "0.1",
+      "task_category_ids": [
+        "dag.acquire.batch",
+        "dag.prepare.profile",
+        "dag.prepare.clean",
+        "dag.prepare.verify",
+        "dag.integrate.enrich",
+        "dag.integrate.enrich.identity",
+        "dag.integrate.enrich.geotemporal",
+        "dag.integrate.join",
+        "dag.integrate.reconcile",
+        "dag.prepare.conflict",
+        "dag.acquire.stream",
+        "dag.prepare.parse",
+        "dag.integrate.aggregate"
+      ],
+      "title": "Data engineering",
+      "version": "0.1.0"
+    },
+    {
+      "delivery": {
+        "current_distribution": "browsergraph",
+        "entry_point_group": "solutiongraph.specialized_packs",
+        "entry_point_name": "data-analysis",
+        "extraction_target": "solutiongraph-pack-data-analysis",
+        "python_module": "solutiongraph.specialized.data_analysis"
+      },
+      "description": "Exploratory, cohort, funnel, geotemporal, experiment, and decision-evidence workflows with explicit uncertainty and traceability.",
+      "domain_pack_ids": [
+        "domain-pack.data-integration",
+        "domain-pack.science-optimization"
+      ],
+      "extensions": {
+        "solutiongraph.delivery": "bundled-extraction-ready"
+      },
+      "gates": [
+        {
+          "decision": "reject",
+          "description": "Reject a report when material claims cannot be reproduced or traced to sufficient evidence.",
+          "id": "gate.data-analysis.evidence-traceability",
+          "independent": true,
+          "metric_ids": [
+            "metric.data-analysis.reproducibility",
+            "metric.data-analysis.finding-support"
+          ],
+          "oracle_kind": "property",
+          "title": "Evidence traceability"
+        },
+        {
+          "decision": "escalate",
+          "description": "Escalate claims whose slice support or fixed multiplicity protocol is insufficient.",
+          "id": "gate.data-analysis.statistical-claims",
+          "independent": true,
+          "metric_ids": [
+            "metric.data-analysis.slice-coverage",
+            "metric.data-analysis.false-discovery-risk"
+          ],
+          "oracle_kind": "statistical",
+          "title": "Statistical claims"
+        }
+      ],
+      "id": "specialized-pack.data-analysis",
+      "license": "MIT",
+      "limitations": [
+        "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+      ],
+      "metrics": [
+        {
+          "description": "Share of reported findings reproducible from content-addressed inputs and declared transformations.",
+          "direction": "maximize",
+          "id": "metric.data-analysis.reproducibility",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.analysis-report",
+          "title": "Reproducibility",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of findings linked to sufficient observations, uncertainty, and source evidence.",
+          "direction": "maximize",
+          "id": "metric.data-analysis.finding-support",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.analysis-report",
+          "title": "Finding support",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of decision-relevant cohorts receiving minimum-sample diagnostics.",
+          "direction": "maximize",
+          "id": "metric.data-analysis.slice-coverage",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.analysis-report",
+          "title": "Slice coverage",
+          "unit": "ratio"
+        },
+        {
+          "description": "Multiplicity-adjusted risk assigned by the fixed statistical evaluation plan.",
+          "direction": "minimize",
+          "id": "metric.data-analysis.false-discovery-risk",
+          "required_evidence": [
+            "evidence.statistical-protocol",
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.analysis-report",
+          "title": "False-discovery risk",
+          "unit": "probability"
+        },
+        {
+          "description": "Observed utility of the analysis for the declared downstream decision under its evaluation protocol.",
+          "direction": "maximize",
+          "id": "metric.data-analysis.decision-utility",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.decision",
+          "title": "Decision utility",
+          "unit": "domain-unit"
+        }
+      ],
+      "profiler_features": [
+        {
+          "cost_tier": 1,
+          "description": "Classify skew, tails, multimodality, discreteness, and zero inflation for candidate measures.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-analysis.distribution-shapes",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Distribution shapes",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure sample size, missingness, and support across declared cohorts and slices.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-analysis.segment-coverage",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Segment coverage",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure observation range, cadence, gaps, seasonality candidates, and censoring boundaries.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-analysis.temporal-span",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Temporal span",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize geographic coverage, resolution, CRS, and boundary uncertainty.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-analysis.spatial-support",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Spatial support",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize pairwise dependence, nonlinearity, collinearity, and sparse interactions without causal claims.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-analysis.association-profile",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Association profile",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Record whether population, unit, measure, time, comparison, and decision are explicit.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-analysis.question-completeness",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Question completeness",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 7,
+          "description": "Optional embedding of the analysis question and evidence contract for historical retrieval in an exact declared space.",
+          "easy_to_compute": false,
+          "effects": [
+            "model.invoke"
+          ],
+          "evidence_kind": "evidence.embedding-sidecar",
+          "id": "feature.data-analysis.analysis-intent-embedding",
+          "mode": "model",
+          "permissions": [
+            "model.invoke"
+          ],
+          "requirements": [
+            "requirement.exact-embedding-space-identity"
+          ],
+          "title": "Analysis-intent embedding",
+          "value_kind": "vector"
+        }
+      ],
+      "readiness": "executable-fixture",
+      "recipes": [
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.dataset-profiling-and-drift",
+            "arena.scientific-experiment"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "analysis.profile",
+            "analysis.explore",
+            "analysis.visualize",
+            "analysis.report"
+          ],
+          "category_ids": [
+            "dag.prepare.profile",
+            "dag.integrate.aggregate",
+            "dag.generate.report"
+          ],
+          "description": "Profile distributions, missingness, associations, anomalies, slices, and conflicting findings before producing a reproducible report.",
+          "design_pack_ids": [
+            "design-pack.profiling-eda",
+            "design-pack.evaluation-error",
+            "design-pack.decision-handoff"
+          ],
+          "effects": [],
+          "example_ids": [
+            "dataset-profiling-and-drift",
+            "scientific-experiment"
+          ],
+          "id": "recipe.data-analysis.exploratory-analysis",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "interrogation.semantic-data-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.analysis-report"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.generic-tabular",
+            "question-pack.ml-dataset"
+          ],
+          "template_ids": [
+            "template.scientific-experiment"
+          ],
+          "title": "Exploratory analysis and evidence report"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.scientific-experiment"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "analysis.cohort",
+            "analysis.sequence",
+            "analysis.funnel",
+            "analysis.retention"
+          ],
+          "category_ids": [
+            "dag.integrate.aggregate",
+            "dag.learn.causal",
+            "dag.evaluate.online"
+          ],
+          "description": "Construct identity- and event-time-aware cohorts, paths, funnels, retention measures, and counter-slices with explicit denominators.",
+          "design_pack_ids": [
+            "design-pack.time-series",
+            "design-pack.causality-experiments"
+          ],
+          "effects": [],
+          "example_ids": [
+            "user-journey-modeling"
+          ],
+          "id": "recipe.data-analysis.cohort-flow-analysis",
+          "input_kind_ids": [
+            "artifact.enriched-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.analysis-report"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.event-driven-system",
+            "template.scientific-experiment"
+          ],
+          "title": "Cohort, funnel, and user-flow analysis"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.geospatial-data-product",
+            "arena.exact-gis-boundary-resolution"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "analysis.spatial",
+            "analysis.temporal",
+            "analysis.geotemporal",
+            "analysis.verify"
+          ],
+          "category_ids": [
+            "dag.integrate.enrich.geotemporal",
+            "dag.integrate.aggregate",
+            "dag.evaluate.data"
+          ],
+          "description": "Validate spatial and temporal support, construct explicit joins, quantify boundary uncertainty, and report map-ready evidence.",
+          "design_pack_ids": [
+            "design-pack.geospatial",
+            "design-pack.time-series"
+          ],
+          "effects": [],
+          "example_ids": [
+            "geotemporal-enrichment",
+            "exact-gis-boundary-resolution"
+          ],
+          "id": "recipe.data-analysis.geotemporal-analysis",
+          "input_kind_ids": [
+            "artifact.enriched-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.decision-evidence"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.geography",
+            "question-pack.datetime"
+          ],
+          "template_ids": [
+            "template.geospatial-analytics",
+            "template.time-series-forecasting"
+          ],
+          "title": "Geospatial and temporal analysis"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.scientific-experiment"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "analysis.experiment-design",
+            "analysis.estimate",
+            "analysis.sensitivity",
+            "analysis.decide"
+          ],
+          "category_ids": [
+            "dag.learn.causal",
+            "dag.evaluate.model",
+            "dag.evaluate.online"
+          ],
+          "description": "Freeze estimand, assignment, exclusions, power, diagnostics, sensitivity, and decision thresholds before interpreting outcomes.",
+          "design_pack_ids": [
+            "design-pack.causality-experiments",
+            "design-pack.robustness-stability",
+            "design-pack.decision-handoff"
+          ],
+          "effects": [],
+          "example_ids": [
+            "scientific-experiment"
+          ],
+          "id": "recipe.data-analysis.experiment-analysis",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.extended-arena-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.decision-evidence"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.scientific-experiment"
+          ],
+          "title": "Experiment and causal analysis"
+        }
+      ],
+      "signal_terms": [
+        "exploratory data analysis",
+        "eda",
+        "analysis",
+        "cohort",
+        "funnel",
+        "retention",
+        "user flow",
+        "dashboard",
+        "finding",
+        "geotemporal analysis",
+        "experiment analysis",
+        "causal analysis"
+      ],
+      "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+      "specialized_pack_model_version": "0.1",
+      "task_category_ids": [
+        "dag.prepare.profile",
+        "dag.integrate.aggregate",
+        "dag.generate.report",
+        "dag.learn.causal",
+        "dag.evaluate.online",
+        "dag.integrate.enrich.geotemporal",
+        "dag.evaluate.data",
+        "dag.evaluate.model"
+      ],
+      "title": "Data analysis",
+      "version": "0.1.0"
+    },
+    {
+      "delivery": {
+        "current_distribution": "browsergraph",
+        "entry_point_group": "solutiongraph.specialized_packs",
+        "entry_point_name": "data-science",
+        "extraction_target": "solutiongraph-pack-data-science",
+        "python_module": "solutiongraph.specialized.data_science"
+      },
+      "description": "Leakage-safe regression, classification, forecasting, ranking, clustering, anomaly, uncertainty, and ensemble solution spaces.",
+      "domain_pack_ids": [
+        "domain-pack.ai-ml",
+        "domain-pack.science-optimization"
+      ],
+      "extensions": {
+        "solutiongraph.delivery": "bundled-extraction-ready"
+      },
+      "gates": [
+        {
+          "decision": "reject",
+          "description": "Reject any route with independently detected leakage or split-identity drift.",
+          "id": "gate.data-science.leakage-safe",
+          "independent": true,
+          "metric_ids": [
+            "metric.data-science.leakage-violations"
+          ],
+          "oracle_kind": "property",
+          "title": "Leakage-safe evaluation"
+        },
+        {
+          "decision": "reject",
+          "description": "Reject promotion unless fixed quality, calibration, stability, and uncertainty contracts pass on untouched evidence.",
+          "id": "gate.data-science.holdout-acceptance",
+          "independent": true,
+          "metric_ids": [
+            "metric.data-science.task-quality",
+            "metric.data-science.calibration-error",
+            "metric.data-science.stability-loss",
+            "metric.data-science.uncertainty-coverage"
+          ],
+          "oracle_kind": "statistical",
+          "title": "Holdout acceptance"
+        }
+      ],
+      "id": "specialized-pack.data-science",
+      "license": "MIT",
+      "limitations": [
+        "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+      ],
+      "metrics": [
+        {
+          "description": "Primary fixed task metric evaluated on the declared validation or holdout split.",
+          "direction": "maximize",
+          "id": "metric.data-science.task-quality",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.holdout",
+          "title": "Task quality",
+          "unit": "task-metric"
+        },
+        {
+          "description": "Error between predicted confidence or interval coverage and observed outcomes.",
+          "direction": "minimize",
+          "id": "metric.data-science.calibration-error",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.holdout",
+          "title": "Calibration error",
+          "unit": "ratio"
+        },
+        {
+          "description": "Quality deterioration across seeds, perturbations, time slices, and protected stress cases.",
+          "direction": "minimize",
+          "id": "metric.data-science.stability-loss",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.stress",
+          "title": "Stability loss",
+          "unit": "task-metric"
+        },
+        {
+          "description": "Count of independently detected split, label, future, group, or preprocessing leakage violations.",
+          "direction": "minimize",
+          "id": "metric.data-science.leakage-violations",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.pipeline",
+          "title": "Leakage violations",
+          "unit": "count"
+        },
+        {
+          "description": "Observed coverage of declared prediction sets or intervals.",
+          "direction": "target",
+          "id": "metric.data-science.uncertainty-coverage",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.holdout",
+          "title": "Uncertainty coverage",
+          "unit": "ratio"
+        },
+        {
+          "description": "Declared complexity or resource proxy retained as a separate Pareto objective.",
+          "direction": "minimize",
+          "id": "metric.data-science.model-complexity",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.model",
+          "title": "Model complexity",
+          "unit": "resource-unit"
+        }
+      ],
+      "profiler_features": [
+        {
+          "cost_tier": 1,
+          "description": "Classify supervised, unsupervised, forecasting, ranking, causal, or numerical outcome semantics.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-science.task-family",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Task family",
+          "value_kind": "category"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Compute effective sample size relative to raw and encoded feature counts.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-science.sample-feature-ratio",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Sample-to-feature ratio",
+          "value_kind": "number"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure balance, skew, tails, modes, censoring, zero inflation, and missing labels.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-science.target-shape",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Target shape",
+          "value_kind": "distribution"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Aggregate cardinality, skew, tail, sparsity, monotonicity, and missingness across features.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-science.feature-shape-summary",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Feature-shape summary",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize linear and nonlinear dependence, redundant groups, and leakage candidates.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-science.dependence-collinearity",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Dependence and collinearity",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Detect entity, group, temporal, spatial, and preprocessing boundaries that can contaminate evaluation.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-science.split-risk",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Split and leakage risk",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize candidate anomalies, density changes, rare slices, and cluster stability.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.data-science.outlier-cluster-profile",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Outlier and cluster profile",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 7,
+          "description": "Optional joint embedding of task semantics and redacted profile statistics for historical route retrieval in an exact space.",
+          "easy_to_compute": false,
+          "effects": [
+            "model.invoke"
+          ],
+          "evidence_kind": "evidence.embedding-sidecar",
+          "id": "feature.data-science.task-data-profile-embedding",
+          "mode": "model",
+          "permissions": [
+            "model.invoke"
+          ],
+          "requirements": [
+            "requirement.exact-embedding-space-identity"
+          ],
+          "title": "Task and data-profile embedding",
+          "value_kind": "vector"
+        }
+      ],
+      "readiness": "executable-fixture",
+      "recipes": [
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.robust-regression-and-conformal",
+            "arena.imbalanced-classification-and-calibration",
+            "arena.wide-table-feature-reduction"
+          ],
+          "benchmark_ids": [
+            "benchmark.tabular-regression",
+            "benchmark.tabular-classification"
+          ],
+          "capability_ids": [
+            "ml.split",
+            "ml.feature",
+            "ml.fit",
+            "ml.calibrate",
+            "ml.verify"
+          ],
+          "category_ids": [
+            "dag.prepare.split",
+            "dag.learn.feature",
+            "dag.learn.regression",
+            "dag.learn.classification",
+            "dag.evaluate.model"
+          ],
+          "description": "Compare explicit preprocessing, feature, model, calibration, ensemble, and verification candidates for classification or regression.",
+          "design_pack_ids": [
+            "design-pack.validation-splits",
+            "design-pack.feature-engineering",
+            "design-pack.baselines-models",
+            "design-pack.tuning-search",
+            "design-pack.evaluation-error"
+          ],
+          "effects": [],
+          "example_ids": [
+            "robust-regression-and-conformal",
+            "imbalanced-classification-and-calibration",
+            "wide-table-feature-reduction"
+          ],
+          "id": "recipe.data-science.supervised-modeling",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.data-science-lifecycle-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.evaluated-model"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.ml-dataset",
+            "question-pack.generic-tabular"
+          ],
+          "template_ids": [
+            "template.kaggle-tabular"
+          ],
+          "title": "Leakage-safe supervised modeling"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.tabular-prediction"
+          ],
+          "benchmark_ids": [
+            "benchmark.tabular-regression",
+            "benchmark.tabular-classification"
+          ],
+          "capability_ids": [
+            "ml.split",
+            "ml.feature",
+            "ml.fit",
+            "ml.calibrate",
+            "ml.verify"
+          ],
+          "category_ids": [
+            "dag.prepare.split",
+            "dag.learn.feature",
+            "dag.learn.regression",
+            "dag.learn.classification",
+            "dag.evaluate.model"
+          ],
+          "description": "Preserve enrichment provenance while evaluating predictive features, models, calibration, and error slices.",
+          "design_pack_ids": [
+            "design-pack.validation-splits",
+            "design-pack.feature-engineering",
+            "design-pack.evaluation-error"
+          ],
+          "effects": [],
+          "example_ids": [
+            "tabular-regression",
+            "tabular-classification"
+          ],
+          "id": "recipe.data-science.enriched-supervised-modeling",
+          "input_kind_ids": [
+            "artifact.enriched-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.data-science-lifecycle-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.evaluated-model"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.ml-dataset"
+          ],
+          "template_ids": [
+            "template.kaggle-tabular"
+          ],
+          "title": "Enriched supervised modeling"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.time-series-feature-backtest",
+            "arena.calibrated-forecast"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "forecast.split",
+            "forecast.feature",
+            "forecast.fit",
+            "forecast.reconcile",
+            "forecast.verify"
+          ],
+          "category_ids": [
+            "dag.learn.forecast",
+            "dag.learn.uncertainty",
+            "dag.evaluate.model"
+          ],
+          "description": "Freeze horizon and availability, construct rolling splits and temporal features, reconcile forecasts, and verify interval coverage.",
+          "design_pack_ids": [
+            "design-pack.time-series",
+            "design-pack.validation-splits",
+            "design-pack.ensemble-calibration"
+          ],
+          "effects": [],
+          "example_ids": [
+            "time-series-feature-backtest",
+            "calibrated-time-series-forecast"
+          ],
+          "id": "recipe.data-science.forecasting-backtest",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.data-science-lifecycle-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.forecast"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.datetime",
+            "question-pack.ml-dataset"
+          ],
+          "template_ids": [
+            "template.time-series-forecasting"
+          ],
+          "title": "Time-series forecasting and backtest"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.unsupervised-segmentation-and-anomaly"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "ml.represent",
+            "ml.cluster",
+            "ml.anomaly",
+            "ml.stability",
+            "ml.explain"
+          ],
+          "category_ids": [
+            "dag.learn.embedding",
+            "dag.learn.cluster",
+            "dag.learn.anomaly",
+            "dag.evaluate.metamorphic"
+          ],
+          "description": "Compare representation, clustering, anomaly, stability, and explanation routes without manufacturing labels.",
+          "design_pack_ids": [
+            "design-pack.selection-reduction",
+            "design-pack.robustness-stability",
+            "design-pack.interpretability"
+          ],
+          "effects": [],
+          "example_ids": [
+            "unsupervised-segmentation-and-anomaly"
+          ],
+          "id": "recipe.data-science.segmentation-anomaly",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.data-science-lifecycle-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.segment-model"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.scientific-experiment"
+          ],
+          "title": "Segmentation and anomaly discovery"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.recommendation-ranking",
+            "arena.ensemble-selection-and-stacking"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "ml.candidates",
+            "ml.rank",
+            "ml.ensemble",
+            "ml.calibrate",
+            "ml.verify"
+          ],
+          "category_ids": [
+            "dag.learn.ranking",
+            "dag.learn.ensemble",
+            "dag.learn.uncertainty",
+            "dag.evaluate.model"
+          ],
+          "description": "Construct eligible candidates, compare ranking/model families, calibrate or ensemble, and evaluate exposure and failure diversity.",
+          "design_pack_ids": [
+            "design-pack.ensemble-calibration",
+            "design-pack.evaluation-error"
+          ],
+          "effects": [],
+          "example_ids": [
+            "recommendation-ranking",
+            "ensemble-selection-and-stacking"
+          ],
+          "id": "recipe.data-science.ranking-ensemble",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.extended-arena-node-pack",
+            "example.data-science-lifecycle-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.evaluated-model"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.recommendation-ranking"
+          ],
+          "title": "Ranking, recommendation, and ensemble selection"
+        }
+      ],
+      "signal_terms": [
+        "data science",
+        "regression",
+        "classification",
+        "forecasting",
+        "time series",
+        "clustering",
+        "anomaly detection",
+        "feature engineering",
+        "calibration",
+        "conformal",
+        "ensemble",
+        "kaggle"
+      ],
+      "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+      "specialized_pack_model_version": "0.1",
+      "task_category_ids": [
+        "dag.prepare.split",
+        "dag.learn.feature",
+        "dag.learn.regression",
+        "dag.learn.classification",
+        "dag.evaluate.model",
+        "dag.learn.forecast",
+        "dag.learn.uncertainty",
+        "dag.learn.embedding",
+        "dag.learn.cluster",
+        "dag.learn.anomaly",
+        "dag.evaluate.metamorphic",
+        "dag.learn.ranking",
+        "dag.learn.ensemble"
+      ],
+      "title": "Data science",
+      "version": "0.1.0"
+    },
+    {
+      "delivery": {
+        "current_distribution": "browsergraph",
+        "entry_point_group": "solutiongraph.specialized_packs",
+        "entry_point_name": "ml-engineering",
+        "extraction_target": "solutiongraph-pack-ml-engineering",
+        "python_module": "solutiongraph.specialized.ml_engineering"
+      },
+      "description": "Reproducible training, synthetic supplementation, model packaging, serving, monitoring, reinforcement learning, and verified rollback.",
+      "domain_pack_ids": [
+        "domain-pack.ai-ml",
+        "domain-pack.platform-release",
+        "domain-pack.sre-incident"
+      ],
+      "extensions": {
+        "solutiongraph.delivery": "bundled-extraction-ready"
+      },
+      "gates": [
+        {
+          "decision": "reject",
+          "description": "Reject deployment unless fixed quality, compatibility, policy, latency, and cost requirements pass.",
+          "id": "gate.ml-engineering.release",
+          "independent": true,
+          "metric_ids": [
+            "metric.ml-engineering.release-acceptance",
+            "metric.ml-engineering.serving-latency",
+            "metric.ml-engineering.serving-cost"
+          ],
+          "oracle_kind": "cross-implementation",
+          "title": "Model release gate"
+        },
+        {
+          "decision": "reject",
+          "description": "Reject promotion when rollback cannot be verified or drift evidence cannot trigger a bounded response.",
+          "id": "gate.ml-engineering.rollback",
+          "independent": true,
+          "metric_ids": [
+            "metric.ml-engineering.recovery-time",
+            "metric.ml-engineering.drift-detection-delay"
+          ],
+          "oracle_kind": "property",
+          "title": "Rollback and monitoring gate"
+        },
+        {
+          "decision": "escalate",
+          "description": "Escalate when synthetic data does not improve or preserve untouched real-data evidence across protected slices.",
+          "id": "gate.ml-engineering.synthetic-supplement",
+          "independent": true,
+          "metric_ids": [
+            "metric.ml-engineering.synthetic-utility-gap"
+          ],
+          "oracle_kind": "statistical",
+          "title": "Synthetic supplementation gate"
+        }
+      ],
+      "id": "specialized-pack.ml-engineering",
+      "license": "MIT",
+      "limitations": [
+        "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+      ],
+      "metrics": [
+        {
+          "description": "Share of fixed release cases passing quality, compatibility, policy, and operational gates.",
+          "direction": "maximize",
+          "id": "metric.ml-engineering.release-acceptance",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.release",
+          "title": "Release acceptance",
+          "unit": "ratio"
+        },
+        {
+          "description": "Measured tail latency on the declared reference runtime and workload.",
+          "direction": "minimize",
+          "id": "metric.ml-engineering.serving-latency",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.runtime",
+          "title": "Serving latency",
+          "unit": "milliseconds"
+        },
+        {
+          "description": "Measured cost per declared unit of accepted work.",
+          "direction": "minimize",
+          "id": "metric.ml-engineering.serving-cost",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.runtime",
+          "title": "Serving cost",
+          "unit": "currency-per-unit"
+        },
+        {
+          "description": "Observed time to detect, halt, roll back, and verify a failed promotion.",
+          "direction": "minimize",
+          "id": "metric.ml-engineering.recovery-time",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.recovery",
+          "title": "Recovery time",
+          "unit": "seconds"
+        },
+        {
+          "description": "Delay between fixed drift onset and independently verified detection.",
+          "direction": "minimize",
+          "id": "metric.ml-engineering.drift-detection-delay",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.monitoring",
+          "title": "Drift detection delay",
+          "unit": "seconds"
+        },
+        {
+          "description": "Difference between real-only and synthetic-supplemented holdout utility under the same evaluator.",
+          "direction": "target",
+          "id": "metric.ml-engineering.synthetic-utility-gap",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.holdout",
+          "title": "Synthetic utility gap",
+          "unit": "task-metric"
+        }
+      ],
+      "profiler_features": [
+        {
+          "cost_tier": 1,
+          "description": "Summarize data, compute, memory, accelerator, wall-time, and artifact requirements.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.ml-engineering.training-footprint",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Training footprint",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Record request/response types, batching, latency, throughput, and availability requirements.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.ml-engineering.serving-contract",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Serving contract",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Count and classify model, binary, package, service, secret, and hardware dependencies.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.ml-engineering.dependency-surface",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Dependency surface",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Identify feature, label, concept, calibration, and operational drift signals relevant to the model.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.ml-engineering.drift-sensitivity",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Drift sensitivity",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Check artifact identity, compatibility, shadow evidence, and reversible promotion boundaries.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.ml-engineering.rollback-readiness",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Rollback readiness",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure delay, censoring, and sampling bias between prediction and trustworthy outcome evidence.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.ml-engineering.feedback-delay",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Feedback delay",
+          "value_kind": "distribution"
+        },
+        {
+          "cost_tier": 7,
+          "description": "Optional embedding of the deployment and monitoring profile for retrieving comparable historical releases.",
+          "easy_to_compute": false,
+          "effects": [
+            "model.invoke"
+          ],
+          "evidence_kind": "evidence.embedding-sidecar",
+          "id": "feature.ml-engineering.system-profile-embedding",
+          "mode": "model",
+          "permissions": [
+            "model.invoke"
+          ],
+          "requirements": [
+            "requirement.exact-embedding-space-identity"
+          ],
+          "title": "ML-system profile embedding",
+          "value_kind": "vector"
+        }
+      ],
+      "readiness": "executable-fixture",
+      "recipes": [
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.ensemble-selection-and-stacking",
+            "arena.model-explainability-and-stability"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "ml.train",
+            "ml.evaluate",
+            "ml.package",
+            "ml.provenance"
+          ],
+          "category_ids": [
+            "dag.learn",
+            "dag.evaluate.model",
+            "dag.govern.provenance"
+          ],
+          "description": "Freeze data and environment identities, train candidate routes, evaluate holdouts, package artifacts, and retain provenance.",
+          "design_pack_ids": [
+            "design-pack.tuning-search",
+            "design-pack.evaluation-error",
+            "design-pack.reproducibility-governance"
+          ],
+          "effects": [],
+          "example_ids": [
+            "ensemble-selection-and-stacking",
+            "model-explainability-and-stability"
+          ],
+          "id": "recipe.ml-engineering.training-pipeline",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.data-science-lifecycle-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.evaluated-model"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.kaggle-tabular",
+            "template.deployment-release"
+          ],
+          "title": "Reproducible training pipeline"
+        },
+        {
+          "adapter_ids": [
+            "adapter.openapi",
+            "adapter.orchestrator.kubernetes"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.model-release-monitoring-and-rollback"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "ml.package",
+            "ml.serve",
+            "ml.release",
+            "ml.rollback"
+          ],
+          "category_ids": [
+            "dag.serve.api",
+            "dag.serve.deploy",
+            "dag.operate.observe"
+          ],
+          "description": "Compile a tested model artifact into a versioned serving interface, staged rollout, health verification, and rollback plan.",
+          "design_pack_ids": [
+            "design-pack.deployment-serving",
+            "design-pack.monitoring-feedback"
+          ],
+          "effects": [],
+          "example_ids": [
+            "model-release-monitoring-and-rollback"
+          ],
+          "id": "recipe.ml-engineering.model-release",
+          "input_kind_ids": [
+            "artifact.evaluated-model"
+          ],
+          "limitations": [
+            "The bundled adapters export manifests; they do not authenticate to or deploy into a production platform."
+          ],
+          "node_pack_ids": [
+            "example.data-science-lifecycle-node-pack",
+            "example.engineering-showcase-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.deployed-model"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.deployment-release",
+            "template.api-service"
+          ],
+          "title": "Model serving and staged release"
+        },
+        {
+          "adapter_ids": [
+            "adapter.orchestrator.dagster"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.dataset-profiling-and-drift",
+            "arena.model-release-monitoring-and-rollback"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "ml.observe",
+            "ml.drift",
+            "ml.feedback",
+            "ml.recover"
+          ],
+          "category_ids": [
+            "dag.operate.observe",
+            "dag.operate.incident",
+            "dag.govern.provenance"
+          ],
+          "description": "Observe inputs, outputs, drift, delayed labels, SLOs, and rollback triggers without allowing telemetry to rewrite prior receipts.",
+          "design_pack_ids": [
+            "design-pack.monitoring-feedback",
+            "design-pack.reproducibility-governance"
+          ],
+          "effects": [],
+          "example_ids": [
+            "dataset-profiling-and-drift",
+            "model-release-monitoring-and-rollback"
+          ],
+          "id": "recipe.ml-engineering.model-monitoring",
+          "input_kind_ids": [
+            "artifact.deployed-model"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.data-science-lifecycle-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.monitoring-evidence"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.observability-sre",
+            "template.deployment-release"
+          ],
+          "title": "Model monitoring and feedback"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.tabular-prediction"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "synthetic.generate",
+            "synthetic.filter",
+            "synthetic.compare",
+            "synthetic.mix"
+          ],
+          "category_ids": [
+            "dag.generate.synthetic.tabular",
+            "dag.generate.augmentation",
+            "dag.evaluate.model"
+          ],
+          "description": "Generate, filter, compare, and mix synthetic records only when untouched real-data utility, privacy, and failure-slice gates pass.",
+          "design_pack_ids": [
+            "design-pack.synthetic-data",
+            "design-pack.fairness-risk"
+          ],
+          "effects": [],
+          "example_ids": [
+            "synthetic-tabular-augmentation"
+          ],
+          "id": "recipe.ml-engineering.synthetic-supplementation",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.scientific-experiment"
+          ],
+          "title": "Synthetic data supplementation"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.scientific-experiment"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "rl.rollout",
+            "rl.reward",
+            "rl.update",
+            "rl.evaluate",
+            "rl.promote"
+          ],
+          "category_ids": [
+            "dag.learn.reinforcement",
+            "dag.learn.optimize",
+            "dag.evaluate.outer"
+          ],
+          "description": "Freeze environment, reward, policy, safety, resource, and holdout boundaries before bounded policy improvement and promotion.",
+          "design_pack_ids": [
+            "design-pack.reinforcement-learning",
+            "design-pack.robustness-stability"
+          ],
+          "effects": [],
+          "example_ids": [
+            "reinforcement-learning-loop"
+          ],
+          "id": "recipe.ml-engineering.reinforcement-loop",
+          "input_kind_ids": [
+            "artifact.model-candidate"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.evaluated-model"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.scientific-experiment"
+          ],
+          "title": "Bounded reinforcement-learning loop"
+        }
+      ],
+      "signal_terms": [
+        "ml engineering",
+        "mlops",
+        "training pipeline",
+        "model deployment",
+        "model serving",
+        "model monitoring",
+        "drift",
+        "rollback",
+        "synthetic training data",
+        "reinforcement learning",
+        "rlhf"
+      ],
+      "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+      "specialized_pack_model_version": "0.1",
+      "task_category_ids": [
+        "dag.learn",
+        "dag.evaluate.model",
+        "dag.govern.provenance",
+        "dag.serve.api",
+        "dag.serve.deploy",
+        "dag.operate.observe",
+        "dag.operate.incident",
+        "dag.generate.synthetic.tabular",
+        "dag.generate.augmentation",
+        "dag.learn.reinforcement",
+        "dag.learn.optimize",
+        "dag.evaluate.outer"
+      ],
+      "title": "ML engineering",
+      "version": "0.1.0"
+    },
+    {
+      "delivery": {
+        "current_distribution": "browsergraph",
+        "entry_point_group": "solutiongraph.specialized_packs",
+        "entry_point_name": "llm-engineering",
+        "extraction_target": "solutiongraph-pack-llm-engineering",
+        "python_module": "solutiongraph.specialized.llm_engineering"
+      },
+      "description": "Grounded RAG, agent and tool systems, synthetic curricula, DueCare-style evaluation, judging, red teaming, and sealed promotion harnesses.",
+      "domain_pack_ids": [
+        "domain-pack.llm-agent",
+        "domain-pack.documents-media",
+        "domain-pack.security-compliance"
+      ],
+      "extensions": {
+        "solutiongraph.delivery": "bundled-extraction-ready"
+      },
+      "gates": [
+        {
+          "decision": "reject",
+          "description": "Reject consequential outputs when task acceptance or source grounding fails.",
+          "id": "gate.llm-engineering.grounded-response",
+          "independent": true,
+          "metric_ids": [
+            "metric.llm-engineering.task-acceptance",
+            "metric.llm-engineering.groundedness"
+          ],
+          "oracle_kind": "cross-implementation",
+          "title": "Grounded response gate"
+        },
+        {
+          "decision": "reject",
+          "description": "Reject promotion when the fixed red-team suite exceeds its declared failure threshold.",
+          "id": "gate.llm-engineering.adversarial-safety",
+          "independent": true,
+          "metric_ids": [
+            "metric.llm-engineering.adversarial-failure"
+          ],
+          "oracle_kind": "property",
+          "title": "Adversarial safety gate"
+        },
+        {
+          "decision": "reject",
+          "description": "Reject promotion unless diverse judges, human samples, and candidate-unreadable holdouts satisfy the predeclared protocol.",
+          "id": "gate.llm-engineering.sealed-promotion",
+          "independent": true,
+          "metric_ids": [
+            "metric.llm-engineering.judge-agreement",
+            "metric.llm-engineering.sealed-holdout-acceptance"
+          ],
+          "oracle_kind": "human",
+          "title": "Sealed promotion gate"
+        }
+      ],
+      "id": "specialized-pack.llm-engineering",
+      "license": "MIT",
+      "limitations": [
+        "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+      ],
+      "metrics": [
+        {
+          "description": "Share of scenarios accepted by the separately identified task oracle.",
+          "direction": "maximize",
+          "id": "metric.llm-engineering.task-acceptance",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.scenario",
+          "title": "Task acceptance",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of material claims supported by authorized source evidence under the fixed citation evaluator.",
+          "direction": "maximize",
+          "id": "metric.llm-engineering.groundedness",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.response",
+          "title": "Groundedness",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of adversarial scenarios causing a declared safety, policy, or integrity failure.",
+          "direction": "minimize",
+          "id": "metric.llm-engineering.adversarial-failure",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.stress",
+          "title": "Adversarial failure rate",
+          "unit": "ratio"
+        },
+        {
+          "description": "Agreement and calibrated disagreement across independent judges and human adjudication samples.",
+          "direction": "maximize",
+          "id": "metric.llm-engineering.judge-agreement",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.evaluation",
+          "title": "Judge agreement",
+          "unit": "ratio"
+        },
+        {
+          "description": "Measured model, tool, and infrastructure cost divided by accepted outputs.",
+          "direction": "minimize",
+          "id": "metric.llm-engineering.cost-per-accepted",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.run",
+          "title": "Cost per accepted result",
+          "unit": "currency-per-result"
+        },
+        {
+          "description": "Measured end-to-end latency including retrieval, tools, generation, and independent evaluation.",
+          "direction": "minimize",
+          "id": "metric.llm-engineering.latency",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.run",
+          "title": "End-to-end latency",
+          "unit": "milliseconds"
+        },
+        {
+          "description": "Acceptance on candidate-unreadable scenarios and evaluator infrastructure.",
+          "direction": "maximize",
+          "id": "metric.llm-engineering.sealed-holdout-acceptance",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.holdout",
+          "title": "Sealed holdout acceptance",
+          "unit": "ratio"
+        }
+      ],
+      "profiler_features": [
+        {
+          "cost_tier": 1,
+          "description": "Classify generation, extraction, retrieval, tool use, judging, tutoring, or agent trajectory semantics.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.llm-engineering.task-mode",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "LLM task mode",
+          "value_kind": "category"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure source count, token length, structure, freshness, authority, duplication, and retrieval boundaries.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.llm-engineering.context-profile",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Context profile",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Enumerate tools, effects, permissions, secrets, and approval boundaries available to the system.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.llm-engineering.tool-authority",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Tool authority",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize normal, edge, adversarial, multilingual, long-context, and tool-failure scenario coverage.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.llm-engineering.scenario-surface",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Scenario surface",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure shared model families, prompts, training signals, and likely correlated judge failures.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.llm-engineering.judge-dependence",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Judge dependence",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Record candidate readability, benchmark exposure, retrieval leakage, and held-out evaluator isolation.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.llm-engineering.contamination-risk",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Contamination risk",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Describe structured-output, citation, abstention, length, modality, and safety requirements.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.llm-engineering.response-shape",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Response shape",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 7,
+          "description": "Optional embedding of redacted scenario semantics for diverse retrieval; exact model, revision, dimensions, distance, and source digest remain mandatory.",
+          "easy_to_compute": false,
+          "effects": [
+            "model.invoke"
+          ],
+          "evidence_kind": "evidence.embedding-sidecar",
+          "id": "feature.llm-engineering.scenario-embedding",
+          "mode": "model",
+          "permissions": [
+            "model.invoke"
+          ],
+          "requirements": [
+            "requirement.exact-embedding-space-identity"
+          ],
+          "title": "Scenario embedding",
+          "value_kind": "vector"
+        }
+      ],
+      "readiness": "executable-fixture",
+      "recipes": [
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.grounded-knowledge-system"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "llm.retrieve",
+            "llm.rerank",
+            "llm.generate",
+            "llm.cite",
+            "llm.verify"
+          ],
+          "category_ids": [
+            "dag.learn.rag",
+            "dag.integrate.enrich.knowledge",
+            "dag.evaluate.rag"
+          ],
+          "description": "Establish corpus authority, parse and index content, retrieve and rerank evidence, generate with citations, and independently verify claims.",
+          "design_pack_ids": [
+            "design-pack.text-document",
+            "design-pack.llm-harness"
+          ],
+          "effects": [],
+          "example_ids": [
+            "grounded-document-extraction"
+          ],
+          "id": "recipe.llm-engineering.grounded-rag",
+          "input_kind_ids": [
+            "artifact.document-corpus"
+          ],
+          "limitations": [
+            "Fixture retrieval and judging do not establish production factuality or safety."
+          ],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.llm-system"
+          ],
+          "permissions": [],
+          "question_pack_ids": [
+            "question-pack.document"
+          ],
+          "template_ids": [
+            "template.knowledge-retrieval",
+            "template.document-intelligence"
+          ],
+          "title": "Grounded retrieval and generation"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.content-policy-moderation",
+            "arena.defensive-cyber-investigation"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "llm.scenario",
+            "llm.evaluate",
+            "llm.red-team",
+            "llm.adjudicate",
+            "llm.promote"
+          ],
+          "category_ids": [
+            "dag.evaluate.llm-harness",
+            "dag.evaluate.safety",
+            "dag.evaluate.judge",
+            "dag.evaluate.outer"
+          ],
+          "description": "Freeze scenarios, solution, development evaluation, improvement, promotion, and sealed outer-evaluation graphs with feedback firewalls.",
+          "design_pack_ids": [
+            "design-pack.llm-harness",
+            "design-pack.fairness-risk",
+            "design-pack.robustness-stability"
+          ],
+          "effects": [],
+          "example_ids": [
+            "duecare-llm-evaluation-harness"
+          ],
+          "id": "recipe.llm-engineering.evaluation-red-team",
+          "input_kind_ids": [
+            "artifact.llm-system"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.llm-evaluation-report"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.content-moderation",
+            "template.cybersecurity-investigation"
+          ],
+          "title": "LLM evaluation and red-team harness"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.text-classification-pipeline"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "llm.synthetic-generate",
+            "llm.synthetic-filter",
+            "llm.synthetic-balance",
+            "llm.synthetic-verify"
+          ],
+          "category_ids": [
+            "dag.generate.synthetic.text",
+            "dag.generate.synthetic.adversarial",
+            "dag.generate.label"
+          ],
+          "description": "Generate, deduplicate, filter, balance, adversarially expand, and independently evaluate synthetic training examples before mixing.",
+          "design_pack_ids": [
+            "design-pack.synthetic-data",
+            "design-pack.llm-harness"
+          ],
+          "effects": [],
+          "example_ids": [
+            "synthetic-llm-curriculum"
+          ],
+          "id": "recipe.llm-engineering.synthetic-curriculum",
+          "input_kind_ids": [
+            "artifact.validated-dataset"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack",
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.llm-training-data"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.scientific-experiment"
+          ],
+          "title": "Synthetic instruction and adversarial curriculum"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [
+            "agent-benchmark.reference-smoke",
+            "agent-benchmark.command-matrix-example"
+          ],
+          "arena_task_ids": [
+            "arena.repository-repair"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "agent.materialize",
+            "agent.invoke",
+            "agent.evaluate",
+            "agent.compare",
+            "agent.report"
+          ],
+          "category_ids": [
+            "dag.evaluate.agent",
+            "dag.evaluate.outer",
+            "dag.evaluate.human"
+          ],
+          "description": "Run paired control and SolutionGraph-context workspaces across compatible task, harness, model, and seed cells with sealed evaluation.",
+          "design_pack_ids": [
+            "design-pack.llm-harness",
+            "design-pack.reproducibility-governance"
+          ],
+          "effects": [],
+          "example_ids": [
+            "tested-code-repair"
+          ],
+          "id": "recipe.llm-engineering.coding-agent-ab",
+          "input_kind_ids": [
+            "artifact.repository"
+          ],
+          "limitations": [
+            "The bundled smoke adapter is model-free and proves harness mechanics only."
+          ],
+          "node_pack_ids": [
+            "reference.core-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.llm-evaluation-report"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.qa-engineering"
+          ],
+          "title": "Coding-agent control/treatment arena"
+        }
+      ],
+      "signal_terms": [
+        "llm",
+        "language model",
+        "rag",
+        "retrieval augmented",
+        "agent",
+        "tool use",
+        "eval harness",
+        "llm evaluation",
+        "red team",
+        "jailbreak",
+        "llm as judge",
+        "synthetic instruction data",
+        "due care"
+      ],
+      "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+      "specialized_pack_model_version": "0.1",
+      "task_category_ids": [
+        "dag.learn.rag",
+        "dag.integrate.enrich.knowledge",
+        "dag.evaluate.rag",
+        "dag.evaluate.llm-harness",
+        "dag.evaluate.safety",
+        "dag.evaluate.judge",
+        "dag.evaluate.outer",
+        "dag.generate.synthetic.text",
+        "dag.generate.synthetic.adversarial",
+        "dag.generate.label",
+        "dag.evaluate.agent",
+        "dag.evaluate.human"
+      ],
+      "title": "LLM engineering",
+      "version": "0.1.0"
+    },
+    {
+      "delivery": {
+        "current_distribution": "browsergraph",
+        "entry_point_group": "solutiongraph.specialized_packs",
+        "entry_point_name": "software-engineering",
+        "extraction_target": "solutiongraph-pack-software-engineering",
+        "python_module": "solutiongraph.specialized.software_engineering"
+      },
+      "description": "Repository repair, testing, API/backend systems, frontend journeys, database migrations, supply-chain assurance, and staged releases.",
+      "domain_pack_ids": [
+        "domain-pack.backend-api",
+        "domain-pack.frontend-browser",
+        "domain-pack.platform-release",
+        "domain-pack.database-storage"
+      ],
+      "extensions": {
+        "solutiongraph.delivery": "bundled-extraction-ready"
+      },
+      "gates": [
+        {
+          "decision": "reject",
+          "description": "Reject a change that fails fixed acceptance, regression, compatibility, or scope constraints.",
+          "id": "gate.software-engineering.change-acceptance",
+          "independent": true,
+          "metric_ids": [
+            "metric.software-engineering.acceptance-pass-rate",
+            "metric.software-engineering.regression-rate",
+            "metric.software-engineering.compatibility-violations"
+          ],
+          "oracle_kind": "property",
+          "title": "Change acceptance gate"
+        },
+        {
+          "decision": "reject",
+          "description": "Reject release when rollback evidence or supply-chain identity is incomplete.",
+          "id": "gate.software-engineering.release-assurance",
+          "independent": true,
+          "metric_ids": [
+            "metric.software-engineering.release-recovery",
+            "metric.software-engineering.supply-chain-coverage"
+          ],
+          "oracle_kind": "cross-implementation",
+          "title": "Release assurance gate"
+        }
+      ],
+      "id": "specialized-pack.software-engineering",
+      "license": "MIT",
+      "limitations": [
+        "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+      ],
+      "metrics": [
+        {
+          "description": "Share of fixed functional, property, integration, and sealed acceptance cases passing.",
+          "direction": "maximize",
+          "id": "metric.software-engineering.acceptance-pass-rate",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.change",
+          "title": "Acceptance pass rate",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of protected baseline behavior changed outside the task contract.",
+          "direction": "minimize",
+          "id": "metric.software-engineering.regression-rate",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.change",
+          "title": "Regression rate",
+          "unit": "ratio"
+        },
+        {
+          "description": "Count of independently detected interface or migration compatibility violations.",
+          "direction": "minimize",
+          "id": "metric.software-engineering.compatibility-violations",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.release",
+          "title": "Compatibility violations",
+          "unit": "count"
+        },
+        {
+          "description": "Reviewable size and structural complexity retained as a separate objective.",
+          "direction": "minimize",
+          "id": "metric.software-engineering.change-complexity",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.change",
+          "title": "Change complexity",
+          "unit": "complexity-unit"
+        },
+        {
+          "description": "Observed time and success rate for rollback or compensation under injected failure.",
+          "direction": "minimize",
+          "id": "metric.software-engineering.release-recovery",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.recovery",
+          "title": "Release recovery",
+          "unit": "seconds"
+        },
+        {
+          "description": "Share of shipped artifacts bound to exact source, dependency, build, and attestation identities.",
+          "direction": "maximize",
+          "id": "metric.software-engineering.supply-chain-coverage",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.release",
+          "title": "Supply-chain coverage",
+          "unit": "ratio"
+        }
+      ],
+      "profiler_features": [
+        {
+          "cost_tier": 1,
+          "description": "Count languages, modules, dependency boundaries, generated assets, tests, and build surfaces.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.software-engineering.repository-shape",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Repository shape",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize affected interfaces, callers, migrations, tests, documentation, and operational dependencies.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.software-engineering.change-surface",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Change surface",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure unit, property, integration, end-to-end, regression, mutation, and sealed-case coverage.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.software-engineering.test-topology",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Test topology",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize version constraints, provenance, licenses, vulnerabilities, native builds, and update depth.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.software-engineering.dependency-risk",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Dependency risk",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Compare request, response, event, schema, persistence, and client contracts with the baseline.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.software-engineering.api-compatibility",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "API compatibility",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Estimate users, services, data, regions, and irreversible effects touched by a release.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.software-engineering.release-blast-radius",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Release blast radius",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 7,
+          "description": "Optional embedding of the ticket, interfaces, and redacted repository profile for retrieving similar verified changes.",
+          "easy_to_compute": false,
+          "effects": [
+            "model.invoke"
+          ],
+          "evidence_kind": "evidence.embedding-sidecar",
+          "id": "feature.software-engineering.ticket-repository-embedding",
+          "mode": "model",
+          "permissions": [
+            "model.invoke"
+          ],
+          "requirements": [
+            "requirement.exact-embedding-space-identity"
+          ],
+          "title": "Ticket and repository embedding",
+          "value_kind": "vector"
+        }
+      ],
+      "readiness": "executable-fixture",
+      "recipes": [
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [
+            "agent-benchmark.reference-smoke"
+          ],
+          "arena_task_ids": [
+            "arena.repository-repair"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "software.diagnose",
+            "software.change",
+            "software.test",
+            "software.review"
+          ],
+          "category_ids": [
+            "dag.evaluate.regression",
+            "dag.evaluate.metamorphic",
+            "dag.serve.backend"
+          ],
+          "description": "Localize the failure, define protected behavior, implement a bounded change, run layered checks, and emit reviewable evidence.",
+          "design_pack_ids": [
+            "design-pack.task-contract",
+            "design-pack.evaluation-error",
+            "design-pack.reproducibility-governance"
+          ],
+          "effects": [],
+          "example_ids": [
+            "tested-code-repair"
+          ],
+          "id": "recipe.software-engineering.repository-repair",
+          "input_kind_ids": [
+            "artifact.repository"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.real-world-node-pack",
+            "example.extended-arena-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.verified-change"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.qa-engineering"
+          ],
+          "title": "Repository diagnosis and repair"
+        },
+        {
+          "adapter_ids": [
+            "adapter.orchestrator.kubernetes"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.dependency-assurance",
+            "arena.deployment-release"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "software.build",
+            "software.assure",
+            "software.release",
+            "software.rollback"
+          ],
+          "category_ids": [
+            "dag.serve.deploy",
+            "dag.govern.security",
+            "dag.govern.provenance"
+          ],
+          "description": "Produce a reproducible artifact, bind provenance, execute compatibility and security gates, stage rollout, and retain rollback.",
+          "design_pack_ids": [],
+          "effects": [],
+          "example_ids": [
+            "dependency-assurance",
+            "frontend-release-journey"
+          ],
+          "id": "recipe.software-engineering.release-pipeline",
+          "input_kind_ids": [
+            "artifact.verified-change"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.extended-arena-node-pack",
+            "example.engineering-showcase-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.release-candidate"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.deployment-release"
+          ],
+          "title": "Build, verify, and stage a release"
+        },
+        {
+          "adapter_ids": [
+            "adapter.openapi",
+            "adapter.orchestrator.temporal"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.idempotent-api-contract"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "service.contract",
+            "service.execute",
+            "service.persist",
+            "service.observe",
+            "service.recover"
+          ],
+          "category_ids": [
+            "dag.serve.api",
+            "dag.serve.backend",
+            "dag.operate.observe"
+          ],
+          "description": "Model request validation, domain behavior, idempotent effects, persistence, observability, and compensation behind a stable API.",
+          "design_pack_ids": [],
+          "effects": [],
+          "example_ids": [
+            "idempotent-api-contract"
+          ],
+          "id": "recipe.software-engineering.backend-service",
+          "input_kind_ids": [
+            "artifact.release-candidate"
+          ],
+          "limitations": [
+            "Reference adapters project contracts and plans but do not host an authenticated production service."
+          ],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.deployed-service"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.api-service"
+          ],
+          "title": "Contract-safe backend service"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.frontend-release-journey"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "frontend.journey",
+            "frontend.render",
+            "frontend.accessibility",
+            "frontend.verify",
+            "frontend.release"
+          ],
+          "category_ids": [
+            "dag.serve.frontend",
+            "dag.serve.automation",
+            "dag.evaluate.regression"
+          ],
+          "description": "Compile critical journeys, render and interaction checks, accessibility evidence, staged release, and independent effect verification.",
+          "design_pack_ids": [],
+          "effects": [],
+          "example_ids": [
+            "frontend-release-journey"
+          ],
+          "id": "recipe.software-engineering.frontend-journey",
+          "input_kind_ids": [
+            "artifact.release-candidate"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.engineering-showcase-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.deployed-service"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.qa-engineering",
+            "template.web-automation"
+          ],
+          "title": "Frontend journey and release assurance"
+        },
+        {
+          "adapter_ids": [
+            "adapter.orchestrator.temporal"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.database-migration",
+            "arena.schema-migration"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "database.inventory",
+            "database.convert",
+            "database.backfill",
+            "database.reconcile",
+            "database.cutover"
+          ],
+          "category_ids": [
+            "dag.operate.migrate",
+            "dag.integrate.reconcile",
+            "dag.evaluate.data"
+          ],
+          "description": "Inventory schema and dependencies, convert and backfill, run CDC, reconcile, cut over, verify, and preserve rollback.",
+          "design_pack_ids": [],
+          "effects": [],
+          "example_ids": [
+            "schema-migration"
+          ],
+          "id": "recipe.software-engineering.database-migration",
+          "input_kind_ids": [
+            "artifact.database-state"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.extended-arena-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.migrated-database"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.database-migration"
+          ],
+          "title": "Database migration and cutover"
+        }
+      ],
+      "signal_terms": [
+        "software engineering",
+        "repository repair",
+        "bug fix",
+        "regression test",
+        "backend",
+        "api",
+        "frontend",
+        "database migration",
+        "release pipeline",
+        "deployment",
+        "dependency assurance"
+      ],
+      "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+      "specialized_pack_model_version": "0.1",
+      "task_category_ids": [
+        "dag.evaluate.regression",
+        "dag.evaluate.metamorphic",
+        "dag.serve.backend",
+        "dag.serve.deploy",
+        "dag.govern.security",
+        "dag.govern.provenance",
+        "dag.serve.api",
+        "dag.operate.observe",
+        "dag.serve.frontend",
+        "dag.serve.automation",
+        "dag.operate.migrate",
+        "dag.integrate.reconcile",
+        "dag.evaluate.data"
+      ],
+      "title": "Software engineering",
+      "version": "0.1.0"
+    },
+    {
+      "delivery": {
+        "current_distribution": "browsergraph",
+        "entry_point_group": "solutiongraph.specialized_packs",
+        "entry_point_name": "operations",
+        "extraction_target": "solutiongraph-pack-operations",
+        "python_module": "solutiongraph.specialized.operations"
+      },
+      "description": "Observability, SLOs, incident response, recovery, compliance evidence, governed workflows, and constrained operational planning.",
+      "domain_pack_ids": [
+        "domain-pack.sre-incident",
+        "domain-pack.security-compliance",
+        "domain-pack.business-human-workflow"
+      ],
+      "extensions": {
+        "solutiongraph.delivery": "bundled-extraction-ready"
+      },
+      "gates": [
+        {
+          "decision": "reject",
+          "description": "Reject a recovery or rollout state that fails the declared SLO or independent health oracle.",
+          "id": "gate.operations.service-health",
+          "independent": true,
+          "metric_ids": [
+            "metric.operations.slo-attainment",
+            "metric.operations.recovery-success"
+          ],
+          "oracle_kind": "property",
+          "title": "Service health gate"
+        },
+        {
+          "decision": "escalate",
+          "description": "Escalate when detection or recovery exceeds policy, evidence is incomplete, or authority is unavailable.",
+          "id": "gate.operations.incident-response",
+          "independent": true,
+          "metric_ids": [
+            "metric.operations.detection-time",
+            "metric.operations.recovery-time"
+          ],
+          "oracle_kind": "human",
+          "title": "Incident response gate"
+        },
+        {
+          "decision": "reject",
+          "description": "Reject operational plans that violate hard feasibility or required control-evidence boundaries.",
+          "id": "gate.operations.governed-plan",
+          "independent": true,
+          "metric_ids": [
+            "metric.operations.control-coverage",
+            "metric.operations.plan-feasibility"
+          ],
+          "oracle_kind": "external-authority",
+          "title": "Governed plan gate"
+        }
+      ],
+      "id": "specialized-pack.operations",
+      "license": "MIT",
+      "limitations": [
+        "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+      ],
+      "metrics": [
+        {
+          "description": "Observed attainment of the declared service-level objective over its fixed window.",
+          "direction": "maximize",
+          "id": "metric.operations.slo-attainment",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.service",
+          "title": "SLO attainment",
+          "unit": "ratio"
+        },
+        {
+          "description": "Time from fixed incident onset to an actionable independently recorded alert.",
+          "direction": "minimize",
+          "id": "metric.operations.detection-time",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.incident",
+          "title": "Detection time",
+          "unit": "seconds"
+        },
+        {
+          "description": "Time from incident declaration to independently verified service recovery.",
+          "direction": "minimize",
+          "id": "metric.operations.recovery-time",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.incident",
+          "title": "Recovery time",
+          "unit": "seconds"
+        },
+        {
+          "description": "Share of injected or observed incidents recovered within policy without undeclared effects.",
+          "direction": "maximize",
+          "id": "metric.operations.recovery-success",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.incident",
+          "title": "Recovery success",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of required controls bound to current source, test, exception, owner, and review evidence.",
+          "direction": "maximize",
+          "id": "metric.operations.control-coverage",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.governance",
+          "title": "Control coverage",
+          "unit": "ratio"
+        },
+        {
+          "description": "Share of proposed operational decisions satisfying all hard resource and policy constraints.",
+          "direction": "maximize",
+          "id": "metric.operations.plan-feasibility",
+          "required_evidence": [
+            "evidence.independent-evaluation"
+          ],
+          "scope": "scope.plan",
+          "title": "Plan feasibility",
+          "unit": "ratio"
+        }
+      ],
+      "profiler_features": [
+        {
+          "cost_tier": 1,
+          "description": "Summarize upstream, downstream, regional, queue, database, and external-provider dependencies.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.operations.service-dependency-graph",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Service dependency graph",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Record service-level indicators, objectives, windows, burn policies, and missing telemetry.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.operations.slo-profile",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "SLO profile",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Summarize failure classes, recurrence, correlated dependencies, mitigations, and recovery evidence.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.operations.failure-history",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Failure history",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Record owners, responders, approvers, credentials, effects, and separation-of-duty boundaries.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.operations.authority-map",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Authority map",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure runbook, backup, checkpoint, rollback, compensation, and verification coverage.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.operations.recovery-readiness",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Recovery readiness",
+          "value_kind": "mapping"
+        },
+        {
+          "cost_tier": 1,
+          "description": "Measure evidence age, source identity, exceptions, owners, and renewal requirements.",
+          "easy_to_compute": true,
+          "effects": [],
+          "evidence_kind": "evidence.task-profile",
+          "id": "feature.operations.control-evidence-freshness",
+          "mode": "deterministic",
+          "permissions": [],
+          "requirements": [],
+          "title": "Control-evidence freshness",
+          "value_kind": "distribution"
+        },
+        {
+          "cost_tier": 7,
+          "description": "Optional embedding of sanitized symptoms, topology, and failure history for retrieving comparable incidents in an exact space.",
+          "easy_to_compute": false,
+          "effects": [
+            "model.invoke"
+          ],
+          "evidence_kind": "evidence.embedding-sidecar",
+          "id": "feature.operations.incident-profile-embedding",
+          "mode": "model",
+          "permissions": [
+            "model.invoke"
+          ],
+          "requirements": [
+            "requirement.exact-embedding-space-identity"
+          ],
+          "title": "Incident profile embedding",
+          "value_kind": "vector"
+        }
+      ],
+      "readiness": "executable-fixture",
+      "recipes": [
+        {
+          "adapter_ids": [
+            "adapter.orchestrator.dagster"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.sre-observability-response"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "operations.instrument",
+            "operations.correlate",
+            "operations.slo",
+            "operations.alert"
+          ],
+          "category_ids": [
+            "dag.operate.observe",
+            "dag.govern.provenance"
+          ],
+          "description": "Define signals and SLOs, collect and correlate telemetry, detect symptoms, and preserve trace and lineage context.",
+          "design_pack_ids": [],
+          "effects": [],
+          "example_ids": [
+            "web-change-monitoring"
+          ],
+          "id": "recipe.operations.observability",
+          "input_kind_ids": [
+            "artifact.deployed-service"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.extended-arena-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.telemetry"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.observability-sre"
+          ],
+          "title": "Observability and SLO pipeline"
+        },
+        {
+          "adapter_ids": [
+            "adapter.orchestrator.temporal"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.incident-triage"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "incident.correlate",
+            "incident.triage",
+            "incident.contain",
+            "incident.recover",
+            "incident.verify"
+          ],
+          "category_ids": [
+            "dag.operate.incident",
+            "dag.human.review",
+            "dag.evaluate.outer"
+          ],
+          "description": "Gather scoped evidence, rank hypotheses, contain effects, recover through bounded actions, verify health, and retain learning evidence.",
+          "design_pack_ids": [
+            "design-pack.monitoring-feedback",
+            "design-pack.decision-handoff"
+          ],
+          "effects": [],
+          "example_ids": [
+            "incident-triage"
+          ],
+          "id": "recipe.operations.incident-response",
+          "input_kind_ids": [
+            "artifact.telemetry"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.extended-arena-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.recovery-evidence"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.incident-response"
+          ],
+          "title": "Incident triage and verified recovery"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.compliance-evidence-pack"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "governance.map-control",
+            "governance.collect-evidence",
+            "governance.test",
+            "governance.review"
+          ],
+          "category_ids": [
+            "dag.govern.compliance",
+            "dag.govern.provenance",
+            "dag.human.review"
+          ],
+          "description": "Bind controls to owners and source evidence, execute independent tests, preserve exceptions, and route attestation to authorized reviewers.",
+          "design_pack_ids": [
+            "design-pack.fairness-risk",
+            "design-pack.reproducibility-governance",
+            "design-pack.decision-handoff"
+          ],
+          "effects": [],
+          "example_ids": [],
+          "id": "recipe.operations.compliance-evidence",
+          "input_kind_ids": [
+            "artifact.deployed-service"
+          ],
+          "limitations": [
+            "A reference evidence graph is not a regulatory certification or external attestation."
+          ],
+          "node_pack_ids": [
+            "design-atlas.data-science-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.control-evidence"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.compliance-evidence"
+          ],
+          "title": "Compliance and control evidence"
+        },
+        {
+          "adapter_ids": [
+            "adapter.bpmn",
+            "adapter.orchestrator.temporal"
+          ],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.claims-adjudication",
+            "arena.api-business-workflow"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "workflow.policy",
+            "workflow.decide",
+            "workflow.approve",
+            "workflow.execute",
+            "workflow.audit"
+          ],
+          "category_ids": [
+            "dag.human.review",
+            "dag.serve.backend",
+            "dag.govern.provenance"
+          ],
+          "description": "Establish identity and policy, gather records, calculate a decision, obtain required approval, perform effects, verify, notify, and archive.",
+          "design_pack_ids": [],
+          "effects": [],
+          "example_ids": [],
+          "id": "recipe.operations.business-workflow",
+          "input_kind_ids": [
+            "artifact.decision-evidence"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "reference.core-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.operational-plan"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.claims-processing",
+            "template.customer-support"
+          ],
+          "title": "Governed human and service workflow"
+        },
+        {
+          "adapter_ids": [],
+          "agent_benchmark_ids": [],
+          "arena_task_ids": [
+            "arena.supply-chain-plan",
+            "arena.constraint-scheduling"
+          ],
+          "benchmark_ids": [],
+          "capability_ids": [
+            "planning.formulate",
+            "planning.optimize",
+            "planning.simulate",
+            "planning.verify",
+            "planning.release"
+          ],
+          "category_ids": [
+            "dag.learn.optimize",
+            "dag.evaluate.model",
+            "dag.human.review"
+          ],
+          "description": "Define variables, objectives, hard constraints, uncertainty scenarios, solver candidates, feasibility checks, and authorized release.",
+          "design_pack_ids": [
+            "design-pack.causality-experiments",
+            "design-pack.decision-handoff"
+          ],
+          "effects": [],
+          "example_ids": [],
+          "id": "recipe.operations.planning-scheduling",
+          "input_kind_ids": [
+            "artifact.planning-inputs"
+          ],
+          "limitations": [],
+          "node_pack_ids": [
+            "example.extended-arena-node-pack"
+          ],
+          "output_kind_ids": [
+            "artifact.operational-plan"
+          ],
+          "permissions": [],
+          "question_pack_ids": [],
+          "template_ids": [
+            "template.supply-chain-planning",
+            "template.optimization-scheduling"
+          ],
+          "title": "Supply-chain, planning, and scheduling"
+        }
+      ],
+      "signal_terms": [
+        "operations",
+        "sre",
+        "observability",
+        "slo",
+        "incident",
+        "on call",
+        "recovery",
+        "runbook",
+        "compliance",
+        "audit",
+        "business workflow",
+        "supply chain",
+        "scheduling"
+      ],
+      "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+      "specialized_pack_model_version": "0.1",
+      "task_category_ids": [
+        "dag.operate.observe",
+        "dag.govern.provenance",
+        "dag.operate.incident",
+        "dag.human.review",
+        "dag.evaluate.outer",
+        "dag.govern.compliance",
+        "dag.serve.backend",
+        "dag.learn.optimize",
+        "dag.evaluate.model"
+      ],
+      "title": "Operations and reliability",
+      "version": "0.1.0"
+    }
+  ],
+  "specialized_pack_model_version": "0.1",
+  "version": "0.1.0"
+}

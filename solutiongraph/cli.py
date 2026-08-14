@@ -65,6 +65,11 @@ def _doctor() -> int:
     )
     from solutiongraph.reference_nodes import REFERENCE_DESCRIPTORS, REFERENCE_NODE_SPECS
     from solutiongraph.schemas import load_all_schemas
+    from solutiongraph.specialized import (
+        REFERENCE_SPECIALIZED_PACK_REGISTRY,
+        REFERENCE_SPECIALIZED_PACKS,
+        validate_specialized_pack_catalog,
+    )
     from solutiongraph.stdlib_pack import (
         STANDARD_LIBRARY_DESCRIPTORS,
         STANDARD_LIBRARY_NODE_PACK,
@@ -80,6 +85,7 @@ def _doctor() -> int:
     )
 
     problems: list[str] = []
+    problems.extend(validate_specialized_pack_catalog(REFERENCE_SPECIALIZED_PACK_REGISTRY))
     problems.extend(validate_universal_catalog())
     problems.extend(validate_integration_profiles())
     problems.extend(reference_coverage_report().validate())
@@ -179,6 +185,8 @@ def _doctor() -> int:
         f"universal_obligations={len(REFERENCE_OBLIGATIONS)} "
         f"universal_domains={len(REFERENCE_DOMAIN_PACKS)} "
         f"universal_questions={len(REFERENCE_ENGINEERING_QUESTIONS)} "
+        f"specialized_packs={len(REFERENCE_SPECIALIZED_PACKS)} "
+        f"specialized_recipes={sum(len(item.recipes) for item in REFERENCE_SPECIALIZED_PACKS)} "
         f"integration_adapters={len(REFERENCE_INTEGRATION_ADAPTERS)} "
         f"interrogation_concepts={len(REFERENCE_CONCEPTS)} "
         f"question_packs={len(REFERENCE_QUESTION_PACKS)} "
@@ -774,6 +782,7 @@ def _verify(catalog_root: Path | None, runtime: str, as_json: bool) -> int:
             f"conformance_checks={len(result.conformance.checks)} "
             f"benchmarks={result.benchmark_count} "
             f"solution_packs={result.solution_pack_count} "
+            f"specialized_packs={result.specialized_pack_count} "
             f"catalog_documents={result.catalog_document_count} "
             f"catalog_checked={'yes' if result.catalog_checked else 'no'}"
         )
@@ -1189,6 +1198,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     add_universal_parser(commands)
 
+    from solutiongraph.specialized.cli import add_specialized_parser
+
+    add_specialized_parser(commands)
+
     concepts = commands.add_parser(
         "concepts", help="Inspect semantic concepts and map dataset fields"
     )
@@ -1547,6 +1560,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             from solutiongraph.universal.cli import run_universal_command
 
             return run_universal_command(args)
+        if args.command == "packages":
+            from solutiongraph.specialized.cli import run_specialized_command
+
+            return run_specialized_command(args)
         if args.command == "concepts":
             if args.concept_command == "list":
                 return _concepts_list(args.json)

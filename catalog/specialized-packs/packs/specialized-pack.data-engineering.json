@@ -1,0 +1,465 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "data-engineering",
+    "extraction_target": "solutiongraph-pack-data-engineering",
+    "python_module": "solutiongraph.specialized.data_engineering"
+  },
+  "description": "Composable quality, cleaning, contracts, enrichment, entity resolution, reconciliation, batch, and event-time data pipelines.",
+  "domain_pack_ids": [
+    "domain-pack.data-integration",
+    "domain-pack.event-stream",
+    "domain-pack.database-storage"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject publication when required schema, semantic, reconciliation, or lineage checks fail.",
+      "id": "gate.data-engineering.publish-contract",
+      "independent": true,
+      "metric_ids": [
+        "metric.data-engineering.contract-pass-rate",
+        "metric.data-engineering.invalid-record-rate",
+        "metric.data-engineering.unresolved-duplicate-rate",
+        "metric.data-engineering.reconciliation-error",
+        "metric.data-engineering.lineage-coverage"
+      ],
+      "oracle_kind": "property",
+      "title": "Publication contract"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject a stream materialization when the fixed event-time oracle detects silent admissible-event loss.",
+      "id": "gate.data-engineering.event-time-integrity",
+      "independent": true,
+      "metric_ids": [
+        "metric.data-engineering.late-event-loss"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Event-time integrity"
+    }
+  ],
+  "id": "specialized-pack.data-engineering",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Share of records accepted by the independently identified data contract.",
+      "direction": "maximize",
+      "id": "metric.data-engineering.contract-pass-rate",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.record-set",
+      "title": "Contract pass rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of records rejected for structural or semantic violations.",
+      "direction": "minimize",
+      "id": "metric.data-engineering.invalid-record-rate",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.record-set",
+      "title": "Invalid record rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of records remaining in unresolved duplicate clusters.",
+      "direction": "minimize",
+      "id": "metric.data-engineering.unresolved-duplicate-rate",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.record-set",
+      "title": "Unresolved duplicate rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Absolute discrepancy remaining across declared sources or balances.",
+      "direction": "minimize",
+      "id": "metric.data-engineering.reconciliation-error",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.dataset",
+      "title": "Reconciliation error",
+      "unit": "domain-unit"
+    },
+    {
+      "description": "Share of published fields bound to source and transformation evidence.",
+      "direction": "maximize",
+      "id": "metric.data-engineering.lineage-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.dataset",
+      "title": "Lineage coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of admissible late events missing from final materialized results.",
+      "direction": "minimize",
+      "id": "metric.data-engineering.late-event-loss",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.stream",
+      "title": "Late-event loss",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Count rows, columns, and sparse structural regions.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-engineering.row-column-shape",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Row and column shape",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure missingness overall, by field, and by co-missingness pattern.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-engineering.null-density",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Null density",
+      "value_kind": "distribution"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure exact and candidate-key duplicate rates without merging records.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-engineering.duplicate-density",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Duplicate density",
+      "value_kind": "number"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Compare names, types, cardinalities, and constraints with a declared baseline.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-engineering.schema-drift",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Schema drift",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize event-time range, gaps, ordering, and timezone evidence.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-engineering.temporal-coverage",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Temporal coverage",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize address, postal, coordinate, CRS, and jurisdiction coverage.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-engineering.geographic-coverage",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Geographic coverage",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional embedding of a redacted deterministic data profile; the exact vector space must be declared before comparison.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.data-engineering.data-profile-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Data-profile embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.validated-analytical-dataset",
+        "arena.conflict-aware-data-contract"
+      ],
+      "benchmark_ids": [
+        "benchmark.stdlib-data-quality",
+        "benchmark.data-cleaning"
+      ],
+      "capability_ids": [
+        "records.profile",
+        "records.normalize",
+        "records.validate",
+        "records.verify"
+      ],
+      "category_ids": [
+        "dag.acquire.batch",
+        "dag.prepare.profile",
+        "dag.prepare.clean",
+        "dag.prepare.verify"
+      ],
+      "description": "Profile, normalize, validate, repair in shadow, independently verify, and publish records.",
+      "design_pack_ids": [
+        "design-pack.schema-semantics",
+        "design-pack.quality-cleaning"
+      ],
+      "effects": [],
+      "example_ids": [
+        "stdlib-data-quality",
+        "data-cleanup",
+        "conflict-aware-data-contract"
+      ],
+      "id": "recipe.data-engineering.batch-quality",
+      "input_kind_ids": [
+        "artifact.raw-records"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "stdlib.data-foundation-node-pack",
+        "interrogation.semantic-data-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.generic-tabular",
+        "question-pack.organization",
+        "question-pack.postal-address"
+      ],
+      "template_ids": [
+        "template.data-quality",
+        "template.batch-data-pipeline"
+      ],
+      "title": "Batch quality and contract pipeline"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.golden-customer-table",
+        "arena.geospatial-enrichment",
+        "arena.usps-address-verification"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "records.entity-resolve",
+        "records.reference-enrich",
+        "records.geotemporal-enrich"
+      ],
+      "category_ids": [
+        "dag.integrate.enrich",
+        "dag.integrate.enrich.identity",
+        "dag.integrate.enrich.geotemporal"
+      ],
+      "description": "Resolve entities and join versioned postal, geographic, temporal, and reference evidence with abstention.",
+      "design_pack_ids": [
+        "design-pack.geospatial",
+        "design-pack.time-series"
+      ],
+      "effects": [],
+      "example_ids": [
+        "golden-customer-table",
+        "address-reference-verification",
+        "geotemporal-enrichment"
+      ],
+      "id": "recipe.data-engineering.reference-enrichment",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [
+        "Bundled reference tables are teaching fixtures, not authoritative postal, census, or geocoding services."
+      ],
+      "node_pack_ids": [
+        "example.real-world-node-pack",
+        "example.engineering-showcase-node-pack",
+        "interrogation.semantic-data-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.enriched-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.organization",
+        "question-pack.postal-address",
+        "question-pack.datetime",
+        "question-pack.geography"
+      ],
+      "template_ids": [
+        "template.data-quality",
+        "template.geospatial-analytics"
+      ],
+      "title": "Identity, geographic, and temporal enrichment"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.transaction-reconciliation",
+        "arena.validated-analytical-dataset"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "records.merge",
+        "records.reconcile",
+        "records.provenance"
+      ],
+      "category_ids": [
+        "dag.integrate.join",
+        "dag.integrate.reconcile",
+        "dag.prepare.conflict"
+      ],
+      "description": "Preserve source identities, resolve conflicts, balance facts, and emit an auditable analytical dataset.",
+      "design_pack_ids": [
+        "design-pack.data-source",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [
+        "multi-feed-analytical-dataset",
+        "transaction-reconciliation"
+      ],
+      "id": "recipe.data-engineering.multi-source-reconciliation",
+      "input_kind_ids": [
+        "artifact.enriched-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.real-world-node-pack",
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.reconciled-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.transaction",
+        "question-pack.generic-tabular"
+      ],
+      "template_ids": [
+        "template.batch-data-pipeline"
+      ],
+      "title": "Multi-source merge and reconciliation"
+    },
+    {
+      "adapter_ids": [
+        "adapter.cloudevents",
+        "adapter.orchestrator.dagster"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.event-time-windowing"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "events.decode",
+        "events.window",
+        "events.reconcile",
+        "events.observe"
+      ],
+      "category_ids": [
+        "dag.acquire.stream",
+        "dag.prepare.parse",
+        "dag.integrate.aggregate"
+      ],
+      "description": "Decode events, apply explicit windows and lateness policy, reconcile revisions, and publish lineage-aware state.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "event-time-windowing"
+      ],
+      "id": "recipe.data-engineering.event-time-materialization",
+      "input_kind_ids": [
+        "artifact.raw-events"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.event-driven-system"
+      ],
+      "title": "Event-time stream materialization"
+    }
+  ],
+  "signal_terms": [
+    "data cleaning",
+    "data validation",
+    "data quality",
+    "etl",
+    "elt",
+    "schema drift",
+    "entity resolution",
+    "address",
+    "geospatial",
+    "gis",
+    "event time",
+    "reconciliation"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.acquire.batch",
+    "dag.prepare.profile",
+    "dag.prepare.clean",
+    "dag.prepare.verify",
+    "dag.integrate.enrich",
+    "dag.integrate.enrich.identity",
+    "dag.integrate.enrich.geotemporal",
+    "dag.integrate.join",
+    "dag.integrate.reconcile",
+    "dag.prepare.conflict",
+    "dag.acquire.stream",
+    "dag.prepare.parse",
+    "dag.integrate.aggregate"
+  ],
+  "title": "Data engineering",
+  "version": "0.1.0"
+}

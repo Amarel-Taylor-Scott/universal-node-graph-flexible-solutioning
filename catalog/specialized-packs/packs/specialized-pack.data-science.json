@@ -1,0 +1,533 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "data-science",
+    "extraction_target": "solutiongraph-pack-data-science",
+    "python_module": "solutiongraph.specialized.data_science"
+  },
+  "description": "Leakage-safe regression, classification, forecasting, ranking, clustering, anomaly, uncertainty, and ensemble solution spaces.",
+  "domain_pack_ids": [
+    "domain-pack.ai-ml",
+    "domain-pack.science-optimization"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject any route with independently detected leakage or split-identity drift.",
+      "id": "gate.data-science.leakage-safe",
+      "independent": true,
+      "metric_ids": [
+        "metric.data-science.leakage-violations"
+      ],
+      "oracle_kind": "property",
+      "title": "Leakage-safe evaluation"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject promotion unless fixed quality, calibration, stability, and uncertainty contracts pass on untouched evidence.",
+      "id": "gate.data-science.holdout-acceptance",
+      "independent": true,
+      "metric_ids": [
+        "metric.data-science.task-quality",
+        "metric.data-science.calibration-error",
+        "metric.data-science.stability-loss",
+        "metric.data-science.uncertainty-coverage"
+      ],
+      "oracle_kind": "statistical",
+      "title": "Holdout acceptance"
+    }
+  ],
+  "id": "specialized-pack.data-science",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Primary fixed task metric evaluated on the declared validation or holdout split.",
+      "direction": "maximize",
+      "id": "metric.data-science.task-quality",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.holdout",
+      "title": "Task quality",
+      "unit": "task-metric"
+    },
+    {
+      "description": "Error between predicted confidence or interval coverage and observed outcomes.",
+      "direction": "minimize",
+      "id": "metric.data-science.calibration-error",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.holdout",
+      "title": "Calibration error",
+      "unit": "ratio"
+    },
+    {
+      "description": "Quality deterioration across seeds, perturbations, time slices, and protected stress cases.",
+      "direction": "minimize",
+      "id": "metric.data-science.stability-loss",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.stress",
+      "title": "Stability loss",
+      "unit": "task-metric"
+    },
+    {
+      "description": "Count of independently detected split, label, future, group, or preprocessing leakage violations.",
+      "direction": "minimize",
+      "id": "metric.data-science.leakage-violations",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.pipeline",
+      "title": "Leakage violations",
+      "unit": "count"
+    },
+    {
+      "description": "Observed coverage of declared prediction sets or intervals.",
+      "direction": "target",
+      "id": "metric.data-science.uncertainty-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.holdout",
+      "title": "Uncertainty coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Declared complexity or resource proxy retained as a separate Pareto objective.",
+      "direction": "minimize",
+      "id": "metric.data-science.model-complexity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.model",
+      "title": "Model complexity",
+      "unit": "resource-unit"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Classify supervised, unsupervised, forecasting, ranking, causal, or numerical outcome semantics.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-science.task-family",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Task family",
+      "value_kind": "category"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Compute effective sample size relative to raw and encoded feature counts.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-science.sample-feature-ratio",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Sample-to-feature ratio",
+      "value_kind": "number"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure balance, skew, tails, modes, censoring, zero inflation, and missing labels.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-science.target-shape",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Target shape",
+      "value_kind": "distribution"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Aggregate cardinality, skew, tail, sparsity, monotonicity, and missingness across features.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-science.feature-shape-summary",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Feature-shape summary",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize linear and nonlinear dependence, redundant groups, and leakage candidates.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-science.dependence-collinearity",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Dependence and collinearity",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Detect entity, group, temporal, spatial, and preprocessing boundaries that can contaminate evaluation.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-science.split-risk",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Split and leakage risk",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize candidate anomalies, density changes, rare slices, and cluster stability.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.data-science.outlier-cluster-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Outlier and cluster profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional joint embedding of task semantics and redacted profile statistics for historical route retrieval in an exact space.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.data-science.task-data-profile-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Task and data-profile embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.robust-regression-and-conformal",
+        "arena.imbalanced-classification-and-calibration",
+        "arena.wide-table-feature-reduction"
+      ],
+      "benchmark_ids": [
+        "benchmark.tabular-regression",
+        "benchmark.tabular-classification"
+      ],
+      "capability_ids": [
+        "ml.split",
+        "ml.feature",
+        "ml.fit",
+        "ml.calibrate",
+        "ml.verify"
+      ],
+      "category_ids": [
+        "dag.prepare.split",
+        "dag.learn.feature",
+        "dag.learn.regression",
+        "dag.learn.classification",
+        "dag.evaluate.model"
+      ],
+      "description": "Compare explicit preprocessing, feature, model, calibration, ensemble, and verification candidates for classification or regression.",
+      "design_pack_ids": [
+        "design-pack.validation-splits",
+        "design-pack.feature-engineering",
+        "design-pack.baselines-models",
+        "design-pack.tuning-search",
+        "design-pack.evaluation-error"
+      ],
+      "effects": [],
+      "example_ids": [
+        "robust-regression-and-conformal",
+        "imbalanced-classification-and-calibration",
+        "wide-table-feature-reduction"
+      ],
+      "id": "recipe.data-science.supervised-modeling",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.data-science-lifecycle-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.evaluated-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.ml-dataset",
+        "question-pack.generic-tabular"
+      ],
+      "template_ids": [
+        "template.kaggle-tabular"
+      ],
+      "title": "Leakage-safe supervised modeling"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.tabular-prediction"
+      ],
+      "benchmark_ids": [
+        "benchmark.tabular-regression",
+        "benchmark.tabular-classification"
+      ],
+      "capability_ids": [
+        "ml.split",
+        "ml.feature",
+        "ml.fit",
+        "ml.calibrate",
+        "ml.verify"
+      ],
+      "category_ids": [
+        "dag.prepare.split",
+        "dag.learn.feature",
+        "dag.learn.regression",
+        "dag.learn.classification",
+        "dag.evaluate.model"
+      ],
+      "description": "Preserve enrichment provenance while evaluating predictive features, models, calibration, and error slices.",
+      "design_pack_ids": [
+        "design-pack.validation-splits",
+        "design-pack.feature-engineering",
+        "design-pack.evaluation-error"
+      ],
+      "effects": [],
+      "example_ids": [
+        "tabular-regression",
+        "tabular-classification"
+      ],
+      "id": "recipe.data-science.enriched-supervised-modeling",
+      "input_kind_ids": [
+        "artifact.enriched-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.data-science-lifecycle-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.evaluated-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.ml-dataset"
+      ],
+      "template_ids": [
+        "template.kaggle-tabular"
+      ],
+      "title": "Enriched supervised modeling"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.time-series-feature-backtest",
+        "arena.calibrated-forecast"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "forecast.split",
+        "forecast.feature",
+        "forecast.fit",
+        "forecast.reconcile",
+        "forecast.verify"
+      ],
+      "category_ids": [
+        "dag.learn.forecast",
+        "dag.learn.uncertainty",
+        "dag.evaluate.model"
+      ],
+      "description": "Freeze horizon and availability, construct rolling splits and temporal features, reconcile forecasts, and verify interval coverage.",
+      "design_pack_ids": [
+        "design-pack.time-series",
+        "design-pack.validation-splits",
+        "design-pack.ensemble-calibration"
+      ],
+      "effects": [],
+      "example_ids": [
+        "time-series-feature-backtest",
+        "calibrated-time-series-forecast"
+      ],
+      "id": "recipe.data-science.forecasting-backtest",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.data-science-lifecycle-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.forecast"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.datetime",
+        "question-pack.ml-dataset"
+      ],
+      "template_ids": [
+        "template.time-series-forecasting"
+      ],
+      "title": "Time-series forecasting and backtest"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.unsupervised-segmentation-and-anomaly"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "ml.represent",
+        "ml.cluster",
+        "ml.anomaly",
+        "ml.stability",
+        "ml.explain"
+      ],
+      "category_ids": [
+        "dag.learn.embedding",
+        "dag.learn.cluster",
+        "dag.learn.anomaly",
+        "dag.evaluate.metamorphic"
+      ],
+      "description": "Compare representation, clustering, anomaly, stability, and explanation routes without manufacturing labels.",
+      "design_pack_ids": [
+        "design-pack.selection-reduction",
+        "design-pack.robustness-stability",
+        "design-pack.interpretability"
+      ],
+      "effects": [],
+      "example_ids": [
+        "unsupervised-segmentation-and-anomaly"
+      ],
+      "id": "recipe.data-science.segmentation-anomaly",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.data-science-lifecycle-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.segment-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.scientific-experiment"
+      ],
+      "title": "Segmentation and anomaly discovery"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.recommendation-ranking",
+        "arena.ensemble-selection-and-stacking"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "ml.candidates",
+        "ml.rank",
+        "ml.ensemble",
+        "ml.calibrate",
+        "ml.verify"
+      ],
+      "category_ids": [
+        "dag.learn.ranking",
+        "dag.learn.ensemble",
+        "dag.learn.uncertainty",
+        "dag.evaluate.model"
+      ],
+      "description": "Construct eligible candidates, compare ranking/model families, calibrate or ensemble, and evaluate exposure and failure diversity.",
+      "design_pack_ids": [
+        "design-pack.ensemble-calibration",
+        "design-pack.evaluation-error"
+      ],
+      "effects": [],
+      "example_ids": [
+        "recommendation-ranking",
+        "ensemble-selection-and-stacking"
+      ],
+      "id": "recipe.data-science.ranking-ensemble",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack",
+        "example.data-science-lifecycle-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.evaluated-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.recommendation-ranking"
+      ],
+      "title": "Ranking, recommendation, and ensemble selection"
+    }
+  ],
+  "signal_terms": [
+    "data science",
+    "regression",
+    "classification",
+    "forecasting",
+    "time series",
+    "clustering",
+    "anomaly detection",
+    "feature engineering",
+    "calibration",
+    "conformal",
+    "ensemble",
+    "kaggle"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.prepare.split",
+    "dag.learn.feature",
+    "dag.learn.regression",
+    "dag.learn.classification",
+    "dag.evaluate.model",
+    "dag.learn.forecast",
+    "dag.learn.uncertainty",
+    "dag.learn.embedding",
+    "dag.learn.cluster",
+    "dag.learn.anomaly",
+    "dag.evaluate.metamorphic",
+    "dag.learn.ranking",
+    "dag.learn.ensemble"
+  ],
+  "title": "Data science",
+  "version": "0.1.0"
+}

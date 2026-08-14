@@ -1,0 +1,507 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "ml-engineering",
+    "extraction_target": "solutiongraph-pack-ml-engineering",
+    "python_module": "solutiongraph.specialized.ml_engineering"
+  },
+  "description": "Reproducible training, synthetic supplementation, model packaging, serving, monitoring, reinforcement learning, and verified rollback.",
+  "domain_pack_ids": [
+    "domain-pack.ai-ml",
+    "domain-pack.platform-release",
+    "domain-pack.sre-incident"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject deployment unless fixed quality, compatibility, policy, latency, and cost requirements pass.",
+      "id": "gate.ml-engineering.release",
+      "independent": true,
+      "metric_ids": [
+        "metric.ml-engineering.release-acceptance",
+        "metric.ml-engineering.serving-latency",
+        "metric.ml-engineering.serving-cost"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Model release gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject promotion when rollback cannot be verified or drift evidence cannot trigger a bounded response.",
+      "id": "gate.ml-engineering.rollback",
+      "independent": true,
+      "metric_ids": [
+        "metric.ml-engineering.recovery-time",
+        "metric.ml-engineering.drift-detection-delay"
+      ],
+      "oracle_kind": "property",
+      "title": "Rollback and monitoring gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate when synthetic data does not improve or preserve untouched real-data evidence across protected slices.",
+      "id": "gate.ml-engineering.synthetic-supplement",
+      "independent": true,
+      "metric_ids": [
+        "metric.ml-engineering.synthetic-utility-gap"
+      ],
+      "oracle_kind": "statistical",
+      "title": "Synthetic supplementation gate"
+    }
+  ],
+  "id": "specialized-pack.ml-engineering",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Share of fixed release cases passing quality, compatibility, policy, and operational gates.",
+      "direction": "maximize",
+      "id": "metric.ml-engineering.release-acceptance",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.release",
+      "title": "Release acceptance",
+      "unit": "ratio"
+    },
+    {
+      "description": "Measured tail latency on the declared reference runtime and workload.",
+      "direction": "minimize",
+      "id": "metric.ml-engineering.serving-latency",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.runtime",
+      "title": "Serving latency",
+      "unit": "milliseconds"
+    },
+    {
+      "description": "Measured cost per declared unit of accepted work.",
+      "direction": "minimize",
+      "id": "metric.ml-engineering.serving-cost",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.runtime",
+      "title": "Serving cost",
+      "unit": "currency-per-unit"
+    },
+    {
+      "description": "Observed time to detect, halt, roll back, and verify a failed promotion.",
+      "direction": "minimize",
+      "id": "metric.ml-engineering.recovery-time",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.recovery",
+      "title": "Recovery time",
+      "unit": "seconds"
+    },
+    {
+      "description": "Delay between fixed drift onset and independently verified detection.",
+      "direction": "minimize",
+      "id": "metric.ml-engineering.drift-detection-delay",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.monitoring",
+      "title": "Drift detection delay",
+      "unit": "seconds"
+    },
+    {
+      "description": "Difference between real-only and synthetic-supplemented holdout utility under the same evaluator.",
+      "direction": "target",
+      "id": "metric.ml-engineering.synthetic-utility-gap",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.holdout",
+      "title": "Synthetic utility gap",
+      "unit": "task-metric"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Summarize data, compute, memory, accelerator, wall-time, and artifact requirements.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.ml-engineering.training-footprint",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Training footprint",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record request/response types, batching, latency, throughput, and availability requirements.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.ml-engineering.serving-contract",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Serving contract",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Count and classify model, binary, package, service, secret, and hardware dependencies.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.ml-engineering.dependency-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Dependency surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Identify feature, label, concept, calibration, and operational drift signals relevant to the model.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.ml-engineering.drift-sensitivity",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Drift sensitivity",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Check artifact identity, compatibility, shadow evidence, and reversible promotion boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.ml-engineering.rollback-readiness",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Rollback readiness",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure delay, censoring, and sampling bias between prediction and trustworthy outcome evidence.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.ml-engineering.feedback-delay",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Feedback delay",
+      "value_kind": "distribution"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional embedding of the deployment and monitoring profile for retrieving comparable historical releases.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.ml-engineering.system-profile-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "ML-system profile embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.ensemble-selection-and-stacking",
+        "arena.model-explainability-and-stability"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "ml.train",
+        "ml.evaluate",
+        "ml.package",
+        "ml.provenance"
+      ],
+      "category_ids": [
+        "dag.learn",
+        "dag.evaluate.model",
+        "dag.govern.provenance"
+      ],
+      "description": "Freeze data and environment identities, train candidate routes, evaluate holdouts, package artifacts, and retain provenance.",
+      "design_pack_ids": [
+        "design-pack.tuning-search",
+        "design-pack.evaluation-error",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [
+        "ensemble-selection-and-stacking",
+        "model-explainability-and-stability"
+      ],
+      "id": "recipe.ml-engineering.training-pipeline",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.data-science-lifecycle-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.evaluated-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.kaggle-tabular",
+        "template.deployment-release"
+      ],
+      "title": "Reproducible training pipeline"
+    },
+    {
+      "adapter_ids": [
+        "adapter.openapi",
+        "adapter.orchestrator.kubernetes"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.model-release-monitoring-and-rollback"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "ml.package",
+        "ml.serve",
+        "ml.release",
+        "ml.rollback"
+      ],
+      "category_ids": [
+        "dag.serve.api",
+        "dag.serve.deploy",
+        "dag.operate.observe"
+      ],
+      "description": "Compile a tested model artifact into a versioned serving interface, staged rollout, health verification, and rollback plan.",
+      "design_pack_ids": [
+        "design-pack.deployment-serving",
+        "design-pack.monitoring-feedback"
+      ],
+      "effects": [],
+      "example_ids": [
+        "model-release-monitoring-and-rollback"
+      ],
+      "id": "recipe.ml-engineering.model-release",
+      "input_kind_ids": [
+        "artifact.evaluated-model"
+      ],
+      "limitations": [
+        "The bundled adapters export manifests; they do not authenticate to or deploy into a production platform."
+      ],
+      "node_pack_ids": [
+        "example.data-science-lifecycle-node-pack",
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.deployed-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.deployment-release",
+        "template.api-service"
+      ],
+      "title": "Model serving and staged release"
+    },
+    {
+      "adapter_ids": [
+        "adapter.orchestrator.dagster"
+      ],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.dataset-profiling-and-drift",
+        "arena.model-release-monitoring-and-rollback"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "ml.observe",
+        "ml.drift",
+        "ml.feedback",
+        "ml.recover"
+      ],
+      "category_ids": [
+        "dag.operate.observe",
+        "dag.operate.incident",
+        "dag.govern.provenance"
+      ],
+      "description": "Observe inputs, outputs, drift, delayed labels, SLOs, and rollback triggers without allowing telemetry to rewrite prior receipts.",
+      "design_pack_ids": [
+        "design-pack.monitoring-feedback",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [
+        "dataset-profiling-and-drift",
+        "model-release-monitoring-and-rollback"
+      ],
+      "id": "recipe.ml-engineering.model-monitoring",
+      "input_kind_ids": [
+        "artifact.deployed-model"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.data-science-lifecycle-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.monitoring-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.observability-sre",
+        "template.deployment-release"
+      ],
+      "title": "Model monitoring and feedback"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.tabular-prediction"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "synthetic.generate",
+        "synthetic.filter",
+        "synthetic.compare",
+        "synthetic.mix"
+      ],
+      "category_ids": [
+        "dag.generate.synthetic.tabular",
+        "dag.generate.augmentation",
+        "dag.evaluate.model"
+      ],
+      "description": "Generate, filter, compare, and mix synthetic records only when untouched real-data utility, privacy, and failure-slice gates pass.",
+      "design_pack_ids": [
+        "design-pack.synthetic-data",
+        "design-pack.fairness-risk"
+      ],
+      "effects": [],
+      "example_ids": [
+        "synthetic-tabular-augmentation"
+      ],
+      "id": "recipe.ml-engineering.synthetic-supplementation",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.scientific-experiment"
+      ],
+      "title": "Synthetic data supplementation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.scientific-experiment"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "rl.rollout",
+        "rl.reward",
+        "rl.update",
+        "rl.evaluate",
+        "rl.promote"
+      ],
+      "category_ids": [
+        "dag.learn.reinforcement",
+        "dag.learn.optimize",
+        "dag.evaluate.outer"
+      ],
+      "description": "Freeze environment, reward, policy, safety, resource, and holdout boundaries before bounded policy improvement and promotion.",
+      "design_pack_ids": [
+        "design-pack.reinforcement-learning",
+        "design-pack.robustness-stability"
+      ],
+      "effects": [],
+      "example_ids": [
+        "reinforcement-learning-loop"
+      ],
+      "id": "recipe.ml-engineering.reinforcement-loop",
+      "input_kind_ids": [
+        "artifact.model-candidate"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.evaluated-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.scientific-experiment"
+      ],
+      "title": "Bounded reinforcement-learning loop"
+    }
+  ],
+  "signal_terms": [
+    "ml engineering",
+    "mlops",
+    "training pipeline",
+    "model deployment",
+    "model serving",
+    "model monitoring",
+    "drift",
+    "rollback",
+    "synthetic training data",
+    "reinforcement learning",
+    "rlhf"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.learn",
+    "dag.evaluate.model",
+    "dag.govern.provenance",
+    "dag.serve.api",
+    "dag.serve.deploy",
+    "dag.operate.observe",
+    "dag.operate.incident",
+    "dag.generate.synthetic.tabular",
+    "dag.generate.augmentation",
+    "dag.learn.reinforcement",
+    "dag.learn.optimize",
+    "dag.evaluate.outer"
+  ],
+  "title": "ML engineering",
+  "version": "0.1.0"
+}

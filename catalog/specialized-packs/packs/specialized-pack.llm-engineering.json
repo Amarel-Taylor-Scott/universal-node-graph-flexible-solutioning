@@ -1,0 +1,487 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "llm-engineering",
+    "extraction_target": "solutiongraph-pack-llm-engineering",
+    "python_module": "solutiongraph.specialized.llm_engineering"
+  },
+  "description": "Grounded RAG, agent and tool systems, synthetic curricula, DueCare-style evaluation, judging, red teaming, and sealed promotion harnesses.",
+  "domain_pack_ids": [
+    "domain-pack.llm-agent",
+    "domain-pack.documents-media",
+    "domain-pack.security-compliance"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject consequential outputs when task acceptance or source grounding fails.",
+      "id": "gate.llm-engineering.grounded-response",
+      "independent": true,
+      "metric_ids": [
+        "metric.llm-engineering.task-acceptance",
+        "metric.llm-engineering.groundedness"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Grounded response gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject promotion when the fixed red-team suite exceeds its declared failure threshold.",
+      "id": "gate.llm-engineering.adversarial-safety",
+      "independent": true,
+      "metric_ids": [
+        "metric.llm-engineering.adversarial-failure"
+      ],
+      "oracle_kind": "property",
+      "title": "Adversarial safety gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject promotion unless diverse judges, human samples, and candidate-unreadable holdouts satisfy the predeclared protocol.",
+      "id": "gate.llm-engineering.sealed-promotion",
+      "independent": true,
+      "metric_ids": [
+        "metric.llm-engineering.judge-agreement",
+        "metric.llm-engineering.sealed-holdout-acceptance"
+      ],
+      "oracle_kind": "human",
+      "title": "Sealed promotion gate"
+    }
+  ],
+  "id": "specialized-pack.llm-engineering",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Share of scenarios accepted by the separately identified task oracle.",
+      "direction": "maximize",
+      "id": "metric.llm-engineering.task-acceptance",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.scenario",
+      "title": "Task acceptance",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of material claims supported by authorized source evidence under the fixed citation evaluator.",
+      "direction": "maximize",
+      "id": "metric.llm-engineering.groundedness",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.response",
+      "title": "Groundedness",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of adversarial scenarios causing a declared safety, policy, or integrity failure.",
+      "direction": "minimize",
+      "id": "metric.llm-engineering.adversarial-failure",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.stress",
+      "title": "Adversarial failure rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Agreement and calibrated disagreement across independent judges and human adjudication samples.",
+      "direction": "maximize",
+      "id": "metric.llm-engineering.judge-agreement",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.evaluation",
+      "title": "Judge agreement",
+      "unit": "ratio"
+    },
+    {
+      "description": "Measured model, tool, and infrastructure cost divided by accepted outputs.",
+      "direction": "minimize",
+      "id": "metric.llm-engineering.cost-per-accepted",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.run",
+      "title": "Cost per accepted result",
+      "unit": "currency-per-result"
+    },
+    {
+      "description": "Measured end-to-end latency including retrieval, tools, generation, and independent evaluation.",
+      "direction": "minimize",
+      "id": "metric.llm-engineering.latency",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.run",
+      "title": "End-to-end latency",
+      "unit": "milliseconds"
+    },
+    {
+      "description": "Acceptance on candidate-unreadable scenarios and evaluator infrastructure.",
+      "direction": "maximize",
+      "id": "metric.llm-engineering.sealed-holdout-acceptance",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.holdout",
+      "title": "Sealed holdout acceptance",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Classify generation, extraction, retrieval, tool use, judging, tutoring, or agent trajectory semantics.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-engineering.task-mode",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "LLM task mode",
+      "value_kind": "category"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure source count, token length, structure, freshness, authority, duplication, and retrieval boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-engineering.context-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Context profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Enumerate tools, effects, permissions, secrets, and approval boundaries available to the system.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-engineering.tool-authority",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Tool authority",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Summarize normal, edge, adversarial, multilingual, long-context, and tool-failure scenario coverage.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-engineering.scenario-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Scenario surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure shared model families, prompts, training signals, and likely correlated judge failures.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-engineering.judge-dependence",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Judge dependence",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record candidate readability, benchmark exposure, retrieval leakage, and held-out evaluator isolation.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-engineering.contamination-risk",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Contamination risk",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Describe structured-output, citation, abstention, length, modality, and safety requirements.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-engineering.response-shape",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Response shape",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional embedding of redacted scenario semantics for diverse retrieval; exact model, revision, dimensions, distance, and source digest remain mandatory.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.llm-engineering.scenario-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Scenario embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.grounded-knowledge-system"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "llm.retrieve",
+        "llm.rerank",
+        "llm.generate",
+        "llm.cite",
+        "llm.verify"
+      ],
+      "category_ids": [
+        "dag.learn.rag",
+        "dag.integrate.enrich.knowledge",
+        "dag.evaluate.rag"
+      ],
+      "description": "Establish corpus authority, parse and index content, retrieve and rerank evidence, generate with citations, and independently verify claims.",
+      "design_pack_ids": [
+        "design-pack.text-document",
+        "design-pack.llm-harness"
+      ],
+      "effects": [],
+      "example_ids": [
+        "grounded-document-extraction"
+      ],
+      "id": "recipe.llm-engineering.grounded-rag",
+      "input_kind_ids": [
+        "artifact.document-corpus"
+      ],
+      "limitations": [
+        "Fixture retrieval and judging do not establish production factuality or safety."
+      ],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.llm-system"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.document"
+      ],
+      "template_ids": [
+        "template.knowledge-retrieval",
+        "template.document-intelligence"
+      ],
+      "title": "Grounded retrieval and generation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.content-policy-moderation",
+        "arena.defensive-cyber-investigation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "llm.scenario",
+        "llm.evaluate",
+        "llm.red-team",
+        "llm.adjudicate",
+        "llm.promote"
+      ],
+      "category_ids": [
+        "dag.evaluate.llm-harness",
+        "dag.evaluate.safety",
+        "dag.evaluate.judge",
+        "dag.evaluate.outer"
+      ],
+      "description": "Freeze scenarios, solution, development evaluation, improvement, promotion, and sealed outer-evaluation graphs with feedback firewalls.",
+      "design_pack_ids": [
+        "design-pack.llm-harness",
+        "design-pack.fairness-risk",
+        "design-pack.robustness-stability"
+      ],
+      "effects": [],
+      "example_ids": [
+        "duecare-llm-evaluation-harness"
+      ],
+      "id": "recipe.llm-engineering.evaluation-red-team",
+      "input_kind_ids": [
+        "artifact.llm-system"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.llm-evaluation-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.content-moderation",
+        "template.cybersecurity-investigation"
+      ],
+      "title": "LLM evaluation and red-team harness"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.text-classification-pipeline"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "llm.synthetic-generate",
+        "llm.synthetic-filter",
+        "llm.synthetic-balance",
+        "llm.synthetic-verify"
+      ],
+      "category_ids": [
+        "dag.generate.synthetic.text",
+        "dag.generate.synthetic.adversarial",
+        "dag.generate.label"
+      ],
+      "description": "Generate, deduplicate, filter, balance, adversarially expand, and independently evaluate synthetic training examples before mixing.",
+      "design_pack_ids": [
+        "design-pack.synthetic-data",
+        "design-pack.llm-harness"
+      ],
+      "effects": [],
+      "example_ids": [
+        "synthetic-llm-curriculum"
+      ],
+      "id": "recipe.llm-engineering.synthetic-curriculum",
+      "input_kind_ids": [
+        "artifact.validated-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack",
+        "design-atlas.data-science-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.llm-training-data"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.scientific-experiment"
+      ],
+      "title": "Synthetic instruction and adversarial curriculum"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [
+        "agent-benchmark.reference-smoke",
+        "agent-benchmark.command-matrix-example"
+      ],
+      "arena_task_ids": [
+        "arena.repository-repair"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "agent.materialize",
+        "agent.invoke",
+        "agent.evaluate",
+        "agent.compare",
+        "agent.report"
+      ],
+      "category_ids": [
+        "dag.evaluate.agent",
+        "dag.evaluate.outer",
+        "dag.evaluate.human"
+      ],
+      "description": "Run paired control and SolutionGraph-context workspaces across compatible task, harness, model, and seed cells with sealed evaluation.",
+      "design_pack_ids": [
+        "design-pack.llm-harness",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [
+        "tested-code-repair"
+      ],
+      "id": "recipe.llm-engineering.coding-agent-ab",
+      "input_kind_ids": [
+        "artifact.repository"
+      ],
+      "limitations": [
+        "The bundled smoke adapter is model-free and proves harness mechanics only."
+      ],
+      "node_pack_ids": [
+        "reference.core-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.llm-evaluation-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.qa-engineering"
+      ],
+      "title": "Coding-agent control/treatment arena"
+    }
+  ],
+  "signal_terms": [
+    "llm",
+    "language model",
+    "rag",
+    "retrieval augmented",
+    "agent",
+    "tool use",
+    "eval harness",
+    "llm evaluation",
+    "red team",
+    "jailbreak",
+    "llm as judge",
+    "synthetic instruction data",
+    "due care"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.learn.rag",
+    "dag.integrate.enrich.knowledge",
+    "dag.evaluate.rag",
+    "dag.evaluate.llm-harness",
+    "dag.evaluate.safety",
+    "dag.evaluate.judge",
+    "dag.evaluate.outer",
+    "dag.generate.synthetic.text",
+    "dag.generate.synthetic.adversarial",
+    "dag.generate.label",
+    "dag.evaluate.agent",
+    "dag.evaluate.human"
+  ],
+  "title": "LLM engineering",
+  "version": "0.1.0"
+}

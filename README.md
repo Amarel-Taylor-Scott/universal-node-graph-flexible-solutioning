@@ -7,7 +7,7 @@
 [![Status: developer preview](https://img.shields.io/badge/status-developer%20preview-orange)](READINESS.md)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
-Version 0.6 is a working developer preview of a different way to build software:
+Version 0.7 is a working developer preview of a different way to build software:
 compile each task into an ordered graph search space, expose every compatible
 implementation for every atomic substep, and learn which complete route best
 satisfies the task's quality, speed, cost, reliability, and policy objectives.
@@ -24,6 +24,15 @@ git clone https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-s
 cd universal-node-graph-flexible-solutioning
 python -m pip install -e .
 solutiongraph doctor
+python examples/specialized_package_workflow.py
+solutiongraph packages list
+solutiongraph packages recommend \
+  "Validate and enrich company records, then train and deploy a model" \
+  --input-kind artifact.raw-records \
+  --output-kind artifact.deployed-model
+solutiongraph packages compose \
+  --input-kind artifact.raw-records \
+  --output-kind artifact.deployed-model
 solutiongraph universal domains
 solutiongraph universal coverage
 solutiongraph universal plan idempotent-api-contract \
@@ -49,6 +58,17 @@ Read [the universal-engineering guide](UNIVERSAL_ENGINEERING_SYSTEM.md) for
 fingerprints, coverage gates, standards projections, runtime payload
 validation, and horizontal/vertical extension rules.
 
+The specialized-package commands expose seven focused product surfaces for
+data engineering, analysis, data science, ML engineering, LLM engineering,
+software engineering, and operations. Their 32 typed recipes can be ranked for
+a task or composed by exact artifact kind while exposing every package ranking
+and explicit search accounting. They are advisory authoring views—not
+executable closure—so
+ordinary node admission, compilation, permissions, independent verification,
+and solution-pack rules still apply. Read the
+[specialized-package guide](SPECIALIZED_PACKAGES.md) for the extension API and
+third-party entry-point format.
+
 The graph experiment generates a compiler-validated two-node mutation from a
 fixed one-node control, admits two routes in the control topology and four in
 the mutation, executes all six under the same verifier, and reports the
@@ -69,6 +89,7 @@ Choose a path:
 
 - **Try examples:** [examples/README.md](examples/README.md)
 - **Plan a universal engineering task:** [UNIVERSAL_ENGINEERING_SYSTEM.md](UNIVERSAL_ENGINEERING_SYSTEM.md)
+- **Choose and compose specialized packages:** [SPECIALIZED_PACKAGES.md](SPECIALIZED_PACKAGES.md)
 - **Build a task or node:** [GETTING_STARTED.md](GETTING_STARTED.md)
 - **Understand the architecture:** [UNIVERSAL_NODE_GRAPH_SPEC.md](UNIVERSAL_NODE_GRAPH_SPEC.md)
 - **Find the right guide:** [DOCUMENTATION.md](DOCUMENTATION.md)
@@ -76,8 +97,8 @@ Choose a path:
 
 The framework does not prescribe a fixed six-step pipeline or a fixed node
 catalogue. Macro stages and atomic substeps are task data; node definitions,
-parameter bindings, contracts, routes, objectives, and feedback are separate
-typed objects that can grow without redesigning the viewer or compiler.
+parameter bindings, contracts, routes, objectives, packages, and feedback are
+separate typed objects that can grow without redesigning the viewer or compiler.
 
 The `solutiongraph` package is the domain-neutral compiler core. It defines
 strict semantic programs, a content-addressed node ABI, negotiated node
@@ -85,8 +106,11 @@ discovery, sparse descriptions and exact embedding spaces, closed-world
 registry snapshots, reusable semantic templates, complete admission, frozen
 plans, prior/beam/sprout/exhaustive search, adaptive resource allocation,
 immutable evidence, Pareto ranking, and observational prior learning. Version
-0.6 adds a task-contract and portable solution-pack layer, a source-bound Python
-node-authoring SDK, a dependency-free reusable node library, repeatable
+0.7 adds extraction-ready specialized package definitions, transparent package
+recommendation, typed cross-package recipe composition, and declare-before-load
+provider discovery. It builds on the 0.6 task-contract and portable
+solution-pack layer, a source-bound Python node-authoring SDK, a dependency-free
+reusable node library, repeatable
 benchmark suites, and offline evidence reports. These sit above the 0.5 control,
 topology, checkpoint, streaming, saga, multi-fidelity, compatibility, and
 provenance foundations.
@@ -110,7 +134,7 @@ fallback routes. The [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md) catalogues
 programs; twelve more are strict semantic templates and four require
 credentialed external connectors.
 
-The unreleased task-intelligence layer adds an open, multi-label DAG taxonomy,
+The task-intelligence layer adds an open, multi-label DAG taxonomy,
 progressive task/data fingerprints, failure-preserving historical retrieval,
 diverse historical and history-blind starting points, arbitrary effort
 policies, matched-budget negative-transfer detection, exact plan/lane/receipt
@@ -220,6 +244,7 @@ is not mixed into the execution path as another step.
 | Source-bound Python authoring | Callable signature validation, source-derived implementation digests, stable candidate bindings, and exact finite candidate expansion |
 | Reusable standard library | 19 dependency-free text/data nodes, 32 exact bindings, discovery sidecars, and a portable node pack built through the public authoring SDK |
 | Portable task and solution packs | Stable task meaning, case/oracle identity, exact program/registry/node-pack closure, fixed baselines, and benchmark-suite digests |
+| Specialized capability packages | Seven extraction-ready vertical packages, 32 typed recipes, 51 profiler features, 42 metrics, 17 quality gates, transparent recommendation, bounded typed composition, and declare-before-load provider discovery |
 | Cross-domain templates | 31 checked-in templates containing 544 atomic obligations across data, ML, documents, web, media, services, operations, security, business, science, knowledge, claims, fraud, compliance, geospatial, audio, supply chain, scheduling, migration, SRE, and moderation |
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
 | Universal engineering model | 14 reusable obligations, 13 domain packs, 42 all-visible questions, E1–E10 authority-aware planning, ten fingerprint channels, and evidence-derived C0–C7 coverage |

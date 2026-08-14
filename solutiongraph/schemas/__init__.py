@@ -106,6 +106,12 @@ SCHEMA_NAMES = (
     "integration-adapter.schema.json",
     "integration-projection.schema.json",
     "orchestrator-plan-projection.schema.json",
+    "specialized-pack.schema.json",
+    "specialized-pack-registry.schema.json",
+    "specialized-task-request.schema.json",
+    "specialized-recommendation-report.schema.json",
+    "specialized-composition-request.schema.json",
+    "specialized-composition-report.schema.json",
 )
 
 

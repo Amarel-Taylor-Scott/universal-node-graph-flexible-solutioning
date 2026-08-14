@@ -44,6 +44,10 @@ from solutiongraph.reference_nodes import (
     parse_json,
     require_keys,
 )
+from solutiongraph.specialized import (
+    REFERENCE_SPECIALIZED_PACK_REGISTRY,
+    REFERENCE_SPECIALIZED_PACKS,
+)
 from solutiongraph.stdlib_pack import (
     STANDARD_LIBRARY_DESCRIPTORS,
     STANDARD_LIBRARY_NODE_SPECS,
@@ -132,6 +136,8 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + len(REFERENCE_ENGINEERING_QUESTIONS)
         + len(REFERENCE_INTEGRATION_ADAPTERS)
         + 3
+        + 3
+        + len(REFERENCE_SPECIALIZED_PACKS)
     )
     assert len(first) == expected
     index = first["index.json"]
@@ -177,6 +183,15 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         "suite_count": 2,
         "reference_smoke_trials": 20,
         "sealed_payloads_published": False,
+    }
+    assert index["specialized_packages"] == {
+        "path": "specialized-packs/index.json",
+        "registry_digest": REFERENCE_SPECIALIZED_PACK_REGISTRY.digest,
+        "pack_count": 7,
+        "recipe_count": 32,
+        "profiler_feature_count": 51,
+        "metric_count": 42,
+        "gate_count": 17,
     }
     assert first["agent-bench/index.json"]["sealed_payloads_published"] is False
     assert all(
