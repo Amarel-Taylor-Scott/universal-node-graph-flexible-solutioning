@@ -1,0 +1,979 @@
+{
+  "description": "A standards, content, assessment, accessibility, scoring, review, and learning scaffold.",
+  "domains": [
+    "education.assessment",
+    "education.content"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.education-assessment",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_learning_objectives",
+        "target_port": "state",
+        "target_slot": "define_assessment_claims"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_assessment_claims",
+        "target_port": "state",
+        "target_slot": "define_fairness_accessibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_fairness_accessibility",
+        "target_port": "state",
+        "target_slot": "retrieve_source_material"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "retrieve_source_material",
+        "target_port": "state",
+        "target_slot": "author_content"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "author_content",
+        "target_port": "state",
+        "target_slot": "author_items"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "author_items",
+        "target_port": "state",
+        "target_slot": "verify_accuracy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_accuracy",
+        "target_port": "state",
+        "target_slot": "verify_alignment"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_alignment",
+        "target_port": "state",
+        "target_slot": "audit_accessibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_accessibility",
+        "target_port": "state",
+        "target_slot": "audit_bias"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_bias",
+        "target_port": "state",
+        "target_slot": "deliver_assessment"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "deliver_assessment",
+        "target_port": "state",
+        "target_slot": "score_responses"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "score_responses",
+        "target_port": "state",
+        "target_slot": "adjudicate_scores"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "adjudicate_scores",
+        "target_port": "state",
+        "target_slot": "analyze_items"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "analyze_items",
+        "target_port": "state",
+        "target_slot": "recommend_support"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "recommend_support",
+        "target_port": "state",
+        "target_slot": "publish_assessment_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.education-assessment",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_learning_objectives",
+        "type": {
+          "id": "template.education-assessment.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_assessment_receipt",
+        "type": {
+          "id": "template.education-assessment.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_learning_objectives",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Bind learning objectives, prerequisite knowledge, level, population, and setting.",
+        "required_capabilities": [
+          "template.education-assessment.define_learning_objectives.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Bind learning objectives, prerequisite knowledge, level, population, and setting and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_assessment_claims",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define what evidence supports each proficiency claim and what it cannot establish.",
+        "required_capabilities": [
+          "template.education-assessment.define_assessment_claims.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define what evidence supports each proficiency claim and what it cannot establish and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_fairness_accessibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define accessibility, accommodation, cultural, language, privacy, and fairness criteria.",
+        "required_capabilities": [
+          "template.education-assessment.define_fairness_accessibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define accessibility, accommodation, cultural, language, privacy, and fairness criteria and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.author"
+        ],
+        "id": "retrieve_source_material",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Retrieve authoritative source material and exact standards.",
+        "required_capabilities": [
+          "template.education-assessment.retrieve_source_material.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Retrieve authoritative source material and exact standards and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.author"
+        ],
+        "id": "author_content",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Author explanations, examples, activities, and alternate representations.",
+        "required_capabilities": [
+          "template.education-assessment.author_content.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Author explanations, examples, activities, and alternate representations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.author"
+        ],
+        "id": "author_items",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Author assessment items, rubrics, distractors, rationales, and metadata.",
+        "required_capabilities": [
+          "template.education-assessment.author_items.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Author assessment items, rubrics, distractors, rationales, and metadata and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "verify_accuracy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify claims, calculations, citations, and answer keys independently.",
+        "required_capabilities": [
+          "template.education-assessment.verify_accuracy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify claims, calculations, citations, and answer keys independently and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "verify_alignment",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify objective, item, rubric, difficulty, and cognitive-demand alignment.",
+        "required_capabilities": [
+          "template.education-assessment.verify_alignment.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify objective, item, rubric, difficulty, and cognitive-demand alignment and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "audit_accessibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Audit structure, presentation, alternatives, accommodations, and assistive compatibility.",
+        "required_capabilities": [
+          "template.education-assessment.audit_accessibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Audit structure, presentation, alternatives, accommodations, and assistive compatibility and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "audit_bias",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Review language, context, differential difficulty, stereotype, and subgroup risks.",
+        "required_capabilities": [
+          "template.education-assessment.audit_bias.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Review language, context, differential difficulty, stereotype, and subgroup risks and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.score"
+        ],
+        "id": "deliver_assessment",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Deliver under declared identity, timing, assistance, and integrity policy.",
+        "required_capabilities": [
+          "template.education-assessment.deliver_assessment.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Deliver under declared identity, timing, assistance, and integrity policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.score"
+        ],
+        "id": "score_responses",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Score deterministically or with calibrated graders and retain criterion evidence.",
+        "required_capabilities": [
+          "template.education-assessment.score_responses.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Score deterministically or with calibrated graders and retain criterion evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.score"
+        ],
+        "id": "adjudicate_scores",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Route ambiguous or consequential scores for trained human review.",
+        "required_capabilities": [
+          "template.education-assessment.adjudicate_scores.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Route ambiguous or consequential scores for trained human review and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "analyze_items",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Analyze reliability, difficulty, discrimination, validity, and subgroup behavior.",
+        "required_capabilities": [
+          "template.education-assessment.analyze_items.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Analyze reliability, difficulty, discrimination, validity, and subgroup behavior and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "recommend_support",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Recommend source-grounded next learning actions without overclaiming diagnosis.",
+        "required_capabilities": [
+          "template.education-assessment.recommend_support.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Recommend source-grounded next learning actions without overclaiming diagnosis and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.learn"
+        ],
+        "id": "publish_assessment_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.education-assessment.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish content, versions, administration, scoring, review, and limitations.",
+        "required_capabilities": [
+          "template.education-assessment.publish_assessment_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish content, versions, administration, scoring, review, and limitations and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Educational content and assessment assurance obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.education-assessment.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.education-assessment.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define learning and fairness obligations.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_learning_objectives",
+        "define_assessment_claims",
+        "define_fairness_accessibility"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Create traceable content and assessment assets.",
+      "extensions": {},
+      "id": "stage.author",
+      "slot_ids": [
+        "retrieve_source_material",
+        "author_content",
+        "author_items"
+      ],
+      "title": "Author"
+    },
+    {
+      "description": "Validate content before learner exposure.",
+      "extensions": {},
+      "id": "stage.assure",
+      "slot_ids": [
+        "verify_accuracy",
+        "verify_alignment",
+        "audit_accessibility",
+        "audit_bias"
+      ],
+      "title": "Assure"
+    },
+    {
+      "description": "Produce accountable learner evidence.",
+      "extensions": {},
+      "id": "stage.score",
+      "slot_ids": [
+        "deliver_assessment",
+        "score_responses",
+        "adjudicate_scores"
+      ],
+      "title": "Score"
+    },
+    {
+      "description": "Improve without compromising learners.",
+      "extensions": {},
+      "id": "stage.learn",
+      "slot_ids": [
+        "analyze_items",
+        "recommend_support",
+        "publish_assessment_receipt"
+      ],
+      "title": "Learn"
+    }
+  ],
+  "tags": [
+    "education",
+    "assessment",
+    "rubric",
+    "accessibility"
+  ],
+  "template_model_version": "0.1",
+  "title": "Educational content and assessment assurance",
+  "version": "1.0.0"
+}

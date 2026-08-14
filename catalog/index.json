@@ -7,9 +7,9 @@
     "task_count": 10
   },
   "arena": {
-    "executable_fixture_count": 36,
+    "executable_fixture_count": 45,
     "path": "arena/index.json",
-    "task_count": 52
+    "task_count": 63
   },
   "benchmarks": {
     "benchmark_count": 6,
@@ -99,6 +99,15 @@
       "version": "1.0.0"
     },
     {
+      "descriptor_count": 0,
+      "digest": "sha256:4f460f2d900f53e4cc1f2b009ce13182761577e16976d8aa9228335362065d54",
+      "embedding_record_count": 0,
+      "id": "example.frontier-domain-node-pack",
+      "node_count": 70,
+      "path": "nodepacks/frontier-domains/manifest.json",
+      "version": "1.0.0"
+    },
+    {
       "descriptor_count": 8,
       "digest": "sha256:de3b6e2d94d9026a787e7af86c8f03c8a9c412314f77986b338523bc3784be8d",
       "embedding_record_count": 0,
@@ -124,13 +133,13 @@
     "question_count": 86
   },
   "specialized_packages": {
-    "gate_count": 17,
-    "metric_count": 42,
-    "pack_count": 7,
+    "gate_count": 55,
+    "metric_count": 118,
+    "pack_count": 26,
     "path": "specialized-packs/index.json",
-    "profiler_feature_count": 51,
-    "recipe_count": 32,
-    "registry_digest": "sha256:9ecdb49c44ec0ba3dda4642a7ca1d1d4b796a21a93cb74f58e3c1495daae56ee"
+    "profiler_feature_count": 127,
+    "recipe_count": 89,
+    "registry_digest": "sha256:f8605968fd23acb25a9d5f2ce473429db292385a8eb9ddfb87c5800879cb5ade"
   },
   "templates": [
     {
@@ -230,6 +239,24 @@
     },
     {
       "atomic_slot_count": 17,
+      "digest": "sha256:8fcf27b52acd6a1508f596d8a87105b8f03a19e4851b38a7404587a4c45e0fab",
+      "domains": [
+        "creative.production",
+        "media.campaign"
+      ],
+      "id": "template.creative-content-production",
+      "path": "templates/template.creative-content-production.json",
+      "tags": [
+        "creative",
+        "campaign",
+        "image",
+        "video",
+        "audio"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
       "digest": "sha256:be54a85020462a93190215158575de38a0b1eaa9de44e68a23564dee5043b477",
       "domains": [
         "business.customer-support",
@@ -309,6 +336,23 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 16,
+      "digest": "sha256:e38e91cafe927a689a3309f170543fa0ba150adf39c52b7fa2c19cc564a0415a",
+      "domains": [
+        "simulation.digital-twin",
+        "science.modeling"
+      ],
+      "id": "template.digital-twin-simulation",
+      "path": "templates/template.digital-twin-simulation.json",
+      "tags": [
+        "digital-twin",
+        "simulation",
+        "calibration",
+        "sensitivity"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 18,
       "digest": "sha256:daa514b8a9a78fad07149f624d465d942ce327375a9e0e5ea3575da5540a7eea",
       "domains": [
@@ -321,6 +365,41 @@
         "ingestion",
         "extraction",
         "unstructured-data"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 16,
+      "digest": "sha256:7b8fd2b34c2fe4b10ee8b96a6e270dbc1e836b82441eb027ab06472386efc4ec",
+      "domains": [
+        "education.assessment",
+        "education.content"
+      ],
+      "id": "template.education-assessment",
+      "path": "templates/template.education-assessment.json",
+      "tags": [
+        "education",
+        "assessment",
+        "rubric",
+        "accessibility"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:dd57c7bb23295d93408a708c2fc87031bf0a3309b1efc9f6ef60449e29434b0f",
+      "domains": [
+        "software.embedded",
+        "systems.iot"
+      ],
+      "id": "template.embedded-iot-system",
+      "path": "templates/template.embedded-iot-system.json",
+      "tags": [
+        "embedded",
+        "iot",
+        "telemetry",
+        "firmware",
+        "device-security"
       ],
       "version": "1.0.0"
     },
@@ -357,6 +436,24 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 19,
+      "digest": "sha256:9acbfa8185cbc3a70563bb84f2c7df76e8cacf5116554dbe3930baabe4c7a666",
+      "domains": [
+        "software.games",
+        "simulation.interactive"
+      ],
+      "id": "template.game-build-playtest",
+      "path": "templates/template.game-build-playtest.json",
+      "tags": [
+        "game",
+        "playtest",
+        "replay",
+        "balance",
+        "release"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 16,
       "digest": "sha256:91d1d41c80cc4b092ae67f70d6d2b42bdee4cb7cbda4a72ab3a95ff58e9f42c5",
       "domains": [
@@ -369,6 +466,23 @@
         "gis",
         "coordinates",
         "spatial-analysis"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 16,
+      "digest": "sha256:7ce5bdefcac7e1cfa5ea8cecef3bcfa31617fe0cee24f5fc77ff312397349ed3",
+      "domains": [
+        "healthcare.data",
+        "healthcare.decision-support"
+      ],
+      "id": "template.healthcare-evidence",
+      "path": "templates/template.healthcare-evidence.json",
+      "tags": [
+        "healthcare",
+        "clinical-data",
+        "human-review",
+        "privacy"
       ],
       "version": "1.0.0"
     },
@@ -453,6 +567,23 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 22,
+      "digest": "sha256:9b4fc6d162c354d68d6da3073252c34092927709b96ad842a2ba51b3198aba93",
+      "domains": [
+        "ai.llm-evaluation",
+        "trust-safety.assurance"
+      ],
+      "id": "template.llm-evaluation-harness",
+      "path": "templates/template.llm-evaluation-harness.json",
+      "tags": [
+        "llm-evaluation",
+        "agent-evaluation",
+        "red-team",
+        "sealed-holdout"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 14,
       "digest": "sha256:1b6244544a18887f507cb5b140770a5e00f9701d409c80d82c14ea2439e602e5",
       "domains": [
@@ -517,6 +648,23 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 17,
+      "digest": "sha256:72fb8e173f12abdf9aa1fed716cc823d4b7979793b765291db51eeba26ed5df8",
+      "domains": [
+        "product.experimentation",
+        "analytics.causal"
+      ],
+      "id": "template.product-experimentation",
+      "path": "templates/template.product-experimentation.json",
+      "tags": [
+        "experiment",
+        "ab-test",
+        "causal",
+        "product-analytics"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 13,
       "digest": "sha256:ef68e6ea76f3ee80f3fe7da7f1638a87ef89cd0e64cb56233d53aa3e3c35f971",
       "domains": [
@@ -544,6 +692,24 @@
         "ranking",
         "personalization",
         "experimentation"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 16,
+      "digest": "sha256:5b0ff38332d62824012915dde34095f6e583d493dd417d9f22951d9ea020f91d",
+      "domains": [
+        "robotics.control",
+        "simulation.physical"
+      ],
+      "id": "template.robotics-control",
+      "path": "templates/template.robotics-control.json",
+      "tags": [
+        "robotics",
+        "planning",
+        "control",
+        "safety",
+        "simulation"
       ],
       "version": "1.0.0"
     },
@@ -596,6 +762,24 @@
       "version": "1.0.0"
     },
     {
+      "atomic_slot_count": 16,
+      "digest": "sha256:114592385b4dc80ae4d2234be24a2409c56a62a1f637b35724e0de33ed9b9c1a",
+      "domains": [
+        "media.three-d",
+        "simulation.assets"
+      ],
+      "id": "template.three-d-asset-pipeline",
+      "path": "templates/template.three-d-asset-pipeline.json",
+      "tags": [
+        "three-d",
+        "mesh",
+        "materials",
+        "lod",
+        "rendering"
+      ],
+      "version": "1.0.0"
+    },
+    {
       "atomic_slot_count": 20,
       "digest": "sha256:53c3d03dccda037eb13cc6992e0493c40b78cdcfd5517a1a45d32f69ef2e0da3",
       "domains": [
@@ -607,6 +791,24 @@
         "forecasting",
         "validation",
         "ensemble"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "atomic_slot_count": 17,
+      "digest": "sha256:f2b699461cbb1476598411ac113addfa7fe876a230d98c37138d67374b8dbb7d",
+      "domains": [
+        "media.video",
+        "media.multimodal"
+      ],
+      "id": "template.video-media-pipeline",
+      "path": "templates/template.video-media-pipeline.json",
+      "tags": [
+        "video",
+        "audio",
+        "captions",
+        "transcoding",
+        "media-assurance"
       ],
       "version": "1.0.0"
     },
@@ -628,7 +830,7 @@
     }
   ],
   "universal_engineering": {
-    "coverage_digest": "sha256:5acb7de8d5ac6915adb0f65db6cb9971d7f3bb672c79fb70de39009081fe45d6",
+    "coverage_digest": "sha256:ab3fc46fa3cabd295bdaece55f433f61705617200f6c2a44c24a3ad1c64d12f3",
     "domain_pack_count": 13,
     "engineering_question_count": 42,
     "obligation_count": 14,

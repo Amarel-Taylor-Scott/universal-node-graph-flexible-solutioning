@@ -1,0 +1,39 @@
+{
+  "acceptance_signals": [
+    "untouched residual",
+    "coverage",
+    "sensitivity",
+    "regime validity",
+    "decision uncertainty"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "digital-twin-validation"
+  ],
+  "external_requirements": [
+    "The bundled linear fixture does not validate fidelity for any physical system; production twins require domain models and representative observations."
+  ],
+  "id": "arena.digital-twin-validation",
+  "input_contract": "System identity, model family, calibration observations, validation observations, scenarios, and decision contract.",
+  "output_contract": "Calibrated model identity, simulations, residual and sensitivity evidence, applicability bounds, and reviewed recommendation.",
+  "problem": "Calibrate a model, simulate scenarios, validate on untouched observations, quantify sensitivity, and bound applicability.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "scope",
+    "assimilate",
+    "calibrate",
+    "simulate",
+    "uncertainty",
+    "sensitivity",
+    "validate",
+    "decide"
+  ],
+  "tags": [
+    "digital-twin",
+    "simulation",
+    "calibration",
+    "decision-support"
+  ],
+  "template_id": "template.digital-twin-simulation",
+  "title": "Observed system to a validated simulation and decision dossier"
+}

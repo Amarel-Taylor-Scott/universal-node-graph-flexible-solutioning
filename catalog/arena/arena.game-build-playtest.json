@@ -1,0 +1,43 @@
+{
+  "acceptance_signals": [
+    "determinism",
+    "crash-free rate",
+    "frame time",
+    "input latency",
+    "balance",
+    "exploit rate",
+    "accessibility"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "gameplay-replay-and-balance"
+  ],
+  "external_requirements": [
+    "The bundled fixture exercises deterministic rules and balance accounting only; engine builds and subjective fun require adapters and human evidence."
+  ],
+  "id": "arena.game-build-playtest",
+  "input_contract": "Versioned game state, rules, code, content, target platforms, replays, player slices, and release policy.",
+  "output_contract": "Builds, replay hashes, regressions, balance and performance evidence, human playtest evidence, and rollback plan.",
+  "problem": "Build reproducibly, replay state transitions, run automated and human playtests, audit balance and accessibility, and gate release.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "contract",
+    "build",
+    "replay",
+    "agent playtest",
+    "balance",
+    "performance",
+    "accessibility",
+    "human review",
+    "release"
+  ],
+  "tags": [
+    "game",
+    "playtest",
+    "replay",
+    "balance",
+    "release"
+  ],
+  "template_id": "template.game-build-playtest",
+  "title": "Game rules and content to a release decision"
+}

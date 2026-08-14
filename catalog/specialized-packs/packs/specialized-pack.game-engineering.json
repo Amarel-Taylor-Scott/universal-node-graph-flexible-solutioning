@@ -1,0 +1,317 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "game-engineering",
+    "extraction_target": "solutiongraph-pack-game-engineering",
+    "python_module": "solutiongraph.specialized.game_engineering"
+  },
+  "description": "Game-state contracts, reproducible builds, replay testing, bot and human playtests, balance, performance, accessibility, release, and rollback.",
+  "domain_pack_ids": [
+    "domain-pack.platform-release",
+    "domain-pack.frontend-browser",
+    "domain-pack.science-optimization",
+    "domain-pack.ai-ml"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject builds that fail deterministic replay, crash, save, migration, networking, or accessibility requirements.",
+      "id": "gate.game-engineering.functional",
+      "independent": true,
+      "metric_ids": [
+        "metric.game-engineering.deterministic-replay",
+        "metric.game-engineering.crash-free",
+        "metric.game-engineering.runtime"
+      ],
+      "oracle_kind": "property",
+      "title": "Game functional gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate release when balance, exploit, safety, accessibility, or structured human playtest evidence is insufficient.",
+      "id": "gate.game-engineering.release",
+      "independent": true,
+      "metric_ids": [
+        "metric.game-engineering.balance-gap"
+      ],
+      "oracle_kind": "human",
+      "title": "Game release gate"
+    }
+  ],
+  "id": "specialized-pack.game-engineering",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Replays producing the expected state and outcome hashes under the declared determinism contract.",
+      "direction": "maximize",
+      "id": "metric.game-engineering.deterministic-replay",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.replay",
+      "title": "Deterministic replay",
+      "unit": "ratio"
+    },
+    {
+      "description": "Sessions completing without crash, hang, corrupt save, or fatal desynchronization.",
+      "direction": "maximize",
+      "id": "metric.game-engineering.crash-free",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.session",
+      "title": "Crash-free sessions",
+      "unit": "ratio"
+    },
+    {
+      "description": "Frame time, input latency, load time, memory, and network performance against target budgets.",
+      "direction": "minimize",
+      "id": "metric.game-engineering.runtime",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.runtime",
+      "title": "Runtime performance",
+      "unit": "milliseconds"
+    },
+    {
+      "description": "Maximum predeclared disparity across roles, matchups, strategies, progression, or economy slices.",
+      "direction": "minimize",
+      "id": "metric.game-engineering.balance-gap",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.playtest",
+      "title": "Balance gap",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile entities, actions, transitions, randomness, persistence, networking, progression, and reachable-state boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.game-engineering.state-space",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Game state space",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure code, levels, assets, localization, targets, save versions, dependencies, and build reproducibility.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.game-engineering.content-build",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Content and build profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile roles, levels, difficulty, devices, sessions, replays, bots, player slices, and human evidence.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.game-engineering.playtest-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Playtest surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional design/telemetry embedding for historical retrieval under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.game-engineering.design-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Game design embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.game-build-playtest"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "game.state-contract",
+        "game.content-closure",
+        "game.build",
+        "game.save-migration"
+      ],
+      "category_ids": [
+        "dag.serve.deploy",
+        "dag.evaluate.regression",
+        "dag.govern.provenance"
+      ],
+      "description": "Bind rules, content, dependencies, targets, save schemas, and build environments into versioned game artifacts.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.game-engineering.build",
+      "input_kind_ids": [
+        "artifact.game-design"
+      ],
+      "limitations": [
+        "Engine-specific builds require Unity, Unreal, Godot, or another runtime adapter."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.game-build"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.game-build-playtest",
+        "template.deployment-release"
+      ],
+      "title": "Reproducible game build"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.game-build-playtest"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "game.replay",
+        "game.bot-playtest",
+        "game.edge-case",
+        "game.economy",
+        "game.balance",
+        "game.human-playtest"
+      ],
+      "category_ids": [
+        "dag.evaluate.regression",
+        "dag.generate.scenario",
+        "dag.learn.reinforcement",
+        "dag.evaluate.human"
+      ],
+      "description": "Run deterministic replays, bounded bots, edge-state generation, economy simulations, balance analysis, and structured human playtests.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "gameplay-replay-and-balance"
+      ],
+      "id": "recipe.game-engineering.playtest",
+      "input_kind_ids": [
+        "artifact.game-build"
+      ],
+      "limitations": [
+        "The local fixture measures deterministic rules and a tiny balance sample; subjective fun requires structured human evidence."
+      ],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.game-playtest-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.game-build-playtest"
+      ],
+      "title": "Automated replay and playtest"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.game-build-playtest"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "game.regression",
+        "game.performance",
+        "game.accessibility",
+        "game.safety",
+        "game.release",
+        "game.rollback"
+      ],
+      "category_ids": [
+        "dag.evaluate.regression",
+        "dag.evaluate.safety",
+        "dag.serve.deploy",
+        "dag.operate.observe"
+      ],
+      "description": "Compare control and candidate builds on identical replays, devices, performance, accessibility, safety, and rollback checks.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.game-engineering.release",
+      "input_kind_ids": [
+        "artifact.game-build"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.game-release-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.game-build-playtest",
+        "template.qa-engineering"
+      ],
+      "title": "Game quality and release gate"
+    }
+  ],
+  "signal_terms": [
+    "game",
+    "video game",
+    "gameplay",
+    "playtest",
+    "replay",
+    "level",
+    "balance",
+    "matchmaking",
+    "economy",
+    "unity",
+    "unreal",
+    "godot"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.serve.deploy",
+    "dag.evaluate.regression",
+    "dag.govern.provenance",
+    "dag.generate.scenario",
+    "dag.learn.reinforcement",
+    "dag.evaluate.human",
+    "dag.evaluate.safety",
+    "dag.operate.observe"
+  ],
+  "title": "Game engineering",
+  "version": "0.1.0"
+}

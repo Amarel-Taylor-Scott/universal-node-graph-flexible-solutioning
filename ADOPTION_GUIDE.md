@@ -54,7 +54,7 @@ Do not begin by modeling an entire company or claiming every program is a DAG.
 Choose one measurable workflow with replaceable implementation choices:
 
 1. freeze exact input/output and an independent oracle;
-2. select one of the 31 semantic templates and remove irrelevant obligations;
+2. select one of the 42 semantic templates and remove irrelevant obligations;
 3. split remaining obligations until candidates are genuine substitutes;
 4. reuse or author strict nodes;
 5. compile the complete snapshot;

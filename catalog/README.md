@@ -4,10 +4,15 @@ This directory is a checked-in projection generated from the canonical Python
 contracts in `solutiongraph.reference_nodes` and `solutiongraph.template_library`.
 
 - `index.json` lists every template and node pack with content digest and counts.
-- `templates/` contains 18 reusable semantic templates and 317 atomic
+- `templates/` contains 42 reusable semantic templates and 733 atomic
   obligations, not fixed routes.
-- `nodepacks/reference-core/` demonstrates node contracts, sparse descriptors,
-  external connectors, registry capabilities, and a portable pack manifest.
+- `nodepacks/` contains nine portable packs spanning the core, standard-library
+  data nodes, executable domain fixtures, semantic interrogation, and the data-
+  science design atlas. Each pack preserves exact node and registry identities.
+- `specialized-packs/` contains 26 advisory domain/practice package definitions;
+  these nominate recipes and assets but do not replace compiler admission.
+- `arena/` contains 63 honestly labeled executable, template-only, or
+  credentialed-connector task-family contracts.
 
 Regenerate the JSON documents with:
 

@@ -1,0 +1,212 @@
+"""Specialized package for supply-chain data, planning, execution, and resilience."""
+
+from solutiongraph.specialized._builders import (
+    embedding_feature,
+    feature,
+    gate,
+    metric,
+    recipe,
+    specialized_pack,
+)
+
+NAMESPACE = "supply-chain-planning"
+FEATURES = (
+    feature(
+        NAMESPACE,
+        "network",
+        "Supply network",
+        "Profile facilities, suppliers, lanes, lead times, capacities, calendars, bills of material, substitutes, ownership, and constraints.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "demand-inventory",
+        "Demand and inventory",
+        "Measure horizon, hierarchy, intermittency, promotions, censoring, safety stock, service classes, spoilage, and data latency.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "disruption-space",
+        "Disruption space",
+        "Profile delays, outages, shortages, demand shocks, geopolitical or weather boundaries, alternatives, and consequence severity.",
+        "mapping",
+    ),
+    embedding_feature(
+        NAMESPACE,
+        "scenario-embedding",
+        "Supply scenario embedding",
+        "Optional redacted network/scenario embedding for historical retrieval under an exact embedding-space identity.",
+    ),
+)
+METRICS = (
+    metric(
+        NAMESPACE,
+        "service",
+        "Service attainment",
+        "Demand fulfilled on time and in full by declared product, location, customer, and horizon slice.",
+        "maximize",
+        "ratio",
+        scope="scope.service",
+    ),
+    metric(
+        NAMESPACE,
+        "total-cost",
+        "Total landed cost",
+        "Procurement, production, transport, inventory, shortage, spoilage, and intervention costs under declared weights.",
+        "minimize",
+        "currency",
+        scope="scope.plan",
+    ),
+    metric(
+        NAMESPACE,
+        "constraint-violations",
+        "Planning constraint violations",
+        "Capacity, material, precedence, calendar, inventory, lane, policy, and authority failures.",
+        "minimize",
+        "count",
+        scope="scope.plan",
+    ),
+    metric(
+        NAMESPACE,
+        "stress-recovery",
+        "Stress recovery",
+        "Fixed disruptions meeting declared service and recovery-time thresholds.",
+        "maximize",
+        "ratio",
+        scope="scope.stress",
+    ),
+)
+GATES = (
+    gate(
+        NAMESPACE,
+        "feasibility",
+        "Supply plan feasibility gate",
+        "Reject plans with unresolved material, capacity, inventory, timing, policy, or traceability violations.",
+        (METRICS[2].id,),
+        oracle_kind="exact",
+    ),
+    gate(
+        NAMESPACE,
+        "promotion",
+        "Supply plan promotion gate",
+        "Escalate operational promotion without service, cost, fixed-scenario resilience, alternatives, and accountable approval evidence.",
+        (METRICS[0].id, METRICS[1].id, METRICS[3].id),
+        oracle_kind="human",
+        decision="escalate",
+    ),
+)
+RECIPES = (
+    recipe(
+        NAMESPACE,
+        "network-data",
+        "Supply network data product",
+        "Reconcile products, facilities, suppliers, calendars, lanes, lead times, inventory, and demand into a versioned planning snapshot.",
+        ("artifact.supply-source-data",),
+        ("artifact.supply-network-snapshot",),
+        (
+            "supply.resolve",
+            "supply.reconcile",
+            "supply.calendar",
+            "supply.inventory",
+            "supply.validate",
+            "supply.provenance",
+        ),
+        (
+            "dag.integrate.join",
+            "dag.integrate.reconcile",
+            "dag.prepare.verify",
+            "dag.govern.provenance",
+        ),
+        ("template.supply-chain-planning", "template.data-quality"),
+        question_packs=(
+            "question-pack.product",
+            "question-pack.organization",
+            "question-pack.datetime",
+        ),
+        arena_tasks=("arena.supply-chain-plan",),
+    ),
+    recipe(
+        NAMESPACE,
+        "plan",
+        "Constrained supply plan",
+        "Forecast demand, generate feasible sourcing, production and transport alternatives, optimize declared objectives, and independently verify constraints.",
+        ("artifact.supply-network-snapshot",),
+        ("artifact.supply-plan",),
+        ("supply.forecast", "supply.formulate", "supply.solve", "supply.verify", "supply.explain"),
+        (
+            "dag.learn.forecast",
+            "dag.learn.optimize",
+            "dag.evaluate.metamorphic",
+            "dag.human.review",
+        ),
+        ("template.supply-chain-planning", "template.optimization-scheduling"),
+        design_packs=(
+            "design-pack.time-series",
+            "design-pack.robustness-stability",
+            "design-pack.decision-handoff",
+        ),
+        arena_tasks=("arena.supply-chain-plan",),
+    ),
+    recipe(
+        NAMESPACE,
+        "execute-monitor",
+        "Shipment execution and resilience loop",
+        "Ingest authenticated events, reconcile shipment state, detect exceptions, notify by policy, measure recovery, and feed bounded evidence to replanning.",
+        ("artifact.supply-plan",),
+        ("artifact.supply-execution-evidence",),
+        (
+            "supply.dispatch",
+            "supply.event-time",
+            "supply.reconcile-state",
+            "supply.exception",
+            "supply.notify",
+            "supply.replan",
+        ),
+        (
+            "dag.acquire.stream",
+            "dag.integrate.reconcile",
+            "dag.operate.observe",
+            "dag.serve.automation",
+        ),
+        ("template.shipping-notifications", "template.event-driven-system"),
+        node_packs=("example.real-world-node-pack",),
+        examples=("address-reference-verification",),
+        arena_tasks=("arena.shipping-notification",),
+        limitations=(
+            "The local example demonstrates validation mechanics, not carrier dispatch or production inventory authority.",
+        ),
+    ),
+)
+PACK = specialized_pack(
+    "supply_chain_planning",
+    "Supply chain and planning",
+    "Supply-network data, demand and inventory, constrained planning, fulfillment events, disruption scenarios, resilience, and governed execution.",
+    domain_packs=(
+        "domain-pack.data-integration",
+        "domain-pack.science-optimization",
+        "domain-pack.event-stream",
+        "domain-pack.business-human-workflow",
+    ),
+    categories=tuple(dict.fromkeys(category for item in RECIPES for category in item.category_ids)),
+    signals=(
+        "supply chain",
+        "inventory",
+        "demand planning",
+        "logistics",
+        "shipment",
+        "warehouse",
+        "procurement",
+        "production planning",
+        "routing",
+        "fulfillment",
+    ),
+    recipes=RECIPES,
+    features=FEATURES,
+    metrics=METRICS,
+    gates=GATES,
+    limitations=(
+        "Executable evidence is limited to small deterministic logistics fixtures; production planning requires current enterprise data and solver, carrier, ERP, and authority adapters.",
+    ),
+)
+__all__ = ["FEATURES", "GATES", "METRICS", "PACK", "RECIPES"]

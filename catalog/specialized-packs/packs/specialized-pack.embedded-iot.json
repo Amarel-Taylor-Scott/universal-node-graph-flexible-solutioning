@@ -1,0 +1,321 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "embedded-iot",
+    "extraction_target": "solutiongraph-pack-embedded-iot",
+    "python_module": "solutiongraph.specialized.embedded_iot"
+  },
+  "description": "Firmware, device identity, event-time telemetry, fleet state, anomalies, commands, staged rollout, and lifecycle assurance.",
+  "domain_pack_ids": [
+    "domain-pack.event-stream",
+    "domain-pack.backend-api",
+    "domain-pack.security-compliance",
+    "domain-pack.platform-release"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject fleet conclusions without event integrity, device identity, freshness, and coverage evidence.",
+      "id": "gate.embedded-iot.telemetry",
+      "independent": true,
+      "metric_ids": [
+        "metric.embedded-iot.event-integrity",
+        "metric.embedded-iot.fleet-coverage"
+      ],
+      "oracle_kind": "property",
+      "title": "Fleet evidence gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject firmware rollout or device commands without regression, authority, staged rollout, verification, and rollback.",
+      "id": "gate.embedded-iot.firmware-command",
+      "independent": true,
+      "metric_ids": [
+        "metric.embedded-iot.firmware-regression",
+        "metric.embedded-iot.command-verification"
+      ],
+      "oracle_kind": "human",
+      "title": "Firmware and command gate"
+    }
+  ],
+  "id": "specialized-pack.embedded-iot",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Authenticated, schema-valid, deduplicated, event-time-correct observations.",
+      "direction": "maximize",
+      "id": "metric.embedded-iot.event-integrity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.event",
+      "title": "Telemetry event integrity",
+      "unit": "ratio"
+    },
+    {
+      "description": "Expected devices with fresh, versioned, uncertainty-bounded state.",
+      "direction": "maximize",
+      "id": "metric.embedded-iot.fleet-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.fleet",
+      "title": "Fleet state coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Static, host, emulator, hardware-in-loop, compatibility, and rollback test failures.",
+      "direction": "minimize",
+      "id": "metric.embedded-iot.firmware-regression",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.firmware",
+      "title": "Firmware regression failures",
+      "unit": "count"
+    },
+    {
+      "description": "Authorized commands with acknowledged, independently verified resulting state or rollback.",
+      "direction": "maximize",
+      "id": "metric.embedded-iot.command-verification",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.command",
+      "title": "Command verification",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile hardware, firmware, capabilities, keys, owners, regions, connectivity, power, and lifecycle states.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.embedded-iot.device-fleet",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Device fleet",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile schemas, units, event time, frequency, loss, duplication, lateness, privacy, and retention.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.embedded-iot.telemetry-contract",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Telemetry contract",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure targets, dependencies, memory, interfaces, unsafe operations, secrets, boot chain, and update compatibility.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.embedded-iot.firmware-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Firmware surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted fleet-state or incident embedding for historical retrieval under an exact space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.embedded-iot.fleet-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Fleet incident embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.iot-fleet-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "iot.authenticate",
+        "iot.event-time",
+        "iot.deduplicate",
+        "iot.state",
+        "iot.anomaly",
+        "iot.report"
+      ],
+      "category_ids": [
+        "dag.acquire.stream",
+        "dag.prepare.verify",
+        "dag.learn.anomaly",
+        "dag.operate.observe"
+      ],
+      "description": "Validate schemas, deduplicate and order events, derive device state, detect fleet anomalies, and publish evidence with firmware context.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "iot-telemetry-assurance"
+      ],
+      "id": "recipe.embedded-iot.telemetry",
+      "input_kind_ids": [
+        "artifact.iot-events"
+      ],
+      "limitations": [
+        "The fixture contains no signed device identity or durable streaming backend."
+      ],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.fleet-state-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.embedded-iot-system",
+        "template.event-driven-system"
+      ],
+      "title": "IoT telemetry assurance"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.iot-fleet-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "iot.build-firmware",
+        "iot.static-check",
+        "iot.emulate",
+        "iot.compatibility",
+        "iot.sign",
+        "iot.rollout"
+      ],
+      "category_ids": [
+        "dag.evaluate.regression",
+        "dag.govern.security",
+        "dag.serve.deploy"
+      ],
+      "description": "Build target binaries, inspect dependencies and authority, run static and emulated fixtures, verify compatibility, and stage a reversible rollout.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.embedded-iot.firmware",
+      "input_kind_ids": [
+        "artifact.firmware-source"
+      ],
+      "limitations": [
+        "Hardware-in-loop, signing, secure boot, and fleet rollout require target-specific production adapters."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.firmware-release-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.embedded-iot-system",
+        "template.deployment-release"
+      ],
+      "title": "Embedded firmware assurance"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "iot.plan-command",
+        "iot.authorize",
+        "iot.execute-command",
+        "iot.verify-command",
+        "iot.rollback"
+      ],
+      "category_ids": [
+        "dag.serve.automation",
+        "dag.govern.security",
+        "dag.human.review",
+        "dag.operate.observe"
+      ],
+      "description": "Freeze target and preconditions, authorize least privilege, deliver idempotently, verify resulting state, and compensate or roll back partial failure.",
+      "design_pack_ids": [],
+      "effects": [
+        "device.write"
+      ],
+      "example_ids": [],
+      "id": "recipe.embedded-iot.command",
+      "input_kind_ids": [
+        "artifact.device-command-request"
+      ],
+      "limitations": [
+        "The core never grants device authority; an authenticated enforcing adapter and accountable approval are required."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.device-command-evidence"
+      ],
+      "permissions": [
+        "device.write"
+      ],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.embedded-iot-system"
+      ],
+      "title": "Safety-gated device command"
+    }
+  ],
+  "signal_terms": [
+    "embedded",
+    "iot",
+    "device",
+    "firmware",
+    "telemetry",
+    "sensor",
+    "fleet",
+    "microcontroller",
+    "edge",
+    "hardware"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.acquire.stream",
+    "dag.prepare.verify",
+    "dag.learn.anomaly",
+    "dag.operate.observe",
+    "dag.evaluate.regression",
+    "dag.govern.security",
+    "dag.serve.deploy",
+    "dag.serve.automation",
+    "dag.human.review"
+  ],
+  "title": "Embedded systems and IoT",
+  "version": "0.1.0"
+}

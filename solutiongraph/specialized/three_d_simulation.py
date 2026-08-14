@@ -1,0 +1,185 @@
+"""Specialized package for 3D assets, scenes, rendering, and simulation inputs."""
+
+from solutiongraph.specialized._builders import (
+    embedding_feature,
+    feature,
+    gate,
+    metric,
+    recipe,
+    specialized_pack,
+)
+
+NAMESPACE = "three-d-simulation"
+FEATURES = (
+    feature(
+        NAMESPACE,
+        "geometry-profile",
+        "Geometry profile",
+        "Measure vertices, faces, components, topology defects, normals, UVs, bounds, units, and coordinate systems.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "scene-complexity",
+        "Scene complexity",
+        "Measure hierarchy, instances, materials, textures, lights, rigs, animations, collisions, and dependencies.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "runtime-budget",
+        "Runtime budget",
+        "Record target platforms and triangle, draw-call, texture, memory, load-time, and frame-time budgets.",
+        "mapping",
+    ),
+    embedding_feature(
+        NAMESPACE,
+        "asset-embedding",
+        "3D asset embedding",
+        "Optional asset/preview embedding for retrieval and diversity under an exact representation identity.",
+    ),
+)
+METRICS = (
+    metric(
+        NAMESPACE,
+        "topology-defects",
+        "Topology defects",
+        "Non-manifold edges, holes, degenerates, invalid normals, and disconnected components.",
+        "minimize",
+        "count",
+        scope="scope.asset",
+    ),
+    metric(
+        NAMESPACE,
+        "reference-closure",
+        "Reference closure",
+        "Resolved material, texture, rig, animation, and scene references.",
+        "maximize",
+        "ratio",
+        scope="scope.asset",
+    ),
+    metric(
+        NAMESPACE,
+        "visual-error",
+        "Visual error",
+        "Fixed-camera visual difference introduced by repair, simplification, or export.",
+        "minimize",
+        "score",
+        scope="scope.render",
+    ),
+    metric(
+        NAMESPACE,
+        "budget-headroom",
+        "Runtime budget headroom",
+        "Remaining headroom across geometry, draw, memory, load, and frame budgets.",
+        "maximize",
+        "ratio",
+        scope="scope.runtime",
+    ),
+)
+GATES = (
+    gate(
+        NAMESPACE,
+        "asset",
+        "3D asset validity gate",
+        "Reject unresolved geometry, reference, coordinate, material, or collision defects.",
+        (METRICS[0].id, METRICS[1].id),
+        oracle_kind="property",
+    ),
+    gate(
+        NAMESPACE,
+        "runtime",
+        "3D runtime budget gate",
+        "Reject release when visual tolerance or declared target budgets fail.",
+        (METRICS[2].id, METRICS[3].id),
+        oracle_kind="cross-implementation",
+    ),
+)
+RECIPES = (
+    recipe(
+        NAMESPACE,
+        "validate-assets",
+        "Validate and repair 3D assets",
+        "Decode assets, normalize coordinate semantics, inspect topology, apply bounded repairs, and verify materials and collisions.",
+        ("artifact.raw-3d-assets",),
+        ("artifact.validated-3d-assets",),
+        (
+            "three-d.decode",
+            "three-d.coordinates",
+            "three-d.topology",
+            "three-d.repair",
+            "three-d.references",
+            "three-d.collision",
+        ),
+        ("dag.prepare.parse", "dag.prepare.verify", "dag.prepare.clean"),
+        ("template.three-d-asset-pipeline",),
+        node_packs=("example.frontier-domain-node-pack",),
+        examples=("three-d-asset-assurance",),
+        arena_tasks=("arena.three-d-asset-assurance",),
+    ),
+    recipe(
+        NAMESPACE,
+        "optimize-assets",
+        "Optimize 3D assets",
+        "Generate LODs, reduce geometry and draw overhead, optimize textures, and retain fixed-camera visual evidence.",
+        ("artifact.validated-3d-assets",),
+        ("artifact.optimized-3d-bundle",),
+        (
+            "three-d.lod",
+            "three-d.optimize-geometry",
+            "three-d.optimize-textures",
+            "three-d.render-regression",
+        ),
+        ("dag.learn.optimize", "dag.evaluate.regression", "dag.generate.report"),
+        ("template.three-d-asset-pipeline",),
+        design_packs=("design-pack.image-multimodal", "design-pack.robustness-stability"),
+        arena_tasks=("arena.three-d-asset-assurance",),
+        limitations=(
+            "Production optimization needs target-engine render and performance adapters.",
+        ),
+    ),
+    recipe(
+        NAMESPACE,
+        "export-assure",
+        "Export and assure 3D bundle",
+        "Export versioned target bundles, round-trip their structure, profile runtime budgets, and publish defects and provenance.",
+        ("artifact.optimized-3d-bundle",),
+        ("artifact.three-d-assurance-report",),
+        ("three-d.export", "three-d.roundtrip", "three-d.profile", "three-d.publish"),
+        ("dag.serve.deploy", "dag.evaluate.regression", "dag.govern.provenance"),
+        ("template.three-d-asset-pipeline", "template.deployment-release"),
+        arena_tasks=("arena.three-d-asset-assurance",),
+        limitations=(
+            "Blender, CAD, Unity, Unreal, and Godot execution belong in optional adapters.",
+        ),
+    ),
+)
+PACK = specialized_pack(
+    "three_d_simulation",
+    "3D and simulation assets",
+    "3D geometry, materials, rigging, collision, LOD, rendering regression, runtime budgets, and export assurance.",
+    domain_packs=(
+        "domain-pack.documents-media",
+        "domain-pack.science-optimization",
+        "domain-pack.platform-release",
+    ),
+    categories=tuple(dict.fromkeys(category for item in RECIPES for category in item.category_ids)),
+    signals=(
+        "3d",
+        "three d",
+        "mesh",
+        "scene",
+        "material",
+        "texture",
+        "lod",
+        "collision",
+        "render",
+        "cad",
+        "point cloud",
+    ),
+    recipes=RECIPES,
+    features=FEATURES,
+    metrics=METRICS,
+    gates=GATES,
+)
+__all__ = ["FEATURES", "GATES", "METRICS", "PACK", "RECIPES"]

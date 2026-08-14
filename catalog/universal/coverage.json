@@ -6,7 +6,7 @@
         {
           "blockers": [],
           "capability_id": "capability.data.reference-enrichment",
-          "evidence_digest": "sha256:457ec2cf5c8e7cc67e62509aca6fc56583199aea8d3bbf63fc262a941b78c779",
+          "evidence_digest": "sha256:e75ed668a17dad7a5fdd7bfb7267e7a463ce4d2d1c9f8d5418aea7add803f743",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -31,7 +31,7 @@
         {
           "blockers": [],
           "capability_id": "capability.data.multi-source-reconciliation",
-          "evidence_digest": "sha256:1351a60968d510fcf8403ad91f7039ae5635ac5829a4b87291ff1f326b5fddb8",
+          "evidence_digest": "sha256:c56025f7d3ab17a4731eb415ec8903fb52fa87b604997b88ea6411cd1b035fcf",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -55,7 +55,7 @@
         {
           "blockers": [],
           "capability_id": "capability.data.quality-validation",
-          "evidence_digest": "sha256:0e683e5fb7182090023cbc9d570ffcc8745d54267252ce961c9790264c0f457c",
+          "evidence_digest": "sha256:63280898c00caf5887cd46010d28782b8a6004f85e0b2a73ae60d06fee41d120",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -96,7 +96,7 @@
         {
           "blockers": [],
           "capability_id": "capability.backend.compensating-recovery",
-          "evidence_digest": "sha256:a44d322842fbbef6cbb85f511fc9d8e9c35035fbc58947861df9413d1cdfb7d0",
+          "evidence_digest": "sha256:65ab0ce9c77822746cd4d0fa533cf6bb4701aec8d67b02ccd26e0a56094fc85c",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -119,7 +119,7 @@
         {
           "blockers": [],
           "capability_id": "capability.backend.service-delivery",
-          "evidence_digest": "sha256:a845d9083d42d6a7b58f21091e7bb2d26b7576b407a0b6128d7c92825f80e220",
+          "evidence_digest": "sha256:93faa7433c9df3d8651d1dbb59b4024ffef47e5317ac41adb8f19378f032ab67",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -142,7 +142,7 @@
         {
           "blockers": [],
           "capability_id": "capability.backend.api-contract",
-          "evidence_digest": "sha256:e26292105d86c5f3b678025d462eebd4ce64f2e9d0329fe8e2b9deccdd075553",
+          "evidence_digest": "sha256:a4d70b54425b7b8af2dce5888eb02d17aaea331b5deacda1f575d524ef610b92",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -179,7 +179,7 @@
         {
           "blockers": [],
           "capability_id": "capability.event.cloudevents-ingest",
-          "evidence_digest": "sha256:e8e0e4bf05c44417fe5ce404a5a121ce11b85c7bf40d9d61bac3edff42ef68b9",
+          "evidence_digest": "sha256:62e83a570021d9e8b60b29c8a13d3a0055210a8533595ee55ce81306a01e4df3",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -202,7 +202,7 @@
         {
           "blockers": [],
           "capability_id": "capability.event.time-aware-routing",
-          "evidence_digest": "sha256:59c32397356f64cddf6fcdd3ea273176be8d3778e833e8d19ed5ba89b9d8e1ef",
+          "evidence_digest": "sha256:bcb60c25c6d002a70a2a6837f15baa7d7c858d2ec8581377290f4b66a9e316f3",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -225,7 +225,7 @@
         {
           "blockers": [],
           "capability_id": "capability.event.telemetry",
-          "evidence_digest": "sha256:4f41c647f7185771ece897998a8f17ed9ab9c862f079aebb75bdbceb3984939a",
+          "evidence_digest": "sha256:1e6f893bbab894c50030fff501989e933dec2cdf9361bbc7c561c570d04e8f11",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -261,7 +261,7 @@
         {
           "blockers": [],
           "capability_id": "capability.platform.rollback",
-          "evidence_digest": "sha256:3ea1f24096cfc903784ea53ef8469ca7d7d169ac9e4066692b33b5666683c8c4",
+          "evidence_digest": "sha256:5fc2c2905976345090c9ed16cf8d41a21fe40b0b63e54f95519d554e692ff1ef",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -285,7 +285,7 @@
             "An operator must provide an authenticated deployment runtime."
           ],
           "capability_id": "capability.platform.deployment",
-          "evidence_digest": "sha256:ac3dbfcb3af3e5d4f906b515d3f44e6c911e4adb7a7b74dbac6fde592f306873",
+          "evidence_digest": "sha256:4fc43841051854e73aa299d693ab963e20f449277aff668ff7b3758d1d5cc698",
           "maturity_level": "C2",
           "missing_assets": [],
           "next_gate": "C3",
@@ -305,7 +305,7 @@
         {
           "blockers": [],
           "capability_id": "capability.platform.release-gate",
-          "evidence_digest": "sha256:94a7ff47cfebc755a81f8b4c0eca6cfa61093061650c8a40b9a0729f19cecf3f",
+          "evidence_digest": "sha256:25058f9b9f63daeea147a13888a6f7524a57a6b8d2e29cde35ab881399b084ce",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -342,7 +342,7 @@
         {
           "blockers": [],
           "capability_id": "capability.sre.incident-triage",
-          "evidence_digest": "sha256:bab1da161a85302eac074f7a42241cb6c85d2f7574214d7036d04b8b79d9a139",
+          "evidence_digest": "sha256:054e18cca7dc256006f3e77a9143530ad2534c6b5ce5da9cd9faa055eb17d82c",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -364,7 +364,7 @@
         {
           "blockers": [],
           "capability_id": "capability.sre.signal-correlation",
-          "evidence_digest": "sha256:1ca32632381bbfb8351a5e2c4d89b806323d48303ee99ae2a4176a1a207f7e2f",
+          "evidence_digest": "sha256:0fa7b1293d27bc1581b834bd5f7f9241d89903f88bdfdbf201e65603f1ab34b0",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -387,7 +387,7 @@
         {
           "blockers": [],
           "capability_id": "capability.sre.recovery",
-          "evidence_digest": "sha256:88bc0d000a15e5aa7628a8cb9f8d5537866949d512a98f33a6149f7d56493bee",
+          "evidence_digest": "sha256:2199f8f8182232ca7440aacfcf9968ace8573bde54373cad1e951f98d702f121",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -426,7 +426,7 @@
             "Production certification requires an authorized external assessor."
           ],
           "capability_id": "capability.security.compliance-evidence",
-          "evidence_digest": "sha256:48c0f94db238e4307cfd7eed0bc6bb97ddef02d8dcae1553505ef95a47bb765e",
+          "evidence_digest": "sha256:d70d2806d226354d23a4e7e01e56045e8ddf15609241d6e07161aa0ee1a375d7",
           "maturity_level": "C2",
           "missing_assets": [],
           "next_gate": "C3",
@@ -444,7 +444,7 @@
         {
           "blockers": [],
           "capability_id": "capability.security.hostile-runtime-recovery",
-          "evidence_digest": "sha256:ec6df00cbd55dc4be9360a7fbb2d21b3a52546ef016592c9a625dbe8ba3e99d5",
+          "evidence_digest": "sha256:12afb6866c3b942fdf02f05c1888c31ceff98a374a5ef6bfc3de1800e9257c07",
           "maturity_level": "C1",
           "missing_assets": [],
           "next_gate": "C2",
@@ -459,7 +459,7 @@
         {
           "blockers": [],
           "capability_id": "capability.security.defensive-assurance",
-          "evidence_digest": "sha256:78074f2304c00d9df4a9b47824f4b66c722559d7d5c0b9a35d9c2d957c5988a5",
+          "evidence_digest": "sha256:8d72d2663590e4e7a16a1d99ea6b01c142bb9724adf1738b791bd39daba928c3",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -496,7 +496,7 @@
         {
           "blockers": [],
           "capability_id": "capability.frontend.authorized-browser-acquire",
-          "evidence_digest": "sha256:5890752d3b0772326c3f49fac5b3787a6aa5783cd97f7a4687abefd903194475",
+          "evidence_digest": "sha256:cc6786aefa34f1ec33cd566c0620eba23ca3f17ab6719069976dda1c7e046b47",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -519,7 +519,7 @@
         {
           "blockers": [],
           "capability_id": "capability.frontend.release-journey",
-          "evidence_digest": "sha256:d1ef4d465edddf844cfaf4c32e7a9ab5131beaa51fd8b799c5a736a251a1ad9c",
+          "evidence_digest": "sha256:5ce006af3ecabb8164eb20e236851500000d20d71313c8f1a5b1475cf2162dc5",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -541,7 +541,7 @@
         {
           "blockers": [],
           "capability_id": "capability.frontend.render-verification",
-          "evidence_digest": "sha256:389ebe27ec7c1948537588f7347fbe4632fa97ce69e66d6802f54033cd4e5cfb",
+          "evidence_digest": "sha256:3fe0936482f311cf546d116e51c3ff0346819b38b802ea0048ca8a22d0d817b1",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -578,7 +578,7 @@
         {
           "blockers": [],
           "capability_id": "capability.database.evidence-persistence",
-          "evidence_digest": "sha256:5c942a17556b2995240b2bc46e8b095ee5281a1bbd500ad42fa296778115cc51",
+          "evidence_digest": "sha256:968dcfb08db047c070b8305bfcf9be6630d324fca11f7aec3fb59f6fcafd3d62",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -600,7 +600,7 @@
         {
           "blockers": [],
           "capability_id": "capability.database.cutover-recovery",
-          "evidence_digest": "sha256:22a45998748e8845d4e1e375889f690d8af411d9b2ffafcb200345aa307b691d",
+          "evidence_digest": "sha256:088473b589a3f3cd96f5c4f285d9425a8f8b98fcd27d67b3cbecaee13200aa76",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -623,7 +623,7 @@
         {
           "blockers": [],
           "capability_id": "capability.database.schema-migration",
-          "evidence_digest": "sha256:de55816db8f504055d715f031e639947a3f20e6f84f6243973ee248c67fec97c",
+          "evidence_digest": "sha256:0d642cb33c29b250b0d392a2737f93fd9c8ddbaad60e65d0887a347113e507f6",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -661,7 +661,7 @@
             "Execution requires an authenticated human task and delegation service."
           ],
           "capability_id": "capability.business.authorized-approval",
-          "evidence_digest": "sha256:2093170766c39fa5eb5001fb0c0dba992f35469a4e4cc99b78ba5c8200bcdc3a",
+          "evidence_digest": "sha256:88819d7082410842453007f7c4983267386cf7d5642057ea2abce7e8122dbd19",
           "maturity_level": "C2",
           "missing_assets": [],
           "next_gate": "C3",
@@ -682,7 +682,7 @@
             "Production case authority and retention policy are deployment-specific."
           ],
           "capability_id": "capability.business.case-governance",
-          "evidence_digest": "sha256:f8282d7129dc981173a6f49cf574b6e0a00160800c1fddd53af218c72632204a",
+          "evidence_digest": "sha256:5fd5fca83a37a5f4b44d75ab3850b40608f62033797e5e21c8417c9ba975023f",
           "maturity_level": "C2",
           "missing_assets": [],
           "next_gate": "C3",
@@ -702,7 +702,7 @@
         {
           "blockers": [],
           "capability_id": "capability.gap.business-human-workflow.recover",
-          "evidence_digest": "sha256:58d3503080962fb4a9a2e89fef08ab14cb092bc656e6b928e8fab5c20d89b9df",
+          "evidence_digest": "sha256:2d1299d2f6b4412682a235c4f395deabc53704c553ac094a7445ffd719cb9ade",
           "maturity_level": "C0",
           "missing_assets": [
             "capability-declaration"
@@ -731,7 +731,7 @@
         {
           "blockers": [],
           "capability_id": "capability.media.document-decode",
-          "evidence_digest": "sha256:fef8a4047503f0de255a84be33b54439a0a68f720fd5237aa8ea2d7d707436fc",
+          "evidence_digest": "sha256:27621e271693f13084a0a6c086e394f9844862afbe06c08a8fb7d8011a4c30ac",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -757,7 +757,7 @@
         {
           "blockers": [],
           "capability_id": "capability.media.image-transform",
-          "evidence_digest": "sha256:6854fb91091005d73a8010b4d53b6238b9b104a542fead6074df5226ffaa5a23",
+          "evidence_digest": "sha256:62ae04592bb2b719069de610dfe4a410729c313f57f222fdf30853ca4995c5df",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -782,7 +782,7 @@
         {
           "blockers": [],
           "capability_id": "capability.media.grounded-verification",
-          "evidence_digest": "sha256:9e6ccbf1a613b94d14bc078cf9f80cc41a79a704e9cc59596282ac3b6c08a5ee",
+          "evidence_digest": "sha256:010cf469a39329ab213486c9fc1a6f16a0da08251fa80f9aaa713997f8c56834",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -821,7 +821,7 @@
         {
           "blockers": [],
           "capability_id": "capability.science.experimental-decision",
-          "evidence_digest": "sha256:1f030c2405b07c151ee1d46e5dd2c7488e2ddd9e5483ca503b6cfebf1401cc6b",
+          "evidence_digest": "sha256:3a2cce15e098f7fd04c8cd3a3b290ee0a36ef94ab7c684909c19faa4f6757c6a",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -845,7 +845,7 @@
         {
           "blockers": [],
           "capability_id": "capability.science.numerical-transform",
-          "evidence_digest": "sha256:9ffbaa9f762bd889b5e1c1c2dc208eddef04066cc633d33a25d4d87b0be4c132",
+          "evidence_digest": "sha256:1caa817bb2f217090e3310cf574fbee5e307bf606f4a131351e16257b0d4c263",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -867,7 +867,7 @@
         {
           "blockers": [],
           "capability_id": "capability.science.residual-verification",
-          "evidence_digest": "sha256:33233a46fca25d0be253b68109c56b8bb12a17a4f0e1777e24a23a30b8df5fe7",
+          "evidence_digest": "sha256:45838425a2d08632bf2dd8c681ade7141921788247a38ae8a62e27fdc85d56ad",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -904,7 +904,7 @@
         {
           "blockers": [],
           "capability_id": "capability.ml.leakage-safe-preparation",
-          "evidence_digest": "sha256:577b06228aa7e09c406a6774c4a1f8195b13d81accfdb92c1c277b3c3ed9a144",
+          "evidence_digest": "sha256:f197e8d867df19b93af72f4cb8109a74ca24a67008fe110cc5d300ff4955e079",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -931,7 +931,7 @@
         {
           "blockers": [],
           "capability_id": "capability.ml.model-and-feature-search",
-          "evidence_digest": "sha256:d48c18b4cc79bf734538180d4d9fddcc432d8036e0905147a77284e04fc986fe",
+          "evidence_digest": "sha256:6aa916da0a98e7c0de7de4b949962d657834aed33501994b43400ddd2ab7b340",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -958,7 +958,7 @@
         {
           "blockers": [],
           "capability_id": "capability.ml.holdout-verification",
-          "evidence_digest": "sha256:29bfa280908cb0ec73bef0e8a9c1d228094c17104ce115eb56e40215c379a793",
+          "evidence_digest": "sha256:7f569b09fd9387d89e0f7ae9e1d11b9fd9c560c300a021ec756e85bc554c347b",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -999,7 +999,7 @@
             "External model claims require pinned, authorized model harnesses."
           ],
           "capability_id": "capability.llm.panel-decision",
-          "evidence_digest": "sha256:68ba7f074086fa36b37dff33b9a116e690e1c9a0e730cb21e0f06f4f66b26ced",
+          "evidence_digest": "sha256:475827a5bf819aa104c96fa8afc764c277d2155a3475ba164f5fdea005a31022",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -1022,7 +1022,7 @@
         {
           "blockers": [],
           "capability_id": "capability.llm.grounded-context",
-          "evidence_digest": "sha256:dce0a07bf38161a4457efc38d0d4b1e1d9bcd105ac3aa214ed747ffac4767abb",
+          "evidence_digest": "sha256:f0d3bf1f306b1c4baff6ee08146597b32045943b2ecb1113caa436cb35503686",
           "maturity_level": "C5",
           "missing_assets": [],
           "next_gate": "C6",
@@ -1045,7 +1045,7 @@
         {
           "blockers": [],
           "capability_id": "capability.llm.adversarial-verification",
-          "evidence_digest": "sha256:2fadd1e5732a141bd115f456720085a51b0dcad61810ae4579783c7406f5696a",
+          "evidence_digest": "sha256:340a638c7459cc4fcb4dc5eb84b8d3186f1ffe54baa3f62ddd99eb30e7584f89",
           "maturity_level": "C6",
           "missing_assets": [],
           "next_gate": "C7",
@@ -1078,7 +1078,7 @@
       }
     }
   ],
-  "generated_from": "sha256:94ee4dfca31b9ebd6e1eb06a968701907da304db63d184d37e32d4ebfa0ea85d",
+  "generated_from": "sha256:70ec6881362ca9205f6575ab5ddffc2563441c9d8961ee43d5de2eb63e6f570c",
   "id": "coverage.reference-universal-engineering",
   "status_counts": {
     "blocked": 4,

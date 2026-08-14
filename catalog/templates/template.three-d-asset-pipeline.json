@@ -1,0 +1,980 @@
+{
+  "description": "A geometry, material, collision, optimization, rendering, and export scaffold.",
+  "domains": [
+    "media.three-d",
+    "simulation.assets"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.three-d-asset-pipeline",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_assets",
+        "target_port": "state",
+        "target_slot": "detect_coordinate_system"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_coordinate_system",
+        "target_port": "state",
+        "target_slot": "normalize_formats"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_formats",
+        "target_port": "state",
+        "target_slot": "validate_topology"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_topology",
+        "target_port": "state",
+        "target_slot": "repair_geometry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "repair_geometry",
+        "target_port": "state",
+        "target_slot": "validate_uvs"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_uvs",
+        "target_port": "state",
+        "target_slot": "validate_materials"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_materials",
+        "target_port": "state",
+        "target_slot": "validate_rigging"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_rigging",
+        "target_port": "state",
+        "target_slot": "validate_collisions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_collisions",
+        "target_port": "state",
+        "target_slot": "generate_lods"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_lods",
+        "target_port": "state",
+        "target_slot": "optimize_geometry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "optimize_geometry",
+        "target_port": "state",
+        "target_slot": "optimize_textures"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "optimize_textures",
+        "target_port": "state",
+        "target_slot": "render_regression"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "render_regression",
+        "target_port": "state",
+        "target_slot": "profile_asset"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "profile_asset",
+        "target_port": "state",
+        "target_slot": "export_asset"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "export_asset",
+        "target_port": "state",
+        "target_slot": "publish_asset_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.three-d-asset-pipeline",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_assets",
+        "type": {
+          "id": "template.three-d-asset-pipeline.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_asset_receipt",
+        "type": {
+          "id": "template.three-d-asset-pipeline.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "load_assets",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load meshes, scenes, materials, textures, skeletons, and metadata by digest.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.load_assets.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load meshes, scenes, materials, textures, skeletons, and metadata by digest and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "detect_coordinate_system",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify handedness, axes, units, transforms, and scene hierarchy.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.detect_coordinate_system.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify handedness, axes, units, transforms, and scene hierarchy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "normalize_formats",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Convert formats only through explicit typed adapters with loss accounting.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.normalize_formats.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Convert formats only through explicit typed adapters with loss accounting and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.geometry"
+        ],
+        "id": "validate_topology",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect non-manifold edges, holes, degenerates, inverted normals, and disconnected components.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.validate_topology.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect non-manifold edges, holes, degenerates, inverted normals, and disconnected components and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.geometry"
+        ],
+        "id": "repair_geometry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply bounded reversible repairs and quarantine unresolved defects.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.repair_geometry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply bounded reversible repairs and quarantine unresolved defects and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.geometry"
+        ],
+        "id": "validate_uvs",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate UV coverage, overlap policy, seams, and texel density.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.validate_uvs.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate UV coverage, overlap policy, seams, and texel density and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scene"
+        ],
+        "id": "validate_materials",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve material and texture references, channels, color spaces, and licenses.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.validate_materials.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve material and texture references, channels, color spaces, and licenses and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scene"
+        ],
+        "id": "validate_rigging",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate skeleton hierarchy, weights, animations, and deformation invariants.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.validate_rigging.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate skeleton hierarchy, weights, animations, and deformation invariants and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scene"
+        ],
+        "id": "validate_collisions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate collision geometry, layers, bounds, and intended physical semantics.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.validate_collisions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate collision geometry, layers, bounds, and intended physical semantics and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.optimize"
+        ],
+        "id": "generate_lods",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate or validate level-of-detail variants with visual-error evidence.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.generate_lods.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate or validate level-of-detail variants with visual-error evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.optimize"
+        ],
+        "id": "optimize_geometry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reduce geometry and draw overhead without violating declared shape tolerances.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.optimize_geometry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reduce geometry and draw overhead without violating declared shape tolerances and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.optimize"
+        ],
+        "id": "optimize_textures",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resize, pack, compress, and stream textures under memory and quality budgets.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.optimize_textures.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resize, pack, compress, and stream textures under memory and quality budgets and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "render_regression",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Render fixed cameras and compare silhouettes, materials, lighting, and artifacts.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.render_regression.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Render fixed cameras and compare silhouettes, materials, lighting, and artifacts and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "profile_asset",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure triangles, draw calls, memory, load time, and representative frame cost.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.profile_asset.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure triangles, draw calls, memory, load time, and representative frame cost and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "export_asset",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Export versioned bundles and verify round-trip structure and references.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.export_asset.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Export versioned bundles and verify round-trip structure and references and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.verify"
+        ],
+        "id": "publish_asset_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.three-d-asset-pipeline.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish defects, repairs, budgets, renders, exports, and source lineage.",
+        "required_capabilities": [
+          "template.three-d-asset-pipeline.publish_asset_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish defects, repairs, budgets, renders, exports, and source lineage and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the 3D asset validation and optimization obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.three-d-asset-pipeline.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.three-d-asset-pipeline.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Decode spatial assets with exact coordinate semantics.",
+      "extensions": {},
+      "id": "stage.ingest",
+      "slot_ids": [
+        "load_assets",
+        "detect_coordinate_system",
+        "normalize_formats"
+      ],
+      "title": "Ingest"
+    },
+    {
+      "description": "Validate and repair geometric structure.",
+      "extensions": {},
+      "id": "stage.geometry",
+      "slot_ids": [
+        "validate_topology",
+        "repair_geometry",
+        "validate_uvs"
+      ],
+      "title": "Geometry"
+    },
+    {
+      "description": "Validate appearance and interaction contracts.",
+      "extensions": {},
+      "id": "stage.scene",
+      "slot_ids": [
+        "validate_materials",
+        "validate_rigging",
+        "validate_collisions"
+      ],
+      "title": "Scene"
+    },
+    {
+      "description": "Meet explicit runtime and visual budgets.",
+      "extensions": {},
+      "id": "stage.optimize",
+      "slot_ids": [
+        "generate_lods",
+        "optimize_geometry",
+        "optimize_textures"
+      ],
+      "title": "Optimize"
+    },
+    {
+      "description": "Render, simulate, and export independently checked assets.",
+      "extensions": {},
+      "id": "stage.verify",
+      "slot_ids": [
+        "render_regression",
+        "profile_asset",
+        "export_asset",
+        "publish_asset_receipt"
+      ],
+      "title": "Verify"
+    }
+  ],
+  "tags": [
+    "three-d",
+    "mesh",
+    "materials",
+    "lod",
+    "rendering"
+  ],
+  "template_model_version": "0.1",
+  "title": "3D asset validation and optimization",
+  "version": "1.0.0"
+}

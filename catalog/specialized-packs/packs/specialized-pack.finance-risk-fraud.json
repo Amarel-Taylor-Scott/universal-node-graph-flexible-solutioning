@@ -1,0 +1,332 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "finance-risk-fraud",
+    "extraction_target": "solutiongraph-pack-finance-risk-fraud",
+    "python_module": "solutiongraph.specialized.finance_risk_fraud"
+  },
+  "description": "Ledger integrity, reconciliation, fraud and abuse detection, calibrated risk decisions, financial forecasting, stress testing, and control evidence.",
+  "domain_pack_ids": [
+    "domain-pack.data-integration",
+    "domain-pack.ai-ml",
+    "domain-pack.security-compliance",
+    "domain-pack.business-human-workflow"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject financial aggregates with unexplained imbalance, duplication, currency, sign, or effective-time failures.",
+      "id": "gate.finance-risk-fraud.ledger",
+      "independent": true,
+      "metric_ids": [
+        "metric.finance-risk-fraud.unreconciled-value"
+      ],
+      "oracle_kind": "exact",
+      "title": "Ledger integrity gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate consequential risk or fraud decisions without calibrated cost evidence, independent controls, explanation, appeal, and accountable authority.",
+      "id": "gate.finance-risk-fraud.risk",
+      "independent": true,
+      "metric_ids": [
+        "metric.finance-risk-fraud.expected-cost",
+        "metric.finance-risk-fraud.calibration",
+        "metric.finance-risk-fraud.control-violations"
+      ],
+      "oracle_kind": "human",
+      "title": "Risk decision gate"
+    }
+  ],
+  "id": "specialized-pack.finance-risk-fraud",
+  "license": "MIT",
+  "limitations": [
+    "Bundled fixtures use synthetic or simplified data and do not constitute trading, lending, accounting, audit, or regulatory advice."
+  ],
+  "metrics": [
+    {
+      "description": "Absolute value remaining unmatched, duplicated, mistimed, or unexplained after reconciliation.",
+      "direction": "minimize",
+      "id": "metric.finance-risk-fraud.unreconciled-value",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.ledger",
+      "title": "Unreconciled value",
+      "unit": "currency"
+    },
+    {
+      "description": "Task-specific false-positive, false-negative, delay, loss, and intervention cost under declared weights.",
+      "direction": "minimize",
+      "id": "metric.finance-risk-fraud.expected-cost",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.decision",
+      "title": "Decision expected cost",
+      "unit": "currency"
+    },
+    {
+      "description": "Agreement between predicted and observed risk by horizon, amount, regime, and protected review slice.",
+      "direction": "maximize",
+      "id": "metric.finance-risk-fraud.calibration",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.slice",
+      "title": "Risk calibration",
+      "unit": "score"
+    },
+    {
+      "description": "Limit, authority, segregation, audit, fairness, privacy, or prohibited-use failures.",
+      "direction": "minimize",
+      "id": "metric.finance-risk-fraud.control-violations",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.release",
+      "title": "Financial control violations",
+      "unit": "count"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile accounts, currencies, signs, effective and posting times, reversals, settlements, identities, and reconciliation keys.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.finance-risk-fraud.ledger-contract",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Ledger and transaction contract",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile exposure, horizon, labels, costs, limits, overrides, latency, affected parties, and regulatory constraints.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.finance-risk-fraud.risk-decision",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Risk decision surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure calendar, corporate-action, liquidity, volatility, drift, dependency, tail, and stress-regime characteristics.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.finance-risk-fraud.market-regime",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Market and regime profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted case-pattern embedding for historical discovery under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.finance-risk-fraud.case-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Financial case embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.transaction-reconciliation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "finance.normalize",
+        "finance.match",
+        "finance.balance",
+        "finance.explain-break",
+        "finance.publish"
+      ],
+      "category_ids": [
+        "dag.integrate.reconcile",
+        "dag.prepare.verify",
+        "dag.govern.provenance"
+      ],
+      "description": "Normalize signed amounts and time semantics, match transactions, explain breaks, preserve double-entry invariants, and publish exception evidence.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "transaction-reconciliation"
+      ],
+      "id": "recipe.finance-risk-fraud.reconcile",
+      "input_kind_ids": [
+        "artifact.financial-transactions"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.reconciled-ledger"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.transaction",
+        "question-pack.datetime"
+      ],
+      "template_ids": [
+        "template.fraud-risk",
+        "template.data-quality"
+      ],
+      "title": "Financial reconciliation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.fraud-risk-decision"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "finance.label",
+        "finance.entity-features",
+        "finance.score",
+        "finance.calibrate",
+        "finance.explain",
+        "finance.review"
+      ],
+      "category_ids": [
+        "dag.learn.classification",
+        "dag.learn.anomaly",
+        "dag.evaluate.model",
+        "dag.human.review"
+      ],
+      "description": "Construct leakage-safe labels, generate entity and temporal signals, compare rules and models, calibrate costs, review adverse slices, and route uncertain cases.",
+      "design_pack_ids": [
+        "design-pack.target-labels",
+        "design-pack.validation-splits",
+        "design-pack.fairness-risk"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.finance-risk-fraud.fraud",
+      "input_kind_ids": [
+        "artifact.transaction-events"
+      ],
+      "limitations": [
+        "The template does not authorize adverse action and requires domain-specific legal, fairness, and appeal controls."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.fraud-risk-decisions"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.transaction"
+      ],
+      "template_ids": [
+        "template.fraud-risk"
+      ],
+      "title": "Fraud and abuse decisioning"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.calibrated-forecast"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "finance.calendar",
+        "finance.vintage",
+        "finance.backtest",
+        "finance.forecast",
+        "finance.stress",
+        "finance.report"
+      ],
+      "category_ids": [
+        "dag.learn.forecast",
+        "dag.generate.scenario",
+        "dag.evaluate.model",
+        "dag.generate.report"
+      ],
+      "description": "Align market calendars and vintages, backtest without look-ahead, model uncertainty and tails, run fixed stress scenarios, and publish bounded exposure evidence.",
+      "design_pack_ids": [
+        "design-pack.time-series",
+        "design-pack.robustness-stability"
+      ],
+      "effects": [],
+      "example_ids": [
+        "calibrated-time-series-forecast"
+      ],
+      "id": "recipe.finance-risk-fraud.forecast-stress",
+      "input_kind_ids": [
+        "artifact.financial-time-series"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.real-world-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.financial-stress-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.time-series-forecasting",
+        "template.scientific-experiment"
+      ],
+      "title": "Financial forecast and stress analysis"
+    }
+  ],
+  "signal_terms": [
+    "finance",
+    "financial",
+    "ledger",
+    "transaction",
+    "reconciliation",
+    "fraud",
+    "credit risk",
+    "market risk",
+    "stress test",
+    "portfolio"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.integrate.reconcile",
+    "dag.prepare.verify",
+    "dag.govern.provenance",
+    "dag.learn.classification",
+    "dag.learn.anomaly",
+    "dag.evaluate.model",
+    "dag.human.review",
+    "dag.learn.forecast",
+    "dag.generate.scenario",
+    "dag.generate.report"
+  ],
+  "title": "Finance, risk, and fraud",
+  "version": "0.1.0"
+}

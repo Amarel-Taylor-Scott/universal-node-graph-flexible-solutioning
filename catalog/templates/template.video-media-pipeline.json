@@ -1,0 +1,1033 @@
+{
+  "description": "A source, timeline, transformation, interpretation, assurance, and publication scaffold.",
+  "domains": [
+    "media.video",
+    "media.multimodal"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.video-media-pipeline",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "load_media",
+        "target_port": "state",
+        "target_slot": "probe_streams"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "probe_streams",
+        "target_port": "state",
+        "target_slot": "validate_integrity"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_integrity",
+        "target_port": "state",
+        "target_slot": "normalize_timestamps"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_timestamps",
+        "target_port": "state",
+        "target_slot": "segment_scenes"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "segment_scenes",
+        "target_port": "state",
+        "target_slot": "align_modalities"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "align_modalities",
+        "target_port": "state",
+        "target_slot": "select_regions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_regions",
+        "target_port": "state",
+        "target_slot": "transform_picture"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "transform_picture",
+        "target_port": "state",
+        "target_slot": "transform_audio"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "transform_audio",
+        "target_port": "state",
+        "target_slot": "encode_variants"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "encode_variants",
+        "target_port": "state",
+        "target_slot": "transcribe_speech"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "transcribe_speech",
+        "target_port": "state",
+        "target_slot": "describe_visuals"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "describe_visuals",
+        "target_port": "state",
+        "target_slot": "author_captions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "author_captions",
+        "target_port": "state",
+        "target_slot": "verify_sync"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_sync",
+        "target_port": "state",
+        "target_slot": "verify_quality"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_quality",
+        "target_port": "state",
+        "target_slot": "verify_safety_rights"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_safety_rights",
+        "target_port": "state",
+        "target_slot": "publish_media"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.video-media-pipeline",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "load_media",
+        "type": {
+          "id": "template.video-media-pipeline.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_media",
+        "type": {
+          "id": "template.video-media-pipeline.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "load_media",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Load source bytes, sidecars, rights, and provenance by digest.",
+        "required_capabilities": [
+          "template.video-media-pipeline.load_media.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Load source bytes, sidecars, rights, and provenance by digest and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "probe_streams",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify containers, codecs, tracks, durations, rates, channels, and color metadata.",
+        "required_capabilities": [
+          "template.video-media-pipeline.probe_streams.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify containers, codecs, tracks, durations, rates, channels, and color metadata and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.ingest"
+        ],
+        "id": "validate_integrity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect truncation, corrupt packets, missing tracks, and unsupported structure.",
+        "required_capabilities": [
+          "template.video-media-pipeline.validate_integrity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect truncation, corrupt packets, missing tracks, and unsupported structure and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.timeline"
+        ],
+        "id": "normalize_timestamps",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize presentation and decode timestamps under an explicit time base.",
+        "required_capabilities": [
+          "template.video-media-pipeline.normalize_timestamps.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize presentation and decode timestamps under an explicit time base and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.timeline"
+        ],
+        "id": "segment_scenes",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Segment scenes, shots, speech, music, silence, and requested events.",
+        "required_capabilities": [
+          "template.video-media-pipeline.segment_scenes.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Segment scenes, shots, speech, music, silence, and requested events and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.timeline"
+        ],
+        "id": "align_modalities",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Align video, audio, captions, metadata, and externally supplied events.",
+        "required_capabilities": [
+          "template.video-media-pipeline.align_modalities.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Align video, audio, captions, metadata, and externally supplied events and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "select_regions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select or assemble source-grounded clips under editorial constraints.",
+        "required_capabilities": [
+          "template.video-media-pipeline.select_regions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select or assemble source-grounded clips under editorial constraints and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "transform_picture",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Crop, resize, stabilize, grade, or reframe while recording every transformation.",
+        "required_capabilities": [
+          "template.video-media-pipeline.transform_picture.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Crop, resize, stabilize, grade, or reframe while recording every transformation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "transform_audio",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Mix, denoise, level, or separate audio under a declared policy.",
+        "required_capabilities": [
+          "template.video-media-pipeline.transform_audio.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Mix, denoise, level, or separate audio under a declared policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.transform"
+        ],
+        "id": "encode_variants",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Encode exact delivery variants with content and configuration identity.",
+        "required_capabilities": [
+          "template.video-media-pipeline.encode_variants.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Encode exact delivery variants with content and configuration identity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.interpret"
+        ],
+        "id": "transcribe_speech",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Transcribe and time-align speech with language and confidence.",
+        "required_capabilities": [
+          "template.video-media-pipeline.transcribe_speech.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Transcribe and time-align speech with language and confidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.interpret"
+        ],
+        "id": "describe_visuals",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect requested objects, text, actions, scenes, and visual properties.",
+        "required_capabilities": [
+          "template.video-media-pipeline.describe_visuals.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect requested objects, text, actions, scenes, and visual properties and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.interpret"
+        ],
+        "id": "author_captions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Create, translate, and format accessible captions or subtitles.",
+        "required_capabilities": [
+          "template.video-media-pipeline.author_captions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Create, translate, and format accessible captions or subtitles and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "verify_sync",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure audiovisual and caption synchronization.",
+        "required_capabilities": [
+          "template.video-media-pipeline.verify_sync.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure audiovisual and caption synchronization and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "verify_quality",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure picture, audio, continuity, and encoding quality against fixed references or properties.",
+        "required_capabilities": [
+          "template.video-media-pipeline.verify_quality.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure picture, audio, continuity, and encoding quality against fixed references or properties and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "verify_safety_rights",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Check declared content policy, privacy, licensing, and release constraints.",
+        "required_capabilities": [
+          "template.video-media-pipeline.verify_safety_rights.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Check declared content policy, privacy, licensing, and release constraints and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "publish_media",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.video-media-pipeline.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish variants, manifests, rejects, measurements, and provenance receipts.",
+        "required_capabilities": [
+          "template.video-media-pipeline.publish_media.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish variants, manifests, rejects, measurements, and provenance receipts and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Video and multimodal media pipeline obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.video-media-pipeline.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.video-media-pipeline.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Identify and decode exact media assets.",
+      "extensions": {},
+      "id": "stage.ingest",
+      "slot_ids": [
+        "load_media",
+        "probe_streams",
+        "validate_integrity"
+      ],
+      "title": "Ingest"
+    },
+    {
+      "description": "Create a coherent audiovisual timeline.",
+      "extensions": {},
+      "id": "stage.timeline",
+      "slot_ids": [
+        "normalize_timestamps",
+        "segment_scenes",
+        "align_modalities"
+      ],
+      "title": "Timeline"
+    },
+    {
+      "description": "Produce declared media variants.",
+      "extensions": {},
+      "id": "stage.transform",
+      "slot_ids": [
+        "select_regions",
+        "transform_picture",
+        "transform_audio",
+        "encode_variants"
+      ],
+      "title": "Transform"
+    },
+    {
+      "description": "Generate typed multimodal observations.",
+      "extensions": {},
+      "id": "stage.interpret",
+      "slot_ids": [
+        "transcribe_speech",
+        "describe_visuals",
+        "author_captions"
+      ],
+      "title": "Interpret"
+    },
+    {
+      "description": "Independently verify media quality and policy.",
+      "extensions": {},
+      "id": "stage.assure",
+      "slot_ids": [
+        "verify_sync",
+        "verify_quality",
+        "verify_safety_rights",
+        "publish_media"
+      ],
+      "title": "Assure"
+    }
+  ],
+  "tags": [
+    "video",
+    "audio",
+    "captions",
+    "transcoding",
+    "media-assurance"
+  ],
+  "template_model_version": "0.1",
+  "title": "Video and multimodal media pipeline",
+  "version": "1.0.0"
+}

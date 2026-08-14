@@ -1,0 +1,39 @@
+{
+  "acceptance_signals": [
+    "brand compliance",
+    "technical quality",
+    "accessibility",
+    "rights coverage",
+    "policy",
+    "campaign outcome"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.creative-content-production",
+  "input_contract": "Audience, goal, channel, brand policy, source assets, rights, formats, and experiment contract.",
+  "output_contract": "Traceable creative variants, rights and review evidence, channel packages, experiment outcomes, and provenance.",
+  "problem": "Research, generate, assemble, edit, verify rights and quality, experiment, publish, and monitor creative assets.",
+  "readiness": "template",
+  "stage_families": [
+    "brief",
+    "rights",
+    "research",
+    "concept",
+    "generate",
+    "assemble",
+    "edit",
+    "assure",
+    "package",
+    "experiment",
+    "monitor"
+  ],
+  "tags": [
+    "creative",
+    "campaign",
+    "media",
+    "experimentation"
+  ],
+  "template_id": "template.creative-content-production",
+  "title": "Creative brief to governed campaign variants"
+}

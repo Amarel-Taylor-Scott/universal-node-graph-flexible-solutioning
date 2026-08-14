@@ -21,6 +21,7 @@ solutiongraph/
 ├── template_library.py   original reference decompositions
 ├── template_library_extended.py  thirteen additional application templates
 ├── template_library_market.py    twelve additional cross-domain templates
+├── template_library_frontier.py  eleven frontier modality/system templates
 ├── tasking.py            task/case/oracle contracts + exact solution-pack closure
 ├── authoring.py          source-bound Python node definitions and candidate expansion
 ├── stdlib_nodes.py       dependency-free reusable text/data primitives
@@ -55,7 +56,7 @@ solutiongraph/
 ├── intelligence.py       task fingerprints, historical retrieval, starts, and effort
 ├── solutioning.py        staged task-to-history solutioning quality-of-life façade
 ├── task_categories.py    open 95-category multi-label DAG taxonomy
-├── examples/             47 release-gated programs + modular control/mutation quickstart
+├── examples/             54 release-gated programs + modular control/mutation quickstart
 ├── reference_nodes.py    small executable node-pack demonstration
 ├── catalog.py            deterministic catalogue projection
 ├── scaffold.py           transactional coding-harness starter workspaces
@@ -65,10 +66,10 @@ catalog/
 ├── design-atlas/         sources, phases, techniques, packs, questions, archetypes
 ├── agent-bench/          ten digest-only task contracts and two benchmark suites
 ├── index.json            content-addressed template/node-pack/benchmark index
-├── templates/            544 atomic obligations across 31 varied templates
-├── nodepacks/            eight portable registries and discovery sidecars
+├── templates/            733 atomic obligations across 42 varied templates
+├── nodepacks/            nine portable registries and discovery sidecars
 ├── harnesses/            strict linked-graph evaluation-harness artifact
-├── arena/                52 cross-domain task-family contracts
+├── arena/                63 cross-domain task-family contracts
 └── benchmarks/           six task/solution packs and 24 immutable cases
 
 browsergraph/

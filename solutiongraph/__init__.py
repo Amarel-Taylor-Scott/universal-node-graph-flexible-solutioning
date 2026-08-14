@@ -443,7 +443,7 @@ from solutiongraph.verification import (
     verify_reference_release,
 )
 
-__version__ = "0.7.0"
+__version__ = "0.8.0"
 
 __all__ = [
     "INTERROGATION_MODEL_VERSION",

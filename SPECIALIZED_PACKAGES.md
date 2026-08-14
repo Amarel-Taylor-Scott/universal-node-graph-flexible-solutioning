@@ -7,7 +7,12 @@ gates, and links to checked-in assets for one engineering practice. It helps an
 engineer or agent discover and compose a solution space; it does not authorize
 or execute that solution by itself.
 
-The reference release includes seven individually importable packages:
+The reference release includes 26 individually importable packages. They are
+layered rather than mutually exclusive: a task can combine a practice pack, a
+modality or assurance pack, and a mission/industry pack before exact recipe
+composition and compiler admission.
+
+### Practice foundations
 
 | Package | Typical work | Recipes | Features | Metrics | Gates |
 |---|---|---:|---:|---:|---:|
@@ -19,9 +24,41 @@ The reference release includes seven individually importable packages:
 | Software engineering | Repository repair, testing, APIs, frontend journeys, migrations and staged releases | 5 | 7 | 6 | 2 |
 | Operations and reliability | Observability, incidents, recovery, compliance, workflows and constrained planning | 5 | 7 | 6 | 3 |
 
-Together they expose 32 typed recipes, 51 profiling features, 42 metrics, and
-17 independent or escalation-oriented quality gates. Every recipe references
-real catalog assets, and release verification rejects stale references.
+### Modality, assurance, and cyber-physical packs
+
+| Package | Typical work | Readiness |
+|---|---|---|
+| LLM evaluation and safety | Independent evaluation, judge calibration, agent trajectories, red-team regression curricula, sealed promotion | Executable fixture |
+| Cybersecurity | Authorized threat modeling, defensive telemetry investigation, containment/recovery evidence | Executable read-only fixture; effectful response is permission-gated |
+| Privacy, governance, and compliance | Privacy-by-design, de-identification, control testing, exception and attestation evidence | Executable fixture |
+| Document intelligence | OCR/layout-aware extraction, source grounding, rendering, visual verification, redaction | Executable fixture |
+| Media intelligence | Image, audio, and video integrity, timelines, captions, transformations, release assurance | Executable fixture |
+| 3D and simulation assets | Geometry, materials, collision, LOD, rendering regression, export budgets | Executable synthetic fixture |
+| Game engineering | State contracts, builds, deterministic replay, bot/human playtests, balance, release | Executable rules fixture |
+| Geospatial and temporal | Addresses, CRS, boundaries, time zones, event time, place-time enrichment, maps | Credentialed connector |
+| Robotics and control | Robot models, planning, simulation, safety envelopes, recovery, physical authority | Executable simulation-only fixture |
+| Scientific computing and digital twins | Numerical solve, calibration, validation, uncertainty, sensitivity, scenario decisions | Executable synthetic fixture |
+| Embedded systems and IoT | Firmware assurance, device identity, event-time telemetry, fleet state, commands, rollout | Executable telemetry fixture |
+
+### Mission and industry packs
+
+| Package | Typical work | Readiness |
+|---|---|---|
+| Healthcare and biomedical evidence | Cohorts, evidence synthesis, subgroup evaluation, bounded clinical decision support | Catalog only; no clinical-use claim |
+| Finance, risk, and fraud | Ledger reconciliation, calibrated fraud/risk decisions, forecasting and stress evidence | Executable synthetic fixture |
+| Supply chain and planning | Network data, demand/inventory, constrained plans, fulfillment and disruption loops | Executable logistics fixture |
+| Product experimentation | Event contracts, journeys/funnels, randomization, causal estimates, guardrails | Executable event fixture |
+| Search and recommendation | Permission-aware indexing, hybrid retrieval, ranking, recommendation, feedback bias | Executable ranking fixture |
+| Knowledge and research | Provenance-first knowledge bases, conflict-aware synthesis, reproducible dossiers, grounded answers | Executable document/research fixtures |
+| Education and assessment | Objectives, content, assessment blueprints, rubrics, accessibility, educator review | Catalog only; no high-stakes scoring claim |
+| Creative content production | Briefs, diverse concepts, multimodal production, rights/brand/accessibility review, delivery | Executable media-assurance fixture |
+
+Together the 26 packs expose 89 typed recipes, 127 profiling features, 118
+metrics, and 55 independent or escalation-oriented quality gates. Every recipe
+references real catalog assets, and release verification rejects stale
+references. A readiness label applies only to the evidence explicitly linked
+from the pack; it is not a production, safety, regulatory, or domain-quality
+certification.
 
 ## Three different meanings of “pack”
 
@@ -43,6 +80,7 @@ List and inspect the bundled packages:
 ```bash
 solutiongraph packages list
 solutiongraph packages show specialized-pack.data-engineering
+solutiongraph packages show specialized-pack.robotics-control
 ```
 
 Rank every package for a task. The recommended list is bounded, but the report
@@ -86,6 +124,8 @@ JSON output is available on every command:
 
 ```bash
 solutiongraph packages recommend "Investigate a production outage" --json
+solutiongraph packages recommend \
+  "Validate a 3D mesh, generate LODs, and run render regressions" --json
 solutiongraph packages compose \
   --input-kind artifact.deployed-service \
   --output-kind artifact.recovery-evidence \
@@ -202,11 +242,23 @@ The strict wire contracts are in:
 
 ## Extraction and product boundaries
 
-The seven built-ins currently ship in the `browsergraph` distribution so one
+The 26 built-ins currently ship in the `browsergraph` distribution so one
 checkout and one test suite can prove cross-package contracts. Each definition
 records an extraction target such as `solutiongraph-pack-data-engineering` or
 `solutiongraph-pack-llm-engineering`. That makes later repository/package
 splits mechanical without pretending they have already happened.
+
+The intended extraction axes are deliberately composable:
+
+- practice packages such as `solutiongraph-pack-data-engineering`;
+- modality packages such as `solutiongraph-pack-document-intelligence`;
+- assurance packages such as `solutiongraph-pack-llm-evaluation-safety`;
+- cyber-physical packages such as `solutiongraph-pack-robotics-control`; and
+- mission packages such as `solutiongraph-pack-healthcare-biomedical`.
+
+See [COMPETITIVE_LANDSCAPE_AND_INTEGRATION_STRATEGY.md](COMPETITIVE_LANDSCAPE_AND_INTEGRATION_STRATEGY.md)
+for the current build-versus-integrate boundary across workflow engines,
+data/ML orchestration, LLM evaluation, observability, cyber, robotics, and 3D.
 
 A focused distribution should contain its package definition, relevant
 templates/question banks, executable node packs, fixtures, and benchmark

@@ -407,7 +407,7 @@ This repository implements Level 1 as a general Python core and now includes a
 trusted-local Level 2 reference slice: admitted-space-bound frozen plans,
 content-addressed memory/file artifacts, implementation-digest checks, bounded
 retry, frozen fallbacks, independent verification, receipts, and five
-notebook families within 47 executable domain programs. Version 0.6 also adds
+notebook families within 54 executable domain programs. Version 0.6 also adds
 portable task/solution-pack closure and controlled benchmark evidence. The
 bundled Python adapter is in-process and is not
 a least-privilege sandbox, durable crash-replay engine, or production Level 2

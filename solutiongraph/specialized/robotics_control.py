@@ -1,0 +1,192 @@
+"""Specialized package for robotics planning, simulation, control, and safety."""
+
+from solutiongraph.specialized._builders import (
+    embedding_feature,
+    feature,
+    gate,
+    metric,
+    recipe,
+    specialized_pack,
+)
+
+NAMESPACE = "robotics-control"
+FEATURES = (
+    feature(
+        NAMESPACE,
+        "robot-model",
+        "Robot model",
+        "Profile kinematics, dynamics, frames, joint and actuator limits, sensors, calibration, payload, and fail-safe behavior.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "environment-risk",
+        "Environment risk",
+        "Profile operating domain, obstacles, humans, uncertainty, prohibited regions, and consequence severity.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "plan-complexity",
+        "Plan complexity",
+        "Measure horizon, waypoints, branches, recovery states, timing, energy, and constraint margins.",
+        "mapping",
+    ),
+    embedding_feature(
+        NAMESPACE,
+        "task-embedding",
+        "Robotics task embedding",
+        "Optional redacted task and environment embedding for historical retrieval under an exact space identity.",
+    ),
+)
+METRICS = (
+    metric(
+        NAMESPACE,
+        "constraint-violations",
+        "Constraint violations",
+        "Kinematic, dynamic, collision, timing, energy, authority, and safety violations.",
+        "minimize",
+        "count",
+        scope="scope.plan",
+    ),
+    metric(
+        NAMESPACE,
+        "safety-margin",
+        "Safety margin",
+        "Minimum observed margin to declared collision, force, speed, region, and human-safety limits.",
+        "maximize",
+        "distance",
+        scope="scope.simulation",
+    ),
+    metric(
+        NAMESPACE,
+        "task-success",
+        "Task success",
+        "Independently verified goal completion across nominal and perturbation scenarios.",
+        "maximize",
+        "ratio",
+        scope="scope.scenario",
+    ),
+    metric(
+        NAMESPACE,
+        "safe-recovery",
+        "Safe recovery",
+        "Failures reaching a declared safe state within the response contract.",
+        "maximize",
+        "ratio",
+        scope="scope.failure",
+    ),
+)
+GATES = (
+    gate(
+        NAMESPACE,
+        "simulation",
+        "Robotics simulation gate",
+        "Reject plans with feasibility, safety, robustness, or recovery failures in the fixed scenario suite.",
+        (METRICS[0].id, METRICS[1].id, METRICS[2].id, METRICS[3].id),
+        oracle_kind="property",
+    ),
+    gate(
+        NAMESPACE,
+        "physical-authority",
+        "Physical execution authority gate",
+        "Escalate every consequential physical execution to an independently enforced controller and accountable approval boundary.",
+        (METRICS[1].id, METRICS[3].id),
+        oracle_kind="human",
+        decision="escalate",
+    ),
+)
+RECIPES = (
+    recipe(
+        NAMESPACE,
+        "plan",
+        "Robot task and motion planning",
+        "Estimate state, generate diverse plans, check feasibility and safety, and select an eligible plan without executing it.",
+        ("artifact.robot-task",),
+        ("artifact.robot-plan",),
+        (
+            "robotics.model",
+            "robotics.state-estimation",
+            "robotics.plan",
+            "robotics.feasibility",
+            "robotics.select",
+        ),
+        ("dag.learn.optimize", "dag.learn.reinforcement", "dag.evaluate.safety"),
+        ("template.robotics-control",),
+        design_packs=("design-pack.reinforcement-learning", "design-pack.robustness-stability"),
+        arena_tasks=("arena.robotics-control-assurance",),
+    ),
+    recipe(
+        NAMESPACE,
+        "simulate",
+        "Robot plan safety simulation",
+        "Run nominal, perturbation, obstacle, sensor-failure, and interruption scenarios and independently verify the safety envelope.",
+        ("artifact.robot-plan",),
+        ("artifact.robot-simulation-report",),
+        (
+            "robotics.simulate",
+            "robotics.perturb",
+            "robotics.safety-monitor",
+            "robotics.recovery",
+            "robotics.report",
+        ),
+        ("dag.generate.scenario", "dag.evaluate.safety", "dag.evaluate.metamorphic"),
+        ("template.robotics-control",),
+        node_packs=("example.frontier-domain-node-pack",),
+        examples=("robotics-safety-simulation",),
+        arena_tasks=("arena.robotics-control-assurance",),
+        limitations=("The bundled fixture is one-dimensional and has no device effects.",),
+    ),
+    recipe(
+        NAMESPACE,
+        "execute",
+        "Safety-gated robot execution",
+        "Authorize a frozen plan, execute through an enforcing controller, monitor divergence, stop safely, and publish telemetry and intervention evidence.",
+        ("artifact.robot-plan",),
+        ("artifact.robot-execution-evidence",),
+        (
+            "robotics.authorize",
+            "robotics.execute",
+            "robotics.monitor",
+            "robotics.emergency-stop",
+            "robotics.recover",
+        ),
+        ("dag.serve.automation", "dag.operate.observe", "dag.govern.security", "dag.human.review"),
+        ("template.robotics-control", "template.compliance-evidence"),
+        effects=("device.write",),
+        permissions=("device.write",),
+        limitations=(
+            "Physical execution requires device-specific enforcing adapters, tested emergency stops, qualified safety review, and local authority.",
+        ),
+    ),
+)
+PACK = specialized_pack(
+    "robotics_control",
+    "Robotics and control",
+    "Robot modeling, perception, planning, simulation, safety verification, physical-effect authorization, monitoring, and recovery.",
+    domain_packs=(
+        "domain-pack.science-optimization",
+        "domain-pack.event-stream",
+        "domain-pack.security-compliance",
+    ),
+    categories=tuple(dict.fromkeys(category for item in RECIPES for category in item.category_ids)),
+    signals=(
+        "robotics",
+        "robot",
+        "motion planning",
+        "control",
+        "kinematics",
+        "simulation",
+        "safety",
+        "sensor",
+        "actuator",
+    ),
+    recipes=RECIPES,
+    features=FEATURES,
+    metrics=METRICS,
+    gates=GATES,
+    limitations=(
+        "Executable evidence is simulation-only and grants no physical-device authority.",
+    ),
+)
+__all__ = ["FEATURES", "GATES", "METRICS", "PACK", "RECIPES"]

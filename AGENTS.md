@@ -184,7 +184,7 @@ objects, not in `NodeSpec`.
 - `solutiongraph/solutioning.py` — staged task recognition, routing, execution, and history closure.
 - `solutiongraph/ranking.py` — reusable receipt-derived gates, Pareto flags, and weighted projections.
 - `solutiongraph/stdlib_pack.py` — 19 dependency-free reusable nodes and 32 bindings.
-- `solutiongraph/examples/` — 47 dependency-free executable domain examples,
+- `solutiongraph/examples/` — 54 dependency-free executable domain examples,
   including ten three-strategy data-science lifecycle graphs.
 - `solutiongraph/schemas/` — strict portable wire schemas.
 - `catalog/` — generated templates, node packs, Arena tasks, solution packs, and benchmarks.

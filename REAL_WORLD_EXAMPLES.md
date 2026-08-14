@@ -1,9 +1,10 @@
 # Executable real-world example skeleton
 
-The repository now includes 47 dependency-free programs, including five
+The repository now includes 54 dependency-free programs, including five
 notebook task families, 18 additional Arena fixtures, and one reusable
 standard-library data-quality program, plus thirteen engineering and evaluation
-showcases and ten data-science lifecycle graphs, that pass through
+showcases, ten data-science lifecycle graphs, and seven frontier-domain
+fixtures, that pass through
 the same universal lifecycle: full registry admission, route compilation,
 frozen fallbacks, execution, content-addressed artifacts, independent
 verification, and immutable receipts.
@@ -64,6 +65,13 @@ solutiongraph examples run unsupervised-segmentation-and-anomaly
 solutiongraph examples run model-explainability-and-stability
 solutiongraph examples run ensemble-selection-and-stacking
 solutiongraph examples run model-release-monitoring-and-rollback
+solutiongraph examples run defensive-cyber-investigation
+solutiongraph examples run video-media-assurance
+solutiongraph examples run three-d-asset-assurance
+solutiongraph examples run gameplay-replay-and-balance
+solutiongraph examples run robotics-safety-simulation
+solutiongraph examples run iot-telemetry-assurance
+solutiongraph examples run digital-twin-validation
 solutiongraph examples run stdlib-data-quality
 ```
 
@@ -140,14 +148,27 @@ solutiongraph examples run tabular-regression \
 | Ensemble/stacking | collect OOF → lineage → prune → blend → calibrate → holdout | minimal/robust/alternate candidates at every stage | no fold leakage, weak-model removal, weights, and untouched-holdout error |
 | Model release/rollback | package → replay → shadow → drift → gate → rollback | minimal/robust/alternate candidates at every stage | exact identities, non-mutating shadow, human-gated approval, rollback target |
 | Standard-library data quality | normalize keys → trim → normalize missing → case-fold/pass → filter/pass → deduplicate/pass → profile | 19 reusable source-bound primitives expanded into 32 candidate bindings | exact normalized records, profile, and deterministic digest |
+| Defensive cyber investigation | scope → normalize → correlate → test hypotheses → report | reference/disclosed-shortcut candidates at every stage | authorized synthetic telemetry, evidence-bound hypothesis, non-effectful response proposal, and claim boundary |
+| Video/media assurance | probe → timeline → align → captions → assure | reference/disclosed-shortcut candidates at every stage | monotonic frame timing, no dropped intervals, bounded A/V sync error, caption timing/coverage, and explicit codec boundary |
+| 3D asset assurance | parse → topology → materials → collision → budget | reference/disclosed-shortcut candidates at every stage | closed tetrahedron topology, material closure, exact bounds, triangle budget, and asset digest |
+| Gameplay replay and balance | rules → replay → regression → balance → gate | reference/disclosed-shortcut candidates at every stage | expected final state, replay hashes, balanced fixture outcomes, and explicit absence of human-fun evidence |
+| Robotics safety simulation | model → plan → simulate → safety → gate | reference/disclosed-shortcut candidates at every stage | endpoint and step-limit checks, obstacle distance, no physical effects, and simulation-only boundary |
+| IoT telemetry assurance | schema → event time → anomalies → device state → assure | reference/disclosed-shortcut candidates at every stage | required fields, ordered/deduplicated events, anomaly evidence, latest device state, and connector boundary |
+| Digital-twin validation | calibrate → simulate → validate → sensitivity → report | reference/disclosed-shortcut candidates at every stage | recovered parameters, untouched residuals, sensitivity spread, and synthetic-fidelity boundary |
 
 Both ML examples are real DAGs rather than only lists: each split artifact fans
 out to training and evaluation, while the trained model joins evaluation.
 
-Forty-four controls are expected to be rejected by their independent oracles.
+Fifty-one controls are expected to be rejected by their independent oracles.
 Preserving those valid-but-poor routes is part of the evidence model. The
-release gate compiles and executes all 120 declared routes through both runtime
+release gate compiles and executes all 134 declared routes through both runtime
 adapters.
+
+Run every new frontier control/reference pair in one dependency-free command:
+
+```bash
+python examples/frontier_domain_showcase.py
+```
 
 The thirteen showcase mechanisms and the linked-graph DueCare-style boundary are
 explained in

@@ -4,7 +4,7 @@ Choose the shortest path for what you are doing.
 
 ## I want to apply SolutionGraph beyond AI/ML
 
-1. `SPECIALIZED_PACKAGES.md` — seven focused engineering packages, typed
+1. `SPECIALIZED_PACKAGES.md` — 26 focused engineering packages, typed
    recipes, transparent recommendation, cross-package composition, and the
    third-party extension contract.
 2. `UNIVERSAL_ENGINEERING_SYSTEM.md` — 14 obligations, 13 domain packs,
@@ -16,6 +16,9 @@ Choose the shortest path for what you are doing.
 5. `UNIVERSAL_NODE_GRAPH_SPEC.md` — normative compiler ontology and invariants.
 6. `READINESS.md` — exact supported, experimental, projected, and unavailable
    surfaces.
+7. `COMPETITIVE_LANDSCAPE_AND_INTEGRATION_STRATEGY.md` — current primary-source
+   competitor map, build-versus-integrate boundaries, and prioritized adapter
+   roadmap.
 
 ## I want to design a data-science, ML, or LLM system
 

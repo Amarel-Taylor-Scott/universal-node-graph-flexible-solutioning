@@ -1,0 +1,193 @@
+"""Specialized package for scientific computing, simulation, and digital twins."""
+
+from solutiongraph.specialized._builders import (
+    embedding_feature,
+    feature,
+    gate,
+    metric,
+    recipe,
+    specialized_pack,
+)
+
+NAMESPACE = "scientific-computing-digital-twins"
+FEATURES = (
+    feature(
+        NAMESPACE,
+        "model-structure",
+        "Model structure",
+        "Profile equations, states, parameters, solvers, scales, boundary conditions, discontinuities, and conservation laws.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "observation-design",
+        "Observation design",
+        "Profile calibration and validation observations, uncertainty, cadence, regimes, missingness, and measurement error.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "scenario-space",
+        "Scenario space",
+        "Count nominal, stress, intervention, counterfactual, perturbation, and extrapolation scenarios and resources.",
+        "mapping",
+    ),
+    embedding_feature(
+        NAMESPACE,
+        "model-embedding",
+        "Model and scenario embedding",
+        "Optional textual model/scenario embedding for historical retrieval under an exact embedding-space identity.",
+    ),
+)
+METRICS = (
+    metric(
+        NAMESPACE,
+        "validation-error",
+        "Validation error",
+        "Error on untouched observations across declared regimes and output slices.",
+        "minimize",
+        "score",
+        scope="scope.validation",
+    ),
+    metric(
+        NAMESPACE,
+        "constraint-residual",
+        "Constraint residual",
+        "Residual against governing equations, conservation laws, invariants, and solver tolerances.",
+        "minimize",
+        "score",
+        scope="scope.simulation",
+    ),
+    metric(
+        NAMESPACE,
+        "uncertainty-coverage",
+        "Uncertainty coverage",
+        "Observed coverage of declared prediction or state uncertainty sets.",
+        "maximize",
+        "ratio",
+        scope="scope.validation",
+    ),
+    metric(
+        NAMESPACE,
+        "decision-regret",
+        "Decision regret",
+        "Observed or simulated regret of the selected intervention against eligible alternatives.",
+        "minimize",
+        "score",
+        scope="scope.decision",
+    ),
+)
+GATES = (
+    gate(
+        NAMESPACE,
+        "model-validity",
+        "Model validity gate",
+        "Reject applicability claims when untouched error, residual, uncertainty, sensitivity, or regime checks fail.",
+        (METRICS[0].id, METRICS[1].id, METRICS[2].id),
+        oracle_kind="statistical",
+    ),
+    gate(
+        NAMESPACE,
+        "decision",
+        "Simulation decision gate",
+        "Escalate consequential decisions when validation scope, uncertainty, alternatives, or accountable review is insufficient.",
+        (METRICS[0].id, METRICS[3].id),
+        oracle_kind="human",
+        decision="escalate",
+    ),
+)
+RECIPES = (
+    recipe(
+        NAMESPACE,
+        "numerical-solve",
+        "Verified numerical computation",
+        "Qualify structure and conditioning, choose a formulation and solver, compute, refine, and independently verify residual and backward error.",
+        ("artifact.numerical-problem",),
+        ("artifact.numerical-solution",),
+        (
+            "science.qualify",
+            "science.formulate",
+            "science.solve",
+            "science.residual",
+            "science.fallback",
+        ),
+        ("dag.learn.optimize", "dag.evaluate.metamorphic", "dag.generate.report"),
+        ("template.numerical-linear-system",),
+        node_packs=("example.extended-arena-node-pack",),
+        examples=("numerical-linear-system",),
+        arena_tasks=("arena.numerical-linear-system",),
+    ),
+    recipe(
+        NAMESPACE,
+        "digital-twin",
+        "Calibrate and validate a digital twin",
+        "Bind the real-system claim, assimilate observations, calibrate parameters, simulate, validate untouched data, analyze sensitivity, and bound applicability.",
+        ("artifact.system-observations",),
+        ("artifact.validated-digital-twin",),
+        (
+            "twin.scope",
+            "twin.assimilate",
+            "twin.calibrate",
+            "twin.simulate",
+            "twin.validate",
+            "twin.sensitivity",
+        ),
+        (
+            "dag.learn.optimize",
+            "dag.learn.causal",
+            "dag.evaluate.model",
+            "dag.evaluate.metamorphic",
+        ),
+        ("template.digital-twin-simulation",),
+        node_packs=("example.frontier-domain-node-pack",),
+        examples=("digital-twin-validation",),
+        arena_tasks=("arena.digital-twin-validation",),
+        limitations=(
+            "The bundled fixture is a transparent linear model and proves no physical-system fidelity.",
+        ),
+    ),
+    recipe(
+        NAMESPACE,
+        "scenario-decision",
+        "Simulation-based intervention comparison",
+        "Generate traceable scenarios, execute exact model variants, propagate uncertainty, compare interventions, and require bounded human review.",
+        ("artifact.validated-digital-twin",),
+        ("artifact.simulation-decision-dossier",),
+        ("twin.scenario", "twin.simulate", "twin.uncertainty", "twin.compare", "twin.decision"),
+        ("dag.generate.scenario", "dag.learn.optimize", "dag.evaluate.model", "dag.human.review"),
+        ("template.digital-twin-simulation", "template.scientific-experiment"),
+        design_packs=(
+            "design-pack.causality-experiments",
+            "design-pack.robustness-stability",
+            "design-pack.decision-handoff",
+        ),
+        arena_tasks=("arena.digital-twin-validation",),
+    ),
+)
+PACK = specialized_pack(
+    "scientific_computing_digital_twins",
+    "Scientific computing and digital twins",
+    "Numerical solvers, calibrated simulations, uncertainty, sensitivity, validation, digital twins, and reviewed intervention decisions.",
+    domain_packs=(
+        "domain-pack.science-optimization",
+        "domain-pack.ai-ml",
+        "domain-pack.data-integration",
+    ),
+    categories=tuple(dict.fromkeys(category for item in RECIPES for category in item.category_ids)),
+    signals=(
+        "scientific computing",
+        "simulation",
+        "digital twin",
+        "numerical",
+        "solver",
+        "calibration",
+        "sensitivity",
+        "physics",
+        "counterfactual",
+    ),
+    recipes=RECIPES,
+    features=FEATURES,
+    metrics=METRICS,
+    gates=GATES,
+)
+__all__ = ["FEATURES", "GATES", "METRICS", "PACK", "RECIPES"]

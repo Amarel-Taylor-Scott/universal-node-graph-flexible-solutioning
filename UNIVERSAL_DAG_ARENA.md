@@ -77,21 +77,31 @@ response provenance, retention policy, and stable failure taxonomy.
 | Explainability and stability | `model-explainability-and-stability` | register × importance × resample × slices × counterfactual × model card |
 | Ensemble and stacking | `ensemble-selection-and-stacking` | collect OOF × lineage × prune × blend × calibrate × holdout |
 | Model release and rollback | `model-release-monitoring-and-rollback` | package × replay × shadow × drift × gate × rollback |
+| Defensive cyber investigation | `defensive-cyber-investigation` | authorized scope × normalize × correlate × hypothesis testing × evidence report |
+| LLM evaluation harness | `duecare-llm-evaluation-harness` | scenarios × SUT × deterministic checks × blinded panel × bounded claims × sealed feedback |
+| Video/media assurance | `video-media-assurance` | probe × timeline × A/V alignment × captions × assurance |
+| 3D asset assurance | `three-d-asset-assurance` | parse × topology × materials × collision bounds × budget |
+| Game build and playtest | `gameplay-replay-and-balance` | rules × deterministic replay × regression × balance × gate |
+| Robotics control assurance | `robotics-safety-simulation` | model × plan × simulation × safety distance × gate |
+| IoT fleet assurance | `iot-telemetry-assurance` | schema × event-time deduplication × anomalies × device state × assurance |
+| Digital-twin validation | `digital-twin-validation` | calibration × simulation × untouched validation × sensitivity × report |
+| Product experimentation | `scientific-experiment`, `user-journey-modeling` | hypothesis × assignment/journey evidence × inference × decision guardrails |
 
-Together these map to 40 programs and 106 declared reference routes. The Arena
-and standard-library registries contain 379 unique executable nodes. Sixty-nine
-routes are accepted by independent fixture oracles and 37 are deliberate
+Together these map to 49 programs and 124 declared reference routes. The Arena
+and standard-library registries contain 449 unique executable nodes. Seventy-eight
+routes are accepted by independent fixture oracles and 46 are deliberate
 negative controls. The
 declared routes are release-gate fixtures; `UniversalSolver` searches
 additional combinations from the complete compiler-admitted matrix.
 
 ## Other included DAG families
 
-Twelve additional Arena entries are strict templates for grounded knowledge,
-claims, fraud, defensive cybersecurity, compliance evidence, geospatial data,
-audio/speech, supply-chain planning, constraint scheduling, database migration,
-SRE/observability, and content moderation. They expose 205 additional atomic
-obligations without pretending placeholder functions are implementations.
+Fourteen additional Arena entries are strict templates for grounded knowledge,
+claims, fraud, compliance evidence, geospatial data, audio/speech, supply-chain
+planning, constraint scheduling, database migration, SRE/observability,
+healthcare evidence, education assessment, creative production, and content
+moderation. They expose 236 additional atomic obligations without pretending
+placeholder functions are implementations.
 
 Four catalog families require production connectors for:
 

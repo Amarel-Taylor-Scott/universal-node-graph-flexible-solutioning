@@ -1,0 +1,40 @@
+{
+  "acceptance_signals": [
+    "sample ratio",
+    "primary effect",
+    "guardrails",
+    "uncertainty",
+    "heterogeneity",
+    "long-term effect"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "scientific-experiment",
+    "user-journey-modeling"
+  ],
+  "external_requirements": [],
+  "id": "arena.product-experimentation",
+  "input_contract": "Hypothesis, eligible population, randomization unit, intervention, metrics, guardrails, power, and decision policy.",
+  "output_contract": "Assignment and exposure evidence, effect estimates, uncertainty, deviations, decision, and rollout monitoring plan.",
+  "problem": "Preregister metrics and allocation, verify instrumentation, run a controlled experiment, estimate effects, and monitor rollout.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "design",
+    "instrument",
+    "allocate",
+    "monitor",
+    "validate",
+    "estimate",
+    "sensitivity",
+    "decide",
+    "rollout"
+  ],
+  "tags": [
+    "product",
+    "experiment",
+    "causal",
+    "analytics"
+  ],
+  "template_id": "template.product-experimentation",
+  "title": "Product hypothesis to a causal rollout decision"
+}

@@ -1,0 +1,718 @@
+{
+  "artifacts": [
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.scope.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.scope.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.normalize.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.normalize.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.correlate.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.correlate.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.test-hypotheses.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.test-hypotheses.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.report.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.cyber.report.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.probe.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.probe.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.timeline.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.timeline.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.align.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.align.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.captions.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.captions.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.assure.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.video.assure.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.parse.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.parse.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.topology.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.topology.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.materials.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.materials.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.collision.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.collision.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.budget.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.three-d.budget.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.rules.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.rules.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.replay.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.replay.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.regression.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.regression.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.balance.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.balance.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.gate.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.game.gate.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.model.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.model.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.plan.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.plan.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.simulate.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.simulate.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.safety.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.safety.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.gate.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.robotics.gate.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.schema.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.schema.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.event-time.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.event-time.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.anomalies.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.anomalies.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.state.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.state.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.assure.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.iot.assure.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.calibrate.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.calibrate.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.simulate.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.simulate.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.validate.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.validate.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.sensitivity.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.sensitivity.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_reference_step"
+      },
+      "digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.report.reference",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_reference_step"
+    },
+    {
+      "annotations": {
+        "org.opencontainers.image.title": "solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+      },
+      "digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "media_type": "text/x-python",
+      "name": "artifact.example.frontier.digital-twin.report.shortcut",
+      "uri": "python://solutiongraph.examples.frontier_tasks:execute_shortcut_step"
+    }
+  ],
+  "dependencies": [],
+  "description": "Dependency-free reference and disclosed-shortcut candidates for defensive cyber investigation, video timelines, 3D assets, deterministic gameplay, robotics safety simulation, IoT telemetry, and digital-twin validation.",
+  "descriptor_digests": [],
+  "discovery_version": "0.1",
+  "embedding_record_digests": [],
+  "extensions": {
+    "example.maturity": "frontier-mechanism-fixture"
+  },
+  "id": "example.frontier-domain-node-pack",
+  "license": "MIT",
+  "node_spec_digests": [
+    "sha256:9c677086afd76fd9cb6b21b61bedc61a98910e7947eaf5771c251b52d2260692",
+    "sha256:c94b98e401c24ed494dbe78297ef012d3a7451fc5575cf7f62cdb2e6c40d90a9",
+    "sha256:bbfec08daf6b896910480a97427108edc882c1ad119c5796254b87b096c7f9d7",
+    "sha256:793874a85f8794453dcb974939989b72082d2ba37c63f926cc960128cee70f4d",
+    "sha256:762e656cf76a8597fa50e1304269ff85ce6e7729598168b17e3106f7a67bb1cf",
+    "sha256:15f202d8e7ae82738874047c86eca3ae62f0449829912c961208f97dd4d92314",
+    "sha256:7ebe410338d5d4962645213464b74c85e60795fc2a89b2a0006b1398cb7f8197",
+    "sha256:fcced1841f69b19aedfafd5f5831706013eadce99becefaf1298891cabe39db3",
+    "sha256:2d0d0cb5e65541f9a4467508886641159fb16b6eb70c38439db40c90d957537c",
+    "sha256:ccb4e110309ce97af524b9ef3f1f7bd86e048e4fffce13432183990f2658d663",
+    "sha256:526d1779e6d79aa842ba545be5454a2521bb932d44737e46d92e79b05c219afe",
+    "sha256:ab61379245198de6546353d22b448300d4cd641d72a0589dff192ee7f6a64476",
+    "sha256:a48d883efd62f8b76cfc5e82471504775627e13205c3bad3a3b40e3ee36efdbc",
+    "sha256:c936575cdabbb42a3cca798accf7bc0937edbe855c1fef34ca58aba136f5c66b",
+    "sha256:734fdf89dad00b8b0ee0b86706555200d883fabb08731f8a4a76fcc9cc05c66e",
+    "sha256:e2551d1efb33794937d383847e6d5f37704a794239c72f6c1ac9a942b2105e4f",
+    "sha256:f80e0beb96fef5de4e86c611974dfd82301aa1a42cda085d8bbe41cd88a975d7",
+    "sha256:2d6f3748b7b6870f1034cb63add4694ca6ab1dc06dd973d6886cc9e788591a82",
+    "sha256:390714396f13df0aef5c96fc0a102f40d97eae6ea3728ab96a44d859a7b4c21d",
+    "sha256:b39139c397bae9b062115e3488b01a4b9c37ad53d20645dc2119d31bd7caf91d",
+    "sha256:d6704c0cdb0426357ebec6640365d543189e0716f83d71c48ebc7a10759fcd8f",
+    "sha256:a15a7b6be945eecaed64c666afe40d485bab8939f1caebd5b9dd6502de79af18",
+    "sha256:be8b185f2a692175389fd7638d38960cc5c009c5aa3df00d6f78bf30763f45a1",
+    "sha256:ba8b7cdf37978ddedba161c6f1eee683f46c2c34a4c1d9339682d7e7cfade654",
+    "sha256:f4c2d18ccc8615ce37cca34b59aea537c4dadd8366b7cec13c2a0c2244fd91bc",
+    "sha256:a28e347930a88191ffb459c5ed5d045345d4a44014a5c929cee506cfcca1d766",
+    "sha256:f4e9eb09867d7e90d1ccaf87666dcc2f466c5b7d19cdc4dbbc3af49c8185e13b",
+    "sha256:8cc624bbe52cd9f79861300b62e1a14d4a1725e701c15eefd01930bf2078a328",
+    "sha256:b30275d0b180654490693e9173d27825ff5cddbec1e8134c93c9ae679b0aef4a",
+    "sha256:f077175d6ad434a7e5fc432e999c367ea2ad0d3d34c87bace77cf7f95f06681d",
+    "sha256:0968a950e926f121d7c1d5cdf2c7ea2802fba61bed20fe7749e751fc2919a860",
+    "sha256:0373858754ce26224f92bd8f7efc4af4e04d334c21edf85a11582251d15b9a05",
+    "sha256:f208d750145cb6216cb27786d9349dd79cfda36535a86394f48ce23f12b2e736",
+    "sha256:89877619010023a4383991b49a59f0c2772d1e78e396f8289c5675d4ceb64d30",
+    "sha256:4fee0b0b978789b17e761b09df0ce58ce8552151607fcd57445af799c24a8e86",
+    "sha256:8543b6448f0a36a2ab710a05b0b31b8785044d6b58f80e9a87f59c74568d532a",
+    "sha256:b3904dbf695c3caafc8ae6e90ff10a0c654688e2bde1a995c6d47dc4fb25664f",
+    "sha256:8896040eb6d18dc157c12f9292f3949abdd8a91c9f68e4d034dcc98f9864345a",
+    "sha256:b80202aec7373edd7393d007331019fd3b56d86eb66a3b285c18171ed98ff340",
+    "sha256:5813d51caa380bf7e3a024a4b264229ea5db943ab394e14709140c93bb650e78",
+    "sha256:91eedb09f0879e217881332a8950ce28312d8bcc40ccdee09c52044c1e1afcef",
+    "sha256:aa6c770ef8a3586cdc84a2394ec924bb1f4908ebf5ab9e3d35e7029a6004ab0b",
+    "sha256:75d886114605a659d72365f1f69ee1dba8cba274c94464f00e8873cd04bf1975",
+    "sha256:e5d8e51c4a516e4024365985e18b7a178f9105f41ce9e6978926db2d1fad9631",
+    "sha256:f781e6ce02c72fa8520786d383430672be3cdcac677ad50581bf3f4aea056fd3",
+    "sha256:c90c5e9ce3647f86ca2525c301549e2083aa7351e89420c9131cdb0301477cb2",
+    "sha256:a6fb29bd1aaf097ff18628b1f88232bff8054eabea2c7111e672adcfec62f074",
+    "sha256:481ba828a9c077d79fe615b6b3c7b33baa4177c003ff0b57b17a65be96a493aa",
+    "sha256:f8ea2149209499e5609f561aa2571294a38c650c1a0a53d7fca99d7660297763",
+    "sha256:cdb6d4621d23cba03cbb31a2b5b56dccfbde3e072948a3078dd860e1a31ef9c6",
+    "sha256:a48b62aaf40dc8c8873be32a05147f2969d2977df82a3372d3e26bcad12884d9",
+    "sha256:666ecbe9236b5c86491f117be5e646643f73ebeaef117b7b25f4d046180d8ca9",
+    "sha256:5c77f98f4d881a4023223f4b1864faa5998bc821628bdd63280e5846795374f3",
+    "sha256:b4f45ed828cbd45a7d93e42fd0d37faadc449d6642fe28be055f4fdacd0139cd",
+    "sha256:3b48004db1caf8d943859a367a713d8411538a1e18e704e152491f0d02f2cc7a",
+    "sha256:963d06cbe66e1a4f47fd720ccbb0610bf4dd411dd8dd7a6c4cc6ab65428df5a7",
+    "sha256:cfd67042cb7d4f1dfe064bc20e6ef5fa7a00c20261ef0611c14526ae65cc67da",
+    "sha256:7fcd2b8e639b29c387381443347d6b87aaa6255117bb6cfddb51441b6f73defa",
+    "sha256:639441645c5ae867d089e55739a489471a13092cc35849a7983581b88fa9703f",
+    "sha256:5faa08a167275256a0b17946a1ab15d42feaacbc6387d2d37634aea701997b21",
+    "sha256:8c425836c5af4c59bf913748a40a4d7af36cf0ff216090e8d5193e4679fabb32",
+    "sha256:26a3a0970c9b711dbc79e85efec5eb4eb1ff5065cccb316be25afd7c581ebca2",
+    "sha256:eb468358b02bc1fe51ce1ae1e2c68818e79fd9394251f444a3c7ee253c61f4ba",
+    "sha256:fb00f813fe4255593648d975a9e5a8f8216bf0f9d35af14fee72517eace33e88",
+    "sha256:f0b41e559163563266725cc35ba40c810191fd2307d3f9b34abbbeabd861610e",
+    "sha256:2a4f9fc2d2267eb3985dd68bff1c60ca27b39a7a27187f3cd24554b821f60d2d",
+    "sha256:313647a4055e721a7f34ec1118bd95146d7bdbfe22fc3c892e643c7ee5636fb7",
+    "sha256:663deb5875afaed6282833f9aec707af14b4613dd53141dd05c6420a2c55ea91",
+    "sha256:dfdfe6abe2f133e79a838abf264b13c6ef89a21ef465c52c6ff243ac74386c05",
+    "sha256:569195121f2155fd412ad7beadc3b0de768e3e19812f6e0c0ac92353df08707a"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning",
+  "version": "1.0.0"
+}

@@ -339,14 +339,25 @@ def recommend_specialized_packs(
         matching_recipes = tuple(
             recipe_id for score_value, recipe_id in recipe_scores if score_value > 0
         )
+        best_recipe_score = recipe_scores[0][0]
+        best_recipe_ids = {
+            recipe_id
+            for score_value, recipe_id in recipe_scores
+            if score_value == best_recipe_score and score_value > 0
+        }
         considered_recipes = [
-            recipe for recipe in pack.recipes if recipe.id in set(matching_recipes)
+            recipe for recipe in pack.recipes if recipe.id in best_recipe_ids
         ] or list(pack.recipes)
+        # A pack is permission-blocked only when every equally best recipe needs
+        # the same ungranted permission.  Unioning permissions across every
+        # loosely matched recipe made a read-only investigation look effectful
+        # merely because the same pack also offered an optional response recipe.
+        permission_sets = [set(recipe.permissions) for recipe in considered_recipes]
+        unavoidable_permissions = (
+            set.intersection(*permission_sets) if permission_sets else set()
+        )
         blocked_permissions = tuple(
-            sorted(
-                {permission for recipe in considered_recipes for permission in recipe.permissions}
-                - set(request.granted_permissions)
-            )
+            sorted(unavoidable_permissions - set(request.granted_permissions))
         )
 
         interface_gap = bool(request.input_kind_ids and not matched_inputs) or bool(
@@ -374,7 +385,8 @@ def recommend_specialized_packs(
             reasons.append("no recipe exactly matches at least one requested interface kind")
         if blocked_permissions:
             reasons.append(
-                "candidate recipes need ungranted permissions: " + ", ".join(blocked_permissions)
+                "every equally best recipe needs ungranted permissions: "
+                + ", ".join(blocked_permissions)
             )
         if pack.id in request.preferred_pack_ids:
             reasons.append("received an explicit user preference prior")

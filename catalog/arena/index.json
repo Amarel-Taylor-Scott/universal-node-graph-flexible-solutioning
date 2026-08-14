@@ -1,6 +1,6 @@
 {
   "arena_model_version": "0.1",
-  "task_count": 52,
+  "task_count": 63,
   "tasks": [
     {
       "acceptance_signals": [
@@ -1428,17 +1428,98 @@
         "recovery verification"
       ],
       "arena_model_version": "0.1",
-      "executable_example_ids": [],
+      "executable_example_ids": [
+        "defensive-cyber-investigation"
+      ],
       "external_requirements": [
-        "E",
+        "T",
+        "h",
+        "e",
+        " ",
+        "b",
+        "u",
+        "n",
+        "d",
+        "l",
+        "e",
+        "d",
+        " ",
+        "e",
+        "x",
+        "a",
+        "m",
+        "p",
+        "l",
+        "e",
+        " ",
+        "i",
+        "s",
+        " ",
+        "s",
+        "y",
+        "n",
+        "t",
+        "h",
+        "e",
+        "t",
+        "i",
+        "c",
+        ",",
+        " ",
+        "r",
+        "e",
+        "a",
+        "d",
+        "-",
+        "o",
+        "n",
+        "l",
+        "y",
+        ",",
+        " ",
+        "a",
+        "n",
+        "d",
+        " ",
+        "e",
         "x",
         "e",
         "c",
         "u",
         "t",
+        "e",
+        "s",
+        " ",
+        "n",
+        "o",
+        " ",
+        "c",
+        "o",
+        "n",
+        "t",
+        "a",
+        "i",
+        "n",
+        "m",
+        "e",
+        "n",
+        "t",
+        ".",
+        " ",
+        "P",
+        "r",
+        "o",
+        "d",
+        "u",
+        "c",
+        "t",
         "i",
         "o",
         "n",
+        " ",
+        "u",
+        "s",
+        "e",
         " ",
         "r",
         "e",
@@ -1510,6 +1591,19 @@
         "r",
         "y",
         " ",
+        "a",
+        "n",
+        "d",
+        " ",
+        "r",
+        "e",
+        "s",
+        "p",
+        "o",
+        "n",
+        "s",
+        "e",
+        " ",
         "c",
         "o",
         "n",
@@ -1526,7 +1620,7 @@
       "input_contract": "Authorized systems, investigation window, hypotheses, telemetry sources, and evidence policy.",
       "output_contract": "Confidence-bounded findings, timeline, defensive actions, recovery evidence, and case receipt.",
       "problem": "Collect authorized telemetry, build an activity graph, test hypotheses, contain, and verify recovery.",
-      "readiness": "template",
+      "readiness": "executable_fixture",
       "stage_families": [
         "scope",
         "collect",
@@ -2539,6 +2633,443 @@
       ],
       "template_id": "template.deployment-release",
       "title": "Candidate models to a gated release and rollback receipt"
+    },
+    {
+      "acceptance_signals": [
+        "task acceptance",
+        "judge calibration",
+        "attack success rate",
+        "over-refusal",
+        "sealed holdout",
+        "cost and latency"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "duecare-llm-evaluation-harness"
+      ],
+      "external_requirements": [],
+      "id": "arena.llm-evaluation-harness",
+      "input_contract": "Exact system identity, authority, scenario families, criteria, evaluator boundary, seeds, and budget.",
+      "output_contract": "Criterion judgments, calibrated panels, failure clusters, sealed outer summary, promotion decision, and rollback identity.",
+      "problem": "Freeze scenarios and evaluators, run controlled systems, adjudicate judgments, cluster development failures, and gate promotion on sealed evidence.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "contract",
+        "scenarios",
+        "allocate",
+        "invoke",
+        "deterministic oracles",
+        "independent judges",
+        "adjudicate",
+        "failure learning",
+        "sealed promotion"
+      ],
+      "tags": [
+        "llm",
+        "agent",
+        "evaluation",
+        "red-team",
+        "sealed-holdout"
+      ],
+      "template_id": "template.llm-evaluation-harness",
+      "title": "LLM or agent system to a sealed evaluation decision"
+    },
+    {
+      "acceptance_signals": [
+        "integrity",
+        "dropped frames",
+        "A/V sync",
+        "caption timing",
+        "quality",
+        "rights"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "video-media-assurance"
+      ],
+      "external_requirements": [
+        "The bundled fixture validates timeline metadata only. Real codecs, perceptual quality, and delivery variants require a media runtime adapter."
+      ],
+      "id": "arena.video-media-assurance",
+      "input_contract": "Captured media metadata or bytes, caption tracks, rights context, and quality policy.",
+      "output_contract": "Timeline, synchronization, caption, integrity, policy, and provenance report.",
+      "problem": "Probe streams, normalize timelines, align modalities, verify captions, and publish bounded media evidence.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "ingest",
+        "probe",
+        "timeline",
+        "align",
+        "captions",
+        "assure",
+        "publish"
+      ],
+      "tags": [
+        "video",
+        "audio",
+        "captions",
+        "media-assurance"
+      ],
+      "template_id": "template.video-media-pipeline",
+      "title": "Video and audio assets to an assurance report"
+    },
+    {
+      "acceptance_signals": [
+        "manifoldness",
+        "degenerates",
+        "reference closure",
+        "collision bounds",
+        "triangle and memory budgets"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "three-d-asset-assurance"
+      ],
+      "external_requirements": [
+        "The bundled tetrahedron fixture proves mesh-contract mechanics; engine rendering and physics require production adapters."
+      ],
+      "id": "arena.three-d-asset-assurance",
+      "input_contract": "Versioned meshes, scenes, materials, textures, coordinate systems, collision intent, and budgets.",
+      "output_contract": "Validated assets, defect and repair ledger, performance profile, renders, exports, and provenance.",
+      "problem": "Validate geometry, materials, collisions, budgets, renders, and export contracts.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "ingest",
+        "coordinates",
+        "topology",
+        "materials",
+        "collision",
+        "optimize",
+        "render",
+        "export"
+      ],
+      "tags": [
+        "three-d",
+        "mesh",
+        "asset-pipeline",
+        "simulation"
+      ],
+      "template_id": "template.three-d-asset-pipeline",
+      "title": "3D assets to a validated optimized bundle"
+    },
+    {
+      "acceptance_signals": [
+        "determinism",
+        "crash-free rate",
+        "frame time",
+        "input latency",
+        "balance",
+        "exploit rate",
+        "accessibility"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "gameplay-replay-and-balance"
+      ],
+      "external_requirements": [
+        "The bundled fixture exercises deterministic rules and balance accounting only; engine builds and subjective fun require adapters and human evidence."
+      ],
+      "id": "arena.game-build-playtest",
+      "input_contract": "Versioned game state, rules, code, content, target platforms, replays, player slices, and release policy.",
+      "output_contract": "Builds, replay hashes, regressions, balance and performance evidence, human playtest evidence, and rollback plan.",
+      "problem": "Build reproducibly, replay state transitions, run automated and human playtests, audit balance and accessibility, and gate release.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "contract",
+        "build",
+        "replay",
+        "agent playtest",
+        "balance",
+        "performance",
+        "accessibility",
+        "human review",
+        "release"
+      ],
+      "tags": [
+        "game",
+        "playtest",
+        "replay",
+        "balance",
+        "release"
+      ],
+      "template_id": "template.game-build-playtest",
+      "title": "Game rules and content to a release decision"
+    },
+    {
+      "acceptance_signals": [
+        "collision margin",
+        "constraint violations",
+        "state divergence",
+        "stop response",
+        "task success"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "robotics-safety-simulation"
+      ],
+      "external_requirements": [
+        "The bundled fixture has no physical effects. Real robots require enforcing controllers, device authority, emergency stops, and domain safety validation."
+      ],
+      "id": "arena.robotics-control-assurance",
+      "input_contract": "Robot and environment models, observations, task goal, safety envelope, and physical-effect authority.",
+      "output_contract": "Feasible plan, simulation and safety evidence, approvals, execution telemetry, and recovery receipt.",
+      "problem": "Estimate state, plan, simulate, verify safety, require authority, monitor execution, and recover to a safe state.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "model",
+        "perceive",
+        "plan",
+        "feasibility",
+        "simulate",
+        "safety",
+        "approve",
+        "execute",
+        "recover"
+      ],
+      "tags": [
+        "robotics",
+        "control",
+        "safety",
+        "simulation"
+      ],
+      "template_id": "template.robotics-control",
+      "title": "Robot task to a safety-gated execution plan"
+    },
+    {
+      "acceptance_signals": [
+        "event integrity",
+        "late and duplicate handling",
+        "fleet coverage",
+        "anomaly evidence",
+        "rollback readiness"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "iot-telemetry-assurance"
+      ],
+      "external_requirements": [
+        "The bundled fixture uses unauthenticated finite telemetry; real devices require key management, signed firmware, enforcing command channels, and hardware testing."
+      ],
+      "id": "arena.iot-fleet-assurance",
+      "input_contract": "Device identities, firmware versions, telemetry events, schemas, fleet policy, and command authority.",
+      "output_contract": "Fleet state, anomalies, event-time evidence, command or rollout plan, and lifecycle receipt.",
+      "problem": "Authenticate and normalize event-time telemetry, derive device state, detect anomalies, and gate commands and firmware rollout.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "identity",
+        "schema",
+        "event-time",
+        "deduplicate",
+        "state",
+        "anomaly",
+        "command",
+        "rollout",
+        "monitor"
+      ],
+      "tags": [
+        "iot",
+        "embedded",
+        "telemetry",
+        "firmware"
+      ],
+      "template_id": "template.embedded-iot-system",
+      "title": "Device telemetry to fleet state and anomaly evidence"
+    },
+    {
+      "acceptance_signals": [
+        "untouched residual",
+        "coverage",
+        "sensitivity",
+        "regime validity",
+        "decision uncertainty"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "digital-twin-validation"
+      ],
+      "external_requirements": [
+        "The bundled linear fixture does not validate fidelity for any physical system; production twins require domain models and representative observations."
+      ],
+      "id": "arena.digital-twin-validation",
+      "input_contract": "System identity, model family, calibration observations, validation observations, scenarios, and decision contract.",
+      "output_contract": "Calibrated model identity, simulations, residual and sensitivity evidence, applicability bounds, and reviewed recommendation.",
+      "problem": "Calibrate a model, simulate scenarios, validate on untouched observations, quantify sensitivity, and bound applicability.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "scope",
+        "assimilate",
+        "calibrate",
+        "simulate",
+        "uncertainty",
+        "sensitivity",
+        "validate",
+        "decide"
+      ],
+      "tags": [
+        "digital-twin",
+        "simulation",
+        "calibration",
+        "decision-support"
+      ],
+      "template_id": "template.digital-twin-simulation",
+      "title": "Observed system to a validated simulation and decision dossier"
+    },
+    {
+      "acceptance_signals": [
+        "clinical validity",
+        "subgroup safety",
+        "abstention",
+        "workflow fit",
+        "privacy",
+        "adverse events"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [],
+      "external_requirements": [
+        "Clinical use requires representative data, regulatory and institutional review, qualified human oversight, privacy controls, and production validation."
+      ],
+      "id": "arena.healthcare-decision-support",
+      "input_contract": "Authorized health records, terminology versions, intended-use contract, consent, and clinical review policy.",
+      "output_contract": "Source-grounded evidence, uncertainty and applicability, qualified review state, and governed audit receipt.",
+      "problem": "Govern access, normalize clinical data, reconcile a timeline, apply bounded decision support, and require qualified review.",
+      "readiness": "template",
+      "stage_families": [
+        "govern",
+        "normalize",
+        "terminology",
+        "identity",
+        "timeline",
+        "analyze",
+        "uncertainty",
+        "clinical review",
+        "monitor"
+      ],
+      "tags": [
+        "healthcare",
+        "clinical-data",
+        "privacy",
+        "human-review"
+      ],
+      "template_id": "template.healthcare-evidence",
+      "title": "Longitudinal health data to reviewed decision-support evidence"
+    },
+    {
+      "acceptance_signals": [
+        "sample ratio",
+        "primary effect",
+        "guardrails",
+        "uncertainty",
+        "heterogeneity",
+        "long-term effect"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [
+        "scientific-experiment",
+        "user-journey-modeling"
+      ],
+      "external_requirements": [],
+      "id": "arena.product-experimentation",
+      "input_contract": "Hypothesis, eligible population, randomization unit, intervention, metrics, guardrails, power, and decision policy.",
+      "output_contract": "Assignment and exposure evidence, effect estimates, uncertainty, deviations, decision, and rollout monitoring plan.",
+      "problem": "Preregister metrics and allocation, verify instrumentation, run a controlled experiment, estimate effects, and monitor rollout.",
+      "readiness": "executable_fixture",
+      "stage_families": [
+        "design",
+        "instrument",
+        "allocate",
+        "monitor",
+        "validate",
+        "estimate",
+        "sensitivity",
+        "decide",
+        "rollout"
+      ],
+      "tags": [
+        "product",
+        "experiment",
+        "causal",
+        "analytics"
+      ],
+      "template_id": "template.product-experimentation",
+      "title": "Product hypothesis to a causal rollout decision"
+    },
+    {
+      "acceptance_signals": [
+        "content accuracy",
+        "alignment",
+        "reliability",
+        "validity",
+        "fairness",
+        "accessibility"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [],
+      "external_requirements": [],
+      "id": "arena.education-assessment",
+      "input_contract": "Learning objectives, standards, learner population, content sources, accommodation policy, and assessment claims.",
+      "output_contract": "Versioned content, items, rubrics, scoring evidence, review state, item analysis, and limitations.",
+      "problem": "Author aligned content and items, verify accuracy and accessibility, score accountably, and analyze validity and fairness.",
+      "readiness": "template",
+      "stage_families": [
+        "contract",
+        "source",
+        "author",
+        "accuracy",
+        "alignment",
+        "accessibility",
+        "bias",
+        "deliver",
+        "score",
+        "review",
+        "analyze"
+      ],
+      "tags": [
+        "education",
+        "assessment",
+        "rubric",
+        "accessibility"
+      ],
+      "template_id": "template.education-assessment",
+      "title": "Learning objectives to an assured assessment"
+    },
+    {
+      "acceptance_signals": [
+        "brand compliance",
+        "technical quality",
+        "accessibility",
+        "rights coverage",
+        "policy",
+        "campaign outcome"
+      ],
+      "arena_model_version": "0.1",
+      "executable_example_ids": [],
+      "external_requirements": [],
+      "id": "arena.creative-content-production",
+      "input_contract": "Audience, goal, channel, brand policy, source assets, rights, formats, and experiment contract.",
+      "output_contract": "Traceable creative variants, rights and review evidence, channel packages, experiment outcomes, and provenance.",
+      "problem": "Research, generate, assemble, edit, verify rights and quality, experiment, publish, and monitor creative assets.",
+      "readiness": "template",
+      "stage_families": [
+        "brief",
+        "rights",
+        "research",
+        "concept",
+        "generate",
+        "assemble",
+        "edit",
+        "assure",
+        "package",
+        "experiment",
+        "monitor"
+      ],
+      "tags": [
+        "creative",
+        "campaign",
+        "media",
+        "experimentation"
+      ],
+      "template_id": "template.creative-content-production",
+      "title": "Creative brief to governed campaign variants"
     },
     {
       "acceptance_signals": [

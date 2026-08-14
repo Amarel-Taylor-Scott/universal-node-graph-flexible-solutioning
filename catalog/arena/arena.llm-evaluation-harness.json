@@ -1,0 +1,40 @@
+{
+  "acceptance_signals": [
+    "task acceptance",
+    "judge calibration",
+    "attack success rate",
+    "over-refusal",
+    "sealed holdout",
+    "cost and latency"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "duecare-llm-evaluation-harness"
+  ],
+  "external_requirements": [],
+  "id": "arena.llm-evaluation-harness",
+  "input_contract": "Exact system identity, authority, scenario families, criteria, evaluator boundary, seeds, and budget.",
+  "output_contract": "Criterion judgments, calibrated panels, failure clusters, sealed outer summary, promotion decision, and rollback identity.",
+  "problem": "Freeze scenarios and evaluators, run controlled systems, adjudicate judgments, cluster development failures, and gate promotion on sealed evidence.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "contract",
+    "scenarios",
+    "allocate",
+    "invoke",
+    "deterministic oracles",
+    "independent judges",
+    "adjudicate",
+    "failure learning",
+    "sealed promotion"
+  ],
+  "tags": [
+    "llm",
+    "agent",
+    "evaluation",
+    "red-team",
+    "sealed-holdout"
+  ],
+  "template_id": "template.llm-evaluation-harness",
+  "title": "LLM or agent system to a sealed evaluation decision"
+}

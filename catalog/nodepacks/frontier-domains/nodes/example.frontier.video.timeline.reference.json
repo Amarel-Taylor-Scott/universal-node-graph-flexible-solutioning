@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    "frontier.video.timeline"
+  ],
+  "description": "Reference mechanism fixture for video/timeline.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+  "failure_modes": [],
+  "id": "example.frontier.video.timeline.reference",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.frontier-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.frontier-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "video"
+      ],
+      "default": null,
+      "description": "",
+      "name": "domain",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "timeline"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/frontier_tasks.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

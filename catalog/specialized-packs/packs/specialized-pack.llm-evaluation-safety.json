@@ -1,0 +1,324 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "llm-evaluation-safety",
+    "extraction_target": "solutiongraph-pack-llm-evaluation-safety",
+    "python_module": "solutiongraph.specialized.llm_evaluation_safety"
+  },
+  "description": "Independent LLM and agent evaluation, judge calibration, red teaming, regression curricula, feedback firewalls, and sealed promotion.",
+  "domain_pack_ids": [
+    "domain-pack.llm-agent",
+    "domain-pack.security-compliance",
+    "domain-pack.business-human-workflow"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject improvement claims without slice acceptance, judge calibration, and retained negative evidence.",
+      "id": "gate.llm-evaluation-safety.development",
+      "independent": true,
+      "metric_ids": [
+        "metric.llm-evaluation-safety.slice-acceptance",
+        "metric.llm-evaluation-safety.judge-calibration"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Development evidence gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject promotion when adversarial or sealed evidence fails the predeclared threshold or accountable approval is absent.",
+      "id": "gate.llm-evaluation-safety.promotion",
+      "independent": true,
+      "metric_ids": [
+        "metric.llm-evaluation-safety.attack-success",
+        "metric.llm-evaluation-safety.sealed-acceptance"
+      ],
+      "oracle_kind": "human",
+      "title": "Sealed promotion gate"
+    }
+  ],
+  "id": "specialized-pack.llm-evaluation-safety",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Independent task acceptance reported by predeclared scenario slice.",
+      "direction": "maximize",
+      "id": "metric.llm-evaluation-safety.slice-acceptance",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.scenario",
+      "title": "Slice acceptance",
+      "unit": "ratio"
+    },
+    {
+      "description": "Agreement, calibration, and correlated-error evidence across deterministic, model, panel, and human judges.",
+      "direction": "maximize",
+      "id": "metric.llm-evaluation-safety.judge-calibration",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.evaluation",
+      "title": "Judge calibration",
+      "unit": "ratio"
+    },
+    {
+      "description": "Share of adversarial scenarios that cause a declared safety, integrity, privacy, or authority failure.",
+      "direction": "minimize",
+      "id": "metric.llm-evaluation-safety.attack-success",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.stress",
+      "title": "Attack success rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Acceptance on candidate-unreadable cases and evaluator infrastructure.",
+      "direction": "maximize",
+      "id": "metric.llm-evaluation-safety.sealed-acceptance",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.holdout",
+      "title": "Sealed acceptance",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile model, prompt, retrieval, tools, memory, authority, sampling, and environment identity.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-evaluation-safety.system-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "System surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Count normal, boundary, multilingual, long-context, tool, adversarial, and failure-recovery slices.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-evaluation-safety.scenario-coverage",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Scenario coverage",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile producer/judge family overlap, candidate readability, human sampling, and outer-evaluator isolation.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.llm-evaluation-safety.evaluator-independence",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Evaluator independence",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted failure-family embedding for diverse retrieval under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.llm-evaluation-safety.failure-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Failure-family embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.llm-evaluation-harness"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "llm-eval.contract",
+        "llm-eval.scenario",
+        "llm-eval.execute",
+        "llm-eval.judge",
+        "llm-eval.promote"
+      ],
+      "category_ids": [
+        "dag.evaluate.llm-harness",
+        "dag.evaluate.judge",
+        "dag.evaluate.outer"
+      ],
+      "description": "Freeze criteria and scenarios, execute the exact system, apply diverse judges, adjudicate disagreement, and publish a sealed promotion report.",
+      "design_pack_ids": [
+        "design-pack.llm-harness",
+        "design-pack.evaluation-error",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [
+        "duecare-llm-evaluation-harness"
+      ],
+      "id": "recipe.llm-evaluation-safety.system-evaluation",
+      "input_kind_ids": [
+        "artifact.llm-system"
+      ],
+      "limitations": [
+        "The bundled DueCare-style evidence is a transparent mechanism fixture; confidential evaluation requires a separate candidate-unreadable trust domain."
+      ],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.llm-evaluation-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.llm-evaluation-harness"
+      ],
+      "title": "LLM system evaluation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [
+        "agent-benchmark.reference-smoke",
+        "agent-benchmark.command-matrix-example"
+      ],
+      "arena_task_ids": [
+        "arena.repository-repair"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "agent-eval.trace",
+        "agent-eval.tool-authority",
+        "agent-eval.outcome",
+        "agent-eval.compare"
+      ],
+      "category_ids": [
+        "dag.evaluate.agent",
+        "dag.evaluate.safety",
+        "dag.evaluate.outer"
+      ],
+      "description": "Evaluate planning, tool choice, authority, intermediate state, recovery, and final outcomes over exact agent trajectories.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.llm-evaluation-safety.agent-trajectory",
+      "input_kind_ids": [
+        "artifact.agent-system"
+      ],
+      "limitations": [
+        "The bundled coding-agent smoke harness is model-free and does not prove frontier-model quality."
+      ],
+      "node_pack_ids": [
+        "reference.core-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.llm-evaluation-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.llm-evaluation-harness",
+        "template.qa-engineering"
+      ],
+      "title": "Agent and tool-use evaluation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.content-policy-moderation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "llm-eval.red-team",
+        "llm-eval.deduplicate",
+        "llm-eval.cluster",
+        "llm-eval.regression-suite"
+      ],
+      "category_ids": [
+        "dag.generate.synthetic.adversarial",
+        "dag.evaluate.safety",
+        "dag.evaluate.metamorphic"
+      ],
+      "description": "Generate lineage-bound adversarial families, deduplicate and partition them, cluster failures, sanitize feedback, and build a non-leaking regression suite.",
+      "design_pack_ids": [
+        "design-pack.llm-harness",
+        "design-pack.robustness-stability",
+        "design-pack.fairness-risk"
+      ],
+      "effects": [],
+      "example_ids": [
+        "synthetic-llm-curriculum",
+        "duecare-llm-evaluation-harness"
+      ],
+      "id": "recipe.llm-evaluation-safety.red-team-regression",
+      "input_kind_ids": [
+        "artifact.llm-system"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.red-team-regression-suite"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.llm-evaluation-harness",
+        "template.content-moderation"
+      ],
+      "title": "Red-team to regression curriculum"
+    }
+  ],
+  "signal_terms": [
+    "llm evaluation",
+    "agent evaluation",
+    "red team",
+    "safety evaluation",
+    "judge calibration",
+    "sealed holdout",
+    "due care",
+    "adversarial testing"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.evaluate.llm-harness",
+    "dag.evaluate.judge",
+    "dag.evaluate.outer",
+    "dag.evaluate.agent",
+    "dag.evaluate.safety",
+    "dag.generate.synthetic.adversarial",
+    "dag.evaluate.metamorphic"
+  ],
+  "title": "LLM evaluation and safety",
+  "version": "0.1.0"
+}

@@ -1,0 +1,39 @@
+{
+  "acceptance_signals": [
+    "manifoldness",
+    "degenerates",
+    "reference closure",
+    "collision bounds",
+    "triangle and memory budgets"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "three-d-asset-assurance"
+  ],
+  "external_requirements": [
+    "The bundled tetrahedron fixture proves mesh-contract mechanics; engine rendering and physics require production adapters."
+  ],
+  "id": "arena.three-d-asset-assurance",
+  "input_contract": "Versioned meshes, scenes, materials, textures, coordinate systems, collision intent, and budgets.",
+  "output_contract": "Validated assets, defect and repair ledger, performance profile, renders, exports, and provenance.",
+  "problem": "Validate geometry, materials, collisions, budgets, renders, and export contracts.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "ingest",
+    "coordinates",
+    "topology",
+    "materials",
+    "collision",
+    "optimize",
+    "render",
+    "export"
+  ],
+  "tags": [
+    "three-d",
+    "mesh",
+    "asset-pipeline",
+    "simulation"
+  ],
+  "template_id": "template.three-d-asset-pipeline",
+  "title": "3D assets to a validated optimized bundle"
+}

@@ -1,9 +1,9 @@
 {
-  "asset_inventory_digest": "sha256:8390a8b71ce6978fde18d04ab503824ff0438addb13152d55eb12d1132a671f6",
+  "asset_inventory_digest": "sha256:62994e978665ea6509427c30eacc567f05c79274f9807fd9d815464c9b5dc7c5",
   "claim_boundary": "Specialized packs nominate reusable authoring assets and typed recipe interfaces; they are not executable or reproducible solution-pack closures.",
-  "gate_count": 17,
-  "metric_count": 42,
-  "pack_count": 7,
+  "gate_count": 55,
+  "metric_count": 118,
+  "pack_count": 26,
   "packs": [
     {
       "digest": "sha256:d75cfc0d6d684200c0645873d3754d7fbdf32927fc88e5c8114db5e19478709e",
@@ -67,11 +67,182 @@
       "path": "specialized-packs/packs/specialized-pack.operations.json",
       "recipe_count": 5,
       "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:9b0ac0ff342d99a92778f7a0f33edb8a6d78a49ad82509921aa974f026052539",
+      "entry_point_name": "llm-evaluation-safety",
+      "extraction_target": "solutiongraph-pack-llm-evaluation-safety",
+      "id": "specialized-pack.llm-evaluation-safety",
+      "path": "specialized-packs/packs/specialized-pack.llm-evaluation-safety.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:f239ff6a5c5de69037550183bc01ca7533c2b584ad65d8d384a61f13078effca",
+      "entry_point_name": "cybersecurity",
+      "extraction_target": "solutiongraph-pack-cybersecurity",
+      "id": "specialized-pack.cybersecurity",
+      "path": "specialized-packs/packs/specialized-pack.cybersecurity.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:aa949da71c08218fb9c3fd8e4a33b052374f7bccff93115a708109288cd23d70",
+      "entry_point_name": "privacy-governance-compliance",
+      "extraction_target": "solutiongraph-pack-privacy-governance-compliance",
+      "id": "specialized-pack.privacy-governance-compliance",
+      "path": "specialized-packs/packs/specialized-pack.privacy-governance-compliance.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:f8351954568f67356a4540e02760e310a0781d864ed4b7224356e61d694194f9",
+      "entry_point_name": "document-intelligence",
+      "extraction_target": "solutiongraph-pack-document-intelligence",
+      "id": "specialized-pack.document-intelligence",
+      "path": "specialized-packs/packs/specialized-pack.document-intelligence.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:ac9b2156578bf45d5da5c86e75a7146469ba624c129b5ddfcce7e90aa4df8a1f",
+      "entry_point_name": "media-intelligence",
+      "extraction_target": "solutiongraph-pack-media-intelligence",
+      "id": "specialized-pack.media-intelligence",
+      "path": "specialized-packs/packs/specialized-pack.media-intelligence.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:85b5aa222b891c83d23e3bd3752c07409b619176d6d7c29a6038fc6ce8532867",
+      "entry_point_name": "three-d-simulation",
+      "extraction_target": "solutiongraph-pack-three-d-simulation",
+      "id": "specialized-pack.three-d-simulation",
+      "path": "specialized-packs/packs/specialized-pack.three-d-simulation.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:5349d0013f69dc43ca6d19773e3cef615d98e0d08476e776af087e8065ccac8f",
+      "entry_point_name": "game-engineering",
+      "extraction_target": "solutiongraph-pack-game-engineering",
+      "id": "specialized-pack.game-engineering",
+      "path": "specialized-packs/packs/specialized-pack.game-engineering.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:ebdde7f1f8d59f7cfb0f6fb31381e5724537567349f9aadc0fc4c74723f91926",
+      "entry_point_name": "geospatial-temporal",
+      "extraction_target": "solutiongraph-pack-geospatial-temporal",
+      "id": "specialized-pack.geospatial-temporal",
+      "path": "specialized-packs/packs/specialized-pack.geospatial-temporal.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:f589123872ecf5ffba99b2aaee04bc49c134a032954f5d2db8fc1e5027d56eff",
+      "entry_point_name": "robotics-control",
+      "extraction_target": "solutiongraph-pack-robotics-control",
+      "id": "specialized-pack.robotics-control",
+      "path": "specialized-packs/packs/specialized-pack.robotics-control.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:9fddbcd686788ce55a409d6ac7cb9d13abe88b13a305380730082f3c999964c4",
+      "entry_point_name": "scientific-computing-digital-twins",
+      "extraction_target": "solutiongraph-pack-scientific-computing-digital-twins",
+      "id": "specialized-pack.scientific-computing-digital-twins",
+      "path": "specialized-packs/packs/specialized-pack.scientific-computing-digital-twins.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:e7918b71827cd0bd222316c54a197456fee0b525c853aba16a614dc43ea87dcf",
+      "entry_point_name": "embedded-iot",
+      "extraction_target": "solutiongraph-pack-embedded-iot",
+      "id": "specialized-pack.embedded-iot",
+      "path": "specialized-packs/packs/specialized-pack.embedded-iot.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:57c7b6e74a615149c3dd0921a57d8a31cef6206bd9c62713c324d4e6e0aa9cc2",
+      "entry_point_name": "healthcare-biomedical",
+      "extraction_target": "solutiongraph-pack-healthcare-biomedical",
+      "id": "specialized-pack.healthcare-biomedical",
+      "path": "specialized-packs/packs/specialized-pack.healthcare-biomedical.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:0f6be9de213c93890457791b79fd1063f56d1675e5a77e74bdfe64f53a6c3639",
+      "entry_point_name": "finance-risk-fraud",
+      "extraction_target": "solutiongraph-pack-finance-risk-fraud",
+      "id": "specialized-pack.finance-risk-fraud",
+      "path": "specialized-packs/packs/specialized-pack.finance-risk-fraud.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:7f0894c5c41f3bb3ac6880637e14b3ea596d44ebe9ef7f5b16cee4fde74cb29b",
+      "entry_point_name": "supply-chain-planning",
+      "extraction_target": "solutiongraph-pack-supply-chain-planning",
+      "id": "specialized-pack.supply-chain-planning",
+      "path": "specialized-packs/packs/specialized-pack.supply-chain-planning.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:27bfc4ce01517c46ab27f151bfd970b1a29f54103c722be24c963aaf20d22b75",
+      "entry_point_name": "product-experimentation",
+      "extraction_target": "solutiongraph-pack-product-experimentation",
+      "id": "specialized-pack.product-experimentation",
+      "path": "specialized-packs/packs/specialized-pack.product-experimentation.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:ff1ebd8fe8d295f05f6e699f92f8131b3e917f8c201b2de1a5190f74f337118e",
+      "entry_point_name": "search-recommendation",
+      "extraction_target": "solutiongraph-pack-search-recommendation",
+      "id": "specialized-pack.search-recommendation",
+      "path": "specialized-packs/packs/specialized-pack.search-recommendation.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:a17bc920275171eb6ddd3fbdcc05f79e5f49ba3a20d06c40894e0e6937ae6c61",
+      "entry_point_name": "knowledge-research",
+      "extraction_target": "solutiongraph-pack-knowledge-research",
+      "id": "specialized-pack.knowledge-research",
+      "path": "specialized-packs/packs/specialized-pack.knowledge-research.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:7d94d7561081c851bba07bd5abd8b641853c289e9afb33cf52f832f40db634b2",
+      "entry_point_name": "education-assessment",
+      "extraction_target": "solutiongraph-pack-education-assessment",
+      "id": "specialized-pack.education-assessment",
+      "path": "specialized-packs/packs/specialized-pack.education-assessment.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
+    },
+    {
+      "digest": "sha256:0dfd21d233af6b7930ee9339221a649a8f45f9c15a299897a111de9a32f97555",
+      "entry_point_name": "creative-content-production",
+      "extraction_target": "solutiongraph-pack-creative-content-production",
+      "id": "specialized-pack.creative-content-production",
+      "path": "specialized-packs/packs/specialized-pack.creative-content-production.json",
+      "recipe_count": 3,
+      "version": "0.1.0"
     }
   ],
-  "profiler_feature_count": 51,
-  "recipe_count": 32,
-  "registry_digest": "sha256:9ecdb49c44ec0ba3dda4642a7ca1d1d4b796a21a93cb74f58e3c1495daae56ee",
+  "profiler_feature_count": 127,
+  "recipe_count": 89,
+  "registry_digest": "sha256:f8605968fd23acb25a9d5f2ce473429db292385a8eb9ddfb87c5800879cb5ade",
   "registry_id": "registry.reference-specialized-packs",
   "specialized_pack_model_version": "0.1"
 }

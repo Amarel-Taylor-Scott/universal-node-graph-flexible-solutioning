@@ -1,0 +1,315 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "media-intelligence",
+    "extraction_target": "solutiongraph-pack-media-intelligence",
+    "python_module": "solutiongraph.specialized.media_intelligence"
+  },
+  "description": "Image, audio, video, captions, multimodal extraction, transformation, assurance, rights, and delivery evidence.",
+  "domain_pack_ids": [
+    "domain-pack.documents-media",
+    "domain-pack.ai-ml",
+    "domain-pack.security-compliance"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject assets that fail integrity, synchronization, caption, or declared quality constraints.",
+      "id": "gate.media-intelligence.technical",
+      "independent": true,
+      "metric_ids": [
+        "metric.media-intelligence.integrity",
+        "metric.media-intelligence.sync-error",
+        "metric.media-intelligence.quality"
+      ],
+      "oracle_kind": "property",
+      "title": "Technical media gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject publication without independent rights, privacy, safety, and policy evidence.",
+      "id": "gate.media-intelligence.release",
+      "independent": true,
+      "metric_ids": [
+        "metric.media-intelligence.policy-violations"
+      ],
+      "oracle_kind": "human",
+      "title": "Media release gate"
+    }
+  ],
+  "id": "specialized-pack.media-intelligence",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Assets without structural corruption, missing tracks, invalid timestamps, or reference gaps.",
+      "direction": "maximize",
+      "id": "metric.media-intelligence.integrity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.asset",
+      "title": "Media integrity",
+      "unit": "ratio"
+    },
+    {
+      "description": "Measured audio, video, caption, and metadata timing error.",
+      "direction": "minimize",
+      "id": "metric.media-intelligence.sync-error",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.timeline",
+      "title": "Synchronization error",
+      "unit": "milliseconds"
+    },
+    {
+      "description": "Fixed-reference or property-based picture, audio, continuity, and encoding quality.",
+      "direction": "maximize",
+      "id": "metric.media-intelligence.quality",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.asset",
+      "title": "Perceptual and technical quality",
+      "unit": "score"
+    },
+    {
+      "description": "Verified privacy, safety, licensing, or delivery-policy violations.",
+      "direction": "minimize",
+      "id": "metric.media-intelligence.policy-violations",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.release",
+      "title": "Rights and policy violations",
+      "unit": "count"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile containers, codecs, tracks, rates, dimensions, duration, channels, color, captions, and metadata.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.media-intelligence.stream-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Media stream profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure monotonicity, gaps, overlap, drift, synchronization, and caption coverage.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.media-intelligence.timeline-quality",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Timeline quality",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record source, ownership, consent, likeness, licensing, retention, audience, and content-policy boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.media-intelligence.rights-policy",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Rights and policy profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional content embedding for search and diversity under an exact model and representation identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.media-intelligence.multimodal-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Multimodal content embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.image-assurance"
+      ],
+      "benchmark_ids": [
+        "benchmark.image-assurance"
+      ],
+      "capability_ids": [
+        "media.decode-image",
+        "media.ocr",
+        "media.inspect-image",
+        "media.verify-image"
+      ],
+      "category_ids": [
+        "dag.acquire.document",
+        "dag.prepare.parse",
+        "dag.evaluate.safety"
+      ],
+      "description": "Decode, orient, enhance, extract text and visual signals, verify quality and policy, and publish a source-bound report.",
+      "design_pack_ids": [
+        "design-pack.image-multimodal"
+      ],
+      "effects": [],
+      "example_ids": [
+        "image-check-and-process"
+      ],
+      "id": "recipe.media-intelligence.image-assurance",
+      "input_kind_ids": [
+        "artifact.image-bundle"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.real-world-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.media-assurance-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.image-processing"
+      ],
+      "title": "Image intelligence and assurance"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.audio-speech-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "media.decode-audio",
+        "media.segment-audio",
+        "media.transcribe",
+        "media.verify-audio"
+      ],
+      "category_ids": [
+        "dag.acquire.document",
+        "dag.prepare.parse",
+        "dag.evaluate.model"
+      ],
+      "description": "Decode, enhance, segment, transcribe, diarize, align, classify, and independently verify audio outputs.",
+      "design_pack_ids": [
+        "design-pack.image-multimodal"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.media-intelligence.audio-assurance",
+      "input_kind_ids": [
+        "artifact.audio-bundle"
+      ],
+      "limitations": [
+        "No production speech or audio runtime is bundled."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.media-assurance-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.audio-speech"
+      ],
+      "title": "Audio and speech assurance"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.video-media-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "media.probe-video",
+        "media.timeline",
+        "media.align",
+        "media.caption",
+        "media.assure"
+      ],
+      "category_ids": [
+        "dag.acquire.document",
+        "dag.prepare.verify",
+        "dag.generate.report"
+      ],
+      "description": "Probe streams, normalize timestamps, align modalities, verify captions and integrity, and produce versioned delivery evidence.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "video-media-assurance"
+      ],
+      "id": "recipe.media-intelligence.video-assurance",
+      "input_kind_ids": [
+        "artifact.video-bundle"
+      ],
+      "limitations": [
+        "The fixture validates timeline metadata and does not execute a codec or establish perceptual quality."
+      ],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.media-assurance-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.video-media-pipeline"
+      ],
+      "title": "Video timeline and caption assurance"
+    }
+  ],
+  "signal_terms": [
+    "image",
+    "audio",
+    "video",
+    "media",
+    "speech",
+    "caption",
+    "transcription",
+    "ocr",
+    "multimodal",
+    "transcode"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.acquire.document",
+    "dag.prepare.parse",
+    "dag.evaluate.safety",
+    "dag.evaluate.model",
+    "dag.prepare.verify",
+    "dag.generate.report"
+  ],
+  "title": "Media intelligence",
+  "version": "0.1.0"
+}

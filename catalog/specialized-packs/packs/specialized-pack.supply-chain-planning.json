@@ -1,0 +1,327 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "supply-chain-planning",
+    "extraction_target": "solutiongraph-pack-supply-chain-planning",
+    "python_module": "solutiongraph.specialized.supply_chain_planning"
+  },
+  "description": "Supply-network data, demand and inventory, constrained planning, fulfillment events, disruption scenarios, resilience, and governed execution.",
+  "domain_pack_ids": [
+    "domain-pack.data-integration",
+    "domain-pack.science-optimization",
+    "domain-pack.event-stream",
+    "domain-pack.business-human-workflow"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject plans with unresolved material, capacity, inventory, timing, policy, or traceability violations.",
+      "id": "gate.supply-chain-planning.feasibility",
+      "independent": true,
+      "metric_ids": [
+        "metric.supply-chain-planning.constraint-violations"
+      ],
+      "oracle_kind": "exact",
+      "title": "Supply plan feasibility gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate operational promotion without service, cost, fixed-scenario resilience, alternatives, and accountable approval evidence.",
+      "id": "gate.supply-chain-planning.promotion",
+      "independent": true,
+      "metric_ids": [
+        "metric.supply-chain-planning.service",
+        "metric.supply-chain-planning.total-cost",
+        "metric.supply-chain-planning.stress-recovery"
+      ],
+      "oracle_kind": "human",
+      "title": "Supply plan promotion gate"
+    }
+  ],
+  "id": "specialized-pack.supply-chain-planning",
+  "license": "MIT",
+  "limitations": [
+    "Executable evidence is limited to small deterministic logistics fixtures; production planning requires current enterprise data and solver, carrier, ERP, and authority adapters."
+  ],
+  "metrics": [
+    {
+      "description": "Demand fulfilled on time and in full by declared product, location, customer, and horizon slice.",
+      "direction": "maximize",
+      "id": "metric.supply-chain-planning.service",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.service",
+      "title": "Service attainment",
+      "unit": "ratio"
+    },
+    {
+      "description": "Procurement, production, transport, inventory, shortage, spoilage, and intervention costs under declared weights.",
+      "direction": "minimize",
+      "id": "metric.supply-chain-planning.total-cost",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.plan",
+      "title": "Total landed cost",
+      "unit": "currency"
+    },
+    {
+      "description": "Capacity, material, precedence, calendar, inventory, lane, policy, and authority failures.",
+      "direction": "minimize",
+      "id": "metric.supply-chain-planning.constraint-violations",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.plan",
+      "title": "Planning constraint violations",
+      "unit": "count"
+    },
+    {
+      "description": "Fixed disruptions meeting declared service and recovery-time thresholds.",
+      "direction": "maximize",
+      "id": "metric.supply-chain-planning.stress-recovery",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.stress",
+      "title": "Stress recovery",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile facilities, suppliers, lanes, lead times, capacities, calendars, bills of material, substitutes, ownership, and constraints.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.supply-chain-planning.network",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Supply network",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure horizon, hierarchy, intermittency, promotions, censoring, safety stock, service classes, spoilage, and data latency.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.supply-chain-planning.demand-inventory",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Demand and inventory",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile delays, outages, shortages, demand shocks, geopolitical or weather boundaries, alternatives, and consequence severity.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.supply-chain-planning.disruption-space",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Disruption space",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted network/scenario embedding for historical retrieval under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.supply-chain-planning.scenario-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Supply scenario embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.supply-chain-plan"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "supply.resolve",
+        "supply.reconcile",
+        "supply.calendar",
+        "supply.inventory",
+        "supply.validate",
+        "supply.provenance"
+      ],
+      "category_ids": [
+        "dag.integrate.join",
+        "dag.integrate.reconcile",
+        "dag.prepare.verify",
+        "dag.govern.provenance"
+      ],
+      "description": "Reconcile products, facilities, suppliers, calendars, lanes, lead times, inventory, and demand into a versioned planning snapshot.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.supply-chain-planning.network-data",
+      "input_kind_ids": [
+        "artifact.supply-source-data"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.supply-network-snapshot"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.product",
+        "question-pack.organization",
+        "question-pack.datetime"
+      ],
+      "template_ids": [
+        "template.supply-chain-planning",
+        "template.data-quality"
+      ],
+      "title": "Supply network data product"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.supply-chain-plan"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "supply.forecast",
+        "supply.formulate",
+        "supply.solve",
+        "supply.verify",
+        "supply.explain"
+      ],
+      "category_ids": [
+        "dag.learn.forecast",
+        "dag.learn.optimize",
+        "dag.evaluate.metamorphic",
+        "dag.human.review"
+      ],
+      "description": "Forecast demand, generate feasible sourcing, production and transport alternatives, optimize declared objectives, and independently verify constraints.",
+      "design_pack_ids": [
+        "design-pack.time-series",
+        "design-pack.robustness-stability",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.supply-chain-planning.plan",
+      "input_kind_ids": [
+        "artifact.supply-network-snapshot"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.supply-plan"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.supply-chain-planning",
+        "template.optimization-scheduling"
+      ],
+      "title": "Constrained supply plan"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.shipping-notification"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "supply.dispatch",
+        "supply.event-time",
+        "supply.reconcile-state",
+        "supply.exception",
+        "supply.notify",
+        "supply.replan"
+      ],
+      "category_ids": [
+        "dag.acquire.stream",
+        "dag.integrate.reconcile",
+        "dag.operate.observe",
+        "dag.serve.automation"
+      ],
+      "description": "Ingest authenticated events, reconcile shipment state, detect exceptions, notify by policy, measure recovery, and feed bounded evidence to replanning.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "address-reference-verification"
+      ],
+      "id": "recipe.supply-chain-planning.execute-monitor",
+      "input_kind_ids": [
+        "artifact.supply-plan"
+      ],
+      "limitations": [
+        "The local example demonstrates validation mechanics, not carrier dispatch or production inventory authority."
+      ],
+      "node_pack_ids": [
+        "example.real-world-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.supply-execution-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.shipping-notifications",
+        "template.event-driven-system"
+      ],
+      "title": "Shipment execution and resilience loop"
+    }
+  ],
+  "signal_terms": [
+    "supply chain",
+    "inventory",
+    "demand planning",
+    "logistics",
+    "shipment",
+    "warehouse",
+    "procurement",
+    "production planning",
+    "routing",
+    "fulfillment"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.integrate.join",
+    "dag.integrate.reconcile",
+    "dag.prepare.verify",
+    "dag.govern.provenance",
+    "dag.learn.forecast",
+    "dag.learn.optimize",
+    "dag.evaluate.metamorphic",
+    "dag.human.review",
+    "dag.acquire.stream",
+    "dag.operate.observe",
+    "dag.serve.automation"
+  ],
+  "title": "Supply chain and planning",
+  "version": "0.1.0"
+}

@@ -69,12 +69,12 @@ def test_blueprint_rejects_unknown_fields_duplicates_and_missing_capabilities():
 def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert main(["doctor"]) == 0
     doctor = capsys.readouterr().out
-    assert "templates=31" in doctor
-    assert "atomic_slots=544" in doctor
+    assert "templates=42" in doctor
+    assert "atomic_slots=733" in doctor
     assert f"schemas={len(SCHEMA_NAMES)}" in doctor
     assert "stdlib_nodes=19" in doctor
-    assert "executable_examples=47" in doctor
-    assert "arena_tasks=52" in doctor
+    assert "executable_examples=54" in doctor
+    assert "arena_tasks=63" in doctor
     assert "benchmarks=6" in doctor
     assert "agent_bench_tasks=10" in doctor
 
@@ -113,10 +113,10 @@ def test_cli_lists_shows_validates_creates_and_runs_doctor(tmp_path, capsys):
     assert "tabular-classification" in examples
 
 
-def test_reference_catalog_spans_thirty_one_templates_and_544_atomic_slots():
+def test_reference_catalog_spans_forty_two_templates_and_733_atomic_slots():
     assert REFERENCE_TEMPLATES.validate() == []
-    assert len(REFERENCE_TEMPLATES.templates) == 31
-    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 544
+    assert len(REFERENCE_TEMPLATES.templates) == 42
+    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 733
     assert {
         "template.api-service",
         "template.document-intelligence",

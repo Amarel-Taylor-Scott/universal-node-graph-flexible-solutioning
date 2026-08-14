@@ -1,0 +1,321 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "privacy-governance-compliance",
+    "extraction_target": "solutiongraph-pack-privacy-governance-compliance",
+    "python_module": "solutiongraph.specialized.privacy_governance_compliance"
+  },
+  "description": "Privacy-by-design, de-identification, data governance, control testing, exception management, audit evidence, and bounded attestations.",
+  "domain_pack_ids": [
+    "domain-pack.security-compliance",
+    "domain-pack.data-integration",
+    "domain-pack.business-human-workflow"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject release when purpose, authority, minimization, retention, or leakage checks fail.",
+      "id": "gate.privacy-governance-compliance.privacy-release",
+      "independent": true,
+      "metric_ids": [
+        "metric.privacy-governance-compliance.prohibited-leakage"
+      ],
+      "oracle_kind": "property",
+      "title": "Privacy release gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate material attestations without complete control coverage, evidence integrity, exception disclosure, and accountable approval.",
+      "id": "gate.privacy-governance-compliance.attestation",
+      "independent": true,
+      "metric_ids": [
+        "metric.privacy-governance-compliance.control-coverage",
+        "metric.privacy-governance-compliance.exception-aging",
+        "metric.privacy-governance-compliance.evidence-integrity"
+      ],
+      "oracle_kind": "human",
+      "title": "Compliance attestation gate"
+    }
+  ],
+  "id": "specialized-pack.privacy-governance-compliance",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Residual prohibited identifiers, attributes, secrets, or unapproved disclosures.",
+      "direction": "minimize",
+      "id": "metric.privacy-governance-compliance.prohibited-leakage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.release",
+      "title": "Prohibited leakage",
+      "unit": "count"
+    },
+    {
+      "description": "Applicable requirements with tested controls and authenticated evidence.",
+      "direction": "maximize",
+      "id": "metric.privacy-governance-compliance.control-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.control",
+      "title": "Control coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Open material exceptions beyond the declared remediation deadline.",
+      "direction": "minimize",
+      "id": "metric.privacy-governance-compliance.exception-aging",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.exception",
+      "title": "Exception aging",
+      "unit": "count"
+    },
+    {
+      "description": "Control conclusions with exact source, period, population, sample, test, reviewer, and receipt identity.",
+      "direction": "maximize",
+      "id": "metric.privacy-governance-compliance.evidence-integrity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.evidence",
+      "title": "Evidence integrity",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile data classes, subjects, systems, flows, purposes, consent, retention, residency, recipients, and owners.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.privacy-governance-compliance.data-map",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Data map",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Map requirements to controls, owners, systems, test procedures, evidence, exceptions, and compensating controls.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.privacy-governance-compliance.control-coverage",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Control coverage",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure direct identifiers, quasi-identifiers, sensitive attributes, linkability, leakage paths, and consequence.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.privacy-governance-compliance.privacy-risk",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Privacy risk",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional version-bound requirement/control embedding for discovery under an exact space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.privacy-governance-compliance.requirement-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Requirement and control embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.compliance-evidence-pack"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "privacy.data-map",
+        "privacy.purpose",
+        "privacy.minimize",
+        "privacy.threat-model",
+        "privacy.retention"
+      ],
+      "category_ids": [
+        "dag.govern.privacy",
+        "dag.govern.security",
+        "dag.generate.report"
+      ],
+      "description": "Map data and purposes, minimize collection, enforce purpose and retention boundaries, model threats, and define independent release checks.",
+      "design_pack_ids": [
+        "design-pack.fairness-risk",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.privacy-governance-compliance.privacy-design",
+      "input_kind_ids": [
+        "artifact.system-inventory"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.privacy-design"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.compliance-evidence",
+        "template.login-system"
+      ],
+      "title": "Privacy-by-design data flow"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.pii-redaction"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "privacy.detect",
+        "privacy.transform",
+        "privacy.linkability",
+        "privacy.utility",
+        "privacy.leakage-check"
+      ],
+      "category_ids": [
+        "dag.govern.privacy",
+        "dag.prepare.clean",
+        "dag.evaluate.data",
+        "dag.evaluate.safety"
+      ],
+      "description": "Detect sensitive values and relationships, apply a declared transformation, measure utility and linkability, and independently scan output leakage.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "pii-redaction"
+      ],
+      "id": "recipe.privacy-governance-compliance.deidentify",
+      "input_kind_ids": [
+        "artifact.sensitive-dataset"
+      ],
+      "limitations": [
+        "Fixture redaction is not a formal anonymity or re-identification-risk guarantee."
+      ],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.governed-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.generic-tabular",
+        "question-pack.document"
+      ],
+      "template_ids": [
+        "template.document-intelligence",
+        "template.compliance-evidence"
+      ],
+      "title": "De-identification and leakage assurance"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.compliance-evidence-pack"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "compliance.map",
+        "compliance.collect",
+        "compliance.test",
+        "compliance.exception",
+        "compliance.attest"
+      ],
+      "category_ids": [
+        "dag.govern.compliance",
+        "dag.govern.provenance",
+        "dag.human.review"
+      ],
+      "description": "Map exact requirements, collect authenticated evidence, test design and operation, manage exceptions, verify remediation, and publish bounded attestation evidence.",
+      "design_pack_ids": [
+        "design-pack.reproducibility-governance",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.privacy-governance-compliance.control-evidence",
+      "input_kind_ids": [
+        "artifact.requirement-set"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.control-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.compliance-evidence"
+      ],
+      "title": "Compliance control evidence"
+    }
+  ],
+  "signal_terms": [
+    "privacy",
+    "governance",
+    "compliance",
+    "audit",
+    "control",
+    "pii",
+    "redaction",
+    "deidentification",
+    "retention",
+    "consent",
+    "attestation"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.govern.privacy",
+    "dag.govern.security",
+    "dag.generate.report",
+    "dag.prepare.clean",
+    "dag.evaluate.data",
+    "dag.evaluate.safety",
+    "dag.govern.compliance",
+    "dag.govern.provenance",
+    "dag.human.review"
+  ],
+  "title": "Privacy, governance, and compliance",
+  "version": "0.1.0"
+}

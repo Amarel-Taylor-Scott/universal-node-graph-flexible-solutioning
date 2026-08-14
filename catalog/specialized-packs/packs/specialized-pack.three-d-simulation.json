@@ -1,0 +1,313 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "three-d-simulation",
+    "extraction_target": "solutiongraph-pack-three-d-simulation",
+    "python_module": "solutiongraph.specialized.three_d_simulation"
+  },
+  "description": "3D geometry, materials, rigging, collision, LOD, rendering regression, runtime budgets, and export assurance.",
+  "domain_pack_ids": [
+    "domain-pack.documents-media",
+    "domain-pack.science-optimization",
+    "domain-pack.platform-release"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject unresolved geometry, reference, coordinate, material, or collision defects.",
+      "id": "gate.three-d-simulation.asset",
+      "independent": true,
+      "metric_ids": [
+        "metric.three-d-simulation.topology-defects",
+        "metric.three-d-simulation.reference-closure"
+      ],
+      "oracle_kind": "property",
+      "title": "3D asset validity gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject release when visual tolerance or declared target budgets fail.",
+      "id": "gate.three-d-simulation.runtime",
+      "independent": true,
+      "metric_ids": [
+        "metric.three-d-simulation.visual-error",
+        "metric.three-d-simulation.budget-headroom"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "3D runtime budget gate"
+    }
+  ],
+  "id": "specialized-pack.three-d-simulation",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Non-manifold edges, holes, degenerates, invalid normals, and disconnected components.",
+      "direction": "minimize",
+      "id": "metric.three-d-simulation.topology-defects",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.asset",
+      "title": "Topology defects",
+      "unit": "count"
+    },
+    {
+      "description": "Resolved material, texture, rig, animation, and scene references.",
+      "direction": "maximize",
+      "id": "metric.three-d-simulation.reference-closure",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.asset",
+      "title": "Reference closure",
+      "unit": "ratio"
+    },
+    {
+      "description": "Fixed-camera visual difference introduced by repair, simplification, or export.",
+      "direction": "minimize",
+      "id": "metric.three-d-simulation.visual-error",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.render",
+      "title": "Visual error",
+      "unit": "score"
+    },
+    {
+      "description": "Remaining headroom across geometry, draw, memory, load, and frame budgets.",
+      "direction": "maximize",
+      "id": "metric.three-d-simulation.budget-headroom",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.runtime",
+      "title": "Runtime budget headroom",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Measure vertices, faces, components, topology defects, normals, UVs, bounds, units, and coordinate systems.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.three-d-simulation.geometry-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Geometry profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure hierarchy, instances, materials, textures, lights, rigs, animations, collisions, and dependencies.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.three-d-simulation.scene-complexity",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Scene complexity",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record target platforms and triangle, draw-call, texture, memory, load-time, and frame-time budgets.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.three-d-simulation.runtime-budget",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Runtime budget",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional asset/preview embedding for retrieval and diversity under an exact representation identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.three-d-simulation.asset-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "3D asset embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.three-d-asset-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "three-d.decode",
+        "three-d.coordinates",
+        "three-d.topology",
+        "three-d.repair",
+        "three-d.references",
+        "three-d.collision"
+      ],
+      "category_ids": [
+        "dag.prepare.parse",
+        "dag.prepare.verify",
+        "dag.prepare.clean"
+      ],
+      "description": "Decode assets, normalize coordinate semantics, inspect topology, apply bounded repairs, and verify materials and collisions.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "three-d-asset-assurance"
+      ],
+      "id": "recipe.three-d-simulation.validate-assets",
+      "input_kind_ids": [
+        "artifact.raw-3d-assets"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.validated-3d-assets"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.three-d-asset-pipeline"
+      ],
+      "title": "Validate and repair 3D assets"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.three-d-asset-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "three-d.lod",
+        "three-d.optimize-geometry",
+        "three-d.optimize-textures",
+        "three-d.render-regression"
+      ],
+      "category_ids": [
+        "dag.learn.optimize",
+        "dag.evaluate.regression",
+        "dag.generate.report"
+      ],
+      "description": "Generate LODs, reduce geometry and draw overhead, optimize textures, and retain fixed-camera visual evidence.",
+      "design_pack_ids": [
+        "design-pack.image-multimodal",
+        "design-pack.robustness-stability"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.three-d-simulation.optimize-assets",
+      "input_kind_ids": [
+        "artifact.validated-3d-assets"
+      ],
+      "limitations": [
+        "Production optimization needs target-engine render and performance adapters."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.optimized-3d-bundle"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.three-d-asset-pipeline"
+      ],
+      "title": "Optimize 3D assets"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.three-d-asset-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "three-d.export",
+        "three-d.roundtrip",
+        "three-d.profile",
+        "three-d.publish"
+      ],
+      "category_ids": [
+        "dag.serve.deploy",
+        "dag.evaluate.regression",
+        "dag.govern.provenance"
+      ],
+      "description": "Export versioned target bundles, round-trip their structure, profile runtime budgets, and publish defects and provenance.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.three-d-simulation.export-assure",
+      "input_kind_ids": [
+        "artifact.optimized-3d-bundle"
+      ],
+      "limitations": [
+        "Blender, CAD, Unity, Unreal, and Godot execution belong in optional adapters."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.three-d-assurance-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.three-d-asset-pipeline",
+        "template.deployment-release"
+      ],
+      "title": "Export and assure 3D bundle"
+    }
+  ],
+  "signal_terms": [
+    "3d",
+    "three d",
+    "mesh",
+    "scene",
+    "material",
+    "texture",
+    "lod",
+    "collision",
+    "render",
+    "cad",
+    "point cloud"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.prepare.parse",
+    "dag.prepare.verify",
+    "dag.prepare.clean",
+    "dag.learn.optimize",
+    "dag.evaluate.regression",
+    "dag.generate.report",
+    "dag.serve.deploy",
+    "dag.govern.provenance"
+  ],
+  "title": "3D and simulation assets",
+  "version": "0.1.0"
+}

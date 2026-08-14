@@ -23,6 +23,7 @@ from solutiongraph.design_atlas.node_pack import (
 )
 from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
+from solutiongraph.examples.frontier_tasks import FRONTIER_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.integrations import REFERENCE_INTEGRATION_ADAPTERS
@@ -79,8 +80,8 @@ def test_reference_nodes_execute_and_all_contracts_and_descriptors_validate():
 
 def test_reference_templates_cover_unrelated_domains_and_atomic_obligations():
     assert REFERENCE_TEMPLATES.validate() == []
-    assert len(REFERENCE_TEMPLATES.templates) == 31
-    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 544
+    assert len(REFERENCE_TEMPLATES.templates) == 42
+    assert sum(len(template.program.slots) for template in REFERENCE_TEMPLATES.templates) == 733
     assert {
         "template.kaggle-tabular",
         "template.data-quality",
@@ -105,6 +106,7 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         + (3 + len(STANDARD_LIBRARY_NODE_SPECS) + len(STANDARD_LIBRARY_DESCRIPTORS))
         + (3 + len(SHOWCASE_NODES))
         + (3 + len(DATA_SCIENCE_NODES))
+        + (3 + len(FRONTIER_NODES))
         + (3 + len(INTERROGATION_NODE_SPECS) + len(INTERROGATION_DESCRIPTORS))
         + (3 + len(DESIGN_ATLAS_NODE_SPECS) + len(DESIGN_ATLAS_DESCRIPTORS))
         + 1
@@ -141,11 +143,11 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     )
     assert len(first) == expected
     index = first["index.json"]
-    assert len(index["templates"]) == 31
+    assert len(index["templates"]) == 42
     assert index["arena"] == {
         "path": "arena/index.json",
-        "task_count": 52,
-        "executable_fixture_count": 36,
+        "task_count": 63,
+        "executable_fixture_count": 45,
     }
     assert [item["node_count"] for item in index["node_packs"]] == [
         5,
@@ -154,6 +156,7 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
         len(EXTENDED_NODES),
         len(SHOWCASE_NODES),
         len(DATA_SCIENCE_NODES),
+        len(FRONTIER_NODES),
         len(INTERROGATION_NODE_SPECS),
         len(DESIGN_ATLAS_NODE_SPECS),
     ]
@@ -187,11 +190,11 @@ def test_catalogue_projection_is_deterministic_indexed_and_has_no_fake_embedding
     assert index["specialized_packages"] == {
         "path": "specialized-packs/index.json",
         "registry_digest": REFERENCE_SPECIALIZED_PACK_REGISTRY.digest,
-        "pack_count": 7,
-        "recipe_count": 32,
-        "profiler_feature_count": 51,
-        "metric_count": 42,
-        "gate_count": 17,
+        "pack_count": 26,
+        "recipe_count": 89,
+        "profiler_feature_count": 127,
+        "metric_count": 118,
+        "gate_count": 55,
     }
     assert first["agent-bench/index.json"]["sealed_payloads_published"] is False
     assert all(
@@ -236,6 +239,7 @@ def test_catalogue_explorer_is_self_contained_and_exposes_every_reference_templa
     assert all(node.id in html for node in EXAMPLE_NODES)
     assert all(node.id in html for node in EXTENDED_NODES)
     assert all(node.id in html for node in SHOWCASE_NODES)
+    assert all(node.id in html for node in FRONTIER_NODES)
     assert all(node.id in html for node in STANDARD_LIBRARY_NODE_SPECS)
     assert all(node.description in html for node in REFERENCE_NODE_SPECS)
     assert all(

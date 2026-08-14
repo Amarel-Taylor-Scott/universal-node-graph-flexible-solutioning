@@ -1,0 +1,331 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "geospatial-temporal",
+    "extraction_target": "solutiongraph-pack-geospatial-temporal",
+    "python_module": "solutiongraph.specialized.geospatial_temporal"
+  },
+  "description": "Address, place, coordinate, boundary, time-zone, event-time, place-time enrichment, spatial analysis, and map products.",
+  "domain_pack_ids": [
+    "domain-pack.data-integration",
+    "domain-pack.science-optimization",
+    "domain-pack.documents-media"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject authoritative claims without exact source, vintage, match, uncertainty, and unresolved-reason evidence.",
+      "id": "gate.geospatial-temporal.reference",
+      "independent": true,
+      "metric_ids": [
+        "metric.geospatial-temporal.match-coverage",
+        "metric.geospatial-temporal.false-match"
+      ],
+      "oracle_kind": "external-authority",
+      "title": "Place and time reference gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject output that fails CRS, geometry, spatial-predicate, event-time, or boundary-vintage checks.",
+      "id": "gate.geospatial-temporal.product",
+      "independent": true,
+      "metric_ids": [
+        "metric.geospatial-temporal.topology-validity",
+        "metric.geospatial-temporal.temporal-validity"
+      ],
+      "oracle_kind": "property",
+      "title": "Geospatial-temporal product gate"
+    }
+  ],
+  "id": "specialized-pack.geospatial-temporal",
+  "license": "MIT",
+  "limitations": [
+    "Local fixtures prove typed seams only; authoritative address, boundary, time-zone, and event enrichment requires current licensed sources and scoped connectors."
+  ],
+  "metrics": [
+    {
+      "description": "Records with an accepted authoritative or explicitly qualified reference match.",
+      "direction": "maximize",
+      "id": "metric.geospatial-temporal.match-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.record",
+      "title": "Reference match coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Sampled or independently verified incorrect place, address, boundary, or event matches.",
+      "direction": "minimize",
+      "id": "metric.geospatial-temporal.false-match",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.record",
+      "title": "False-match rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Geometries and joins satisfying declared CRS, predicate, multiplicity, and topology contracts.",
+      "direction": "maximize",
+      "id": "metric.geospatial-temporal.topology-validity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.dataset",
+      "title": "Topology validity",
+      "unit": "ratio"
+    },
+    {
+      "description": "Records satisfying event-time, time-zone, cadence, lateness, and effective-date contracts.",
+      "direction": "maximize",
+      "id": "metric.geospatial-temporal.temporal-validity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.dataset",
+      "title": "Temporal validity",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile addresses, coordinates, geometry types, CRS, extents, resolution, boundaries, and topology defects.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.geospatial-temporal.spatial-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Spatial profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile timestamp formats, time zones, cadence, gaps, lateness, daylight transitions, and boundary vintages.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.geospatial-temporal.temporal-profile",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Temporal profile",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Record reference authority, publication date, effective interval, geographic coverage, match codes, and licensing.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.geospatial-temporal.authority-vintage",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Authority and vintage",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted place-time semantics for historical retrieval under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.geospatial-temporal.place-time-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Place-time task embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "credentialed-connector",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.usps-address-verification",
+        "arena.exact-gis-boundary-resolution"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "geo.parse-address",
+        "geo.normalize",
+        "geo.reference-match",
+        "geo.geocode",
+        "geo.verify"
+      ],
+      "category_ids": [
+        "dag.integrate.enrich.geospatial",
+        "dag.prepare.verify",
+        "dag.integrate.enrich.identity"
+      ],
+      "description": "Parse and normalize address and place fields, resolve candidates, preserve match codes, and sample unresolved and accepted results.",
+      "design_pack_ids": [
+        "design-pack.geospatial"
+      ],
+      "effects": [],
+      "example_ids": [
+        "address-reference-verification",
+        "exact-gis-boundary-resolution"
+      ],
+      "id": "recipe.geospatial-temporal.address-place",
+      "input_kind_ids": [
+        "artifact.raw-records"
+      ],
+      "limitations": [
+        "Offline fixtures are not USPS, Census, national mapping, or other authoritative production responses."
+      ],
+      "node_pack_ids": [
+        "example.real-world-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.geospatial-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.postal-address",
+        "question-pack.geography"
+      ],
+      "template_ids": [
+        "template.data-quality",
+        "template.geospatial-analytics"
+      ],
+      "title": "Address and place validation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.geospatial-enrichment"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "geo.boundary",
+        "geo.timezone",
+        "geo.temporal-features",
+        "geo.place-time-join",
+        "geo.provenance"
+      ],
+      "category_ids": [
+        "dag.integrate.enrich.geotemporal",
+        "dag.integrate.enrich.temporal",
+        "dag.govern.provenance"
+      ],
+      "description": "Resolve location, CRS, boundaries, time zone, local/UTC features, effective dates, and authorized place-time context with provenance.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "geotemporal-enrichment"
+      ],
+      "id": "recipe.geospatial-temporal.geotemporal-enrichment",
+      "input_kind_ids": [
+        "artifact.geospatial-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.enriched-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.datetime",
+        "question-pack.geography"
+      ],
+      "template_ids": [
+        "template.geospatial-analytics",
+        "template.event-driven-system"
+      ],
+      "title": "Geospatial and temporal enrichment"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.geospatial-data-product"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "geo.repair",
+        "geo.transform",
+        "geo.spatial-join",
+        "geo.analyze",
+        "geo.uncertainty",
+        "geo.render"
+      ],
+      "category_ids": [
+        "dag.integrate.join",
+        "dag.learn.feature",
+        "dag.generate.report",
+        "dag.prepare.verify"
+      ],
+      "description": "Repair and transform geometries, join with explicit predicates, derive spatial evidence, quantify uncertainty, render, and publish data and maps.",
+      "design_pack_ids": [
+        "design-pack.geospatial",
+        "design-pack.robustness-stability"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.geospatial-temporal.spatial-product",
+      "input_kind_ids": [
+        "artifact.geospatial-dataset"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.spatial-product"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.geospatial-analytics"
+      ],
+      "title": "Spatial analysis and map product"
+    }
+  ],
+  "signal_terms": [
+    "gis",
+    "geospatial",
+    "address",
+    "zip code",
+    "city",
+    "state",
+    "county",
+    "coordinates",
+    "timezone",
+    "datetime",
+    "geotemporal",
+    "map"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.integrate.enrich.geospatial",
+    "dag.prepare.verify",
+    "dag.integrate.enrich.identity",
+    "dag.integrate.enrich.geotemporal",
+    "dag.integrate.enrich.temporal",
+    "dag.govern.provenance",
+    "dag.integrate.join",
+    "dag.learn.feature",
+    "dag.generate.report"
+  ],
+  "title": "Geospatial and temporal",
+  "version": "0.1.0"
+}

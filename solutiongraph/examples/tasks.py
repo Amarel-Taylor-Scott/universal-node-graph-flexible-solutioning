@@ -2139,11 +2139,13 @@ from solutiongraph.examples.data_science_tasks import (  # noqa: E402
     DATA_SCIENCE_EXAMPLE_TASKS,
 )
 from solutiongraph.examples.extended_tasks import EXTENDED_EXAMPLE_TASKS  # noqa: E402
+from solutiongraph.examples.frontier_tasks import FRONTIER_EXAMPLE_TASKS  # noqa: E402
 from solutiongraph.examples.showcase_tasks import SHOWCASE_EXAMPLE_TASKS  # noqa: E402
 
 EXAMPLE_TASKS = (
     *EXAMPLE_TASKS,
     *EXTENDED_EXAMPLE_TASKS,
+    *FRONTIER_EXAMPLE_TASKS,
     *SHOWCASE_EXAMPLE_TASKS,
     *DATA_SCIENCE_EXAMPLE_TASKS,
 )

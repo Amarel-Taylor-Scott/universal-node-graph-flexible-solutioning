@@ -2,7 +2,7 @@
 
 Universal Node Graph can be explored without a browser, model provider, vector
 database, or network service. The domain-neutral core uses only the Python
-standard library. Version 0.7 is a developer preview; read `READINESS.md`
+standard library. Version 0.8 is a developer preview; read `READINESS.md`
 before production integration.
 
 ## Interrogate a dataset before building a pipeline
@@ -68,8 +68,8 @@ solutiongraph verify --catalog-root catalog --runtime subprocess
 
 The doctor command validates all bundled schemas, templates, reference nodes,
 descriptors, solution packs, benchmark closures, and generated catalog
-projections. The release verifier then compiles and executes all 120 frozen
-reference routes, checks 44 declared negative controls, runs 11 installed-wheel
+projections. The release verifier then compiles and executes all 134 frozen
+reference routes, checks 51 declared negative controls, runs 11 installed-wheel
 conformance mechanisms, and rejects stale checked-in catalog JSON.
 
 For a non-editable installation directly from GitHub:
@@ -107,7 +107,7 @@ solutiongraph templates show template.document-intelligence
 solutiongraph templates show template.kaggle-tabular --json
 ```
 
-The library contains 31 domain templates and 544 atomic obligations. A template
+The library contains 42 domain templates and 733 atomic obligations. A template
 describes what must happen; node registries independently provide the possible
 ways to accomplish each obligation.
 
@@ -209,7 +209,7 @@ authority. See `INTELLIGENT_SOLUTIONING.md`.
 
 ## 9. Solve and execute the reference domain skeletons
 
-Inspect all 52 Arena contracts and execute or solve the 40 Arena-linked local programs:
+Inspect all 63 Arena contracts and execute or solve the 49 Arena-linked local programs:
 
 ```bash
 solutiongraph examples list

@@ -1,0 +1,318 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "robotics-control",
+    "extraction_target": "solutiongraph-pack-robotics-control",
+    "python_module": "solutiongraph.specialized.robotics_control"
+  },
+  "description": "Robot modeling, perception, planning, simulation, safety verification, physical-effect authorization, monitoring, and recovery.",
+  "domain_pack_ids": [
+    "domain-pack.science-optimization",
+    "domain-pack.event-stream",
+    "domain-pack.security-compliance"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject plans with feasibility, safety, robustness, or recovery failures in the fixed scenario suite.",
+      "id": "gate.robotics-control.simulation",
+      "independent": true,
+      "metric_ids": [
+        "metric.robotics-control.constraint-violations",
+        "metric.robotics-control.safety-margin",
+        "metric.robotics-control.task-success",
+        "metric.robotics-control.safe-recovery"
+      ],
+      "oracle_kind": "property",
+      "title": "Robotics simulation gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate every consequential physical execution to an independently enforced controller and accountable approval boundary.",
+      "id": "gate.robotics-control.physical-authority",
+      "independent": true,
+      "metric_ids": [
+        "metric.robotics-control.safety-margin",
+        "metric.robotics-control.safe-recovery"
+      ],
+      "oracle_kind": "human",
+      "title": "Physical execution authority gate"
+    }
+  ],
+  "id": "specialized-pack.robotics-control",
+  "license": "MIT",
+  "limitations": [
+    "Executable evidence is simulation-only and grants no physical-device authority."
+  ],
+  "metrics": [
+    {
+      "description": "Kinematic, dynamic, collision, timing, energy, authority, and safety violations.",
+      "direction": "minimize",
+      "id": "metric.robotics-control.constraint-violations",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.plan",
+      "title": "Constraint violations",
+      "unit": "count"
+    },
+    {
+      "description": "Minimum observed margin to declared collision, force, speed, region, and human-safety limits.",
+      "direction": "maximize",
+      "id": "metric.robotics-control.safety-margin",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.simulation",
+      "title": "Safety margin",
+      "unit": "distance"
+    },
+    {
+      "description": "Independently verified goal completion across nominal and perturbation scenarios.",
+      "direction": "maximize",
+      "id": "metric.robotics-control.task-success",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.scenario",
+      "title": "Task success",
+      "unit": "ratio"
+    },
+    {
+      "description": "Failures reaching a declared safe state within the response contract.",
+      "direction": "maximize",
+      "id": "metric.robotics-control.safe-recovery",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.failure",
+      "title": "Safe recovery",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile kinematics, dynamics, frames, joint and actuator limits, sensors, calibration, payload, and fail-safe behavior.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.robotics-control.robot-model",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Robot model",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile operating domain, obstacles, humans, uncertainty, prohibited regions, and consequence severity.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.robotics-control.environment-risk",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Environment risk",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure horizon, waypoints, branches, recovery states, timing, energy, and constraint margins.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.robotics-control.plan-complexity",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Plan complexity",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted task and environment embedding for historical retrieval under an exact space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.robotics-control.task-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Robotics task embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.robotics-control-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "robotics.model",
+        "robotics.state-estimation",
+        "robotics.plan",
+        "robotics.feasibility",
+        "robotics.select"
+      ],
+      "category_ids": [
+        "dag.learn.optimize",
+        "dag.learn.reinforcement",
+        "dag.evaluate.safety"
+      ],
+      "description": "Estimate state, generate diverse plans, check feasibility and safety, and select an eligible plan without executing it.",
+      "design_pack_ids": [
+        "design-pack.reinforcement-learning",
+        "design-pack.robustness-stability"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.robotics-control.plan",
+      "input_kind_ids": [
+        "artifact.robot-task"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.robot-plan"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.robotics-control"
+      ],
+      "title": "Robot task and motion planning"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.robotics-control-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "robotics.simulate",
+        "robotics.perturb",
+        "robotics.safety-monitor",
+        "robotics.recovery",
+        "robotics.report"
+      ],
+      "category_ids": [
+        "dag.generate.scenario",
+        "dag.evaluate.safety",
+        "dag.evaluate.metamorphic"
+      ],
+      "description": "Run nominal, perturbation, obstacle, sensor-failure, and interruption scenarios and independently verify the safety envelope.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "robotics-safety-simulation"
+      ],
+      "id": "recipe.robotics-control.simulate",
+      "input_kind_ids": [
+        "artifact.robot-plan"
+      ],
+      "limitations": [
+        "The bundled fixture is one-dimensional and has no device effects."
+      ],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.robot-simulation-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.robotics-control"
+      ],
+      "title": "Robot plan safety simulation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "robotics.authorize",
+        "robotics.execute",
+        "robotics.monitor",
+        "robotics.emergency-stop",
+        "robotics.recover"
+      ],
+      "category_ids": [
+        "dag.serve.automation",
+        "dag.operate.observe",
+        "dag.govern.security",
+        "dag.human.review"
+      ],
+      "description": "Authorize a frozen plan, execute through an enforcing controller, monitor divergence, stop safely, and publish telemetry and intervention evidence.",
+      "design_pack_ids": [],
+      "effects": [
+        "device.write"
+      ],
+      "example_ids": [],
+      "id": "recipe.robotics-control.execute",
+      "input_kind_ids": [
+        "artifact.robot-plan"
+      ],
+      "limitations": [
+        "Physical execution requires device-specific enforcing adapters, tested emergency stops, qualified safety review, and local authority."
+      ],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.robot-execution-evidence"
+      ],
+      "permissions": [
+        "device.write"
+      ],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.robotics-control",
+        "template.compliance-evidence"
+      ],
+      "title": "Safety-gated robot execution"
+    }
+  ],
+  "signal_terms": [
+    "robotics",
+    "robot",
+    "motion planning",
+    "control",
+    "kinematics",
+    "simulation",
+    "safety",
+    "sensor",
+    "actuator"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.learn.optimize",
+    "dag.learn.reinforcement",
+    "dag.evaluate.safety",
+    "dag.generate.scenario",
+    "dag.evaluate.metamorphic",
+    "dag.serve.automation",
+    "dag.operate.observe",
+    "dag.govern.security",
+    "dag.human.review"
+  ],
+  "title": "Robotics and control",
+  "version": "0.1.0"
+}

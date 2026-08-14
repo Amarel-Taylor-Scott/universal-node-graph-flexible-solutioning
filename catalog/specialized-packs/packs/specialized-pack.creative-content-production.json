@@ -1,0 +1,322 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "creative-content-production",
+    "extraction_target": "solutiongraph-pack-creative-content-production",
+    "python_module": "solutiongraph.specialized.creative_content_production"
+  },
+  "description": "Creative briefs, diverse concepts, multimodal production, rights and consent, brand and safety review, accessibility, delivery, and bounded learning.",
+  "domain_pack_ids": [
+    "domain-pack.documents-media",
+    "domain-pack.llm-agent",
+    "domain-pack.platform-release",
+    "domain-pack.business-human-workflow"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject assets with unresolved rights, consent, safety, disclosure, accessibility, or technical failures.",
+      "id": "gate.creative-content-production.release",
+      "independent": true,
+      "metric_ids": [
+        "metric.creative-content-production.rights-violations",
+        "metric.creative-content-production.technical-validity"
+      ],
+      "oracle_kind": "human",
+      "title": "Creative release gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate final selection without brief coverage, diverse options, structured human evidence, and accountable brand approval.",
+      "id": "gate.creative-content-production.selection",
+      "independent": true,
+      "metric_ids": [
+        "metric.creative-content-production.brief-coverage",
+        "metric.creative-content-production.human-preference"
+      ],
+      "oracle_kind": "human",
+      "title": "Creative selection gate"
+    }
+  ],
+  "id": "specialized-pack.creative-content-production",
+  "license": "MIT",
+  "limitations": [
+    "Executable evidence covers technical media assurance only; production generation, rights clearance, brand approval, and distribution require scoped adapters and accountable humans."
+  ],
+  "metrics": [
+    {
+      "description": "Required message, audience, format, channel, accessibility, and call-to-action constraints satisfied.",
+      "direction": "maximize",
+      "id": "metric.creative-content-production.brief-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.asset",
+      "title": "Brief coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Unresolved license, attribution, consent, likeness, trademark, disclosure, or territorial failures.",
+      "direction": "minimize",
+      "id": "metric.creative-content-production.rights-violations",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.release",
+      "title": "Rights and consent violations",
+      "unit": "count"
+    },
+    {
+      "description": "Assets satisfying target format, duration, dimension, codec, loudness, caption, render, and delivery contracts.",
+      "direction": "maximize",
+      "id": "metric.creative-content-production.technical-validity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.asset",
+      "title": "Technical validity",
+      "unit": "ratio"
+    },
+    {
+      "description": "Predeclared reviewer or audience preference measured with blinded variants and retained disagreement.",
+      "direction": "maximize",
+      "id": "metric.creative-content-production.human-preference",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.review",
+      "title": "Structured human preference",
+      "unit": "score"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile audience, message, channels, formats, variants, constraints, success criteria, deadlines, owners, and approval rights.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.creative-content-production.brief",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Creative brief",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile source ownership, licenses, consent, likeness, trademarks, disclosures, brand rules, safety, and territorial limits.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.creative-content-production.rights-and-brand",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Rights and brand",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure text, image, audio, video, 3D, localization, accessibility, dependencies, rendering, and distribution targets.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.creative-content-production.production-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Production surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional brief/concept embedding for diversity and historical retrieval under an exact representation identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.creative-content-production.concept-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Creative concept embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.creative-content-production"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "creative.scope",
+        "creative.retrieve-licensed",
+        "creative.generate-diverse",
+        "creative.critique",
+        "creative.select"
+      ],
+      "category_ids": [
+        "dag.generate",
+        "dag.evaluate.human",
+        "dag.govern.provenance"
+      ],
+      "description": "Normalize the brief, retrieve licensed references, generate meaningfully diverse concepts, critique against constraints, and preserve rejected evidence.",
+      "design_pack_ids": [
+        "design-pack.image-multimodal",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.creative-content-production.concept",
+      "input_kind_ids": [
+        "artifact.creative-brief"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.creative-concepts"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.creative-content-production"
+      ],
+      "title": "Creative concept exploration"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.creative-content-production",
+        "arena.video-media-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "creative.author",
+        "creative.compose",
+        "creative.localize",
+        "creative.accessibility",
+        "creative.render",
+        "creative.provenance"
+      ],
+      "category_ids": [
+        "dag.generate",
+        "dag.generate.synthetic.media",
+        "dag.evaluate.regression",
+        "dag.govern.provenance"
+      ],
+      "description": "Build source-bound text, image, audio, video, or 3D variants, localize them, verify technical contracts, and retain transformation provenance.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "video-media-assurance"
+      ],
+      "id": "recipe.creative-content-production.produce",
+      "input_kind_ids": [
+        "artifact.approved-creative-concept"
+      ],
+      "limitations": [
+        "The bundled fixture verifies a synthetic media timeline; it does not generate production creative assets."
+      ],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.creative-asset-bundle"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.creative-content-production",
+        "template.video-media-pipeline",
+        "template.audio-speech",
+        "template.three-d-asset-pipeline"
+      ],
+      "title": "Multimodal content production"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.creative-content-production",
+        "arena.content-policy-moderation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "creative.rights-check",
+        "creative.brand-check",
+        "creative.safety-check",
+        "creative.review",
+        "creative.publish",
+        "creative.learn"
+      ],
+      "category_ids": [
+        "dag.evaluate.safety",
+        "dag.evaluate.human",
+        "dag.serve.deploy",
+        "dag.operate.observe"
+      ],
+      "description": "Run rights, brand, safety, accessibility and technical checks, collect structured human review, deliver approved variants, and feed aggregate outcomes without leaking holdouts.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.creative-content-production.release-learn",
+      "input_kind_ids": [
+        "artifact.creative-asset-bundle"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.creative-release-evidence"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.creative-content-production",
+        "template.content-moderation",
+        "template.deployment-release"
+      ],
+      "title": "Creative approval and learning loop"
+    }
+  ],
+  "signal_terms": [
+    "creative",
+    "content production",
+    "campaign",
+    "copywriting",
+    "storyboard",
+    "brand",
+    "localization",
+    "multimodal",
+    "asset production",
+    "creative review"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.generate",
+    "dag.evaluate.human",
+    "dag.govern.provenance",
+    "dag.generate.synthetic.media",
+    "dag.evaluate.regression",
+    "dag.evaluate.safety",
+    "dag.serve.deploy",
+    "dag.operate.observe"
+  ],
+  "title": "Creative content production",
+  "version": "0.1.0"
+}

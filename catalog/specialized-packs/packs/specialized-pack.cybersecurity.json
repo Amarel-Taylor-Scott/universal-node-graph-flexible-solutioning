@@ -1,0 +1,321 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "cybersecurity",
+    "extraction_target": "solutiongraph-pack-cybersecurity",
+    "python_module": "solutiongraph.specialized.cybersecurity"
+  },
+  "description": "Authorized defensive security assurance, threat modeling, telemetry investigation, incident recovery, and evidence packaging.",
+  "domain_pack_ids": [
+    "domain-pack.security-compliance",
+    "domain-pack.sre-incident",
+    "domain-pack.platform-release"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject findings without authority, evidence integrity, hypothesis testing, and a bounded claim.",
+      "id": "gate.cybersecurity.finding",
+      "independent": true,
+      "metric_ids": [
+        "metric.cybersecurity.false-positive",
+        "metric.cybersecurity.evidence-integrity"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Defensive finding gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate consequential containment and recovery actions for independent authorization and verification.",
+      "id": "gate.cybersecurity.response",
+      "independent": true,
+      "metric_ids": [
+        "metric.cybersecurity.detection-coverage",
+        "metric.cybersecurity.recovery"
+      ],
+      "oracle_kind": "human",
+      "title": "Response authority gate"
+    }
+  ],
+  "id": "specialized-pack.cybersecurity",
+  "license": "MIT",
+  "limitations": [
+    "Only explicitly authorized defensive workflows are in scope.",
+    "Local fixtures prove graph mechanics, not detection quality or production containment."
+  ],
+  "metrics": [
+    {
+      "description": "Coverage of predeclared defensive behaviors, assets, and telemetry slices.",
+      "direction": "maximize",
+      "id": "metric.cybersecurity.detection-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.stress",
+      "title": "Detection coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Benign scenarios incorrectly promoted to actionable findings.",
+      "direction": "minimize",
+      "id": "metric.cybersecurity.false-positive",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.evaluation",
+      "title": "False-positive rate",
+      "unit": "ratio"
+    },
+    {
+      "description": "Findings with complete source identity, timeline, chain, and disconfirming evidence.",
+      "direction": "maximize",
+      "id": "metric.cybersecurity.evidence-integrity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.finding",
+      "title": "Evidence integrity",
+      "unit": "ratio"
+    },
+    {
+      "description": "Incidents with independently verified containment, eradication, recovery, and rollback evidence.",
+      "direction": "maximize",
+      "id": "metric.cybersecurity.recovery",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.incident",
+      "title": "Verified recovery",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile approved systems, identities, time windows, telemetry, effects, secrets, and escalation boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.cybersecurity.authority-scope",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Defensive authority scope",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Count assets, services, identities, dependencies, exposures, criticality, ownership, and trust boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.cybersecurity.asset-attack-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Asset and attack surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure source, event-time, retention, schema, identity, and detection coverage gaps.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.cybersecurity.telemetry-coverage",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Telemetry coverage",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted case-pattern embedding for historical retrieval under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.cybersecurity.case-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Defensive case embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.dependency-assurance"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "cyber.scope",
+        "cyber.asset-graph",
+        "cyber.threat-model",
+        "cyber.control-map"
+      ],
+      "category_ids": [
+        "dag.govern.security",
+        "dag.integrate.enrich.identity",
+        "dag.generate.report"
+      ],
+      "description": "Resolve assets, identities, dependencies, trust boundaries, abuse cases, controls, and accountable mitigations.",
+      "design_pack_ids": [
+        "design-pack.fairness-risk",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.cybersecurity.threat-model",
+      "input_kind_ids": [
+        "artifact.system-inventory"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.threat-model"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.login-system",
+        "template.cybersecurity-investigation"
+      ],
+      "title": "Asset inventory and threat model"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.defensive-cyber-investigation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "cyber.scope",
+        "cyber.normalize",
+        "cyber.correlate",
+        "cyber.hypothesis",
+        "cyber.report"
+      ],
+      "category_ids": [
+        "dag.operate.incident",
+        "dag.govern.security",
+        "dag.evaluate.safety"
+      ],
+      "description": "Scope authority, normalize telemetry, correlate activity, test benign and malicious hypotheses, and publish evidence-bounded findings.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "defensive-cyber-investigation"
+      ],
+      "id": "recipe.cybersecurity.investigation",
+      "input_kind_ids": [
+        "artifact.security-telemetry"
+      ],
+      "limitations": [
+        "The executable example is read-only synthetic telemetry and performs no containment."
+      ],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.security-findings"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.cybersecurity-investigation"
+      ],
+      "title": "Defensive investigation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.incident-triage"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "cyber.triage",
+        "cyber.contain",
+        "cyber.recover",
+        "cyber.verify-recovery",
+        "cyber.learn"
+      ],
+      "category_ids": [
+        "dag.operate.incident",
+        "dag.govern.security",
+        "dag.govern.provenance"
+      ],
+      "description": "Triage verified findings, select reversible containment, preserve evidence, recover services, and independently verify absence of recurrence.",
+      "design_pack_ids": [],
+      "effects": [
+        "system.write"
+      ],
+      "example_ids": [
+        "incident-triage"
+      ],
+      "id": "recipe.cybersecurity.incident-recovery",
+      "input_kind_ids": [
+        "artifact.security-findings"
+      ],
+      "limitations": [
+        "Production response requires scoped effect adapters, approvals, idempotency, compensation, and tested rollback."
+      ],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.recovery-evidence"
+      ],
+      "permissions": [
+        "system.write"
+      ],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.incident-response",
+        "template.observability-sre"
+      ],
+      "title": "Incident containment and recovery"
+    }
+  ],
+  "signal_terms": [
+    "cybersecurity",
+    "security",
+    "threat model",
+    "incident response",
+    "telemetry",
+    "detection",
+    "forensics",
+    "vulnerability",
+    "supply chain security"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.govern.security",
+    "dag.integrate.enrich.identity",
+    "dag.generate.report",
+    "dag.operate.incident",
+    "dag.evaluate.safety",
+    "dag.govern.provenance"
+  ],
+  "title": "Cybersecurity",
+  "version": "0.1.0"
+}

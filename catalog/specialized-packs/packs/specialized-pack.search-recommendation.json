@@ -1,0 +1,334 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "search-recommendation",
+    "extraction_target": "solutiongraph-pack-search-recommendation",
+    "python_module": "solutiongraph.specialized.search_recommendation"
+  },
+  "description": "Corpus and catalog preparation, permission-aware indexing, hybrid retrieval, ranking, recommendation, evaluation, serving, and feedback-bias control.",
+  "domain_pack_ids": [
+    "domain-pack.data-integration",
+    "domain-pack.ai-ml",
+    "domain-pack.llm-agent",
+    "domain-pack.backend-api"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject rankings containing unauthorized, unsafe, unavailable, stale, or otherwise ineligible results.",
+      "id": "gate.search-recommendation.eligibility",
+      "independent": true,
+      "metric_ids": [
+        "metric.search-recommendation.unsafe-ineligible"
+      ],
+      "oracle_kind": "property",
+      "title": "Search eligibility gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject promotion without fixed-slice relevance, coverage, diversity, latency, and regression evidence.",
+      "id": "gate.search-recommendation.quality",
+      "independent": true,
+      "metric_ids": [
+        "metric.search-recommendation.relevance",
+        "metric.search-recommendation.coverage-diversity",
+        "metric.search-recommendation.latency"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Search quality gate"
+    }
+  ],
+  "id": "specialized-pack.search-recommendation",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Task-appropriate recall, precision, gain, rank, or satisfaction on fixed query and user slices.",
+      "direction": "maximize",
+      "id": "metric.search-recommendation.relevance",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.query",
+      "title": "Ranking relevance",
+      "unit": "score"
+    },
+    {
+      "description": "Eligible catalog, intent, supplier, topic, or viewpoint coverage under declared diversity constraints.",
+      "direction": "maximize",
+      "id": "metric.search-recommendation.coverage-diversity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.ranking",
+      "title": "Coverage and diversity",
+      "unit": "score"
+    },
+    {
+      "description": "Permission, policy, inventory, privacy, factuality, or eligibility violations shown to a user.",
+      "direction": "minimize",
+      "id": "metric.search-recommendation.unsafe-ineligible",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.result",
+      "title": "Unsafe or ineligible results",
+      "unit": "count"
+    },
+    {
+      "description": "End-to-end retrieval, filtering, ranking, and rendering latency at the declared percentile.",
+      "direction": "minimize",
+      "id": "metric.search-recommendation.latency",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.request",
+      "title": "Serving latency",
+      "unit": "milliseconds"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile documents or items, fields, languages, freshness, permissions, duplicates, taxonomy, inventory, and provenance.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.search-recommendation.corpus-catalog",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Corpus and catalog",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile intents, sessions, histories, cold start, locale, device, eligibility, privacy, and personalization boundaries.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.search-recommendation.query-user-context",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Query and user context",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure candidate generators, rankers, filters, diversity, latency, feedback bias, exposure, and failure slices.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.search-recommendation.ranking-surface",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Retrieval and ranking surface",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional query/item embedding for retrieval only when exact model, revision, preprocessing, dimension, and distance identity match.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.search-recommendation.semantic-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Retrieval-space embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.grounded-knowledge-system"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "search.parse",
+        "search.identity",
+        "search.permissions",
+        "search.chunk",
+        "search.index",
+        "search.validate"
+      ],
+      "category_ids": [
+        "dag.acquire.document",
+        "dag.prepare.parse",
+        "dag.integrate.enrich.knowledge",
+        "dag.govern.privacy"
+      ],
+      "description": "Parse and normalize content, resolve identity and access, chunk with provenance, build lexical and semantic indexes, and validate freshness and deletion.",
+      "design_pack_ids": [
+        "design-pack.text-document"
+      ],
+      "effects": [],
+      "example_ids": [
+        "grounded-document-extraction"
+      ],
+      "id": "recipe.search-recommendation.index",
+      "input_kind_ids": [
+        "artifact.search-corpus"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.search-index"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.document"
+      ],
+      "template_ids": [
+        "template.knowledge-retrieval"
+      ],
+      "title": "Permission-aware search index"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.recommendation-ranking",
+        "arena.grounded-knowledge-system"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "search.intent",
+        "search.retrieve",
+        "search.filter",
+        "search.rank",
+        "search.diversify",
+        "search.explain"
+      ],
+      "category_ids": [
+        "dag.integrate.enrich.knowledge",
+        "dag.learn.ranking",
+        "dag.evaluate.model",
+        "dag.serve.api"
+      ],
+      "description": "Interpret intent, generate lexical, semantic and structured candidates, enforce eligibility, rank, diversify, explain, and measure fixed query slices.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "recommendation-ranking"
+      ],
+      "id": "recipe.search-recommendation.retrieve-rank",
+      "input_kind_ids": [
+        "artifact.search-request"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.ranked-results"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.knowledge-retrieval",
+        "template.recommendation-ranking"
+      ],
+      "title": "Hybrid retrieve and rank"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.recommendation-ranking"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "recommend.feature",
+        "recommend.candidate",
+        "recommend.rank",
+        "recommend.explore",
+        "recommend.evaluate",
+        "recommend.monitor"
+      ],
+      "category_ids": [
+        "dag.learn.ranking",
+        "dag.learn.reinforcement",
+        "dag.evaluate.model",
+        "dag.operate.observe"
+      ],
+      "description": "Build consented features, generate and filter candidates, rank with exploration bounds, evaluate counterfactual limitations, monitor feedback bias, and retain rollback.",
+      "design_pack_ids": [
+        "design-pack.reinforcement-learning",
+        "design-pack.fairness-risk",
+        "design-pack.monitoring-feedback"
+      ],
+      "effects": [],
+      "example_ids": [
+        "recommendation-ranking"
+      ],
+      "id": "recipe.search-recommendation.recommend",
+      "input_kind_ids": [
+        "artifact.recommendation-events"
+      ],
+      "limitations": [
+        "Logged feedback is exposure-biased; offline uplift does not establish causal online benefit."
+      ],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.recommendation-policy"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.recommendation-ranking",
+        "template.product-experimentation"
+      ],
+      "title": "Recommendation feedback loop"
+    }
+  ],
+  "signal_terms": [
+    "search",
+    "retrieval",
+    "ranking",
+    "recommendation",
+    "recommender",
+    "semantic search",
+    "vector search",
+    "rag",
+    "catalog",
+    "personalization"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.acquire.document",
+    "dag.prepare.parse",
+    "dag.integrate.enrich.knowledge",
+    "dag.govern.privacy",
+    "dag.learn.ranking",
+    "dag.evaluate.model",
+    "dag.serve.api",
+    "dag.learn.reinforcement",
+    "dag.operate.observe"
+  ],
+  "title": "Search and recommendation",
+  "version": "0.1.0"
+}

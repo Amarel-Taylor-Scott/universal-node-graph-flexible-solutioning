@@ -1,0 +1,196 @@
+"""Specialized package for embedded software, IoT telemetry, and fleet operations."""
+
+from solutiongraph.specialized._builders import (
+    embedding_feature,
+    feature,
+    gate,
+    metric,
+    recipe,
+    specialized_pack,
+)
+
+NAMESPACE = "embedded-iot"
+FEATURES = (
+    feature(
+        NAMESPACE,
+        "device-fleet",
+        "Device fleet",
+        "Profile hardware, firmware, capabilities, keys, owners, regions, connectivity, power, and lifecycle states.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "telemetry-contract",
+        "Telemetry contract",
+        "Profile schemas, units, event time, frequency, loss, duplication, lateness, privacy, and retention.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "firmware-surface",
+        "Firmware surface",
+        "Measure targets, dependencies, memory, interfaces, unsafe operations, secrets, boot chain, and update compatibility.",
+        "mapping",
+    ),
+    embedding_feature(
+        NAMESPACE,
+        "fleet-embedding",
+        "Fleet incident embedding",
+        "Optional redacted fleet-state or incident embedding for historical retrieval under an exact space identity.",
+    ),
+)
+METRICS = (
+    metric(
+        NAMESPACE,
+        "event-integrity",
+        "Telemetry event integrity",
+        "Authenticated, schema-valid, deduplicated, event-time-correct observations.",
+        "maximize",
+        "ratio",
+        scope="scope.event",
+    ),
+    metric(
+        NAMESPACE,
+        "fleet-coverage",
+        "Fleet state coverage",
+        "Expected devices with fresh, versioned, uncertainty-bounded state.",
+        "maximize",
+        "ratio",
+        scope="scope.fleet",
+    ),
+    metric(
+        NAMESPACE,
+        "firmware-regression",
+        "Firmware regression failures",
+        "Static, host, emulator, hardware-in-loop, compatibility, and rollback test failures.",
+        "minimize",
+        "count",
+        scope="scope.firmware",
+    ),
+    metric(
+        NAMESPACE,
+        "command-verification",
+        "Command verification",
+        "Authorized commands with acknowledged, independently verified resulting state or rollback.",
+        "maximize",
+        "ratio",
+        scope="scope.command",
+    ),
+)
+GATES = (
+    gate(
+        NAMESPACE,
+        "telemetry",
+        "Fleet evidence gate",
+        "Reject fleet conclusions without event integrity, device identity, freshness, and coverage evidence.",
+        (METRICS[0].id, METRICS[1].id),
+        oracle_kind="property",
+    ),
+    gate(
+        NAMESPACE,
+        "firmware-command",
+        "Firmware and command gate",
+        "Reject firmware rollout or device commands without regression, authority, staged rollout, verification, and rollback.",
+        (METRICS[2].id, METRICS[3].id),
+        oracle_kind="human",
+    ),
+)
+RECIPES = (
+    recipe(
+        NAMESPACE,
+        "telemetry",
+        "IoT telemetry assurance",
+        "Validate schemas, deduplicate and order events, derive device state, detect fleet anomalies, and publish evidence with firmware context.",
+        ("artifact.iot-events",),
+        ("artifact.fleet-state-report",),
+        (
+            "iot.authenticate",
+            "iot.event-time",
+            "iot.deduplicate",
+            "iot.state",
+            "iot.anomaly",
+            "iot.report",
+        ),
+        ("dag.acquire.stream", "dag.prepare.verify", "dag.learn.anomaly", "dag.operate.observe"),
+        ("template.embedded-iot-system", "template.event-driven-system"),
+        node_packs=("example.frontier-domain-node-pack",),
+        examples=("iot-telemetry-assurance",),
+        arena_tasks=("arena.iot-fleet-assurance",),
+        limitations=(
+            "The fixture contains no signed device identity or durable streaming backend.",
+        ),
+    ),
+    recipe(
+        NAMESPACE,
+        "firmware",
+        "Embedded firmware assurance",
+        "Build target binaries, inspect dependencies and authority, run static and emulated fixtures, verify compatibility, and stage a reversible rollout.",
+        ("artifact.firmware-source",),
+        ("artifact.firmware-release-evidence",),
+        (
+            "iot.build-firmware",
+            "iot.static-check",
+            "iot.emulate",
+            "iot.compatibility",
+            "iot.sign",
+            "iot.rollout",
+        ),
+        ("dag.evaluate.regression", "dag.govern.security", "dag.serve.deploy"),
+        ("template.embedded-iot-system", "template.deployment-release"),
+        arena_tasks=("arena.iot-fleet-assurance",),
+        limitations=(
+            "Hardware-in-loop, signing, secure boot, and fleet rollout require target-specific production adapters.",
+        ),
+    ),
+    recipe(
+        NAMESPACE,
+        "command",
+        "Safety-gated device command",
+        "Freeze target and preconditions, authorize least privilege, deliver idempotently, verify resulting state, and compensate or roll back partial failure.",
+        ("artifact.device-command-request",),
+        ("artifact.device-command-evidence",),
+        (
+            "iot.plan-command",
+            "iot.authorize",
+            "iot.execute-command",
+            "iot.verify-command",
+            "iot.rollback",
+        ),
+        ("dag.serve.automation", "dag.govern.security", "dag.human.review", "dag.operate.observe"),
+        ("template.embedded-iot-system",),
+        effects=("device.write",),
+        permissions=("device.write",),
+        limitations=(
+            "The core never grants device authority; an authenticated enforcing adapter and accountable approval are required.",
+        ),
+    ),
+)
+PACK = specialized_pack(
+    "embedded_iot",
+    "Embedded systems and IoT",
+    "Firmware, device identity, event-time telemetry, fleet state, anomalies, commands, staged rollout, and lifecycle assurance.",
+    domain_packs=(
+        "domain-pack.event-stream",
+        "domain-pack.backend-api",
+        "domain-pack.security-compliance",
+        "domain-pack.platform-release",
+    ),
+    categories=tuple(dict.fromkeys(category for item in RECIPES for category in item.category_ids)),
+    signals=(
+        "embedded",
+        "iot",
+        "device",
+        "firmware",
+        "telemetry",
+        "sensor",
+        "fleet",
+        "microcontroller",
+        "edge",
+        "hardware",
+    ),
+    recipes=RECIPES,
+    features=FEATURES,
+    metrics=METRICS,
+    gates=GATES,
+)
+__all__ = ["FEATURES", "GATES", "METRICS", "PACK", "RECIPES"]

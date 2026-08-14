@@ -1,0 +1,327 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "product-experimentation",
+    "extraction_target": "solutiongraph-pack-product-experimentation",
+    "python_module": "solutiongraph.specialized.product_experimentation"
+  },
+  "description": "Product-event contracts, journey and funnel analytics, controlled experiments, guardrails, causal evidence, decisions, and monitoring.",
+  "domain_pack_ids": [
+    "domain-pack.event-stream",
+    "domain-pack.data-integration",
+    "domain-pack.science-optimization",
+    "domain-pack.business-human-workflow"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject behavioral conclusions when event, identity, assignment, exposure, or consent contracts fail.",
+      "id": "gate.product-experimentation.instrumentation",
+      "independent": true,
+      "metric_ids": [
+        "metric.product-experimentation.event-validity"
+      ],
+      "oracle_kind": "property",
+      "title": "Product instrumentation gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject ship, stop, or iterate claims without frozen outcomes, uncertainty, guardrails, multiplicity policy, and reproducible evidence.",
+      "id": "gate.product-experimentation.decision",
+      "independent": true,
+      "metric_ids": [
+        "metric.product-experimentation.primary-effect",
+        "metric.product-experimentation.guardrail-regression",
+        "metric.product-experimentation.decision-reproducibility"
+      ],
+      "oracle_kind": "statistical",
+      "title": "Experiment decision gate"
+    }
+  ],
+  "id": "specialized-pack.product-experimentation",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Events satisfying identity, schema, time, consent, deduplication, and exposure semantics.",
+      "direction": "maximize",
+      "id": "metric.product-experimentation.event-validity",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.event",
+      "title": "Event validity",
+      "unit": "ratio"
+    },
+    {
+      "description": "Predeclared effect and uncertainty for the primary outcome under the frozen analysis contract.",
+      "direction": "maximize",
+      "id": "metric.product-experimentation.primary-effect",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.experiment",
+      "title": "Primary treatment effect",
+      "unit": "effect"
+    },
+    {
+      "description": "Statistically and operationally material adverse movement in predeclared guardrails.",
+      "direction": "minimize",
+      "id": "metric.product-experimentation.guardrail-regression",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.guardrail",
+      "title": "Guardrail regressions",
+      "unit": "count"
+    },
+    {
+      "description": "Experiment decisions reproducible from exact assignment, data, exclusions, estimator, and correction identity.",
+      "direction": "maximize",
+      "id": "metric.product-experimentation.decision-reproducibility",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.decision",
+      "title": "Decision reproducibility",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile actors, sessions, entities, event time, exposure, assignment, identity stitching, consent, and schema versions.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.product-experimentation.event-contract",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Product event contract",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile unit, population, hypothesis, variants, randomization, interference, duration, power, outcomes, and guardrails.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.product-experimentation.experiment-design",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Experiment design",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure paths, loops, drop-off, latency, retention, cohorts, channels, devices, and segment imbalance.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.product-experimentation.journey-shape",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Journey and funnel shape",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted hypothesis and behavior embedding for historical discovery under an exact space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.product-experimentation.hypothesis-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Product hypothesis embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.product-experimentation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "product.event-contract",
+        "product.instrument",
+        "product.reconcile-identity",
+        "product.validate",
+        "product.monitor"
+      ],
+      "category_ids": [
+        "dag.acquire.stream",
+        "dag.prepare.schema",
+        "dag.prepare.verify",
+        "dag.operate.observe"
+      ],
+      "description": "Define semantic events, validate client and server emissions, reconcile identity and exposure, monitor schema drift, and publish event quality evidence.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "event-time-windowing"
+      ],
+      "id": "recipe.product-experimentation.instrument",
+      "input_kind_ids": [
+        "artifact.product-event-spec"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.validated-product-events"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.person",
+        "question-pack.datetime"
+      ],
+      "template_ids": [
+        "template.product-experimentation",
+        "template.event-driven-system"
+      ],
+      "title": "Product event instrumentation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.product-experimentation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "product.sessionize",
+        "product.journey",
+        "product.funnel",
+        "product.segment",
+        "product.sensitivity"
+      ],
+      "category_ids": [
+        "dag.integrate.enrich.temporal",
+        "dag.learn.cluster",
+        "dag.evaluate.metamorphic",
+        "dag.generate.report"
+      ],
+      "description": "Sessionize under explicit rules, derive journeys and funnels, preserve alternate paths, segment behavior, and test stability across definitions.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "user-journey-modeling"
+      ],
+      "id": "recipe.product-experimentation.journeys",
+      "input_kind_ids": [
+        "artifact.validated-product-events"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.product-journey-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.product-experimentation"
+      ],
+      "title": "User journey and funnel modeling"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.product-experimentation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "product.freeze-design",
+        "product.validate-randomization",
+        "product.estimate",
+        "product.guardrails",
+        "product.heterogeneity",
+        "product.decide"
+      ],
+      "category_ids": [
+        "dag.learn.causal",
+        "dag.evaluate.model",
+        "dag.human.review",
+        "dag.govern.provenance"
+      ],
+      "description": "Freeze hypothesis and estimand, validate randomization and exposure, analyze primary and guardrail outcomes, inspect heterogeneity, and publish a bounded decision.",
+      "design_pack_ids": [
+        "design-pack.causality-experiments",
+        "design-pack.validation-splits",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.product-experimentation.experiment",
+      "input_kind_ids": [
+        "artifact.product-experiment"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.product-experiment-report"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.product-experimentation",
+        "template.scientific-experiment"
+      ],
+      "title": "Controlled product experiment"
+    }
+  ],
+  "signal_terms": [
+    "product analytics",
+    "ab test",
+    "a/b test",
+    "experiment",
+    "user journey",
+    "funnel",
+    "retention",
+    "conversion",
+    "feature flag",
+    "telemetry"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.acquire.stream",
+    "dag.prepare.schema",
+    "dag.prepare.verify",
+    "dag.operate.observe",
+    "dag.integrate.enrich.temporal",
+    "dag.learn.cluster",
+    "dag.evaluate.metamorphic",
+    "dag.generate.report",
+    "dag.learn.causal",
+    "dag.evaluate.model",
+    "dag.human.review",
+    "dag.govern.provenance"
+  ],
+  "title": "Product experimentation",
+  "version": "0.1.0"
+}

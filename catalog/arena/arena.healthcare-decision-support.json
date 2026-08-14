@@ -1,0 +1,39 @@
+{
+  "acceptance_signals": [
+    "clinical validity",
+    "subgroup safety",
+    "abstention",
+    "workflow fit",
+    "privacy",
+    "adverse events"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [
+    "Clinical use requires representative data, regulatory and institutional review, qualified human oversight, privacy controls, and production validation."
+  ],
+  "id": "arena.healthcare-decision-support",
+  "input_contract": "Authorized health records, terminology versions, intended-use contract, consent, and clinical review policy.",
+  "output_contract": "Source-grounded evidence, uncertainty and applicability, qualified review state, and governed audit receipt.",
+  "problem": "Govern access, normalize clinical data, reconcile a timeline, apply bounded decision support, and require qualified review.",
+  "readiness": "template",
+  "stage_families": [
+    "govern",
+    "normalize",
+    "terminology",
+    "identity",
+    "timeline",
+    "analyze",
+    "uncertainty",
+    "clinical review",
+    "monitor"
+  ],
+  "tags": [
+    "healthcare",
+    "clinical-data",
+    "privacy",
+    "human-review"
+  ],
+  "template_id": "template.healthcare-evidence",
+  "title": "Longitudinal health data to reviewed decision-support evidence"
+}

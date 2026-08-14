@@ -1,0 +1,73 @@
+{
+  "capabilities": [
+    "frontier.iot.assure"
+  ],
+  "description": "Shortcut mechanism fixture for iot/assure.",
+  "determinism": "deterministic",
+  "effects": [],
+  "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+  "failure_modes": [],
+  "id": "example.frontier.iot.assure.shortcut",
+  "idempotency": "idempotent",
+  "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+  "inputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.frontier-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "invariants": [],
+  "model_version": "0.2",
+  "outputs": [
+    {
+      "cardinality": "one",
+      "description": "",
+      "name": "payload",
+      "type": {
+        "id": "example.frontier-workflow-payload",
+        "media_type": "application/json",
+        "schema_digest": "",
+        "units": "",
+        "version": "1"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "choices": [
+        "iot"
+      ],
+      "default": null,
+      "description": "",
+      "name": "domain",
+      "required": true,
+      "value_type": "string"
+    },
+    {
+      "choices": [
+        "assure"
+      ],
+      "default": null,
+      "description": "",
+      "name": "operation",
+      "required": true,
+      "value_type": "string"
+    }
+  ],
+  "permissions": [],
+  "postconditions": [],
+  "preconditions": [],
+  "resources": [],
+  "runtime": "python",
+  "source": "solutiongraph/examples/frontier_tasks.py",
+  "verifier": "",
+  "version": "1.0.0"
+}

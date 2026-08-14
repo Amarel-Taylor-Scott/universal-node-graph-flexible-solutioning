@@ -7,7 +7,8 @@ dependency-free and run without browser, model-provider, or network access.
 
 | Goal | Command | What it proves |
 |---|---|---|
-| Recommend and compose specialized packages | `python examples/specialized_package_workflow.py` | Seven all-visible verticals, transparent task nomination, exact artifact-kind composition, and search accounting without claiming executable compatibility |
+| Recommend and compose specialized packages | `python examples/specialized_package_workflow.py` | 26 all-visible packages, transparent task nomination, exact artifact-kind composition, and search accounting without claiming executable compatibility |
+| Compare seven frontier controls and references | `python examples/frontier_domain_showcase.py` | Compiler admission, frozen routes, independent rejection of disclosed shortcuts, and accepted references across cyber, video, 3D, games, robotics, IoT, and digital twins |
 | Plan a cross-domain engineering task | `python examples/universal_engineering_quickstart.py` | Ten-channel task context, all-visible effort plan, evidence-derived coverage, OpenAPI projection, and frozen-plan orchestrator export without network or deployment |
 | Compile and search a two-slot graph | `python examples/solutiongraph_quickstart.py` | Full admission, exhaustive route ordering, and a frozen plan |
 | Compare control and mutated graphs | `python examples/control_vs_mutated_graph_experiment.py` | Six compatible routes, fixed control, topology mutation, execution, Pareto/champion evidence |
@@ -33,6 +34,8 @@ solutiongraph universal coverage
 solutiongraph universal plan idempotent-api-contract \
   --domain domain-pack.backend-api --effort E3
 solutiongraph examples run dataset-profiling-and-drift --route all --json
+solutiongraph examples run defensive-cyber-investigation --route all --json
+python examples/frontier_domain_showcase.py
 solutiongraph solve golden-customer-table --profile balanced
 solutiongraph arena list
 solutiongraph benchmarks list
@@ -43,10 +46,11 @@ solutiongraph agent-bench tasks
 solutiongraph agent-bench smoke --output .artifacts/agent-benchmark-smoke
 ```
 
-The 47 bundled programs cover data quality, documents, images, GIS, APIs,
-frontend release checks, synthetic data, reinforcement learning, LLM evaluation,
-and ten data-science/ML lifecycle families. They are transparent mechanism
-fixtures, not production performance evidence.
+The 54 bundled programs cover data quality, documents, images/video, 3D, games,
+GIS, APIs, frontend release checks, defensive security, robotics, IoT, digital
+twins, synthetic data, reinforcement learning, LLM evaluation, and ten data-
+science/ML lifecycle families. They are transparent mechanism fixtures, not
+production performance evidence.
 
 The semantic interrogation example uses one intentionally dirty organization,
 address, contact, time, and ML-target dataset. The equivalent CLI workflow is:

@@ -273,7 +273,7 @@ An LLM coding harness adding a domain should:
 9. compare baseline and alternatives under declared objectives;
 10. add holdouts before making optimization claims.
 
-The 47 bundled programs and six numbered notebooks demonstrate this sequence with
+The 54 bundled programs and six numbered notebooks demonstrate this sequence with
 standard-library nodes. They are executable teaching fixtures, not production
 benchmark claims for web scraping, OCR, imaging, entity resolution, or machine
 learning.
@@ -289,7 +289,7 @@ The reference executor layer is conforming when:
 - retries and fallbacks are bounded and visible;
 - verification is independent and may reject a technically completed route;
 - every attempt produces a valid receipt;
-- all 47 examples compile against their declared cross-domain registries and execute
+- all 54 examples compile against their declared cross-domain registries and execute
   without optional packages or network access.
 
 The `solutiongraph conformance` gate additionally executes conditional control,

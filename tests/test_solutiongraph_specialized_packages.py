@@ -50,11 +50,11 @@ def test_specialized_pack_registry_is_strict_asset_resolved_and_extraction_ready
     registry = REFERENCE_SPECIALIZED_PACK_REGISTRY
     assert registry.validate() == []
     assert validate_specialized_pack_catalog(registry) == []
-    assert len(REFERENCE_SPECIALIZED_PACKS) == 7
-    assert sum(len(pack.recipes) for pack in REFERENCE_SPECIALIZED_PACKS) == 32
-    assert sum(len(pack.profiler_features) for pack in REFERENCE_SPECIALIZED_PACKS) == 51
-    assert sum(len(pack.metrics) for pack in REFERENCE_SPECIALIZED_PACKS) == 42
-    assert sum(len(pack.gates) for pack in REFERENCE_SPECIALIZED_PACKS) == 17
+    assert len(REFERENCE_SPECIALIZED_PACKS) == 26
+    assert sum(len(pack.recipes) for pack in REFERENCE_SPECIALIZED_PACKS) == 89
+    assert sum(len(pack.profiler_features) for pack in REFERENCE_SPECIALIZED_PACKS) == 127
+    assert sum(len(pack.metrics) for pack in REFERENCE_SPECIALIZED_PACKS) == 118
+    assert sum(len(pack.gates) for pack in REFERENCE_SPECIALIZED_PACKS) == 55
     assert {pack.id for pack in REFERENCE_SPECIALIZED_PACKS} == {
         "specialized-pack.data-engineering",
         "specialized-pack.data-analysis",
@@ -63,6 +63,25 @@ def test_specialized_pack_registry_is_strict_asset_resolved_and_extraction_ready
         "specialized-pack.llm-engineering",
         "specialized-pack.software-engineering",
         "specialized-pack.operations",
+        "specialized-pack.llm-evaluation-safety",
+        "specialized-pack.cybersecurity",
+        "specialized-pack.privacy-governance-compliance",
+        "specialized-pack.document-intelligence",
+        "specialized-pack.media-intelligence",
+        "specialized-pack.three-d-simulation",
+        "specialized-pack.game-engineering",
+        "specialized-pack.geospatial-temporal",
+        "specialized-pack.robotics-control",
+        "specialized-pack.scientific-computing-digital-twins",
+        "specialized-pack.embedded-iot",
+        "specialized-pack.healthcare-biomedical",
+        "specialized-pack.finance-risk-fraud",
+        "specialized-pack.supply-chain-planning",
+        "specialized-pack.product-experimentation",
+        "specialized-pack.search-recommendation",
+        "specialized-pack.knowledge-research",
+        "specialized-pack.education-assessment",
+        "specialized-pack.creative-content-production",
     }
     assert all(pack.current_distribution == "browsergraph" for pack in registry.packs)
     assert all(pack.extraction_target.startswith("solutiongraph-pack-") for pack in registry.packs)
@@ -196,6 +215,55 @@ def test_exact_categories_capabilities_preferences_exclusions_and_interfaces_are
     assert excluded.score == 0.0
 
 
+def test_frontier_verticals_are_recommended_without_effectful_sibling_poisoning():
+    registry = REFERENCE_SPECIALIZED_PACK_REGISTRY
+    examples = (
+        ("Defensive cybersecurity investigation of security telemetry", "cybersecurity"),
+        ("Validate a 3D mesh, materials, collision, and LOD budget", "three-d-simulation"),
+        ("Run deterministic game replay and balance playtests", "game-engineering"),
+        ("Validate robot motion planning in safety simulation", "robotics-control"),
+        ("Validate IoT telemetry and stage firmware rollout", "embedded-iot"),
+        ("Reconcile a financial ledger and score fraud risk", "finance-risk-fraud"),
+        ("Build hybrid search and recommendation ranking", "search-recommendation"),
+        ("Author curriculum and validate assessment rubrics", "education-assessment"),
+        ("Produce creative campaign content with brand and rights review", "creative-content-production"),
+    )
+    for index, (description, suffix) in enumerate(examples):
+        report = recommend_specialized_packs(
+            TaskPackageRequest(f"package-request.frontier-{index}", description),
+            registry,
+            selection_limit=1,
+        )
+        assert report.recommended_pack_ids == (f"specialized-pack.{suffix}",)
+
+    read_only = recommend_specialized_packs(
+        TaskPackageRequest(
+            "package-request.cyber-read-only",
+            "Investigate suspicious security telemetry and preserve evidence",
+        ),
+        registry,
+        selection_limit=1,
+    )
+    assert read_only.recommended_pack_ids == ("specialized-pack.cybersecurity",)
+    assert read_only.recommendations[0].blocked_permissions == ()
+
+    effectful = recommend_specialized_packs(
+        TaskPackageRequest(
+            "package-request.cyber-response",
+            "Contain and recover a security incident",
+            output_kind_ids=("artifact.recovery-evidence",),
+        ),
+        registry,
+        selection_limit=1,
+    )
+    cyber = next(
+        item for item in effectful.recommendations
+        if item.pack_id == "specialized-pack.cybersecurity"
+    )
+    assert cyber.status == "partial"
+    assert cyber.blocked_permissions == ("system.write",)
+
+
 def test_typed_recipe_composition_finds_cross_pack_routes_without_implicit_conversion():
     registry = REFERENCE_SPECIALIZED_PACK_REGISTRY
     report = compose_specialized_packs(
@@ -327,9 +395,9 @@ def test_merging_deduplicates_exact_packs_and_rejects_conflicting_identity():
 def test_catalog_cli_and_distribution_entry_points_publish_the_specialized_layer(capsys):
     documents = catalog_documents()
     index = documents["specialized-packs/index.json"]
-    assert index["pack_count"] == 7
-    assert index["recipe_count"] == 32
-    assert documents["index.json"]["specialized_packages"]["gate_count"] == 17
+    assert index["pack_count"] == 26
+    assert index["recipe_count"] == 89
+    assert documents["index.json"]["specialized_packages"]["gate_count"] == 55
     assert all(
         f"specialized-packs/packs/{pack.id}.json" in documents
         for pack in REFERENCE_SPECIALIZED_PACKS
@@ -337,7 +405,7 @@ def test_catalog_cli_and_distribution_entry_points_publish_the_specialized_layer
 
     assert main(["packages", "list", "--json"]) == 0
     payload = json.loads(capsys.readouterr().out)
-    assert len(payload["packs"]) == 7
+    assert len(payload["packs"]) == 26
     assert (
         main(
             [
@@ -353,7 +421,7 @@ def test_catalog_cli_and_distribution_entry_points_publish_the_specialized_layer
     )
     recommendation = json.loads(capsys.readouterr().out)
     assert recommendation["recommended_pack_ids"] == ["specialized-pack.llm-engineering"]
-    assert len(recommendation["recommendations"]) == 7
+    assert len(recommendation["recommendations"]) == 26
 
     root = Path(__file__).parents[1]
     project = tomllib.loads((root / "pyproject.toml").read_text(encoding="utf-8"))

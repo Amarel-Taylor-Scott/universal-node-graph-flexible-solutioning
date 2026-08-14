@@ -1,0 +1,329 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "knowledge-research",
+    "extraction_target": "solutiongraph-pack-knowledge-research",
+    "python_module": "solutiongraph.specialized.knowledge_research"
+  },
+  "description": "Provenance-first knowledge bases, evidence discovery, conflict-aware synthesis, reproducible research dossiers, grounded answers, and abstention.",
+  "domain_pack_ids": [
+    "domain-pack.documents-media",
+    "domain-pack.llm-agent",
+    "domain-pack.data-integration",
+    "domain-pack.science-optimization"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject unsupported, stale, scope-mismatched, or provenance-free material claims.",
+      "id": "gate.knowledge-research.claim",
+      "independent": true,
+      "metric_ids": [
+        "metric.knowledge-research.claim-grounding",
+        "metric.knowledge-research.conflict-closure"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Grounded claim gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate high-consequence conclusions without adequate source coverage, reproducibility, uncertainty, and accountable domain review.",
+      "id": "gate.knowledge-research.research",
+      "independent": true,
+      "metric_ids": [
+        "metric.knowledge-research.source-coverage",
+        "metric.knowledge-research.reproducibility"
+      ],
+      "oracle_kind": "human",
+      "title": "Research decision gate"
+    }
+  ],
+  "id": "specialized-pack.knowledge-research",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Material claims linked to exact source spans, versions, retrieval times, and applicability notes.",
+      "direction": "maximize",
+      "id": "metric.knowledge-research.claim-grounding",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.claim",
+      "title": "Claim grounding",
+      "unit": "ratio"
+    },
+    {
+      "description": "Predeclared evidence perspectives, authorities, dates, and disconfirming searches represented in the dossier.",
+      "direction": "maximize",
+      "id": "metric.knowledge-research.source-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.question",
+      "title": "Source coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Detected material conflicts explicitly resolved, scoped, or left visible with decision impact.",
+      "direction": "maximize",
+      "id": "metric.knowledge-research.conflict-closure",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.conflict",
+      "title": "Conflict closure",
+      "unit": "ratio"
+    },
+    {
+      "description": "Queries, sources, snapshots, extraction, transformations, analyses, and outputs reproducible from receipts.",
+      "direction": "maximize",
+      "id": "metric.knowledge-research.reproducibility",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.study",
+      "title": "Research reproducibility",
+      "unit": "ratio"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile decisions, claims, populations, time windows, jurisdictions, uncertainty, freshness, and acceptable abstention.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.knowledge-research.question-scope",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Question and claim scope",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile source authority, independence, access, format, date, version, coverage, conflicts, and retraction or correction risk.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.knowledge-research.source-landscape",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Source landscape",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure entities, concepts, relations, provenance, temporal validity, contradictions, orphan claims, and update dependencies.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.knowledge-research.knowledge-structure",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Knowledge structure",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional claim/source embedding for discovery under an exact embedding-space identity; never treated as proof.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.knowledge-research.claim-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Claim and source embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.grounded-knowledge-system"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "knowledge.ingest",
+        "knowledge.resolve",
+        "knowledge.extract",
+        "knowledge.provenance",
+        "knowledge.conflict",
+        "knowledge.update"
+      ],
+      "category_ids": [
+        "dag.acquire.document",
+        "dag.integrate.enrich.knowledge",
+        "dag.integrate.enrich.identity",
+        "dag.govern.provenance"
+      ],
+      "description": "Ingest permitted sources, resolve entities and concepts, extract source-bound relations, retain temporal validity and conflicts, and publish update lineage.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "grounded-document-extraction"
+      ],
+      "id": "recipe.knowledge-research.knowledge-base",
+      "input_kind_ids": [
+        "artifact.source-corpus"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.knowledge-base"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.document"
+      ],
+      "template_ids": [
+        "template.knowledge-retrieval",
+        "template.document-intelligence"
+      ],
+      "title": "Provenance-first knowledge base"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.scientific-experiment"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "research.protocol",
+        "research.discover",
+        "research.extract",
+        "research.analyze",
+        "research.challenge",
+        "research.publish"
+      ],
+      "category_ids": [
+        "dag.acquire.web",
+        "dag.acquire.document",
+        "dag.evaluate.outer",
+        "dag.generate.report"
+      ],
+      "description": "Freeze the question and protocol, discover diverse sources, extract and reconcile evidence, run declared analysis, challenge conclusions, and publish receipts.",
+      "design_pack_ids": [
+        "design-pack.task-contract",
+        "design-pack.evaluation-error",
+        "design-pack.reproducibility-governance"
+      ],
+      "effects": [],
+      "example_ids": [
+        "scientific-experiment"
+      ],
+      "id": "recipe.knowledge-research.research",
+      "input_kind_ids": [
+        "artifact.research-question"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.research-dossier"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.scientific-experiment",
+        "template.knowledge-retrieval"
+      ],
+      "title": "Reproducible research dossier"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.grounded-knowledge-system",
+        "arena.llm-evaluation-harness"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "knowledge.decompose",
+        "knowledge.retrieve",
+        "knowledge.rerank",
+        "knowledge.synthesize",
+        "knowledge.cite",
+        "knowledge.abstain"
+      ],
+      "category_ids": [
+        "dag.integrate.enrich.knowledge",
+        "dag.evaluate.llm-harness",
+        "dag.evaluate.outer",
+        "dag.human.review"
+      ],
+      "description": "Decompose the question, retrieve eligible evidence, synthesize only supported claims, expose conflicts and uncertainty, and abstain outside the evidence boundary.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "grounded-document-extraction",
+        "duecare-llm-evaluation-harness"
+      ],
+      "id": "recipe.knowledge-research.grounded-answer",
+      "input_kind_ids": [
+        "artifact.knowledge-query"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.grounded-answer"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.knowledge-retrieval",
+        "template.llm-evaluation-harness"
+      ],
+      "title": "Grounded answer with abstention"
+    }
+  ],
+  "signal_terms": [
+    "research",
+    "knowledge base",
+    "knowledge graph",
+    "evidence synthesis",
+    "literature review",
+    "grounded answer",
+    "citations",
+    "fact checking",
+    "rag"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.acquire.document",
+    "dag.integrate.enrich.knowledge",
+    "dag.integrate.enrich.identity",
+    "dag.govern.provenance",
+    "dag.acquire.web",
+    "dag.evaluate.outer",
+    "dag.generate.report",
+    "dag.evaluate.llm-harness",
+    "dag.human.review"
+  ],
+  "title": "Knowledge and research",
+  "version": "0.1.0"
+}

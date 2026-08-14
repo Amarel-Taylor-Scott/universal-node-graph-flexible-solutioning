@@ -1,0 +1,40 @@
+{
+  "acceptance_signals": [
+    "event integrity",
+    "late and duplicate handling",
+    "fleet coverage",
+    "anomaly evidence",
+    "rollback readiness"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "iot-telemetry-assurance"
+  ],
+  "external_requirements": [
+    "The bundled fixture uses unauthenticated finite telemetry; real devices require key management, signed firmware, enforcing command channels, and hardware testing."
+  ],
+  "id": "arena.iot-fleet-assurance",
+  "input_contract": "Device identities, firmware versions, telemetry events, schemas, fleet policy, and command authority.",
+  "output_contract": "Fleet state, anomalies, event-time evidence, command or rollout plan, and lifecycle receipt.",
+  "problem": "Authenticate and normalize event-time telemetry, derive device state, detect anomalies, and gate commands and firmware rollout.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "identity",
+    "schema",
+    "event-time",
+    "deduplicate",
+    "state",
+    "anomaly",
+    "command",
+    "rollout",
+    "monitor"
+  ],
+  "tags": [
+    "iot",
+    "embedded",
+    "telemetry",
+    "firmware"
+  ],
+  "template_id": "template.embedded-iot-system",
+  "title": "Device telemetry to fleet state and anomaly evidence"
+}

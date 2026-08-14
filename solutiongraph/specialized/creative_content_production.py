@@ -1,0 +1,208 @@
+"""Specialized package for governed creative content production and delivery."""
+
+from solutiongraph.specialized._builders import (
+    embedding_feature,
+    feature,
+    gate,
+    metric,
+    recipe,
+    specialized_pack,
+)
+
+NAMESPACE = "creative-content-production"
+FEATURES = (
+    feature(
+        NAMESPACE,
+        "brief",
+        "Creative brief",
+        "Profile audience, message, channels, formats, variants, constraints, success criteria, deadlines, owners, and approval rights.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "rights-and-brand",
+        "Rights and brand",
+        "Profile source ownership, licenses, consent, likeness, trademarks, disclosures, brand rules, safety, and territorial limits.",
+        "mapping",
+    ),
+    feature(
+        NAMESPACE,
+        "production-surface",
+        "Production surface",
+        "Measure text, image, audio, video, 3D, localization, accessibility, dependencies, rendering, and distribution targets.",
+        "mapping",
+    ),
+    embedding_feature(
+        NAMESPACE,
+        "concept-embedding",
+        "Creative concept embedding",
+        "Optional brief/concept embedding for diversity and historical retrieval under an exact representation identity.",
+    ),
+)
+METRICS = (
+    metric(
+        NAMESPACE,
+        "brief-coverage",
+        "Brief coverage",
+        "Required message, audience, format, channel, accessibility, and call-to-action constraints satisfied.",
+        "maximize",
+        "ratio",
+        scope="scope.asset",
+    ),
+    metric(
+        NAMESPACE,
+        "rights-violations",
+        "Rights and consent violations",
+        "Unresolved license, attribution, consent, likeness, trademark, disclosure, or territorial failures.",
+        "minimize",
+        "count",
+        scope="scope.release",
+    ),
+    metric(
+        NAMESPACE,
+        "technical-validity",
+        "Technical validity",
+        "Assets satisfying target format, duration, dimension, codec, loudness, caption, render, and delivery contracts.",
+        "maximize",
+        "ratio",
+        scope="scope.asset",
+    ),
+    metric(
+        NAMESPACE,
+        "human-preference",
+        "Structured human preference",
+        "Predeclared reviewer or audience preference measured with blinded variants and retained disagreement.",
+        "maximize",
+        "score",
+        scope="scope.review",
+    ),
+)
+GATES = (
+    gate(
+        NAMESPACE,
+        "release",
+        "Creative release gate",
+        "Reject assets with unresolved rights, consent, safety, disclosure, accessibility, or technical failures.",
+        (METRICS[1].id, METRICS[2].id),
+        oracle_kind="human",
+    ),
+    gate(
+        NAMESPACE,
+        "selection",
+        "Creative selection gate",
+        "Escalate final selection without brief coverage, diverse options, structured human evidence, and accountable brand approval.",
+        (METRICS[0].id, METRICS[3].id),
+        oracle_kind="human",
+        decision="escalate",
+    ),
+)
+RECIPES = (
+    recipe(
+        NAMESPACE,
+        "concept",
+        "Creative concept exploration",
+        "Normalize the brief, retrieve licensed references, generate meaningfully diverse concepts, critique against constraints, and preserve rejected evidence.",
+        ("artifact.creative-brief",),
+        ("artifact.creative-concepts",),
+        (
+            "creative.scope",
+            "creative.retrieve-licensed",
+            "creative.generate-diverse",
+            "creative.critique",
+            "creative.select",
+        ),
+        ("dag.generate", "dag.evaluate.human", "dag.govern.provenance"),
+        ("template.creative-content-production",),
+        design_packs=("design-pack.image-multimodal", "design-pack.decision-handoff"),
+        arena_tasks=("arena.creative-content-production",),
+    ),
+    recipe(
+        NAMESPACE,
+        "produce",
+        "Multimodal content production",
+        "Build source-bound text, image, audio, video, or 3D variants, localize them, verify technical contracts, and retain transformation provenance.",
+        ("artifact.approved-creative-concept",),
+        ("artifact.creative-asset-bundle",),
+        (
+            "creative.author",
+            "creative.compose",
+            "creative.localize",
+            "creative.accessibility",
+            "creative.render",
+            "creative.provenance",
+        ),
+        (
+            "dag.generate",
+            "dag.generate.synthetic.media",
+            "dag.evaluate.regression",
+            "dag.govern.provenance",
+        ),
+        (
+            "template.creative-content-production",
+            "template.video-media-pipeline",
+            "template.audio-speech",
+            "template.three-d-asset-pipeline",
+        ),
+        node_packs=("example.frontier-domain-node-pack",),
+        examples=("video-media-assurance",),
+        arena_tasks=("arena.creative-content-production", "arena.video-media-assurance"),
+        limitations=(
+            "The bundled fixture verifies a synthetic media timeline; it does not generate production creative assets.",
+        ),
+    ),
+    recipe(
+        NAMESPACE,
+        "release-learn",
+        "Creative approval and learning loop",
+        "Run rights, brand, safety, accessibility and technical checks, collect structured human review, deliver approved variants, and feed aggregate outcomes without leaking holdouts.",
+        ("artifact.creative-asset-bundle",),
+        ("artifact.creative-release-evidence",),
+        (
+            "creative.rights-check",
+            "creative.brand-check",
+            "creative.safety-check",
+            "creative.review",
+            "creative.publish",
+            "creative.learn",
+        ),
+        ("dag.evaluate.safety", "dag.evaluate.human", "dag.serve.deploy", "dag.operate.observe"),
+        (
+            "template.creative-content-production",
+            "template.content-moderation",
+            "template.deployment-release",
+        ),
+        arena_tasks=("arena.creative-content-production", "arena.content-policy-moderation"),
+    ),
+)
+PACK = specialized_pack(
+    "creative_content_production",
+    "Creative content production",
+    "Creative briefs, diverse concepts, multimodal production, rights and consent, brand and safety review, accessibility, delivery, and bounded learning.",
+    domain_packs=(
+        "domain-pack.documents-media",
+        "domain-pack.llm-agent",
+        "domain-pack.platform-release",
+        "domain-pack.business-human-workflow",
+    ),
+    categories=tuple(dict.fromkeys(category for item in RECIPES for category in item.category_ids)),
+    signals=(
+        "creative",
+        "content production",
+        "campaign",
+        "copywriting",
+        "storyboard",
+        "brand",
+        "localization",
+        "multimodal",
+        "asset production",
+        "creative review",
+    ),
+    recipes=RECIPES,
+    features=FEATURES,
+    metrics=METRICS,
+    gates=GATES,
+    limitations=(
+        "Executable evidence covers technical media assurance only; production generation, rights clearance, brand approval, and distribution require scoped adapters and accountable humans.",
+    ),
+)
+__all__ = ["FEATURES", "GATES", "METRICS", "PACK", "RECIPES"]

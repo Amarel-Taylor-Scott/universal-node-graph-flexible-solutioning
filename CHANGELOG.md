@@ -1,5 +1,56 @@
 # Changelog
 
+## 0.8.0 — 2026-08-13
+
+### Universal domain expansion
+
+- Expanded the extraction-ready specialized package registry from seven to 26
+  packages. The catalog now exposes 89 typed recipes, 127 task/data profiler
+  features, 118 metrics, and 55 quality gates across LLM evaluation, defensive
+  cybersecurity, documents, GIS/time, media, 3D, games, robotics, digital
+  twins, IoT, privacy/compliance, healthcare, finance, supply chain, product
+  experimentation, search/recommendation, knowledge/research, education, and
+  creative production in addition to the original practice foundations.
+- Added 19 independently importable package modules and matching
+  `solutiongraph.specialized_packs` entry points so each domain can later move
+  into its own distribution without changing the shared contracts.
+- Improved package recommendation so an optional effectful sibling recipe does
+  not incorrectly block an equally suitable read-only recipe; recommendations
+  remain partial when the requested output truly requires ungranted authority.
+
+### Templates, fixtures, and Arena
+
+- Added 11 semantic templates with 189 atomic obligations for LLM evaluation,
+  video, 3D assets, games, robotics, digital twins, embedded/IoT systems,
+  healthcare evidence, product experimentation, education, and creative
+  production. The full catalog now contains 42 templates and 733 obligations.
+- Added seven dependency-free five-stage executable fixtures with 70
+  source-bound nodes for defensive cyber investigation, video assurance, 3D
+  asset assurance, gameplay replay/balance, robotics safety simulation, IoT
+  telemetry assurance, and digital-twin validation.
+- Each frontier fixture includes two compiler-admitted strategies per slot: a
+  verified reference and a disclosed-shortcut negative control rejected by an
+  independent oracle. `examples/frontier_domain_showcase.py` executes all 14
+  control/reference routes in one command.
+- Expanded the Universal DAG Arena to 63 task families: 45 executable fixture
+  families linked to 49 programs, 14 strict template families, and four
+  credentialed-connector families.
+- Expanded release verification to 54 executable examples, 449 unique nodes,
+  134 declared routes, 83 accepted observations, and 51 intentional negative
+  controls across in-process and subprocess adapters.
+
+### Catalog, documentation, and assurance
+
+- Added the frontier node pack to the portable catalog and updated catalog
+  projection, offline explorer, CLI/doctor summaries, package exports, tests,
+  readiness matrix, architecture map, quickstarts, and example documentation.
+- Added a primary-source-backed competitor and integration review covering
+  orchestration, agent graphs/evaluation, data quality/observability, defensive
+  security, robotics/simulation, and 3D ecosystems with explicit
+  build-versus-integrate boundaries and a prioritized adapter backlog.
+- Added focused catalog, package, recommendation, fixture, compiler-grid,
+  independent-control, in-process, and subprocess regression tests.
+
 ## 0.7.0 — 2026-08-13
 
 All notable changes to this proof of concept are documented here.

@@ -35,8 +35,9 @@ diagram or candidate count is not, by itself, progress.
 - Negotiated registry discovery with sparse descriptors, exact named embedding
   spaces, graceful query fallback, coverage receipts, and closed-world snapshots.
 - Portable node packs and a deterministic reference catalogue containing a
-  five-node core pack, a 19-node/32-binding standard-library pack, two Arena
-  packs, and 31 cross-domain templates with 544 atomic obligations.
+  five-node core pack, a 19-node/32-binding standard-library pack, executable
+  Arena and frontier packs, and 42 cross-domain templates with 733 atomic
+  obligations.
 - Dependency-free template authoring CLI, strict linear-blueprint schema, and
   focused workspace skills for templates, node packs, and benchmarking.
 - Prior-guided, beam, seeded-sprout, and uncapped exhaustive route search with explicit
@@ -72,9 +73,10 @@ diagram or candidate count is not, by itself, progress.
 - Transactional `solutiongraph init` starter workspaces that bind a selected
   semantic template, task intake, and coding-agent instructions without
   inventing nodes or evidence.
-- Twenty-four dependency-free executable programs spanning 20 Arena task
-  families, including data, identity, privacy, operations, security, science,
-  recommendation, and numerical workflows in addition to the six numbered notebooks.
+- Fifty-four dependency-free executable programs spanning 45 Arena fixture
+  families, including data, identity, privacy, operations, defensive security,
+  science, media, 3D, games, robotics, IoT, digital twins, recommendation, and
+  numerical workflows in addition to the six numbered notebooks.
 - Campaign contracts for bounded generated candidates/trials, immutable
   proposal ancestry, append-only evidence decisions, and explicit evaluator
   trust boundaries, plus a harness skill for population-based campaigns.
@@ -118,11 +120,17 @@ diagram or candidate count is not, by itself, progress.
 - Opt-in exact runtime payload validation at graph and node boundaries, plus
   bounded local parallel experiment allocation with fresh execution state and
   deterministic evidence order.
-- Seven extraction-ready specialized capability packages for data engineering,
-  analysis, data science, ML engineering, LLM engineering, software
-  engineering, and operations, with typed recipes, task/data profiler features,
-  metrics, quality gates, transparent nomination, bounded artifact-kind
-  composition, exact catalog references, and declare-before-load discovery.
+- Twenty-six extraction-ready specialized capability packages spanning data,
+  AI/ML, software, operations, LLM evaluation, defensive cybersecurity,
+  documents, GIS/time, media, 3D, games, robotics, digital twins, IoT, privacy,
+  healthcare, finance, supply chain, product experiments, search, research,
+  education, and creative production. The packages expose 89 typed recipes,
+  127 profiler features, 118 metrics, 55 quality gates, transparent nomination,
+  bounded artifact-kind composition, exact catalog references, and
+  declare-before-load discovery.
+- Eleven additional frontier semantic templates with 189 atomic obligations,
+  plus seven five-stage executable fixtures with 70 source-bound nodes and an
+  independently rejected shortcut route for each domain.
 
 ## Phase 1 — compiler and registry discovery (foundation implemented)
 

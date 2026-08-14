@@ -7,7 +7,7 @@
 [![Status: developer preview](https://img.shields.io/badge/status-developer%20preview-orange)](READINESS.md)
 [![Kaggle](https://img.shields.io/badge/Kaggle-live%20demo-20BEFF?logo=kaggle)](https://www.kaggle.com/code/taylorsamarel/browsergraph-composable-browser-automation)
 
-Version 0.7 is a working developer preview of a different way to build software:
+Version 0.8 is a working developer preview of a different way to build software:
 compile each task into an ordered graph search space, expose every compatible
 implementation for every atomic substep, and learn which complete route best
 satisfies the task's quality, speed, cost, reliability, and policy objectives.
@@ -25,6 +25,7 @@ cd universal-node-graph-flexible-solutioning
 python -m pip install -e .
 solutiongraph doctor
 python examples/specialized_package_workflow.py
+python examples/frontier_domain_showcase.py
 solutiongraph packages list
 solutiongraph packages recommend \
   "Validate and enrich company records, then train and deploy a model" \
@@ -58,11 +59,13 @@ Read [the universal-engineering guide](UNIVERSAL_ENGINEERING_SYSTEM.md) for
 fingerprints, coverage gates, standards projections, runtime payload
 validation, and horizontal/vertical extension rules.
 
-The specialized-package commands expose seven focused product surfaces for
-data engineering, analysis, data science, ML engineering, LLM engineering,
-software engineering, and operations. Their 32 typed recipes can be ranked for
-a task or composed by exact artifact kind while exposing every package ranking
-and explicit search accounting. They are advisory authoring views—not
+The specialized-package commands expose 26 focused, composable product
+surfaces: seven practice foundations plus LLM evaluation/safety, cyber,
+privacy, documents, media, 3D, games, geospatial/time, robotics, digital twins,
+IoT, healthcare, finance, supply chain, product experimentation, search,
+knowledge/research, education, and creative production. Their 89 typed recipes
+can be ranked for a task or composed by exact artifact kind while exposing
+every package ranking and explicit search accounting. They are advisory authoring views—not
 executable closure—so
 ordinary node admission, compilation, permissions, independent verification,
 and solution-pack rules still apply. Read the
@@ -106,7 +109,10 @@ discovery, sparse descriptions and exact embedding spaces, closed-world
 registry snapshots, reusable semantic templates, complete admission, frozen
 plans, prior/beam/sprout/exhaustive search, adaptive resource allocation,
 immutable evidence, Pareto ranking, and observational prior learning. Version
-0.7 adds extraction-ready specialized package definitions, transparent package
+0.8 expands that layer to 26 specialized packages, 42 templates, 63 Arena
+families, and seven executable frontier-domain fixtures for defensive cyber,
+video, 3D, games, robotics, IoT, and digital-twin validation. Version 0.7 added
+extraction-ready specialized package definitions, transparent package
 recommendation, typed cross-package recipe composition, and declare-before-load
 provider discovery. It builds on the 0.6 task-contract and portable
 solution-pack layer, a source-bound Python node-authoring SDK, a dependency-free
@@ -130,8 +136,8 @@ registry admission, explicit multi-round search, plan freezing, receipt-backed
 experiments, observational belief updates, hard acceptance/objective gates,
 Pareto reporting, champion selection, and separately benchmarked diverse
 fallback routes. The [Universal DAG Arena](UNIVERSAL_DAG_ARENA.md) catalogues
-52 cross-domain problem families. Thirty-six families map to 40 executable local
-programs; twelve more are strict semantic templates and four require
+63 cross-domain problem families. Forty-five families map to 49 executable local
+programs; fourteen more are strict semantic templates and four require
 credentialed external connectors.
 
 The task-intelligence layer adds an open, multi-label DAG taxonomy,
@@ -244,8 +250,8 @@ is not mixed into the execution path as another step.
 | Source-bound Python authoring | Callable signature validation, source-derived implementation digests, stable candidate bindings, and exact finite candidate expansion |
 | Reusable standard library | 19 dependency-free text/data nodes, 32 exact bindings, discovery sidecars, and a portable node pack built through the public authoring SDK |
 | Portable task and solution packs | Stable task meaning, case/oracle identity, exact program/registry/node-pack closure, fixed baselines, and benchmark-suite digests |
-| Specialized capability packages | Seven extraction-ready vertical packages, 32 typed recipes, 51 profiler features, 42 metrics, 17 quality gates, transparent recommendation, bounded typed composition, and declare-before-load provider discovery |
-| Cross-domain templates | 31 checked-in templates containing 544 atomic obligations across data, ML, documents, web, media, services, operations, security, business, science, knowledge, claims, fraud, compliance, geospatial, audio, supply chain, scheduling, migration, SRE, and moderation |
+| Specialized capability packages | 26 extraction-ready practice, modality, assurance, cyber-physical, and mission packages with 89 typed recipes, 127 profiler features, 118 metrics, 55 quality gates, transparent recommendation, bounded typed composition, and declare-before-load provider discovery |
+| Cross-domain templates | 42 checked-in templates containing 733 atomic obligations across data, ML, LLM evaluation, documents, web, image/audio/video, 3D, games, services, operations, security, privacy, business, science, digital twins, robotics, IoT, healthcare, finance, geospatial/time, supply chain, product experimentation, education, creative work, and moderation |
 | Domain-neutral compilation | Strict slots, ports, effects, permissions, full snapshot admission, diagnostics, and content-addressed frozen plans |
 | Universal engineering model | 14 reusable obligations, 13 domain packs, 42 all-visible questions, E1–E10 authority-aware planning, ten fingerprint channels, and evidence-derived C0–C7 coverage |
 | Standards projections | Side-effect-free OpenAPI 3.0–3.2, CloudEvents 1.0, and structural BPMN 2.0/2.0.2 projections with explicit limitations |
@@ -265,9 +271,10 @@ is not mixed into the execution path as another step.
 | Paired experiment studies | Immutable-receipt pairing, deterministic bootstrap intervals, practical-effect and acceptance gates, unmatched-evidence accounting, and promote/reject/continue recommendations |
 | Linked evaluation harnesses | Exact scenario, solution, development-evaluation, improvement, promotion, and sealed outer-evaluation graph identities plus typed judgments, panels, failure clusters, sanitized outer summaries, human approvals, and feedback firewalls |
 | Semantic data interrogation | 46 versioned concepts, 11 question packs, 86 visible questions, 43 deterministic checks, effort/permission planning, reversible shadow repair, independent verification, observational utility memory, and redacted JSON/Markdown/HTML reports |
-| Universal DAG Arena | 52 task families, 36 executable fixture families, 12 additional template families, four credentialed-connector families, and 40 runnable programs |
+| Universal DAG Arena | 63 task families, 45 executable fixture families, 14 additional template families, four credentialed-connector families, and 49 Arena-linked runnable programs |
 | Engineering showcase pack | Thirteen additional executable fixtures and 154 source-bound nodes covering data contracts, event-time windows, GIS boundaries, APIs, frontend release gates, document rendering, geotemporal enrichment, user journeys, synthetic data, grounded documents, reinforcement learning, and DueCare-style evaluation/red teaming |
 | Data-science lifecycle pack | Ten executable six-stage fixtures, 60 source-bound nodes, 180 exact candidates, 729 admitted routes per graph, and accepted robust, alternate, and hybrid paths across profiling, feature engineering, modeling, evaluation, explainability, ensembling, and MLOps |
+| Frontier-domain pack | Seven executable five-stage fixtures, 70 source-bound nodes, two admitted strategies per slot, independent negative controls, and isolated subprocess coverage across defensive cyber, video, 3D, games, robotics, IoT, and digital twins |
 | Reproducible benchmark arena | Six solution packs, 24 immutable cases, fixed controls, quick/balanced solver arms, holdouts, explicit claim scopes, JSON evidence, and self-contained HTML reports |
 | External benchmark manifests | Claim-safe, side-effect-free profiles for Kaggle, MLE-bench, SkillsBench, SWE-bench, BrowserGym, and DueCare-style harnesses with exact source/version/limitation closure |
 | LLM coding-agent A/B arena | Ten task families, compatible harness/model matrices, identical prompts, isolated SolutionGraph context intervention, sealed-case scoring, counterbalanced paired cells, hash-chained trial receipts, bootstrap effects, diagrams, and conservative selection/promotion gates |
@@ -279,7 +286,7 @@ is not mixed into the execution path as another step.
 | Streaming and effects | Finite event-time windows, watermarks, late-data/retraction receipts, plus reference saga compensation for effectful nodes |
 | Interoperable provenance | Machine-readable W3C PROV, OpenLineage, and in-toto/SLSA provenance projections from one run receipt |
 | Harness onboarding | Transactional `solutiongraph init` workspace generation from any bundled semantic template |
-| Executable domain skeleton | 47 dependency-free programs spanning web, documents, images, data, ML, identity, reconciliation, privacy, operations, security, science, recommendation, numerical computing, streaming, GIS, APIs, frontend release gates, document rendering, synthetic data, reinforcement learning, MLOps, and LLM harnesses using 379 executable nodes |
+| Executable domain skeleton | 54 dependency-free programs spanning web, documents, image/audio/video, 3D, games, data, ML, identity, reconciliation, privacy, operations, defensive security, science, digital twins, robotics, IoT, recommendation, numerical computing, streaming, GIS, APIs, frontend release gates, synthetic data, reinforcement learning, MLOps, and LLM harnesses using 449 executable nodes |
 | Cross-agent adoption | Canonical `AGENTS.md`, Claude/Gemini/Copilot adapters, `llms.txt`, and twelve focused workspace Agent Skills |
 | Real runtime proof | BrowserGraph executes the same node graph across deterministic, browser, HTTP, model, and mock adapters |
 
@@ -310,7 +317,7 @@ plan = Compiler().compile(
 print(plan.digest, report.evaluation_coverage)
 ```
 
-## Solve and execute 47 framework programs
+## Solve and execute 54 framework programs
 
 The examples use small standard-library implementations so the complete
 compile → execute → verify → receipt path runs from a fresh checkout. They are
@@ -330,9 +337,9 @@ solutiongraph verify --catalog-root catalog --runtime subprocess
 ```
 
 Every task has multiple frozen routes and every important slot exposes its full
-admitted candidate column. Forty-four declared controls are intentionally rejected
+admitted candidate column. Fifty-one declared controls are intentionally rejected
 by independent oracles, preserving negative evidence while alternative routes
-pass across 120 declared routes. The address examples use explicit offline
+pass across 134 declared routes. The address examples use explicit offline
 reference fixtures and never claim that a fixture is an official USPS
 response. Persist artifacts with:
 
@@ -442,8 +449,8 @@ finite parameters into visible candidate bindings.
 The [solution template protocol](SOLUTION_TEMPLATE_PROTOCOL.md) standardizes
 macro-stage submatrices, atomic semantic slots, safe pass-through candidates,
 and bounded refinement loops. The generated [catalogue](catalog/) currently
-contains 31 cross-domain templates, 544 atomic obligations, six portable node
-packs, 52 Arena task contracts, six portable solution packs, 24 benchmark cases,
+contains 42 cross-domain templates, 733 atomic obligations, nine portable node
+packs, 63 Arena task contracts, six portable solution packs, 24 benchmark cases,
 six benchmark suites, one strict linked-graph harness bundle, and one typed
 harness-evidence example, plus ten digest-only coding-agent task contracts and
 two agent-benchmark suites. Sealed evaluator payloads are not catalogued.
@@ -479,7 +486,7 @@ modern browser. No server, account, CDN, or build step is required.
 | Explorer | Purpose |
 |---|---|
 | [Universal DAG explorer](examples/universal-dag-explorer.html) | Strictly left-to-right nested submatrices, every node in every atomic step, structured-control semantics, route overlays, contracts, filters, and feedback |
-| [Template and node catalogue](examples/catalog-template-explorer.html) | 31 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and six reference node packs |
+| [Template and node catalogue](examples/catalog-template-explorer.html) | 42 cross-domain templates, atomic slots by submatrix, registry handshake boundary, and nine reference node packs |
 | [Benchmark evidence report](examples/universal-dag-benchmark-report.html) | Fixed controls and bounded solver policies, left-to-right champion routes, holdout state, route coverage, and complete embedded evidence |
 | [Full solution studio](examples/universal-graph-workbench.html) | All candidates, route rows, exhaustive adjacent network, comparison, builder, and feedback views |
 | [Compact hierarchical explorer](examples/universal-node-graph-workbench.html) | Select one macro-stage submatrix at a time and see all of its substeps, node families, bindings, and route lines |

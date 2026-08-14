@@ -50,7 +50,7 @@ def test_arena_is_valid_cross_domain_and_honest_about_external_authorities():
 def test_every_arena_executable_points_to_a_real_typed_example():
     examples = {example.id: example for example in all_examples()}
     executable_tasks = UNIVERSAL_DAG_ARENA.matching(readiness="executable_fixture")
-    assert len(executable_tasks) == 36
+    assert len(executable_tasks) == 45
     for task in executable_tasks:
         for example_id in task.executable_example_ids:
             example = examples[example_id]

@@ -1,0 +1,979 @@
+{
+  "description": "A system-identity, data assimilation, calibration, simulation, validation, and decision scaffold.",
+  "domains": [
+    "simulation.digital-twin",
+    "science.modeling"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.digital-twin-simulation",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "identify_system",
+        "target_port": "state",
+        "target_slot": "define_model_claim"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_model_claim",
+        "target_port": "state",
+        "target_slot": "define_validation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_validation",
+        "target_port": "state",
+        "target_slot": "ingest_observations"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ingest_observations",
+        "target_port": "state",
+        "target_slot": "reconcile_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_state",
+        "target_port": "state",
+        "target_slot": "estimate_parameters"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_parameters",
+        "target_port": "state",
+        "target_slot": "generate_scenarios"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_scenarios",
+        "target_port": "state",
+        "target_slot": "execute_simulation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "execute_simulation",
+        "target_port": "state",
+        "target_slot": "quantify_uncertainty"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "quantify_uncertainty",
+        "target_port": "state",
+        "target_slot": "analyze_sensitivity"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "analyze_sensitivity",
+        "target_port": "state",
+        "target_slot": "compare_observations"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "compare_observations",
+        "target_port": "state",
+        "target_slot": "diagnose_residuals"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "diagnose_residuals",
+        "target_port": "state",
+        "target_slot": "bound_applicability"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "bound_applicability",
+        "target_port": "state",
+        "target_slot": "compare_interventions"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "compare_interventions",
+        "target_port": "state",
+        "target_slot": "require_decision_review"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "require_decision_review",
+        "target_port": "state",
+        "target_slot": "publish_twin_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.digital-twin-simulation",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "identify_system",
+        "type": {
+          "id": "template.digital-twin-simulation.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_twin_receipt",
+        "type": {
+          "id": "template.digital-twin-simulation.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scope"
+        ],
+        "id": "identify_system",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify assets, boundaries, topology, versions, operating modes, and ownership.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.identify_system.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify assets, boundaries, topology, versions, operating modes, and ownership and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scope"
+        ],
+        "id": "define_model_claim",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define which observables and decisions the twin is permitted to represent.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.define_model_claim.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define which observables and decisions the twin is permitted to represent and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scope"
+        ],
+        "id": "define_validation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define calibration, validation, extrapolation, uncertainty, and decision oracles.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.define_validation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define calibration, validation, extrapolation, uncertainty, and decision oracles and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assimilate"
+        ],
+        "id": "ingest_observations",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Ingest aligned sensor, event, maintenance, and environmental observations.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.ingest_observations.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Ingest aligned sensor, event, maintenance, and environmental observations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assimilate"
+        ],
+        "id": "reconcile_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve conflicting observations, missingness, latency, and uncertainty.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.reconcile_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve conflicting observations, missingness, latency, and uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assimilate"
+        ],
+        "id": "estimate_parameters",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate model parameters on calibration-only evidence.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.estimate_parameters.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate model parameters on calibration-only evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "generate_scenarios",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate nominal, stress, intervention, and counterfactual scenarios.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.generate_scenarios.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate nominal, stress, intervention, and counterfactual scenarios and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "execute_simulation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute the exact model and solver under recorded initial and boundary conditions.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.execute_simulation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute the exact model and solver under recorded initial and boundary conditions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "quantify_uncertainty",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Propagate parameter, measurement, structural, and stochastic uncertainty.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.quantify_uncertainty.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Propagate parameter, measurement, structural, and stochastic uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "analyze_sensitivity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure output sensitivity and identify fragile assumptions.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.analyze_sensitivity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure output sensitivity and identify fragile assumptions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.validate"
+        ],
+        "id": "compare_observations",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare untouched observations with simulated values across regimes and slices.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.compare_observations.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare untouched observations with simulated values across regimes and slices and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.validate"
+        ],
+        "id": "diagnose_residuals",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Diagnose bias, drift, autocorrelation, regime failure, and unmodeled effects.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.diagnose_residuals.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Diagnose bias, drift, autocorrelation, regime failure, and unmodeled effects and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.validate"
+        ],
+        "id": "bound_applicability",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Declare validated regions, abstention conditions, and extrapolation limits.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.bound_applicability.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Declare validated regions, abstention conditions, and extrapolation limits and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "compare_interventions",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare eligible interventions across outcomes, uncertainty, cost, and risk.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.compare_interventions.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare eligible interventions across outcomes, uncertainty, cost, and risk and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "require_decision_review",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Require accountable review for consequential recommendations.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.require_decision_review.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Require accountable review for consequential recommendations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.decide"
+        ],
+        "id": "publish_twin_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.digital-twin-simulation.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish data, model, calibration, scenarios, validation, recommendation, and limitations.",
+        "required_capabilities": [
+          "template.digital-twin-simulation.publish_twin_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish data, model, calibration, scenarios, validation, recommendation, and limitations and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Digital twin calibration and decision support obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.digital-twin-simulation.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.digital-twin-simulation.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Bind the real system and model claim.",
+      "extensions": {},
+      "id": "stage.scope",
+      "slot_ids": [
+        "identify_system",
+        "define_model_claim",
+        "define_validation"
+      ],
+      "title": "Scope"
+    },
+    {
+      "description": "Create a trustworthy state estimate.",
+      "extensions": {},
+      "id": "stage.assimilate",
+      "slot_ids": [
+        "ingest_observations",
+        "reconcile_state",
+        "estimate_parameters"
+      ],
+      "title": "Assimilate"
+    },
+    {
+      "description": "Run declared scenarios and alternatives.",
+      "extensions": {},
+      "id": "stage.simulate",
+      "slot_ids": [
+        "generate_scenarios",
+        "execute_simulation",
+        "quantify_uncertainty",
+        "analyze_sensitivity"
+      ],
+      "title": "Simulate"
+    },
+    {
+      "description": "Test fidelity and decision usefulness.",
+      "extensions": {},
+      "id": "stage.validate",
+      "slot_ids": [
+        "compare_observations",
+        "diagnose_residuals",
+        "bound_applicability"
+      ],
+      "title": "Validate"
+    },
+    {
+      "description": "Use the twin without overstating authority.",
+      "extensions": {},
+      "id": "stage.decide",
+      "slot_ids": [
+        "compare_interventions",
+        "require_decision_review",
+        "publish_twin_receipt"
+      ],
+      "title": "Decide"
+    }
+  ],
+  "tags": [
+    "digital-twin",
+    "simulation",
+    "calibration",
+    "sensitivity"
+  ],
+  "template_model_version": "0.1",
+  "title": "Digital twin calibration and decision support",
+  "version": "1.0.0"
+}

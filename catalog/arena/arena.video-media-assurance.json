@@ -1,0 +1,39 @@
+{
+  "acceptance_signals": [
+    "integrity",
+    "dropped frames",
+    "A/V sync",
+    "caption timing",
+    "quality",
+    "rights"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "video-media-assurance"
+  ],
+  "external_requirements": [
+    "The bundled fixture validates timeline metadata only. Real codecs, perceptual quality, and delivery variants require a media runtime adapter."
+  ],
+  "id": "arena.video-media-assurance",
+  "input_contract": "Captured media metadata or bytes, caption tracks, rights context, and quality policy.",
+  "output_contract": "Timeline, synchronization, caption, integrity, policy, and provenance report.",
+  "problem": "Probe streams, normalize timelines, align modalities, verify captions, and publish bounded media evidence.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "ingest",
+    "probe",
+    "timeline",
+    "align",
+    "captions",
+    "assure",
+    "publish"
+  ],
+  "tags": [
+    "video",
+    "audio",
+    "captions",
+    "media-assurance"
+  ],
+  "template_id": "template.video-media-pipeline",
+  "title": "Video and audio assets to an assurance report"
+}

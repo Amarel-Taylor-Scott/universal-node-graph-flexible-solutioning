@@ -1,0 +1,1033 @@
+{
+  "description": "A device contract, firmware, telemetry, state, command, assurance, and fleet-operations scaffold.",
+  "domains": [
+    "software.embedded",
+    "systems.iot"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.embedded-iot-system",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_device_identity",
+        "target_port": "state",
+        "target_slot": "define_telemetry_contract"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_telemetry_contract",
+        "target_port": "state",
+        "target_slot": "define_command_authority"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_command_authority",
+        "target_port": "state",
+        "target_slot": "build_firmware"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_firmware",
+        "target_port": "state",
+        "target_slot": "static_firmware_checks"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "static_firmware_checks",
+        "target_port": "state",
+        "target_slot": "hardware_fixture_tests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "hardware_fixture_tests",
+        "target_port": "state",
+        "target_slot": "authenticate_events"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authenticate_events",
+        "target_port": "state",
+        "target_slot": "normalize_events"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_events",
+        "target_port": "state",
+        "target_slot": "derive_device_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "derive_device_state",
+        "target_port": "state",
+        "target_slot": "detect_fleet_anomalies"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_fleet_anomalies",
+        "target_port": "state",
+        "target_slot": "plan_command"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "plan_command",
+        "target_port": "state",
+        "target_slot": "authorize_command"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "authorize_command",
+        "target_port": "state",
+        "target_slot": "execute_command"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "execute_command",
+        "target_port": "state",
+        "target_slot": "verify_command"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_command",
+        "target_port": "state",
+        "target_slot": "stage_firmware_release"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "stage_firmware_release",
+        "target_port": "state",
+        "target_slot": "monitor_fleet"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "monitor_fleet",
+        "target_port": "state",
+        "target_slot": "retire_device"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.embedded-iot-system",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_device_identity",
+        "type": {
+          "id": "template.embedded-iot-system.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "retire_device",
+        "type": {
+          "id": "template.embedded-iot-system.state-17",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_device_identity",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define hardware, firmware, keys, capabilities, ownership, and lifecycle identity.",
+        "required_capabilities": [
+          "template.embedded-iot-system.define_device_identity.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define hardware, firmware, keys, capabilities, ownership, and lifecycle identity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_telemetry_contract",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define event schemas, time semantics, units, frequency, retention, and privacy.",
+        "required_capabilities": [
+          "template.embedded-iot-system.define_telemetry_contract.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define event schemas, time semantics, units, frequency, retention, and privacy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_command_authority",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define command authentication, authorization, idempotency, safety, and expiry.",
+        "required_capabilities": [
+          "template.embedded-iot-system.define_command_authority.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define command authentication, authorization, idempotency, safety, and expiry and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.firmware"
+        ],
+        "id": "build_firmware",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build exact target binaries with dependency, compiler, configuration, and provenance identity.",
+        "required_capabilities": [
+          "template.embedded-iot-system.build_firmware.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build exact target binaries with dependency, compiler, configuration, and provenance identity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.firmware"
+        ],
+        "id": "static_firmware_checks",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Check memory, interfaces, unsafe operations, secrets, and supply-chain policy.",
+        "required_capabilities": [
+          "template.embedded-iot-system.static_firmware_checks.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Check memory, interfaces, unsafe operations, secrets, and supply-chain policy and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.firmware"
+        ],
+        "id": "hardware_fixture_tests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run deterministic host, emulator, or hardware-in-loop fixtures under an honest boundary.",
+        "required_capabilities": [
+          "template.embedded-iot-system.hardware_fixture_tests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run deterministic host, emulator, or hardware-in-loop fixtures under an honest boundary and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.telemetry"
+        ],
+        "id": "authenticate_events",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Authenticate device identity, integrity, sequence, and replay state.",
+        "required_capabilities": [
+          "template.embedded-iot-system.authenticate_events.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Authenticate device identity, integrity, sequence, and replay state and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.telemetry"
+        ],
+        "id": "normalize_events",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize schemas, units, event time, and firmware-version context.",
+        "required_capabilities": [
+          "template.embedded-iot-system.normalize_events.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize schemas, units, event time, and firmware-version context and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.telemetry"
+        ],
+        "id": "derive_device_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Derive current state, health, connectivity, and uncertainty.",
+        "required_capabilities": [
+          "template.embedded-iot-system.derive_device_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Derive current state, health, connectivity, and uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.telemetry"
+        ],
+        "id": "detect_fleet_anomalies",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect device, cohort, location, version, and fleet anomalies.",
+        "required_capabilities": [
+          "template.embedded-iot-system.detect_fleet_anomalies.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect device, cohort, location, version, and fleet anomalies and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.command"
+        ],
+        "id": "plan_command",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Create a target, precondition, expiry, rollout, and rollback-bound command plan.",
+        "required_capabilities": [
+          "template.embedded-iot-system.plan_command.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Create a target, precondition, expiry, rollout, and rollback-bound command plan and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.command"
+        ],
+        "id": "authorize_command",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply least privilege and accountable approval to physical or fleet effects.",
+        "required_capabilities": [
+          "template.embedded-iot-system.authorize_command.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply least privilege and accountable approval to physical or fleet effects and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.command"
+        ],
+        "id": "execute_command",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute idempotently through an authenticated delivery adapter.",
+        "required_capabilities": [
+          "template.embedded-iot-system.execute_command.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute idempotently through an authenticated delivery adapter and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.command"
+        ],
+        "id": "verify_command",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify acknowledgement, resulting state, partial failures, and rollback readiness.",
+        "required_capabilities": [
+          "template.embedded-iot-system.verify_command.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify acknowledgement, resulting state, partial failures, and rollback readiness and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.operate"
+        ],
+        "id": "stage_firmware_release",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Roll out through canary cohorts with compatibility and recovery gates.",
+        "required_capabilities": [
+          "template.embedded-iot-system.stage_firmware_release.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Roll out through canary cohorts with compatibility and recovery gates and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.operate"
+        ],
+        "id": "monitor_fleet",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Monitor health, security, energy, connectivity, drift, and support impact.",
+        "required_capabilities": [
+          "template.embedded-iot-system.monitor_fleet.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Monitor health, security, energy, connectivity, drift, and support impact and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.operate"
+        ],
+        "id": "retire_device",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.embedded-iot-system.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Revoke authority, erase governed data, and preserve lifecycle evidence.",
+        "required_capabilities": [
+          "template.embedded-iot-system.retire_device.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Revoke authority, erase governed data, and preserve lifecycle evidence and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Embedded and IoT telemetry system obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.embedded-iot-system.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.embedded-iot-system.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define device and fleet boundaries.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_device_identity",
+        "define_telemetry_contract",
+        "define_command_authority"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Build and qualify immutable firmware.",
+      "extensions": {},
+      "id": "stage.firmware",
+      "slot_ids": [
+        "build_firmware",
+        "static_firmware_checks",
+        "hardware_fixture_tests"
+      ],
+      "title": "Firmware"
+    },
+    {
+      "description": "Ingest and reconcile fleet observations.",
+      "extensions": {},
+      "id": "stage.telemetry",
+      "slot_ids": [
+        "authenticate_events",
+        "normalize_events",
+        "derive_device_state",
+        "detect_fleet_anomalies"
+      ],
+      "title": "Telemetry"
+    },
+    {
+      "description": "Execute bounded remote actions.",
+      "extensions": {},
+      "id": "stage.command",
+      "slot_ids": [
+        "plan_command",
+        "authorize_command",
+        "execute_command",
+        "verify_command"
+      ],
+      "title": "Command"
+    },
+    {
+      "description": "Release and maintain the fleet safely.",
+      "extensions": {},
+      "id": "stage.operate",
+      "slot_ids": [
+        "stage_firmware_release",
+        "monitor_fleet",
+        "retire_device"
+      ],
+      "title": "Operate"
+    }
+  ],
+  "tags": [
+    "embedded",
+    "iot",
+    "telemetry",
+    "firmware",
+    "device-security"
+  ],
+  "template_model_version": "0.1",
+  "title": "Embedded and IoT telemetry system",
+  "version": "1.0.0"
+}

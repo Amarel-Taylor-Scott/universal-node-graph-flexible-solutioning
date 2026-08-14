@@ -41,6 +41,10 @@ from solutiongraph.examples.extended_tasks import (
     EXTENDED_NODES,
     EXTENDED_REGISTRY,
 )
+from solutiongraph.examples.frontier_tasks import (
+    FRONTIER_NODES,
+    FRONTIER_REGISTRY,
+)
 from solutiongraph.examples.showcase_tasks import (
     DUECARE_HARNESS_BUNDLE,
     DUECARE_HARNESS_EVIDENCE,
@@ -60,6 +64,7 @@ from solutiongraph.pack_library import (
     DATA_SCIENCE_LIFECYCLE_NODE_PACK,
     ENGINEERING_SHOWCASE_NODE_PACK,
     EXTENDED_ARENA_NODE_PACK,
+    FRONTIER_DOMAIN_NODE_PACK,
     REAL_WORLD_EXAMPLE_NODE_PACK,
     REFERENCE_CORE_NODE_PACK,
 )
@@ -272,6 +277,29 @@ def data_science_registry_capabilities() -> RegistryCapabilities:
     )
 
 
+def frontier_registry_capabilities() -> RegistryCapabilities:
+    """Advertise exact lookup and enumeration for frontier-domain fixtures."""
+    return RegistryCapabilities(
+        registry_id=FRONTIER_REGISTRY.id,
+        registry_version=FRONTIER_REGISTRY.version,
+        registry_digest=FRONTIER_REGISTRY.digest,
+        protocol_versions=("0.1",),
+        schemas=(
+            SchemaSupport("node-spec", ("0.2",)),
+            SchemaSupport("node-pack", ("0.1",)),
+        ),
+        query_modes=(
+            QueryMode("exact", fields=("node_id", "node_spec_digest")),
+            QueryMode("enumeration", supports_cursor=True),
+        ),
+        supports_enumeration=True,
+        supports_snapshots=True,
+        supports_continuation=True,
+        max_page_size=1000,
+        extensions=(("example.maturity", "frontier-mechanism-fixture"),),
+    )
+
+
 def interrogation_registry_capabilities() -> RegistryCapabilities:
     """Advertise strict and lexical discovery for interrogation stages."""
     return RegistryCapabilities(
@@ -361,6 +389,7 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
     stdlib_capabilities = standard_library_registry_capabilities()
     showcase_capabilities = showcase_registry_capabilities()
     data_science_capabilities = data_science_registry_capabilities()
+    frontier_capabilities = frontier_registry_capabilities()
     interrogation_capabilities = interrogation_registry_capabilities()
     design_atlas_capabilities = design_atlas_registry_capabilities()
     documents: dict[str, dict[str, Any]] = {
@@ -391,6 +420,11 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         "nodepacks/data-science-lifecycle/registry.json": DATA_SCIENCE_REGISTRY.to_dict(),
         "nodepacks/data-science-lifecycle/registry-capabilities.json": (
             data_science_capabilities.to_dict()
+        ),
+        "nodepacks/frontier-domains/manifest.json": FRONTIER_DOMAIN_NODE_PACK.to_dict(),
+        "nodepacks/frontier-domains/registry.json": FRONTIER_REGISTRY.to_dict(),
+        "nodepacks/frontier-domains/registry-capabilities.json": (
+            frontier_capabilities.to_dict()
         ),
         "nodepacks/semantic-interrogation/manifest.json": INTERROGATION_NODE_PACK.to_dict(),
         "nodepacks/semantic-interrogation/registry.json": INTERROGATION_REGISTRY.to_dict(),
@@ -532,6 +566,8 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
         documents[f"nodepacks/engineering-showcases/nodes/{node.id}.json"] = node.to_dict()
     for node in DATA_SCIENCE_NODES:
         documents[f"nodepacks/data-science-lifecycle/nodes/{node.id}.json"] = node.to_dict()
+    for node in FRONTIER_NODES:
+        documents[f"nodepacks/frontier-domains/nodes/{node.id}.json"] = node.to_dict()
     for node in INTERROGATION_NODE_SPECS:
         documents[f"nodepacks/semantic-interrogation/nodes/{node.id}.json"] = node.to_dict()
     for descriptor in INTERROGATION_DESCRIPTORS:
@@ -704,6 +740,15 @@ def catalog_documents() -> dict[str, dict[str, Any]]:
                 "digest": DATA_SCIENCE_LIFECYCLE_NODE_PACK.digest,
                 "path": "nodepacks/data-science-lifecycle/manifest.json",
                 "node_count": len(DATA_SCIENCE_NODES),
+                "descriptor_count": 0,
+                "embedding_record_count": 0,
+            },
+            {
+                "id": FRONTIER_DOMAIN_NODE_PACK.id,
+                "version": FRONTIER_DOMAIN_NODE_PACK.version,
+                "digest": FRONTIER_DOMAIN_NODE_PACK.digest,
+                "path": "nodepacks/frontier-domains/manifest.json",
+                "node_count": len(FRONTIER_NODES),
                 "descriptor_count": 0,
                 "embedding_record_count": 0,
             },

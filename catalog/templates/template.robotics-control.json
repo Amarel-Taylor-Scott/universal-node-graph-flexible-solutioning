@@ -1,0 +1,980 @@
+{
+  "description": "A model, perception, planning, simulation, safety, deployment, and monitoring scaffold.",
+  "domains": [
+    "robotics.control",
+    "simulation.physical"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.robotics-control",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_robot_model",
+        "target_port": "state",
+        "target_slot": "define_environment"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_environment",
+        "target_port": "state",
+        "target_slot": "define_safety_envelope"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_safety_envelope",
+        "target_port": "state",
+        "target_slot": "ingest_sensors"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "ingest_sensors",
+        "target_port": "state",
+        "target_slot": "estimate_state"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "estimate_state",
+        "target_port": "state",
+        "target_slot": "detect_hazards"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "detect_hazards",
+        "target_port": "state",
+        "target_slot": "generate_plans"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_plans",
+        "target_port": "state",
+        "target_slot": "check_feasibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "check_feasibility",
+        "target_port": "state",
+        "target_slot": "select_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "select_plan",
+        "target_port": "state",
+        "target_slot": "simulate_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "simulate_plan",
+        "target_port": "state",
+        "target_slot": "verify_safety"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_safety",
+        "target_port": "state",
+        "target_slot": "approve_execution"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "approve_execution",
+        "target_port": "state",
+        "target_slot": "execute_plan"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "execute_plan",
+        "target_port": "state",
+        "target_slot": "monitor_execution"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "monitor_execution",
+        "target_port": "state",
+        "target_slot": "recover_safely"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "recover_safely",
+        "target_port": "state",
+        "target_slot": "publish_run_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.robotics-control",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_robot_model",
+        "type": {
+          "id": "template.robotics-control.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_run_receipt",
+        "type": {
+          "id": "template.robotics-control.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_robot_model",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define kinematics, dynamics, limits, sensors, actuators, frames, and calibration.",
+        "required_capabilities": [
+          "template.robotics-control.define_robot_model.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define kinematics, dynamics, limits, sensors, actuators, frames, and calibration and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_environment",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define operating domain, obstacles, uncertainty, humans, and prohibited regions.",
+        "required_capabilities": [
+          "template.robotics-control.define_environment.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define operating domain, obstacles, uncertainty, humans, and prohibited regions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_safety_envelope",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define independent collision, force, speed, fail-safe, and human-approval criteria.",
+        "required_capabilities": [
+          "template.robotics-control.define_safety_envelope.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define independent collision, force, speed, fail-safe, and human-approval criteria and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "ingest_sensors",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Ingest synchronized sensor observations with calibration and event-time provenance.",
+        "required_capabilities": [
+          "template.robotics-control.ingest_sensors.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Ingest synchronized sensor observations with calibration and event-time provenance and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "estimate_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Estimate robot and environment state with uncertainty.",
+        "required_capabilities": [
+          "template.robotics-control.estimate_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Estimate robot and environment state with uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.perceive"
+        ],
+        "id": "detect_hazards",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect obstacles, people, degraded sensors, and out-of-distribution conditions.",
+        "required_capabilities": [
+          "template.robotics-control.detect_hazards.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect obstacles, people, degraded sensors, and out-of-distribution conditions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.plan"
+        ],
+        "id": "generate_plans",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate candidate task, motion, and recovery plans.",
+        "required_capabilities": [
+          "template.robotics-control.generate_plans.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate candidate task, motion, and recovery plans and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.plan"
+        ],
+        "id": "check_feasibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Check kinematic, dynamic, collision, timing, energy, and authority constraints.",
+        "required_capabilities": [
+          "template.robotics-control.check_feasibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Check kinematic, dynamic, collision, timing, energy, and authority constraints and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.plan"
+        ],
+        "id": "select_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Select an eligible plan across safety, quality, robustness, and resource objectives.",
+        "required_capabilities": [
+          "template.robotics-control.select_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Select an eligible plan across safety, quality, robustness, and resource objectives and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.validate"
+        ],
+        "id": "simulate_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Simulate nominal, perturbation, sensor-failure, and interruption scenarios.",
+        "required_capabilities": [
+          "template.robotics-control.simulate_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Simulate nominal, perturbation, sensor-failure, and interruption scenarios and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.validate"
+        ],
+        "id": "verify_safety",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply an independent safety monitor or formally bounded property check where available.",
+        "required_capabilities": [
+          "template.robotics-control.verify_safety.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply an independent safety monitor or formally bounded property check where available and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.validate"
+        ],
+        "id": "approve_execution",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Require declared human or system approval for consequential physical effects.",
+        "required_capabilities": [
+          "template.robotics-control.approve_execution.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Require declared human or system approval for consequential physical effects and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "execute_plan",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Execute through a bounded controller with emergency-stop and idempotency semantics.",
+        "required_capabilities": [
+          "template.robotics-control.execute_plan.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Execute through a bounded controller with emergency-stop and idempotency semantics and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "monitor_execution",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Monitor state divergence, hazards, limits, progress, and stop conditions.",
+        "required_capabilities": [
+          "template.robotics-control.monitor_execution.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Monitor state divergence, hazards, limits, progress, and stop conditions and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "recover_safely",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Enter a verified safe state or bounded recovery behavior after failure.",
+        "required_capabilities": [
+          "template.robotics-control.recover_safely.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Enter a verified safe state or bounded recovery behavior after failure and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "publish_run_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.robotics-control.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish model, plan, simulation, approvals, telemetry, interventions, and outcomes.",
+        "required_capabilities": [
+          "template.robotics-control.publish_run_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish model, plan, simulation, approvals, telemetry, interventions, and outcomes and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Robotics planning and control assurance obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.robotics-control.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.robotics-control.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Bound the robot, environment, task, and safety authority.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_robot_model",
+        "define_environment",
+        "define_safety_envelope"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Construct a time-bounded world estimate.",
+      "extensions": {},
+      "id": "stage.perceive",
+      "slot_ids": [
+        "ingest_sensors",
+        "estimate_state",
+        "detect_hazards"
+      ],
+      "title": "Perceive"
+    },
+    {
+      "description": "Produce a feasible bounded action plan.",
+      "extensions": {},
+      "id": "stage.plan",
+      "slot_ids": [
+        "generate_plans",
+        "check_feasibility",
+        "select_plan"
+      ],
+      "title": "Plan"
+    },
+    {
+      "description": "Test the plan before physical effects.",
+      "extensions": {},
+      "id": "stage.validate",
+      "slot_ids": [
+        "simulate_plan",
+        "verify_safety",
+        "approve_execution"
+      ],
+      "title": "Validate"
+    },
+    {
+      "description": "Run through an enforcing controller and preserve evidence.",
+      "extensions": {},
+      "id": "stage.execute",
+      "slot_ids": [
+        "execute_plan",
+        "monitor_execution",
+        "recover_safely",
+        "publish_run_receipt"
+      ],
+      "title": "Execute"
+    }
+  ],
+  "tags": [
+    "robotics",
+    "planning",
+    "control",
+    "safety",
+    "simulation"
+  ],
+  "template_model_version": "0.1",
+  "title": "Robotics planning and control assurance",
+  "version": "1.0.0"
+}

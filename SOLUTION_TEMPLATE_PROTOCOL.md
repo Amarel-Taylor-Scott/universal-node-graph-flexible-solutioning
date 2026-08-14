@@ -94,7 +94,7 @@ it works” loop is invalid.
 
 ## 6. Reference template catalogue
 
-The repository ships 31 deliberately varied templates containing 544 atomic
+The repository ships 42 deliberately varied templates containing 733 atomic
 obligations:
 
 | Template | Atomic slots | What it demonstrates |
@@ -130,6 +130,17 @@ obligations:
 | `template.database-migration` | 18 | inventory, schema/data conversion, CDC, verification, cutover, rollback |
 | `template.observability-sre` | 17 | signals, SLOs, detection, correlation, response, remediation, learning |
 | `template.content-moderation` | 17 | policy, multimodal detection, context, decision, appeal, monitoring, audit |
+| `template.llm-evaluation-harness` | 22 | suite contracts, SUT execution, deterministic checks, panels, red teaming, sealed evidence, feedback firewall |
+| `template.video-media-pipeline` | 17 | probe, decode, timeline, transforms, quality, encoding, publication |
+| `template.three-d-asset-pipeline` | 16 | ingest, geometry, materials, transforms, optimization, rendering, packaging |
+| `template.game-build-playtest` | 19 | content/build contracts, deterministic simulation, playtests, performance, balance, release |
+| `template.robotics-control` | 16 | world model, perception, planning, simulation, safety, deployment gates, monitoring |
+| `template.digital-twin-simulation` | 16 | asset binding, calibration, simulation, observed comparison, uncertainty, validity, reporting |
+| `template.embedded-iot-system` | 17 | device identity, firmware, telemetry, command safety, fleet rollout, observability |
+| `template.healthcare-evidence` | 16 | cohort, terminology, provenance, bias, clinical validation, human authority, monitoring |
+| `template.product-experimentation` | 17 | hypothesis, assignment, instrumentation, guardrails, inference, decision, rollout |
+| `template.education-assessment` | 16 | construct, item design, delivery, scoring, fairness, validity, feedback |
+| `template.creative-content-production` | 17 | brief, rights/provenance, generation, editorial checks, accessibility, publication, measurement |
 
 These are test fixtures for the universal abstraction, not claims that every
 project needs exactly these steps. Their value is that agents can start with a

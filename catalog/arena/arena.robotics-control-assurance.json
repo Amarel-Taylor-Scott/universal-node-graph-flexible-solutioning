@@ -1,0 +1,40 @@
+{
+  "acceptance_signals": [
+    "collision margin",
+    "constraint violations",
+    "state divergence",
+    "stop response",
+    "task success"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [
+    "robotics-safety-simulation"
+  ],
+  "external_requirements": [
+    "The bundled fixture has no physical effects. Real robots require enforcing controllers, device authority, emergency stops, and domain safety validation."
+  ],
+  "id": "arena.robotics-control-assurance",
+  "input_contract": "Robot and environment models, observations, task goal, safety envelope, and physical-effect authority.",
+  "output_contract": "Feasible plan, simulation and safety evidence, approvals, execution telemetry, and recovery receipt.",
+  "problem": "Estimate state, plan, simulate, verify safety, require authority, monitor execution, and recover to a safe state.",
+  "readiness": "executable_fixture",
+  "stage_families": [
+    "model",
+    "perceive",
+    "plan",
+    "feasibility",
+    "simulate",
+    "safety",
+    "approve",
+    "execute",
+    "recover"
+  ],
+  "tags": [
+    "robotics",
+    "control",
+    "safety",
+    "simulation"
+  ],
+  "template_id": "template.robotics-control",
+  "title": "Robot task to a safety-gated execution plan"
+}

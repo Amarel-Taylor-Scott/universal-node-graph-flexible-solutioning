@@ -1,6 +1,6 @@
 # Readiness and support levels
 
-Current release line: **0.7 Developer Preview / external alpha**.
+Current release line: **0.8 Developer Preview / external alpha**.
 
 SolutionGraph is ready for developers and researchers to model typed solution
 spaces, author reusable node contracts, compile frozen routes, execute trusted
@@ -12,7 +12,7 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Surface | Status | Supported use |
 |---|---|---|
 | Semantic model and 105 strict schemas | Alpha-supported | Typed specialized and universal domain packs, package recommendation/composition reports, design contexts/questions/plans, evidence-derived coverage, integration profiles/projections, semantic concepts, dataset profiles, field maps, question packs/plans/findings, design-atlas techniques/questions/packs/archetypes/contexts/plans/answers/answer sets/dossiers/reports/evidence, reversible repair and verification reports, task contracts/cases, coding-agent tasks/suites/trial receipts/reports, task fingerprints, historical memory and update receipts, search initialization, task-solution reports, mutation receipts, paired-study reports, external benchmark bundles, linked harness and evidence bundles, solution packs, benchmark suites/reports, graph experiment reports, graphs, slots, nodes, candidates, registries, plans, receipts, topology families and search reports, checkpoints, streams, sagas, compatibility, multi-fidelity, provenance, and conformance |
-| Specialized capability packages | Alpha-supported as an authoring/discovery layer | Seven extraction-ready vertical packages, 32 typed recipes, 51 profiler features, 42 evaluation metrics, 17 gates, all-visible recommendation, bounded artifact-kind composition, and declare-before-load third-party providers; packages do not grant node compatibility or replace executable solution-pack closure |
+| Specialized capability packages | Alpha-supported as an authoring/discovery layer | 26 extraction-ready packages, 89 typed recipes, 127 profiler features, 118 evaluation metrics, 55 gates, all-visible recommendation, bounded artifact-kind composition, and declare-before-load third-party providers; packages do not grant node compatibility or replace executable solution-pack closure |
 | Universal engineering catalog and planner | Alpha-supported as a reference decision system | Fourteen domain-neutral obligations, 13 domain packs, 42 all-visible questions, ten task-context channels, E1–E10 allocation, and explicit human/model/network authority gates; selection is not an answer or execution grant |
 | Evidence-derived domain coverage | Alpha-supported for checked-in assets | Exact template, example, compiler-route, benchmark, agent-suite, question-pack, adapter, and operational-evidence resolution through contiguous C0–C7 gates; the result is not a production-readiness or domain-superiority score |
 | OpenAPI, CloudEvents, and BPMN projection | Experimental structural authoring seam | Side-effect-free OpenAPI 3.0–3.2 operations, CloudEvents 1.0 event types, and BPMN 2.0/2.0.2 flow dependencies; no remote reference resolution, transport execution, or native BPMN engine semantics |
@@ -36,10 +36,11 @@ yet a turnkey production scheduler or a hostile-code execution service.
 | Benchmark runner and reports | Alpha-supported as mechanism evidence | Six suites, fixed controls, bounded solver arms, common seeds/cases, holdout status, exact coverage, JSON reports, and offline HTML projections |
 | External benchmark manifest adapters | Experimental normalization seam | Strict side-effect-free source manifests for Kaggle, MLE-bench, SkillsBench, SWE-bench, BrowserGym, and DueCare-style evaluations; dataset fetch, credential use, execution, submission, and score certification are explicitly outside the adapter |
 | Coding-agent A/B arena | Alpha-supported as mechanism evidence; external execution experimental | Ten diverse task contracts with public/sealed cases, identical paired prompts, isolated context intervention, explicit harness/model compatibility, counterbalanced allocation, no-shell adapters, deterministic scoring, hash-chained receipts, paired bootstrap effects, JSON/HTML/diagram reports, and a model-free 20-trial smoke; external model quality and uplift are not claimed |
-| Universal DAG Arena | Alpha-supported as a mechanism suite | 52 typed task families, 40 executable programs across 36 fixture families, 12 additional template families, and four credentialed-connector families |
+| Universal DAG Arena | Alpha-supported as a mechanism suite | 63 typed task families, 49 linked executable programs across 45 fixture families, 14 additional template families, and four credentialed-connector families |
 | Engineering showcase pack | Alpha-supported as mechanism fixtures | Thirteen additional executable programs and 154 source-bound nodes covering data contracts, event-time windows, GIS boundaries, APIs, frontend release gates, rendering, geotemporal enrichment, user journeys, synthetic data, grounded documents, reinforcement learning, and LLM evaluation/red teaming |
 | Data-science lifecycle pack | Alpha-supported as mechanism fixtures | Ten six-stage programs, 60 source-bound nodes, three strategies per stage, and independent controls covering profiling, features, supervised/unsupervised learning, temporal/text modeling, explainability, ensembles, monitoring, and rollback |
-| Templates and offline viewers | Alpha-supported | Explore 31 templates, 544 atomic slots, every bundled slot/candidate projection, and a generated benchmark report |
+| Frontier-domain pack | Alpha-supported as mechanism fixtures | Seven five-stage programs, 70 source-bound nodes, a verified reference and disclosed shortcut candidate per slot, and independent controls across defensive cyber, video, 3D, games, robotics, IoT, and digital twins |
+| Templates and offline viewers | Alpha-supported | Explore 42 templates, 733 atomic slots, every bundled slot/candidate projection, and a generated benchmark report |
 | Trusted in-process Python runtime | Development only | Fast fixtures, tests, and notebooks using trusted code |
 | Runtime payload validator registry | Alpha-supported locally | Optional exact schema-digest/media-type validation at graph and node boundaries, stable failure classes, and validator identity in environment receipts; callers supply trusted validator implementations |
 | Parallel local experiment allocation | Alpha-supported locally | Deterministic case/plan/seed/repetition schedules, fresh executor and artifact store per cell, bounded threads, immediate receipt append, and stable final ledger order; not a distributed scheduler |
@@ -128,7 +129,7 @@ configured.
 
 Beta requires at least one enforcing isolated runtime adapter, distributed
 crash-resumable campaign execution, larger mature-library node packs, and
-held-out multi-seed benchmarks on real external tasks. Version 0.7 demonstrates
+held-out multi-seed benchmarks on real external tasks. Version 0.8 demonstrates
 the complete local task → graph → admission → search → execution → evidence →
 belief-update → champion/fallback loop plus structured control and recovery,
 but only on small trusted fixtures.

@@ -1,0 +1,979 @@
+{
+  "description": "A consent, terminology, longitudinal record, model, clinical review, and monitoring scaffold.",
+  "domains": [
+    "healthcare.data",
+    "healthcare.decision-support"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.healthcare-evidence",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_intended_use",
+        "target_port": "state",
+        "target_slot": "verify_consent_authority"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_consent_authority",
+        "target_port": "state",
+        "target_slot": "define_clinical_oracle"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_clinical_oracle",
+        "target_port": "state",
+        "target_slot": "normalize_health_formats"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "normalize_health_formats",
+        "target_port": "state",
+        "target_slot": "map_terminology"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "map_terminology",
+        "target_port": "state",
+        "target_slot": "resolve_patient"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "resolve_patient",
+        "target_port": "state",
+        "target_slot": "reconcile_timeline"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "reconcile_timeline",
+        "target_port": "state",
+        "target_slot": "derive_clinical_features"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "derive_clinical_features",
+        "target_port": "state",
+        "target_slot": "apply_decision_support"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_decision_support",
+        "target_port": "state",
+        "target_slot": "quantify_uncertainty"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "quantify_uncertainty",
+        "target_port": "state",
+        "target_slot": "explain_evidence"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "explain_evidence",
+        "target_port": "state",
+        "target_slot": "conduct_clinical_review"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "conduct_clinical_review",
+        "target_port": "state",
+        "target_slot": "verify_workflow_fit"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "verify_workflow_fit",
+        "target_port": "state",
+        "target_slot": "monitor_safety_quality"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "monitor_safety_quality",
+        "target_port": "state",
+        "target_slot": "audit_access"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_access",
+        "target_port": "state",
+        "target_slot": "publish_healthcare_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.healthcare-evidence",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_intended_use",
+        "type": {
+          "id": "template.healthcare-evidence.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_healthcare_receipt",
+        "type": {
+          "id": "template.healthcare-evidence.state-16",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.govern"
+        ],
+        "id": "define_intended_use",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define population, setting, decision, exclusions, users, and non-use cases.",
+        "required_capabilities": [
+          "template.healthcare-evidence.define_intended_use.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define population, setting, decision, exclusions, users, and non-use cases and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.govern"
+        ],
+        "id": "verify_consent_authority",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify consent, legal basis, minimum necessary access, and retention.",
+        "required_capabilities": [
+          "template.healthcare-evidence.verify_consent_authority.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify consent, legal basis, minimum necessary access, and retention and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.govern"
+        ],
+        "id": "define_clinical_oracle",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define independent clinical, safety, subgroup, and workflow acceptance.",
+        "required_capabilities": [
+          "template.healthcare-evidence.define_clinical_oracle.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define independent clinical, safety, subgroup, and workflow acceptance and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.integrate"
+        ],
+        "id": "normalize_health_formats",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Normalize admitted healthcare messages, documents, images, and measurements.",
+        "required_capabilities": [
+          "template.healthcare-evidence.normalize_health_formats.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Normalize admitted healthcare messages, documents, images, and measurements and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.integrate"
+        ],
+        "id": "map_terminology",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Map codes and concepts with exact terminology versions and uncertainty.",
+        "required_capabilities": [
+          "template.healthcare-evidence.map_terminology.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Map codes and concepts with exact terminology versions and uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.integrate"
+        ],
+        "id": "resolve_patient",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve identity under privacy, error, and human-review controls.",
+        "required_capabilities": [
+          "template.healthcare-evidence.resolve_patient.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve identity under privacy, error, and human-review controls and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.integrate"
+        ],
+        "id": "reconcile_timeline",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Reconcile event time, amendments, provenance, and conflicting observations.",
+        "required_capabilities": [
+          "template.healthcare-evidence.reconcile_timeline.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Reconcile event time, amendments, provenance, and conflicting observations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "derive_clinical_features",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Derive point-in-time features with missingness and provenance.",
+        "required_capabilities": [
+          "template.healthcare-evidence.derive_clinical_features.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Derive point-in-time features with missingness and provenance and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "apply_decision_support",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply rules or models only within the declared intended-use boundary.",
+        "required_capabilities": [
+          "template.healthcare-evidence.apply_decision_support.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply rules or models only within the declared intended-use boundary and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.analyze"
+        ],
+        "id": "quantify_uncertainty",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Quantify uncertainty, abstention, applicability, and subgroup behavior.",
+        "required_capabilities": [
+          "template.healthcare-evidence.quantify_uncertainty.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Quantify uncertainty, abstention, applicability, and subgroup behavior and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "explain_evidence",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Present source-grounded factors, limitations, alternatives, and uncertainty.",
+        "required_capabilities": [
+          "template.healthcare-evidence.explain_evidence.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Present source-grounded factors, limitations, alternatives, and uncertainty and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "conduct_clinical_review",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Require qualified human review and preserve amendments or disagreement.",
+        "required_capabilities": [
+          "template.healthcare-evidence.conduct_clinical_review.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Require qualified human review and preserve amendments or disagreement and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.review"
+        ],
+        "id": "verify_workflow_fit",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Verify that presentation, timing, escalation, and override behavior fit the real workflow.",
+        "required_capabilities": [
+          "template.healthcare-evidence.verify_workflow_fit.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Verify that presentation, timing, escalation, and override behavior fit the real workflow and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.monitor"
+        ],
+        "id": "monitor_safety_quality",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Monitor errors, overrides, delays, subgroup performance, drift, and adverse events.",
+        "required_capabilities": [
+          "template.healthcare-evidence.monitor_safety_quality.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Monitor errors, overrides, delays, subgroup performance, drift, and adverse events and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.monitor"
+        ],
+        "id": "audit_access",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Audit access, disclosure, retention, and downstream reuse.",
+        "required_capabilities": [
+          "template.healthcare-evidence.audit_access.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Audit access, disclosure, retention, and downstream reuse and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.monitor"
+        ],
+        "id": "publish_healthcare_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.healthcare-evidence.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish governed evidence and limitations without exposing protected data.",
+        "required_capabilities": [
+          "template.healthcare-evidence.publish_healthcare_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish governed evidence and limitations without exposing protected data and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Healthcare data and decision-support evidence obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.healthcare-evidence.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.healthcare-evidence.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Establish purpose, consent, and accountable use.",
+      "extensions": {},
+      "id": "stage.govern",
+      "slot_ids": [
+        "define_intended_use",
+        "verify_consent_authority",
+        "define_clinical_oracle"
+      ],
+      "title": "Govern"
+    },
+    {
+      "description": "Construct an evidence-preserving longitudinal record.",
+      "extensions": {},
+      "id": "stage.integrate",
+      "slot_ids": [
+        "normalize_health_formats",
+        "map_terminology",
+        "resolve_patient",
+        "reconcile_timeline"
+      ],
+      "title": "Integrate"
+    },
+    {
+      "description": "Produce bounded analytical or decision-support evidence.",
+      "extensions": {},
+      "id": "stage.analyze",
+      "slot_ids": [
+        "derive_clinical_features",
+        "apply_decision_support",
+        "quantify_uncertainty"
+      ],
+      "title": "Analyze"
+    },
+    {
+      "description": "Keep consequential interpretation accountable.",
+      "extensions": {},
+      "id": "stage.review",
+      "slot_ids": [
+        "explain_evidence",
+        "conduct_clinical_review",
+        "verify_workflow_fit"
+      ],
+      "title": "Review"
+    },
+    {
+      "description": "Detect harm, drift, and misuse after release.",
+      "extensions": {},
+      "id": "stage.monitor",
+      "slot_ids": [
+        "monitor_safety_quality",
+        "audit_access",
+        "publish_healthcare_receipt"
+      ],
+      "title": "Monitor"
+    }
+  ],
+  "tags": [
+    "healthcare",
+    "clinical-data",
+    "human-review",
+    "privacy"
+  ],
+  "template_model_version": "0.1",
+  "title": "Healthcare data and decision-support evidence",
+  "version": "1.0.0"
+}

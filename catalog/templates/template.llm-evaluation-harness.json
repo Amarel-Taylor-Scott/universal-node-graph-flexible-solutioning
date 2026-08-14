@@ -1,0 +1,1305 @@
+{
+  "description": "A scenario, oracle, blinded execution, adjudication, red-team, failure-learning, and sealed-promotion scaffold with explicit feedback firewalls.",
+  "domains": [
+    "ai.llm-evaluation",
+    "trust-safety.assurance"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.llm-evaluation-harness",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_system_boundary",
+        "target_port": "state",
+        "target_slot": "define_criteria"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_criteria",
+        "target_port": "state",
+        "target_slot": "define_oracles"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_oracles",
+        "target_port": "state",
+        "target_slot": "freeze_feedback_boundary"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "freeze_feedback_boundary",
+        "target_port": "state",
+        "target_slot": "acquire_scenarios"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "acquire_scenarios",
+        "target_port": "state",
+        "target_slot": "generate_adversarial_scenarios"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_adversarial_scenarios",
+        "target_port": "state",
+        "target_slot": "deduplicate_scenarios"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "deduplicate_scenarios",
+        "target_port": "state",
+        "target_slot": "partition_scenarios"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "partition_scenarios",
+        "target_port": "state",
+        "target_slot": "allocate_cells"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "allocate_cells",
+        "target_port": "state",
+        "target_slot": "invoke_system"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "invoke_system",
+        "target_port": "state",
+        "target_slot": "validate_outputs"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_outputs",
+        "target_port": "state",
+        "target_slot": "apply_deterministic_oracles"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_deterministic_oracles",
+        "target_port": "state",
+        "target_slot": "apply_independent_judges"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "apply_independent_judges",
+        "target_port": "state",
+        "target_slot": "adjudicate_disagreement"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "adjudicate_disagreement",
+        "target_port": "state",
+        "target_slot": "calibrate_judges"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "calibrate_judges",
+        "target_port": "state",
+        "target_slot": "cluster_failures"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "cluster_failures",
+        "target_port": "state",
+        "target_slot": "propose_improvements"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "propose_improvements",
+        "target_port": "state",
+        "target_slot": "build_regression_suite"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_regression_suite",
+        "target_port": "state",
+        "target_slot": "run_sealed_evaluation"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_sealed_evaluation",
+        "target_port": "state",
+        "target_slot": "compare_pareto_front"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "compare_pareto_front",
+        "target_port": "state",
+        "target_slot": "approve_promotion"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "approve_promotion",
+        "target_port": "state",
+        "target_slot": "publish_evaluation_receipt"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.llm-evaluation-harness",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_system_boundary",
+        "type": {
+          "id": "template.llm-evaluation-harness.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "publish_evaluation_receipt",
+        "type": {
+          "id": "template.llm-evaluation-harness.state-22",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_system_boundary",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Bind the exact system, model, prompt, tools, authority, and environment under evaluation.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.define_system_boundary.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Bind the exact system, model, prompt, tools, authority, and environment under evaluation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_criteria",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define atomic criteria, slice definitions, hard gates, and objective metrics.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.define_criteria.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define atomic criteria, slice definitions, hard gates, and objective metrics and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_oracles",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Identify deterministic, model, panel, human, and external oracles independently of the producer.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.define_oracles.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Identify deterministic, model, panel, human, and external oracles independently of the producer and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "freeze_feedback_boundary",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Separate development feedback, promotion evidence, and candidate-unreadable outer evaluation.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.freeze_feedback_boundary.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Separate development feedback, promotion evidence, and candidate-unreadable outer evaluation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scenarios"
+        ],
+        "id": "acquire_scenarios",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Acquire versioned normal, boundary, multilingual, long-context, and tool-use scenarios.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.acquire_scenarios.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Acquire versioned normal, boundary, multilingual, long-context, and tool-use scenarios and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scenarios"
+        ],
+        "id": "generate_adversarial_scenarios",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate lineage-bound adversarial variants without exposing sealed cases.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.generate_adversarial_scenarios.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate lineage-bound adversarial variants without exposing sealed cases and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scenarios"
+        ],
+        "id": "deduplicate_scenarios",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Detect semantic duplicates, contamination, and family overlap.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.deduplicate_scenarios.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Detect semantic duplicates, contamination, and family overlap and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.scenarios"
+        ],
+        "id": "partition_scenarios",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Create development, validation, stress, and sealed partitions with family isolation.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.partition_scenarios.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Create development, validation, stress, and sealed partitions with family isolation and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "allocate_cells",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Allocate compatible system, harness, model, scenario, seed, and repetition cells.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.allocate_cells.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Allocate compatible system, harness, model, scenario, seed, and repetition cells and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "invoke_system",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Invoke the frozen system while recording prompts, tools, effects, outputs, cost, and latency.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.invoke_system.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Invoke the frozen system while recording prompts, tools, effects, outputs, cost, and latency and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.execute"
+        ],
+        "id": "validate_outputs",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate structured outputs, citations, tool traces, refusals, and declared invariants.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.validate_outputs.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate structured outputs, citations, tool traces, refusals, and declared invariants and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.judge"
+        ],
+        "id": "apply_deterministic_oracles",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply exact, property, policy, and source-grounding checks first.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.apply_deterministic_oracles.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply exact, property, policy, and source-grounding checks first and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.judge"
+        ],
+        "id": "apply_independent_judges",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run blinded independent judges with exact identities and calibration evidence.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.apply_independent_judges.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run blinded independent judges with exact identities and calibration evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.judge"
+        ],
+        "id": "adjudicate_disagreement",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Route material disagreement and sampled judgments to accountable human review.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.adjudicate_disagreement.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Route material disagreement and sampled judgments to accountable human review and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.judge"
+        ],
+        "id": "calibrate_judges",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure agreement, bias, sensitivity, specificity, and correlated judge failure.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.calibrate_judges.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure agreement, bias, sensitivity, specificity, and correlated judge failure and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.improve"
+        ],
+        "id": "cluster_failures",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Cluster failures by criterion, scenario family, cause, and severity while retaining atomic evidence.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.cluster_failures.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Cluster failures by criterion, scenario family, cause, and severity while retaining atomic evidence and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.improve"
+        ],
+        "id": "propose_improvements",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Propose bounded system, prompt, tool, data, or topology changes outside the evaluator.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.propose_improvements.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Propose bounded system, prompt, tool, data, or topology changes outside the evaluator and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.improve"
+        ],
+        "id": "build_regression_suite",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Promote sanitized failure families into lineage-bound regression scenarios.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.build_regression_suite.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Promote sanitized failure families into lineage-bound regression scenarios and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.promote"
+        ],
+        "id": "run_sealed_evaluation",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate the frozen shortlist on candidate-unreadable cases and evaluator infrastructure.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.run_sealed_evaluation.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate the frozen shortlist on candidate-unreadable cases and evaluator infrastructure and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.promote"
+        ],
+        "id": "compare_pareto_front",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare quality, safety, calibration, cost, latency, reliability, and policy without hiding tradeoffs.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.compare_pareto_front.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare quality, safety, calibration, cost, latency, reliability, and policy without hiding tradeoffs and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.promote"
+        ],
+        "id": "approve_promotion",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-20",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-21",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Require declared accountable approval and preserve rollback identity.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.approve_promotion.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Require declared accountable approval and preserve rollback identity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.promote"
+        ],
+        "id": "publish_evaluation_receipt",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-21",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.llm-evaluation-harness.state-22",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Publish criteria, panels, failures, aggregate outer evidence, limitations, and exact identities.",
+        "required_capabilities": [
+          "template.llm-evaluation-harness.publish_evaluation_receipt.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Publish criteria, panels, failures, aggregate outer evidence, limitations, and exact identities and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Independent LLM and agent evaluation harness obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.llm-evaluation-harness.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.llm-evaluation-harness.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Freeze evaluation meaning and authority.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_system_boundary",
+        "define_criteria",
+        "define_oracles",
+        "freeze_feedback_boundary"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Create a traceable, diverse evaluation surface.",
+      "extensions": {},
+      "id": "stage.scenarios",
+      "slot_ids": [
+        "acquire_scenarios",
+        "generate_adversarial_scenarios",
+        "deduplicate_scenarios",
+        "partition_scenarios"
+      ],
+      "title": "Scenarios"
+    },
+    {
+      "description": "Run comparable systems under controlled conditions.",
+      "extensions": {},
+      "id": "stage.execute",
+      "slot_ids": [
+        "allocate_cells",
+        "invoke_system",
+        "validate_outputs"
+      ],
+      "title": "Execute"
+    },
+    {
+      "description": "Produce criterion-level evidence and accountable disagreement.",
+      "extensions": {},
+      "id": "stage.judge",
+      "slot_ids": [
+        "apply_deterministic_oracles",
+        "apply_independent_judges",
+        "adjudicate_disagreement",
+        "calibrate_judges"
+      ],
+      "title": "Judge"
+    },
+    {
+      "description": "Learn from development failures without contaminating promotion.",
+      "extensions": {},
+      "id": "stage.improve",
+      "slot_ids": [
+        "cluster_failures",
+        "propose_improvements",
+        "build_regression_suite"
+      ],
+      "title": "Improve"
+    },
+    {
+      "description": "Make a bounded evidence-backed release decision.",
+      "extensions": {},
+      "id": "stage.promote",
+      "slot_ids": [
+        "run_sealed_evaluation",
+        "compare_pareto_front",
+        "approve_promotion",
+        "publish_evaluation_receipt"
+      ],
+      "title": "Promote"
+    }
+  ],
+  "tags": [
+    "llm-evaluation",
+    "agent-evaluation",
+    "red-team",
+    "sealed-holdout"
+  ],
+  "template_model_version": "0.1",
+  "title": "Independent LLM and agent evaluation harness",
+  "version": "1.0.0"
+}

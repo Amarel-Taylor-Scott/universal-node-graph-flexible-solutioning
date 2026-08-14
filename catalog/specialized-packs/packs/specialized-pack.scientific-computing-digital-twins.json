@@ -1,0 +1,318 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "scientific-computing-digital-twins",
+    "extraction_target": "solutiongraph-pack-scientific-computing-digital-twins",
+    "python_module": "solutiongraph.specialized.scientific_computing_digital_twins"
+  },
+  "description": "Numerical solvers, calibrated simulations, uncertainty, sensitivity, validation, digital twins, and reviewed intervention decisions.",
+  "domain_pack_ids": [
+    "domain-pack.science-optimization",
+    "domain-pack.ai-ml",
+    "domain-pack.data-integration"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject applicability claims when untouched error, residual, uncertainty, sensitivity, or regime checks fail.",
+      "id": "gate.scientific-computing-digital-twins.model-validity",
+      "independent": true,
+      "metric_ids": [
+        "metric.scientific-computing-digital-twins.validation-error",
+        "metric.scientific-computing-digital-twins.constraint-residual",
+        "metric.scientific-computing-digital-twins.uncertainty-coverage"
+      ],
+      "oracle_kind": "statistical",
+      "title": "Model validity gate"
+    },
+    {
+      "decision": "escalate",
+      "description": "Escalate consequential decisions when validation scope, uncertainty, alternatives, or accountable review is insufficient.",
+      "id": "gate.scientific-computing-digital-twins.decision",
+      "independent": true,
+      "metric_ids": [
+        "metric.scientific-computing-digital-twins.validation-error",
+        "metric.scientific-computing-digital-twins.decision-regret"
+      ],
+      "oracle_kind": "human",
+      "title": "Simulation decision gate"
+    }
+  ],
+  "id": "specialized-pack.scientific-computing-digital-twins",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Error on untouched observations across declared regimes and output slices.",
+      "direction": "minimize",
+      "id": "metric.scientific-computing-digital-twins.validation-error",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.validation",
+      "title": "Validation error",
+      "unit": "score"
+    },
+    {
+      "description": "Residual against governing equations, conservation laws, invariants, and solver tolerances.",
+      "direction": "minimize",
+      "id": "metric.scientific-computing-digital-twins.constraint-residual",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.simulation",
+      "title": "Constraint residual",
+      "unit": "score"
+    },
+    {
+      "description": "Observed coverage of declared prediction or state uncertainty sets.",
+      "direction": "maximize",
+      "id": "metric.scientific-computing-digital-twins.uncertainty-coverage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.validation",
+      "title": "Uncertainty coverage",
+      "unit": "ratio"
+    },
+    {
+      "description": "Observed or simulated regret of the selected intervention against eligible alternatives.",
+      "direction": "minimize",
+      "id": "metric.scientific-computing-digital-twins.decision-regret",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.decision",
+      "title": "Decision regret",
+      "unit": "score"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile equations, states, parameters, solvers, scales, boundary conditions, discontinuities, and conservation laws.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.scientific-computing-digital-twins.model-structure",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Model structure",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile calibration and validation observations, uncertainty, cadence, regimes, missingness, and measurement error.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.scientific-computing-digital-twins.observation-design",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Observation design",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Count nominal, stress, intervention, counterfactual, perturbation, and extrapolation scenarios and resources.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.scientific-computing-digital-twins.scenario-space",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Scenario space",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional textual model/scenario embedding for historical retrieval under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.scientific-computing-digital-twins.model-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Model and scenario embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.numerical-linear-system"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "science.qualify",
+        "science.formulate",
+        "science.solve",
+        "science.residual",
+        "science.fallback"
+      ],
+      "category_ids": [
+        "dag.learn.optimize",
+        "dag.evaluate.metamorphic",
+        "dag.generate.report"
+      ],
+      "description": "Qualify structure and conditioning, choose a formulation and solver, compute, refine, and independently verify residual and backward error.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "numerical-linear-system"
+      ],
+      "id": "recipe.scientific-computing-digital-twins.numerical-solve",
+      "input_kind_ids": [
+        "artifact.numerical-problem"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.numerical-solution"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.numerical-linear-system"
+      ],
+      "title": "Verified numerical computation"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.digital-twin-validation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "twin.scope",
+        "twin.assimilate",
+        "twin.calibrate",
+        "twin.simulate",
+        "twin.validate",
+        "twin.sensitivity"
+      ],
+      "category_ids": [
+        "dag.learn.optimize",
+        "dag.learn.causal",
+        "dag.evaluate.model",
+        "dag.evaluate.metamorphic"
+      ],
+      "description": "Bind the real-system claim, assimilate observations, calibrate parameters, simulate, validate untouched data, analyze sensitivity, and bound applicability.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "digital-twin-validation"
+      ],
+      "id": "recipe.scientific-computing-digital-twins.digital-twin",
+      "input_kind_ids": [
+        "artifact.system-observations"
+      ],
+      "limitations": [
+        "The bundled fixture is a transparent linear model and proves no physical-system fidelity."
+      ],
+      "node_pack_ids": [
+        "example.frontier-domain-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.validated-digital-twin"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.digital-twin-simulation"
+      ],
+      "title": "Calibrate and validate a digital twin"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.digital-twin-validation"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "twin.scenario",
+        "twin.simulate",
+        "twin.uncertainty",
+        "twin.compare",
+        "twin.decision"
+      ],
+      "category_ids": [
+        "dag.generate.scenario",
+        "dag.learn.optimize",
+        "dag.evaluate.model",
+        "dag.human.review"
+      ],
+      "description": "Generate traceable scenarios, execute exact model variants, propagate uncertainty, compare interventions, and require bounded human review.",
+      "design_pack_ids": [
+        "design-pack.causality-experiments",
+        "design-pack.robustness-stability",
+        "design-pack.decision-handoff"
+      ],
+      "effects": [],
+      "example_ids": [],
+      "id": "recipe.scientific-computing-digital-twins.scenario-decision",
+      "input_kind_ids": [
+        "artifact.validated-digital-twin"
+      ],
+      "limitations": [],
+      "node_pack_ids": [],
+      "output_kind_ids": [
+        "artifact.simulation-decision-dossier"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.digital-twin-simulation",
+        "template.scientific-experiment"
+      ],
+      "title": "Simulation-based intervention comparison"
+    }
+  ],
+  "signal_terms": [
+    "scientific computing",
+    "simulation",
+    "digital twin",
+    "numerical",
+    "solver",
+    "calibration",
+    "sensitivity",
+    "physics",
+    "counterfactual"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.learn.optimize",
+    "dag.evaluate.metamorphic",
+    "dag.generate.report",
+    "dag.learn.causal",
+    "dag.evaluate.model",
+    "dag.generate.scenario",
+    "dag.human.review"
+  ],
+  "title": "Scientific computing and digital twins",
+  "version": "0.1.0"
+}

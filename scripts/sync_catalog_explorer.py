@@ -14,6 +14,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
 
 def _viewer_data() -> tuple[list[dict[str, object]], list[dict[str, object]]]:
     from solutiongraph.examples.extended_tasks import EXTENDED_NODES
+    from solutiongraph.examples.frontier_tasks import FRONTIER_NODES
     from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
     from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
     from solutiongraph.reference_nodes import (
@@ -71,7 +72,7 @@ def _viewer_data() -> tuple[list[dict[str, object]], list[dict[str, object]]]:
             "effects": list(node.effects),
             "summary": node.description,
         }
-        for node in (*EXTENDED_NODES, *SHOWCASE_NODES)
+        for node in (*EXTENDED_NODES, *SHOWCASE_NODES, *FRONTIER_NODES)
     ] + [
         {
             "id": node.id,

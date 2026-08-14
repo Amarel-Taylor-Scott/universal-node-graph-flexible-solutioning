@@ -1,0 +1,1139 @@
+{
+  "description": "A rules, content, deterministic simulation, automated playtest, quality, and release scaffold.",
+  "domains": [
+    "software.games",
+    "simulation.interactive"
+  ],
+  "extensions": {
+    "universal.template-source": "linear-blueprint",
+    "universal.template-state": "schematic; refine before execution"
+  },
+  "id": "template.game-build-playtest",
+  "program": {
+    "allowed_effects": [],
+    "edges": [
+      {
+        "source_port": "state",
+        "source_slot": "define_game_state",
+        "target_port": "state",
+        "target_slot": "define_invariants"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_invariants",
+        "target_port": "state",
+        "target_slot": "define_playtest_oracles"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "define_playtest_oracles",
+        "target_port": "state",
+        "target_slot": "assemble_content"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "assemble_content",
+        "target_port": "state",
+        "target_slot": "build_targets"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "build_targets",
+        "target_port": "state",
+        "target_slot": "validate_save_migrations"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "validate_save_migrations",
+        "target_port": "state",
+        "target_slot": "run_deterministic_replays"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_deterministic_replays",
+        "target_port": "state",
+        "target_slot": "run_agent_playtests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_agent_playtests",
+        "target_port": "state",
+        "target_slot": "simulate_economy"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "simulate_economy",
+        "target_port": "state",
+        "target_slot": "generate_edge_cases"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "generate_edge_cases",
+        "target_port": "state",
+        "target_slot": "run_regression_tests"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "run_regression_tests",
+        "target_port": "state",
+        "target_slot": "profile_runtime"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "profile_runtime",
+        "target_port": "state",
+        "target_slot": "audit_balance"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_balance",
+        "target_port": "state",
+        "target_slot": "audit_accessibility"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "audit_accessibility",
+        "target_port": "state",
+        "target_slot": "conduct_human_playtest"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "conduct_human_playtest",
+        "target_port": "state",
+        "target_slot": "compare_builds"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "compare_builds",
+        "target_port": "state",
+        "target_slot": "approve_release"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "approve_release",
+        "target_port": "state",
+        "target_slot": "monitor_telemetry"
+      },
+      {
+        "source_port": "state",
+        "source_slot": "monitor_telemetry",
+        "target_port": "state",
+        "target_slot": "prepare_rollback"
+      }
+    ],
+    "granted_permissions": [],
+    "id": "program.template.game-build-playtest",
+    "inputs": [
+      {
+        "name": "input",
+        "target_port": "state",
+        "target_slot": "define_game_state",
+        "type": {
+          "id": "template.game-build-playtest.state-0",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "invariants": [],
+    "model_version": "0.2",
+    "outputs": [
+      {
+        "name": "result",
+        "source_port": "state",
+        "source_slot": "prepare_rollback",
+        "type": {
+          "id": "template.game-build-playtest.state-19",
+          "media_type": "application/json",
+          "schema_digest": "",
+          "units": "",
+          "version": "1"
+        }
+      }
+    ],
+    "slots": [
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_game_state",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-0",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define versioned state, actions, transitions, persistence, and networking semantics.",
+        "required_capabilities": [
+          "template.game-build-playtest.define_game_state.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define versioned state, actions, transitions, persistence, and networking semantics and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_invariants",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-1",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define rule, economy, progression, fairness, accessibility, and safety invariants.",
+        "required_capabilities": [
+          "template.game-build-playtest.define_invariants.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define rule, economy, progression, fairness, accessibility, and safety invariants and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.contract"
+        ],
+        "id": "define_playtest_oracles",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-2",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Define deterministic, statistical, performance, accessibility, and human playtest oracles.",
+        "required_capabilities": [
+          "template.game-build-playtest.define_playtest_oracles.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Define deterministic, statistical, performance, accessibility, and human playtest oracles and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.build"
+        ],
+        "id": "assemble_content",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-3",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Resolve code, levels, assets, localization, configuration, and rights.",
+        "required_capabilities": [
+          "template.game-build-playtest.assemble_content.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Resolve code, levels, assets, localization, configuration, and rights and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.build"
+        ],
+        "id": "build_targets",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-4",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Build declared platform targets with dependency and environment identity.",
+        "required_capabilities": [
+          "template.game-build-playtest.build_targets.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Build declared platform targets with dependency and environment identity and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.build"
+        ],
+        "id": "validate_save_migrations",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-5",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Validate save, replay, schema, and content-version migrations.",
+        "required_capabilities": [
+          "template.game-build-playtest.validate_save_migrations.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Validate save, replay, schema, and content-version migrations and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "run_deterministic_replays",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-6",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Replay fixed actions and verify state hashes, outcomes, and desynchronization.",
+        "required_capabilities": [
+          "template.game-build-playtest.run_deterministic_replays.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Replay fixed actions and verify state hashes, outcomes, and desynchronization and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "run_agent_playtests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-7",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run bounded bots or policies across levels, roles, and difficulty slices.",
+        "required_capabilities": [
+          "template.game-build-playtest.run_agent_playtests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run bounded bots or policies across levels, roles, and difficulty slices and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "simulate_economy",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-8",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Simulate rewards, sinks, progression, matchmaking, and exploit pressure.",
+        "required_capabilities": [
+          "template.game-build-playtest.simulate_economy.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Simulate rewards, sinks, progression, matchmaking, and exploit pressure and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.simulate"
+        ],
+        "id": "generate_edge_cases",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-9",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Generate reachable boundary and adversarial state sequences with lineage.",
+        "required_capabilities": [
+          "template.game-build-playtest.generate_edge_cases.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Generate reachable boundary and adversarial state sequences with lineage and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "run_regression_tests",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-10",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Run functional, integration, multiplayer, save, and content regression suites.",
+        "required_capabilities": [
+          "template.game-build-playtest.run_regression_tests.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Run functional, integration, multiplayer, save, and content regression suites and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "profile_runtime",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-11",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure frame time, input latency, memory, loading, network, and crash behavior.",
+        "required_capabilities": [
+          "template.game-build-playtest.profile_runtime.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure frame time, input latency, memory, loading, network, and crash behavior and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "audit_balance",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-12",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Measure outcome distributions, matchup fairness, economy stability, and exploit rates.",
+        "required_capabilities": [
+          "template.game-build-playtest.audit_balance.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Measure outcome distributions, matchup fairness, economy stability, and exploit rates and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "audit_accessibility",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-13",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Evaluate controls, presentation, assistive support, and documented accessibility criteria.",
+        "required_capabilities": [
+          "template.game-build-playtest.audit_accessibility.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Evaluate controls, presentation, assistive support, and documented accessibility criteria and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.assure"
+        ],
+        "id": "conduct_human_playtest",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-14",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Collect structured human evidence for subjective qualities that automation cannot establish.",
+        "required_capabilities": [
+          "template.game-build-playtest.conduct_human_playtest.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Collect structured human evidence for subjective qualities that automation cannot establish and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.release"
+        ],
+        "id": "compare_builds",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-15",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Compare control and candidate builds on identical tests, replays, devices, and seeds.",
+        "required_capabilities": [
+          "template.game-build-playtest.compare_builds.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Compare control and candidate builds on identical tests, replays, devices, and seeds and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.release"
+        ],
+        "id": "approve_release",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-16",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Apply hard gates and accountable human approval for the declared target.",
+        "required_capabilities": [
+          "template.game-build-playtest.approve_release.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Apply hard gates and accountable human approval for the declared target and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.release"
+        ],
+        "id": "monitor_telemetry",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-17",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Monitor crashes, performance, progression, economy, safety, and player-impact slices.",
+        "required_capabilities": [
+          "template.game-build-playtest.monitor_telemetry.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Monitor crashes, performance, progression, economy, safety, and player-impact slices and preserve every invariant required by later slots."
+      },
+      {
+        "activation_port": "",
+        "activation_slot": "",
+        "activation_values": [],
+        "allowed_effects": [],
+        "group": [
+          "stage.release"
+        ],
+        "id": "prepare_rollback",
+        "inputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-18",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "kind": "atomic",
+        "optional": false,
+        "outputs": [
+          {
+            "cardinality": "one",
+            "description": "",
+            "name": "state",
+            "type": {
+              "id": "template.game-build-playtest.state-19",
+              "media_type": "application/json",
+              "schema_digest": "",
+              "units": "",
+              "version": "1"
+            }
+          }
+        ],
+        "purpose": "Preserve a tested rollback target and compatible state migration path.",
+        "required_capabilities": [
+          "template.game-build-playtest.prepare_rollback.perform"
+        ],
+        "subgraph_ref": "",
+        "success_contract": "Preserve a tested rollback target and compatible state migration path and preserve every invariant required by later slots."
+      }
+    ],
+    "success_contract": "A task-specific independent acceptance oracle accepts the final result.",
+    "task": "Instantiate the Game build, simulation, and playtest assurance obligations for a task-specific contract.",
+    "version": "1.0.0"
+  },
+  "refinements": [
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Compile the proposal and re-run the task's independent acceptance oracle.",
+      "extensions": {},
+      "id": "template.game-build-playtest.repair-rejected-route",
+      "max_iterations": 8,
+      "proposal_strategy": "search.sprout",
+      "refresh_registry_snapshot": false,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop at acceptance, explicit experiment exhaustion, or eight proposals.",
+      "trigger": "outcome.rejected"
+    },
+    {
+      "budget_ref": "",
+      "evaluation_contract": "Negotiate again, preserve a new discovery receipt, then recompile.",
+      "extensions": {},
+      "id": "template.game-build-playtest.revisit-registry",
+      "max_iterations": 1,
+      "proposal_strategy": "discovery.refresh",
+      "refresh_registry_snapshot": true,
+      "retain_history": true,
+      "scopes": [
+        "program"
+      ],
+      "stop_contract": "Stop after one new closed-world snapshot is admitted.",
+      "trigger": "registry.coverage-gap"
+    }
+  ],
+  "stages": [
+    {
+      "description": "Define player-visible rules and release criteria.",
+      "extensions": {},
+      "id": "stage.contract",
+      "slot_ids": [
+        "define_game_state",
+        "define_invariants",
+        "define_playtest_oracles"
+      ],
+      "title": "Contract"
+    },
+    {
+      "description": "Create reproducible game and content artifacts.",
+      "extensions": {},
+      "id": "stage.build",
+      "slot_ids": [
+        "assemble_content",
+        "build_targets",
+        "validate_save_migrations"
+      ],
+      "title": "Build"
+    },
+    {
+      "description": "Exercise rules and state transitions reproducibly.",
+      "extensions": {},
+      "id": "stage.simulate",
+      "slot_ids": [
+        "run_deterministic_replays",
+        "run_agent_playtests",
+        "simulate_economy",
+        "generate_edge_cases"
+      ],
+      "title": "Simulate"
+    },
+    {
+      "description": "Evaluate functional and experiential constraints.",
+      "extensions": {},
+      "id": "stage.assure",
+      "slot_ids": [
+        "run_regression_tests",
+        "profile_runtime",
+        "audit_balance",
+        "audit_accessibility",
+        "conduct_human_playtest"
+      ],
+      "title": "Assure"
+    },
+    {
+      "description": "Gate and monitor a reversible release.",
+      "extensions": {},
+      "id": "stage.release",
+      "slot_ids": [
+        "compare_builds",
+        "approve_release",
+        "monitor_telemetry",
+        "prepare_rollback"
+      ],
+      "title": "Release"
+    }
+  ],
+  "tags": [
+    "game",
+    "playtest",
+    "replay",
+    "balance",
+    "release"
+  ],
+  "template_model_version": "0.1",
+  "title": "Game build, simulation, and playtest assurance",
+  "version": "1.0.0"
+}

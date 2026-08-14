@@ -1,0 +1,327 @@
+{
+  "delivery": {
+    "current_distribution": "browsergraph",
+    "entry_point_group": "solutiongraph.specialized_packs",
+    "entry_point_name": "document-intelligence",
+    "extraction_target": "solutiongraph-pack-document-intelligence",
+    "python_module": "solutiongraph.specialized.document_intelligence"
+  },
+  "description": "Document ingestion, OCR and layout, grounded extraction, rendering, visual verification, redaction, and provenance.",
+  "domain_pack_ids": [
+    "domain-pack.documents-media",
+    "domain-pack.data-integration",
+    "domain-pack.llm-agent"
+  ],
+  "extensions": {
+    "solutiongraph.delivery": "bundled-extraction-ready"
+  },
+  "gates": [
+    {
+      "decision": "reject",
+      "description": "Reject structured output that fails schema, reconciliation, or source-grounding requirements.",
+      "id": "gate.document-intelligence.extraction",
+      "independent": true,
+      "metric_ids": [
+        "metric.document-intelligence.field-accuracy",
+        "metric.document-intelligence.grounding"
+      ],
+      "oracle_kind": "cross-implementation",
+      "title": "Grounded extraction gate"
+    },
+    {
+      "decision": "reject",
+      "description": "Reject rendered or redacted documents with visual regressions or prohibited leakage.",
+      "id": "gate.document-intelligence.document",
+      "independent": true,
+      "metric_ids": [
+        "metric.document-intelligence.visual-regression",
+        "metric.document-intelligence.prohibited-leakage"
+      ],
+      "oracle_kind": "property",
+      "title": "Document release gate"
+    }
+  ],
+  "id": "specialized-pack.document-intelligence",
+  "license": "MIT",
+  "limitations": [
+    "This capability pack recommends authoring assets; compiler admission and a task-specific SolutionPackManifest are still required before execution."
+  ],
+  "metrics": [
+    {
+      "description": "Independently verified extracted fields by schema and document slice.",
+      "direction": "maximize",
+      "id": "metric.document-intelligence.field-accuracy",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.field",
+      "title": "Field accuracy",
+      "unit": "ratio"
+    },
+    {
+      "description": "Material outputs bound to exact source spans, regions, pages, and content digests.",
+      "direction": "maximize",
+      "id": "metric.document-intelligence.grounding",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.output",
+      "title": "Source grounding",
+      "unit": "ratio"
+    },
+    {
+      "description": "Unexpected layout, clipping, overflow, font, image, or pagination differences.",
+      "direction": "minimize",
+      "id": "metric.document-intelligence.visual-regression",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.render",
+      "title": "Visual regression",
+      "unit": "count"
+    },
+    {
+      "description": "Residual prohibited content after redaction or governed transformation.",
+      "direction": "minimize",
+      "id": "metric.document-intelligence.prohibited-leakage",
+      "required_evidence": [
+        "evidence.independent-evaluation"
+      ],
+      "scope": "scope.document",
+      "title": "Prohibited leakage",
+      "unit": "count"
+    }
+  ],
+  "profiler_features": [
+    {
+      "cost_tier": 1,
+      "description": "Profile formats, pages, regions, tables, forms, reading order, images, fonts, and render requirements.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.document-intelligence.format-layout",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Format and layout",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Measure native text coverage, OCR need, language, corruption, confidence, and source-span availability.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.document-intelligence.text-quality",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Text and OCR quality",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 1,
+      "description": "Profile requested fields, types, cardinalities, totals, citations, redaction classes, and abstention rules.",
+      "easy_to_compute": true,
+      "effects": [],
+      "evidence_kind": "evidence.task-profile",
+      "id": "feature.document-intelligence.schema-grounding",
+      "mode": "deterministic",
+      "permissions": [],
+      "requirements": [],
+      "title": "Schema and grounding",
+      "value_kind": "mapping"
+    },
+    {
+      "cost_tier": 7,
+      "description": "Optional redacted document-profile embedding for retrieval under an exact embedding-space identity.",
+      "easy_to_compute": false,
+      "effects": [
+        "model.invoke"
+      ],
+      "evidence_kind": "evidence.embedding-sidecar",
+      "id": "feature.document-intelligence.document-embedding",
+      "mode": "model",
+      "permissions": [
+        "model.invoke"
+      ],
+      "requirements": [
+        "requirement.exact-embedding-space-identity"
+      ],
+      "title": "Document profile embedding",
+      "value_kind": "vector"
+    }
+  ],
+  "readiness": "executable-fixture",
+  "recipes": [
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.invoice-accounting-schema"
+      ],
+      "benchmark_ids": [
+        "benchmark.document-extraction"
+      ],
+      "capability_ids": [
+        "document.detect",
+        "document.decode",
+        "document.layout",
+        "document.extract",
+        "document.ground",
+        "document.verify"
+      ],
+      "category_ids": [
+        "dag.acquire.document",
+        "dag.prepare.parse",
+        "dag.prepare.schema",
+        "dag.prepare.verify"
+      ],
+      "description": "Detect format, decode text and layout, extract typed fields, reconcile values, ground claims, and verify the schema.",
+      "design_pack_ids": [
+        "design-pack.text-document"
+      ],
+      "effects": [],
+      "example_ids": [
+        "document-to-schema",
+        "grounded-document-extraction"
+      ],
+      "id": "recipe.document-intelligence.extract",
+      "input_kind_ids": [
+        "artifact.document-corpus"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.real-world-node-pack",
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.structured-dataset"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.document"
+      ],
+      "template_ids": [
+        "template.document-intelligence"
+      ],
+      "title": "Grounded document extraction"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.document-render-and-verify"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "document.assets",
+        "document.layout",
+        "document.render",
+        "document.visual-verify",
+        "document.publish"
+      ],
+      "category_ids": [
+        "dag.generate.report",
+        "dag.evaluate.regression",
+        "dag.govern.provenance"
+      ],
+      "description": "Resolve assets, paginate, render, inspect every page, compare visual properties, and publish exact output provenance.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "document-render-and-verify"
+      ],
+      "id": "recipe.document-intelligence.render",
+      "input_kind_ids": [
+        "artifact.document-source"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.engineering-showcase-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.verified-document"
+      ],
+      "permissions": [],
+      "question_pack_ids": [],
+      "template_ids": [
+        "template.document-intelligence"
+      ],
+      "title": "Document render and visual verification"
+    },
+    {
+      "adapter_ids": [],
+      "agent_benchmark_ids": [],
+      "arena_task_ids": [
+        "arena.pii-redaction"
+      ],
+      "benchmark_ids": [],
+      "capability_ids": [
+        "document.detect-sensitive",
+        "document.redact",
+        "document.render",
+        "document.leakage-check",
+        "document.audit"
+      ],
+      "category_ids": [
+        "dag.govern.privacy",
+        "dag.prepare.verify",
+        "dag.evaluate.safety"
+      ],
+      "description": "Detect sensitive spans and regions, apply irreversible or reversible policy, render, and independently scan for residual leakage.",
+      "design_pack_ids": [],
+      "effects": [],
+      "example_ids": [
+        "pii-redaction"
+      ],
+      "id": "recipe.document-intelligence.redact",
+      "input_kind_ids": [
+        "artifact.document-corpus"
+      ],
+      "limitations": [],
+      "node_pack_ids": [
+        "example.extended-arena-node-pack"
+      ],
+      "output_kind_ids": [
+        "artifact.redacted-documents"
+      ],
+      "permissions": [],
+      "question_pack_ids": [
+        "question-pack.document"
+      ],
+      "template_ids": [
+        "template.document-intelligence",
+        "template.compliance-evidence"
+      ],
+      "title": "Document privacy and redaction"
+    }
+  ],
+  "signal_terms": [
+    "document",
+    "pdf",
+    "docx",
+    "invoice",
+    "ocr",
+    "layout",
+    "table extraction",
+    "form",
+    "redaction",
+    "render"
+  ],
+  "source": "https://github.com/Amarel-Taylor-Scott/universal-node-graph-flexible-solutioning/tree/main/solutiongraph/specialized",
+  "specialized_pack_model_version": "0.1",
+  "task_category_ids": [
+    "dag.acquire.document",
+    "dag.prepare.parse",
+    "dag.prepare.schema",
+    "dag.prepare.verify",
+    "dag.generate.report",
+    "dag.evaluate.regression",
+    "dag.govern.provenance",
+    "dag.govern.privacy",
+    "dag.evaluate.safety"
+  ],
+  "title": "Document intelligence",
+  "version": "0.1.0"
+}

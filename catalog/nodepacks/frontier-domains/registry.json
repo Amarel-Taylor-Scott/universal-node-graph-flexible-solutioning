@@ -1,0 +1,5889 @@
+{
+  "candidates": [
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.scope.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.cyber.scope.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "scope"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.scope.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.cyber.scope.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "scope"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.normalize.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.cyber.normalize.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "normalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.normalize.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.cyber.normalize.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "normalize"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.correlate.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.cyber.correlate.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "correlate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.correlate.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.cyber.correlate.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "correlate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.test-hypotheses.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.cyber.test-hypotheses.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "test-hypotheses"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.test-hypotheses.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.cyber.test-hypotheses.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "test-hypotheses"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.report.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.cyber.report.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "report"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.cyber.report.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.cyber.report.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "cyber",
+        "operation": "report"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.probe.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.video.probe.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "probe"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.probe.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.video.probe.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "probe"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.timeline.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.video.timeline.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "timeline"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.timeline.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.video.timeline.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "timeline"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.align.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.video.align.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "align"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.align.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.video.align.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "align"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.captions.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.video.captions.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "captions"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.captions.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.video.captions.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "captions"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.assure.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.video.assure.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "assure"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.video.assure.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.video.assure.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "video",
+        "operation": "assure"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.parse.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.three-d.parse.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "parse"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.parse.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.three-d.parse.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "parse"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.topology.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.three-d.topology.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "topology"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.topology.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.three-d.topology.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "topology"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.materials.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.three-d.materials.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "materials"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.materials.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.three-d.materials.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "materials"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.collision.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.three-d.collision.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "collision"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.collision.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.three-d.collision.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "collision"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.budget.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.three-d.budget.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "budget"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.three-d.budget.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.three-d.budget.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "three-d",
+        "operation": "budget"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.rules.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.game.rules.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "rules"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.rules.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.game.rules.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "rules"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.replay.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.game.replay.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "replay"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.replay.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.game.replay.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "replay"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.regression.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.game.regression.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "regression"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.regression.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.game.regression.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "regression"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.balance.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.game.balance.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "balance"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.balance.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.game.balance.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "balance"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.gate.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.game.gate.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "gate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.game.gate.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.game.gate.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "game",
+        "operation": "gate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.model.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.robotics.model.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "model"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.model.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.robotics.model.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "model"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.plan.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.robotics.plan.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "plan"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.plan.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.robotics.plan.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "plan"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.simulate.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.robotics.simulate.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "simulate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.simulate.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.robotics.simulate.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "simulate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.safety.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.robotics.safety.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "safety"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.safety.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.robotics.safety.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "safety"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.gate.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.robotics.gate.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "gate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.robotics.gate.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.robotics.gate.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "robotics",
+        "operation": "gate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.schema.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.iot.schema.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "schema"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.schema.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.iot.schema.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "schema"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.event-time.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.iot.event-time.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "event-time"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.event-time.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.iot.event-time.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "event-time"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.anomalies.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.iot.anomalies.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "anomalies"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.anomalies.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.iot.anomalies.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "anomalies"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.state.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.iot.state.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "state"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.state.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.iot.state.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "state"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.assure.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.iot.assure.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "assure"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.iot.assure.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.iot.assure.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "iot",
+        "operation": "assure"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.calibrate.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.digital-twin.calibrate.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "calibrate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.calibrate.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.digital-twin.calibrate.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "calibrate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.simulate.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.digital-twin.simulate.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "simulate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.simulate.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.digital-twin.simulate.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "simulate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.validate.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.digital-twin.validate.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "validate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.validate.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.digital-twin.validate.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "validate"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.sensitivity.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.digital-twin.sensitivity.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "sensitivity"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.sensitivity.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.digital-twin.sensitivity.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "sensitivity"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.report.reference",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "node_id": "example.frontier.digital-twin.report.reference",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "report"
+      }
+    },
+    {
+      "deployment": "",
+      "id": "candidate.example.frontier.digital-twin.report.shortcut",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "node_id": "example.frontier.digital-twin.report.shortcut",
+      "node_version": "1.0.0",
+      "parameters": {
+        "domain": "digital-twin",
+        "operation": "report"
+      }
+    }
+  ],
+  "id": "example.frontier-domain-registry",
+  "model_version": "0.2",
+  "nodes": [
+    {
+      "capabilities": [
+        "frontier.cyber.scope"
+      ],
+      "description": "Reference mechanism fixture for cyber/scope.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.scope.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "scope"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.scope"
+      ],
+      "description": "Shortcut mechanism fixture for cyber/scope.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.scope.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "scope"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.normalize"
+      ],
+      "description": "Reference mechanism fixture for cyber/normalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.normalize.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "normalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.normalize"
+      ],
+      "description": "Shortcut mechanism fixture for cyber/normalize.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.normalize.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "normalize"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.correlate"
+      ],
+      "description": "Reference mechanism fixture for cyber/correlate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.correlate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "correlate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.correlate"
+      ],
+      "description": "Shortcut mechanism fixture for cyber/correlate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.correlate.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "correlate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.test-hypotheses"
+      ],
+      "description": "Reference mechanism fixture for cyber/test-hypotheses.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.test-hypotheses.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "test-hypotheses"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.test-hypotheses"
+      ],
+      "description": "Shortcut mechanism fixture for cyber/test-hypotheses.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.test-hypotheses.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "test-hypotheses"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.report"
+      ],
+      "description": "Reference mechanism fixture for cyber/report.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.report.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "report"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.cyber.report"
+      ],
+      "description": "Shortcut mechanism fixture for cyber/report.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.cyber.report.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "cyber"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "report"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.probe"
+      ],
+      "description": "Reference mechanism fixture for video/probe.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.probe.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "probe"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.probe"
+      ],
+      "description": "Shortcut mechanism fixture for video/probe.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.probe.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "probe"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.timeline"
+      ],
+      "description": "Reference mechanism fixture for video/timeline.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.timeline.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "timeline"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.timeline"
+      ],
+      "description": "Shortcut mechanism fixture for video/timeline.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.timeline.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "timeline"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.align"
+      ],
+      "description": "Reference mechanism fixture for video/align.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.align.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "align"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.align"
+      ],
+      "description": "Shortcut mechanism fixture for video/align.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.align.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "align"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.captions"
+      ],
+      "description": "Reference mechanism fixture for video/captions.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.captions.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "captions"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.captions"
+      ],
+      "description": "Shortcut mechanism fixture for video/captions.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.captions.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "captions"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.assure"
+      ],
+      "description": "Reference mechanism fixture for video/assure.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.assure.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "assure"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.video.assure"
+      ],
+      "description": "Shortcut mechanism fixture for video/assure.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.video.assure.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "video"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "assure"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.parse"
+      ],
+      "description": "Reference mechanism fixture for three-d/parse.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.parse.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "parse"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.parse"
+      ],
+      "description": "Shortcut mechanism fixture for three-d/parse.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.parse.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "parse"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.topology"
+      ],
+      "description": "Reference mechanism fixture for three-d/topology.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.topology.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "topology"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.topology"
+      ],
+      "description": "Shortcut mechanism fixture for three-d/topology.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.topology.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "topology"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.materials"
+      ],
+      "description": "Reference mechanism fixture for three-d/materials.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.materials.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "materials"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.materials"
+      ],
+      "description": "Shortcut mechanism fixture for three-d/materials.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.materials.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "materials"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.collision"
+      ],
+      "description": "Reference mechanism fixture for three-d/collision.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.collision.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "collision"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.collision"
+      ],
+      "description": "Shortcut mechanism fixture for three-d/collision.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.collision.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "collision"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.budget"
+      ],
+      "description": "Reference mechanism fixture for three-d/budget.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.budget.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "budget"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.three-d.budget"
+      ],
+      "description": "Shortcut mechanism fixture for three-d/budget.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.three-d.budget.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "three-d"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "budget"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.rules"
+      ],
+      "description": "Reference mechanism fixture for game/rules.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.rules.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "rules"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.rules"
+      ],
+      "description": "Shortcut mechanism fixture for game/rules.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.rules.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "rules"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.replay"
+      ],
+      "description": "Reference mechanism fixture for game/replay.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.replay.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "replay"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.replay"
+      ],
+      "description": "Shortcut mechanism fixture for game/replay.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.replay.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "replay"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.regression"
+      ],
+      "description": "Reference mechanism fixture for game/regression.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.regression.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "regression"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.regression"
+      ],
+      "description": "Shortcut mechanism fixture for game/regression.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.regression.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "regression"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.balance"
+      ],
+      "description": "Reference mechanism fixture for game/balance.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.balance.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "balance"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.balance"
+      ],
+      "description": "Shortcut mechanism fixture for game/balance.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.balance.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "balance"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.gate"
+      ],
+      "description": "Reference mechanism fixture for game/gate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.gate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "gate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.game.gate"
+      ],
+      "description": "Shortcut mechanism fixture for game/gate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.game.gate.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "game"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "gate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.model"
+      ],
+      "description": "Reference mechanism fixture for robotics/model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.model.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "model"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.model"
+      ],
+      "description": "Shortcut mechanism fixture for robotics/model.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.model.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "model"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.plan"
+      ],
+      "description": "Reference mechanism fixture for robotics/plan.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.plan.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "plan"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.plan"
+      ],
+      "description": "Shortcut mechanism fixture for robotics/plan.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.plan.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "plan"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.simulate"
+      ],
+      "description": "Reference mechanism fixture for robotics/simulate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.simulate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "simulate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.simulate"
+      ],
+      "description": "Shortcut mechanism fixture for robotics/simulate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.simulate.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "simulate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.safety"
+      ],
+      "description": "Reference mechanism fixture for robotics/safety.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.safety.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "safety"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.safety"
+      ],
+      "description": "Shortcut mechanism fixture for robotics/safety.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.safety.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "safety"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.gate"
+      ],
+      "description": "Reference mechanism fixture for robotics/gate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.gate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "gate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.robotics.gate"
+      ],
+      "description": "Shortcut mechanism fixture for robotics/gate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.robotics.gate.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "robotics"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "gate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.schema"
+      ],
+      "description": "Reference mechanism fixture for iot/schema.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.schema.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "schema"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.schema"
+      ],
+      "description": "Shortcut mechanism fixture for iot/schema.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.schema.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "schema"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.event-time"
+      ],
+      "description": "Reference mechanism fixture for iot/event-time.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.event-time.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "event-time"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.event-time"
+      ],
+      "description": "Shortcut mechanism fixture for iot/event-time.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.event-time.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "event-time"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.anomalies"
+      ],
+      "description": "Reference mechanism fixture for iot/anomalies.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.anomalies.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "anomalies"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.anomalies"
+      ],
+      "description": "Shortcut mechanism fixture for iot/anomalies.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.anomalies.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "anomalies"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.state"
+      ],
+      "description": "Reference mechanism fixture for iot/state.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.state.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "state"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.state"
+      ],
+      "description": "Shortcut mechanism fixture for iot/state.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.state.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "state"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.assure"
+      ],
+      "description": "Reference mechanism fixture for iot/assure.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.assure.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "assure"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.iot.assure"
+      ],
+      "description": "Shortcut mechanism fixture for iot/assure.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.iot.assure.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "iot"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "assure"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.calibrate"
+      ],
+      "description": "Reference mechanism fixture for digital-twin/calibrate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.calibrate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "calibrate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.calibrate"
+      ],
+      "description": "Shortcut mechanism fixture for digital-twin/calibrate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.calibrate.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "calibrate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.simulate"
+      ],
+      "description": "Reference mechanism fixture for digital-twin/simulate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.simulate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "simulate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.simulate"
+      ],
+      "description": "Shortcut mechanism fixture for digital-twin/simulate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.simulate.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "simulate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.validate"
+      ],
+      "description": "Reference mechanism fixture for digital-twin/validate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.validate.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "validate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.validate"
+      ],
+      "description": "Shortcut mechanism fixture for digital-twin/validate.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.validate.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "validate"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.sensitivity"
+      ],
+      "description": "Reference mechanism fixture for digital-twin/sensitivity.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.sensitivity.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "sensitivity"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.sensitivity"
+      ],
+      "description": "Shortcut mechanism fixture for digital-twin/sensitivity.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.sensitivity.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "sensitivity"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.report"
+      ],
+      "description": "Reference mechanism fixture for digital-twin/report.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_reference_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.report.reference",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:3e2bade24322a2c3602459499d78ff00e3dc2d6efe18f702fe3fb4ffdffd92b7",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "report"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    },
+    {
+      "capabilities": [
+        "frontier.digital-twin.report"
+      ],
+      "description": "Shortcut mechanism fixture for digital-twin/report.",
+      "determinism": "deterministic",
+      "effects": [],
+      "entrypoint": "solutiongraph.examples.frontier_tasks:execute_shortcut_step",
+      "failure_modes": [],
+      "id": "example.frontier.digital-twin.report.shortcut",
+      "idempotency": "idempotent",
+      "implementation_digest": "sha256:0f5be5362587ccbec4addf5b7d85b7fe035179e0cfd8247deb2e17f5d1abc307",
+      "inputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "invariants": [],
+      "model_version": "0.2",
+      "outputs": [
+        {
+          "cardinality": "one",
+          "description": "",
+          "name": "payload",
+          "type": {
+            "id": "example.frontier-workflow-payload",
+            "media_type": "application/json",
+            "schema_digest": "",
+            "units": "",
+            "version": "1"
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "choices": [
+            "digital-twin"
+          ],
+          "default": null,
+          "description": "",
+          "name": "domain",
+          "required": true,
+          "value_type": "string"
+        },
+        {
+          "choices": [
+            "report"
+          ],
+          "default": null,
+          "description": "",
+          "name": "operation",
+          "required": true,
+          "value_type": "string"
+        }
+      ],
+      "permissions": [],
+      "postconditions": [],
+      "preconditions": [],
+      "resources": [],
+      "runtime": "python",
+      "source": "solutiongraph/examples/frontier_tasks.py",
+      "verifier": "",
+      "version": "1.0.0"
+    }
+  ],
+  "version": "1.0.0"
+}

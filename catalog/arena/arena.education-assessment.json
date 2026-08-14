@@ -1,0 +1,39 @@
+{
+  "acceptance_signals": [
+    "content accuracy",
+    "alignment",
+    "reliability",
+    "validity",
+    "fairness",
+    "accessibility"
+  ],
+  "arena_model_version": "0.1",
+  "executable_example_ids": [],
+  "external_requirements": [],
+  "id": "arena.education-assessment",
+  "input_contract": "Learning objectives, standards, learner population, content sources, accommodation policy, and assessment claims.",
+  "output_contract": "Versioned content, items, rubrics, scoring evidence, review state, item analysis, and limitations.",
+  "problem": "Author aligned content and items, verify accuracy and accessibility, score accountably, and analyze validity and fairness.",
+  "readiness": "template",
+  "stage_families": [
+    "contract",
+    "source",
+    "author",
+    "accuracy",
+    "alignment",
+    "accessibility",
+    "bias",
+    "deliver",
+    "score",
+    "review",
+    "analyze"
+  ],
+  "tags": [
+    "education",
+    "assessment",
+    "rubric",
+    "accessibility"
+  ],
+  "template_id": "template.education-assessment",
+  "title": "Learning objectives to an assured assessment"
+}

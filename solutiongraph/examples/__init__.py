@@ -21,6 +21,10 @@ from solutiongraph.examples.data_science_tasks import (
     DATA_SCIENCE_EXAMPLE_TASKS,
     DATA_SCIENCE_REGISTRY,
 )
+from solutiongraph.examples.frontier_tasks import (
+    FRONTIER_EXAMPLE_TASKS,
+    FRONTIER_REGISTRY,
+)
 from solutiongraph.examples.intelligent_solutioning import example_solution_request
 
 __all__ = [
@@ -34,6 +38,8 @@ __all__ = [
     "DUECARE_HARNESS_EVIDENCE",
     "DATA_SCIENCE_EXAMPLE_TASKS",
     "DATA_SCIENCE_REGISTRY",
+    "FRONTIER_EXAMPLE_TASKS",
+    "FRONTIER_REGISTRY",
     "SHOWCASE_EXAMPLE_TASKS",
     "SHOWCASE_REGISTRY",
     "example_solution_request",

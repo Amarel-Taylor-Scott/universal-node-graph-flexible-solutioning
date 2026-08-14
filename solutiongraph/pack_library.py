@@ -6,6 +6,7 @@ from solutiongraph.design_atlas.node_pack import DESIGN_ATLAS_NODE_PACK
 from solutiongraph.discovery import ArtifactReference, NodePackManifest
 from solutiongraph.examples.data_science_tasks import DATA_SCIENCE_NODES
 from solutiongraph.examples.extended_tasks import EXTENDED_NODES
+from solutiongraph.examples.frontier_tasks import FRONTIER_NODES
 from solutiongraph.examples.showcase_tasks import SHOWCASE_NODES
 from solutiongraph.examples.tasks import NODES as EXAMPLE_NODES
 from solutiongraph.interrogation.node_pack import INTERROGATION_NODE_PACK
@@ -107,12 +108,28 @@ DATA_SCIENCE_LIFECYCLE_NODE_PACK = NodePackManifest(
     extensions=(("example.maturity", "deterministic-mechanism-fixture"),),
 )
 
+FRONTIER_DOMAIN_NODE_PACK = NodePackManifest(
+    id="example.frontier-domain-node-pack",
+    version="1.0.0",
+    description=(
+        "Dependency-free reference and disclosed-shortcut candidates for defensive "
+        "cyber investigation, video timelines, 3D assets, deterministic gameplay, "
+        "robotics safety simulation, IoT telemetry, and digital-twin validation."
+    ),
+    node_spec_digests=tuple(node.digest for node in FRONTIER_NODES),
+    artifacts=_artifacts(FRONTIER_NODES),
+    source=REPOSITORY_SOURCE,
+    license="MIT",
+    extensions=(("example.maturity", "frontier-mechanism-fixture"),),
+)
+
 REFERENCE_NODE_PACKS = (
     REFERENCE_CORE_NODE_PACK,
     REAL_WORLD_EXAMPLE_NODE_PACK,
     EXTENDED_ARENA_NODE_PACK,
     ENGINEERING_SHOWCASE_NODE_PACK,
     DATA_SCIENCE_LIFECYCLE_NODE_PACK,
+    FRONTIER_DOMAIN_NODE_PACK,
     INTERROGATION_NODE_PACK,
     DESIGN_ATLAS_NODE_PACK,
 )
@@ -121,6 +138,7 @@ REFERENCE_NODE_PACKS = (
 __all__ = [
     "EXTENDED_ARENA_NODE_PACK",
     "ENGINEERING_SHOWCASE_NODE_PACK",
+    "FRONTIER_DOMAIN_NODE_PACK",
     "INTERROGATION_NODE_PACK",
     "DATA_SCIENCE_LIFECYCLE_NODE_PACK",
     "DESIGN_ATLAS_NODE_PACK",
