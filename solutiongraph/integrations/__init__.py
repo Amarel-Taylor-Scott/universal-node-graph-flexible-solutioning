@@ -1,4 +1,4 @@
-"""Side-effect-free standard and orchestrator integration seams."""
+"""Side-effect-free standard, orchestrator, and model integration seams."""
 
 from solutiongraph.integrations.model import (
     INTEGRATION_MODEL_VERSION,
@@ -7,6 +7,15 @@ from solutiongraph.integrations.model import (
     OrchestratorPlanProjection,
     OrchestratorTask,
     ProjectedOperation,
+)
+from solutiongraph.integrations.ollama import (
+    OLLAMA_ADAPTER_MODEL_VERSION,
+    JsonTransport,
+    OllamaAdapter,
+    OllamaConfig,
+    OllamaError,
+    OllamaModelInfo,
+    UrlLibJsonTransport,
 )
 from solutiongraph.integrations.orchestrators import export_frozen_plan
 from solutiongraph.integrations.profiles import (
@@ -25,10 +34,17 @@ __all__ = [
     "INTEGRATION_MODEL_VERSION",
     "IntegrationAdapterProfile",
     "IntegrationProjection",
+    "JsonTransport",
+    "OLLAMA_ADAPTER_MODEL_VERSION",
+    "OllamaAdapter",
+    "OllamaConfig",
+    "OllamaError",
+    "OllamaModelInfo",
     "OrchestratorPlanProjection",
     "OrchestratorTask",
     "ProjectedOperation",
     "REFERENCE_INTEGRATION_ADAPTERS",
+    "UrlLibJsonTransport",
     "export_frozen_plan",
     "project_bpmn",
     "project_cloudevents",
