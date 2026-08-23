@@ -1,14 +1,14 @@
 """Strategy allocation, proposal reconciliation, and the recursive Solver Cell.
 
-The engine chooses proposals; it does not compile or execute graphs.  The
+The engine chooses proposals; it does not compile or execute graphs. The
 SolverCell delegates selected actions through an ActionExecutor and updates an
-immutable KnowledgeState through a StateReducer.  Loop ordinals are receipts,
+immutable KnowledgeState through a StateReducer. Loop ordinals are receipts,
 never semantic graph positions.
 """
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Mapping, Sequence
+from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, replace
 from math import isfinite
@@ -104,11 +104,13 @@ class RankedCluster:
 
     @property
     def digest(self) -> str:
-        return sha256_digest({
-            "rank": self.rank,
-            "score": self.score,
-            "cluster_digest": self.cluster.digest,
-        })
+        return sha256_digest(
+            {
+                "rank": self.rank,
+                "score": self.score,
+                "cluster_digest": self.cluster.digest,
+            }
+        )
 
 
 @dataclass(frozen=True)
@@ -144,14 +146,24 @@ class WhatIsNextEngine:
         budget = budget or NextBudget()
         selection_policy = selection_policy or StrategySelectionPolicy()
         decision_policy = decision_policy or DecisionPolicy()
-        problems = [*state.validate(), *question.validate(), *budget.validate(),
-                    *selection_policy.validate()]
+        problems = [
+            *state.validate(),
+            *question.validate(),
+            *budget.validate(),
+            *selection_policy.validate(),
+        ]
         if question.state_digest != state.digest:
-            problems.append("question state digest differs from supplied knowledge state")
+            problems.append(
+                "question state digest differs from supplied knowledge state"
+            )
         if question.depth > budget.max_depth:
-            problems.append("question exceeds the Solver Cell recursion depth budget")
+            problems.append(
+                "question exceeds the Solver Cell recursion depth budget"
+            )
         if problems:
-            raise ValueError("invalid What-Is-Next request: " + "; ".join(problems))
+            raise ValueError(
+                "invalid What-Is-Next request: " + "; ".join(problems)
+            )
 
         selected, skipped = self._select_strategies(
             selection_policy,
@@ -171,26 +183,37 @@ class WhatIsNextEngine:
             constraints=constraints,
         )
         clusters = self._cluster(outcomes)
-        ranked = tuple(sorted(
-            clusters,
-            key=lambda item: (-self._cluster_score(item, decision_policy), item.semantic_identity),
-        ))
+        ranked = tuple(
+            sorted(
+                clusters,
+                key=lambda item: (
+                    -self._cluster_score(item, decision_policy),
+                    item.semantic_identity,
+                ),
+            )
+        )
         decision = self._choose(question, ranked, budget, decision_policy)
-        receipt_id = "next-receipt." + sha256_digest({
-            "state": state.digest,
-            "question": question.digest,
-            "strategies": [item.manifest.id for item in selected],
-            "outcomes": [item.digest for item in outcomes],
-            "decision": decision.digest,
-        }).removeprefix("sha256:")[:24]
+        receipt_id = "next-receipt." + sha256_digest(
+            {
+                "state": state.digest,
+                "question": question.digest,
+                "strategies": [item.manifest.id for item in selected],
+                "outcomes": [item.digest for item in outcomes],
+                "decision": decision.digest,
+            }
+        ).removeprefix("sha256:")[:24]
         return NextDecisionReceipt(
             id=receipt_id,
             state_digest=state.digest,
             question_digest=question.digest,
             budget_digest=budget.digest,
             policy_digest=decision_policy.digest,
-            selected_strategy_ids=tuple(item.manifest.id for item in selected),
-            skipped_strategy_ids=tuple(item.manifest.id for item in skipped),
+            selected_strategy_ids=tuple(
+                item.manifest.id for item in selected
+            ),
+            skipped_strategy_ids=tuple(
+                item.manifest.id for item in skipped
+            ),
             outcomes=outcomes,
             clusters=ranked,
             decision=decision,
@@ -205,7 +228,11 @@ class WhatIsNextEngine:
         decision_policy = kwargs.get("decision_policy") or DecisionPolicy()
         receipt = self.decide(state, question, **kwargs)
         ranking = tuple(
-            RankedCluster(index + 1, self._cluster_score(cluster, decision_policy), cluster)
+            RankedCluster(
+                index + 1,
+                self._cluster_score(cluster, decision_policy),
+                cluster,
+            )
             for index, cluster in enumerate(receipt.clusters)
         )
         return NextEngineResult(receipt, ranking)
@@ -219,48 +246,120 @@ class WhatIsNextEngine:
         all_strategies = list(self.registry.all())
         by_id = {item.manifest.id: item for item in all_strategies}
         excluded = set(policy.exclude_strategy_ids)
-        candidates = [item for item in all_strategies if item.manifest.id not in excluded]
+        candidates = [
+            item
+            for item in all_strategies
+            if item.manifest.id not in excluded
+        ]
         if policy.include_strategy_ids:
             unknown = sorted(set(policy.include_strategy_ids) - set(by_id))
             if unknown:
-                raise ValueError("selection policy references unknown strategies: " + ", ".join(unknown))
-            candidates = [by_id[item] for item in policy.include_strategy_ids if item not in excluded]
+                raise ValueError(
+                    "selection policy references unknown strategies: "
+                    + ", ".join(unknown)
+                )
+            candidates = [
+                by_id[item]
+                for item in policy.include_strategy_ids
+                if item not in excluded
+            ]
 
         required: list[NextStrategy] = []
         for family in policy.required_families:
-            family_items = [item for item in candidates if item.manifest.family == family]
+            family_items = [
+                item
+                for item in candidates
+                if item.manifest.family == family
+            ]
             if family_items:
-                required.append(sorted(family_items, key=lambda item: item.manifest.id)[0])
+                required.append(
+                    sorted(
+                        family_items,
+                        key=lambda item: item.manifest.id,
+                    )[0]
+                )
 
-        blind_target = int(round(budget.max_strategy_calls * budget.protected_blind_fraction))
-        random_target = int(round(budget.max_strategy_calls * budget.protected_random_fraction))
+        blind_target = int(
+            round(
+                budget.max_strategy_calls
+                * budget.protected_blind_fraction
+            )
+        )
+        random_target = int(
+            round(
+                budget.max_strategy_calls
+                * budget.protected_random_fraction
+            )
+        )
         protected = [
-            *sorted((item for item in candidates if item.manifest.blind_lane), key=lambda item: item.manifest.id)[:blind_target],
-            *sorted((item for item in candidates if item.manifest.random_lane), key=lambda item: item.manifest.id)[:random_target],
+            *sorted(
+                (
+                    item
+                    for item in candidates
+                    if item.manifest.blind_lane
+                ),
+                key=lambda item: item.manifest.id,
+            )[:blind_target],
+            *sorted(
+                (
+                    item
+                    for item in candidates
+                    if item.manifest.random_lane
+                ),
+                key=lambda item: item.manifest.id,
+            )[:random_target],
         ]
 
         def score(strategy: NextStrategy) -> tuple[float, int, str]:
-            belief = beliefs.score_strategy(strategy.manifest.id) if beliefs is not None else 0.0
-            exploration = policy.exploration_weight if strategy.manifest.random_lane else 0.0
-            uncertainty = policy.uncertainty_weight if strategy.manifest.blind_lane else 0.0
-            return (belief + exploration + uncertainty - 0.01 * strategy.manifest.cost_tier,
-                    -strategy.manifest.cost_tier, strategy.manifest.id)
+            belief = (
+                beliefs.score_strategy(strategy.manifest.id)
+                if beliefs is not None
+                else 0.0
+            )
+            exploration = (
+                policy.exploration_weight
+                if strategy.manifest.random_lane
+                else 0.0
+            )
+            uncertainty = (
+                policy.uncertainty_weight
+                if strategy.manifest.blind_lane
+                else 0.0
+            )
+            return (
+                belief
+                + exploration
+                + uncertainty
+                - 0.01 * strategy.manifest.cost_tier,
+                -strategy.manifest.cost_tier,
+                strategy.manifest.id,
+            )
 
-        ordered = sorted(candidates, key=lambda item: (-score(item)[0], item.manifest.id))
+        ordered = sorted(
+            candidates,
+            key=lambda item: (-score(item)[0], item.manifest.id),
+        )
         selected: list[NextStrategy] = []
         family_counts: dict[str, int] = defaultdict(int)
         for strategy in (*required, *protected, *ordered):
             if strategy in selected:
                 continue
             family = strategy.manifest.family
-            if policy.maximum_per_family is not None and family_counts[family] >= policy.maximum_per_family:
+            if (
+                policy.maximum_per_family is not None
+                and family_counts[family] >= policy.maximum_per_family
+            ):
                 continue
             selected.append(strategy)
             family_counts[family] += 1
             if len(selected) >= budget.max_strategy_calls:
                 break
         selected_ids = {item.manifest.id for item in selected}
-        skipped = tuple(item for item in all_strategies if item.manifest.id not in selected_ids)
+        skipped = tuple(
+            item
+            for item in all_strategies
+            if item.manifest.id not in selected_ids
+        )
         return tuple(selected), skipped
 
     @staticmethod
@@ -288,12 +387,16 @@ class WhatIsNextEngine:
                 return StrategyOutcome(
                     strategy.manifest.id,
                     question.id,
-                    diagnostics=(f"strategy raised {type(exc).__name__}: {exc}",),
+                    diagnostics=(
+                        f"strategy raised {type(exc).__name__}: {exc}",
+                    ),
                     abstained=True,
                 )
 
         outcomes: dict[str, StrategyOutcome] = {}
-        with ThreadPoolExecutor(max_workers=min(budget.max_parallel, len(strategies))) as pool:
+        with ThreadPoolExecutor(
+            max_workers=min(budget.max_parallel, len(strategies))
+        ) as pool:
             futures = {
                 pool.submit(invoke, index, strategy): strategy.manifest.id
                 for index, strategy in enumerate(strategies)
@@ -309,11 +412,17 @@ class WhatIsNextEngine:
             outcome = outcomes[strategy.manifest.id]
             remaining = max(0, budget.max_proposals - proposal_count)
             proposals = outcome.proposals[:remaining]
-            if budget.max_cost_units is not None and cost + outcome.cost_units > budget.max_cost_units:
+            if (
+                budget.max_cost_units is not None
+                and cost + outcome.cost_units > budget.max_cost_units
+            ):
                 outcome = replace(
                     outcome,
                     proposals=(),
-                    diagnostics=(*outcome.diagnostics, "strategy outcome excluded by cost budget"),
+                    diagnostics=(
+                        *outcome.diagnostics,
+                        "strategy outcome excluded by cost budget",
+                    ),
                     abstained=True,
                 )
             else:
@@ -324,7 +433,9 @@ class WhatIsNextEngine:
         return tuple(ordered)
 
     @staticmethod
-    def _cluster(outcomes: Sequence[StrategyOutcome]) -> tuple[ProposalCluster, ...]:
+    def _cluster(
+        outcomes: Sequence[StrategyOutcome],
+    ) -> tuple[ProposalCluster, ...]:
         groups: dict[str, list[NextActionProposal]] = defaultdict(list)
         for outcome in outcomes:
             for proposal in outcome.proposals:
@@ -334,8 +445,11 @@ class WhatIsNextEngine:
             representative = max(
                 members,
                 key=lambda item: (
-                    item.expected_utility + item.expected_information_gain + item.confidence
-                    - item.uncertainty - item.expected_cost,
+                    item.expected_utility
+                    + item.expected_information_gain
+                    + item.confidence
+                    - item.uncertainty
+                    - item.expected_cost,
                     item.id,
                 ),
             )
@@ -344,20 +458,30 @@ class WhatIsNextEngine:
                     semantic_identity=identity,
                     representative=representative,
                     member_ids=tuple(sorted(item.id for item in members)),
-                    strategy_ids=tuple(sorted({item.strategy_id for item in members})),
-                    aggregate_confidence=fmean(item.confidence for item in members),
-                    aggregate_uncertainty=fmean(item.uncertainty for item in members),
+                    strategy_ids=tuple(
+                        sorted({item.strategy_id for item in members})
+                    ),
+                    aggregate_confidence=fmean(
+                        item.confidence for item in members
+                    ),
+                    aggregate_uncertainty=fmean(
+                        item.uncertainty for item in members
+                    ),
                 )
             )
         return tuple(clusters)
 
     @staticmethod
-    def _cluster_score(cluster: ProposalCluster, policy: DecisionPolicy) -> float:
+    def _cluster_score(
+        cluster: ProposalCluster,
+        policy: DecisionPolicy,
+    ) -> float:
         item = cluster.representative
         diversity = max(0, len(cluster.strategy_ids) - 1)
         return (
             policy.utility_weight * item.expected_utility
-            + policy.information_gain_weight * item.expected_information_gain
+            + policy.information_gain_weight
+            * item.expected_information_gain
             + policy.confidence_weight * cluster.aggregate_confidence
             + policy.priority_weight * item.priority
             + policy.diversity_bonus * diversity
@@ -372,7 +496,11 @@ class WhatIsNextEngine:
         budget: NextBudget,
         policy: DecisionPolicy,
     ) -> NextDecision:
-        eligible = [item for item in ranked if item.aggregate_confidence >= policy.minimum_confidence]
+        eligible = [
+            item
+            for item in ranked
+            if item.aggregate_confidence >= policy.minimum_confidence
+        ]
         if not eligible:
             return NextDecision(
                 id=f"decision.{question.id}.defer",
@@ -401,7 +529,10 @@ class WhatIsNextEngine:
                 proposal = cluster.representative
                 if len(selected) >= budget.max_actions:
                     break
-                if not proposal.parallel_safe or occupied & set(proposal.conflict_keys):
+                if (
+                    not proposal.parallel_safe
+                    or occupied & set(proposal.conflict_keys)
+                ):
                     continue
                 selected.append(cluster)
                 occupied.update(proposal.conflict_keys)
@@ -410,19 +541,29 @@ class WhatIsNextEngine:
             id=f"decision.{question.id}.{disposition}",
             question_id=question.id,
             disposition=disposition,
-            selected_proposal_ids=tuple(item.representative.id for item in selected),
+            selected_proposal_ids=tuple(
+                item.representative.id for item in selected
+            ),
             rationale=(
                 "Selected a conflict-free portfolio of ready next actions."
                 if len(selected) > 1
                 else selected[0].representative.rationale
             ),
-            confidence=fmean(item.aggregate_confidence for item in selected),
+            confidence=fmean(
+                item.aggregate_confidence for item in selected
+            ),
             ranked_cluster_digests=tuple(item.digest for item in ranked),
         )
 
 
 class QuestionFactory(Protocol):
-    def build(self, state: KnowledgeState, *, iteration: int, depth: int) -> NextQuestion: ...
+    def build(
+        self,
+        state: KnowledgeState,
+        *,
+        iteration: int,
+        depth: int,
+    ) -> NextQuestion: ...
 
 
 @dataclass(frozen=True)
@@ -432,7 +573,13 @@ class DefaultQuestionFactory:
     context_policy_id: str = "context.selective"
     allowed_action_kinds: tuple[str, ...] = ()
 
-    def build(self, state: KnowledgeState, *, iteration: int, depth: int) -> NextQuestion:
+    def build(
+        self,
+        state: KnowledgeState,
+        *,
+        iteration: int,
+        depth: int,
+    ) -> NextQuestion:
         return NextQuestion(
             id=f"question.solver-cell-{iteration}",
             state_digest=state.digest,
@@ -441,12 +588,18 @@ class DefaultQuestionFactory:
             context_policy_id=self.context_policy_id,
             recipe_ref=state.recipe_ref,
             depth=depth,
-            allowed_action_kinds=self.allowed_action_kinds or CORE_ACTION_KINDS,
+            allowed_action_kinds=(
+                self.allowed_action_kinds or CORE_ACTION_KINDS
+            ),
         )
 
 
 class ActionExecutor(Protocol):
-    def execute(self, proposal: NextActionProposal, state: KnowledgeState) -> ActionResult: ...
+    def execute(
+        self,
+        proposal: NextActionProposal,
+        state: KnowledgeState,
+    ) -> ActionResult: ...
 
 
 class StateReducer(Protocol):
@@ -460,7 +613,7 @@ class StateReducer(Protocol):
 
 
 class AppendOnlyStateReducer:
-    """Reference reducer that adds evidence and removes explicitly resolved unknowns."""
+    """Add evidence and remove only explicitly resolved unknowns."""
 
     def reduce(
         self,
@@ -481,9 +634,13 @@ class AppendOnlyStateReducer:
         return replace(
             state,
             revision=f"{state.revision}.{iteration + 1}",
-            references=tuple(references[key] for key in sorted(references)),
+            references=tuple(
+                references[key] for key in sorted(references)
+            ),
             facts=tuple(facts[key] for key in sorted(facts)),
-            unknowns=tuple(item for item in state.unknowns if item.id not in resolved),
+            unknowns=tuple(
+                item for item in state.unknowns if item.id not in resolved
+            ),
             parent_state_digest=state.digest,
         )
 
@@ -511,6 +668,24 @@ class SolverCell:
         self.reducer = reducer or AppendOnlyStateReducer()
         self.question_factory = question_factory or DefaultQuestionFactory()
 
+    def _execute_action(
+        self,
+        proposal: NextActionProposal,
+        state: KnowledgeState,
+    ) -> ActionResult:
+        try:
+            return self.executor.execute(proposal, state)
+        except Exception as exc:
+            return ActionResult(
+                proposal_id=proposal.id,
+                outcome="failed",
+                failure_class="next.action-executor-exception",
+                details={
+                    "exception_type": type(exc).__name__,
+                    "message": str(exc),
+                },
+            )
+
     def run(
         self,
         initial_state: KnowledgeState,
@@ -535,7 +710,11 @@ class SolverCell:
         reason = "Solver Cell iteration budget exhausted."
 
         for iteration in range(budget.max_iterations):
-            question = self.question_factory.build(state, iteration=iteration, depth=depth)
+            question = self.question_factory.build(
+                state,
+                iteration=iteration,
+                depth=depth,
+            )
             receipt = self.engine.decide(
                 state,
                 question,
@@ -551,7 +730,11 @@ class SolverCell:
             )
             decisions.append(receipt)
             if receipt.decision.disposition in ("stop", "defer"):
-                terminal = "stop" if receipt.decision.disposition == "stop" else "blocked"
+                terminal = (
+                    "stop"
+                    if receipt.decision.disposition == "stop"
+                    else "blocked"
+                )
                 reason = receipt.decision.rationale
                 break
 
@@ -560,16 +743,33 @@ class SolverCell:
                 for outcome in receipt.outcomes
                 for proposal in outcome.proposals
             }
-            selected = [proposal_map[item] for item in receipt.decision.selected_proposal_ids]
+            selected = [
+                proposal_map[item]
+                for item in receipt.decision.selected_proposal_ids
+            ]
             if receipt.decision.disposition == "parallel" and len(selected) > 1:
-                with ThreadPoolExecutor(max_workers=min(budget.max_parallel, len(selected))) as pool:
-                    futures = {pool.submit(self.executor.execute, item, state): item.id for item in selected}
-                    result_map = {futures[future]: future.result() for future in as_completed(futures)}
+                with ThreadPoolExecutor(
+                    max_workers=min(budget.max_parallel, len(selected))
+                ) as pool:
+                    futures = {
+                        pool.submit(self._execute_action, item, state): item.id
+                        for item in selected
+                    }
+                    result_map = {
+                        futures[future]: future.result()
+                        for future in as_completed(futures)
+                    }
                 results = tuple(result_map[item.id] for item in selected)
             else:
-                results = tuple(self.executor.execute(item, state) for item in selected)
+                results = tuple(
+                    self._execute_action(item, state) for item in selected
+                )
 
-            next_state = self.reducer.reduce(state, results, iteration=iteration)
+            next_state = self.reducer.reduce(
+                state,
+                results,
+                iteration=iteration,
+            )
             progressed = next_state.digest != state.digest and any(
                 result.outcome == "succeeded" for result in results
             )
@@ -587,16 +787,21 @@ class SolverCell:
             state = next_state
             if no_progress >= budget.max_no_progress:
                 terminal = "blocked"
-                reason = "No measurable progress within the configured ceiling."
+                reason = (
+                    "No measurable progress within the configured ceiling."
+                )
                 break
 
         cell_receipt = SolverCellReceipt(
-            id="solver-cell-receipt." + sha256_digest({
-                "initial": initial_state.digest,
-                "final": state.digest,
-                "iterations": [item.digest for item in iterations],
-                "terminal": terminal,
-            }).removeprefix("sha256:")[:24],
+            id="solver-cell-receipt."
+            + sha256_digest(
+                {
+                    "initial": initial_state.digest,
+                    "final": state.digest,
+                    "iterations": [item.digest for item in iterations],
+                    "terminal": terminal,
+                }
+            ).removeprefix("sha256:")[:24],
             initial_state_digest=initial_state.digest,
             final_state_digest=state.digest,
             iteration_receipts=tuple(iterations),
@@ -607,8 +812,17 @@ class SolverCell:
 
 
 __all__ = [
-    "ENGINE_MODEL_VERSION", "ActionExecutor", "AppendOnlyStateReducer",
-    "DefaultQuestionFactory", "NextEngineResult", "QuestionFactory", "RankedCluster",
-    "SolverCell", "SolverCellResult", "StateReducer", "StrategyBeliefs",
-    "StrategySelectionPolicy", "WhatIsNextEngine",
+    "ENGINE_MODEL_VERSION",
+    "ActionExecutor",
+    "AppendOnlyStateReducer",
+    "DefaultQuestionFactory",
+    "NextEngineResult",
+    "QuestionFactory",
+    "RankedCluster",
+    "SolverCell",
+    "SolverCellResult",
+    "StateReducer",
+    "StrategyBeliefs",
+    "StrategySelectionPolicy",
+    "WhatIsNextEngine",
 ]
