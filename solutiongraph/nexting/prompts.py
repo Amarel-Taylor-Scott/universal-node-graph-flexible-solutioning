@@ -1,17 +1,18 @@
 """Context exposure, prompt frames, personas, and lazy prompt variation.
 
-Knowledge is larger than a prompt.  A context policy selects which summaries a
+Knowledge is larger than a prompt. A context policy selects which summaries a
 specific strategy may inspect, and a ContextManifest records both included and
-omitted references.  Prompt variation is represented as a lazy Cartesian space
+omitted references. Prompt variation is represented as a lazy Cartesian space
 rather than millions of copied strings.
 """
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from itertools import product
 from math import prod
 from random import Random
-from typing import Any, Mapping, Sequence
+from typing import Any
 
 from solutiongraph.model import ID_RE, canonical_json, sha256_digest
 from solutiongraph.nexting.contracts import KnowledgeState, NextQuestion
@@ -35,7 +36,7 @@ class ContextExposurePolicy:
     extensions: Mapping[str, Any] = field(default_factory=dict)
 
     @classmethod
-    def blind(cls) -> "ContextExposurePolicy":
+    def blind(cls) -> ContextExposurePolicy:
         return cls(
             id="context.blind",
             mode="blind",
@@ -46,15 +47,15 @@ class ContextExposurePolicy:
         )
 
     @classmethod
-    def minimal(cls) -> "ContextExposurePolicy":
+    def minimal(cls) -> ContextExposurePolicy:
         return cls(id="context.minimal", mode="minimal", maximum_references=0)
 
     @classmethod
-    def selective(cls) -> "ContextExposurePolicy":
+    def selective(cls) -> ContextExposurePolicy:
         return cls(id="context.selective", mode="selective")
 
     @classmethod
-    def full(cls) -> "ContextExposurePolicy":
+    def full(cls) -> ContextExposurePolicy:
         return cls(id="context.full", mode="full", maximum_references=None)
 
     @property
@@ -65,7 +66,13 @@ class ContextExposurePolicy:
         problems: list[str] = []
         if not ID_RE.fullmatch(self.id):
             problems.append("context policy id must be namespaced")
-        if self.mode not in ("blind", "minimal", "selective", "summary", "full"):
+        if self.mode not in (
+            "blind",
+            "minimal",
+            "selective",
+            "summary",
+            "full",
+        ):
             problems.append("context policy mode is invalid")
         for label, values in (
             ("include_tags", self.include_tags),
@@ -123,7 +130,14 @@ class PersonaFrame:
         problems: list[str] = []
         if not ID_RE.fullmatch(self.id):
             problems.append("persona id must be namespaced")
-        for label in ("role", "stance", "language", "era", "objective", "resource_regime"):
+        for label in (
+            "role",
+            "stance",
+            "language",
+            "era",
+            "objective",
+            "resource_regime",
+        ):
             if not getattr(self, label).strip():
                 problems.append(f"persona {label} must not be empty")
         return problems
@@ -132,7 +146,6 @@ class PersonaFrame:
         return self.__dict__.copy()
 
 
-# More descriptive alias used by some authoring APIs.
 PromptPersona = PersonaFrame
 
 
@@ -256,16 +269,32 @@ class PromptComposer:
         if policy.maximum_references is not None:
             selected = selected[: policy.maximum_references]
         selected_ids = {item.id for item in selected}
-        omitted = tuple(item.id for item in state.references if item.id not in selected_ids)
+        omitted = tuple(
+            item.id for item in state.references if item.id not in selected_ids
+        )
         return tuple(selected), omitted
 
-    def compose(self, context: PromptContext) -> tuple[PromptFrame, ContextManifest, str]:
-        problems = (*context.state.validate(), *context.question.validate(),
-                    *context.exposure.validate(), *context.persona.validate())
+    def compose(
+        self,
+        context: PromptContext,
+    ) -> tuple[PromptFrame, ContextManifest, str]:
+        problems = (
+            *context.state.validate(),
+            *context.question.validate(),
+            *context.exposure.validate(),
+            *context.persona.validate(),
+        )
         if problems:
             raise ValueError("invalid prompt context: " + "; ".join(problems))
-        references, omitted = self.select_references(context.state, context.exposure)
-        known_lines = [f"- {item.id}: {item.summary}" for item in references if item.summary]
+        references, omitted = self.select_references(
+            context.state,
+            context.exposure,
+        )
+        known_lines = [
+            f"- {item.id}: {item.summary}"
+            for item in references
+            if item.summary
+        ]
         fact_ids: tuple[str, ...] = ()
         if context.exposure.include_facts:
             fact_ids = tuple(item.id for item in context.state.facts)
@@ -279,10 +308,13 @@ class PromptComposer:
         if context.exposure.include_unknowns:
             unknown_ids = tuple(item.id for item in context.state.unknowns)
             unknown_summary = "\n".join(
-                f"- {item.id}: {item.question} (importance={item.importance:.2f})"
+                f"- {item.id}: {item.question} "
+                f"(importance={item.importance:.2f})"
                 for item in context.state.unknowns
             )
-        known_summary = "\n".join(known_lines)[: context.exposure.maximum_summary_chars]
+        known_summary = "\n".join(known_lines)[
+            : context.exposure.maximum_summary_chars
+        ]
         frame = PromptFrame(
             system_instruction=context.system_instruction,
             original_task=context.original_task,
@@ -293,7 +325,11 @@ class PromptComposer:
             unknown_summary=unknown_summary,
             graph_summary=context.graph_summary,
             recipe_summary=context.recipe_summary,
-            prior_attempts=(context.prior_attempts if context.exposure.include_prior_attempts else ""),
+            prior_attempts=(
+                context.prior_attempts
+                if context.exposure.include_prior_attempts
+                else ""
+            ),
             constraints=context.constraints,
             persona=context.persona,
             response_contract=context.response_contract,
@@ -317,21 +353,31 @@ class PromptComposer:
 
     @staticmethod
     def render(frame: PromptFrame) -> str:
+        persona_lines = filter(
+            None,
+            (
+                f"Role: {frame.persona.role}",
+                f"Stance: {frame.persona.stance}",
+                (
+                    f"Theory: {frame.persona.theory}"
+                    if frame.persona.theory
+                    else ""
+                ),
+                (
+                    f"Analogy: {frame.persona.analogy}"
+                    if frame.persona.analogy
+                    else ""
+                ),
+                f"Language: {frame.persona.language}",
+                f"Era: {frame.persona.era}",
+                f"Objective: {frame.persona.objective}",
+                f"Resource regime: {frame.persona.resource_regime}",
+                frame.persona.additional_instruction,
+            ),
+        )
         sections = [
             ("SYSTEM", frame.system_instruction),
-            ("PERSONA", "\n".join(
-                filter(None, (
-                    f"Role: {frame.persona.role}",
-                    f"Stance: {frame.persona.stance}",
-                    f"Theory: {frame.persona.theory}" if frame.persona.theory else "",
-                    f"Analogy: {frame.persona.analogy}" if frame.persona.analogy else "",
-                    f"Language: {frame.persona.language}",
-                    f"Era: {frame.persona.era}",
-                    f"Objective: {frame.persona.objective}",
-                    f"Resource regime: {frame.persona.resource_regime}",
-                    frame.persona.additional_instruction,
-                ))
-            )),
+            ("PERSONA", "\n".join(persona_lines)),
             ("ORIGINAL TASK", frame.original_task),
             ("SIMPLIFIED TASK", frame.simplified_task),
             ("DELEGATED GOAL", frame.delegated_goal),
@@ -347,7 +393,9 @@ class PromptComposer:
             ("ADDITIONAL INSTRUCTION", frame.additional_instruction),
             ("RESPONSE CONTRACT", frame.response_contract),
         ]
-        return "\n\n".join(f"## {title}\n{text}" for title, text in sections if text.strip())
+        return "\n\n".join(
+            f"## {title}\n{text}" for title, text in sections if text.strip()
+        )
 
 
 @dataclass(frozen=True)
@@ -377,21 +425,24 @@ class PromptGenome:
         return dict(self.assignments)
 
 
-# Descriptive alias retained for callers that think of one rendered combination.
 PromptVariant = PromptGenome
 
 
 class PromptVariantSpace:
-    """Mixed-radix access to a prompt Cartesian product without materialization."""
+    """Mixed-radix access to a prompt product without materialization."""
 
     def __init__(self, axes: Sequence[PromptAxis]) -> None:
         self.axes = tuple(axes)
-        problems = [problem for axis in self.axes for problem in axis.validate()]
+        problems = [
+            problem for axis in self.axes for problem in axis.validate()
+        ]
         ids = [axis.id for axis in self.axes]
         if len(ids) != len(set(ids)):
             problems.append("prompt axis ids must be unique")
         if problems:
-            raise ValueError("invalid prompt variant space: " + "; ".join(problems))
+            raise ValueError(
+                "invalid prompt variant space: " + "; ".join(problems)
+            )
 
     @property
     def cardinality(self) -> int:
@@ -413,18 +464,35 @@ class PromptVariantSpace:
             raise ValueError("count must be non-negative")
         count = min(count, self.cardinality)
         random = Random(seed)
-        return tuple(self.at(index) for index in random.sample(range(self.cardinality), count))
+        return tuple(
+            self.at(index)
+            for index in random.sample(range(self.cardinality), count)
+        )
 
     def iter_all(self):
         if not self.axes:
             yield PromptGenome(())
             return
         for values in product(*(axis.values for axis in self.axes)):
-            yield PromptGenome(tuple((axis.id, value) for axis, value in zip(self.axes, values, strict=True)))
+            yield PromptGenome(
+                tuple(
+                    (axis.id, value)
+                    for axis, value in zip(self.axes, values, strict=True)
+                )
+            )
 
 
 __all__ = [
-    "PROMPT_MODEL_VERSION", "ContextExposurePolicy", "ContextManifest",
-    "PersonaFrame", "PromptAxis", "PromptComposer", "PromptContext", "PromptFrame",
-    "PromptGenome", "PromptPersona", "PromptVariant", "PromptVariantSpace",
+    "PROMPT_MODEL_VERSION",
+    "ContextExposurePolicy",
+    "ContextManifest",
+    "PersonaFrame",
+    "PromptAxis",
+    "PromptComposer",
+    "PromptContext",
+    "PromptFrame",
+    "PromptGenome",
+    "PromptPersona",
+    "PromptVariant",
+    "PromptVariantSpace",
 ]
