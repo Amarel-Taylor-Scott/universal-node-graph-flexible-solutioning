@@ -102,7 +102,7 @@ packages = [
     "solutiongraph.design_atlas.nodes", "solutiongraph.design_atlas.data",
     "solutiongraph.agent_bench", "solutiongraph.agent_bench.tasks",
     "solutiongraph.universal", "solutiongraph.integrations",
-    "solutiongraph.specialized",
+    "solutiongraph.specialized", "solutiongraph.nexting",
     "browsergraph", "browsergraph.nodes", "browsergraph.drivers",
     "browsergraph.dimensions", "browsergraph.extract", "browsergraph.classify",
     "browsergraph.tasks", "browsergraph.assets", "browsergraph.schemas",
