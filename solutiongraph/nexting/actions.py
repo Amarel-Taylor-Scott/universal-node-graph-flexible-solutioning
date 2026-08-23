@@ -7,9 +7,10 @@ introduced by plugins and validated by their own schemas.
 """
 from __future__ import annotations
 
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from math import isfinite
-from typing import Any, Mapping, Union
+from typing import Any
 
 from solutiongraph.model import ID_RE, canonical_json, sha256_digest
 
@@ -362,17 +363,17 @@ class StopRequest:
         }
 
 
-ActionPayload = Union[
-    ContextRequest,
-    ProbeRequest,
-    ResearchRequest,
-    GraphChangeRequest,
-    OptimizationRequest,
-    ExperimentRequest,
-    CouncilRequest,
-    SubloopRequest,
-    StopRequest,
-]
+ActionPayload = (
+    ContextRequest
+    | ProbeRequest
+    | ResearchRequest
+    | GraphChangeRequest
+    | OptimizationRequest
+    | ExperimentRequest
+    | CouncilRequest
+    | SubloopRequest
+    | StopRequest
+)
 
 REFERENCE_PAYLOAD_TYPES = {
     "next.gather-context": ContextRequest,
