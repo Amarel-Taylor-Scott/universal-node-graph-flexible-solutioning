@@ -1,14 +1,15 @@
 """Evidence-only learning for What-Is-Next allocation.
 
-Beliefs may reorder or allocate proposal strategies.  They cannot change task
+Beliefs may reorder or allocate proposal strategies. They cannot change task
 meaning, make an invalid graph valid, grant authority, or replace independent
 execution and evaluation evidence.
 """
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass
 from math import isfinite, sqrt
-from typing import Any, Sequence
+from typing import Any
 
 from solutiongraph.model import ID_RE, sha256_digest
 
@@ -25,7 +26,10 @@ class FactorWeight:
 
     def validate(self) -> list[str]:
         problems: list[str] = []
-        for label, value in (("factor_kind", self.factor_kind), ("factor_id", self.factor_id)):
+        for label, value in (
+            ("factor_kind", self.factor_kind),
+            ("factor_id", self.factor_id),
+        ):
             if not ID_RE.fullmatch(value):
                 problems.append(f"{label} must be namespaced")
         if not isfinite(self.mean_reward):
@@ -53,16 +57,24 @@ class StrategyEvidence:
 
     def validate(self) -> list[str]:
         problems: list[str] = []
-        for label, value in (("strategy_id", self.strategy_id), ("action_kind", self.action_kind)):
+        for label, value in (
+            ("strategy_id", self.strategy_id),
+            ("action_kind", self.action_kind),
+        ):
             if not ID_RE.fullmatch(value):
                 problems.append(f"{label} must be namespaced")
-        for label, value in (("context_policy_id", self.context_policy_id),
-                             ("model_id", self.model_id), ("receipt_id", self.receipt_id)):
+        for label, value in (
+            ("context_policy_id", self.context_policy_id),
+            ("model_id", self.model_id),
+            ("receipt_id", self.receipt_id),
+        ):
             if value and not ID_RE.fullmatch(value):
                 problems.append(f"{label} must be empty or namespaced")
         if not isfinite(self.reward):
             problems.append("reward must be finite")
-        if len(self.tags) != len(set(self.tags)) or any(not ID_RE.fullmatch(item) for item in self.tags):
+        if len(self.tags) != len(set(self.tags)) or any(
+            not ID_RE.fullmatch(item) for item in self.tags
+        ):
             problems.append("tags must contain unique namespaced identifiers")
         return problems
 
@@ -111,10 +123,15 @@ class NextBeliefModel:
         score = self.factor_score("factor.strategy", observation.strategy_id)
         score += self.factor_score("factor.action-kind", observation.action_kind)
         if observation.context_policy_id:
-            score += self.factor_score("factor.context-policy", observation.context_policy_id)
+            score += self.factor_score(
+                "factor.context-policy",
+                observation.context_policy_id,
+            )
         if observation.model_id:
             score += self.factor_score("factor.model", observation.model_id)
-        score += sum(self.factor_score("factor.tag", tag) for tag in observation.tags)
+        score += sum(
+            self.factor_score("factor.tag", tag) for tag in observation.tags
+        )
         return score
 
     def to_dict(self) -> dict[str, Any]:
@@ -133,7 +150,9 @@ class BeliefUpdater:
         self.rejection_reward = rejection_reward
 
     @staticmethod
-    def _factor_keys(observation: StrategyEvidence) -> tuple[tuple[str, str], ...]:
+    def _factor_keys(
+        observation: StrategyEvidence,
+    ) -> tuple[tuple[str, str], ...]:
         keys = [
             ("factor.strategy", observation.strategy_id),
             ("factor.action-kind", observation.action_kind),
@@ -166,7 +185,11 @@ class BeliefUpdater:
             for key, item in by_key.items()
         }
         for observation in observations:
-            reward = observation.reward if observation.accepted else self.rejection_reward
+            reward = (
+                observation.reward
+                if observation.accepted
+                else self.rejection_reward
+            )
             for key in self._factor_keys(observation):
                 total, count = totals.get(key, (0.0, 0))
                 totals[key] = (total + reward, count + 1)
@@ -175,7 +198,9 @@ class BeliefUpdater:
         for (kind, factor_id), (total, count) in sorted(totals.items()):
             mean = total / count if count else 0.0
             uncertainty = 1.0 / sqrt(max(1, count))
-            factors.append(FactorWeight(kind, factor_id, mean, count, uncertainty))
+            factors.append(
+                FactorWeight(kind, factor_id, mean, count, uncertainty)
+            )
         return NextBeliefModel(
             revision=revision,
             factors=tuple(factors),
@@ -184,6 +209,10 @@ class BeliefUpdater:
 
 
 __all__ = [
-    "LEARNING_MODEL_VERSION", "BeliefUpdater", "FactorWeight",
-    "LearningObservation", "NextBeliefModel", "StrategyEvidence",
+    "LEARNING_MODEL_VERSION",
+    "BeliefUpdater",
+    "FactorWeight",
+    "LearningObservation",
+    "NextBeliefModel",
+    "StrategyEvidence",
 ]
