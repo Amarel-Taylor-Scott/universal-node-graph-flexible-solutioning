@@ -1,8 +1,8 @@
 """Typed payload shells for universal What-Is-Next answer families.
 
-The control plane stores payloads as portable JSON mappings.  These frozen
+The control plane stores payloads as portable JSON mappings. These frozen
 classes provide optional typed authoring helpers without turning the action
-vocabulary into a closed enum.  Unknown namespaced action kinds may still be
+vocabulary into a closed enum. Unknown namespaced action kinds may still be
 introduced by plugins and validated by their own schemas.
 """
 from __future__ import annotations
@@ -14,6 +14,16 @@ from typing import Any, Mapping, Union
 from solutiongraph.model import ID_RE, canonical_json, sha256_digest
 
 ACTION_PAYLOAD_MODEL_VERSION = "0.1"
+GRAPH_CHANGE_ACTIONS = (
+    "next.mutate-graph",
+    "next.propose-graph",
+    "next.propose-subgraph",
+    "next.propose-node",
+    "next.replace-node",
+)
+OPTIMIZATION_ACTIONS = ("next.configure", "next.optimize")
+EXPERIMENT_ACTIONS = ("next.evaluate", "next.compare")
+TERMINAL_ACTIONS = ("next.stop", "next.pause")
 
 
 def _ids(values: tuple[str, ...], label: str) -> list[str]:
@@ -73,7 +83,11 @@ class ProbeRequest:
     action_kind: str = field(default="next.run-probe", init=False)
 
     def validate(self) -> list[str]:
-        problems = [] if ID_RE.fullmatch(self.probe_kind) else ["probe_kind must be namespaced"]
+        problems = (
+            []
+            if ID_RE.fullmatch(self.probe_kind)
+            else ["probe_kind must be namespaced"]
+        )
         if not self.hypothesis.strip():
             problems.append("hypothesis must not be empty")
         problems.extend(_ids(self.input_refs, "input_refs"))
@@ -131,12 +145,16 @@ class GraphChangeRequest:
     operations: tuple[Mapping[str, Any], ...]
     hypothesis: str
     preserve_external_interface: bool = True
-
-    action_kind: str = field(default="next.mutate-graph", init=False)
+    action_kind: str = "next.mutate-graph"
 
     def validate(self) -> list[str]:
         problems: list[str] = []
-        for label, value in (("change_kind", self.change_kind), ("target_ref", self.target_ref)):
+        if self.action_kind not in GRAPH_CHANGE_ACTIONS:
+            problems.append("action_kind is not a graph-change action")
+        for label, value in (
+            ("change_kind", self.change_kind),
+            ("target_ref", self.target_ref),
+        ):
             if not ID_RE.fullmatch(value):
                 problems.append(f"{label} must be namespaced")
         if not self.operations:
@@ -149,6 +167,7 @@ class GraphChangeRequest:
     def to_dict(self) -> dict[str, Any]:
         return {
             "payload_model_version": ACTION_PAYLOAD_MODEL_VERSION,
+            "action_kind": self.action_kind,
             "change_kind": self.change_kind,
             "target_ref": self.target_ref,
             "operations": [dict(item) for item in self.operations],
@@ -164,11 +183,12 @@ class OptimizationRequest:
     search_space_ref: str
     budget_ref: str = ""
     optimizer_family: str = "optimizer.adaptive"
-
-    action_kind: str = field(default="next.optimize", init=False)
+    action_kind: str = "next.optimize"
 
     def validate(self) -> list[str]:
         problems: list[str] = []
+        if self.action_kind not in OPTIMIZATION_ACTIONS:
+            problems.append("action_kind is not an optimization action")
         for label, value in (
             ("target_ref", self.target_ref),
             ("search_space_ref", self.search_space_ref),
@@ -186,6 +206,7 @@ class OptimizationRequest:
     def to_dict(self) -> dict[str, Any]:
         return {
             "payload_model_version": ACTION_PAYLOAD_MODEL_VERSION,
+            "action_kind": self.action_kind,
             "target_ref": self.target_ref,
             "objective_ids": list(self.objective_ids),
             "search_space_ref": self.search_space_ref,
@@ -201,11 +222,12 @@ class ExperimentRequest:
     objective_ids: tuple[str, ...]
     fidelity: float = 1.0
     repetitions: int = 1
-
-    action_kind: str = field(default="next.evaluate", init=False)
+    action_kind: str = "next.evaluate"
 
     def validate(self) -> list[str]:
         problems: list[str] = []
+        if self.action_kind not in EXPERIMENT_ACTIONS:
+            problems.append("action_kind is not an experiment action")
         for label, values in (
             ("candidate_refs", self.candidate_refs),
             ("case_refs", self.case_refs),
@@ -223,6 +245,7 @@ class ExperimentRequest:
     def to_dict(self) -> dict[str, Any]:
         return {
             "payload_model_version": ACTION_PAYLOAD_MODEL_VERSION,
+            "action_kind": self.action_kind,
             "candidate_refs": list(self.candidate_refs),
             "case_refs": list(self.case_refs),
             "objective_ids": list(self.objective_ids),
@@ -245,7 +268,10 @@ class CouncilRequest:
         problems = _ids(self.member_strategy_ids, "member_strategy_ids")
         if not self.member_strategy_ids:
             problems.append("member_strategy_ids must not be empty")
-        for label, value in (("aggregation", self.aggregation), ("question_ref", self.question_ref)):
+        for label, value in (
+            ("aggregation", self.aggregation),
+            ("question_ref", self.question_ref),
+        ):
             if not ID_RE.fullmatch(value):
                 problems.append(f"{label} must be namespaced")
         if self.maximum_rounds <= 0:
@@ -308,14 +334,20 @@ class StopRequest:
     reason: str
     terminal_disposition: str = "stop"
     unresolved_refs: tuple[str, ...] = ()
-
-    action_kind: str = field(default="next.stop", init=False)
+    action_kind: str = "next.stop"
 
     def validate(self) -> list[str]:
         problems: list[str] = []
+        if self.action_kind not in TERMINAL_ACTIONS:
+            problems.append("action_kind is not a terminal action")
         if not self.reason.strip():
             problems.append("reason must not be empty")
-        if self.terminal_disposition not in ("stop", "pause", "blocked", "exhausted"):
+        if self.terminal_disposition not in (
+            "stop",
+            "pause",
+            "blocked",
+            "exhausted",
+        ):
             problems.append("terminal_disposition is invalid")
         problems.extend(_ids(self.unresolved_refs, "unresolved_refs"))
         return problems
@@ -323,6 +355,7 @@ class StopRequest:
     def to_dict(self) -> dict[str, Any]:
         return {
             "payload_model_version": ACTION_PAYLOAD_MODEL_VERSION,
+            "action_kind": self.action_kind,
             "reason": self.reason,
             "terminal_disposition": self.terminal_disposition,
             "unresolved_refs": list(self.unresolved_refs),
@@ -345,27 +378,25 @@ REFERENCE_PAYLOAD_TYPES = {
     "next.gather-context": ContextRequest,
     "next.run-probe": ProbeRequest,
     "next.research": ResearchRequest,
-    "next.mutate-graph": GraphChangeRequest,
-    "next.propose-graph": GraphChangeRequest,
-    "next.propose-subgraph": GraphChangeRequest,
-    "next.propose-node": GraphChangeRequest,
-    "next.replace-node": GraphChangeRequest,
-    "next.configure": OptimizationRequest,
-    "next.optimize": OptimizationRequest,
-    "next.evaluate": ExperimentRequest,
-    "next.compare": ExperimentRequest,
+    **{kind: GraphChangeRequest for kind in GRAPH_CHANGE_ACTIONS},
+    **{kind: OptimizationRequest for kind in OPTIMIZATION_ACTIONS},
+    **{kind: ExperimentRequest for kind in EXPERIMENT_ACTIONS},
     "next.ask-council": CouncilRequest,
     "next.spawn-subloop": SubloopRequest,
-    "next.stop": StopRequest,
-    "next.pause": StopRequest,
+    **{kind: StopRequest for kind in TERMINAL_ACTIONS},
 }
 
 
 def action_payload_digest(payload: ActionPayload) -> str:
-    return sha256_digest({"action_kind": payload.action_kind, "payload": payload.to_dict()})
+    return sha256_digest(
+        {"action_kind": payload.action_kind, "payload": payload.to_dict()}
+    )
 
 
-def validate_action_payload(action_kind: str, payload: ActionPayload) -> list[str]:
+def validate_action_payload(
+    action_kind: str,
+    payload: ActionPayload,
+) -> list[str]:
     problems: list[str] = []
     if not ID_RE.fullmatch(action_kind):
         problems.append("action_kind must be namespaced")
@@ -380,7 +411,11 @@ def validate_action_payload(action_kind: str, payload: ActionPayload) -> list[st
 
 __all__ = [
     "ACTION_PAYLOAD_MODEL_VERSION",
+    "EXPERIMENT_ACTIONS",
+    "GRAPH_CHANGE_ACTIONS",
+    "OPTIMIZATION_ACTIONS",
     "REFERENCE_PAYLOAD_TYPES",
+    "TERMINAL_ACTIONS",
     "ActionPayload",
     "ContextRequest",
     "CouncilRequest",
