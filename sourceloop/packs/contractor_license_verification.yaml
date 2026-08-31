@@ -1,0 +1,80 @@
+id: contractor_license_verification
+name: Contractor License and Capability Verify
+product_family: SourceLoop Verify
+category: contractors
+case_kind: market_investigation
+investigation_mode: compliance_probe
+risk_tier: moderate
+restricted: false
+description: Verify a contractor's legal identity, public license claim, insurance representation, commercial capability, service territory, and current availability.
+max_contacts: 5
+max_followups: 1
+completion_target: 2
+allowed_channels:
+  - email
+required_fields:
+  - trade
+  - geography
+  - project_type
+optional_fields:
+  - license_required
+  - insurance_requirements
+  - project_window
+  - registry_results
+  - minimum_results
+prohibited_requirement_fields:
+  - private_home_address
+  - payment_credentials
+  - accept_offer
+  - fabricated_project
+stage_roles:
+  orient:
+    - case_supervisor
+  reconcile_horizon:
+    - jurisdiction_policy_agent
+    - risk_classifier
+  assess_prepare:
+    - scenario_compiler
+    - missing_information_critic
+  how:
+    - counterparty_discovery_agent
+    - registry_license_scout
+    - gis_scout
+    - identity_resolver
+    - contact_resolver
+  act:
+    - message_composer
+    - policy_critic
+  verify:
+    - extractor_a
+    - extractor_b
+    - investigation_extractor_a
+    - investigation_extractor_b
+    - discrepancy_auditor
+    - corroboration_agent
+  integrate_commit:
+    - evidence_curator
+    - graph_curator
+  route:
+    - completion_judge
+question_prompts:
+  - What legal entity performs the work and what license or registration number applies in the requested jurisdiction?
+  - Does the business currently perform the specified commercial or residential project type itself or through subcontractors?
+  - What service territory, current availability, lead time, minimum job size, and estimating route apply?
+  - Can the business confirm the requested insurance limits and provide a certificate through an authorized process if selected?
+  - Which elements remain subject to site review or a formal written quote?
+required_disclosures:
+  - claimed_license_number
+  - service_scope
+  - availability
+critical_finding_fields:
+  - claimed_license_number
+  - service_scope
+completion_policy: distinct_respondents
+followup_approval_required: true
+report_template: contractor_verification
+prohibited_actions:
+  - autonomous_contract_acceptance
+  - autonomous_purchase
+  - false_license_accusation
+  - hidden_requester

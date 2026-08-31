@@ -1,0 +1,38 @@
+# Local runtime state
+*.db
+*.sqlite
+*.sqlite3
+.sourceloop/
+evidence/
+*.eml
+
+# Credentials and local configuration
+.env
+.env.*.local
+!.env.example
+!.env.sandbox.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

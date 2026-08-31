@@ -1,0 +1,30 @@
+id: civic_intelligence
+name: Civic Infrastructure Intelligence
+description: Verify public organizations, public roles, service areas, meetings, and referral routes without private-person surveillance.
+case_kind: civic_intelligence
+investigation_mode: market_census
+risk_tier: elevated
+requires_requester_email: false
+max_contacts: 3
+max_followups: 1
+completion_target: 1
+completion_basis: results
+required_fields: [geography]
+optional_fields: [purpose, issue, requested_public_resource]
+question_prompts:
+  - What geography does the organization publicly serve?
+  - Which public organizational role handles this type of inquiry?
+  - Where are official public meetings or information resources published?
+  - Which public organization should receive the request if another is more appropriate?
+response_fields:
+  - {id: service_area, label: Public service area, question: Please confirm the geography served., markers: ["serve", "service area", "county", "municipality"] , critical: true}
+  - {id: inquiry_route, label: Public inquiry route, question: Please confirm the correct public role or inbox., markers: ["contact", "coordinator", "email", "inquiries"] , critical: true}
+  - {id: public_resource, label: Public meeting or resource, question: Please identify the official public calendar or resource., markers: ["calendar", "meeting", "website", "public"] , critical: true}
+prohibited_actions: [private_belief_inference, residential_mapping, attendee_identification, persuasion, fundraising, hidden_identity]
+message_purpose: verify public civic infrastructure and route a legitimate information request
+respondent_value: reduce misrouted inquiries and avoid repeatedly asking the same public question
+reuse_policy: public_only_with_permission
+demo_contacts:
+  - {organization_name: Demonstration County Civic Committee, role_title: Public inquiry coordinator, endpoint: info@county-civic.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration municipality, location: {latitude: 41.336, longitude: -75.048, label: Demonstration County Civic Committee, precision: public_office}}
+demo_replies:
+  - body: "Our organization serves the full county, including the requested municipality. The public inquiry coordinator at this email handles new inquiries. Official public meeting information is maintained on our public calendar and website."

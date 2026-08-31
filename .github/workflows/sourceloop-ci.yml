@@ -1,0 +1,150 @@
+name: SourceLoop CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/sourceloop-direct-source-intelligence-mvp
+    paths:
+      - "sourceloop/**"
+      - ".github/workflows/sourceloop-ci.yml"
+  pull_request:
+    paths:
+      - "sourceloop/**"
+      - ".github/workflows/sourceloop-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sourceloop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: sourceloop/pyproject.toml
+      - name: Install backend and test dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Compile
+        run: python -m compileall -q src
+      - name: Lint
+        run: ruff check src tests
+      - name: Test
+        run: pytest
+      - name: Build wheel and verify packaged vertical manifests
+        run: |
+          python -m pip wheel . --no-deps --wheel-dir /tmp/sourceloop-wheel
+          python - <<'PY'
+          import glob
+          import zipfile
+
+          wheel = glob.glob("/tmp/sourceloop-wheel/sourceloop-*.whl")
+          assert len(wheel) == 1, wheel
+          with zipfile.ZipFile(wheel[0]) as archive:
+              names = set(archive.namelist())
+          pack_names = {
+              "bpo_quote.yaml",
+              "business_record_verification.yaml",
+              "civic_intelligence.yaml",
+              "contractor_license_audit.yaml",
+              "employment_agency_audit.yaml",
+              "facilities_quote.yaml",
+              "franchise_service_audit.yaml",
+              "informal_business_verification.yaml",
+              "lender_disclosure_audit.yaml",
+              "local_services_quote.yaml",
+              "staffing_procurement.yaml",
+          }
+          expected = {f"sourceloop/vertical_packs/{name}" for name in pack_names}
+          missing = expected - names
+          assert not missing, f"Missing packaged vertical manifests: {sorted(missing)}"
+          PY
+      - name: Exercise every deterministic vertical pack
+        run: |
+          sourceloop list-packs > /tmp/sourceloop-pack-catalog.json
+          for kind in \
+            facilities_quote bpo_quote local_services_quote staffing_procurement \
+            civic_intelligence data_verification employment_agency_audit \
+            lender_disclosure_audit contractor_license_audit \
+            informal_business_verification franchise_service_audit
+          do
+            SOURCELOOP_DATABASE_URL="sqlite:////tmp/sourceloop-ci-${kind}.db" \
+              sourceloop demo --kind "$kind" > "/tmp/sourceloop-${kind}-demo.json"
+          done
+      - name: Publish deterministic demo receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-demo-receipts
+          path: |
+            /tmp/sourceloop-*-demo.json
+            /tmp/sourceloop-pack-catalog.json
+          if-no-files-found: error
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sourceloop/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install frontend dependencies
+        run: npm install --no-audit --no-fund
+      - name: Type-check and build
+        run: npm run build
+      - name: Publish operator console build
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-console
+          path: sourceloop/frontend/dist
+          if-no-files-found: error
+
+  container-correspondence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: sourceloop
+    env:
+      SOURCELOOP_DB_PASSWORD: ci-sandbox-password
+      SOURCELOOP_WEB_PORT: "8080"
+      SOURCELOOP_SANDBOX_SMTP_PORT: "3025"
+      SOURCELOOP_SANDBOX_IMAP_PORT: "3143"
+      SOURCELOOP_SANDBOX_API_PORT: "8085"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate Compose configurations
+        run: |
+          docker compose -f docker-compose.yml config >/tmp/sourceloop-compose.yml
+          docker compose -f docker-compose.yml -f docker-compose.sandbox.yml config >/tmp/sourceloop-compose-sandbox.yml
+      - name: Build and start isolated SMTP/IMAP sandbox
+        run: docker compose -f docker-compose.yml -f docker-compose.sandbox.yml up --build -d
+      - name: Prove SMTP to IMAP to extraction correspondence loop
+        run: python scripts/sandbox_smoke.py | tee /tmp/sourceloop-container-smoke.json
+      - name: Publish container correspondence receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-container-correspondence
+          path: |
+            /tmp/sourceloop-container-smoke.json
+            /tmp/sourceloop-compose.yml
+            /tmp/sourceloop-compose-sandbox.yml
+          if-no-files-found: warn
+      - name: Show service logs on failure
+        if: failure()
+        run: docker compose -f docker-compose.yml -f docker-compose.sandbox.yml logs --no-color --tail=300
+      - name: Tear down isolated sandbox
+        if: always()
+        run: docker compose -f docker-compose.yml -f docker-compose.sandbox.yml down -v --remove-orphans

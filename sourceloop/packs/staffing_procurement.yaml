@@ -1,0 +1,62 @@
+id: staffing_procurement
+name: Staffing Market Procurement Desk
+description: Employer-side staffing quotes, fulfillment capacity, conversion terms, and screening assumptions.
+case_kind: quote_intelligence
+investigation_mode: quote_probe
+risk_tier: elevated
+requires_requester_email: true
+max_contacts: 6
+max_followups: 1
+completion_target: 2
+completion_basis: quotes
+required_acknowledgements: [authorized_requester, research_only]
+required_fields: [roles, workers, geography]
+optional_fields: [shift, start_window, assignment_length, temp_to_hire, screening, minimum_quotes]
+stage_roles:
+  assess_prepare: [workforce_requirement_compiler, employment_terms_critic, missing_information_critic]
+  how: [staffing_market_scout, geographic_coverage_scout, agency_contact_resolver]
+  act: [staffing_rfq_composer, wage_information_policy_critic, policy_critic]
+  verify: [extractor_a, extractor_b, staffing_quote_auditor, employment_terms_auditor]
+prohibited_actions:
+  - applicant_impersonation
+  - wage_coordination
+  - candidate_sensitive_data_collection
+  - autonomous_contract_acceptance
+question_prompts:
+  - What client bill rate, worker pay-rate assumption, markup, overtime, and shift differential apply?
+  - What recruiting lead time and fill capacity are currently expected for the stated role and shift?
+  - What screening, payroll, workers' compensation, replacement, cancellation, and conversion terms apply?
+  - What geography is served, what minimum assignment applies, and how long is the quote valid?
+response_fields:
+  - {id: bill_rate, label: Client bill rate, question: Please confirm the client bill rate and unit., markers: ["bill rate", "$", "per hour"], critical: true}
+  - {id: pay_rate, label: Worker pay assumption, question: Please state the worker pay-rate assumption used in the quote., markers: ["pay rate", "worker pay", "candidate pay"], critical: true}
+  - {id: markup, label: Markup, question: Please confirm the markup or explain what is included in the spread., markers: ["markup", "mark-up", "spread", "includes payroll"], critical: true}
+  - {id: lead_time, label: Recruiting lead time, question: Please confirm expected recruiting and start lead time., markers: ["lead time", "days", "weeks", "start"] , critical: true}
+  - {id: capacity, label: Fill capacity, question: Please confirm current estimated fill capacity., markers: ["capacity", "can fill", "workers", "candidates"], critical: true}
+  - {id: conversion_terms, label: Temp-to-hire conversion terms, question: Please confirm any conversion period and fee., markers: ["conversion", "temp-to-hire", "hire fee"], critical: true}
+  - {id: screening, label: Screening assumptions, question: Please confirm included screening and any extra charges., markers: ["background", "drug", "screening", "check"] , critical: false}
+  - {id: quote_validity, label: Quote validity, question: Please confirm the date through which the quote is valid., markers: ["valid through", "valid until", "valid for"], critical: true}
+finding_rules:
+  - id: applicant_fee_signal
+    kind: policy_risk
+    severity: high
+    title: Applicant-paid fee referenced in employer quote
+    summary: The response appears to reference a fee paid by workers or applicants and requires human review.
+    patterns: ["applicant fee", "candidate fee", "worker pays", "deducted from (?:the )?worker"]
+    negative_patterns: ["no applicant fee", "no candidate fee", "workers? (?:do|does) not pay"]
+  - id: conversion_fee_signal
+    kind: reported_fee
+    severity: low
+    title: Conversion fee reported
+    summary: A temp-to-hire conversion fee or waiting period was reported.
+    patterns: ["conversion fee", "hire fee", 'after \d+ hours']
+critical_quote_fields: [payment_terms, quote_validity]
+message_purpose: obtain a current employer-side non-binding staffing proposal
+respondent_value: route qualified workforce requests with complete scope and fewer repetitive questions
+reuse_policy: buyer_private_and_aggregated_only
+demo_contacts:
+  - {organization_name: Keystone Staffing Partners, role_title: Client solutions team, endpoint: proposals@keystonestaffing.example.test, source: demo_pack, source_public: true, confidence: 0.93, geography: Demonstration market}
+  - {organization_name: Regional Workforce Group, role_title: Commercial staffing desk, endpoint: quotes@regionalworkforce.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration market}
+demo_replies:
+  - body: "Our client bill rate is $29.50 per hour based on a $20.00 worker pay rate and a 47.5% markup that includes payroll taxes and workers' compensation. We can fill 20 workers in about two weeks. Background checks are included. Temp-to-hire conversion is free after 520 hours. Payment terms are Net 30. Valid through 2026-10-31."
+  - body: "We can fill 20 candidates for the second shift within three weeks. The bill rate is $30.25 per hour using a $20.50 pay rate; the spread includes payroll, workers' compensation, and recruiting. Conversion carries a $1,500 fee before 480 hours and no fee afterward. Drug screening is $45 per worker. Payment is Net 30. Quote valid through 2026-10-25."

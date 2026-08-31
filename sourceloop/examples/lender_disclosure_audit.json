@@ -1,0 +1,34 @@
+{
+  "title": "Short-term credit public-disclosure audit",
+  "kind": "market_investigation",
+  "pack": "lender_disclosure_audit",
+  "objective": "Collect standardized public credit disclosures for institutional research without applying for credit.",
+  "requester_name": "Example Authorized Compliance Lab",
+  "requester_email": "compliance@example.org",
+  "requirements": {
+    "geography": "Example State",
+    "research_purpose": "institutional public disclosure audit",
+    "scenario": "$300 principal for 14 days"
+  },
+  "governance_acknowledgements": {
+    "institutional_authority": true,
+    "authorized_requester": true,
+    "legal_review": true,
+    "research_only": true,
+    "public_business_channels_only": true,
+    "no_fake_persona": true,
+    "no_application": true,
+    "no_sensitive_personal_data": true
+  },
+  "contacts": [
+    {
+      "organization_name": "Example Credit Company LLC",
+      "role_title": "Compliance information desk",
+      "endpoint": "compliance@example-credit.invalid",
+      "source": "public_website",
+      "source_public": true,
+      "business_only": true,
+      "geography": "Example State"
+    }
+  ]
+}

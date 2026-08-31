@@ -1,0 +1,128 @@
+id: local_services_quote
+name: Local Service Price Scout
+description: Direct-source pricing, scope, availability, and service-area intelligence for local property services.
+case_kind: quote_intelligence
+investigation_mode: quote_probe
+risk_tier: standard
+max_contacts: 6
+max_followups: 1
+completion_target: 2
+completion_basis: quotes
+required_fields:
+  - service
+  - geography
+optional_fields:
+  - property_address
+  - lawn_area_sqft
+  - parcel_area_sqft
+  - terrain
+  - access_constraints
+  - scope
+  - frequency
+  - requested_start
+  - insurance_requirements
+  - minimum_quotes
+stage_roles:
+  assess_prepare: [scenario_compiler, property_scope_critic, missing_information_critic]
+  how: [local_market_scout, gis_route_scout, service_area_resolver, contact_resolver]
+  act: [message_composer, quote_request_critic, policy_critic]
+  verify: [extractor_a, extractor_b, quote_comparability_auditor, hidden_fee_critic]
+  integrate_commit: [price_graph_curator]
+prohibited_actions:
+  - hidden_requester
+  - fake_property_owner
+  - autonomous_purchase
+  - competitor_quote_disclosure
+required_acknowledgements:
+  - authorized_requester
+  - research_only
+question_prompts:
+  - What is the current base price and pricing unit for the stated property and frequency?
+  - What work is included, and what first-cut, overgrowth, travel, disposal, material, or after-hours fees may apply?
+  - Do you currently serve the stated area, and when could service begin?
+  - Is insurance available where relevant, what payment terms apply, and how long is the quote valid?
+response_fields:
+  - id: base_price
+    label: Base price
+    question: Please confirm the base price.
+    markers: ["$", "price", "rate"]
+    critical: true
+  - id: pricing_unit
+    label: Pricing unit
+    question: Please confirm whether the price is per visit, cut, hour, week, month, or season.
+    markers: ["per visit", "per cut", "per hour", "per week", "per month", "per season"]
+    critical: true
+  - id: service_scope
+    label: Included service scope
+    question: Please confirm what work is included in the base price.
+    markers: ["includes", "included", "mowing", "edging", "blowing", "scope"]
+    critical: true
+  - id: extra_fees
+    label: Extra fees and exclusions
+    question: Please identify any travel, first-cut, overgrowth, disposal, material, or after-hours fees and exclusions.
+    markers: ["fee", "surcharge", "extra", "excluded", "not included", "included"]
+    critical: true
+  - id: availability
+    label: Current availability
+    question: Please confirm current availability or the earliest start date.
+    markers: ["available", "availability", "start", "schedule"]
+    critical: true
+  - id: service_area
+    label: Service area
+    question: Please confirm that the stated location is within the current service area.
+    markers: ["serve", "service area", "within", "zip"]
+    critical: true
+  - id: payment_terms
+    label: Payment terms
+    question: Please confirm payment timing and accepted payment methods.
+    markers: ["net 15", "net 30", "due", "payment", "card", "check", "invoice"]
+    critical: false
+  - id: quote_validity
+    label: Quote validity
+    question: Please confirm the date through which this quote is valid.
+    markers: ["valid through", "valid until", "valid for"]
+    critical: true
+finding_rules:
+  - id: travel_or_route_fee
+    kind: reported_fee
+    severity: low
+    title: Travel or route fee reported
+    summary: The respondent reported a travel or route-related charge.
+    patterns: ["travel (?:fee|charge)", "trip (?:fee|charge)", "outside .* radius"]
+  - id: first_cut_surcharge
+    kind: reported_fee
+    severity: low
+    title: First-cut or overgrowth surcharge reported
+    summary: The respondent reported an initial-cut or overgrowth surcharge.
+    patterns: ["first[- ]cut", "overgrowth", "overgrown"]
+  - id: current_unavailability
+    kind: availability_signal
+    severity: medium
+    title: Provider reported no current capacity
+    summary: The respondent reported that it is not currently available for the requested work.
+    patterns: ["not (?:currently )?available", "fully booked", "no capacity", "waitlist"]
+critical_quote_fields: [payment_terms, quote_validity]
+followup_approval_required: true
+message_purpose: obtain a current non-binding service quote and availability confirmation
+respondent_value: avoid sending work outside the provider's stated service area or scope
+reuse_policy: case_scoped_and_aggregated_only
+demo_contacts:
+  - organization_name: GreenLine Lawn Care
+    role_title: Estimating team
+    endpoint: quotes@greenline.example.test
+    source: demo_pack
+    source_public: true
+    confidence: 0.92
+    geography: Demonstration market
+    location: {latitude: 40.443, longitude: -79.985, label: GreenLine Lawn Care, precision: public_office}
+  - organization_name: Three Rivers Grounds
+    role_title: Service coordinator
+    endpoint: service@threeriversgrounds.example.test
+    source: demo_pack
+    source_public: true
+    confidence: 0.89
+    geography: Demonstration market
+    location: {latitude: 40.455, longitude: -80.021, label: Three Rivers Grounds, precision: public_office}
+demo_replies:
+  - body: "We serve the stated ZIP and are available to start next week. Weekly mowing is $48 per visit and includes mowing, edging, and blowing. The first cut is an extra $20 only if the lawn is overgrown; travel is included. Payment terms are Net 15 by card after each visit. This quote is valid through 2026-10-31."
+  - body: "The location is within our service area and our schedule has availability in ten days. The price is $52 per visit for weekly service, including mowing, edging, and cleanup. Bagging is not included and would be a $12 fee. We invoice monthly with Net 15 terms. Valid through 2026-10-25."

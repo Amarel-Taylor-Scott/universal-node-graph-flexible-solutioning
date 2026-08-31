@@ -1,0 +1,54 @@
+id: contractor_license_audit
+name: Contractor License and Practice Audit
+description: Public-business verification of legal identity, licensing representations, insurance, deposits, scope, and service area.
+case_kind: market_investigation
+investigation_mode: compliance_probe
+risk_tier: elevated
+requires_requester_email: true
+max_contacts: 3
+max_followups: 1
+completion_target: 1
+completion_basis: responses
+required_acknowledgements: [authorized_requester, research_only, public_business_channels_only, no_fake_persona]
+required_fields: [geography, trade, research_purpose]
+optional_fields: [project_type, project_value, permit_requirements]
+prohibited_request_patterns: ["fake property", "pretend.*homeowner", "residential address of (?:the )?contractor"]
+question_prompts:
+  - What is the legal business name and applicable contractor or trade license number?
+  - What insurance and bonding can be documented for the stated work?
+  - What geographic service area, trade scope, current availability, and estimate terms apply?
+  - What deposit, cancellation, change-order, permit, and warranty terms normally apply?
+response_fields:
+  - {id: legal_name, label: Legal business name, question: Please confirm the legal business name., markers: ["legal name", "llc", "inc", "corporation", "dba"] , critical: true}
+  - {id: license_number, label: License number, question: Please provide the applicable license number or explain why one is not required., markers: ["license", "registration", "licensed", "not required"] , critical: true}
+  - {id: insurance, label: Insurance, question: Please confirm available liability and workers' compensation documentation., markers: ["insured", "insurance", "liability", "workers' compensation"] , critical: true}
+  - {id: service_area, label: Service area, question: Please confirm the geographic service area., markers: ["serve", "service area", "county", "miles"] , critical: true}
+  - {id: scope, label: Trade scope, question: Please confirm the work performed directly and any subcontracted work., markers: ["scope", "perform", "subcontract", "trade"] , critical: true}
+  - {id: availability, label: Availability, question: Please confirm current availability., markers: ["available", "schedule", "lead time", "weeks"] , critical: false}
+  - {id: deposit_terms, label: Deposit terms, question: Please confirm normal deposit and payment milestones., markers: ["deposit", "payment", "milestone", "due"] , critical: false}
+finding_rules:
+  - id: license_not_disclosed
+    kind: license_unverified
+    severity: high
+    title: License or claimed exemption not disclosed
+    summary: The respondent did not provide a license number or explain why a license is not required.
+    missing_field: license_number
+  - id: insurance_not_disclosed
+    kind: disclosure_gap
+    severity: medium
+    title: Insurance documentation not explained
+    summary: The response did not explain available insurance documentation.
+    missing_field: insurance
+  - id: unusually_large_deposit
+    kind: reported_fee
+    severity: high
+    title: Large advance deposit referenced
+    summary: The response appears to request a substantial advance deposit and requires contract-specific review.
+    patterns: ["(?:75|80|90|100)% deposit", "full payment (?:up front|in advance)"]
+message_purpose: verify publicly represented contractor identity, authorization, insurance, and operating terms
+respondent_value: route suitable projects and reduce repeated qualification questions
+reuse_policy: case_scoped_and_registry_linked
+demo_contacts:
+  - {organization_name: Example Trade Services LLC, role_title: Estimating or compliance team, endpoint: estimates@exampletrades.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration market, business_only: true}
+demo_replies:
+  - body: "Our legal name is Example Trade Services LLC and our contractor registration is PA-104822. We carry $2 million general liability and workers' compensation. We serve the full demonstration county within 35 miles and directly perform commercial HVAC maintenance. Current lead time is two weeks. Standard deposit is 20% with the balance due at completion."

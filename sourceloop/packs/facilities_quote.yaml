@@ -1,0 +1,34 @@
+id: facilities_quote
+name: Commercial Facilities Quote Desk
+description: Geographic discovery, qualification, and comparable budgetary quotes for recurring commercial services.
+case_kind: quote_intelligence
+investigation_mode: quote_probe
+risk_tier: standard
+max_contacts: 6
+max_followups: 1
+completion_target: 2
+completion_basis: quotes
+required_fields: [service]
+optional_fields: [property_count, locations, service_window, insurance_requirements, response_window, minimum_quotes]
+question_prompts:
+  - What pricing unit applies and what quantity assumptions were used?
+  - What setup, mobilization, travel, material, and after-hours fees apply?
+  - What geography is currently served and what capacity is available?
+  - What is excluded, what payment terms apply, and how long is the quote valid?
+response_fields:
+  - {id: price, label: Price, question: Please confirm current pricing and units., markers: ["$", "price", "rate", "per visit", "per month"] , critical: true}
+  - {id: scope, label: Scope, question: Please confirm the included scope., markers: ["scope", "includes", "included", "service"] , critical: true}
+  - {id: availability, label: Availability, question: Please confirm current capacity or start date., markers: ["available", "capacity", "start", "schedule"] , critical: false}
+  - {id: payment_terms, label: Payment terms, question: Please confirm payment terms., markers: ["net 15", "net 30", "net 45", "payment terms"] , critical: true}
+  - {id: quote_validity, label: Quote validity, question: Please confirm quote validity., markers: ["valid through", "valid until"] , critical: true}
+critical_quote_fields: [payment_terms, quote_validity]
+prohibited_actions: [hidden_requester, autonomous_contract_acceptance, autonomous_purchase, competitor_quote_disclosure]
+message_purpose: obtain a current non-binding commercial facilities quote
+respondent_value: route appropriately scoped work and reduce repetitive qualification questions
+reuse_policy: buyer_private_and_aggregated_only
+demo_contacts:
+  - {organization_name: Northstar Facility Services, role_title: Estimating desk, endpoint: quotes@northstar.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration market, location: {latitude: 40.443, longitude: -79.985, label: Northstar Facility Services, precision: public_office}}
+  - {organization_name: Three Rivers Mechanical, role_title: Commercial service team, endpoint: estimating@threerivers.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration market, location: {latitude: 40.455, longitude: -80.021, label: Three Rivers Mechanical, precision: public_office}}
+demo_replies:
+  - body: "We are available in two weeks. Budgetary pricing is $125 per visit and $890 per month for the included preventive service scope. Setup is $250 one-time. Travel is included; taxes and emergency call-outs are excluded. Payment terms are Net 30. Valid through 2026-10-15."
+  - body: "We have current capacity. The service rate is $118 per visit and $940 per month for the included portfolio scope. Implementation is $175 one-time. Parts and taxes are excluded. Payment terms are Net 30. Valid through 2026-10-20."

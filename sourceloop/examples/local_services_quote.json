@@ -1,0 +1,32 @@
+{
+  "title": "Weekly lawn service quote",
+  "kind": "quote_intelligence",
+  "pack": "local_services_quote",
+  "objective": "Obtain two comparable non-binding quotes for weekly lawn mowing.",
+  "requester_name": "Example Property Team",
+  "requester_email": "property-team@example.com",
+  "requirements": {
+    "service": "weekly lawn mowing",
+    "geography": "Example ZIP 15222",
+    "lawn_area_sqft": 9500,
+    "terrain": "mostly flat",
+    "scope": ["mowing", "edging", "blowing"],
+    "requested_start": "within 14 days",
+    "minimum_quotes": 2
+  },
+  "governance_acknowledgements": {
+    "authorized_requester": true,
+    "research_only": true
+  },
+  "contacts": [
+    {
+      "organization_name": "Example Lawn Company",
+      "role_title": "Estimating team",
+      "endpoint": "quotes@example-lawn.invalid",
+      "source": "public_website",
+      "source_public": true,
+      "geography": "Example ZIP 15222",
+      "business_only": true
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+id: business_record_verification
+name: Public Business Record Verification
+description: Low-risk verification of a public organization or business record and the correct inquiry route.
+case_kind: data_verification
+investigation_mode: record_verification
+risk_tier: standard
+max_contacts: 3
+max_followups: 1
+completion_target: 1
+completion_basis: results
+required_fields: [record_type]
+optional_fields: [geography, listed_name, listed_address, listed_contact]
+question_prompts:
+  - Is the listed organization or business record currently active?
+  - What legal or public-facing name, operating location, and public contact route should be used?
+  - Which fields are inaccurate, stale, or no longer applicable?
+response_fields:
+  - {id: active_status, label: Active status, question: Please confirm whether the record is active., markers: ["active", "closed", "operating", "no longer"] , critical: true}
+  - {id: correct_identity, label: Correct identity, question: Please confirm the correct legal or public-facing name., markers: ["legal name", "correct name", "dba", "our name"] , critical: false}
+  - {id: public_contact, label: Public contact route, question: Please confirm the correct public contact route., markers: ["email", "contact", "phone", "inquiries"] , critical: true}
+finding_rules:
+  - id: record_inactive
+    kind: reported_practice
+    severity: medium
+    title: Record reported inactive or closed
+    summary: The respondent reports that the listed record is no longer active.
+    patterns: ["no longer active", "permanently closed", "ceased operations", "not operating"]
+message_purpose: verify a public business or organization record
+respondent_value: correct stale directories and reduce misrouted inquiries
+reuse_policy: verified_directory_record
+demo_contacts:
+  - {organization_name: Demonstration Record Owner, role_title: Public records contact, endpoint: records@owner.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration geography}
+demo_replies:
+  - body: "The listed business record is active and operating. Our correct public-facing name is Demonstration Record Owner LLC, and this email is the correct public contact for inquiries."

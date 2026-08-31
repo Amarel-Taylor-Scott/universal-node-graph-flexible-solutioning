@@ -1,0 +1,147 @@
+name: sourceloop
+
+x-sourceloop-environment: &sourceloop-environment
+  SOURCELOOP_ENVIRONMENT: ${SOURCELOOP_ENVIRONMENT:-development}
+  SOURCELOOP_DATABASE_URL: postgresql+psycopg://sourceloop:${SOURCELOOP_DB_PASSWORD:-change-me-local}@db:5432/sourceloop
+  SOURCELOOP_EVIDENCE_DIR: /data/evidence
+  SOURCELOOP_AGENT_RUNTIME: ${SOURCELOOP_AGENT_RUNTIME:-mock}
+  SOURCELOOP_HERMES_PROFILE: ${SOURCELOOP_HERMES_PROFILE:-sourceloop-research}
+  SOURCELOOP_OPENCLAW_AGENT: ${SOURCELOOP_OPENCLAW_AGENT:-sourceloop-practitioner}
+  SOURCELOOP_AGENT_TIMEOUT_SECONDS: ${SOURCELOOP_AGENT_TIMEOUT_SECONDS:-180}
+  SOURCELOOP_MAX_INTERNAL_WORKERS: ${SOURCELOOP_MAX_INTERNAL_WORKERS:-6}
+  SOURCELOOP_EMAIL_MODE: ${SOURCELOOP_EMAIL_MODE:-dry_run}
+  SOURCELOOP_ALLOW_EXTERNAL_SEND: ${SOURCELOOP_ALLOW_EXTERNAL_SEND:-false}
+  SOURCELOOP_SENDER_NAME: ${SOURCELOOP_SENDER_NAME:-SourceLoop Research Assistant}
+  SOURCELOOP_SENDER_EMAIL: ${SOURCELOOP_SENDER_EMAIL:-research@example.invalid}
+  SOURCELOOP_REPLY_TO_EMAIL: ${SOURCELOOP_REPLY_TO_EMAIL:-}
+  SOURCELOOP_SMTP_HOST: ${SOURCELOOP_SMTP_HOST:-}
+  SOURCELOOP_SMTP_PORT: ${SOURCELOOP_SMTP_PORT:-587}
+  SOURCELOOP_SMTP_USERNAME: ${SOURCELOOP_SMTP_USERNAME:-}
+  SOURCELOOP_SMTP_PASSWORD: ${SOURCELOOP_SMTP_PASSWORD:-}
+  SOURCELOOP_SMTP_PASSWORD_FILE: ${SOURCELOOP_SMTP_PASSWORD_FILE:-}
+  SOURCELOOP_SMTP_STARTTLS: ${SOURCELOOP_SMTP_STARTTLS:-true}
+  SOURCELOOP_SMTP_SSL: ${SOURCELOOP_SMTP_SSL:-false}
+  SOURCELOOP_SMTP_TIMEOUT_SECONDS: ${SOURCELOOP_SMTP_TIMEOUT_SECONDS:-30}
+  SOURCELOOP_MAILBOX_MODE: ${SOURCELOOP_MAILBOX_MODE:-disabled}
+  SOURCELOOP_IMAP_HOST: ${SOURCELOOP_IMAP_HOST:-}
+  SOURCELOOP_IMAP_PORT: ${SOURCELOOP_IMAP_PORT:-993}
+  SOURCELOOP_IMAP_USERNAME: ${SOURCELOOP_IMAP_USERNAME:-}
+  SOURCELOOP_IMAP_PASSWORD: ${SOURCELOOP_IMAP_PASSWORD:-}
+  SOURCELOOP_IMAP_PASSWORD_FILE: ${SOURCELOOP_IMAP_PASSWORD_FILE:-}
+  SOURCELOOP_IMAP_FOLDER: ${SOURCELOOP_IMAP_FOLDER:-INBOX}
+  SOURCELOOP_IMAP_SSL: ${SOURCELOOP_IMAP_SSL:-true}
+  SOURCELOOP_IMAP_STARTTLS: ${SOURCELOOP_IMAP_STARTTLS:-false}
+  SOURCELOOP_IMAP_POLL_SECONDS: ${SOURCELOOP_IMAP_POLL_SECONDS:-30}
+  SOURCELOOP_IMAP_MARK_SEEN: ${SOURCELOOP_IMAP_MARK_SEEN:-true}
+  SOURCELOOP_IMAP_SEARCH_CRITERION: ${SOURCELOOP_IMAP_SEARCH_CRITERION:-UNSEEN}
+  SOURCELOOP_IMAP_MAX_MESSAGES: ${SOURCELOOP_IMAP_MAX_MESSAGES:-50}
+  SOURCELOOP_ATTACHMENT_MAX_BYTES: ${SOURCELOOP_ATTACHMENT_MAX_BYTES:-10485760}
+  SOURCELOOP_WORKER_ID: ${SOURCELOOP_WORKER_ID:-mailbox-worker}
+  SOURCELOOP_WORKER_HEARTBEAT_SECONDS: ${SOURCELOOP_WORKER_HEARTBEAT_SECONDS:-15}
+  SOURCELOOP_CORS_ORIGINS: ${SOURCELOOP_CORS_ORIGINS:-http://localhost:8080}
+
+x-app-hardening: &app-hardening
+  init: true
+  restart: unless-stopped
+  read_only: true
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  tmpfs:
+    - /tmp:size=64m,mode=1777
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sourceloop
+      POSTGRES_USER: sourceloop
+      POSTGRES_PASSWORD: ${SOURCELOOP_DB_PASSWORD:-change-me-local}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sourceloop -d sourceloop"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+    volumes:
+      - sourceloop-db:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  api:
+    <<: *app-hardening
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: sourceloop-api:local
+    command: ["serve", "--host", "0.0.0.0", "--port", "8000"]
+    environment: *sourceloop-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=3).read()"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 15s
+    volumes:
+      - sourceloop-evidence:/data/evidence
+    networks:
+      - backend
+      - frontend
+
+  worker:
+    <<: *app-hardening
+    image: sourceloop-api:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    command: ["worker"]
+    environment: *sourceloop-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "sourceloop", "worker-health", "--max-age", "120"]
+      interval: 30s
+      timeout: 8s
+      retries: 5
+      start_period: 25s
+    volumes:
+      - sourceloop-evidence:/data/evidence
+    networks:
+      - backend
+
+  web:
+    <<: *app-hardening
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: sourceloop-web:local
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/health/live"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+      start_period: 10s
+    ports:
+      - "${SOURCELOOP_WEB_PORT:-8080}:8080"
+    networks:
+      - frontend
+
+volumes:
+  sourceloop-db:
+  sourceloop-evidence:
+
+networks:
+  backend:
+    internal: true
+  frontend:

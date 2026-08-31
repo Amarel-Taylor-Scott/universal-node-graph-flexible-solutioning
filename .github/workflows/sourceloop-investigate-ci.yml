@@ -1,0 +1,128 @@
+name: SourceLoop Investigate CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/sourceloop-direct-source-intelligence-mvp
+    paths:
+      - "sourceloop/**"
+      - ".github/workflows/sourceloop-investigate-ci.yml"
+  pull_request:
+    paths:
+      - "sourceloop/**"
+      - ".github/workflows/sourceloop-investigate-ci.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sourceloop-investigate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  investigation-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sourceloop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: sourceloop/pyproject.toml
+      - name: Install backend and test dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Compile
+        run: python -m compileall -q src
+      - name: Lint
+        run: ruff check src tests
+      - name: Test
+        run: pytest
+      - name: Build wheel and verify every packaged vertical manifest
+        run: |
+          python -m pip wheel . --no-deps --wheel-dir /tmp/sourceloop-wheel
+          python - <<'PY'
+          import glob
+          import zipfile
+
+          wheel = glob.glob("/tmp/sourceloop-wheel/sourceloop-*.whl")
+          assert len(wheel) == 1, wheel
+          with zipfile.ZipFile(wheel[0]) as archive:
+              names = set(archive.namelist())
+          pack_names = {
+              "bpo_quote.yaml",
+              "civic_intelligence.yaml",
+              "facilities_quote.yaml",
+              "local_services_quote.yaml",
+              "staffing_procurement.yaml",
+              "employment_practice_audit.yaml",
+              "lender_disclosure_audit.yaml",
+              "contractor_license_verification.yaml",
+              "informal_market_census.yaml",
+              "franchise_service_audit.yaml",
+              "investigative_market_integrity.yaml",
+          }
+          expected = {f"sourceloop/vertical_packs/{name}" for name in pack_names}
+          missing = expected - names
+          assert not missing, f"Missing packaged vertical manifests: {sorted(missing)}"
+          PY
+      - name: Exercise quote and investigation practitioner demos
+        run: |
+          SOURCELOOP_DATABASE_URL=sqlite:////tmp/sourceloop-facilities.db \
+            sourceloop demo --kind facilities_quote > /tmp/facilities-demo.json
+          SOURCELOOP_DATABASE_URL=sqlite:////tmp/sourceloop-investigation.db \
+            sourceloop demo --kind local_services_quote > /tmp/investigation-demo.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          facilities = json.loads(Path("/tmp/facilities-demo.json").read_text())
+          investigation = json.loads(Path("/tmp/investigation-demo.json").read_text())
+          assert facilities["status"] == "completed", facilities
+          assert investigation["kind"] == "market_investigation", investigation
+          assert investigation["findings"] >= 2, investigation
+          assert investigation["status"] == "completed", investigation
+          PY
+      - name: Validate Compose files
+        run: |
+          docker compose -f docker-compose.yml config >/tmp/base-compose.yml
+          if [ -f docker-compose.local.yml ]; then
+            docker compose -f docker-compose.yml -f docker-compose.local.yml config >/tmp/local-compose.yml
+          fi
+          if [ -f docker-compose.prod.yml ]; then
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml config >/tmp/prod-compose.yml
+          fi
+      - name: Publish deterministic receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-investigation-receipts
+          path: |
+            /tmp/facilities-demo.json
+            /tmp/investigation-demo.json
+          if-no-files-found: error
+
+  investigation-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sourceloop/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: sourceloop/frontend/package.json
+      - name: Install frontend dependencies
+        run: npm install --no-audit --no-fund
+      - name: Type-check and build operator console
+        run: npm run build
+      - name: Publish operator console
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-investigation-console
+          path: sourceloop/frontend/dist
+          if-no-files-found: error
