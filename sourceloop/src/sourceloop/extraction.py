@@ -7,7 +7,7 @@ import re
 from datetime import UTC, datetime
 from typing import Any
 
-from .domain import CaseKind, CaseRecord, Claim, ClaimKind, Interaction, Quote, QuoteLineItem
+from .domain import CaseKind, CaseRecord, Claim, ClaimKind, Interaction, Quote
 
 _MONEY_RE = re.compile(
     r"(?P<currency>\$|USD\s*)?(?P<amount>\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?|\d+(?:\.\d{1,2})?)"
@@ -16,6 +16,7 @@ _MONEY_RE = re.compile(
 )
 _EMAIL_RE = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.IGNORECASE)
 _VALID_RE = re.compile(r"valid\s+(?:through|until)\s+(\d{4}-\d{2}-\d{2})", re.IGNORECASE)
+_SEGMENT_RE = re.compile(r"(?<=[.!?;])\s+|\n+")
 
 
 def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[str, Any]:
@@ -70,7 +71,11 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
                     "reuse_scope": "case_only",
                 }
             )
-        referrals = [candidate.lower() for candidate in _EMAIL_RE.findall(body) if candidate.lower() != interaction.endpoint]
+        referrals = [
+            candidate.lower()
+            for candidate in _EMAIL_RE.findall(body)
+            if candidate.lower() != interaction.endpoint
+        ]
         for referral in sorted(set(referrals)):
             claims.append(
                 {
@@ -89,17 +94,25 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
     if case.kind is CaseKind.QUOTE_INTELLIGENCE:
         line_items: list[dict[str, Any]] = []
         seen: set[tuple[float, str, str]] = set()
-        for line in body.splitlines() or [body]:
-            line_lower = line.lower()
-            if not any(marker in line for marker in ("$", "USD")) and not re.search(r"\b\d+(?:\.\d+)?\s*(?:per|/)\s*", line, re.I):
+        segments = [segment.strip() for segment in _SEGMENT_RE.split(body) if segment.strip()]
+        for segment in segments:
+            segment_lower = segment.lower()
+            has_price_marker = any(marker in segment for marker in ("$", "USD")) or bool(
+                re.search(r"\b\d+(?:\.\d+)?\s*(?:per|/)\s*", segment, re.IGNORECASE)
+            )
+            if not has_price_marker:
                 continue
-            for match in _MONEY_RE.finditer(line):
-                amount_text = match.group("amount").replace(",", "")
-                amount = float(amount_text)
+            for match in _MONEY_RE.finditer(segment):
+                currency_marker = match.group("currency")
+                unit_marker = match.group("unit")
+                # Do not treat dates, counts, or unrelated numbers in a price-bearing sentence as prices.
+                if not currency_marker and not unit_marker:
+                    continue
+                amount = float(match.group("amount").replace(",", ""))
                 if amount == 0:
                     continue
-                unit = _normalize_unit(match.group("unit"), line_lower)
-                description = _description_for_line(line_lower, unit)
+                unit = _normalize_unit(unit_marker, segment_lower)
+                description = _description_for_line(segment_lower, unit)
                 key = (amount, unit, description)
                 if key in seen:
                     continue
@@ -111,14 +124,18 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
                         "quantity": None,
                         "unit_price": amount,
                         "currency": "USD",
-                        "one_time": any(token in line_lower for token in ("setup", "implementation", "one-time", "one time")),
+                        "one_time": unit == "one_time",
                         "assumptions": [],
                         "exclusions": [],
                     }
                 )
 
-        exclusions = [line.strip() for line in body.splitlines() if "exclud" in line.lower() or "not included" in line.lower()]
-        assumptions = [line.strip() for line in body.splitlines() if "assum" in line.lower()]
+        exclusions = [
+            segment
+            for segment in segments
+            if "exclud" in segment.lower() or "not included" in segment.lower()
+        ]
+        assumptions = [segment for segment in segments if "assum" in segment.lower()]
         valid_until = None
         valid_match = _VALID_RE.search(body)
         if valid_match:
@@ -138,11 +155,7 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
                 "valid_until": valid_until,
                 "evidence_ids": [interaction.evidence_id],
                 "extraction_confidence": 0.82,
-                "unresolved_fields": [
-                    field
-                    for field in ("payment_terms", "taxes", "final_scope_confirmation")
-                    if field not in lower
-                ],
+                "unresolved_fields": _unresolved_quote_fields(lower),
                 "normalization_lineage": [
                     "Parsed directly from respondent message.",
                     "Currency normalized to USD where a dollar symbol or USD marker was present.",
@@ -213,7 +226,7 @@ def _normalize_unit(unit: str | None, line: str) -> str:
         return aliases[candidate]
     if candidate:
         return candidate
-    if "setup" in line or "implementation" in line:
+    if "setup" in line or "implementation" in line or "one-time" in line or "one time" in line:
         return "one_time"
     return "unspecified"
 
@@ -229,4 +242,15 @@ def _description_for_line(line: str, unit: str) -> str:
         return "monthly service"
     if "visit" in line or unit == "visit":
         return "service visit"
+    if unit in {"productive_hour", "paid_hour", "hour"}:
+        return "hourly service"
     return "quoted service"
+
+
+def _unresolved_quote_fields(lower: str) -> list[str]:
+    markers = {
+        "payment_terms": ("payment term", "net 15", "net 30", "net 45", "net 60"),
+        "taxes": ("tax", "taxes"),
+        "final_scope_confirmation": ("scope", "subject to", "upon review"),
+    }
+    return [field for field, candidates in markers.items() if not any(marker in lower for marker in candidates)]
