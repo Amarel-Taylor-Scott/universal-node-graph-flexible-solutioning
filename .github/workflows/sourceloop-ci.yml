@@ -48,23 +48,42 @@ jobs:
           assert len(wheel) == 1, wheel
           with zipfile.ZipFile(wheel[0]) as archive:
               names = set(archive.namelist())
-          expected = {
-              "sourceloop/vertical_packs/civic_intelligence.yaml",
-              "sourceloop/vertical_packs/facilities_quote.yaml",
-              "sourceloop/vertical_packs/bpo_quote.yaml",
+          pack_names = {
+              "bpo_quote.yaml",
+              "business_record_verification.yaml",
+              "civic_intelligence.yaml",
+              "contractor_license_audit.yaml",
+              "employment_agency_audit.yaml",
+              "facilities_quote.yaml",
+              "franchise_service_audit.yaml",
+              "informal_business_verification.yaml",
+              "lender_disclosure_audit.yaml",
+              "local_services_quote.yaml",
+              "staffing_procurement.yaml",
           }
+          expected = {f"sourceloop/vertical_packs/{name}" for name in pack_names}
           missing = expected - names
           assert not missing, f"Missing packaged vertical manifests: {sorted(missing)}"
           PY
-      - name: Exercise deterministic CLI demo
+      - name: Exercise every deterministic vertical pack
         run: |
-          SOURCELOOP_DATABASE_URL=sqlite:////tmp/sourceloop-ci-demo.db \
-            sourceloop demo --kind facilities_quote > /tmp/sourceloop-demo.json
-      - name: Publish deterministic demo receipt
+          sourceloop list-packs > /tmp/sourceloop-pack-catalog.json
+          for kind in \
+            facilities_quote bpo_quote local_services_quote staffing_procurement \
+            civic_intelligence data_verification employment_agency_audit \
+            lender_disclosure_audit contractor_license_audit \
+            informal_business_verification franchise_service_audit
+          do
+            SOURCELOOP_DATABASE_URL="sqlite:////tmp/sourceloop-ci-${kind}.db" \
+              sourceloop demo --kind "$kind" > "/tmp/sourceloop-${kind}-demo.json"
+          done
+      - name: Publish deterministic demo receipts
         uses: actions/upload-artifact@v4
         with:
-          name: sourceloop-demo-receipt
-          path: /tmp/sourceloop-demo.json
+          name: sourceloop-demo-receipts
+          path: |
+            /tmp/sourceloop-*-demo.json
+            /tmp/sourceloop-pack-catalog.json
           if-no-files-found: error
 
   frontend:

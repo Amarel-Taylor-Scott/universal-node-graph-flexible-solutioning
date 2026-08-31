@@ -1,4 +1,4 @@
-name: Materialize SourceLoop container app
+name: Materialize SourceLoop v0.3 investigation platform
 
 on:
   push:
@@ -42,10 +42,11 @@ jobs:
 
           import base64
           import hashlib
+          import shutil
           import tarfile
-          from pathlib import Path
+          from pathlib import Path, PurePosixPath
 
-          expected = "0d57514c89021f7db42e037205f0a51c39734d6457c082a375b4aae7e1859d4b"
+          expected = "764d1ca095135965472bf874183fc42b844f00710b38b7161b87d2c25f5f449d"
           parts = sorted(Path(".").glob(".sourceloop-materialize.part*"))
           if not parts:
               raise SystemExit("No payload parts were found")
@@ -57,22 +58,38 @@ jobs:
               raise SystemExit(f"Payload checksum mismatch: {digest}")
 
           archive_path = Path("/tmp/sourceloop-materialize.tar.gz")
+          staging = Path("/tmp/sourceloop-materialize")
+          shutil.rmtree(staging, ignore_errors=True)
+          staging.mkdir(parents=True)
           archive_path.write_bytes(archive)
+
           with tarfile.open(archive_path, "r:gz") as bundle:
-              names = bundle.getnames()
-              unsafe = [
-                  name
-                  for name in names
-                  if not (name == "./sourceloop" or name.startswith("./sourceloop/"))
-                  or ".." in Path(name).parts
-              ]
+              members = bundle.getmembers()
+              unsafe: list[str] = []
+              for member in members:
+                  normalized = member.name.removeprefix("./")
+                  path = PurePosixPath(normalized)
+                  allowed = normalized == "sourceloop" or normalized.startswith("sourceloop/")
+                  if (
+                      not allowed
+                      or path.is_absolute()
+                      or ".." in path.parts
+                      or member.issym()
+                      or member.islnk()
+                  ):
+                      unsafe.append(member.name)
               if unsafe:
                   raise SystemExit(f"Unsafe archive entries: {unsafe[:5]}")
-              bundle.extractall(".", filter="data")
+              bundle.extractall(staging, filter="data")
+
+          source = staging / "sourceloop"
+          if not source.is_dir():
+              raise SystemExit("Payload did not contain a sourceloop directory")
+          shutil.copytree(source, Path("sourceloop"), dirs_exist_ok=True)
 
           for part in parts:
               part.unlink()
-          print(f"Materialized {len(names)} paths from {len(parts)} verified parts")
+          print(f"Materialized {len(members)} paths from {len(parts)} verified parts")
           PY
 
       - name: Commit materialized application
@@ -86,5 +103,5 @@ jobs:
             echo "No materialized changes to commit"
             exit 0
           fi
-          git commit -m "feat: containerize SourceLoop correspondence runtime"
+          git commit -m "feat: add governed active-market investigation platform"
           git push origin "HEAD:${GITHUB_REF_NAME}"
