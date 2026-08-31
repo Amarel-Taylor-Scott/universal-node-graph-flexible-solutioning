@@ -1,4 +1,4 @@
-"""Typed domain contracts for cases, conversations, claims, quotes, and mailbox events."""
+"""Typed domain contracts for cases, conversations, findings, quotes, and mailbox events."""
 
 from __future__ import annotations
 
@@ -49,6 +49,22 @@ class CaseKind(StrEnum):
     CIVIC_INTELLIGENCE = "civic_intelligence"
     QUOTE_INTELLIGENCE = "quote_intelligence"
     DATA_VERIFICATION = "data_verification"
+    MARKET_INVESTIGATION = "market_investigation"
+
+
+class InvestigationMode(StrEnum):
+    QUOTE_PROBE = "quote_probe"
+    PRACTICE_AUDIT = "practice_audit"
+    COMPLIANCE_PROBE = "compliance_probe"
+    MARKET_CENSUS = "market_census"
+    RECORD_VERIFICATION = "record_verification"
+
+
+class RiskTier(StrEnum):
+    LOW = "low"
+    STANDARD = "standard"
+    ELEVATED = "elevated"
+    RESTRICTED = "restricted"
 
 
 class CaseStatus(StrEnum):
@@ -97,6 +113,40 @@ class ClaimKind(StrEnum):
     SYSTEM_INFERENCE = "system_inference"
 
 
+class FindingKind(StrEnum):
+    DISCLOSURE_GAP = "disclosure_gap"
+    REPORTED_PRACTICE = "reported_practice"
+    REPORTED_FEE = "reported_fee"
+    REPORTED_PRICE = "reported_price"
+    LICENSE_UNVERIFIED = "license_unverified"
+    LICENSE_REPORTED = "license_reported"
+    IDENTITY_MISMATCH = "identity_mismatch"
+    CAPACITY_SIGNAL = "capacity_signal"
+    AVAILABILITY_SIGNAL = "availability_signal"
+    REFERRAL_SIGNAL = "referral_signal"
+    POLICY_RISK = "policy_risk"
+    CORROBORATION_NEEDED = "corroboration_needed"
+    POSITIVE_CONTROL = "positive_control"
+    DERIVED_METRIC = "derived_metric"
+    NUMERIC_INCONSISTENCY = "numeric_inconsistency"
+    COMPARABILITY_GAP = "comparability_gap"
+
+
+class FindingStatus(StrEnum):
+    OPEN = "open"
+    CORROBORATED = "corroborated"
+    RESOLVED = "resolved"
+    DISMISSED = "dismissed"
+
+
+class Severity(StrEnum):
+    INFO = "info"
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+    CRITICAL = "critical"
+
+
 class GeoPoint(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -132,6 +182,10 @@ class ContactRoute(BaseModel):
     geography: str | None = None
     location: GeoPoint | None = None
     topics: list[str] = Field(default_factory=list)
+    legal_entity_name: str | None = None
+    jurisdiction: str | None = None
+    business_only: bool = True
+    source_url: str | None = None
 
     @field_validator("endpoint")
     @classmethod
@@ -218,6 +272,49 @@ class Claim(BaseModel):
     reuse_scope: str = "case_only"
 
 
+class InvestigationFinding(BaseModel):
+    """A reviewable result derived from direct-source evidence, never an automatic accusation."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    id: str = Field(default_factory=lambda: new_id("finding"))
+    rule_id: str
+    kind: FindingKind
+    severity: Severity = Severity.INFO
+    title: str
+    summary: str
+    subject_id: str
+    value: Any = None
+    evidence_ids: list[str] = Field(default_factory=list)
+    confidence: float = Field(default=0.75, ge=0, le=1)
+    status: FindingStatus = FindingStatus.OPEN
+    source_scope: str = "direct_response"
+    requires_human_review: bool = True
+    reviewed_by: str | None = None
+    reviewed_at: datetime | None = None
+    review_notes: str = ""
+    created_at: datetime = Field(default_factory=utcnow)
+
+
+class RegistryCheck(BaseModel):
+    """A structured record of an authoritative or customer-supplied registry lookup."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    id: str = Field(default_factory=lambda: new_id("registry"))
+    registry: str
+    query: str
+    subject_id: str | None = None
+    status: str
+    identifier: str | None = None
+    entity_name: str | None = None
+    jurisdiction: str | None = None
+    source: str | None = None
+    checked_at: datetime = Field(default_factory=utcnow)
+    evidence_ids: list[str] = Field(default_factory=list)
+    notes: str = ""
+
+
 class QuoteLineItem(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -285,6 +382,12 @@ class CaseRecord(BaseModel):
     interactions: list[Interaction] = Field(default_factory=list)
     claims: list[Claim] = Field(default_factory=list)
     quotes: list[Quote] = Field(default_factory=list)
+    findings: list[InvestigationFinding] = Field(default_factory=list)
+    registry_checks: list[RegistryCheck] = Field(default_factory=list)
+    response_coverage: dict[str, list[str]] = Field(default_factory=dict)
+    risk_tier: RiskTier = RiskTier.STANDARD
+    investigation_mode: InvestigationMode | None = None
+    governance: dict[str, Any] = Field(default_factory=dict)
     stage_outputs: dict[str, Any] = Field(default_factory=dict)
     graph_committed: bool = False
     created_at: datetime = Field(default_factory=utcnow)
@@ -304,6 +407,38 @@ class CaseCreate(BaseModel):
     location: GeoPoint | None = None
     requirements: dict[str, Any] = Field(default_factory=dict)
     contacts: list[ContactRoute] = Field(default_factory=list)
+    investigation_mode: InvestigationMode | None = None
+    governance_acknowledgements: dict[str, bool] = Field(default_factory=dict)
+
+
+class ContactImportRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    contacts: list[ContactRoute]
+    replace: bool = False
+
+
+class RegistryCheckCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    registry: str
+    query: str
+    subject_id: str | None = None
+    status: str
+    identifier: str | None = None
+    entity_name: str | None = None
+    jurisdiction: str | None = None
+    source: str | None = None
+    evidence_ids: list[str] = Field(default_factory=list)
+    notes: str = ""
+
+
+class FindingReviewRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    status: FindingStatus
+    reviewer: str
+    notes: str = ""
 
 
 class ApprovalRequest(BaseModel):

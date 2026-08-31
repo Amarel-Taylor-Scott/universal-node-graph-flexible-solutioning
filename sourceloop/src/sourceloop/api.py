@@ -10,9 +10,10 @@ from pydantic import BaseModel, ConfigDict
 
 from .config import Settings
 from .domain import ApprovalRequest, CaseCreate, InboundEmail
-from .engine import SourceLoopEngine
 from .evidence import EvidenceStore
-from .graph import GraphProjector
+from .extended_engine import InvestigativeSourceLoopEngine
+from .investigation_graph import InvestigationGraphProjector
+from .investigation_api import register_investigation_routes
 from .mailbox import MailboxService
 from .repository import ConcurrentUpdateError, Repository
 
@@ -26,14 +27,17 @@ class SuppressionCreate(BaseModel):
 
 def create_app(settings: Settings | None = None, repository: Repository | None = None) -> FastAPI:
     resolved_settings = settings or Settings.from_env()
-    engine = SourceLoopEngine(resolved_settings, repository=repository)
-    projector = GraphProjector()
+    engine = InvestigativeSourceLoopEngine(resolved_settings, repository=repository)
+    projector = InvestigationGraphProjector()
     evidence = EvidenceStore(resolved_settings.evidence_dir, resolved_settings.attachment_max_bytes)
 
     application = FastAPI(
         title="SourceLoop API",
-        version="0.2.0",
-        description="Container-ready, approval-gated direct-source intelligence and correspondence runtime.",
+        version="0.3.0",
+        description=(
+            "Container-ready, approval-gated direct-source intelligence, quote acquisition, "
+            "market investigation, and evidence runtime."
+        ),
     )
     application.add_middleware(
         CORSMiddleware,
@@ -48,7 +52,7 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
         heartbeat = engine.repository.get_worker_heartbeat(resolved_settings.worker_id)
         return {
             "name": "SourceLoop",
-            "version": "0.2.0",
+            "version": "0.3.0",
             "environment": resolved_settings.environment,
             "docs": "/docs",
             "email_mode": resolved_settings.email_mode,
@@ -56,6 +60,7 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
             "mailbox_mode": resolved_settings.mailbox_mode,
             "mailbox_enabled": resolved_settings.mailbox_enabled,
             "agent_runtime": resolved_settings.agent_runtime,
+            "pack_count": len(engine.packs.list()),
             "worker": heartbeat.model_dump(mode="json") if heartbeat else None,
         }
 
@@ -78,15 +83,30 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
             engine.repository.ping()
         except Exception as exc:  # noqa: BLE001 - readiness must report any database driver failure
             raise HTTPException(status_code=503, detail=f"database unavailable: {exc}") from exc
-        return {"status": "ready", "database": "ok", "timestamp": datetime.now(UTC).isoformat()}
+        return {
+            "status": "ready",
+            "database": "ok",
+            "packs": len(engine.packs.list()),
+            "timestamp": datetime.now(UTC).isoformat(),
+        }
 
     @application.get("/api/v1/packs")
     def list_packs() -> list[dict[str, object]]:
         return [pack.model_dump(mode="json") for pack in engine.packs.list()]
 
+    @application.get("/api/v1/packs/{pack_id}")
+    def get_pack(pack_id: str) -> dict[str, object]:
+        pack = engine.packs.get(pack_id)
+        if pack is None:
+            raise HTTPException(status_code=404, detail="Pack not found")
+        return pack.model_dump(mode="json")
+
     @application.post("/api/v1/cases", status_code=201)
     def create_case(request: CaseCreate) -> dict[str, object]:
-        return engine.create_case(request).model_dump(mode="json")
+        try:
+            return engine.create_case(request).model_dump(mode="json")
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @application.get("/api/v1/cases")
     def list_cases() -> list[dict[str, object]]:
@@ -205,6 +225,7 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
     def city2graph_status() -> dict[str, object]:
         return projector.city2graph_status(engine.repository.list_cases())
 
+    register_investigation_routes(application, engine)
     return application
 
 

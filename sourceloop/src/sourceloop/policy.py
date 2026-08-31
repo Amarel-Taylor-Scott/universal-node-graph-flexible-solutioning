@@ -2,19 +2,30 @@
 
 from __future__ import annotations
 
+import json
 import re
 
 from pydantic import BaseModel, Field
 
 from .config import Settings
-from .domain import ActionProposal, ActionStatus, ActionType, CaseKind, CaseRecord
+from .domain import ActionProposal, ActionStatus, ActionType, CaseKind, CaseRecord, RiskTier
 from .repository import Repository
 
 _EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 _DISCLOSURE_RE = re.compile(r"\b(automated|ai-assisted|assisted by|automation-assisted)\b", re.IGNORECASE)
 _DECEPTION_RE = re.compile(
-    r"\b(pretend to be|impersonat(?:e|ing)|fake constituent|fake customer|do not disclose automation|"
-    r"hide the requester|fabricated identity|astroturf)\b",
+    r"\b(pretend to be|impersonat(?:e|ing)|fake constituent|fake customer|fake jobseeker|"
+    r"do not disclose automation|hide the requester|fabricated identity|astroturf|secret shopper identity)\b",
+    re.IGNORECASE,
+)
+_SENSITIVE_REQUEST_RE = re.compile(
+    r"\b(?:send|provide|share|upload|enter)\b.{0,50}\b(?:social security number|ssn|bank account number|"
+    r"routing number|date of birth|password|login credentials|one-time code|credit card number)\b",
+    re.IGNORECASE | re.DOTALL,
+)
+_TRANSACTION_RE = re.compile(
+    r"\b(?:accept the loan|submit the application|authorize a hard credit pull|sign the contract|place the order|"
+    r"send the deposit|transfer the funds|purchase the service)\b",
     re.IGNORECASE,
 )
 
@@ -34,6 +45,8 @@ class PolicyEngine:
 
     def evaluate(self, case: CaseRecord, action: ActionProposal) -> PolicyDecision:
         reasons: list[str] = []
+        governance = case.governance or {}
+        acknowledgements = governance.get("acknowledgements", {})
 
         if action.action_type is not ActionType.SEND_EMAIL:
             reasons.append("Only typed send_email actions are supported by this gateway.")
@@ -55,12 +68,29 @@ class PolicyEngine:
             reasons.append("The message does not disclose automated or AI assistance.")
         if _DECEPTION_RE.search(action.body):
             reasons.append("The message contains a prohibited deception or impersonation instruction.")
+        if _SENSITIVE_REQUEST_RE.search(action.body):
+            reasons.append("The message requests sensitive personal or authentication information.")
+        if _TRANSACTION_RE.search(action.body):
+            reasons.append("The message attempts an application, purchase, contract acceptance, or funds transfer.")
         if not action.idempotency_key:
             reasons.append("The action does not have an idempotency key.")
         if action.followup and not action.thread_id:
             reasons.append("A follow-up must be attached to an existing SourceLoop thread.")
         if action.followup and not action.in_reply_to:
             reasons.append("A follow-up must identify the provider message it replies to.")
+
+        contact = next((item for item in case.contacts if item.endpoint == action.recipient), None)
+        if contact is None:
+            reasons.append("The recipient is not an approved contact route on this case.")
+        else:
+            if contact.channel not in set(governance.get("allowed_channels", ["email"])):
+                reasons.append("The contact channel is not allowed by the case governance profile.")
+            if case.risk_tier in {RiskTier.ELEVATED, RiskTier.RESTRICTED} and not contact.source_public:
+                reasons.append("Elevated and restricted investigations require a public or customer-authorized endpoint.")
+            if case.risk_tier is RiskTier.RESTRICTED and not contact.business_only:
+                reasons.append("Restricted investigations may contact only organizational or professional endpoints.")
+            if not contact.organization_name.strip():
+                reasons.append("An accountable organization name is required for external investigation outreach.")
 
         active_targets = {
             candidate.recipient
@@ -70,16 +100,37 @@ class PolicyEngine:
         if len(active_targets) > case.max_contacts:
             reasons.append("The case exceeds its maximum number of external contacts.")
         if case.kind is CaseKind.CIVIC_INTELLIGENCE and case.max_contacts > 3:
-            reasons.append("Civic intelligence cases may not configure more than three contacts in Phase 1.")
+            reasons.append("Civic intelligence cases may not configure more than three contacts.")
+        if case.risk_tier is RiskTier.RESTRICTED and case.max_contacts > 3:
+            reasons.append("Restricted investigations may not configure more than three contacts.")
 
         followups = sum(1 for candidate in case.actions if candidate.followup)
         if followups > case.max_followups * max(1, len(case.contacts)):
             reasons.append("The case exceeds its bounded follow-up allowance.")
 
+        if case.risk_tier in {RiskTier.ELEVATED, RiskTier.RESTRICTED} and not (case.requester_email or "").strip():
+            reasons.append("Elevated and restricted cases require a requester email address.")
+        if governance.get("institutional_only") and not acknowledgements.get("institutional_authority"):
+            reasons.append("The institutional-authority acknowledgement is missing.")
+        for required in governance.get("required_acknowledgements", []):
+            if not acknowledgements.get(required):
+                reasons.append(f"Required governance acknowledgement is missing: {required}")
+
+        request_text = json.dumps(
+            {"objective": case.objective, "requirements": case.requirements, "message": action.body},
+            default=str,
+            sort_keys=True,
+        )
+        for pattern in governance.get("prohibited_request_patterns", []):
+            try:
+                if re.search(pattern, request_text, flags=re.IGNORECASE):
+                    reasons.append(f"The case or message matches a prohibited request pattern: {pattern}")
+            except re.error:
+                reasons.append(f"The governance profile contains an invalid prohibited pattern: {pattern}")
+
         if self.settings.email_mode == "smtp" and not self.settings.allow_external_send:
             reasons.append("SMTP mode is configured, but external sending is not explicitly enabled.")
         if self.settings.email_mode == "smtp" and action.recipient.endswith((".test", ".invalid")):
-            # Local GreenMail uses .local so the sandbox can exercise the real SMTP/IMAP loop.
             reasons.append("Reserved demonstration domains cannot be used for external SMTP delivery.")
         if self.settings.email_mode not in {"dry_run", "smtp"}:
             reasons.append("Unknown email mode; only dry_run and smtp are supported.")
@@ -92,8 +143,12 @@ class PolicyEngine:
                 "external_send_enabled": self.settings.allow_external_send,
                 "approval_required": action.approval_required,
                 "followup": action.followup,
+                "risk_tier": case.risk_tier.value,
+                "pack": case.pack,
                 "max_contacts": case.max_contacts,
                 "max_followups": case.max_followups,
                 "suppressed": self.repository.is_suppressed(action.recipient),
+                "public_contact_route": contact.source_public if contact else False,
+                "business_only": contact.business_only if contact else False,
             },
         )

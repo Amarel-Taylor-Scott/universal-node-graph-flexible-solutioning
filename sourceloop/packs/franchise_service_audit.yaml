@@ -1,0 +1,48 @@
+id: franchise_service_audit
+name: Franchise and Multi-Location Service Audit
+description: Transparent, standardized testing of public pricing, availability, policy, and brand-service representations.
+case_kind: market_investigation
+investigation_mode: practice_audit
+risk_tier: elevated
+requires_requester_email: true
+max_contacts: 5
+max_followups: 1
+completion_target: 2
+completion_basis: responses
+required_acknowledgements: [authorized_requester, research_only, public_business_channels_only, no_fake_persona]
+required_fields: [brand_or_category, geography, standardized_scenario, research_purpose]
+optional_fields: [locations, published_policy, service_standard, requested_price]
+prohibited_request_patterns: ["fake disability", "fake emergency", "fake complaint", "secretly record"]
+question_prompts:
+  - Is the standardized product or service currently available at this location?
+  - What price, mandatory fees, taxes, deposits, cancellation terms, and exclusions apply?
+  - Does the location follow the published brand policy for the stated scenario?
+  - What public route should receive corrections or complaints?
+response_fields:
+  - {id: availability, label: Availability, question: Please confirm current availability., markers: ["available", "sold out", "in stock", "appointment"] , critical: true}
+  - {id: price, label: Price, question: Please confirm the current price., markers: ["$", "price", "rate", "cost"] , critical: true}
+  - {id: fees, label: Mandatory fees, question: "Please identify mandatory fees, deposits, taxes, and exclusions.", markers: ["fee", "deposit", "tax", "included", "excluded"], critical: true}
+  - {id: policy, label: Policy treatment, question: Please confirm how the published policy applies to this scenario., markers: ["policy", "terms", "cancellation", "refund", "brand"] , critical: true}
+  - {id: complaint_route, label: Complaint route, question: Please provide the public correction or complaint route., markers: ["complaint", "customer service", "manager", "contact"] , critical: false}
+finding_rules:
+  - id: mandatory_fee_reported
+    kind: reported_fee
+    severity: low
+    title: Mandatory fee reported
+    summary: The response reports a mandatory fee or deposit that should be included in total price.
+    patterns: ["mandatory fee", "service fee", "resort fee", "deposit required"]
+  - id: policy_exception
+    kind: reported_practice
+    severity: medium
+    title: Location-specific policy exception reported
+    summary: The response appears to describe a location-specific exception to a published or brand policy.
+    patterns: ["this location does not", "location-specific", "manager discretion", "exception to"]
+message_purpose: conduct a transparent standardized service and policy inquiry
+respondent_value: identify inconsistent public information and route corrections to the proper team
+reuse_policy: customer_private_and_aggregated_only
+demo_contacts:
+  - {organization_name: Example Franchise North, role_title: Customer service team, endpoint: north@examplefranchise.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration market}
+  - {organization_name: Example Franchise South, role_title: Customer service team, endpoint: south@examplefranchise.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration market}
+demo_replies:
+  - body: "The standardized service is available this week for $129. A mandatory $15 service fee and tax apply; no deposit is required. Cancellations are free up to 24 hours under our brand policy. Corrections can be sent to customer service."
+  - body: "Appointments are available next week at a price of $125 plus tax. There is no mandatory fee or deposit. Our cancellation policy allows a full refund with 24 hours notice. Customer service handles complaints and corrections."

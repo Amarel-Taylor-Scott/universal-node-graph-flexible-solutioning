@@ -1,0 +1,107 @@
+id: lender_disclosure_audit
+name: Alternative Lender Disclosure Audit
+description: Restricted institutional research into publicly offered credit terms, licensing representations, fees, and repayment disclosures.
+case_kind: market_investigation
+investigation_mode: compliance_probe
+risk_tier: restricted
+institutional_only: true
+requires_requester_email: true
+max_contacts: 3
+max_followups: 1
+completion_target: 1
+completion_basis: responses
+required_acknowledgements:
+  - institutional_authority
+  - authorized_requester
+  - legal_review
+  - research_only
+  - public_business_channels_only
+  - no_fake_persona
+  - no_application
+  - no_sensitive_personal_data
+required_fields: [geography, research_purpose, scenario]
+optional_fields: [product_type, representative_principal, representative_term]
+prohibited_request_patterns:
+  - "apply for (?:a )?loan"
+  - "submit (?:a )?loan application"
+  - "hard credit pull"
+  - "social security number|ssn|bank account|routing number|date of birth"
+  - "borrow money for (?:an )?emergency"
+sensitive_data_categories: [financial_account, government_identifier, credit_history, precise_income, authentication_secret]
+stage_roles:
+  orient: [case_supervisor, legal_scope_reviewer, investigation_ethics_reviewer]
+  reconcile_horizon: [jurisdiction_policy_agent, risk_classifier]
+  assess_prepare: [credit_scenario_compiler, disclosure_checklist_critic, missing_information_critic]
+  how: [public_lender_scout, license_registry_scout, legal_entity_resolver, public_contact_resolver]
+  act: [research_only_message_composer, sensitive_data_policy_critic, policy_critic]
+  verify: [extractor_a, extractor_b, credit_terms_auditor, license_discrepancy_critic, adversarial_auditor]
+question_prompts:
+  - What is the legal creditor or broker name, physical business location, and applicable state license number?
+  - For the stated hypothetical principal and term, what amount is disbursed, APR, finance charge, payment schedule, and total repayment?
+  - What origination, application, broker, late, NSF, rollover, renewal, or prepayment fees and conditions apply?
+  - Is ACH authorization required, when would any credit check occur, and what is the public complaint route?
+response_fields:
+  - {id: legal_name, label: Legal creditor or broker, question: Please confirm the legal creditor or broker name., markers: ["legal name", "creditor", "broker", "lender name"] , critical: true}
+  - {id: license_number, label: License number, question: Please provide the applicable state license number or explain the claimed exemption., markers: ["license", "nmls", "licensed", "exempt"] , critical: true}
+  - {id: amount_disbursed, label: Amount disbursed, question: Please confirm the amount the customer would actually receive., markers: ["amount disbursed", "receive", "proceeds", "funded amount"] , critical: true}
+  - {id: apr, label: APR, question: Please confirm the annual percentage rate for the hypothetical scenario., markers: ["apr", "annual percentage rate"] , critical: true}
+  - {id: finance_charge, label: Finance charge, question: Please confirm the total finance charge., markers: ["finance charge", "cost of credit"] , critical: true}
+  - {id: total_repayment, label: Total repayment, question: Please confirm the total of all scheduled payments., markers: ["total repayment", "total of payments", "repay"] , critical: true}
+  - {id: term, label: Term, question: Please confirm the term and payment frequency., markers: ["days", "weeks", "months", "term", "payment frequency"] , critical: true}
+  - {id: fees, label: Fees, question: Please list every mandatory and contingent fee., markers: ["fee", "origination", "application", "late", "nsf"] , critical: true}
+  - {id: rollover, label: Rollover or renewal, question: "Please explain whether rollover, renewal, or refinancing is permitted and at what cost.", markers: ["rollover", "renewal", "refinance", "extension"], critical: true}
+  - {id: ach, label: ACH authorization, question: Please confirm whether recurring ACH authorization is required., markers: ["ach", "automatic debit", "bank debit"] , critical: false}
+  - {id: complaint_route, label: Complaint route, question: Please provide the public complaint or compliance contact., markers: ["complaint", "compliance", "customer service"] , critical: false}
+finding_rules:
+  - id: license_not_disclosed
+    kind: license_unverified
+    severity: high
+    title: License or exemption not disclosed
+    summary: The response did not provide a license number or claimed exemption. This is an information gap, not a legal conclusion.
+    missing_field: license_number
+  - id: apr_not_disclosed
+    kind: disclosure_gap
+    severity: high
+    title: APR not disclosed
+    summary: The response did not disclose an APR for the standardized scenario.
+    missing_field: apr
+  - id: triple_digit_apr
+    kind: reported_price
+    severity: high
+    title: Triple-digit APR reported
+    summary: The response appears to report a triple-digit APR and requires exact-term review.
+    patterns: ["(?:apr|annual percentage rate).{0,20}(?:[1-9]\\d{2,})(?:\\.\\d+)?%"]
+    value_pattern: "(?P<apr>\\d+(?:\\.\\d+)?)%"
+  - id: guaranteed_approval
+    kind: policy_risk
+    severity: critical
+    title: Guaranteed approval representation detected
+    summary: The response appears to make a guaranteed-approval representation.
+    patterns: ["guaranteed approval", "everyone is approved", "no one is denied"]
+  - id: advance_fee
+    kind: reported_fee
+    severity: critical
+    title: Advance fee before disbursement reported
+    summary: The response appears to require payment before loan proceeds are disbursed.
+    patterns: ["fee (?:before|prior to) (?:funding|disbursement)", "pay .* before we fund", "advance fee"]
+    negative_patterns: ["no (?:application or )?advance fee", "no advance fee", "advance fee does not apply"]
+  - id: rollover_available
+    kind: reported_practice
+    severity: medium
+    title: Rollover or renewal reported
+    summary: The response reports a rollover, renewal, refinancing, or extension option that should be included in total-cost analysis.
+    patterns: ["rollover", "renew(?:al|ed)", "refinance", "extension fee"]
+    negative_patterns: ["no rollover", "rollovers? (?:are|is) not (?:available|permitted)", "cannot be renewed"]
+  - id: ach_required
+    kind: reported_practice
+    severity: medium
+    title: Recurring ACH authorization reported
+    summary: The response reports recurring ACH or automatic bank debit as a condition.
+    patterns: ["ach .*required", "automatic debit .*required", "must authorize .*bank debit"]
+message_purpose: collect representative public credit disclosures for institutional research only
+respondent_value: reduce repeated disclosure questions and preserve accurate public compliance routing
+reuse_policy: restricted_customer_private
+demo_contacts:
+  - {organization_name: Example Short-Term Credit LLC, role_title: Compliance information desk, endpoint: compliance@examplecredit.example.test, source: demo_pack, source_public: true, confidence: 0.91, geography: Demonstration market, legal_entity_name: Example Short-Term Credit LLC, business_only: true}
+demo_replies:
+  - body: "The legal creditor is Example Short-Term Credit LLC, state license STC-10482. For a hypothetical $300, 14-day product, the customer receives $300. The finance charge is $45, the APR is 391%, and total repayment is $345 in one payment after 14 days. There is no application or advance fee. A $30 NSF fee may apply. One rollover is available for an additional $45. ACH authorization is required. Compliance complaints can be emailed to this address."

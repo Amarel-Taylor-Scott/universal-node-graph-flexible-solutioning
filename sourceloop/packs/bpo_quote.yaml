@@ -1,44 +1,34 @@
 id: bpo_quote
 name: BPO and Outsourcing Quote Desk
-description: Direct-source pricing, capacity, operational, and security intelligence for outsourced business services.
+description: Structured provider discovery, capability verification, and comparable outsourcing proposals.
 case_kind: quote_intelligence
+investigation_mode: quote_probe
+risk_tier: standard
 max_contacts: 8
 max_followups: 1
-completion_target: 3
-required_fields:
-  - service
-optional_fields:
-  - seats
-  - languages
-  - coverage
-  - start_window
-  - security_requirements
-  - minimum_quotes
-specialist_roles:
-  - requirement_compiler
-  - provider_scout
-  - delivery_location_scout
-  - contact_resolver
-  - quote_extractor
-  - terms_auditor
-prohibited_actions:
-  - hidden_requester
-  - autonomous_contract_acceptance
-  - autonomous_purchase
-  - competitor_quote_disclosure
+completion_target: 2
+completion_basis: quotes
+required_fields: [service]
+optional_fields: [seats, languages, coverage, start_window, security_requirements, minimum_quotes]
 question_prompts:
-  - What hourly, seat, FTE, contact, or outcome pricing unit applies?
-  - What implementation, training, technology, shift, and overtime fees apply?
-  - What delivery locations, security controls, capacity, and ramp time apply?
-  - What minimum commitments, payment terms, exclusions, and validity apply?
-critical_quote_fields:
-  - payment_terms
-  - quote_validity
-followup_approval_required: true
-comparison_dimensions:
-  - normalized_cost
-  - ramp_time
-  - capacity
-  - security_fit
-  - minimum_commitment
-  - exclusions
+  - What hourly, seat, FTE, contact, or outcome price applies and what productive-hour assumptions were used?
+  - What implementation, training, technology, management, overtime, and shift fees apply?
+  - What current delivery capacity, locations, ramp time, security controls, and minimum commitment apply?
+  - What is excluded, what payment terms apply, and how long is the proposal valid?
+response_fields:
+  - {id: price, label: Price, question: Please confirm the price and unit., markers: ["$", "per hour", "per fte", "per seat", "price", "rate"] , critical: true}
+  - {id: capacity, label: Capacity, question: Please confirm current capacity., markers: ["capacity", "fte", "seats", "agents"] , critical: true}
+  - {id: ramp, label: Ramp time, question: Please confirm ramp time., markers: ["ramp", "days", "weeks", "start"] , critical: true}
+  - {id: payment_terms, label: Payment terms, question: Please confirm payment terms., markers: ["net 30", "net 45", "payment terms"] , critical: true}
+  - {id: quote_validity, label: Quote validity, question: Please confirm proposal validity., markers: ["valid through", "valid until"] , critical: true}
+critical_quote_fields: [payment_terms, quote_validity]
+prohibited_actions: [hidden_requester, autonomous_contract_acceptance, autonomous_purchase, competitor_quote_disclosure]
+message_purpose: obtain a current non-binding outsourcing proposal
+respondent_value: route qualified opportunities with complete requirements
+reuse_policy: buyer_private_and_aggregated_only
+demo_contacts:
+  - {organization_name: Pacific Operations Group, role_title: Business development team, endpoint: proposals@pacificops.example.test, source: demo_pack, source_public: true, confidence: 0.91, geography: Demonstration delivery market}
+  - {organization_name: Global Support Partners, role_title: Solutions team, endpoint: solutions@globalsupport.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration delivery market}
+demo_replies:
+  - body: "We can provide 30 bilingual agents with current capacity and a 35-day ramp. Pricing is $13.75 per productive hour. Implementation is $7,500 one-time and training is $350 per agent. Telephony licenses are excluded. Payment terms are Net 30. Valid through 2026-10-31."
+  - body: "We have capacity for 40 FTE and can ramp 30 agents in four weeks. The rate is $14.10 per productive hour with a $5,000 implementation fee. Customer CRM licenses are excluded. Payment terms are Net 30. Valid through 2026-10-25."

@@ -9,8 +9,8 @@ from threading import Event
 
 from .config import Settings
 from .domain import MailboxSyncResult, WorkerHeartbeat, utcnow
-from .engine import SourceLoopEngine
 from .evidence import EvidenceStore
+from .extended_engine import InvestigativeSourceLoopEngine
 from .mailbox import MailboxService
 from .repository import Repository
 
@@ -21,7 +21,7 @@ class SourceLoopWorker:
     def __init__(self, settings: Settings, repository: Repository | None = None) -> None:
         self.settings = settings
         self.repository = repository or Repository(settings.database_url)
-        self.engine = SourceLoopEngine(settings, repository=self.repository)
+        self.engine = InvestigativeSourceLoopEngine(settings, repository=self.repository)
         self.evidence = EvidenceStore(settings.evidence_dir, settings.attachment_max_bytes)
         self.mailbox = MailboxService(settings, self.repository, self.engine, self.evidence)
         self.stop_event = Event()

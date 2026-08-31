@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 
 const API = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, "") ?? "";
 const stages = [
@@ -14,6 +14,7 @@ const stages = [
 ] as const;
 
 type Stage = (typeof stages)[number];
+type Tab = "overview" | "outreach" | "intelligence" | "evidence" | "agents";
 
 type GeoPoint = {
   latitude: number;
@@ -25,10 +26,16 @@ type GeoPoint = {
 type Contact = {
   id: string;
   organization_name: string;
+  legal_entity_name?: string;
   role_title: string;
   endpoint: string;
+  channel: string;
+  source: string;
+  source_public: boolean;
+  business_only: boolean;
   confidence: number;
   geography?: string;
+  jurisdiction?: string;
   location?: GeoPoint;
 };
 
@@ -50,6 +57,8 @@ type AgentRun = {
   stage: Stage;
   runtime: string;
   status: string;
+  started_at: string;
+  finished_at?: string;
   error?: string;
 };
 
@@ -60,6 +69,7 @@ type Claim = {
   kind: string;
   confidence: number;
   corroboration_status: string;
+  evidence_ids: string[];
 };
 
 type QuoteLine = {
@@ -82,6 +92,40 @@ type Quote = {
   extraction_confidence: number;
   unresolved_fields: string[];
   valid_until?: string;
+  evidence_ids: string[];
+};
+
+type Finding = {
+  id: string;
+  rule_id: string;
+  kind: string;
+  severity: string;
+  title: string;
+  summary: string;
+  subject_id: string;
+  value: unknown;
+  evidence_ids: string[];
+  confidence: number;
+  status: string;
+  source_scope: string;
+  requires_human_review: boolean;
+  reviewed_by?: string;
+  reviewed_at?: string;
+  review_notes?: string;
+};
+
+type RegistryCheck = {
+  id: string;
+  registry: string;
+  query: string;
+  subject_id?: string;
+  status: string;
+  identifier?: string;
+  entity_name?: string;
+  jurisdiction?: string;
+  source?: string;
+  checked_at: string;
+  notes: string;
 };
 
 type Interaction = {
@@ -89,7 +133,10 @@ type Interaction = {
   direction: string;
   endpoint: string;
   subject: string;
+  body: string;
   thread_id: string;
+  evidence_id: string;
+  raw_evidence_path?: string;
   provider_message_id?: string;
   attachments: Array<{ filename: string; status: string; size_bytes: number }>;
   created_at: string;
@@ -101,19 +148,59 @@ type CaseRecord = {
   kind: string;
   objective: string;
   requester_name: string;
+  requester_email?: string;
   pack?: string;
   stage: Stage;
   status: string;
   demo: boolean;
   location?: GeoPoint;
   completion_target: number;
+  max_contacts: number;
+  max_followups: number;
   contacts: Contact[];
   actions: Action[];
   agent_runs: AgentRun[];
   claims: Claim[];
   quotes: Quote[];
+  findings: Finding[];
+  registry_checks: RegistryCheck[];
+  response_coverage: Record<string, string[]>;
+  risk_tier: string;
+  investigation_mode?: string;
+  governance: Record<string, unknown>;
   interactions: Interaction[];
   updated_at: string;
+};
+
+type ResponseField = {
+  id: string;
+  label: string;
+  question: string;
+  markers: string[];
+  critical: boolean;
+};
+
+type Pack = {
+  id: string;
+  name: string;
+  case_kind: string;
+  description: string;
+  investigation_mode?: string;
+  risk_tier: string;
+  institutional_only: boolean;
+  requires_requester_email: boolean;
+  required_acknowledgements: string[];
+  required_fields: string[];
+  optional_fields: string[];
+  prohibited_actions: string[];
+  question_prompts: string[];
+  response_fields: ResponseField[];
+  max_contacts: number;
+  max_followups: number;
+  completion_target: number;
+  message_purpose: string;
+  respondent_value: string;
+  reuse_policy: string;
 };
 
 type Feature = {
@@ -140,29 +227,58 @@ type RuntimeInfo = {
   mailbox_mode: string;
   mailbox_enabled: boolean;
   agent_runtime: string;
+  pack_count: number;
   worker?: WorkerInfo;
 };
 
+type CaseReport = {
+  case: Record<string, unknown>;
+  activity: Record<string, number>;
+  results: Record<string, unknown>;
+  market_prices: Record<string, { count: number; minimum: number; median: number; maximum: number; mean: number }>;
+  response_coverage: Array<{
+    endpoint: string;
+    covered: string[];
+    missing_critical: string[];
+    coverage_ratio: number;
+  }>;
+  evidence_ids: string[];
+  interpretation_notice: string;
+};
+
 type NewCaseDraft = {
-  title: string;
-  kind: "quote_intelligence" | "civic_intelligence" | "data_verification";
   pack: string;
+  title: string;
   objective: string;
   requesterName: string;
   requesterEmail: string;
   requirements: string;
   contacts: string;
+  acknowledgements: Record<string, boolean>;
 };
 
-const initialDraft: NewCaseDraft = {
-  title: "",
-  kind: "quote_intelligence",
-  pack: "facilities_quote",
-  objective: "",
-  requesterName: "",
-  requesterEmail: "",
-  requirements: '{\n  "service": "commercial HVAC maintenance",\n  "minimum_quotes": 2\n}',
-  contacts: "",
+type RegistryDraft = {
+  registry: string;
+  query: string;
+  subjectId: string;
+  status: string;
+  identifier: string;
+  entityName: string;
+  jurisdiction: string;
+  source: string;
+  notes: string;
+};
+
+const emptyRegistry: RegistryDraft = {
+  registry: "",
+  query: "",
+  subjectId: "",
+  status: "matched",
+  identifier: "",
+  entityName: "",
+  jurisdiction: "",
+  source: "",
+  notes: "",
 };
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -171,7 +287,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     ...init,
   });
   if (!response.ok) {
-    const payload = await response.json().catch(() => ({ detail: response.statusText }));
+    const payload = (await response.json().catch(() => ({ detail: response.statusText }))) as {
+      detail?: string;
+    };
     throw new Error(payload.detail ?? response.statusText);
   }
   return response.json() as Promise<T>;
@@ -181,14 +299,14 @@ function titleize(value: string): string {
   return value.replaceAll("_", " ").replace(/\b\w/g, (match) => match.toUpperCase());
 }
 
-function quoteTotal(quote: Quote): number {
-  return quote.line_items.reduce((total, line) => total + (line.quantity ?? 1) * line.unit_price, 0);
-}
-
 function formatDate(value?: string): string {
   if (!value) return "—";
   const date = new Date(value);
   return Number.isNaN(date.valueOf()) ? value : date.toLocaleString();
+}
+
+function quoteTotal(quote: Quote): number {
+  return quote.line_items.reduce((total, line) => total + (line.quantity ?? 1) * line.unit_price, 0);
 }
 
 function parseContacts(raw: string): Array<Record<string, unknown>> {
@@ -198,11 +316,11 @@ function parseContacts(raw: string): Array<Record<string, unknown>> {
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => {
-      const [organization_name, role_title, endpoint, geography, latitude, longitude] = line
+      const [organization_name, role_title, endpoint, geography, latitude, longitude, source] = line
         .split("|")
         .map((part) => part.trim());
       if (!organization_name || !endpoint) {
-        throw new Error("Each contact line needs at least: Organization | Role | email");
+        throw new Error("Each contact line needs at least Organization | Role | email.");
       }
       const lat = latitude ? Number(latitude) : undefined;
       const lon = longitude ? Number(longitude) : undefined;
@@ -211,8 +329,9 @@ function parseContacts(raw: string): Array<Record<string, unknown>> {
         role_title: role_title || "Public or business inquiry contact",
         endpoint,
         geography: geography || undefined,
-        source: "operator_supplied",
+        source: source || "operator_supplied",
         source_public: true,
+        business_only: true,
         confidence: 0.8,
         location:
           lat !== undefined && lon !== undefined && Number.isFinite(lat) && Number.isFinite(lon)
@@ -222,8 +341,86 @@ function parseContacts(raw: string): Array<Record<string, unknown>> {
     });
 }
 
+function sampleRequirements(packId: string): Record<string, unknown> {
+  const samples: Record<string, Record<string, unknown>> = {
+    facilities_quote: { service: "commercial HVAC maintenance", property_count: 5, minimum_quotes: 2 },
+    local_services_quote: {
+      service: "weekly lawn mowing",
+      geography: "Pittsburgh, Pennsylvania",
+      lawn_area_sqft: 9500,
+      scope: ["mowing", "edging", "blowing"],
+      requested_start: "within 14 days",
+      minimum_quotes: 2,
+    },
+    bpo_quote: {
+      service: "bilingual customer support",
+      seats: 30,
+      languages: ["English", "Spanish"],
+      coverage: "24x7",
+      start_window: "45 days",
+      minimum_quotes: 2,
+    },
+    staffing_procurement: {
+      roles: "warehouse associates",
+      workers: 20,
+      geography: "Allentown, Pennsylvania",
+      shift: "second shift",
+      start_window: "three weeks",
+      temp_to_hire: true,
+      minimum_quotes: 2,
+    },
+    employment_agency_audit: {
+      geography: "Example metropolitan area",
+      research_purpose: "public employment-practice comparison",
+      scenario: "Public inquiry about a currently advertised warehouse role",
+    },
+    lender_disclosure_audit: {
+      geography: "Example State",
+      research_purpose: "institutional public disclosure audit",
+      scenario: "$300 principal for 14 days",
+    },
+    contractor_license_audit: {
+      geography: "Example State",
+      trade: "commercial roofing",
+      research_purpose: "public authorization and practice verification",
+    },
+    informal_business_verification: {
+      geography: "Example market",
+      service: "lawn and grounds maintenance",
+      research_purpose: "business identity and service verification",
+    },
+    franchise_service_audit: {
+      brand_or_category: "hotel",
+      geography: "Example market",
+      standardized_scenario: "One-night public rate and fee inquiry",
+      research_purpose: "location-level price and policy comparison",
+    },
+    civic_intelligence: { geography: "Pike County, Pennsylvania", purpose: "public organization routing" },
+    business_record_verification: { record_type: "public business location", jurisdiction: "Pennsylvania" },
+  };
+  return samples[packId] ?? {};
+}
+
+function newDraft(pack: Pack | undefined): NewCaseDraft {
+  const selected = pack;
+  return {
+    pack: selected?.id ?? "facilities_quote",
+    title: selected ? `${selected.name} case` : "New SourceLoop case",
+    objective: selected?.message_purpose ? titleize(selected.message_purpose) : "Obtain current direct-source information.",
+    requesterName: "",
+    requesterEmail: "",
+    requirements: JSON.stringify(sampleRequirements(selected?.id ?? "facilities_quote"), null, 2),
+    contacts: "",
+    acknowledgements: Object.fromEntries((selected?.required_acknowledgements ?? []).map((key) => [key, false])),
+  };
+}
+
 function StateDot({ state }: { state: string }) {
   return <span className={`state-dot state-${state}`} aria-hidden="true" />;
+}
+
+function RiskBadge({ risk }: { risk: string }) {
+  return <span className={`risk-badge risk-${risk}`}>{titleize(risk)}</span>;
 }
 
 function SpatialView({ selected, features }: { selected: CaseRecord; features: FeatureCollection }) {
@@ -239,8 +436,8 @@ function SpatialView({ selected, features }: { selected: CaseRecord; features: F
   const maxX = Math.max(...xs);
   const minY = Math.min(...ys);
   const maxY = Math.max(...ys);
-  const projectX = (value: number) => 38 + ((value - minX) / Math.max(maxX - minX, 0.01)) * 524;
-  const projectY = (value: number) => 262 - ((value - minY) / Math.max(maxY - minY, 0.01)) * 224;
+  const projectX = (value: number) => 42 + ((value - minX) / Math.max(maxX - minX, 0.01)) * 516;
+  const projectY = (value: number) => 258 - ((value - minY) / Math.max(maxY - minY, 0.01)) * 216;
   const casePoint = points.find((point) => point.id === selected.id);
 
   return (
@@ -290,32 +487,46 @@ function SpatialView({ selected, features }: { selected: CaseRecord; features: F
   );
 }
 
+function ProgressBar({ ratio }: { ratio: number }) {
+  return (
+    <div className="progress-track" aria-label={`${Math.round(ratio * 100)}% field coverage`}>
+      <span style={{ width: `${Math.max(0, Math.min(100, ratio * 100))}%` }} />
+    </div>
+  );
+}
+
 export default function App() {
   const [cases, setCases] = useState<CaseRecord[]>([]);
+  const [packs, setPacks] = useState<Pack[]>([]);
   const [selectedId, setSelectedId] = useState<string>();
   const [features, setFeatures] = useState<FeatureCollection>({ type: "FeatureCollection", features: [] });
   const [runtime, setRuntime] = useState<RuntimeInfo>();
+  const [report, setReport] = useState<CaseReport>();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string>();
   const [showCreate, setShowCreate] = useState(false);
-  const [draft, setDraft] = useState<NewCaseDraft>(initialDraft);
-  const [activeTab, setActiveTab] = useState<"overview" | "outreach" | "intelligence" | "runs">("overview");
+  const [showRegistry, setShowRegistry] = useState(false);
+  const [draft, setDraft] = useState<NewCaseDraft>(newDraft(undefined));
+  const [registryDraft, setRegistryDraft] = useState<RegistryDraft>(emptyRegistry);
+  const [activeTab, setActiveTab] = useState<Tab>("overview");
 
   const refresh = useCallback(async () => {
-    const [caseRows, mapRows, info] = await Promise.all([
+    const [caseRows, mapRows, info, packRows] = await Promise.all([
       request<CaseRecord[]>("/api/v1/cases"),
       request<FeatureCollection>("/api/v1/map/features"),
       request<RuntimeInfo>("/api/v1/runtime"),
+      request<Pack[]>("/api/v1/packs"),
     ]);
     setCases(caseRows);
     setFeatures(mapRows);
     setRuntime(info);
+    setPacks(packRows);
     setSelectedId((current) => current ?? caseRows[0]?.id);
   }, []);
 
   useEffect(() => {
     refresh().catch((reason: Error) => setError(reason.message));
-    const interval = window.setInterval(() => refresh().catch(() => undefined), 10_000);
+    const interval = window.setInterval(() => refresh().catch(() => undefined), 12_000);
     return () => window.clearInterval(interval);
   }, [refresh]);
 
@@ -323,6 +534,21 @@ export default function App() {
     () => cases.find((candidate) => candidate.id === selectedId) ?? cases[0],
     [cases, selectedId],
   );
+  const selectedPack = useMemo(
+    () => packs.find((pack) => pack.id === selected?.pack),
+    [packs, selected?.pack],
+  );
+  const draftPack = useMemo(() => packs.find((pack) => pack.id === draft.pack), [packs, draft.pack]);
+
+  useEffect(() => {
+    if (!selected) {
+      setReport(undefined);
+      return;
+    }
+    request<CaseReport>(`/api/v1/cases/${selected.id}/report`)
+      .then(setReport)
+      .catch(() => setReport(undefined));
+  }, [selected?.id, selected?.updated_at]);
 
   const execute = async (operation: () => Promise<unknown>) => {
     setBusy(true);
@@ -337,30 +563,36 @@ export default function App() {
     }
   };
 
+  const choosePack = (packId: string) => {
+    const pack = packs.find((candidate) => candidate.id === packId);
+    setDraft((current) => ({
+      ...newDraft(pack),
+      requesterName: current.requesterName,
+      requesterEmail: current.requesterEmail,
+    }));
+  };
+
   const createDemo = () =>
     execute(async () => {
       const created = await request<CaseRecord>("/api/v1/cases", {
         method: "POST",
         body: JSON.stringify({
-          title: "Pittsburgh commercial facilities quote",
+          title: "Pittsburgh local lawn-service market",
           kind: "quote_intelligence",
-          pack: "facilities_quote",
+          pack: "local_services_quote",
           objective:
-            "Obtain comparable non-binding pricing, availability, exclusions, payment terms, and validity from a small qualified provider panel.",
-          requester_name: "Demo Procurement Team",
+            "Obtain comparable non-binding pricing, availability, scope, surcharges, payment terms, and validity.",
+          requester_name: "Demo Property Team",
+          requester_email: "demo@example.test",
           demo: true,
           location: {
             latitude: 40.4406,
             longitude: -79.9959,
-            label: "Pittsburgh demonstration portfolio",
+            label: "Pittsburgh demonstration property",
             precision: "public_venue",
           },
-          requirements: {
-            service: "preventive commercial building service",
-            property_count: 5,
-            response_window: "two weeks",
-            minimum_quotes: 2,
-          },
+          requirements: sampleRequirements("local_services_quote"),
+          governance_acknowledgements: { authorized_requester: true, research_only: true },
         }),
       });
       setSelectedId(created.id);
@@ -370,25 +602,28 @@ export default function App() {
   const createCustom = (event: FormEvent) => {
     event.preventDefault();
     return execute(async () => {
+      if (!draftPack) throw new Error("Select a valid investigation pack.");
       const requirements = JSON.parse(draft.requirements || "{}") as Record<string, unknown>;
       const contacts = parseContacts(draft.contacts);
       const created = await request<CaseRecord>("/api/v1/cases", {
         method: "POST",
         body: JSON.stringify({
           title: draft.title,
-          kind: draft.kind,
-          pack: draft.pack || undefined,
+          kind: draftPack.case_kind,
+          pack: draftPack.id,
+          investigation_mode: draftPack.investigation_mode || undefined,
           objective: draft.objective,
           requester_name: draft.requesterName,
           requester_email: draft.requesterEmail || undefined,
           demo: false,
           requirements,
           contacts,
+          governance_acknowledgements: draft.acknowledgements,
         }),
       });
       setSelectedId(created.id);
       setShowCreate(false);
-      setDraft(initialDraft);
+      setDraft(newDraft(packs[0]));
       await request(`/api/v1/cases/${created.id}/run`, { method: "POST" });
     });
   };
@@ -435,9 +670,46 @@ export default function App() {
   const simulateReplies = () =>
     selected && execute(() => request(`/api/v1/demo/${selected.id}/replies`, { method: "POST" }));
 
+  const reviewFinding = (findingId: string, status: string) =>
+    selected &&
+    execute(() =>
+      request(`/api/v1/cases/${selected.id}/findings/${findingId}/review`, {
+        method: "POST",
+        body: JSON.stringify({
+          status,
+          reviewer: "console-operator",
+          notes: `Marked ${status} in SourceLoop console.`,
+        }),
+      }),
+    );
+
+  const addRegistryCheck = (event: FormEvent) => {
+    event.preventDefault();
+    if (!selected) return Promise.resolve();
+    return execute(async () => {
+      await request(`/api/v1/cases/${selected.id}/registry-checks`, {
+        method: "POST",
+        body: JSON.stringify({
+          registry: registryDraft.registry,
+          query: registryDraft.query,
+          subject_id: registryDraft.subjectId || undefined,
+          status: registryDraft.status,
+          identifier: registryDraft.identifier || undefined,
+          entity_name: registryDraft.entityName || undefined,
+          jurisdiction: registryDraft.jurisdiction || undefined,
+          source: registryDraft.source || undefined,
+          notes: registryDraft.notes,
+        }),
+      });
+      setShowRegistry(false);
+      setRegistryDraft(emptyRegistry);
+    });
+  };
+
   const pendingActions = selected?.actions.filter((action) => action.status === "pending").length ?? 0;
   const approvedActions = selected?.actions.filter((action) => action.status === "approved").length ?? 0;
   const dispatchedActions = selected?.actions.filter((action) => action.status === "dispatched").length ?? 0;
+  const openFindings = selected?.findings.filter((finding) => finding.status === "open").length ?? 0;
   const realMail = runtime?.email_mode === "smtp" && runtime.external_send_enabled;
 
   return (
@@ -446,17 +718,16 @@ export default function App() {
         <div className="brand-lockup">
           <span className="brand-mark">SL</span>
           <div>
-            <p className="eyebrow">DIRECT-SOURCE INTELLIGENCE OS</p>
-            <h1>SourceLoop</h1>
+            <p className="eyebrow">ACTIVE MARKET INTELLIGENCE OS</p>
+            <h1>SourceLoop Investigate</h1>
           </div>
         </div>
         <div className="runtime-badges">
           <span><StateDot state="active" />{runtime?.agent_runtime ?? "loading"} brain</span>
           <span><StateDot state={runtime?.mailbox_enabled ? "active" : "muted"} />{runtime?.mailbox_mode ?? "—"} inbox</span>
-          <span className={realMail ? "warning-badge" : "safe-badge"}>
-            <StateDot state={realMail ? "warning" : "safe"} />{runtime?.email_mode ?? "—"} outbound
-          </span>
-          <button className="secondary compact" disabled={busy} onClick={createDemo}>Run demo</button>
+          <span><StateDot state={realMail ? "warning" : "safe"} />{runtime?.email_mode ?? "—"} outbound</span>
+          <span>{runtime?.pack_count ?? packs.length} packs</span>
+          <button className="secondary compact" disabled={busy} onClick={createDemo}>Run market demo</button>
           <button className="primary compact" disabled={busy} onClick={() => setShowCreate(true)}>New case</button>
         </div>
       </header>
@@ -465,8 +736,8 @@ export default function App() {
         <strong>{realMail ? "Live SMTP is enabled." : "External delivery is locked."}</strong>
         <span>
           {realMail
-            ? "Only approved, policy-cleared actions can leave the container."
-            : "Approved messages are preserved in the dry-run outbox without network delivery."}
+            ? "Only human-approved, policy-cleared business outreach can leave the container."
+            : "Approved messages are preserved in the dry-run outbox without public delivery."}
         </span>
       </div>
       {error && <div className="error-banner"><strong>Operation failed</strong><span>{error}</span></div>}
@@ -474,17 +745,14 @@ export default function App() {
       <main className="workspace">
         <aside className="case-list panel">
           <div className="panel-heading">
-            <div>
-              <p className="eyebrow">CASE QUEUE</p>
-              <h2>{cases.length} records</h2>
-            </div>
+            <div><p className="eyebrow">CASE QUEUE</p><h2>{cases.length} records</h2></div>
             <button className="ghost" disabled={busy} onClick={() => refresh()}>Refresh</button>
           </div>
           <div className="case-scroll">
             {cases.length === 0 && (
               <div className="empty-state">
                 <strong>No cases yet</strong>
-                <span>Launch a demo or create a live, approval-gated acquisition case.</span>
+                <span>Launch a safe demo or create an approval-gated investigation.</span>
               </div>
             )}
             {cases.map((item) => (
@@ -494,43 +762,38 @@ export default function App() {
                 onClick={() => setSelectedId(item.id)}
               >
                 <div className="case-card-top">
-                  <span className="case-kind">{titleize(item.kind)}</span>
-                  <StateDot state={item.status === "completed" ? "safe" : item.status === "failed" ? "warning" : "active"} />
+                  <span className="case-kind">{titleize(item.pack ?? item.kind)}</span>
+                  <RiskBadge risk={item.risk_tier} />
                 </div>
                 <strong>{item.title}</strong>
                 <span className="case-meta">{titleize(item.stage)} · {titleize(item.status)}</span>
                 <div className="micro-metrics">
-                  <span>{item.agent_runs.length} runs</span>
                   <span>{item.interactions.length} messages</span>
-                  <span>{item.quotes.length || item.claims.length} results</span>
+                  <span>{item.quotes.length} quotes</span>
+                  <span>{item.findings.length} findings</span>
                 </div>
               </button>
             ))}
           </div>
           <div className="worker-card">
-            <div>
-              <span className="eyebrow">MAIL WORKER</span>
-              <strong>{runtime?.worker?.status ? titleize(runtime.worker.status) : "No heartbeat"}</strong>
-            </div>
+            <div><span className="eyebrow">MAIL WORKER</span><strong>{runtime?.worker?.status ? titleize(runtime.worker.status) : "No heartbeat"}</strong></div>
             <span>{runtime?.worker ? formatDate(runtime.worker.updated_at) : "Start the worker container to monitor replies."}</span>
-            {runtime?.mailbox_enabled && (
-              <button className="secondary" disabled={busy} onClick={syncMailbox}>Sync mailbox now</button>
-            )}
+            {runtime?.mailbox_enabled && <button className="secondary" disabled={busy} onClick={syncMailbox}>Sync mailbox now</button>}
           </div>
         </aside>
 
         <section className="main-column">
           {!selected ? (
             <section className="panel empty-main">
-              <span className="hero-chip">Unknown → Question → Conversation → Evidence</span>
-              <h2>Launch a direct-source intelligence case</h2>
+              <span className="hero-chip">Unknown → Question → Conversation → Evidence → Market Graph</span>
+              <h2>Ask the market what passive data cannot tell you.</h2>
               <p>
-                SourceLoop compiles the requirement, runs scoped specialists, proposes one coherent thread per
-                counterparty, waits for approval, monitors replies, asks bounded clarifications, and commits
-                evidence-backed intelligence to the graph.
+                SourceLoop compiles standardized scenarios, runs scoped specialist swarms, contacts a small
+                approved business panel, monitors replies, asks bounded clarifications, calculates transparent
+                metrics, and preserves every conclusion beside its evidence.
               </p>
               <div className="hero-actions">
-                <button className="primary" onClick={() => setShowCreate(true)} disabled={busy}>Create live case</button>
+                <button className="primary" onClick={() => setShowCreate(true)} disabled={busy}>Create investigation</button>
                 <button className="secondary" onClick={createDemo} disabled={busy}>Exercise safe demo</button>
               </div>
             </section>
@@ -540,12 +803,13 @@ export default function App() {
                 <div>
                   <div className="status-row">
                     <span className={`status-pill status-${selected.status}`}>{titleize(selected.status)}</span>
-                    <span>{titleize(selected.kind)}</span>
-                    <span>{selected.pack ?? "custom pack"}</span>
+                    <RiskBadge risk={selected.risk_tier} />
+                    <span>{titleize(selected.investigation_mode ?? selected.kind)}</span>
                     <span>{selected.demo ? "demonstration" : "live case"}</span>
                   </div>
                   <h2>{selected.title}</h2>
                   <p>{selected.objective}</p>
+                  {selectedPack && <p className="pack-description">{selectedPack.description}</p>}
                 </div>
                 <div className="case-actions">
                   <button className="secondary" disabled={busy || selected.status !== "active"} onClick={runSelected}>Run practitioner</button>
@@ -559,10 +823,7 @@ export default function App() {
 
               <section className="panel practitioner">
                 <div className="panel-heading">
-                  <div>
-                    <p className="eyebrow">PRACTITIONER RECEIPT</p>
-                    <h2>Nine-stage execution rail</h2>
-                  </div>
+                  <div><p className="eyebrow">PRACTITIONER RECEIPT</p><h2>Nine-stage execution rail</h2></div>
                   <span className="target">Target: {selected.completion_target} complete result(s)</span>
                 </div>
                 <div className="stage-rail">
@@ -580,27 +841,30 @@ export default function App() {
               </section>
 
               <nav className="tabbar panel" aria-label="Case detail sections">
-                {(["overview", "outreach", "intelligence", "runs"] as const).map((tab) => (
-                  <button key={tab} className={activeTab === tab ? "active" : ""} onClick={() => setActiveTab(tab)}>{titleize(tab)}</button>
+                {(["overview", "outreach", "intelligence", "evidence", "agents"] as Tab[]).map((tab) => (
+                  <button key={tab} className={activeTab === tab ? "active" : ""} onClick={() => setActiveTab(tab)}>
+                    {titleize(tab)}
+                    {tab === "intelligence" && openFindings > 0 && <span className="tab-count">{openFindings}</span>}
+                  </button>
                 ))}
               </nav>
 
               {activeTab === "overview" && (
                 <div className="content-grid">
-                  <section className="panel metric-panel">
+                  <section className="panel metric-panel full-span">
                     <p className="eyebrow">CASE TELEMETRY</p>
                     <div className="metric-grid">
                       <div><strong>{selected.contacts.length}</strong><span>counterparties</span></div>
                       <div><strong>{selected.interactions.length}</strong><span>messages</span></div>
                       <div><strong>{selected.quotes.length}</strong><span>quotes</span></div>
-                      <div><strong>{selected.claims.length}</strong><span>claims</span></div>
-                      <div><strong>{pendingActions}</strong><span>awaiting approval</span></div>
-                      <div><strong>{selected.agent_runs.length}</strong><span>specialist receipts</span></div>
+                      <div><strong>{selected.findings.length}</strong><span>findings</span></div>
+                      <div><strong>{openFindings}</strong><span>open review</span></div>
+                      <div><strong>{selected.agent_runs.length}</strong><span>agent receipts</span></div>
                     </div>
                   </section>
                   <section className="panel map-panel">
                     <div className="panel-heading">
-                      <div><p className="eyebrow">GIS PROJECTION</p><h2>Case terrain</h2></div>
+                      <div><p className="eyebrow">GIS PROJECTION</p><h2>Market terrain</h2></div>
                       <span className="target">{selected.contacts.filter((contact) => contact.location).length} geocoded routes</span>
                     </div>
                     <SpatialView selected={selected} features={features} />
@@ -608,55 +872,75 @@ export default function App() {
                   <section className="panel contacts-panel">
                     <div className="panel-heading"><div><p className="eyebrow">CONTACT ROUTES</p><h2>Selected panel</h2></div></div>
                     <div className="stack-list">
-                      {selected.contacts.length === 0 && <div className="empty-card">This case is waiting for supplied contacts or a discovery connector.</div>}
+                      {selected.contacts.length === 0 && <div className="empty-card">Waiting for public or customer-authorized business contacts.</div>}
                       {selected.contacts.map((contact) => (
                         <article className="route-card" key={contact.id}>
                           <div><strong>{contact.organization_name}</strong><span>{contact.role_title}</span></div>
                           <code>{contact.endpoint}</code>
-                          <div className="route-meta"><span>{contact.geography ?? "Unscoped geography"}</span><span>{Math.round(contact.confidence * 100)}% route confidence</span></div>
+                          <div className="route-meta">
+                            <span>{contact.geography ?? "geography not supplied"}</span>
+                            <span>{Math.round(contact.confidence * 100)}% confidence</span>
+                            <span>{contact.source_public ? "public route" : "private route"}</span>
+                          </div>
                         </article>
                       ))}
+                    </div>
+                  </section>
+                  <section className="panel coverage-panel full-span">
+                    <div className="panel-heading"><div><p className="eyebrow">FIELD COVERAGE</p><h2>What each respondent actually answered</h2></div></div>
+                    <div className="coverage-grid">
+                      {(report?.response_coverage ?? []).map((row) => (
+                        <article className="coverage-card" key={row.endpoint}>
+                          <div className="coverage-head"><strong>{row.endpoint}</strong><span>{Math.round(row.coverage_ratio * 100)}%</span></div>
+                          <ProgressBar ratio={row.coverage_ratio} />
+                          <small>{row.covered.length} fields covered · {row.missing_critical.length} critical gaps</small>
+                          {row.missing_critical.length > 0 && <div className="tag-row">{row.missing_critical.map((field) => <span className="tag warning" key={field}>{titleize(field)}</span>)}</div>}
+                        </article>
+                      ))}
+                      {(report?.response_coverage.length ?? 0) === 0 && <div className="empty-card">Coverage appears after the first direct response.</div>}
                     </div>
                   </section>
                 </div>
               )}
 
               {activeTab === "outreach" && (
-                <div className="content-grid outreach-grid">
-                  <section className="panel actions-panel">
-                    <div className="panel-heading"><div><p className="eyebrow">APPROVAL QUEUE</p><h2>Proposed external actions</h2></div><span className="target">{selected.actions.length} total</span></div>
+                <div className="content-grid">
+                  <section className="panel actions-panel full-span">
+                    <div className="panel-heading"><div><p className="eyebrow">ACTION LEDGER</p><h2>Exact messages and approvals</h2></div><span className="target">{pendingActions} pending · {approvedActions} approved</span></div>
                     <div className="stack-list">
-                      {selected.actions.length === 0 && <div className="empty-card">No external actions have been proposed.</div>}
+                      {selected.actions.length === 0 && <div className="empty-card">Run the practitioner after supplying contacts to create outreach proposals.</div>}
                       {selected.actions.map((action) => (
-                        <article className={`message-card message-${action.status}`} key={action.id}>
-                          <div className="message-header">
-                            <div><span className="case-kind">{action.followup ? "THREAD FOLLOW-UP" : "INITIAL REQUEST"}</span><strong>{action.organization_name || action.recipient}</strong><span>{action.recipient}</span></div>
-                            <span className={`status-pill status-${action.status}`}>{titleize(action.status)}</span>
+                        <article className="action-card" key={action.id}>
+                          <div className="action-top">
+                            <div><span className={`status-pill status-${action.status}`}>{titleize(action.status)}</span>{action.followup && <span className="tag">Clarification</span>}</div>
+                            <code>{action.recipient}</code>
                           </div>
                           <h3>{action.subject}</h3>
                           <pre>{action.body}</pre>
-                          {action.status === "pending" && (
-                            <div className="row-actions">
-                              <button className="primary" disabled={busy} onClick={() => approveAction(action.id)}>Approve</button>
-                              <button className="danger-button" disabled={busy} onClick={() => rejectAction(action.id)}>Reject</button>
-                            </div>
-                          )}
+                          <div className="row-actions">
+                            <button className="primary" disabled={busy || action.status !== "pending"} onClick={() => approveAction(action.id)}>Approve</button>
+                            <button className="danger-button" disabled={busy || !["pending", "approved"].includes(action.status)} onClick={() => rejectAction(action.id)}>Reject</button>
+                          </div>
                         </article>
                       ))}
                     </div>
                   </section>
-                  <section className="panel interactions-panel">
-                    <div className="panel-heading"><div><p className="eyebrow">EVIDENCE LEDGER</p><h2>Conversation timeline</h2></div></div>
+                  <section className="panel interactions-panel full-span">
+                    <div className="panel-heading"><div><p className="eyebrow">CONVERSATIONS</p><h2>Thread and evidence timeline</h2></div></div>
                     <div className="timeline">
-                      {selected.interactions.length === 0 && <div className="empty-card">No outbound or inbound evidence yet.</div>}
+                      {selected.interactions.length === 0 && <div className="empty-card">No messages have been recorded.</div>}
                       {selected.interactions.map((interaction) => (
-                        <article key={interaction.id}>
-                          <span className={`timeline-marker ${interaction.direction}`} />
-                          <div>
-                            <div className="timeline-top"><strong>{interaction.direction === "inbound" ? "Reply received" : "Request sent"}</strong><span>{formatDate(interaction.created_at)}</span></div>
+                        <article className={`interaction ${interaction.direction}`} key={interaction.id}>
+                          <div className="interaction-marker"><StateDot state={interaction.direction === "inbound" ? "safe" : "active"} /></div>
+                          <div className="interaction-body">
+                            <div className="interaction-head"><strong>{titleize(interaction.direction)}</strong><span>{formatDate(interaction.created_at)}</span></div>
                             <h3>{interaction.subject}</h3>
-                            <span>{interaction.endpoint}</span>
-                            {interaction.attachments.length > 0 && <small>{interaction.attachments.length} attachment(s) stored as evidence</small>}
+                            <p>{interaction.body}</p>
+                            <div className="tag-row">
+                              <span className="tag">{interaction.endpoint}</span>
+                              <span className="tag">evidence {interaction.evidence_id.slice(-8)}</span>
+                              {interaction.attachments.map((attachment) => <span className="tag" key={attachment.filename}>{attachment.filename} · {attachment.status}</span>)}
+                            </div>
                           </div>
                         </article>
                       ))}
@@ -666,35 +950,72 @@ export default function App() {
               )}
 
               {activeTab === "intelligence" && (
-                <div className="content-grid intelligence-grid">
-                  <section className="panel quote-panel">
-                    <div className="panel-heading"><div><p className="eyebrow">QUOTE LEDGER</p><h2>Comparable direct-source pricing</h2></div></div>
-                    <div className="stack-list">
-                      {selected.quotes.length === 0 && <div className="empty-card">No quote has been extracted from a reply.</div>}
+                <div className="content-grid">
+                  <section className="panel quote-panel full-span">
+                    <div className="panel-heading"><div><p className="eyebrow">LIVE MARKET PRICING</p><h2>Normalized quotes and price bands</h2></div></div>
+                    {Object.keys(report?.market_prices ?? {}).length > 0 && (
+                      <div className="price-band-grid">
+                        {Object.entries(report?.market_prices ?? {}).map(([unit, stats]) => (
+                          <article className="price-band" key={unit}>
+                            <span>{unit}</span><strong>{stats.median.toLocaleString()}</strong>
+                            <small>{stats.minimum.toLocaleString()} min · {stats.maximum.toLocaleString()} max · n={stats.count}</small>
+                          </article>
+                        ))}
+                      </div>
+                    )}
+                    <div className="quote-grid">
+                      {selected.quotes.length === 0 && <div className="empty-card">No comparable quote has been extracted yet.</div>}
                       {selected.quotes.map((quote) => (
                         <article className="quote-card" key={quote.id}>
-                          <div className="quote-top">
-                            <div><strong>{quote.supplier_name}</strong><span>{quote.valid_until ? `Valid until ${new Date(quote.valid_until).toLocaleDateString()}` : "Validity unresolved"}</span></div>
-                            <div className="quote-total"><span>Parsed total</span><strong>${quoteTotal(quote).toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong></div>
+                          <div className="quote-head"><div><strong>{quote.supplier_name}</strong><span>{Math.round(quote.extraction_confidence * 100)}% extraction confidence</span></div><b>${quoteTotal(quote).toLocaleString()}</b></div>
+                          <div className="quote-lines">
+                            {quote.line_items.map((line, index) => (
+                              <div key={`${quote.id}-${index}`}><span>{line.description}</span><strong>{line.currency} {line.unit_price.toLocaleString()} / {titleize(line.unit)}</strong></div>
+                            ))}
                           </div>
-                          <table>
-                            <thead><tr><th>Line item</th><th>Unit</th><th>Price</th></tr></thead>
-                            <tbody>{quote.line_items.map((line, index) => <tr key={`${quote.id}-${index}`}><td>{line.description}</td><td>{titleize(line.unit)}</td><td>{line.currency} {line.unit_price.toLocaleString()}</td></tr>)}</tbody>
-                          </table>
-                          <div className="quote-meta"><span>{Math.round(quote.extraction_confidence * 100)}% extraction confidence</span><span>{quote.unresolved_fields.length ? `Needs: ${quote.unresolved_fields.join(", ")}` : "Critical fields complete"}</span></div>
-                          {quote.exclusions.length > 0 && <p><strong>Exclusions:</strong> {quote.exclusions.join(" · ")}</p>}
+                          <div className="tag-row">
+                            {quote.unresolved_fields.map((field) => <span className="tag warning" key={field}>{titleize(field)}</span>)}
+                            {quote.exclusions.map((value) => <span className="tag" key={value}>{value}</span>)}
+                          </div>
                         </article>
                       ))}
                     </div>
                   </section>
-                  <section className="panel claims-panel">
-                    <div className="panel-heading"><div><p className="eyebrow">CLAIM LEDGER</p><h2>Scoped assertions</h2></div></div>
-                    <div className="stack-list compact-list">
-                      {selected.claims.length === 0 && <div className="empty-card">No structured claims yet.</div>}
-                      {selected.claims.map((claim) => (
-                        <article className="claim-card" key={claim.id}>
-                          <div><strong>{titleize(claim.predicate)}</strong><span>{titleize(claim.kind)} · {Math.round(claim.confidence * 100)}%</span></div>
-                          <code>{typeof claim.value === "string" ? claim.value : JSON.stringify(claim.value)}</code>
+                  <section className="panel findings-panel full-span">
+                    <div className="panel-heading">
+                      <div><p className="eyebrow">INVESTIGATION FINDINGS</p><h2>Reviewable signals, not automatic verdicts</h2></div>
+                      <button className="secondary" onClick={() => setShowRegistry(true)}>Add registry check</button>
+                    </div>
+                    <p className="notice">{report?.interpretation_notice}</p>
+                    <div className="finding-grid">
+                      {selected.findings.length === 0 && <div className="empty-card">Findings appear after replies or registry checks.</div>}
+                      {selected.findings.map((finding) => (
+                        <article className={`finding-card severity-${finding.severity}`} key={finding.id}>
+                          <div className="finding-head">
+                            <div><span className={`severity-pill severity-${finding.severity}`}>{titleize(finding.severity)}</span><span className="tag">{titleize(finding.kind)}</span></div>
+                            <span className={`status-pill status-${finding.status}`}>{titleize(finding.status)}</span>
+                          </div>
+                          <h3>{finding.title}</h3>
+                          <p>{finding.summary}</p>
+                          {finding.value !== null && finding.value !== undefined && <pre className="value-block">{JSON.stringify(finding.value, null, 2)}</pre>}
+                          <div className="finding-meta"><span>{Math.round(finding.confidence * 100)}% confidence</span><span>{finding.source_scope}</span><span>{finding.evidence_ids.length} evidence link(s)</span></div>
+                          {finding.review_notes && <small className="review-note">{finding.review_notes}</small>}
+                          {finding.status === "open" && (
+                            <div className="row-actions">
+                              <button className="secondary" disabled={busy} onClick={() => reviewFinding(finding.id, "corroborated")}>Corroborate</button>
+                              <button className="secondary" disabled={busy} onClick={() => reviewFinding(finding.id, "resolved")}>Resolve</button>
+                              <button className="ghost" disabled={busy} onClick={() => reviewFinding(finding.id, "dismissed")}>Dismiss</button>
+                            </div>
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                    <div className="registry-list">
+                      {selected.registry_checks.map((check) => (
+                        <article className="registry-card" key={check.id}>
+                          <div><strong>{check.registry}</strong><span>{check.query}</span></div>
+                          <span className={`status-pill status-${check.status}`}>{titleize(check.status)}</span>
+                          <small>{check.identifier ?? "No identifier"} · {formatDate(check.checked_at)}</small>
                         </article>
                       ))}
                     </div>
@@ -702,14 +1023,42 @@ export default function App() {
                 </div>
               )}
 
-              {activeTab === "runs" && (
+              {activeTab === "evidence" && (
+                <div className="content-grid">
+                  <section className="panel evidence-panel full-span">
+                    <div className="panel-heading">
+                      <div><p className="eyebrow">REPORTING</p><h2>Evidence-linked deliverables</h2></div>
+                      <div className="row-actions">
+                        <a className="button-link secondary" href={`${API}/api/v1/cases/${selected.id}/report`} target="_blank" rel="noreferrer">Open JSON</a>
+                        <a className="button-link primary" href={`${API}/api/v1/cases/${selected.id}/report.csv`}>Download CSV</a>
+                      </div>
+                    </div>
+                    <div className="report-grid">
+                      <div><span>Response rate</span><strong>{Math.round(Number(report?.activity.response_rate ?? 0) * 100)}%</strong></div>
+                      <div><span>Completion quality</span><strong>{titleize(String(report?.results.completion_quality ?? "in progress"))}</strong></div>
+                      <div><span>Evidence objects</span><strong>{report?.evidence_ids.length ?? 0}</strong></div>
+                      <div><span>Registry checks</span><strong>{selected.registry_checks.length}</strong></div>
+                    </div>
+                    <h3>Evidence IDs</h3>
+                    <div className="evidence-list">
+                      {(report?.evidence_ids ?? []).map((evidence) => <code key={evidence}>{evidence}</code>)}
+                      {(report?.evidence_ids.length ?? 0) === 0 && <div className="empty-card">Evidence identifiers appear after interactions, findings, or quotes.</div>}
+                    </div>
+                    <h3>Governance receipt</h3>
+                    <pre className="governance-block">{JSON.stringify(selected.governance, null, 2)}</pre>
+                  </section>
+                </div>
+              )}
+
+              {activeTab === "agents" && (
                 <section className="panel runs-panel">
-                  <div className="panel-heading"><div><p className="eyebrow">INTERNAL SWARM</p><h2>Specialist execution receipts</h2></div><span className="target">External recipients see one coherent owner</span></div>
+                  <div className="panel-heading"><div><p className="eyebrow">SWARM RECEIPTS</p><h2>Internal specialist execution</h2></div><span className="target">{selected.agent_runs.length} runs</span></div>
                   <div className="run-grid">
                     {selected.agent_runs.map((run) => (
-                      <article key={run.id}>
-                        <StateDot state={run.status === "succeeded" ? "safe" : "warning"} />
-                        <div><strong>{titleize(run.role)}</strong><span>{titleize(run.stage)} · {run.runtime}</span>{run.error && <small>{run.error}</small>}</div>
+                      <article className="run-card" key={run.id}>
+                        <div><StateDot state={run.status === "succeeded" ? "safe" : run.status === "failed" ? "warning" : "active"} /><strong>{titleize(run.role)}</strong></div>
+                        <span>{titleize(run.stage)}</span><span>{run.runtime}</span><span>{formatDate(run.finished_at ?? run.started_at)}</span>
+                        {run.error && <small>{run.error}</small>}
                       </article>
                     ))}
                   </div>
@@ -721,26 +1070,57 @@ export default function App() {
       </main>
 
       {showCreate && (
-        <div className="modal-backdrop" role="presentation" onMouseDown={() => setShowCreate(false)}>
-          <form className="modal" onSubmit={createCustom} onMouseDown={(event) => event.stopPropagation()}>
-            <div className="modal-header">
-              <div><p className="eyebrow">NEW DIRECT-SOURCE CASE</p><h2>Define the intelligence objective</h2></div>
-              <button type="button" className="ghost" onClick={() => setShowCreate(false)}>Close</button>
+        <div className="modal-backdrop" onMouseDown={() => setShowCreate(false)}>
+          <form className="modal large-modal" onSubmit={createCustom} onMouseDown={(event: { stopPropagation(): void }) => event.stopPropagation()}>
+            <div className="modal-header"><div><p className="eyebrow">NEW GOVERNED CASE</p><h2>Configure direct-source acquisition</h2></div><button type="button" className="ghost" onClick={() => setShowCreate(false)}>Close</button></div>
+            <div className="modal-grid">
+              <label className="full-field"><span>Investigation pack</span><select value={draft.pack} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => choosePack(event.target.value)} required><option value="">Select a pack</option>{packs.map((pack) => <option key={pack.id} value={pack.id}>{pack.name} · {titleize(pack.risk_tier)}</option>)}</select></label>
+              {draftPack && (
+                <div className={`pack-preview full-field risk-panel risk-panel-${draftPack.risk_tier}`}>
+                  <div><RiskBadge risk={draftPack.risk_tier} /><strong>{titleize(draftPack.investigation_mode ?? draftPack.case_kind)}</strong>{draftPack.institutional_only && <span className="tag warning">Institutional only</span>}</div>
+                  <p>{draftPack.description}</p>
+                  <small>{draftPack.max_contacts} contacts · {draftPack.max_followups} follow-up(s) · {draftPack.response_fields.length} response fields</small>
+                </div>
+              )}
+              <label className="full-field"><span>Case title</span><input value={draft.title} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setDraft({ ...draft, title: event.target.value })} required /></label>
+              <label className="full-field"><span>Objective</span><textarea rows={3} value={draft.objective} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setDraft({ ...draft, objective: event.target.value })} required /></label>
+              <label><span>Truthful requester name</span><input value={draft.requesterName} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setDraft({ ...draft, requesterName: event.target.value })} required /></label>
+              <label><span>Requester email</span><input type="email" value={draft.requesterEmail} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setDraft({ ...draft, requesterEmail: event.target.value })} required={draftPack?.requires_requester_email} /></label>
+              <label className="full-field"><span>Requirements JSON</span><textarea className="code-input" rows={11} value={draft.requirements} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setDraft({ ...draft, requirements: event.target.value })} required /><small>Required fields: {(draftPack?.required_fields ?? []).join(", ") || "none"}</small></label>
+              <label className="full-field"><span>Public/business contacts</span><textarea className="code-input" rows={5} value={draft.contacts} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setDraft({ ...draft, contacts: event.target.value })} placeholder="Organization | Role | email | Geography | latitude | longitude | source" /><small>One contact per line. Elevated and restricted packs accept only public or customer-authorized routes.</small></label>
+              {(draftPack?.required_acknowledgements.length ?? 0) > 0 && (
+                <fieldset className="acknowledgements full-field">
+                  <legend>Required governance acknowledgements</legend>
+                  {draftPack?.required_acknowledgements.map((key) => (
+                    <label className="check-row" key={key}>
+                      <input type="checkbox" checked={Boolean(draft.acknowledgements[key])} onChange={(event: ChangeEvent<HTMLInputElement>) => setDraft({ ...draft, acknowledgements: { ...draft.acknowledgements, [key]: event.target.checked } })} />
+                      <span>{titleize(key)}</span>
+                    </label>
+                  ))}
+                </fieldset>
+              )}
             </div>
-            <div className="form-grid">
-              <label>Title<input required value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} placeholder="Regional HVAC budgetary quotes" /></label>
-              <label>Case type<select value={draft.kind} onChange={(event) => {
-                const kind = event.target.value as NewCaseDraft["kind"];
-                setDraft({ ...draft, kind, pack: kind === "quote_intelligence" ? "facilities_quote" : kind === "civic_intelligence" ? "civic_intelligence" : "" });
-              }}><option value="quote_intelligence">Quote intelligence</option><option value="civic_intelligence">Civic intelligence</option><option value="data_verification">Data verification</option></select></label>
-              <label>Vertical pack<input value={draft.pack} onChange={(event) => setDraft({ ...draft, pack: event.target.value })} placeholder="facilities_quote" /></label>
-              <label>Requester name<input required value={draft.requesterName} onChange={(event) => setDraft({ ...draft, requesterName: event.target.value })} /></label>
-              <label className="span-2">Requester email<input type="email" value={draft.requesterEmail} onChange={(event) => setDraft({ ...draft, requesterEmail: event.target.value })} /></label>
-              <label className="span-2">Objective<textarea required rows={3} value={draft.objective} onChange={(event) => setDraft({ ...draft, objective: event.target.value })} placeholder="Obtain two comparable, non-binding quotes with current availability and terms." /></label>
-              <label className="span-2">Requirements JSON<textarea rows={7} value={draft.requirements} onChange={(event) => setDraft({ ...draft, requirements: event.target.value })} /></label>
-              <label className="span-2">Contact routes <small>One per line: Organization | Role | email | geography | latitude | longitude</small><textarea rows={5} value={draft.contacts} onChange={(event) => setDraft({ ...draft, contacts: event.target.value })} placeholder="Acme Mechanical | Estimating | quotes@acme.example | Pittsburgh | 40.44 | -79.99" /></label>
+            <div className="modal-actions"><button type="button" className="ghost" onClick={() => setShowCreate(false)}>Cancel</button><button type="submit" className="primary" disabled={busy}>Create and run practitioner</button></div>
+          </form>
+        </div>
+      )}
+
+      {showRegistry && selected && (
+        <div className="modal-backdrop" onMouseDown={() => setShowRegistry(false)}>
+          <form className="modal" onSubmit={addRegistryCheck} onMouseDown={(event: { stopPropagation(): void }) => event.stopPropagation()}>
+            <div className="modal-header"><div><p className="eyebrow">CORROBORATION</p><h2>Add registry check</h2></div><button type="button" className="ghost" onClick={() => setShowRegistry(false)}>Close</button></div>
+            <div className="modal-grid">
+              <label><span>Registry</span><input value={registryDraft.registry} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, registry: event.target.value })} required /></label>
+              <label><span>Status</span><select value={registryDraft.status} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, status: event.target.value })}><option value="matched">Matched</option><option value="verified">Verified</option><option value="not_found">Not found</option><option value="inactive">Inactive</option><option value="expired">Expired</option><option value="unverified">Unverified</option></select></label>
+              <label className="full-field"><span>Query</span><input value={registryDraft.query} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, query: event.target.value })} required /></label>
+              <label><span>Subject/contact ID</span><input value={registryDraft.subjectId} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, subjectId: event.target.value })} /></label>
+              <label><span>Identifier</span><input value={registryDraft.identifier} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, identifier: event.target.value })} /></label>
+              <label><span>Entity name</span><input value={registryDraft.entityName} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, entityName: event.target.value })} /></label>
+              <label><span>Jurisdiction</span><input value={registryDraft.jurisdiction} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, jurisdiction: event.target.value })} /></label>
+              <label className="full-field"><span>Official source</span><input value={registryDraft.source} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, source: event.target.value })} /></label>
+              <label className="full-field"><span>Notes</span><textarea rows={3} value={registryDraft.notes} onChange={(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setRegistryDraft({ ...registryDraft, notes: event.target.value })} /></label>
             </div>
-            <div className="modal-actions"><button type="button" className="secondary" onClick={() => setShowCreate(false)}>Cancel</button><button className="primary" disabled={busy}>Create and run</button></div>
+            <div className="modal-actions"><button type="button" className="ghost" onClick={() => setShowRegistry(false)}>Cancel</button><button type="submit" className="primary" disabled={busy}>Record registry result</button></div>
           </form>
         </div>
       )}

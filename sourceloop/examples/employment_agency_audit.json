@@ -1,0 +1,31 @@
+{
+  "title": "Employment agency public-practice audit",
+  "kind": "market_investigation",
+  "pack": "employment_agency_audit",
+  "objective": "Collect standardized public representations about applicant fees, job availability, wage, schedule, employer disclosure, and complaint routing.",
+  "requester_name": "Example Worker Protection Research Team",
+  "requester_email": "research@example.org",
+  "requirements": {
+    "geography": "Example metropolitan area",
+    "research_purpose": "public employment-practice comparison",
+    "scenario": "Public inquiry about a currently advertised warehouse associate role"
+  },
+  "governance_acknowledgements": {
+    "authorized_requester": true,
+    "research_only": true,
+    "public_business_channels_only": true,
+    "no_fake_persona": true,
+    "no_sensitive_personal_data": true
+  },
+  "contacts": [
+    {
+      "organization_name": "Example Employment Agency LLC",
+      "role_title": "Compliance or public information team",
+      "endpoint": "compliance@example-agency.invalid",
+      "source": "public_website",
+      "source_public": true,
+      "business_only": true,
+      "geography": "Example metropolitan area"
+    }
+  ]
+}

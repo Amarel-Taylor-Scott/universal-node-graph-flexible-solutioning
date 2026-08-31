@@ -1,0 +1,66 @@
+id: informal_business_verification
+name: Informal Business Verification Desk
+description: Consent-aware verification and optional profile formalization for small businesses operating through public messaging channels.
+case_kind: market_investigation
+investigation_mode: record_verification
+risk_tier: elevated
+requires_requester_email: true
+max_contacts: 3
+max_followups: 1
+completion_target: 1
+completion_basis: responses
+required_acknowledgements:
+  - authorized_requester
+  - research_only
+  - public_business_channels_only
+  - no_fake_persona
+  - no_residential_mapping
+required_fields: [geography, service, research_purpose]
+optional_fields: [public_business_name, public_channel, requested_scope, quote_scenario]
+prohibited_request_patterns:
+  - "home address"
+  - "immigration status"
+  - "ethnicity"
+  - "private group membership"
+  - "pretend.*customer"
+sensitive_data_categories: [residential_address, immigration_status, ethnicity, private_group_membership]
+question_prompts:
+  - What public business or trade name should be used, and what public channel should receive future inquiries?
+  - What services and geographic area are currently covered?
+  - What current price or quoting basis, availability, and payment methods apply to the stated scenario?
+  - What license, registration, insurance, or certification applies where required, and may the business profile be reused for similar inquiries?
+response_fields:
+  - {id: business_name, label: Public business identity, question: Please confirm the public business or trade name., markers: ["business name", "trade name", "dba", "we operate as", "our name"] , critical: true}
+  - {id: public_channel, label: Public contact channel, question: Please confirm the preferred public business contact channel., markers: ["email", "phone", "whatsapp", "contact"] , critical: true}
+  - {id: service_scope, label: Service scope, question: Please confirm current services offered., markers: ["services", "we provide", "we offer", "scope"] , critical: true}
+  - {id: service_area, label: Service area, question: Please confirm the geographic service area without providing a residential address., markers: ["serve", "service area", "county", "city", "within"] , critical: true}
+  - {id: price_basis, label: Price basis, question: Please confirm current pricing or how a quote is calculated., markers: ["$", "price", "rate", "quote"] , critical: true}
+  - {id: availability, label: Availability, question: Please confirm current availability., markers: ["available", "schedule", "start", "booked"] , critical: false}
+  - {id: authorization, label: License or registration, question: "Please identify any applicable license, registration, certification, or explain that none is required.", markers: ["license", "registered", "certified", "not required"], critical: false}
+  - {id: reuse_permission, label: Profile reuse permission, question: "May this business-level information be reused for similar inquiries until it changes?", markers: ["may reuse", "permission", "profile", "yes, you may"], critical: false}
+finding_rules:
+  - id: cash_only
+    kind: reported_practice
+    severity: low
+    title: Cash-only payment practice reported
+    summary: The respondent reports accepting only cash; this is a market characteristic, not an allegation.
+    patterns: ["cash only", "only accept cash"]
+  - id: public_identity_missing
+    kind: identity_mismatch
+    severity: medium
+    title: Public business identity not confirmed
+    summary: The response did not provide a public business or trade name.
+    missing_field: business_name
+  - id: no_current_capacity
+    kind: availability_signal
+    severity: low
+    title: No current capacity reported
+    summary: The respondent reported being fully booked or unavailable.
+    patterns: ["fully booked", "not available", "no availability", "waitlist"]
+message_purpose: verify business-level services and quoting information through an already-public business channel
+respondent_value: create a correct, reusable business profile and reduce irrelevant inquiries
+reuse_policy: respondent_controlled_profile
+demo_contacts:
+  - {organization_name: Neighborhood Grounds Crew, role_title: Public business contact, endpoint: hello@neighborhoodgrounds.example.test, source: demo_pack, source_public: true, confidence: 0.82, geography: Demonstration market, business_only: true}
+demo_replies:
+  - body: "Our public trade name is Neighborhood Grounds Crew and this email is our preferred contact. We offer mowing, cleanup, and snow shoveling within the demonstration city and nearby county. A typical small lawn starts at $45 per visit, with a final quote based on size. We are available next week. No special trade license is required for mowing, and we carry general liability insurance. Yes, you may reuse this business profile for similar inquiries until we update it."

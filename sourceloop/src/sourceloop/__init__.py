@@ -1,8 +1,19 @@
 """SourceLoop direct-source intelligence runtime."""
 
 from .config import Settings
-from .domain import CaseCreate, CaseKind, CaseRecord
-from .engine import SourceLoopEngine
+from .domain import CaseCreate, CaseKind, CaseRecord, InvestigationMode, RiskTier
+from .extended_engine import InvestigativeSourceLoopEngine
 
-__all__ = ["CaseCreate", "CaseKind", "CaseRecord", "Settings", "SourceLoopEngine"]
-__version__ = "0.2.0"
+SourceLoopEngine = InvestigativeSourceLoopEngine
+
+__all__ = [
+    "CaseCreate",
+    "CaseKind",
+    "CaseRecord",
+    "InvestigationMode",
+    "InvestigativeSourceLoopEngine",
+    "RiskTier",
+    "Settings",
+    "SourceLoopEngine",
+]
+__version__ = "0.3.0"

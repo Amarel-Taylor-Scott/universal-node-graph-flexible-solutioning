@@ -1,0 +1,77 @@
+id: employment_agency_audit
+name: Employment Agency Practice Audit
+description: Human-reviewed research into public recruiting representations, applicant fees, job availability, and complaint routes.
+case_kind: market_investigation
+investigation_mode: practice_audit
+risk_tier: elevated
+requires_requester_email: true
+max_contacts: 3
+max_followups: 1
+completion_target: 1
+completion_basis: responses
+required_acknowledgements:
+  - authorized_requester
+  - research_only
+  - public_business_channels_only
+  - no_fake_persona
+  - no_sensitive_personal_data
+required_fields: [geography, research_purpose, scenario]
+optional_fields: [job_category, advertised_wage, advertised_schedule, agency_name]
+prohibited_request_patterns:
+  - "pretend.*job(?:seeker| applicant)"
+  - "fake (?:resume|identity|applicant)"
+  - "social security number|ssn|bank account|date of birth"
+sensitive_data_categories: [employment_history, government_identifier, financial_account, immigration_status]
+stage_roles:
+  orient: [case_supervisor, investigation_ethics_reviewer]
+  assess_prepare: [scenario_compiler, worker_protection_critic, missing_information_critic]
+  how: [public_business_scout, registry_scout, agency_contact_resolver]
+  act: [transparent_research_message_composer, policy_critic]
+  verify: [extractor_a, extractor_b, applicant_fee_auditor, representation_consistency_critic]
+question_prompts:
+  - What is the agency's legal business name and the appropriate public complaint or correction route?
+  - Are applicants ever charged registration, placement, training, equipment, transportation, or other fees?
+  - Is the referenced type of job currently available, and what wage, schedule, location, and employer-identification information is disclosed before application?
+  - Which information is required before a candidate receives the employer and job details?
+response_fields:
+  - {id: legal_name, label: Legal business identity, question: Please confirm the legal business name., markers: ["legal name", "legal business", "doing business as", "dba"], critical: true}
+  - {id: applicant_fee_policy, label: Applicant fee policy, question: "Please confirm whether applicants pay any registration, placement, training, equipment, transportation, or other fee.", markers: ["no fee", "applicant fee", "registration fee", "placement fee", "training fee", "candidate pays"], critical: true}
+  - {id: job_availability, label: Current job availability, question: Please confirm whether the described job category is currently available., markers: ["currently available", "open role", "job available", "positions available", "no openings"], critical: true}
+  - {id: wage, label: Wage disclosure, question: Please confirm the wage or wage range., markers: ["per hour", "hourly", "salary", "wage", "$"], critical: true}
+  - {id: schedule, label: Schedule disclosure, question: "Please confirm the shift, hours, or schedule.", markers: ["shift", "schedule", "hours", "full-time", "part-time"], critical: true}
+  - {id: employer_identity, label: Employer disclosure, question: Please explain when the hiring employer's identity and worksite are disclosed., markers: ["employer", "client company", "worksite", "company name"] , critical: true}
+  - {id: complaint_route, label: Complaint route, question: Please identify the public contact for complaints or corrections., markers: ["complaint", "compliance", "customer service", "contact"] , critical: false}
+finding_rules:
+  - id: applicant_fee_reported
+    kind: reported_fee
+    severity: high
+    title: Applicant-paid fee reported
+    summary: The agency reported an applicant-facing fee. The amount and legal context require human review.
+    patterns: ["(?:applicant|candidate|job seeker).{0,40}(?:pay|fee|charge)", "registration fee", "placement fee"]
+    value_pattern: "(?P<fee>\\$\\s?\\d+(?:\\.\\d{1,2})?)"
+    negative_patterns: ["no (?:applicant|candidate|job seeker) fee", "we do not charge applicants", "free to applicants"]
+  - id: guaranteed_placement
+    kind: policy_risk
+    severity: high
+    title: Guaranteed placement representation detected
+    summary: The response appears to guarantee employment or placement and should be reviewed against the exact evidence.
+    patterns: ["guaranteed (?:job|employment|placement)", "100% placement"]
+  - id: unusual_payment_method
+    kind: policy_risk
+    severity: critical
+    title: Unusual payment method referenced
+    summary: The response references a payment method commonly requiring heightened fraud review.
+    patterns: ["gift card", "cryptocurrency", "bitcoin", "wire transfer before"]
+  - id: employer_identity_missing
+    kind: disclosure_gap
+    severity: medium
+    title: Employer or worksite identity not explained
+    summary: The response did not explain when the employer or worksite is disclosed.
+    missing_field: employer_identity
+message_purpose: conduct transparent research into public employment-agency practices without applying for a job
+respondent_value: reduce misrouted complaints and clarify current public recruiting terms
+reuse_policy: institutional_research_case_only
+demo_contacts:
+  - {organization_name: Metro Placement Services, role_title: Compliance or customer service team, endpoint: compliance@metroplacement.example.test, source: demo_pack, source_public: true, confidence: 0.9, geography: Demonstration market}
+demo_replies:
+  - body: "Our legal business name is Metro Placement Services LLC. Positions are currently available for warehouse associates at $18.50 per hour on the second shift. The client company and worksite are disclosed before any application is completed. Applicants pay a $199 registration and training fee. Questions or complaints can be sent to our compliance contact."

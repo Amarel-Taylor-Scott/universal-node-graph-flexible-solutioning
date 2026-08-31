@@ -1,0 +1,32 @@
+{
+  "title": "Warehouse staffing procurement",
+  "kind": "quote_intelligence",
+  "pack": "staffing_procurement",
+  "objective": "Obtain two employer-side non-binding staffing proposals with comparable rates and conversion terms.",
+  "requester_name": "Example Procurement Team",
+  "requester_email": "procurement@example.com",
+  "requirements": {
+    "roles": "warehouse associates",
+    "workers": 20,
+    "geography": "Example market",
+    "shift": "second shift",
+    "start_window": "three weeks",
+    "temp_to_hire": true,
+    "minimum_quotes": 2
+  },
+  "governance_acknowledgements": {
+    "authorized_requester": true,
+    "research_only": true
+  },
+  "contacts": [
+    {
+      "organization_name": "Example Staffing Company",
+      "role_title": "Client solutions team",
+      "endpoint": "proposals@example-staffing.invalid",
+      "source": "public_website",
+      "source_public": true,
+      "business_only": true,
+      "geography": "Example market"
+    }
+  ]
+}
