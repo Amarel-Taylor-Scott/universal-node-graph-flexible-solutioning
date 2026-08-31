@@ -37,8 +37,35 @@ jobs:
         run: ruff check src tests
       - name: Test
         run: pytest
+      - name: Build wheel and verify packaged vertical manifests
+        run: |
+          python -m pip wheel . --no-deps --wheel-dir /tmp/sourceloop-wheel
+          python - <<'PY'
+          import glob
+          import zipfile
+
+          wheel = glob.glob("/tmp/sourceloop-wheel/sourceloop-*.whl")
+          assert len(wheel) == 1, wheel
+          with zipfile.ZipFile(wheel[0]) as archive:
+              names = set(archive.namelist())
+          expected = {
+              "sourceloop/vertical_packs/civic_intelligence.yaml",
+              "sourceloop/vertical_packs/facilities_quote.yaml",
+              "sourceloop/vertical_packs/bpo_quote.yaml",
+          }
+          missing = expected - names
+          assert not missing, f"Missing packaged vertical manifests: {sorted(missing)}"
+          PY
       - name: Exercise deterministic CLI demo
-        run: sourceloop demo --kind facilities_quote > /tmp/sourceloop-demo.json
+        run: |
+          SOURCELOOP_DATABASE_URL=sqlite:////tmp/sourceloop-ci-demo.db \
+            sourceloop demo --kind facilities_quote > /tmp/sourceloop-demo.json
+      - name: Publish deterministic demo receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-demo-receipt
+          path: /tmp/sourceloop-demo.json
+          if-no-files-found: error
 
   frontend:
     runs-on: ubuntu-latest
@@ -54,3 +81,9 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Type-check and build
         run: npm run build
+      - name: Publish operator console build
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-console
+          path: sourceloop/frontend/dist
+          if-no-files-found: error
