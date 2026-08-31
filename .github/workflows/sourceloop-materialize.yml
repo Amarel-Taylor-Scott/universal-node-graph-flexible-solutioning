@@ -1,0 +1,90 @@
+name: Materialize SourceLoop container app
+
+on:
+  push:
+    branches:
+      - feature/sourceloop-direct-source-intelligence-mvp
+    paths:
+      - ".sourceloop-materialize.part*"
+      - ".github/workflows/sourceloop-materialize.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sourceloop-materialize-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect payload parts
+        id: payload
+        shell: bash
+        run: |
+          if compgen -G '.sourceloop-materialize.part*' >/dev/null; then
+            echo 'present=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'present=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify and extract payload
+        if: steps.payload.outputs.present == 'true'
+        shell: bash
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import base64
+          import hashlib
+          import tarfile
+          from pathlib import Path
+
+          expected = "f14c21239c2a1167dff5979103d61482696132d60e5a53c8f366903edc15ea0d"
+          parts = sorted(Path(".").glob(".sourceloop-materialize.part*"))
+          if not parts:
+              raise SystemExit("No payload parts were found")
+
+          encoded = "".join(part.read_text(encoding="utf-8") for part in parts)
+          archive = base64.b64decode(encoded, validate=True)
+          digest = hashlib.sha256(archive).hexdigest()
+          if digest != expected:
+              raise SystemExit(f"Payload checksum mismatch: {digest}")
+
+          archive_path = Path("/tmp/sourceloop-materialize.tar.gz")
+          archive_path.write_bytes(archive)
+          with tarfile.open(archive_path, "r:gz") as bundle:
+              names = bundle.getnames()
+              unsafe = [
+                  name
+                  for name in names
+                  if not (name == "./sourceloop" or name.startswith("./sourceloop/"))
+                  or ".." in Path(name).parts
+              ]
+              if unsafe:
+                  raise SystemExit(f"Unsafe archive entries: {unsafe[:5]}")
+              bundle.extractall(".", filter="data")
+
+          for part in parts:
+              part.unlink()
+          print(f"Materialized {len(names)} paths from {len(parts)} verified parts")
+          PY
+
+      - name: Commit materialized application
+        if: steps.payload.outputs.present == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A sourceloop .sourceloop-materialize.part\*
+          if git diff --cached --quiet; then
+            echo "No materialized changes to commit"
+            exit 0
+          fi
+          git commit -m "feat: containerize SourceLoop correspondence runtime"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
