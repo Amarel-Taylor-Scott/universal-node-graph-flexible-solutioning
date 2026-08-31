@@ -31,18 +31,21 @@ class VerticalPack(BaseModel):
 
 class PackRegistry:
     def __init__(self, search_path: Path | None = None) -> None:
-        self.search_path = search_path or Path(__file__).resolve().parents[2] / "packs"
+        package_path = Path(__file__).resolve().parent / "vertical_packs"
+        workspace_path = Path(__file__).resolve().parents[2] / "packs"
+        self.search_paths = [search_path] if search_path else [package_path, workspace_path]
         self._packs = self._load()
 
     def _load(self) -> dict[str, VerticalPack]:
         packs: dict[str, VerticalPack] = {}
-        if not self.search_path.exists():
-            return packs
-        for path in sorted(self.search_path.glob("*.yaml")):
-            payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-            payload["raw"] = payload.copy()
-            pack = VerticalPack.model_validate(payload)
-            packs[pack.id] = pack
+        for search_path in self.search_paths:
+            if search_path is None or not search_path.exists():
+                continue
+            for path in sorted(search_path.glob("*.yaml")):
+                payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+                payload["raw"] = payload.copy()
+                pack = VerticalPack.model_validate(payload)
+                packs[pack.id] = pack
         return packs
 
     def list(self) -> list[VerticalPack]:
