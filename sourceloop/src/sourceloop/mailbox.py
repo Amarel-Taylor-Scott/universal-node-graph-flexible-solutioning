@@ -6,6 +6,7 @@ import hashlib
 import imaplib
 import re
 import ssl
+from contextlib import suppress
 from dataclasses import dataclass, field
 from email import policy
 from email.header import decode_header
@@ -121,14 +122,10 @@ class ImapMailboxClient:
         client, self.client = self.client, None
         if client is None:
             return
-        try:
+        with suppress(imaplib.IMAP4.error, OSError):
             client.close()
-        except (imaplib.IMAP4.error, OSError):
-            pass
-        try:
+        with suppress(imaplib.IMAP4.error, OSError):
             client.logout()
-        except (imaplib.IMAP4.error, OSError):
-            pass
 
 
 class MailboxService:

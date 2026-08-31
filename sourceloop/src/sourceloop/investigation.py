@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from collections.abc import Iterable
+from contextlib import suppress
 from typing import Any
 
 from .domain import (
@@ -14,9 +15,9 @@ from .domain import (
     ContactRoute,
     FindingKind,
     FindingStatus,
+    Interaction,
     InvestigationFinding,
     InvestigationMode,
-    Interaction,
     Quote,
     RiskTier,
     Severity,
@@ -155,7 +156,6 @@ def evaluate_findings(
     a respondent illegal, fraudulent, or noncompliant without further human/legal review.
     """
 
-    lower = interaction.body.lower()
     coverage = response_coverage(pack, interaction.body)
     aggregate_covered = set(case.response_coverage.get(interaction.endpoint, []))
     aggregate_covered.update(field for field, present in coverage.items() if present)
@@ -178,10 +178,8 @@ def evaluate_findings(
             continue
         summary = rule.summary
         if value not in (None, ""):
-            try:
+            with suppress(KeyError, IndexError, ValueError):
                 summary = summary.format(value=value)
-            except (KeyError, IndexError, ValueError):
-                pass
         findings.append(
             InvestigationFinding(
                 rule_id=rule.id,

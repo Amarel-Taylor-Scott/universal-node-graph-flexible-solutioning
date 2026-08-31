@@ -1,6 +1,14 @@
 from __future__ import annotations
 
-from sourceloop.domain import CaseRecord, CaseKind, FindingKind, InvestigationFinding, Quote, QuoteLineItem, Severity
+from sourceloop.domain import (
+    CaseKind,
+    CaseRecord,
+    FindingKind,
+    InvestigationFinding,
+    Quote,
+    QuoteLineItem,
+    Severity,
+)
 from sourceloop.packs import PackRegistry
 from sourceloop.reporting import build_case_report, case_report_csv
 

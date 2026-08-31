@@ -10,7 +10,7 @@ from sourceloop.repository import Repository
 
 
 class FakeSmtp:
-    instances: list["FakeSmtp"] = []
+    instances: list[FakeSmtp] = []
 
     def __init__(self, host: str, port: int, timeout: int, **_: Any) -> None:
         self.host = host
@@ -21,7 +21,7 @@ class FakeSmtp:
         self.logged_in = False
         self.__class__.instances.append(self)
 
-    def __enter__(self) -> "FakeSmtp":
+    def __enter__(self) -> FakeSmtp:
         return self
 
     def __exit__(self, *_: object) -> None:

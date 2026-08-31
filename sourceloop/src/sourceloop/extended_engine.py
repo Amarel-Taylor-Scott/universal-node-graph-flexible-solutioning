@@ -20,8 +20,8 @@ from .domain import (
     RegistryCheck,
     RegistryCheckCreate,
     Severity,
-    utcnow,
     stable_key,
+    utcnow,
 )
 from .engine import SourceLoopEngine
 from .investigation import (
@@ -32,8 +32,8 @@ from .investigation import (
     evaluate_findings,
     governance_snapshot,
     merge_findings,
-    response_coverage,
     resolve_superseded_findings,
+    response_coverage,
     validate_case_request,
     validate_contacts,
 )
@@ -412,9 +412,11 @@ class InvestigativeSourceLoopEngine(SourceLoopEngine):
             return super()._case_ready_to_complete(case)
         if any(action.status in {ActionStatus.PENDING, ActionStatus.APPROVED} for action in case.actions):
             return False
-        if case.kind is CaseKind.QUOTE_INTELLIGENCE:
-            if not super()._case_ready_to_complete(case):
-                return False
+        if (
+            case.kind is CaseKind.QUOTE_INTELLIGENCE
+            and not super()._case_ready_to_complete(case)
+        ):
+            return False
         if completion_count(case, pack) < case.completion_target:
             return False
         if not pack.response_fields:

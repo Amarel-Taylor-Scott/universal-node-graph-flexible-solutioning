@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import signal
+from contextlib import suppress
 from datetime import UTC, datetime
 from threading import Event
 
@@ -68,10 +69,8 @@ class SourceLoopWorker:
             self.settings.imap_poll_seconds,
         )
         while not self.stop_event.is_set():
-            try:
+            with suppress(Exception):  # heartbeat records failure; the next cycle retries
                 self.sync_once()
-            except Exception:  # noqa: BLE001 - heartbeat already records failure; next cycle retries
-                pass
             remaining = self.settings.imap_poll_seconds
             while remaining > 0 and not self.stop_event.is_set():
                 interval = min(self.settings.worker_heartbeat_seconds, remaining)

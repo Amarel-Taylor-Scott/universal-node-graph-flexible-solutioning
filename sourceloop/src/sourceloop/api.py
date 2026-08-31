@@ -12,8 +12,8 @@ from .config import Settings
 from .domain import ApprovalRequest, CaseCreate, InboundEmail
 from .evidence import EvidenceStore
 from .extended_engine import InvestigativeSourceLoopEngine
-from .investigation_graph import InvestigationGraphProjector
 from .investigation_api import register_investigation_routes
+from .investigation_graph import InvestigationGraphProjector
 from .mailbox import MailboxService
 from .repository import ConcurrentUpdateError, Repository
 
