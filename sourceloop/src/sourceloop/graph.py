@@ -160,9 +160,9 @@ class GraphProjector:
         try:
             import geopandas as gpd
             import pandas as pd
-            from shapely.geometry import LineString, Point
             from city2graph.graph import gdf_to_pyg, is_torch_available
             from city2graph.utils import gdf_to_nx, nx_to_rx
+            from shapely.geometry import LineString, Point
         except ImportError as exc:
             return {
                 "available": False,
