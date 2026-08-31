@@ -1,0 +1,107 @@
+id: investigative_market_integrity
+name: Restricted Market Integrity Investigation
+product_family: SourceLoop Evidence Desk
+category: suspected_unlicensed_operations
+case_kind: market_investigation
+investigation_mode: compliance_probe
+risk_tier: restricted
+restricted: true
+description: A tightly controlled institutional workflow for documenting publicly marketed business representations and comparing them with supplied authoritative records. It does not facilitate transactions or determine illegality.
+max_contacts: 2
+max_followups: 1
+completion_target: 1
+allowed_channels:
+  - email
+required_fields:
+  - geography
+  - service_category
+  - authorized_research
+  - client_type
+  - scenario_basis
+  - public_marketing_reference
+required_operator_fields:
+  - authorized_research
+  - client_type
+  - scenario_basis
+  - public_marketing_reference
+optional_fields:
+  - registry_results
+  - expected_disclosures
+  - known_aliases
+prohibited_requirement_fields:
+  - fake_identity
+  - private_home_address
+  - precise_device_location
+  - closed_group_membership
+  - ethnicity
+  - religion
+  - immigration_status
+  - political_affiliation
+  - ssn
+  - bank_account
+  - payment_credentials
+  - illegal_service
+  - purchase_illegal_service
+allowed_client_types:
+  - regulator
+  - law_firm
+  - consumer_protection
+  - investigative_newsroom
+  - academic_research
+  - marketplace_trust_safety
+  - insurance_siu
+  - financial_institution_compliance
+  - municipal_licensing
+stage_roles:
+  orient:
+    - case_supervisor
+  reconcile_horizon:
+    - jurisdiction_policy_agent
+    - risk_classifier
+    - horizon_critic
+  assess_prepare:
+    - scenario_compiler
+    - missing_information_critic
+  how:
+    - counterparty_discovery_agent
+    - registry_license_scout
+    - identity_resolver
+    - gis_scout
+    - contact_resolver
+  act:
+    - message_composer
+    - policy_critic
+  verify:
+    - extractor_a
+    - extractor_b
+    - investigation_extractor_a
+    - investigation_extractor_b
+    - discrepancy_auditor
+    - corroboration_agent
+  integrate_commit:
+    - evidence_curator
+    - graph_curator
+  route:
+    - completion_judge
+question_prompts:
+  - What legal or trade name, public business location, service scope, and license or registration does the respondent claim?
+  - What price, fee, availability, and written terms apply to the supplied standardized information request?
+  - Which parts of the answer are estimates, policies, forward-looking plans, or referrals?
+  - What official public route can independently verify the representation?
+required_disclosures:
+  - identity_or_legal_name
+  - claimed_license_number
+critical_finding_fields:
+  - identity_or_legal_name
+  - claimed_license_number
+completion_policy: evidence_complete
+followup_approval_required: true
+report_template: restricted_market_integrity
+prohibited_actions:
+  - unlawful_transaction
+  - infiltration_of_closed_community
+  - fabricated_identity
+  - inducement_of_illegal_conduct
+  - automatic_report_to_authorities
+  - public_accusation_without_qualified_review
+  - publication_of_private_residence
