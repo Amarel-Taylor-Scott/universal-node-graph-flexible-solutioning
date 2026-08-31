@@ -6,10 +6,23 @@ import json
 from datetime import UTC, datetime
 from typing import Any
 
-from sqlalchemy import Column, DateTime, Integer, MetaData, String, Table, Text, create_engine, delete, func
-from sqlalchemy import insert, select, update
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy import (
+    Column,
+    DateTime,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    Text,
+    create_engine,
+    delete,
+    func,
+    insert,
+    select,
+    update,
+)
 from sqlalchemy.engine import Engine
+from sqlalchemy.exc import IntegrityError
 
 from .domain import CaseEvent, CaseRecord, OutboxRecord, utcnow
 
