@@ -1,0 +1,58 @@
+name: SourceLoop CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/sourceloop-direct-source-intelligence-mvp
+    paths:
+      - "sourceloop/**"
+      - ".github/workflows/sourceloop-ci.yml"
+  pull_request:
+    paths:
+      - "sourceloop/**"
+      - ".github/workflows/sourceloop-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sourceloop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: sourceloop/pyproject.toml
+      - name: Install backend and test dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Compile
+        run: python -m compileall -q src
+      - name: Lint
+        run: ruff check src tests
+      - name: Test
+        run: pytest
+      - name: Exercise deterministic CLI demo
+        run: sourceloop demo --kind facilities_quote > /tmp/sourceloop-demo.json
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sourceloop/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: sourceloop/frontend/package.json
+      - name: Install frontend dependencies
+        run: npm install
+      - name: Type-check and build
+        run: npm run build
