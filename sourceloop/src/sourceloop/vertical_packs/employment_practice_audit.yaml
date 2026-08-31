@@ -1,0 +1,102 @@
+id: employment_practice_audit
+name: Employment Agency Practice Audit
+product_family: SourceLoop Audit
+category: employment_practices
+case_kind: market_investigation
+investigation_mode: practice_audit
+risk_tier: restricted
+restricted: true
+description: Conduct a transparent, evidence-preserving audit of publicly marketed employment-agency terms, candidate fees, job availability, disclosures, and referral practices.
+max_contacts: 3
+max_followups: 1
+completion_target: 2
+allowed_channels:
+  - email
+required_fields:
+  - geography
+  - advertised_role_or_service
+  - authorized_research
+  - client_type
+  - scenario_basis
+required_operator_fields:
+  - authorized_research
+  - client_type
+  - scenario_basis
+optional_fields:
+  - expected_wage
+  - advertised_schedule
+  - public_advertisement_reference
+  - registry_results
+prohibited_requirement_fields:
+  - fake_applicant
+  - fabricated_identity
+  - ssn
+  - date_of_birth
+  - immigration_status
+  - passport_number
+  - bank_account
+  - payment_credentials
+  - medical_information
+  - private_home_address
+allowed_client_types:
+  - regulator
+  - law_firm
+  - consumer_protection
+  - investigative_newsroom
+  - academic_research
+  - marketplace_trust_safety
+  - municipal_licensing
+stage_roles:
+  orient:
+    - case_supervisor
+  reconcile_horizon:
+    - jurisdiction_policy_agent
+    - risk_classifier
+    - horizon_critic
+  assess_prepare:
+    - scenario_compiler
+    - missing_information_critic
+  how:
+    - counterparty_discovery_agent
+    - registry_license_scout
+    - identity_resolver
+    - gis_scout
+    - contact_resolver
+  act:
+    - message_composer
+    - policy_critic
+  verify:
+    - extractor_a
+    - extractor_b
+    - investigation_extractor_a
+    - investigation_extractor_b
+    - discrepancy_auditor
+    - corroboration_agent
+  integrate_commit:
+    - evidence_curator
+    - graph_curator
+  route:
+    - completion_judge
+question_prompts:
+  - Is the advertised role or placement opportunity currently available, and who is the employer or client when disclosure is permitted?
+  - Does the applicant or candidate pay any registration, placement, training, equipment, screening, transportation, housing, or documentation fee?
+  - What wage, schedule, work location, assignment duration, and conversion terms are currently represented?
+  - What legal entity operates the agency, and what license or registration applies?
+  - Which written terms are provided before any applicant is asked for money or sensitive information?
+required_disclosures:
+  - identity_or_legal_name
+  - applicant_upfront_fee
+  - written_terms
+critical_finding_fields:
+  - identity_or_legal_name
+  - applicant_upfront_fee
+completion_policy: distinct_respondents
+followup_approval_required: true
+report_template: employment_practice_audit
+prohibited_actions:
+  - deceptive_applicant_persona
+  - submission_of_sensitive_personal_data
+  - job_acceptance
+  - payment
+  - worker_recruitment_for_unlawful_employment
+  - public_accusation_without_review
