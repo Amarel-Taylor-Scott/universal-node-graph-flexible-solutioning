@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sourceloop"
-version = "0.3.0"
+version = "0.3.1"
 description = "Approval-gated direct-source intelligence, quote acquisition, and market investigation runtime"
 readme = "README.md"
 requires-python = ">=3.12"

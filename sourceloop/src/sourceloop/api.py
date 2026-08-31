@@ -33,7 +33,7 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
 
     application = FastAPI(
         title="SourceLoop API",
-        version="0.3.0",
+        version="0.3.1",
         description=(
             "Container-ready, approval-gated direct-source intelligence, quote acquisition, "
             "market investigation, and evidence runtime."
@@ -52,7 +52,7 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
         heartbeat = engine.repository.get_worker_heartbeat(resolved_settings.worker_id)
         return {
             "name": "SourceLoop",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "environment": resolved_settings.environment,
             "docs": "/docs",
             "email_mode": resolved_settings.email_mode,

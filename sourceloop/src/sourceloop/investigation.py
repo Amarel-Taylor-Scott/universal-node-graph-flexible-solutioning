@@ -316,7 +316,11 @@ def compose_followup(case: CaseRecord, pack: VerticalPack, missing_fields: list[
     questions: list[str] = []
     for field_id in missing_fields:
         field = pack.field(field_id)
-        questions.append(field.question if field else f"Please clarify {field_id.replace('_', ' ')}.")
+        questions.append(
+            f"{field.label}: {field.question}"
+            if field
+            else f"Please clarify {field_id.replace('_', ' ')}."
+        )
     rendered = "\n".join(f"- {question}" for question in questions)
     return (
         "Hello,\n\n"
@@ -479,7 +483,14 @@ def _staffing_numeric_findings(
 ) -> list[InvestigationFinding]:
     body = interaction.body
     bill_rate = _first_number(body, [r"bill rate(?: is| of)?\s*\$([\d,]+(?:\.\d+)?)"])
-    pay_rate = _first_number(body, [r"(?:worker |candidate )?pay rate(?: is| of)?\s*\$([\d,]+(?:\.\d+)?)"])
+    pay_rate = _first_number(
+        body,
+        [
+            r"(?:worker |candidate )?pay rate(?: is| of)?\s*\$([\d,]+(?:\.\d+)?)",
+            r"\$([\d,]+(?:\.\d+)?)\s*(?:worker |candidate )?pay rate",
+            r"using\s+(?:a\s+)?\$([\d,]+(?:\.\d+)?)\s*pay rate",
+        ],
+    )
     stated_markup = _first_number(body, [r"([\d,]+(?:\.\d+)?)\s*%\s*(?:markup|mark-up)"])
     if bill_rate is None or pay_rate in (None, 0):
         return []

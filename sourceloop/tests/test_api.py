@@ -11,7 +11,7 @@ def test_health_and_runtime(settings, repository) -> None:
     ready = client.get("/health/ready")
     assert ready.status_code == 200
     runtime = client.get("/api/v1/runtime").json()
-    assert runtime["version"] == "0.2.0"
+    assert runtime["version"] == "0.3.1"
     assert runtime["mailbox_mode"] == "disabled"
 
 

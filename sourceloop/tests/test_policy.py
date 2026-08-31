@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sourceloop.domain import ActionProposal, ActionStatus, CaseKind, CaseRecord
+from sourceloop.domain import ActionProposal, ActionStatus, CaseKind, CaseRecord, ContactRoute
 from sourceloop.policy import PolicyEngine
 
 
@@ -24,6 +24,13 @@ def test_policy_allows_approved_disclosed_dry_run(settings, repository) -> None:
         kind=CaseKind.DATA_VERIFICATION,
         objective="Verify a record.",
         requester_name="Analyst",
+        contacts=[
+            ContactRoute(
+                organization_name="Example Organization",
+                role_title="Public contact",
+                endpoint="person@example.com",
+            )
+        ],
     )
     action = ActionProposal(
         status=ActionStatus.APPROVED,

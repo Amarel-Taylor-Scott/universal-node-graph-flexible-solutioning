@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from sourceloop.config import Settings
-from sourceloop.domain import ActionProposal, ActionStatus, CaseKind, CaseRecord
+from sourceloop.domain import ActionProposal, ActionStatus, CaseKind, CaseRecord, ContactRoute
 from sourceloop.mail import SmtpMailGateway
 from sourceloop.policy import PolicyEngine
 from sourceloop.repository import Repository
@@ -60,6 +60,13 @@ def test_smtp_gateway_sends_threaded_message(monkeypatch: Any, tmp_path: Any) ->
         kind=CaseKind.QUOTE_INTELLIGENCE,
         objective="Request a transparent budgetary quote.",
         requester_name="Test Buyer",
+        contacts=[
+            ContactRoute(
+                organization_name="Example Supplier",
+                role_title="Quote desk",
+                endpoint="supplier@example.com",
+            )
+        ],
     )
     action = ActionProposal(
         status=ActionStatus.APPROVED,
