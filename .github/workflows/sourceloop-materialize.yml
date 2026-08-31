@@ -1,107 +1,183 @@
-name: Materialize SourceLoop v0.3 investigation platform
+name: Repair SourceLoop v0.3 validation
 
 on:
   push:
     branches:
       - feature/sourceloop-direct-source-intelligence-mvp
     paths:
-      - ".sourceloop-materialize.part*"
       - ".github/workflows/sourceloop-materialize.yml"
 
 permissions:
   contents: write
 
 concurrency:
-  group: sourceloop-materialize-${{ github.ref }}
+  group: sourceloop-v03-repair-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  materialize:
+  repair:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Detect payload parts
-        id: payload
-        shell: bash
-        run: |
-          if compgen -G '.sourceloop-materialize.part*' >/dev/null; then
-            echo 'present=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'present=false' >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Verify and extract payload
-        if: steps.payload.outputs.present == 'true'
+      - name: Apply deterministic validation repairs
         shell: bash
         run: |
           python - <<'PY'
           from __future__ import annotations
 
-          import base64
-          import hashlib
-          import shutil
-          import tarfile
-          from pathlib import Path, PurePosixPath
+          from pathlib import Path
 
-          expected = "764d1ca095135965472bf874183fc42b844f00710b38b7161b87d2c25f5f449d"
-          parts = sorted(Path(".").glob(".sourceloop-materialize.part*"))
-          if not parts:
-              raise SystemExit("No payload parts were found")
 
-          encoded = "".join(part.read_text(encoding="utf-8") for part in parts)
-          archive = base64.b64decode(encoded, validate=True)
-          digest = hashlib.sha256(archive).hexdigest()
-          if digest != expected:
-              raise SystemExit(f"Payload checksum mismatch: {digest}")
+          def replace_once(path: str, old: str, new: str) -> None:
+              target = Path(path)
+              content = target.read_text(encoding="utf-8")
+              if old not in content:
+                  raise SystemExit(f"Expected repair target not found in {path}: {old!r}")
+              target.write_text(content.replace(old, new, 1), encoding="utf-8")
 
-          archive_path = Path("/tmp/sourceloop-materialize.tar.gz")
-          staging = Path("/tmp/sourceloop-materialize")
-          shutil.rmtree(staging, ignore_errors=True)
-          staging.mkdir(parents=True)
-          archive_path.write_bytes(archive)
 
-          with tarfile.open(archive_path, "r:gz") as bundle:
-              members = bundle.getmembers()
-              unsafe: list[str] = []
-              for member in members:
-                  normalized = member.name.removeprefix("./")
-                  path = PurePosixPath(normalized)
-                  allowed = normalized == "sourceloop" or normalized.startswith("sourceloop/")
-                  if (
-                      not allowed
-                      or path.is_absolute()
-                      or ".." in path.parts
-                      or member.issym()
-                      or member.islnk()
-                  ):
-                      unsafe.append(member.name)
-              if unsafe:
-                  raise SystemExit(f"Unsafe archive entries: {unsafe[:5]}")
-              bundle.extractall(staging, filter="data")
+          replace_once(
+              "sourceloop/src/sourceloop/api.py",
+              "from .investigation_graph import InvestigationGraphProjector\n"
+              "from .investigation_api import register_investigation_routes\n",
+              "from .investigation_api import register_investigation_routes\n"
+              "from .investigation_graph import InvestigationGraphProjector\n",
+          )
 
-          source = staging / "sourceloop"
-          if not source.is_dir():
-              raise SystemExit("Payload did not contain a sourceloop directory")
-          shutil.copytree(source, Path("sourceloop"), dirs_exist_ok=True)
+          replace_once(
+              "sourceloop/src/sourceloop/extended_engine.py",
+              "    Severity,\n    utcnow,\n    stable_key,\n",
+              "    Severity,\n    stable_key,\n    utcnow,\n",
+          )
+          replace_once(
+              "sourceloop/src/sourceloop/extended_engine.py",
+              "    merge_findings,\n    response_coverage,\n    resolve_superseded_findings,\n",
+              "    merge_findings,\n    resolve_superseded_findings,\n    response_coverage,\n",
+          )
+          replace_once(
+              "sourceloop/src/sourceloop/extended_engine.py",
+              "        if case.kind is CaseKind.QUOTE_INTELLIGENCE:\n"
+              "            if not super()._case_ready_to_complete(case):\n"
+              "                return False\n",
+              "        if (\n"
+              "            case.kind is CaseKind.QUOTE_INTELLIGENCE\n"
+              "            and not super()._case_ready_to_complete(case)\n"
+              "        ):\n"
+              "            return False\n",
+          )
 
-          for part in parts:
-              part.unlink()
-          print(f"Materialized {len(members)} paths from {len(parts)} verified parts")
+          replace_once(
+              "sourceloop/src/sourceloop/investigation.py",
+              "import json\nimport re\nfrom collections.abc import Iterable\nfrom typing import Any\n",
+              "import json\nimport re\nfrom collections.abc import Iterable\nfrom contextlib import suppress\nfrom typing import Any\n",
+          )
+          replace_once(
+              "sourceloop/src/sourceloop/investigation.py",
+              "    FindingStatus,\n    InvestigationFinding,\n    InvestigationMode,\n    Interaction,\n",
+              "    FindingStatus,\n    Interaction,\n    InvestigationFinding,\n    InvestigationMode,\n",
+          )
+          replace_once(
+              "sourceloop/src/sourceloop/investigation.py",
+              "    lower = interaction.body.lower()\n    coverage = response_coverage(pack, interaction.body)\n",
+              "    coverage = response_coverage(pack, interaction.body)\n",
+          )
+          replace_once(
+              "sourceloop/src/sourceloop/investigation.py",
+              "        if value not in (None, \"\"):\n"
+              "            try:\n"
+              "                summary = summary.format(value=value)\n"
+              "            except (KeyError, IndexError, ValueError):\n"
+              "                pass\n",
+              "        if value not in (None, \"\"):\n"
+              "            with suppress(KeyError, IndexError, ValueError):\n"
+              "                summary = summary.format(value=value)\n",
+          )
+
+          replace_once(
+              "sourceloop/src/sourceloop/mailbox.py",
+              "import hashlib\nimport imaplib\nimport re\nimport ssl\nfrom dataclasses import dataclass, field\n",
+              "import hashlib\nimport imaplib\nimport re\nimport ssl\nfrom contextlib import suppress\nfrom dataclasses import dataclass, field\n",
+          )
+          replace_once(
+              "sourceloop/src/sourceloop/mailbox.py",
+              "        try:\n"
+              "            client.close()\n"
+              "        except (imaplib.IMAP4.error, OSError):\n"
+              "            pass\n"
+              "        try:\n"
+              "            client.logout()\n"
+              "        except (imaplib.IMAP4.error, OSError):\n"
+              "            pass\n",
+              "        with suppress(imaplib.IMAP4.error, OSError):\n"
+              "            client.close()\n"
+              "        with suppress(imaplib.IMAP4.error, OSError):\n"
+              "            client.logout()\n",
+          )
+
+          replace_once(
+              "sourceloop/src/sourceloop/repository.py",
+              "    func,\n    inspect,\n    insert,\n",
+              "    func,\n    insert,\n    inspect,\n",
+          )
+
+          replace_once(
+              "sourceloop/src/sourceloop/worker.py",
+              "import logging\nimport signal\nfrom datetime import UTC, datetime\n",
+              "import logging\nimport signal\nfrom contextlib import suppress\nfrom datetime import UTC, datetime\n",
+          )
+          replace_once(
+              "sourceloop/src/sourceloop/worker.py",
+              "            try:\n"
+              "                self.sync_once()\n"
+              "            except Exception:  # noqa: BLE001 - heartbeat already records failure; next cycle retries\n"
+              "                pass\n",
+              "            with suppress(Exception):  # heartbeat records failure; the next cycle retries\n"
+              "                self.sync_once()\n",
+          )
+
+          replace_once(
+              "sourceloop/tests/test_mail.py",
+              "    instances: list[\"FakeSmtp\"] = []\n",
+              "    instances: list[FakeSmtp] = []\n",
+          )
+          replace_once(
+              "sourceloop/tests/test_mail.py",
+              "    def __enter__(self) -> \"FakeSmtp\":\n",
+              "    def __enter__(self) -> FakeSmtp:\n",
+          )
+
+          replace_once(
+              "sourceloop/tests/test_reporting.py",
+              "from sourceloop.domain import CaseRecord, CaseKind, FindingKind, InvestigationFinding, Quote, QuoteLineItem, Severity\n",
+              "from sourceloop.domain import (\n"
+              "    CaseKind,\n"
+              "    CaseRecord,\n"
+              "    FindingKind,\n"
+              "    InvestigationFinding,\n"
+              "    Quote,\n"
+              "    QuoteLineItem,\n"
+              "    Severity,\n"
+              ")\n",
+          )
+
+          Path("sourceloop/frontend/src/vite-env.d.ts").write_text(
+              '/// <reference types="vite/client" />\n',
+              encoding="utf-8",
+          )
           PY
 
-      - name: Commit materialized application
-        if: steps.payload.outputs.present == 'true'
+      - name: Compile repaired Python sources
+        run: python -m compileall -q sourceloop/src sourceloop/tests
+
+      - name: Commit repairs and retire one-shot workflow
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A sourceloop .sourceloop-materialize.part\*
-          if git diff --cached --quiet; then
-            echo "No materialized changes to commit"
-            exit 0
-          fi
-          git commit -m "feat: add governed active-market investigation platform"
+          git rm .github/workflows/sourceloop-materialize.yml
+          git add -A sourceloop
+          git commit -m "fix: resolve SourceLoop v0.3 validation failures"
           git push origin "HEAD:${GITHUB_REF_NAME}"
