@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+from sourceloop.config import Settings
 from sourceloop.domain import ActionProposal, ActionStatus, CaseKind, CaseRecord, ContactRoute, stable_key
 from sourceloop.policy import PolicyEngine
 from sourceloop.repository import Repository
-from sourceloop.config import Settings
 
 
 def _approved_action(case: CaseRecord) -> ActionProposal:
