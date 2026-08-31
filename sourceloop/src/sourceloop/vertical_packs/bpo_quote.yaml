@@ -1,0 +1,48 @@
+id: bpo_quote
+name: BPO and Outsourcing Quote Desk
+description: Direct-source pricing and capability intelligence for outsourced customer service and business operations.
+case_kind: quote_intelligence
+max_contacts: 8
+max_followups: 1
+completion_target: 3
+required_fields:
+  - service
+  - seats
+  - coverage
+optional_fields:
+  - languages
+  - start_window
+  - data_location
+  - security_requirements
+  - technology_stack
+  - contract_term_months
+  - minimum_quotes
+specialist_roles:
+  - requirement_compiler
+  - provider_scout
+  - delivery_location_analyst
+  - security_capability_critic
+  - business_development_contact_resolver
+  - quote_extractor
+  - productive_hour_normalizer
+  - terms_auditor
+prohibited_actions:
+  - autonomous_contract_acceptance
+  - fabricated_volume_commitment
+  - undisclosed_competitor_quote_sharing
+  - compensation_benchmark_disclosure
+question_prompts:
+  - Is pricing per productive hour, paid hour, seat, FTE, contact, or outcome?
+  - Which implementation, training, technology, overtime, and shift fees apply?
+  - What current capacity and ramp time can be committed?
+  - Which security controls and delivery locations apply to the quoted service?
+  - What minimum commitment, payment terms, exclusions, and validity period apply?
+comparison_dimensions:
+  - productive_hour_cost
+  - monthly_fte_cost
+  - implementation_cost
+  - ramp_time
+  - security_fit
+  - capacity
+  - exclusions
+  - commercial_terms
