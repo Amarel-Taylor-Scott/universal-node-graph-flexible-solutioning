@@ -1,0 +1,84 @@
+id: informal_market_census
+name: Informal Business Market Census
+product_family: SourceLoop MarketGraph
+category: informal_business
+case_kind: market_investigation
+investigation_mode: market_census
+risk_tier: high
+restricted: false
+description: Map difficult-to-discover but publicly marketed local businesses, service areas, prices, capacity, and formalization needs without exposing private residences or facilitating unlawful activity.
+max_contacts: 3
+max_followups: 1
+completion_target: 2
+allowed_channels:
+  - email
+required_fields:
+  - service_category
+  - geography
+  - scenario_basis
+required_operator_fields:
+  - scenario_basis
+optional_fields:
+  - languages
+  - desired_start
+  - standard_scenario
+  - registry_results
+prohibited_requirement_fields:
+  - precise_device_location
+  - private_home_address
+  - immigration_status
+  - ethnicity
+  - religion
+  - political_affiliation
+  - ssn
+  - bank_account
+  - payment_credentials
+  - illegal_service
+  - tax_evasion
+stage_roles:
+  orient:
+    - case_supervisor
+  reconcile_horizon:
+    - jurisdiction_policy_agent
+    - risk_classifier
+  assess_prepare:
+    - scenario_compiler
+    - missing_information_critic
+  how:
+    - counterparty_discovery_agent
+    - gis_scout
+    - identity_resolver
+    - contact_resolver
+  act:
+    - message_composer
+    - policy_critic
+  verify:
+    - extractor_a
+    - extractor_b
+    - investigation_extractor_a
+    - investigation_extractor_b
+    - discrepancy_auditor
+  integrate_commit:
+    - evidence_curator
+    - graph_curator
+  route:
+    - completion_judge
+question_prompts:
+  - What services are currently offered, in which geographic areas, and through which public business contact route?
+  - What standard pricing unit, minimum charge, availability, and lead time apply to the supplied scenario?
+  - What business or trade name should be displayed, and is there a separate legal entity or public registration?
+  - Which languages and payment methods are supported, without requesting account or identity credentials?
+  - May the business approve a limited public profile or future request-routing preference?
+critical_finding_fields:
+  - service_scope
+  - availability
+completion_policy: distinct_respondents
+followup_approval_required: true
+report_template: informal_market_census
+prohibited_actions:
+  - private_residence_publication
+  - vulnerable_person_profiling
+  - unlawful_service_procurement
+  - tax_or_license_evasion
+  - hidden_identity
+  - public_accusation_without_review
