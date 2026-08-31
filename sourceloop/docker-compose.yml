@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: sourceloop
+      POSTGRES_USER: sourceloop
+      POSTGRES_PASSWORD: sourceloop
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sourceloop -d sourceloop"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - sourceloop-db:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      SOURCELOOP_DATABASE_URL: postgresql+psycopg://sourceloop:sourceloop@db:5432/sourceloop
+      SOURCELOOP_EMAIL_MODE: dry_run
+      SOURCELOOP_ALLOW_EXTERNAL_SEND: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    depends_on:
+      - api
+    ports:
+      - "5173:5173"
+
+volumes:
+  sourceloop-db:
