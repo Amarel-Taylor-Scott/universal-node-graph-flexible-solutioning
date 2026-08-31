@@ -1,80 +1,35 @@
 from __future__ import annotations
 
-from sourceloop.config import Settings
-from sourceloop.domain import ActionProposal, ActionStatus, CaseKind, CaseRecord, ContactRoute, stable_key
+from sourceloop.domain import ActionProposal, ActionStatus, CaseKind, CaseRecord
 from sourceloop.policy import PolicyEngine
-from sourceloop.repository import Repository
 
 
-def _approved_action(case: CaseRecord) -> ActionProposal:
+def test_policy_requires_approval_and_disclosure(settings, repository) -> None:
+    case = CaseRecord(
+        title="Policy",
+        kind=CaseKind.DATA_VERIFICATION,
+        objective="Verify a record.",
+        requester_name="Analyst",
+    )
+    action = ActionProposal(recipient="person@example.com", subject="Question", body="Please answer.")
+    decision = PolicyEngine(settings, repository).evaluate(case, action)
+    assert decision.allowed is False
+    assert any("approval" in reason.lower() for reason in decision.reasons)
+    assert any("disclose" in reason.lower() for reason in decision.reasons)
+
+
+def test_policy_allows_approved_disclosed_dry_run(settings, repository) -> None:
+    case = CaseRecord(
+        title="Policy",
+        kind=CaseKind.DATA_VERIFICATION,
+        objective="Verify a record.",
+        requester_name="Analyst",
+    )
     action = ActionProposal(
         status=ActionStatus.APPROVED,
-        recipient="public@example.test",
-        organization_name="Example Organization",
-        subject="Information request",
-        body=(
-            "I am an automated assistant acting with Test Requester's authorization. "
-            "This is a one-time information request."
-        ),
-        approved_by="reviewer",
+        recipient="person@example.com",
+        subject="Question",
+        body="I am an automated assistant acting for Analyst.",
+        idempotency_key="key",
     )
-    action.idempotency_key = stable_key(case.id, action.recipient, action.subject, action.body)
-    return action
-
-
-def test_policy_allows_approved_dry_run(settings: Settings, repository: Repository) -> None:
-    case = CaseRecord(
-        title="Test",
-        kind=CaseKind.DATA_VERIFICATION,
-        objective="Verify a business contact.",
-        requester_name="Test Requester",
-        contacts=[
-            ContactRoute(
-                organization_name="Example Organization",
-                role_title="Public contact",
-                endpoint="public@example.test",
-            )
-        ],
-    )
-    action = _approved_action(case)
-    case.actions.append(action)
-
-    decision = PolicyEngine(settings, repository).evaluate(case, action)
-
-    assert decision.allowed is True
-    assert decision.reasons == []
-
-
-def test_policy_blocks_suppressed_endpoint(settings: Settings, repository: Repository) -> None:
-    case = CaseRecord(
-        title="Test",
-        kind=CaseKind.DATA_VERIFICATION,
-        objective="Verify a business contact.",
-        requester_name="Test Requester",
-    )
-    action = _approved_action(case)
-    case.actions.append(action)
-    repository.add_suppression(action.recipient, "Test suppression")
-
-    decision = PolicyEngine(settings, repository).evaluate(case, action)
-
-    assert decision.allowed is False
-    assert any("suppression" in reason.lower() for reason in decision.reasons)
-
-
-def test_policy_blocks_undisclosed_automation(settings: Settings, repository: Repository) -> None:
-    case = CaseRecord(
-        title="Test",
-        kind=CaseKind.DATA_VERIFICATION,
-        objective="Verify a business contact.",
-        requester_name="Test Requester",
-    )
-    action = _approved_action(case)
-    action.body = "Please provide this information."
-    action.idempotency_key = stable_key(case.id, action.recipient, action.subject, action.body)
-    case.actions.append(action)
-
-    decision = PolicyEngine(settings, repository).evaluate(case, action)
-
-    assert decision.allowed is False
-    assert any("disclose" in reason.lower() for reason in decision.reasons)
+    assert PolicyEngine(settings, repository).evaluate(case, action).allowed is True

@@ -26,6 +26,8 @@ class VerticalPack(BaseModel):
     specialist_roles: list[str] = Field(default_factory=list)
     prohibited_actions: list[str] = Field(default_factory=list)
     question_prompts: list[str] = Field(default_factory=list)
+    critical_quote_fields: list[str] = Field(default_factory=list)
+    followup_approval_required: bool = True
     raw: dict[str, Any] = Field(default_factory=dict)
 
 

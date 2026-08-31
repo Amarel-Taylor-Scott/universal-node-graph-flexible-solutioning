@@ -1,4 +1,4 @@
-"""Typed domain contracts for cases, conversations, claims, and quotes."""
+"""Typed domain contracts for cases, conversations, claims, quotes, and mailbox events."""
 
 from __future__ import annotations
 
@@ -22,6 +22,12 @@ def new_id(prefix: str) -> str:
 def stable_key(*parts: str) -> str:
     payload = "\x1f".join(parts).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
+
+
+def case_token(case_id: str) -> str:
+    """Return a short, deterministic token suitable for an email subject."""
+
+    return stable_key("case-token", case_id)[:12].upper()
 
 
 class PractitionerStage(StrEnum):
@@ -100,6 +106,18 @@ class GeoPoint(BaseModel):
     precision: str = "public_venue"
 
 
+class AttachmentInfo(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: str = Field(default_factory=lambda: new_id("attachment"))
+    filename: str
+    content_type: str = "application/octet-stream"
+    size_bytes: int = Field(ge=0)
+    sha256: str
+    evidence_path: str | None = None
+    status: str = "stored"
+
+
 class ContactRoute(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -149,6 +167,10 @@ class ActionProposal(BaseModel):
     body: str
     approval_required: bool = True
     followup: bool = False
+    thread_id: str = ""
+    in_reply_to: str | None = None
+    references: list[str] = Field(default_factory=list)
+    reply_to: str | None = None
     idempotency_key: str = ""
     proposed_by_run_ids: list[str] = Field(default_factory=list)
     policy_receipt: dict[str, Any] = Field(default_factory=dict)
@@ -168,6 +190,12 @@ class Interaction(BaseModel):
     subject: str
     body: str
     evidence_id: str = Field(default_factory=lambda: new_id("evidence"))
+    raw_evidence_path: str | None = None
+    provider_message_id: str | None = None
+    in_reply_to: str | None = None
+    references: list[str] = Field(default_factory=list)
+    headers: dict[str, str] = Field(default_factory=dict)
+    attachments: list[AttachmentInfo] = Field(default_factory=list)
     related_action_id: str | None = None
     processed: bool = False
     created_at: datetime = Field(default_factory=utcnow)
@@ -293,6 +321,13 @@ class InboundEmail(BaseModel):
     sender: str
     subject: str
     body: str
+    provider_message_id: str | None = None
+    in_reply_to: str | None = None
+    references: list[str] = Field(default_factory=list)
+    headers: dict[str, str] = Field(default_factory=dict)
+    evidence_id: str | None = None
+    raw_evidence_path: str | None = None
+    attachments: list[AttachmentInfo] = Field(default_factory=list)
 
 
 class CaseEvent(BaseModel):
@@ -319,7 +354,32 @@ class OutboxRecord(BaseModel):
     body: str
     status: str
     provider_message_id: str | None = None
+    thread_id: str = ""
+    in_reply_to: str | None = None
+    references: list[str] = Field(default_factory=list)
+    last_error: str | None = None
     created_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow)
+
+
+class MailboxSyncResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    fetched: int = 0
+    processed: int = 0
+    duplicates: int = 0
+    unmatched: int = 0
+    failed: int = 0
+    errors: list[str] = Field(default_factory=list)
+
+
+class WorkerHeartbeat(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    worker_id: str
+    status: str
+    details: dict[str, Any] = Field(default_factory=dict)
+    updated_at: datetime = Field(default_factory=utcnow)
 
 
 class AgentRequest(BaseModel):

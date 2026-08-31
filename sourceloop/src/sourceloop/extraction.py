@@ -16,6 +16,8 @@ _MONEY_RE = re.compile(
 )
 _EMAIL_RE = re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.IGNORECASE)
 _VALID_RE = re.compile(r"valid\s+(?:through|until)\s+(\d{4}-\d{2}-\d{2})", re.IGNORECASE)
+_PAYMENT_RE = re.compile(r"\bnet\s+(15|30|45|60|90)\b", re.IGNORECASE)
+_LEAD_RE = re.compile(r"\b(?:lead|ramp)(?:\s+time)?\s*(?:is|:)?\s*(\d+)\s*(day|days|week|weeks)\b", re.IGNORECASE)
 _SEGMENT_RE = re.compile(r"(?<=[.!?;])\s+|\n+")
 
 
@@ -71,11 +73,7 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
                     "reuse_scope": "case_only",
                 }
             )
-        referrals = [
-            candidate.lower()
-            for candidate in _EMAIL_RE.findall(body)
-            if candidate.lower() != interaction.endpoint
-        ]
+        referrals = [candidate.lower() for candidate in _EMAIL_RE.findall(body) if candidate.lower() != interaction.endpoint]
         for referral in sorted(set(referrals)):
             claims.append(
                 {
@@ -105,7 +103,6 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
             for match in _MONEY_RE.finditer(segment):
                 currency_marker = match.group("currency")
                 unit_marker = match.group("unit")
-                # Do not treat dates, counts, or unrelated numbers in a price-bearing sentence as prices.
                 if not currency_marker and not unit_marker:
                     continue
                 amount = float(match.group("amount").replace(",", ""))
@@ -130,16 +127,26 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
                     }
                 )
 
-        exclusions = [
-            segment
-            for segment in segments
-            if "exclud" in segment.lower() or "not included" in segment.lower()
-        ]
+        exclusions = [segment for segment in segments if "exclud" in segment.lower() or "not included" in segment.lower()]
         assumptions = [segment for segment in segments if "assum" in segment.lower()]
         valid_until = None
         valid_match = _VALID_RE.search(body)
         if valid_match:
             valid_until = datetime.strptime(valid_match.group(1), "%Y-%m-%d").replace(tzinfo=UTC).isoformat()
+
+        commercial_terms: dict[str, Any] = {}
+        payment_match = _PAYMENT_RE.search(body)
+        if payment_match:
+            commercial_terms["payment_terms"] = f"Net {payment_match.group(1)}"
+        if "deposit" in lower:
+            commercial_terms["deposit_mentioned"] = True
+
+        operational_terms: dict[str, Any] = {}
+        lead_match = _LEAD_RE.search(body)
+        if lead_match:
+            operational_terms["lead_time"] = f"{lead_match.group(1)} {lead_match.group(2).lower()}"
+        if any(marker in lower for marker in ("available", "availability", "capacity", "can support")):
+            operational_terms["availability_reported"] = True
 
         if line_items:
             quote = {
@@ -147,15 +154,15 @@ def extract_reply_payload(case: CaseRecord, interaction: Interaction) -> dict[st
                 "contact_id": contact.id if contact else None,
                 "quote_type": "non_binding",
                 "line_items": line_items,
-                "commercial_terms": {},
-                "operational_terms": {},
+                "commercial_terms": commercial_terms,
+                "operational_terms": operational_terms,
                 "exclusions": exclusions,
                 "assumptions": assumptions,
                 "currency": "USD",
                 "valid_until": valid_until,
                 "evidence_ids": [interaction.evidence_id],
                 "extraction_confidence": 0.82,
-                "unresolved_fields": _unresolved_quote_fields(lower),
+                "unresolved_fields": _unresolved_quote_fields(lower, valid_until),
                 "normalization_lineage": [
                     "Parsed directly from respondent message.",
                     "Currency normalized to USD where a dollar symbol or USD marker was present.",
@@ -247,10 +254,14 @@ def _description_for_line(line: str, unit: str) -> str:
     return "quoted service"
 
 
-def _unresolved_quote_fields(lower: str) -> list[str]:
-    markers = {
-        "payment_terms": ("payment term", "net 15", "net 30", "net 45", "net 60"),
-        "taxes": ("tax", "taxes"),
-        "final_scope_confirmation": ("scope", "subject to", "upon review"),
-    }
-    return [field for field, candidates in markers.items() if not any(marker in lower for marker in candidates)]
+def _unresolved_quote_fields(lower: str, valid_until: str | None) -> list[str]:
+    unresolved: list[str] = []
+    if not _PAYMENT_RE.search(lower):
+        unresolved.append("payment_terms")
+    if "tax" not in lower:
+        unresolved.append("taxes")
+    if not any(marker in lower for marker in ("scope confirmed", "scope is", "subject to", "upon review")):
+        unresolved.append("final_scope_confirmation")
+    if valid_until is None:
+        unresolved.append("quote_validity")
+    return unresolved

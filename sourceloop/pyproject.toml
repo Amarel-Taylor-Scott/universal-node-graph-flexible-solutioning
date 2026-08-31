@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sourceloop"
-version = "0.1.0"
-description = "Approval-gated direct-source intelligence and request-to-quote practitioner runtime"
+version = "0.2.0"
+description = "Container-ready approval-gated direct-source intelligence and correspondence runtime"
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }

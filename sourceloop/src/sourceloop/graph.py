@@ -48,6 +48,8 @@ class GraphProjector:
                     label=action.subject,
                     status=action.status.value,
                     recipient=action.recipient,
+                    followup=action.followup,
+                    thread_id=action.thread_id,
                 )
                 graph.add_edge(case.id, action.id, relation="proposed_action", source="action_ledger")
                 matching = next((contact for contact in case.contacts if contact.endpoint == action.recipient), None)
@@ -62,6 +64,8 @@ class GraphProjector:
                     direction=interaction.direction.value,
                     endpoint=interaction.endpoint,
                     evidence_id=interaction.evidence_id,
+                    provider_message_id=interaction.provider_message_id,
+                    attachment_count=len(interaction.attachments),
                     processed=interaction.processed,
                 )
                 graph.add_edge(case.id, interaction.id, relation="has_interaction", source="evidence_ledger")
@@ -96,6 +100,7 @@ class GraphProjector:
                     normalized_total=quote.normalized_total,
                     extraction_confidence=quote.extraction_confidence,
                     valid_until=quote.valid_until.isoformat() if quote.valid_until else None,
+                    unresolved_fields=quote.unresolved_fields,
                 )
                 graph.add_edge(case.id, quote.id, relation="received_quote", source="quote_ledger")
                 if quote.contact_id and quote.contact_id in graph:
@@ -192,9 +197,7 @@ class GraphProjector:
                         {
                             "node_id": contact.id,
                             "node_kind": 1.0,
-                            "activity": float(
-                                sum(1 for item in case.interactions if item.endpoint == contact.endpoint)
-                            ),
+                            "activity": float(sum(1 for item in case.interactions if item.endpoint == contact.endpoint)),
                             "geometry": Point(coordinates[contact.id]),
                         }
                     )

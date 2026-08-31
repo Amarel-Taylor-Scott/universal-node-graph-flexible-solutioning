@@ -28,6 +28,9 @@ def settings(tmp_path: Path) -> Settings:
         smtp_password="",
         smtp_starttls=True,
         cors_origins=("http://testserver",),
+        mailbox_mode="disabled",
+        evidence_dir=str(tmp_path / "evidence"),
+        worker_id="test-worker",
     )
 
 

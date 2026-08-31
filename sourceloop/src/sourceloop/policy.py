@@ -14,7 +14,7 @@ _EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 _DISCLOSURE_RE = re.compile(r"\b(automated|ai-assisted|assisted by|automation-assisted)\b", re.IGNORECASE)
 _DECEPTION_RE = re.compile(
     r"\b(pretend to be|impersonat(?:e|ing)|fake constituent|fake customer|do not disclose automation|"
-    r"hide the requester|fabricated identity)\b",
+    r"hide the requester|fabricated identity|astroturf)\b",
     re.IGNORECASE,
 )
 
@@ -26,7 +26,7 @@ class PolicyDecision(BaseModel):
 
 
 class PolicyEngine:
-    """Evaluates the proposal and re-evaluates it immediately before dispatch."""
+    """Evaluates a proposal and re-evaluates it immediately before dispatch."""
 
     def __init__(self, settings: Settings, repository: Repository) -> None:
         self.settings = settings
@@ -47,14 +47,26 @@ class PolicyEngine:
             reasons.append("A truthful requester identity is required.")
         if not case.objective.strip():
             reasons.append("The case purpose is missing.")
+        if not action.subject.strip() or len(action.subject) > 250:
+            reasons.append("The subject must be present and no longer than 250 characters.")
+        if not action.body.strip() or len(action.body) > 100_000:
+            reasons.append("The message body is empty or exceeds the safety limit.")
         if not _DISCLOSURE_RE.search(action.body):
             reasons.append("The message does not disclose automated or AI assistance.")
         if _DECEPTION_RE.search(action.body):
             reasons.append("The message contains a prohibited deception or impersonation instruction.")
         if not action.idempotency_key:
             reasons.append("The action does not have an idempotency key.")
+        if action.followup and not action.thread_id:
+            reasons.append("A follow-up must be attached to an existing SourceLoop thread.")
+        if action.followup and not action.in_reply_to:
+            reasons.append("A follow-up must identify the provider message it replies to.")
 
-        active_targets = {candidate.recipient for candidate in case.actions if candidate.status != ActionStatus.REJECTED}
+        active_targets = {
+            candidate.recipient
+            for candidate in case.actions
+            if candidate.status not in {ActionStatus.REJECTED, ActionStatus.BLOCKED}
+        }
         if len(active_targets) > case.max_contacts:
             reasons.append("The case exceeds its maximum number of external contacts.")
         if case.kind is CaseKind.CIVIC_INTELLIGENCE and case.max_contacts > 3:
@@ -67,6 +79,7 @@ class PolicyEngine:
         if self.settings.email_mode == "smtp" and not self.settings.allow_external_send:
             reasons.append("SMTP mode is configured, but external sending is not explicitly enabled.")
         if self.settings.email_mode == "smtp" and action.recipient.endswith((".test", ".invalid")):
+            # Local GreenMail uses .local so the sandbox can exercise the real SMTP/IMAP loop.
             reasons.append("Reserved demonstration domains cannot be used for external SMTP delivery.")
         if self.settings.email_mode not in {"dry_run", "smtp"}:
             reasons.append("Unknown email mode; only dry_run and smtp are supported.")
@@ -78,6 +91,7 @@ class PolicyEngine:
                 "email_mode": self.settings.email_mode,
                 "external_send_enabled": self.settings.allow_external_send,
                 "approval_required": action.approval_required,
+                "followup": action.followup,
                 "max_contacts": case.max_contacts,
                 "max_followups": case.max_followups,
                 "suppressed": self.repository.is_suppressed(action.recipient),

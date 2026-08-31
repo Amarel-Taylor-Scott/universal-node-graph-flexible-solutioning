@@ -1,141 +1,261 @@
-# SourceLoop — Direct-Source Intelligence OS
+# SourceLoop — Direct-Source Intelligence and Quote OS
 
-SourceLoop is a working Phase-1 implementation of a **question-to-knowledge and request-to-quote operating system**. It turns an uncertain business or civic question into a governed practitioner workflow that can research, discover contacts, prepare transparent outreach, wait for asynchronous replies, extract claims or quotes, and update a source-backed graph.
+SourceLoop converts an unknown business or civic question into a governed, evidence-producing workflow:
 
-The implementation deliberately separates four concerns:
+```text
+requirement or knowledge gap
+        ↓
+scoped practitioner swarm
+        ↓
+small, relevant counterparty panel
+        ↓
+operator-approved email
+        ↓
+SMTP delivery + IMAP reply monitoring
+        ↓
+thread-aware clarification when critical fields are missing
+        ↓
+claim / quote extraction with source lineage
+        ↓
+GIS and relationship-graph projection
+```
 
-1. **The practitioner loop** owns the nine-stage case lifecycle.
-2. **Agent runtimes** reason, research, compose, and extract, but do not directly authorize side effects.
-3. **Deterministic policy and approval services** control email, suppression, idempotency, and graph commits.
-4. **The evidence ledger** stores the original interaction beside every structured claim or quote.
+Version 0.2 is a **complete container-shaped application**, not just a library or a mock UI. The default Compose stack includes PostgreSQL/PostGIS, the FastAPI control plane, a long-lived mailbox worker, an immutable evidence volume, and a production-built React console behind an unprivileged Nginx reverse proxy.
+
+Outbound delivery and mailbox access remain disabled by default. A local GreenMail override is included so the complete SMTP → IMAP → extraction loop can be tested without any possibility of relaying email to the public internet.
 
 ## What is implemented
 
-- Nine-stage practitioner runtime: `ORIENT → RECONCILE_HORIZON → ASSESS_PREPARE → DECIDE_NEXT → HOW → ACT → VERIFY → INTEGRATE_COMMIT → ROUTE`.
-- Durable case, event, outbox, approval, and suppression records in SQLite or PostgreSQL.
-- Internal specialist swarms with persistent run receipts.
-- Default deterministic `MockRuntime` plus optional Hermes and OpenClaw CLI adapters.
-- Approval-gated outbound email. External SMTP is disabled unless two explicit safety settings are enabled.
-- One coherent external thread per counterparty; internal workers never contact recipients independently.
-- Dual extraction, deterministic reconciliation, quote normalization, and unresolved-field reporting.
-- NetworkX projection, GeoJSON output, and an optional City2Graph bridge to NetworkX/rustworkx/PyG.
-- Three vertical packs: civic intelligence, commercial-facilities quoting, and BPO quoting.
-- FastAPI API, React + TypeScript operator console, CLI demo, Docker Compose, and automated tests.
+### Practitioner and swarm runtime
 
-## Quick start
+- Nine-stage lifecycle: `ORIENT → RECONCILE_HORIZON → ASSESS_PREPARE → DECIDE_NEXT → HOW → ACT → VERIFY → INTEGRATE_COMMIT → ROUTE`.
+- Bounded internal specialists for requirements, GIS, relationships, contact resolution, message composition, policy review, dual extraction, adversarial review, and graph curation.
+- Framework-neutral runtime adapters for the deterministic test worker, Hermes CLI, and OpenClaw CLI.
+- One visible conversation owner per counterparty even when many internal workers contribute.
+- Persistent case snapshots, ordered event receipts, worker heartbeats, suppression records, inbound deduplication, and an outbox ledger.
+
+### Real correspondence plumbing
+
+- Approval-gated SMTP delivery with STARTTLS or implicit TLS.
+- Durable outbox reservation before network transmission.
+- Stable `Message-ID`, `Reply-To`, `In-Reply-To`, and `References` handling.
+- SourceLoop case and thread correlation headers plus a short subject token fallback.
+- Generic IMAP mailbox access with SSL or STARTTLS.
+- Unseen-message polling, MIME parsing, plain-text and HTML fallback extraction, and configurable folder/search settings.
+- Automatic correlation of replies to cases and threads.
+- Idempotent inbound processing using provider message IDs or message digests.
+- Direct opt-out recognition and permanent suppression.
+- Bounded, thread-aware clarification proposals when a quote omits configured critical fields.
+
+### Evidence and intelligence
+
+- Raw RFC 822 messages stored immutably on an application-owned volume.
+- Attachment size limits, content hashes, safe file names, and quarantine status.
+- Direct-source claims classified as facts, respondent reports, estimates, opinions, plans, referrals, denials, uncertainty, refusals, or system inferences.
+- Quote line items, units, payment terms, operational terms, exclusions, validity, unresolved fields, and normalization lineage.
+- Dual extraction with explicit disagreement marking.
+- NetworkX and GeoJSON projections, plus an optional City2Graph path to rustworkx and PyTorch Geometric.
+
+### Container application
+
+- Multi-stage, non-root Python image shared by API and worker.
+- Multi-stage React build served by non-root Nginx.
+- Same-origin proxy for the API, health checks, OpenAPI, and the operator console.
+- PostgreSQL/PostGIS with a persistent volume and health-gated startup.
+- Read-only application filesystems, dropped Linux capabilities, `no-new-privileges`, tmpfs, restart policies, and health checks.
+- Docker-style `*_FILE` secret support for SMTP and IMAP passwords.
+- GreenMail SMTP/IMAP sandbox and an executable end-to-end smoke test.
+
+## Start the application
 
 ```bash
 cd sourceloop
-python -m venv .venv
-source .venv/bin/activate
-pip install -e ".[dev]"
-
-# Starts the API on http://localhost:8000
-sourceloop serve
-```
-
-In another terminal:
-
-```bash
-cd sourceloop/frontend
-npm install
-npm run dev
-```
-
-Open `http://localhost:5173`. The frontend proxies `/api` to the backend.
-
-### Run the deterministic end-to-end demo
-
-```bash
-sourceloop demo --kind facilities_quote
-```
-
-The demo creates a case, runs the practitioner until an approval gate, approves and **dry-runs** the outbound requests, injects sample supplier replies, normalizes the quotes, and completes the graph update. No external email is sent.
-
-### Docker Compose
-
-```bash
 cp .env.example .env
-docker compose up --build
+docker compose up --build -d
 ```
 
-The stack includes PostgreSQL/PostGIS, the API, and the React console. The email gateway remains `dry_run` unless explicitly changed.
+Open:
+
+- Operator console: `http://localhost:8080`
+- Interactive API documentation: `http://localhost:8080/docs`
+- Readiness: `http://localhost:8080/health/ready`
+
+The default stack is safe to start immediately:
+
+```env
+SOURCELOOP_EMAIL_MODE=dry_run
+SOURCELOOP_ALLOW_EXTERNAL_SEND=false
+SOURCELOOP_MAILBOX_MODE=disabled
+```
+
+Messages can be drafted, approved, and captured in the outbox, but they do not leave the container.
+
+Useful commands:
+
+```bash
+make up
+make logs
+make doctor
+make down
+```
+
+## Prove the complete email loop locally
+
+The sandbox starts a non-relaying GreenMail server with SMTP and IMAP accounts inside Docker:
+
+```bash
+make sandbox-smoke
+```
+
+That command builds the stack and proves this complete path:
+
+1. Create a real non-demo quote case through the API.
+2. Generate and approve one outbound action.
+3. Send the email over SMTP to `supplier1@supplier.local`.
+4. Send a correlated reply over SMTP.
+5. Retrieve the reply from the SourceLoop mailbox over IMAP.
+6. Match `In-Reply-To` to the correct outbox record and case.
+7. Preserve the raw email as evidence.
+8. Extract a complete quote.
+9. Complete the case and verify the sent-message ledger.
+
+The sandbox exposes GreenMail only on local development ports and does not forward email to external mail servers.
+
+Stop and delete sandbox data:
+
+```bash
+make sandbox-down
+```
+
+## Connect a real generic mailbox
+
+Use a dedicated organizational mailbox rather than a personal mailbox. Configure both outbound SMTP and inbound IMAP:
+
+```env
+SOURCELOOP_ENVIRONMENT=production
+
+SOURCELOOP_EMAIL_MODE=smtp
+SOURCELOOP_ALLOW_EXTERNAL_SEND=true
+SOURCELOOP_SENDER_NAME=Acme Research Desk
+SOURCELOOP_SENDER_EMAIL=research@example.com
+SOURCELOOP_REPLY_TO_EMAIL=research@example.com
+SOURCELOOP_SMTP_HOST=smtp.example.com
+SOURCELOOP_SMTP_PORT=587
+SOURCELOOP_SMTP_USERNAME=research@example.com
+SOURCELOOP_SMTP_PASSWORD_FILE=/run/secrets/smtp_password
+SOURCELOOP_SMTP_STARTTLS=true
+SOURCELOOP_SMTP_SSL=false
+
+SOURCELOOP_MAILBOX_MODE=imap
+SOURCELOOP_IMAP_HOST=imap.example.com
+SOURCELOOP_IMAP_PORT=993
+SOURCELOOP_IMAP_USERNAME=research@example.com
+SOURCELOOP_IMAP_PASSWORD_FILE=/run/secrets/imap_password
+SOURCELOOP_IMAP_SSL=true
+SOURCELOOP_IMAP_STARTTLS=false
+SOURCELOOP_IMAP_FOLDER=INBOX
+SOURCELOOP_IMAP_POLL_SECONDS=30
+```
+
+Mount the referenced secret files into both the `api` and `worker` containers. Do not commit passwords, OAuth refresh tokens, or app passwords to the repository.
+
+Gmail and Microsoft 365 deployments can use their SMTP/IMAP interfaces when enabled for the account. Native OAuth connector flows are still an extension point; the current production transport is standards-based SMTP/IMAP.
+
+## Operator workflow
+
+The console supports:
+
+- Creating demo or live cases.
+- Supplying typed requirements and public/business contact routes.
+- Running the practitioner until it reaches an input, approval, or external wait state.
+- Inspecting the exact recipient, subject, and body before approval.
+- Approving or rejecting individual messages.
+- Dispatching approved messages through dry-run or SMTP mode.
+- Viewing conversation and evidence receipts.
+- Manually triggering mailbox synchronization.
+- Inspecting extracted quotes, unresolved fields, claims, agent receipts, and GIS routes.
+
+A live case without contacts deliberately stops at `HOW`. The current version does not invent addresses. Search, registry, CRM, and organization-directory discovery adapters remain separate tools to connect through the runtime contract.
 
 ## Core API
 
 | Method | Route | Purpose |
 |---|---|---|
-| `POST` | `/api/v1/cases` | Create a direct-source intelligence case |
+| `POST` | `/api/v1/cases` | Create a case |
 | `GET` | `/api/v1/cases` | List cases |
-| `GET` | `/api/v1/cases/{case_id}` | Read full case state |
-| `POST` | `/api/v1/cases/{case_id}/run` | Run until input, approval, or external reply is required |
-| `POST` | `/api/v1/cases/{case_id}/actions/{action_id}/approve` | Approve one proposed side effect |
-| `POST` | `/api/v1/cases/{case_id}/dispatch` | Dispatch approved actions through the configured gateway |
-| `POST` | `/api/v1/inbound/email` | Record a reply and resume the case |
-| `POST` | `/api/v1/demo/{case_id}/replies` | Inject deterministic demonstration replies |
-| `GET` | `/api/v1/cases/{case_id}/events` | Read the immutable event timeline |
-| `GET` | `/api/v1/outbox` | Inspect dry-run or sent messages |
-| `GET` | `/api/v1/graph` | NetworkX node-link projection |
-| `GET` | `/api/v1/map/features` | GeoJSON feature collection |
+| `GET` | `/api/v1/cases/{case_id}` | Read complete case state |
+| `POST` | `/api/v1/cases/{case_id}/run` | Run until the next blocking condition |
+| `POST` | `/api/v1/cases/{case_id}/actions/{action_id}/approve` | Approve one exact action |
+| `POST` | `/api/v1/cases/{case_id}/actions/{action_id}/reject` | Reject one action |
+| `POST` | `/api/v1/cases/{case_id}/dispatch` | Dispatch approved actions |
+| `POST` | `/api/v1/inbound/email` | Ingest a normalized inbound message |
+| `GET` | `/api/v1/mailbox/status` | Read mailbox and worker status |
+| `POST` | `/api/v1/mailbox/sync` | Run one immediate IMAP synchronization |
+| `GET` | `/api/v1/outbox` | Inspect captured, pending, sent, or uncertain messages |
+| `POST` | `/api/v1/suppressions` | Suppress an endpoint |
+| `GET` | `/api/v1/graph` | Read the NetworkX node-link projection |
+| `GET` | `/api/v1/map/features` | Read the GeoJSON projection |
+| `GET` | `/api/v1/graph/city2graph` | Inspect optional City2Graph materialization |
 
-Interactive API documentation is available at `/docs`.
+## CLI
+
+```bash
+sourceloop serve
+sourceloop worker
+sourceloop worker --once
+sourceloop mailbox-sync
+sourceloop doctor
+sourceloop worker-health --max-age 120
+sourceloop demo --kind facilities_quote
+```
+
+`sandbox-reply` is restricted to development, test, and sandbox environments.
 
 ## Agent runtimes
 
-The default runtime is deterministic so the repository can be tested without credentials.
+The credential-free runtime is the default:
 
-```bash
+```env
 SOURCELOOP_AGENT_RUNTIME=mock
 ```
 
-Hermes adapter:
+Hermes:
 
-```bash
+```env
 SOURCELOOP_AGENT_RUNTIME=hermes
 SOURCELOOP_HERMES_PROFILE=sourceloop-research
 ```
 
-OpenClaw adapter:
+OpenClaw:
 
-```bash
+```env
 SOURCELOOP_AGENT_RUNTIME=openclaw
 SOURCELOOP_OPENCLAW_AGENT=sourceloop-practitioner
 ```
 
-The adapters run one internal reasoning turn and request JSON. They do **not** use `--deliver` and cannot bypass the SourceLoop action ledger. The exact installed CLI version remains an external dependency; see `ARCHITECTURE.md` for the adapter contract.
+These adapters are internal practitioners. They cannot send email directly. They return typed proposals to SourceLoop, where deterministic approval, suppression, idempotency, and delivery services control side effects.
 
-## Outbound safety
-
-The default configuration is intentionally non-delivering:
+## Development without Docker
 
 ```bash
-SOURCELOOP_EMAIL_MODE=dry_run
-SOURCELOOP_ALLOW_EXTERNAL_SEND=false
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+pytest
+sourceloop demo --kind facilities_quote
+sourceloop serve
 ```
 
-Actual SMTP requires both:
+In a second terminal:
 
 ```bash
-SOURCELOOP_EMAIL_MODE=smtp
-SOURCELOOP_ALLOW_EXTERNAL_SEND=true
+cd frontend
+npm install
+npm run dev
 ```
 
-It also requires an approved action, a non-suppressed endpoint, a disclosed automated-assistance sentence, a configured sender identity, and an idempotency key that has not previously been dispatched.
+## Current production boundaries
 
-SourceLoop does not autonomously accept quotes, sign agreements, make political representations, infer private political beliefs, or contact private individuals merely because they appear in a dataset. Political/civic cases receive the strictest contact and follow-up limits.
+This version is a deployable single-organization foundation. Before exposing it directly to an untrusted network, add organization-specific authentication or place it behind an authenticated reverse proxy. Further enterprise work includes tenant-level row security, provider-native OAuth setup screens, database migrations, malware scanning before attachments leave quarantine, object-storage evidence backends, search/registry discovery connectors, durable distributed scheduling, and formal compliance review for each vertical.
 
-## Vertical packs
-
-A pack defines vocabulary, required fields, specialist roles, completion rules, outreach limits, and reusable question templates. Packs are data, not hard-coded prompt strings:
-
-```text
-packs/civic_intelligence.yaml
-packs/facilities_quote.yaml
-packs/bpo_quote.yaml
-```
-
-The next production step is to connect pack loading to the larger Universal Loop Engine catalog and let its compiler materialize these workflows as reusable loop-node profiles.
-
-## Status
-
-This branch is a functional Phase-1 MVP and architecture proving ground. It is not represented as a finished production communications platform. Before real deployment, add organization-specific identity, OAuth-based email connectors, tenant isolation, encrypted secrets, production migrations, legal/compliance review for each vertical, observability, rate limits, and an evaluated human-approval operating process.
+The system deliberately does not autonomously accept quotes, make purchases, sign contracts, conduct hidden political persuasion, infer private political beliefs, map residential locations, or continue after a recipient opts out.

@@ -1,72 +1,76 @@
-# Security and responsible-use model
+# SourceLoop security model
 
-SourceLoop is designed for transparent direct-source research, verification, and request-for-quote workflows. It is not designed for covert persuasion, impersonation, surveillance, harassment, or unrestricted automated outreach.
+## Safe defaults
 
-## Non-negotiable controls
+A new deployment cannot send external email or access a mailbox:
 
-- External sending is disabled by default.
-- Every initial external message requires a recorded approval.
-- Every message has a deterministic idempotency key.
-- Suppression and opt-out checks occur inside the mail service, not only in prompts.
-- Political and civic cases use the lowest contact and follow-up ceilings.
-- One visible sender identity and one thread are used per counterparty.
-- Automation or assistance is disclosed in the default templates.
-- The agent cannot accept a quote, sign a contract, make a purchase, or create a political representation.
-- Original evidence is retained beside derived structured data.
-- Fact, respondent report, estimate, opinion, forward-looking plan, referral, denial, and system inference are different claim classes.
+```env
+SOURCELOOP_EMAIL_MODE=dry_run
+SOURCELOOP_ALLOW_EXTERNAL_SEND=false
+SOURCELOOP_MAILBOX_MODE=disabled
+```
 
-## Prohibited implementations
+Changing only one outbound flag is insufficient. Live SMTP requires both `email_mode=smtp` and explicit external-send authorization, a configured host, an approved action, a valid non-suppressed endpoint, an automation disclosure, and a unique idempotency key.
 
-Do not extend this system to:
+## Identity and authorization
 
-- create fake residents, constituents, customers, journalists, or organizations;
-- conceal the requester or fabricate a cover story;
-- infer private political beliefs, religion, health, ethnicity, sexuality, or other sensitive traits;
-- map private homes, device-level movement, closed-group membership, or event attendees;
-- use facial recognition to identify attendees;
-- evade rate limits, anti-bot systems, or no-contact requests;
-- repeatedly pressure a recipient who declined or did not respond;
-- pool identifiable nonpublic competitor pricing for seller-side coordination;
-- publish confidential quotes or private replies outside their permitted scope;
-- use an agent's remembered statement as a live price or verified fact.
+Messages must identify the real requester and disclose automation or AI assistance. The policy engine rejects instructions that request impersonation, fabricated identities, hidden requesters, or concealed automation.
 
-## Threat model
+The current application is intended for a trusted, single-organization operator environment. It does not yet contain end-user authentication. Do not expose port 8080 to an untrusted network without an authenticated ingress, VPN, identity-aware proxy, or equivalent access control.
 
-### Prompt injection in replies and attachments
+## Secrets
 
-Inbound content is evidence, not an instruction channel. Extractors receive a fixed role and schema, and action services ignore instructions embedded in respondent content. Production deployments should parse attachments in isolated workers and malware-scan all files.
+Do not store credentials in Git or baked images. `SOURCELOOP_SMTP_PASSWORD_FILE` and `SOURCELOOP_IMAP_PASSWORD_FILE` support Docker/Kubernetes secret mounts. The secret file should be readable only by the application UID. Database credentials should likewise be supplied by a deployment secret manager in production.
 
-### Duplicate delivery
+Dedicated low-privilege mailboxes are strongly preferred. Do not connect an executive or personal inbox containing unrelated correspondence.
 
-Mail dispatch is protected by a unique idempotency key in the database. Workflow retries return the existing outbox record instead of delivering again.
+## Outbound side effects
 
-### Agent overreach
+All outbound email is represented by a typed `ActionProposal`. Deterministic controls enforce:
 
-Agent outputs are `proposed_actions`. Deterministic policy checks and explicit approval precede any side effect. Runtimes receive no direct SMTP credential through the SourceLoop contract.
+- Exact-message approval where required.
+- Suppression status.
+- Maximum counterparty count.
+- Bounded follow-ups.
+- Email syntax.
+- Truthful requester identity.
+- Automation disclosure.
+- No deceptive identity instructions.
+- Thread requirements for a follow-up.
+- Idempotency.
+- Live-delivery configuration.
 
-### Stale or misleading intelligence
+An agent runtime cannot call SMTP directly through SourceLoop. Hermes and OpenClaw are invoked as internal reasoning workers without delivery authority.
 
-Every claim records evidence, scope, assertion time, confidence, and optional expiry. Forward-looking plans and opinions are never silently promoted to facts.
+## Mailbox ingestion
 
-### Cross-tenant leakage
+Inbound email is untrusted content. The worker treats message text as evidence, not as executable instructions. Correlation must be unambiguous. Duplicate messages are suppressed with a durable receipt. Opt-out language immediately creates a suppression record.
 
-The MVP is a single-tenant proving ground. A hosted product must add tenant IDs to every table, database row-level security, isolated object-store namespaces, per-tenant keys, and tests that prove queries cannot cross tenant boundaries.
+HTML is reduced to readable text for extraction. Remote images, JavaScript, macros, and attachment contents are not executed.
 
-### Secret exposure
+## Evidence and attachments
 
-Do not commit credentials. Use a secret manager in production. Hermes/OpenClaw profiles and browser workers should have separate narrowly scoped service accounts rather than a shared human super-account.
+Raw `.eml` evidence is written once with mode `0600`. File names are sanitized, paths are constrained beneath the evidence root, payloads are hashed, and oversized attachments are rejected. Accepted attachments remain `stored_quarantined`; no API route serves them and no downstream parser should consume them before a malware and content-safety stage is added.
 
-## Deployment checklist
+## Political and sensitive workflows
 
-Before enabling real external communication:
+The civic pack restricts contact counts and follow-ups. SourceLoop must not be used to:
 
-1. Complete legal and compliance review for the target jurisdiction and vertical.
-2. Configure an authenticated organizational sender domain.
-3. Replace shared passwords with OAuth or managed secrets.
-4. Verify approval roles and escalation paths.
-5. Test suppression, bounce, duplicate webhook, restart, and retry behavior.
-6. Run a closed pilot with a small, known respondent panel.
-7. Measure complaint, opt-out, wrong-recipient, and unresolved-question rates.
-8. Establish deletion, correction, retention, and evidence-access procedures.
-9. Review benchmark and pricing outputs for confidentiality and competition risk.
-10. Keep purchasing, contract acceptance, and political persuasion outside autonomous authority.
+- Impersonate constituents or manufacture grassroots activity.
+- Infer private political beliefs.
+- Scrape private memberships or hidden personal contact details.
+- Map residences or live movements of organizers or attendees.
+- Conduct individualized political persuasion based on sensitive traits.
+- Continue after a decline or opt-out.
+
+## Commercial and quote workflows
+
+Supplier-specific nonpublic quotes remain scoped to the requesting customer. Do not disclose one supplier's confidential price or terms to a competitor. Autonomous quote acceptance, purchasing, contract signing, or unbounded negotiation is prohibited in the supplied packs.
+
+## Container controls
+
+The supplied Compose deployment runs application processes as non-root, drops Linux capabilities, applies `no-new-privileges`, uses read-only filesystems and tmpfs, places PostgreSQL on an internal-only network, and publishes only the web gateway. These controls reduce impact but are not substitutes for authentication, patching, backups, TLS termination, network policy, and secret management.
+
+## Vulnerability reporting
+
+Report a suspected vulnerability privately to the repository owner. Include the affected version or commit, reproduction steps, and impact. Do not include real mailbox credentials or private correspondence in a public issue.

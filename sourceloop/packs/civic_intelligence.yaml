@@ -1,6 +1,6 @@
 id: civic_intelligence
 name: Civic Infrastructure Intelligence
-description: Transparent verification of public organizations, service geographies, inquiry routes, and public activities.
+description: Transparent verification of public organizations, service areas, inquiry routes, meetings, and referrals.
 case_kind: civic_intelligence
 max_contacts: 3
 max_followups: 1
@@ -8,31 +8,25 @@ completion_target: 1
 required_fields:
   - geography
 optional_fields:
-  - affiliation_self_declared
-  - desired_activity
-  - accessibility_needs
-  - public_meeting_window
+  - purpose
+  - organization_type
+  - issue
 specialist_roles:
   - jurisdiction_resolver
-  - public_source_scout
-  - contact_resolver
-  - perspective_coverage_critic
-  - conversation_owner
+  - official_source_scout
+  - public_role_resolver
+  - message_composer
   - claim_auditor
 prohibited_actions:
-  - impersonation
-  - hidden_automation
   - political_persuasion
   - fundraising
+  - hidden_requester
   - private_profile_scraping
   - residential_mapping
   - attendee_identification
 question_prompts:
-  - Which public organization serves this municipality?
-  - Which public role handles new information or volunteer inquiries?
-  - Where is the authoritative public meeting calendar?
+  - Which public organization serves the stated geography?
+  - Which public role handles this inquiry?
+  - What official meeting or information resource is current?
   - Is another organization a more appropriate referral?
-expiry_days:
-  public_role: 90
-  service_area: 120
-  meeting_schedule: 30
+followup_approval_required: true

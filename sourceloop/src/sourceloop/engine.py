@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Callable
 
 from .config import Settings
@@ -21,6 +22,9 @@ from .domain import (
     InboundEmail,
     Interaction,
     PractitionerStage,
+    Quote,
+    case_token,
+    new_id,
     stable_key,
     utcnow,
 )
@@ -33,7 +37,7 @@ from .runtime import AgentRunStatus, SwarmCoordinator, build_runtime
 
 
 class SourceLoopEngine:
-    """Authoritative process coordinator; agents only return proposals and interpretations."""
+    """Authoritative process coordinator; agents return proposals and interpretations only."""
 
     def __init__(
         self,
@@ -97,6 +101,7 @@ class SourceLoopEngine:
                 "pack": case.pack,
                 "demo": case.demo,
                 "completion_target": case.completion_target,
+                "case_token": case_token(case.id),
             },
         )
         return case
@@ -157,6 +162,27 @@ class SourceLoopEngine:
         )
         return case
 
+    def reject_action(self, case_id: str, action_id: str, request: ApprovalRequest) -> CaseRecord:
+        case = self.get_case(case_id)
+        action = next((candidate for candidate in case.actions if candidate.id == action_id), None)
+        if action is None:
+            raise KeyError(action_id)
+        if action.status not in {ActionStatus.PENDING, ActionStatus.APPROVED}:
+            raise ValueError(f"Action {action_id} cannot be rejected from {action.status.value}")
+        action.status = ActionStatus.REJECTED
+        action.approved_by = request.approver
+        action.approved_at = utcnow()
+        if not any(item.status in {ActionStatus.PENDING, ActionStatus.APPROVED} for item in case.actions):
+            case.stage = PractitionerStage.ROUTE
+            case.status = CaseStatus.ACTIVE
+        self.repository.save_case(case)
+        self.repository.append_event(
+            case.id,
+            "action_rejected",
+            {"action_id": action.id, "operator": request.approver, "note": request.note},
+        )
+        return self.run_until_blocked(case.id)
+
     def dispatch_approved(self, case_id: str) -> CaseRecord:
         case = self.get_case(case_id)
         approved = [action for action in case.actions if action.status is ActionStatus.APPROVED]
@@ -169,16 +195,19 @@ class SourceLoopEngine:
                 record = self.mail_gateway.send(case, action)
                 action.status = ActionStatus.DISPATCHED
                 action.dispatched_at = utcnow()
+                action.thread_id = record.thread_id
                 if not any(item.related_action_id == action.id for item in case.interactions):
-                    thread_id = f"thread_{stable_key(case.id, action.recipient)[:20]}"
                     case.interactions.append(
                         Interaction(
-                            thread_id=thread_id,
+                            thread_id=record.thread_id,
                             direction=Direction.OUTBOUND,
                             endpoint=action.recipient,
                             subject=action.subject,
                             body=action.body,
                             evidence_id=record.id,
+                            provider_message_id=record.provider_message_id,
+                            in_reply_to=record.in_reply_to,
+                            references=record.references,
                             related_action_id=action.id,
                         )
                     )
@@ -188,22 +217,21 @@ class SourceLoopEngine:
                     {
                         "action_id": action.id,
                         "message_id": record.id,
+                        "provider_message_id": record.provider_message_id,
+                        "thread_id": record.thread_id,
                         "mode": self.settings.email_mode,
                         "status": record.status,
+                        "followup": action.followup,
                     },
                 )
             except Exception as exc:  # noqa: BLE001 - preserve per-action failure receipts
                 action.status = ActionStatus.BLOCKED
                 failures.append(f"{action.id}: {exc}")
-                self.repository.append_event(
-                    case.id,
-                    "action_blocked",
-                    {"action_id": action.id, "reason": str(exc)},
-                )
+                self.repository.append_event(case.id, "action_blocked", {"action_id": action.id, "reason": str(exc)})
 
         if any(action.status is ActionStatus.PENDING for action in case.actions):
             case.status = CaseStatus.WAITING_APPROVAL
-        elif any(action.status is ActionStatus.DISPATCHED for action in case.actions):
+        elif any(action.status is ActionStatus.DISPATCHED for action in approved):
             case.stage = PractitionerStage.VERIFY
             case.status = CaseStatus.WAITING_EXTERNAL
         else:
@@ -214,6 +242,10 @@ class SourceLoopEngine:
 
     def record_inbound(self, inbound: InboundEmail) -> CaseRecord:
         case = self.get_case(inbound.case_id)
+        if inbound.provider_message_id and any(
+            item.provider_message_id == inbound.provider_message_id for item in case.interactions
+        ):
+            return case
         endpoint = inbound.sender.strip().lower()
         interaction = Interaction(
             thread_id=inbound.thread_id,
@@ -221,6 +253,13 @@ class SourceLoopEngine:
             endpoint=endpoint,
             subject=inbound.subject,
             body=inbound.body,
+            evidence_id=inbound.evidence_id or new_id("evidence"),
+            raw_evidence_path=inbound.raw_evidence_path,
+            provider_message_id=inbound.provider_message_id,
+            in_reply_to=inbound.in_reply_to,
+            references=inbound.references,
+            headers=inbound.headers,
+            attachments=inbound.attachments,
         )
         case.interactions.append(interaction)
         if any(token in inbound.body.lower() for token in ("unsubscribe", "do not contact", "no further contact")):
@@ -232,7 +271,14 @@ class SourceLoopEngine:
         self.repository.append_event(
             case.id,
             "inbound_recorded",
-            {"interaction_id": interaction.id, "thread_id": interaction.thread_id, "endpoint": endpoint},
+            {
+                "interaction_id": interaction.id,
+                "thread_id": interaction.thread_id,
+                "endpoint": endpoint,
+                "provider_message_id": interaction.provider_message_id,
+                "attachment_count": len(interaction.attachments),
+                "raw_evidence_path": interaction.raw_evidence_path,
+            },
         )
         return self.run_until_blocked(case.id)
 
@@ -244,18 +290,25 @@ class SourceLoopEngine:
         if not outbound:
             raise ValueError("Dispatch the dry-run messages before simulating replies")
 
-        needed = max(1, case.completion_target - (len(case.quotes) if case.kind is CaseKind.QUOTE_INTELLIGENCE else len(case.claims)))
+        needed = max(
+            1,
+            case.completion_target
+            - (len(case.quotes) if case.kind is CaseKind.QUOTE_INTELLIGENCE else len(case.claims)),
+        )
         for index, interaction in enumerate(outbound[:needed]):
             if case.kind is CaseKind.QUOTE_INTELLIGENCE:
                 replies = [
                     "Budgetary pricing: $125 per site visit. Monthly preventive service is $890 per month. "
                     "Setup is $250 one-time. Travel inside the listed service area is included. "
-                    "Taxes and emergency call-outs are excluded. Valid through 2026-10-15.",
+                    "Taxes and emergency call-outs are excluded. Payment terms are Net 30. "
+                    "Scope is confirmed for the stated portfolio. Valid through 2026-10-15.",
                     "We can support the requested locations. The service rate is $118 per visit and the monthly "
-                    "plan is $940 per month. Implementation is $175 one-time. Parts are not included. "
+                    "plan is $940 per month. Implementation is $175 one-time. Parts are not included; taxes are "
+                    "excluded. Payment terms are Net 30. Scope is subject to final site review. "
                     "Valid through 2026-10-20.",
-                    "Our non-binding estimate is $132 per visit with a $825 monthly minimum. After-hours labor is "
-                    "excluded. Valid through 2026-10-10.",
+                    "Our non-binding estimate is $132 per visit with a $825 monthly minimum. After-hours labor and "
+                    "taxes are excluded. Payment terms are Net 45. Scope is confirmed as submitted. "
+                    "Valid through 2026-10-10.",
                 ]
                 body = replies[index % len(replies)]
             elif case.kind is CaseKind.CIVIC_INTELLIGENCE:
@@ -274,6 +327,9 @@ class SourceLoopEngine:
                     sender=interaction.endpoint,
                     subject=f"Re: {interaction.subject}",
                     body=body,
+                    provider_message_id=f"<demo-reply-{index}-{case.id}@example.test>",
+                    in_reply_to=interaction.provider_message_id,
+                    references=[identifier for identifier in [interaction.provider_message_id] if identifier],
                 )
             )
             if case.status is CaseStatus.COMPLETED:
@@ -312,8 +368,7 @@ class SourceLoopEngine:
 
     def _decide_next(self, case: CaseRecord) -> None:
         self._run_agents(case, ["completion_judge"], "Decide whether existing evidence resolves the objective.")
-        obtained = len(case.quotes) if case.kind is CaseKind.QUOTE_INTELLIGENCE else len(case.claims)
-        if obtained >= case.completion_target:
+        if self._case_ready_to_complete(case):
             case.stage = PractitionerStage.INTEGRATE_COMMIT
         else:
             self._move_next(case)
@@ -341,8 +396,7 @@ class SourceLoopEngine:
         if existing:
             case.status = CaseStatus.WAITING_APPROVAL
             return
-        dispatched = [action for action in case.actions if action.status is ActionStatus.DISPATCHED]
-        if dispatched:
+        if any(action.status is ActionStatus.DISPATCHED for action in case.actions):
             case.stage = PractitionerStage.VERIFY
             case.status = CaseStatus.WAITING_EXTERNAL
             return
@@ -354,6 +408,7 @@ class SourceLoopEngine:
         )
         run_ids = [run.id for run in runs if run.status is AgentRunStatus.SUCCEEDED]
         for contact in case.contacts:
+            thread_id = f"thread_{stable_key(case.id, contact.endpoint)[:20]}"
             subject, body = _compose_message(case, contact)
             action = ActionProposal(
                 recipient=contact.endpoint,
@@ -361,6 +416,7 @@ class SourceLoopEngine:
                 organization_name=contact.organization_name,
                 subject=subject,
                 body=body,
+                thread_id=thread_id,
                 proposed_by_run_ids=run_ids,
             )
             action.idempotency_key = stable_key(case.id, contact.id, subject, body, "initial")
@@ -373,13 +429,12 @@ class SourceLoopEngine:
         )
 
     def _verify(self, case: CaseRecord) -> None:
-        pending = [
-            item for item in case.interactions if item.direction is Direction.INBOUND and not item.processed
-        ]
+        pending = [item for item in case.interactions if item.direction is Direction.INBOUND and not item.processed]
         if not pending:
             case.status = CaseStatus.WAITING_EXTERNAL
             return
 
+        followup_proposed = False
         for interaction in pending:
             runs = self._run_agents(
                 case,
@@ -394,8 +449,9 @@ class SourceLoopEngine:
             ]
             claims, quote, disagreement = reconcile_extractor_outputs(case, interaction, outputs)
             case.claims.extend(claims)
-            if quote:
-                case.quotes.append(quote)
+            stored_quote = self._upsert_quote(case, quote) if quote else self._quote_for_endpoint(case, interaction.endpoint)
+            if stored_quote:
+                _resolve_quote_fields_from_reply(stored_quote, interaction.body)
             interaction.processed = True
             self.repository.append_event(
                 case.id,
@@ -403,13 +459,18 @@ class SourceLoopEngine:
                 {
                     "interaction_id": interaction.id,
                     "claim_ids": [claim.id for claim in claims],
-                    "quote_id": quote.id if quote else None,
+                    "quote_id": stored_quote.id if stored_quote else None,
                     "extractor_disagreement": disagreement,
                 },
             )
+            missing = self._critical_missing(case, stored_quote)
+            if missing and self._propose_followup(case, interaction, missing):
+                followup_proposed = True
 
-        obtained = len(case.quotes) if case.kind is CaseKind.QUOTE_INTELLIGENCE else len(case.claims)
-        if obtained >= case.completion_target:
+        if followup_proposed:
+            case.stage = PractitionerStage.ACT
+            case.status = CaseStatus.WAITING_APPROVAL
+        elif self._case_ready_to_complete(case):
             self._move_next(case)
             case.status = CaseStatus.ACTIVE
         else:
@@ -431,17 +492,136 @@ class SourceLoopEngine:
 
     def _route(self, case: CaseRecord) -> None:
         self._run_agents(case, ["completion_judge"], "Confirm completion or route to another evidence cycle.")
-        obtained = len(case.quotes) if case.kind is CaseKind.QUOTE_INTELLIGENCE else len(case.claims)
-        if obtained >= case.completion_target:
+        if self._case_ready_to_complete(case):
             case.status = CaseStatus.COMPLETED
+            obtained = len(case.quotes) if case.kind is CaseKind.QUOTE_INTELLIGENCE else len(case.claims)
             self.repository.append_event(
                 case.id,
                 "case_completed",
                 {"obtained": obtained, "target": case.completion_target},
             )
+        elif any(action.status is ActionStatus.PENDING for action in case.actions):
+            case.stage = PractitionerStage.ACT
+            case.status = CaseStatus.WAITING_APPROVAL
         else:
             case.stage = PractitionerStage.DECIDE_NEXT
             case.status = CaseStatus.ACTIVE
+
+    def _upsert_quote(self, case: CaseRecord, incoming: Quote) -> Quote:
+        existing = next(
+            (
+                quote
+                for quote in case.quotes
+                if incoming.contact_id and quote.contact_id == incoming.contact_id
+            ),
+            None,
+        )
+        if existing is None:
+            case.quotes.append(incoming)
+            return incoming
+        seen = {(item.description, item.unit, item.unit_price) for item in existing.line_items}
+        for line_item in incoming.line_items:
+            key = (line_item.description, line_item.unit, line_item.unit_price)
+            if key not in seen:
+                existing.line_items.append(line_item)
+                seen.add(key)
+        existing.commercial_terms.update(incoming.commercial_terms)
+        existing.operational_terms.update(incoming.operational_terms)
+        existing.exclusions = sorted(set(existing.exclusions + incoming.exclusions))
+        existing.assumptions = sorted(set(existing.assumptions + incoming.assumptions))
+        existing.evidence_ids = list(dict.fromkeys(existing.evidence_ids + incoming.evidence_ids))
+        existing.normalization_lineage = list(
+            dict.fromkeys(existing.normalization_lineage + incoming.normalization_lineage)
+        )
+        existing.unresolved_fields = incoming.unresolved_fields
+        existing.extraction_confidence = min(existing.extraction_confidence, incoming.extraction_confidence)
+        if incoming.valid_until:
+            existing.valid_until = incoming.valid_until
+        return existing
+
+    @staticmethod
+    def _quote_for_endpoint(case: CaseRecord, endpoint: str) -> Quote | None:
+        contact = next((item for item in case.contacts if item.endpoint == endpoint), None)
+        if contact is None:
+            return None
+        return next((quote for quote in case.quotes if quote.contact_id == contact.id), None)
+
+    def _critical_missing(self, case: CaseRecord, quote: Quote | None) -> list[str]:
+        if case.kind is not CaseKind.QUOTE_INTELLIGENCE or quote is None:
+            return []
+        pack = self.packs.get(case.pack)
+        critical = pack.critical_quote_fields if pack else ["payment_terms", "quote_validity"]
+        return sorted(set(quote.unresolved_fields).intersection(critical))
+
+    def _propose_followup(self, case: CaseRecord, interaction: Interaction, missing: list[str]) -> bool:
+        if any(token in interaction.body.lower() for token in ("unsubscribe", "do not contact", "no further contact")):
+            return False
+        sent_or_pending = [
+            action for action in case.actions if action.followup and action.recipient == interaction.endpoint
+        ]
+        if len(sent_or_pending) >= case.max_followups:
+            return False
+        if not interaction.provider_message_id:
+            self.repository.append_event(
+                case.id,
+                "followup_not_proposed",
+                {"interaction_id": interaction.id, "reason": "missing_provider_message_id", "missing": missing},
+            )
+            return False
+        pack = self.packs.get(case.pack)
+        runs = self._run_agents(
+            case,
+            ["message_composer", "policy_critic"],
+            "Compose one thread-aware clarification containing only unresolved critical fields.",
+            extra_payload={"interaction": interaction.model_dump(mode="json"), "missing_fields": missing},
+        )
+        run_ids = [run.id for run in runs if run.status is AgentRunStatus.SUCCEEDED]
+        subject = interaction.subject if interaction.subject.lower().startswith("re:") else f"Re: {interaction.subject}"
+        references = list(
+            dict.fromkeys(
+                [
+                    *interaction.references,
+                    *([interaction.in_reply_to] if interaction.in_reply_to else []),
+                    interaction.provider_message_id,
+                ]
+            )
+        )
+        action = ActionProposal(
+            recipient=interaction.endpoint,
+            subject=subject,
+            body=_compose_followup(case, missing),
+            followup=True,
+            thread_id=interaction.thread_id,
+            in_reply_to=interaction.provider_message_id,
+            references=references,
+            approval_required=pack.followup_approval_required if pack else True,
+            proposed_by_run_ids=run_ids,
+        )
+        action.idempotency_key = stable_key(
+            case.id,
+            interaction.thread_id,
+            interaction.provider_message_id,
+            *missing,
+            "followup",
+        )
+        case.actions.append(action)
+        self.repository.append_event(
+            case.id,
+            "followup_proposed",
+            {"action_id": action.id, "interaction_id": interaction.id, "missing": missing},
+        )
+        return True
+
+    def _case_ready_to_complete(self, case: CaseRecord) -> bool:
+        if any(action.status in {ActionStatus.PENDING, ActionStatus.APPROVED} for action in case.actions):
+            return False
+        obtained = len(case.quotes) if case.kind is CaseKind.QUOTE_INTELLIGENCE else len(case.claims)
+        if obtained < case.completion_target:
+            return False
+        if case.kind is CaseKind.QUOTE_INTELLIGENCE:
+            qualifying = sum(1 for quote in case.quotes if not self._critical_missing(case, quote))
+            return qualifying >= case.completion_target
+        return True
 
     def _run_agents(
         self,
@@ -470,18 +650,19 @@ class SourceLoopEngine:
 
 
 def _compose_message(case: CaseRecord, contact: ContactRoute) -> tuple[str, str]:
+    token = case_token(case.id)
     if case.kind is CaseKind.QUOTE_INTELLIGENCE:
-        subject = f"Budgetary quote request: {case.title}"
+        subject = f"[SL:{token}] Budgetary quote request: {case.title}"
         requirement_lines = "\n".join(
             f"- {key.replace('_', ' ').title()}: {_render_value(value)}"
             for key, value in sorted(case.requirements.items())
         ) or "- Please confirm the scope required to prepare a comparable budgetary quote."
         questions = (
             "Please include current pricing and units, one-time fees, minimum commitments, capacity or "
-            "availability, lead time, assumptions, exclusions, payment terms, and quote validity."
+            "availability, lead time, assumptions, exclusions, payment terms, tax treatment, and quote validity."
         )
     elif case.kind is CaseKind.CIVIC_INTELLIGENCE:
-        subject = f"Public civic information request: {case.title}"
+        subject = f"[SL:{token}] Public civic information request: {case.title}"
         requirement_lines = "\n".join(
             f"- {key.replace('_', ' ').title()}: {_render_value(value)}"
             for key, value in sorted(case.requirements.items())
@@ -492,7 +673,7 @@ def _compose_message(case: CaseRecord, contact: ContactRoute) -> tuple[str, str]
             "another organization is more appropriate."
         )
     else:
-        subject = f"Information verification request: {case.title}"
+        subject = f"[SL:{token}] Information verification request: {case.title}"
         requirement_lines = "\n".join(
             f"- {key.replace('_', ' ').title()}: {_render_value(value)}"
             for key, value in sorted(case.requirements.items())
@@ -514,6 +695,40 @@ def _compose_message(case: CaseRecord, contact: ContactRoute) -> tuple[str, str]
     return subject, body
 
 
+def _compose_followup(case: CaseRecord, missing_fields: list[str]) -> str:
+    labels = {
+        "payment_terms": "the applicable payment terms",
+        "quote_validity": "the date through which the quote is valid",
+        "taxes": "whether taxes are included or excluded",
+        "final_scope_confirmation": "whether the stated scope is confirmed or subject to further review",
+        "extractor_disagreement": "a concise restatement of the quoted price, unit, and scope",
+    }
+    questions = "\n".join(f"- Please confirm {labels.get(field, field.replace('_', ' '))}." for field in missing_fields)
+    return (
+        "Hello,\n\n"
+        "Thank you for the response. I am an automated assistant continuing the same authorized SourceLoop "
+        "request. To compare the response accurately, could you clarify only the following item(s)?\n\n"
+        f"{questions}\n\n"
+        "No further details are needed beyond those items. Reply 'no further contact' to suppress future requests "
+        "to this endpoint.\n\n"
+        f"Thank you,\n{case.requester_name}\nAssisted by SourceLoop"
+    )
+
+
+def _resolve_quote_fields_from_reply(quote: Quote, body: str) -> None:
+    lower = body.lower()
+    resolved: set[str] = set()
+    if re.search(r"\bnet\s+(15|30|45|60|90)\b", lower):
+        resolved.add("payment_terms")
+    if "tax" in lower:
+        resolved.add("taxes")
+    if any(marker in lower for marker in ("scope confirmed", "scope is", "subject to", "upon review")):
+        resolved.add("final_scope_confirmation")
+    if re.search(r"valid\s+(?:through|until)\s+\d{4}-\d{2}-\d{2}", lower):
+        resolved.add("quote_validity")
+    quote.unresolved_fields = [field for field in quote.unresolved_fields if field not in resolved]
+
+
 def _render_value(value: object) -> str:
     if isinstance(value, (dict, list)):
         return json.dumps(value, sort_keys=True)
@@ -533,17 +748,47 @@ def _demo_contacts(case: CaseRecord) -> list[ContactRoute]:
     if case.kind is CaseKind.QUOTE_INTELLIGENCE:
         names = [
             ("Northstar Facility Services", "Estimating desk", "quotes@northstar.example.test", 40.443, -79.985),
-            ("Three Rivers Mechanical", "Commercial service team", "estimating@threerivers.example.test", 40.455, -80.021),
-            ("Allegheny Building Care", "Business development", "rfq@alleghenycare.example.test", 40.421, -79.943),
+            (
+                "Three Rivers Mechanical",
+                "Commercial service team",
+                "estimating@threerivers.example.test",
+                40.455,
+                -80.021,
+            ),
+            (
+                "Allegheny Building Care",
+                "Business development",
+                "rfq@alleghenycare.example.test",
+                40.421,
+                -79.943,
+            ),
         ]
     elif case.kind is CaseKind.CIVIC_INTELLIGENCE:
         names = [
-            ("Demonstration County Civic Committee", "Public inquiry coordinator", "info@county-civic.example.test", 41.336, -75.048),
-            ("Demonstration Regional Volunteer Network", "Volunteer coordinator", "volunteer@regional.example.test", 41.294, -75.139),
+            (
+                "Demonstration County Civic Committee",
+                "Public inquiry coordinator",
+                "info@county-civic.example.test",
+                41.336,
+                -75.048,
+            ),
+            (
+                "Demonstration Regional Volunteer Network",
+                "Volunteer coordinator",
+                "volunteer@regional.example.test",
+                41.294,
+                -75.139,
+            ),
         ]
     else:
         names = [
-            ("Demonstration Record Owner", "Public records contact", "records@owner.example.test", 40.441, -79.996),
+            (
+                "Demonstration Record Owner",
+                "Public records contact",
+                "records@owner.example.test",
+                40.441,
+                -79.996,
+            ),
         ]
     return [
         ContactRoute(

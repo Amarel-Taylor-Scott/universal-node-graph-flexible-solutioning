@@ -18,7 +18,8 @@ def test_quote_extraction_ignores_dates_and_preserves_price_units() -> None:
         subject="Re: quote request",
         body=(
             "Budgetary pricing is $125 per visit. Monthly preventive service is $890 per month. "
-            "Setup is $250 one-time. Taxes are excluded. Valid through 2026-10-15."
+            "Setup is $250 one-time. Taxes are excluded. Payment terms are Net 30. "
+            "Scope is confirmed. Valid through 2026-10-15."
         ),
     )
 
@@ -29,5 +30,7 @@ def test_quote_extraction_ignores_dates_and_preserves_price_units() -> None:
     assert [item["unit_price"] for item in quote["line_items"]] == [125.0, 890.0, 250.0]
     assert [item["unit"] for item in quote["line_items"]] == ["visit", "month", "one_time"]
     assert quote["valid_until"].startswith("2026-10-15")
+    assert quote["commercial_terms"]["payment_terms"] == "Net 30"
     assert all(item["unit_price"] != 2026 for item in quote["line_items"])
     assert "taxes" not in quote["unresolved_fields"]
+    assert "payment_terms" not in quote["unresolved_fields"]

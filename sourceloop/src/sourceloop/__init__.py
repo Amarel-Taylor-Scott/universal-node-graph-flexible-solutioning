@@ -1,14 +1,8 @@
 """SourceLoop direct-source intelligence runtime."""
 
-from .domain import CaseKind, CaseRecord, CaseStatus, PractitionerStage
+from .config import Settings
+from .domain import CaseCreate, CaseKind, CaseRecord
 from .engine import SourceLoopEngine
 
-__all__ = [
-    "CaseKind",
-    "CaseRecord",
-    "CaseStatus",
-    "PractitionerStage",
-    "SourceLoopEngine",
-]
-
-__version__ = "0.1.0"
+__all__ = ["CaseCreate", "CaseKind", "CaseRecord", "Settings", "SourceLoopEngine"]
+__version__ = "0.2.0"

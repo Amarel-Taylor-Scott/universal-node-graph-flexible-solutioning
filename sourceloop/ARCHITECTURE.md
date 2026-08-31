@@ -1,167 +1,144 @@
-# SourceLoop architecture
+# SourceLoop 0.2 architecture
 
-## Purpose
+## System boundaries
 
-SourceLoop acquires intelligence that does not already exist in a usable public record. An unknown becomes a typed question; the system identifies an appropriate source, prepares a transparent conversation, records the answer, separates fact from opinion or intention, and updates a temporal graph with provenance and an expiry policy.
+SourceLoop separates reasoning from authority. An agent may suggest whom to contact, what to ask, and how to interpret a reply. It may not bypass the action ledger, policy engine, approval state, suppression registry, or evidence commit path.
 
 ```text
-Unknown / requirement
-        ↓
-Nine-stage practitioner
-        ↓
-Internal specialist swarm
-        ↓
-Proposed external action
-        ↓
-Deterministic policy + human approval
-        ↓
-One counterparty conversation
-        ↓
-Dual extraction + validation
-        ↓
-Claim / quote / referral ledger
-        ↓
-NetworkX / rustworkx / PyG projection
+React/Nginx operator console
+             │
+             ▼
+FastAPI case and approval control plane
+             │
+    ┌────────┼─────────┐
+    ▼        ▼         ▼
+practitioner policy   graph projector
+swarm        engine   NetworkX/GeoJSON/City2Graph
+    │        │
+    └────┬───┘
+         ▼
+PostgreSQL/PostGIS state + event/outbox/inbound ledgers
+         │
+  ┌──────┴───────────┐
+  ▼                  ▼
+SMTP gateway      IMAP worker
+  │                  │
+  └──── counterparty ┘
+         conversation
+         │
+         ▼
+immutable RFC 822 and quarantined attachment volume
 ```
 
-## Authority boundaries
+## Services
 
-The system has four deliberately different authorities.
+### `web`
 
-### 1. Case runtime
+A production Vite build served by an unprivileged Nginx process. Nginx serves the single-page application and proxies `/api`, `/health`, `/docs`, and `/openapi.json` to the API over an internal Docker network.
 
-The practitioner state machine owns stage progression, waiting conditions, retry boundaries, stopping criteria, and event receipts. It is the authoritative source for what the system believes it is currently doing.
+### `api`
 
-### 2. Agent runtime
+The authoritative synchronous control plane. It creates cases, advances the nine-stage practitioner, records approvals, dispatches allowed actions, receives normalized inbound messages, and exposes intelligence and graph projections.
 
-Hermes, OpenClaw, future OpenAI agents, local models, or deterministic workers may propose interpretations and actions. Their output is untrusted until schema validation and policy checks succeed. An agent runtime cannot send mail, mutate suppression state, accept a quote, or commit a claim by itself.
+### `worker`
 
-### 3. Side-effect services
+A separately scalable long-running process. It polls an IMAP mailbox, parses MIME messages, correlates them to cases, stores raw evidence, records deduplication receipts, and resumes the relevant practitioner. It writes a heartbeat to the database for health monitoring.
 
-Mail, CRM, browser, calendar, and purchasing adapters are invoked only through typed action proposals. Every proposal carries approval status, idempotency key, recipient, case, purpose, and policy receipt.
+### `db`
 
-### 4. Evidence and intelligence ledger
+PostgreSQL/PostGIS. Version 0.2 stores typed case snapshots as JSON plus separate ordered event, outbox, inbound-receipt, suppression, and worker-heartbeat tables. The repository layer performs additive startup upgrades for the initial schema. A later multi-tenant release should move these upgrades into explicit migrations and normalized tenant-scoped tables.
 
-Original messages and attachments are immutable evidence. Claims and quotes are derived objects linked back to evidence. Narrative agent memory is never treated as a current quote or verified fact.
+### Evidence volume
 
-## Practitioner stages
+Original email bytes and attachment bytes are stored outside model prompts and database JSON. Attachments receive hashes, safe names, size enforcement, and `stored_quarantined` state. No attachment is executed or publicly served.
 
-| Stage | Primary purpose | Typical workers |
-|---|---|---|
-| `ORIENT` | Restate objective and requester authority | case supervisor |
-| `RECONCILE_HORIZON` | Resolve deadline, geography, budget, quote type, and risk | horizon critic, risk classifier |
-| `ASSESS_PREPARE` | Compile requirements and identify unknowns | requirement compiler, missing-information critic |
-| `DECIDE_NEXT` | Decide whether direct-source acquisition is necessary | completion judge |
-| `HOW` | Select sources, contact routes, channels, and evidence standards | web/GIS/registry/relationship scouts, contact resolver |
-| `ACT` | Compose one coherent message and propose a side effect | conversation owner, policy critic |
-| `VERIFY` | Interpret replies, reconcile extractors, and detect missing terms | extractor A/B, validator, adversarial auditor |
-| `INTEGRATE_COMMIT` | Create approved claims, quotes, referrals, and graph edges | graph curator |
-| `ROUTE` | Complete, seek more evidence, re-contact, or escalate | completion judge |
+## Outbound delivery transaction
+
+The SMTP gateway follows this sequence:
+
+1. Evaluate deterministic policy immediately before the side effect.
+2. Check approval, suppression, contact ceilings, disclosure, follow-up limits, and configuration.
+3. Generate a provider message ID and reserve an outbox row using the action idempotency key.
+4. Construct an RFC-compliant message with case/thread headers and reply metadata.
+5. Connect through SMTP SSL, STARTTLS, or plain SMTP according to configuration.
+6. Update the outbox state to `sent` after the server accepts the message.
+7. Mark ambiguous transport failures as `delivery_unknown` rather than automatically resending.
+
+The final point avoids duplicating a message when the SMTP server accepted it but the network failed before SourceLoop received the response.
+
+## Inbound correlation order
+
+The mailbox worker uses the strongest available signal first:
+
+1. `In-Reply-To` or `References` matched to a recorded outbound `Message-ID`.
+2. Explicit `X-SourceLoop-Case-ID` and `X-SourceLoop-Thread-ID` headers.
+3. The `[SL:XXXXXXXXXXXX]` subject token.
+4. A unique open case containing the exact sender endpoint.
+
+An ambiguous message is retained as an unmatched receipt and is not attached to an arbitrary case.
+
+## Adaptive correspondence
+
+After each inbound reply, two extraction workers produce schema-shaped interpretations. The deterministic reconciler creates or updates claims and a supplier quote. The vertical pack identifies critical quote fields. When those fields remain unresolved and the thread has not exhausted its follow-up allowance, SourceLoop proposes one reply containing only the missing questions.
+
+The follow-up preserves:
+
+- Thread ID.
+- Original provider `Message-ID` in `In-Reply-To`.
+- The complete `References` chain.
+- Recipient endpoint.
+- Automation disclosure.
+- Human approval when required by the pack.
+- A distinct idempotency key.
 
 ## Swarm topology
 
-Persistent named practitioners own cases and relationships. Ephemeral workers receive bounded tasks and return structured results. External recipients never receive independent messages from the internal swarm.
+Long-lived roles own responsibility; short-lived workers perform narrow tasks.
 
 ```text
-Case supervisor
-  ├─ requirement compiler
-  ├─ GIS scout
-  ├─ registry scout
-  ├─ relationship scout
-  ├─ contact resolver
-  ├─ message composer
-  ├─ policy critic
-  ├─ extractor A
-  ├─ extractor B
-  ├─ quote/claim auditor
-  └─ graph curator
+case supervisor
+  ├── horizon and risk critic
+  ├── requirement compiler
+  ├── missing-information critic
+  ├── market / GIS / relationship scouts
+  ├── contact resolver
+  ├── message composer
+  ├── policy critic
+  ├── extractor A
+  ├── extractor B
+  ├── adversarial quote auditor
+  ├── graph curator
+  └── completion judge
 ```
 
-The current MVP executes workers concurrently inside a bounded thread pool. A production implementation can replace this coordinator with Temporal, LangGraph, Paperclip-managed employees, or the existing Universal Loop Engine without changing the `AgentRuntime` or case contracts.
+Only the conversation action created by the coordinator can reach the mail gateway. Internal workers have no external delivery capability.
 
-## Runtime adapters
+## Persistence and concurrency
 
-### Mock
+Case snapshots use optimistic version checks. An outdated process cannot silently overwrite a newer case version. Inbound receipts and outbound idempotency keys are unique database records. Ordered event insertion retries bounded sequence collisions. These controls support an API process and mailbox worker sharing one database without treating an LLM session as authoritative state.
 
-The deterministic adapter powers tests and demos. It emits explicit role receipts and uses no external network or model.
+## Container posture
 
-### Hermes
+The application images:
 
-The adapter invokes one profile-scoped Hermes chat turn:
+- Run as non-root UID/GID 10001 for Python and as the Nginx user for the web tier.
+- Use multi-stage builds.
+- Mount application filesystems read-only.
+- Store only evidence and database state on named volumes.
+- Drop Linux capabilities.
+- Enable `no-new-privileges`.
+- Use tmpfs for transient files.
+- Provide liveness/readiness and worker-heartbeat checks.
+- Expose only the Nginx port in the default Compose stack.
 
-```text
-hermes -p <profile> chat -q <prompt>
-```
+## Extension ports
 
-The prompt includes the role, case snapshot, and required JSON output. SourceLoop parses the final JSON object and records stdout/stderr as a run receipt. The adapter has no mail tool in SourceLoop; external effects remain behind the action ledger.
+The stable boundaries for further work are:
 
-### OpenClaw
-
-The adapter invokes one named agent through the gateway:
-
-```text
-openclaw agent --agent <id> --message-file <file> --json
-```
-
-It intentionally omits `--deliver`. The command is used as an internal practitioner turn rather than an external messaging shortcut.
-
-### Adapter contract
-
-```python
-class AgentRuntime(Protocol):
-    def invoke(self, request: AgentRequest) -> AgentResult: ...
-```
-
-This prevents any one framework from becoming the domain model. New adapters can target local models, OpenAI Agents SDK, Microsoft Agent Framework, Paperclip-managed workers, Agent Zero, or browser operators.
-
-## Persistence
-
-The repository uses four core tables:
-
-- `cases`: versioned JSON snapshots for fast recovery.
-- `case_events`: immutable ordered receipts.
-- `outbox`: idempotent outbound messages and delivery status.
-- `suppressions`: permanent or expiring no-contact endpoints.
-
-SQLite is suitable for tests and a single-user demo. Docker Compose uses PostgreSQL/PostGIS. Production should add migrations, encryption, tenant-scoped row-level access, attachment object storage, and a dedicated immutable audit sink.
-
-## Graph projections
-
-The authoritative store is not a model tensor. SourceLoop materializes projections:
-
-- NetworkX `MultiDiGraph` for inspection and explainability.
-- GeoJSON for the operator map.
-- City2Graph-compatible GeoDataFrames for geospatial conversion.
-- rustworkx for larger graph algorithms.
-- PyTorch Geometric for embeddings, link prediction, recommendation, and anomaly detection.
-
-Stable IDs map every projected node back to the source ledger. Full messages, permissions, and contractual text remain outside tensors.
-
-## Vertical packs
-
-A vertical pack supplies defaults rather than embedding industry knowledge into orchestration code. Each pack may define:
-
-- required and optional requirement fields;
-- specialist roles;
-- discovery sources;
-- contact and follow-up limits;
-- question templates;
-- claim or quote schemas;
-- completion criteria;
-- expiry policies;
-- prohibited actions.
-
-The MVP includes civic intelligence, commercial facilities quoting, and BPO quoting. The same contract can support healthcare access, insurance agency verification, manufacturing RFQs, construction projects, logistics capacity, government contracting, and supplier qualification.
-
-## Production extension points
-
-1. OAuth-based Gmail and Microsoft 365 gateways.
-2. Inbound webhook signature verification and attachment malware scanning.
-3. Per-tenant encryption and data-retention policies.
-4. A human review queue with role-based authorization.
-5. Durable timers and external-event subscriptions.
-6. Search, GIS, registry, browser, and CRM connectors.
-7. Historical evaluation and adversarial test harnesses.
-8. Permissioned reusable-answer scopes and re-verification schedules.
-9. City2Graph datasets built from authoritative PostGIS views.
-10. Paperclip organization controls and Hermes/OpenClaw employee profiles.
+- `AgentRuntime` for Hermes, OpenClaw, OpenAI Agents SDK, local models, or other specialist workers.
+- `MailGateway` for provider-native Gmail/Microsoft Graph transports.
+- `MailboxClient` for push-webhook or provider-native inbound streams.
+- `EvidenceStore` for S3-compatible immutable storage.
+- `PackRegistry` for new vertical contracts.
+- `GraphProjector` for City2Graph, graph databases, and model feature materialization.
+- Discovery adapters for public registries, GIS, customer CRMs, and authorized search tools.

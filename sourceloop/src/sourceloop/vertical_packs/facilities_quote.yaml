@@ -32,6 +32,10 @@ question_prompts:
   - What setup, mobilization, travel, material, and after-hours fees apply?
   - What geography is currently served and what capacity is available?
   - What is excluded and how long is the quote valid?
+critical_quote_fields:
+  - payment_terms
+  - quote_validity
+followup_approval_required: true
 comparison_dimensions:
   - normalized_cost
   - availability
