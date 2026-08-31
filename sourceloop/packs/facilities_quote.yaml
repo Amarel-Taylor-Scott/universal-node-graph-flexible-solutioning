@@ -1,0 +1,41 @@
+id: facilities_quote
+name: Commercial Facilities Quote Desk
+description: Geographic discovery, qualification, and comparable budgetary quotes for recurring commercial services.
+case_kind: quote_intelligence
+max_contacts: 6
+max_followups: 1
+completion_target: 2
+required_fields:
+  - service
+optional_fields:
+  - property_count
+  - locations
+  - service_window
+  - insurance_requirements
+  - response_window
+  - minimum_quotes
+specialist_roles:
+  - requirement_compiler
+  - gis_scout
+  - license_scout
+  - service_area_resolver
+  - estimator_contact_resolver
+  - quote_extractor
+  - quote_comparability_auditor
+prohibited_actions:
+  - hidden_requester
+  - autonomous_contract_acceptance
+  - autonomous_purchase
+  - competitor_quote_disclosure
+question_prompts:
+  - What pricing unit applies and what quantity assumptions were used?
+  - What setup, mobilization, travel, material, and after-hours fees apply?
+  - What geography is currently served and what capacity is available?
+  - What is excluded and how long is the quote valid?
+comparison_dimensions:
+  - normalized_cost
+  - availability
+  - travel_and_service_area
+  - implementation_risk
+  - exclusions
+  - quote_confidence
