@@ -39,8 +39,7 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
     )
     application.state.engine = engine
 
-    @application.get("/")
-    def root() -> dict[str, object]:
+    def runtime_info() -> dict[str, object]:
         return {
             "name": "SourceLoop",
             "version": "0.1.0",
@@ -49,6 +48,14 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
             "external_send_enabled": resolved_settings.allow_external_send,
             "agent_runtime": resolved_settings.agent_runtime,
         }
+
+    @application.get("/")
+    def root() -> dict[str, object]:
+        return runtime_info()
+
+    @application.get("/api/v1/runtime")
+    def get_runtime_info() -> dict[str, object]:
+        return runtime_info()
 
     @application.get("/health")
     def health() -> dict[str, str]:
@@ -104,6 +111,8 @@ def create_app(settings: Settings | None = None, repository: Repository | None =
             return engine.record_inbound(inbound).model_dump(mode="json")
         except KeyError as exc:
             raise HTTPException(status_code=404, detail="Case not found") from exc
+        except ValueError as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
 
     @application.post("/api/v1/demo/{case_id}/replies")
     def demo_replies(case_id: str) -> dict[str, object]:
