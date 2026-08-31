@@ -106,3 +106,45 @@ jobs:
           name: sourceloop-console
           path: sourceloop/frontend/dist
           if-no-files-found: error
+
+  container-correspondence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: sourceloop
+    env:
+      SOURCELOOP_DB_PASSWORD: ci-sandbox-password
+      SOURCELOOP_WEB_PORT: "8080"
+      SOURCELOOP_SANDBOX_SMTP_PORT: "3025"
+      SOURCELOOP_SANDBOX_IMAP_PORT: "3143"
+      SOURCELOOP_SANDBOX_API_PORT: "8085"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate Compose configurations
+        run: |
+          docker compose -f docker-compose.yml config >/tmp/sourceloop-compose.yml
+          docker compose -f docker-compose.yml -f docker-compose.sandbox.yml config >/tmp/sourceloop-compose-sandbox.yml
+      - name: Build and start isolated SMTP/IMAP sandbox
+        run: docker compose -f docker-compose.yml -f docker-compose.sandbox.yml up --build -d
+      - name: Prove SMTP to IMAP to extraction correspondence loop
+        run: python scripts/sandbox_smoke.py | tee /tmp/sourceloop-container-smoke.json
+      - name: Publish container correspondence receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sourceloop-container-correspondence
+          path: |
+            /tmp/sourceloop-container-smoke.json
+            /tmp/sourceloop-compose.yml
+            /tmp/sourceloop-compose-sandbox.yml
+          if-no-files-found: warn
+      - name: Show service logs on failure
+        if: failure()
+        run: docker compose -f docker-compose.yml -f docker-compose.sandbox.yml logs --no-color --tail=300
+      - name: Tear down isolated sandbox
+        if: always()
+        run: docker compose -f docker-compose.yml -f docker-compose.sandbox.yml down -v --remove-orphans
