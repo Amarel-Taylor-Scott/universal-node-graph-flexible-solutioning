@@ -76,7 +76,7 @@ class Settings:
     imap_search_criterion: str = "UNSEEN"
     imap_max_messages: int = 50
 
-    evidence_dir: str = "/data/evidence"
+    evidence_dir: str = "./.sourceloop/evidence"
     attachment_max_bytes: int = 10 * 1024 * 1024
     worker_id: str = "mailbox-worker"
     worker_heartbeat_seconds: int = 15
@@ -132,7 +132,7 @@ class Settings:
             imap_mark_seen=_bool("SOURCELOOP_IMAP_MARK_SEEN", True),
             imap_search_criterion=_raw("SOURCELOOP_IMAP_SEARCH_CRITERION", "UNSEEN").strip(),
             imap_max_messages=_int("SOURCELOOP_IMAP_MAX_MESSAGES", 50, 1),
-            evidence_dir=_raw("SOURCELOOP_EVIDENCE_DIR", "/data/evidence").strip(),
+            evidence_dir=_raw("SOURCELOOP_EVIDENCE_DIR", "./.sourceloop/evidence").strip(),
             attachment_max_bytes=_int("SOURCELOOP_ATTACHMENT_MAX_BYTES", 10 * 1024 * 1024, 0),
             worker_id=_raw("SOURCELOOP_WORKER_ID", "mailbox-worker").strip(),
             worker_heartbeat_seconds=_int("SOURCELOOP_WORKER_HEARTBEAT_SECONDS", 15, 1),
