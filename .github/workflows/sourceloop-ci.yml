@@ -50,9 +50,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
-          cache-dependency-path: sourceloop/frontend/package.json
       - name: Install frontend dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
       - name: Type-check and build
         run: npm run build
