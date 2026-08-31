@@ -45,7 +45,7 @@ jobs:
           import tarfile
           from pathlib import Path
 
-          expected = "f14c21239c2a1167dff5979103d61482696132d60e5a53c8f366903edc15ea0d"
+          expected = "0d57514c89021f7db42e037205f0a51c39734d6457c082a375b4aae7e1859d4b"
           parts = sorted(Path(".").glob(".sourceloop-materialize.part*"))
           if not parts:
               raise SystemExit("No payload parts were found")
